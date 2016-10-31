@@ -1,0 +1,477 @@
+#baseMap {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+#screen {
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #c0c0c0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.75;
+  z-index: 1;
+}
+
+#cardFrame {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 360px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.65); /* Or #303030; no opacity*/
+  border-radius: 12px;
+  padding: 12px;
+  z-index: 2;
+  box-shadow: 3px 6px 12px 2px rgba(0, 0, 0, 0.5);
+}
+
+#header {
+  border: 0px solid white;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  font-family: 'Roboto-Regular', 'Helvetica Neue', sans-serif;
+  margin: 0px;
+  padding: 18px 12px 12px 12px;
+}
+
+#header p {
+  margin: 0px;
+  padding: 0px;
+}
+
+#content {
+  position: relative;
+  border: 0px solid red;
+  margin: 0px;
+  padding: 0px;
+  height: 400px;
+}
+
+.cardInner {
+  display: none;
+  margin: 0px;
+  padding: 0px;
+  color: white;
+  text-align: center;
+}
+
+/* remove later */
+.cardInner p {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* CARD 1 - Location */
+#cardMapWrapper {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 368px;
+  z-index: 10;
+}
+
+#locationWrapper {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 32px;
+  background-color: #f9f9f9;
+  color: #303030;
+  text-align: center;
+  z-index: 10;
+}
+
+#locationWrapper button {
+  margin: 0px;
+  padding: 0px;
+  width: 50%;
+  height: 100%;
+  float: left;
+  z-index: 11;
+  font-size: 18px;
+  font-family: "Myriad Pro", "arial", "sans-serif";
+  border: 1px solid #303030;
+  background-color: #f9f9f9;
+  outline: none;
+}
+
+#locationWrapper button:disabled {
+  color: #d0d0d0;
+  border: 1px solid #d0d0d0;
+}
+
+#locationWrapper button:active {
+  background-color: #c0c0c0;
+}
+
+#picker {
+  position: relative;
+  padding: 0px;
+  z-index: 500;
+  left: 50%;
+  top: 50%;
+  width: 36px;
+  height: 36px;
+  transform: translate(-50%, -50%);
+}
+
+
+/* CARD 2 - Height */
+#bgRef {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: auto;
+  padding: 0px 0px;
+  width: 320px;
+  transform: translate(-50%, -50%);
+  border: 0px solid red;
+}
+
+#bgRef img {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  z-index: 11;
+}
+
+#hText {
+  position: absolute;
+  text-align: right;
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  font-family: 'Roboto-Light', 'Helvetica Neue', sans-serif;
+  padding: 6px 0px;
+}
+
+#waterFill {
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 20%;
+  transform: translateY(-100%);
+  background-color: rgba(128, 203, 196, 0.25);
+  border: none;
+  border-top: 3px dashed #009588;
+  z-index: 12;
+}
+
+#dragRef {
+  position: relative;
+  margin: auto;
+  border: 0px solid white;
+  width: 70%;
+  transform: translate(43%, 89%);
+  z-index: 15;
+}
+
+#slider { /* NOT UTILISED, remove...*/
+  position: absolute;
+  width: 48px;
+  height: 100%;
+  bottom: 0px; /*check safari & chrome, add width of border-top for waterFill */
+  right: 0px;
+  margin: 0px;
+  padding: 0px;
+  border: 0px solid white;
+  z-index: 13;
+  text-align: center;
+  transform: translateX(26%); /* to center knob within slider*/
+}
+
+#sliderKnob {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  top: 80%;
+  right: 0px;
+  width: 24px;
+  height: 24px;
+  transform: translateY(-50%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  background-color: #80cbc4;
+  outline: none;
+  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
+  z-index: 14;
+}
+
+#sliderKnob:active {
+  background-color: #9bbcb9;
+  box-shadow: none;
+}
+
+#hideZone {
+  position: relative;
+  width: 95px;
+  height: 100px;
+  transform: translate(275%, -15%);
+  z-index: 20;
+}
+
+/* CARD 3 - description*/
+#textWrapper {
+  transform: translateY(150px);
+  margin: auto;
+  padding: 0px;
+  width: 300px;
+  border: 0px solid white;
+}
+
+#descripText {
+  width: 100%;
+  margin: 0px;
+  padding: 6px;
+  background-color: #c0c0c0;
+  color: black;
+  font-family: 'Roboto-Light', 'Helvetica Neue', sans-serif;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: inset 1px 2px 4px 0px rgba(0, 0, 0, 0.5);
+  resize: none;
+  outline: none;
+}
+
+#charRef {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  margin: 0px;
+  padding: 2px 6px;
+  text-align: right;
+  color: #303030;
+  font-family: 'Roboto-Light', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+}
+
+#summaryCard {
+  width: 320px;
+  margin: auto;
+  padding: 0px;
+  background-color: white;
+  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
+  border: 0px solid red;
+  overflow: auto;
+}
+
+#summaryPhoto {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  margin: 0px;
+  padding: 0px;
+}
+
+#summaryTextWrapper {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  border: 0px solid red;
+  text-align: left;
+  font-size: 14px;
+}
+
+#floodH {
+  margin: 3px 6px 0px 6px;
+  color: #009588;
+  font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;
+}
+
+#comment {
+  margin: 0px 6px 6px 6px;
+  color: #303030;
+  font-family: 'Roboto-Light', 'Helvetica Neue', sans-serif;
+}
+
+#reviewSubmit {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  width: 248px; /* width of nav buttons + margin */
+  padding: 0px;
+  margin: auto;
+  transform: translateX(-50%);
+}
+
+#termsConditions {
+  width: 100%;
+  margin: 0px;
+  padding: 12px 3px;
+  color: #c0c0c0;
+  font-family: 'Roboto-Light', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+}
+
+#termsConditions a {
+  cursor: pointer;
+  color: #80cbc4;
+  font-family: 'Roboto-Regular', 'Helvetica Neue', sans-serif;
+}
+
+#submitSlider {
+  position: relative;
+  width: 100%;
+  height: 36px;
+  margin: auto;
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 6px;
+  box-shadow: inset 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  z-index: 3;
+}
+
+#submitKnob {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  background-color: #80cbc4;
+  outline: none;
+  color: white;
+  font-size: 30px;
+  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
+  float: left;
+  z-index: 2;
+}
+
+#submitKnob:active {
+  background-color: #9bbcb9;
+}
+
+#submitRef1 {
+  margin: 0px 6px;
+  padding: 0px;
+  color: white;
+  font-size: 30px;
+  opacity: 0.4;
+  z-index: 1;
+  float: left;
+}
+
+#submitRef2 {
+  margin: 0px;
+  padding: 0px;
+  color: white;
+  font-size: 14px;
+  line-height: 36px;
+  font-family: 'Roboto-Light', 'Helvetica Neue', sans-serif;
+  opacity: 0.4;
+  z-index: 1;
+  float: left;
+}
+
+
+/* Thanks card */
+#TandCWrapper {
+  position: relative;
+  width: 336px;
+  height: 368px;
+  padding: 9px;
+  overflow: scroll;
+  color: #c0c0c0;
+  text-align: justify;
+  font-size: 14px;
+  font-family: 'Roboto-Light', 'Helvetica Neue', sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 6px;
+  box-shadow: inset 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
+}
+
+#TandCWrapper .headers {
+  text-align: left;
+  font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;
+}
+
+
+/* Thanks card */
+#thanksText {
+  position: absolute;
+  width: 75%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #c0c0c0;
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Roboto-Regular', 'Helvetica Neue', sans-serif;
+}
+
+#thanksBold {
+  color: white;
+  font-size: 21px;
+  font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;
+}
+
+/* Navigation buttons */
+#nav {
+  margin: 0px;
+  padding: 6px;
+  border: 0px solid white;
+  text-align: center;
+}
+
+.navButtons button {
+  width: 120px;
+  height: 36px;
+  margin: 16px 4px;
+  padding: 0px;
+  border: none;
+  border-radius: 6px;
+  background-color: #80cbc4;
+  color: white;
+  font-size: 30px;
+  outline: none;
+  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
+}
+
+.navButtons button:disabled {
+  background-color: white;
+  opacity: 0.1;
+  color: #303030;
+  box-shadow: none;
+}
+
+.navButtons button:active {
+  background-color: #9bbcb9;
+  transform: translate(1px, 2px);
+  box-shadow: none;
+}
+
+#tabTracker {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+
+.tabBtn {
+  background-color: #80cbc4;
+  outline: none;
+  border: 1px solid white;
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  margin: 3px;
+  padding: 0px;
+}
+
+.tabBtn:disabled {
+  background-color: transparent;
+  border: 1px solid #c0c0c0;
+}
