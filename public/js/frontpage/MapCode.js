@@ -1,109 +1,141 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiYXNiYXJ2ZSIsImEiOiI4c2ZpNzhVIn0.A1lSinnWsqr7oCUo0UMT7w';
-var map = new mapboxgl.Map({
-  container: 'MapContain', // container id
-  style: 'mapbox://styles/asbarve/ciu0anscx00ac2ipgyvuieuu9', //stylesheet location
-  center: [106.83, -6.25], // starting position
-  zoom: 10, // starting zoom
-  attributionControl: false,
-  maxZoom: 20,
+"use strict";
+
+var map = L.map('MapContain').setView([-6.25,106.83], 10);
+L.tileLayer('https://api.mapbox.com/styles/v1/asbarve/ciu0anscx00ac2ipgyvuieuu9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXNiYXJ2ZSIsImEiOiI4c2ZpNzhVIn0.A1lSinnWsqr7oCUo0UMT7w',
+{ maxZoom: 18,
   minZoom: 9,
-})
-// Add geolocation to the map.
-var geolocate = new mapboxgl.Geolocate({position: 'top-left'});
-map.addControl(geolocate);
+}).addTo(map);
 
-// Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.Navigation());
-
-// for flyto controls
-var spd = .5;
-var zom = 10;
-var crv = 1.43;
-
-
-var url = 'https://raw.githubusercontent.com/ojha-url/URL_Internal/master/Test_jakarta.json';  //url of json data
-
-
-
-// Cambridge for test
-document.getElementById('Cambridge_test').addEventListener('click', function () {
-  url = 'https://raw.githubusercontent.com/ojha-url/URL_Internal/master/test-cambridge.json'; //TODO  - remove cambridge
-  map.flyTo({
-    center: [ -71.0942, 42.3601 ],
-    speed: spd, // make the flying slow
-    zoom: zom,
-    curve: crv
-  });
+//Custom marker icons
+var pumpIcon = L.icon({
+  iconUrl: '/svg/pumpIcon.svg',
+  iconSize: [30, 30],
+  iconAnchor: [20, 10]
 });
-
-// Jakarta
-document.getElementById('Jakarta').addEventListener('click', function () {
-  url = 'https://raw.githubusercontent.com/ojha-url/URL_Internal/master/Test_jakarta.json', //TODO  - change the links
-  map.flyTo({
-    center: [ 106.83, -6.25 ],
-    speed: spd, // make the flying slow
-    zoom: zom,
-    curve: crv
-  });
+var reportIcon = L.icon({
+  iconUrl: '/svg/floodIcon.svg',
+  iconSize: [25, 25],
+  iconAnchor: [18, 8]
 });
+var floodGateIcon = L.icon({
+  iconUrl: '/svg/floodGate.svg',
+  iconSize: [25, 25],
+  iconAnchor: [18, 10],
 
-// Surabaya
-document.getElementById('Surabaya').addEventListener('click', function () {
-  url = 'https://raw.githubusercontent.com/ojha-url/URL_Internal/master/Test_surabaya.json', //TODO  - change the links
-  map.flyTo({
-    center: [ 112.75, -7.25 ],
-    speed: spd, // make the flying slow
-    zoom: zom,
-    curve: crv
-  });
 });
+var waterwaysLinestyle = {
+  "color": "#787878",
+   "weight": 2,
+   "opacity": 0.65
+};
 
-// Bandung
-document.getElementById('Bandung').addEventListener('click', function () {
-  url = 'https://raw.githubusercontent.com/ojha-url/URL_Internal/master/Test_bandung.json', //TODO  - change the links
-  map.flyTo({
-    center: [ 107.61, -6.91 ],
-    speed: spd, // make the flying slow
-    zoom: zom,
-    curve: crv
-  });
+var cityLayers = L.layerGroup();
+var layerToggle;
+
+//Add city objects with following parameters, and data sources with respective names & icons
+var jakartaParams = {
+  city: "Jakarta",
+  center: [-6.15, 106.83],
+  urlList: ["https://raw.githubusercontent.com/ojha-url/URL_Internal/master/Test_jakarta.json", "https://petajakarta.org/banjir/data/api/v2/infrastructure/pumps","https://petajakarta.org/banjir/data/api/v2/infrastructure/floodgates","https://petajakarta.org/banjir/data/api/v2/infrastructure/waterways"],
+  layerList: ["Reports", "Pumps", "Flood Gates", 'Waterways'],
+  styleList: [reportIcon, pumpIcon, floodGateIcon, waterwaysLinestyle]
+};
+
+var cambridgeParams = {
+  city: "Cambridge",
+  center: [42.3601, -71.0942],
+  urlList: ["https://raw.githubusercontent.com/ojha-url/URL_Internal/master/test-cambridge.json"],
+  layerList: ["Reports"],
+  styleList: [reportIcon]
+};
+
+var SurabayaParams = {
+  city: "Surabaya",
+  center: [-7.25,112.75],
+  urlList: ["https://raw.githubusercontent.com/ojha-url/URL_Internal/master/test-cambridge.json"],
+  layerList: ["Reports"],
+  styleList: [reportIcon]
+};
+
+
+var BandungParams = {
+  city: "Bandung",
+  center: [-6.91,107.61],
+  urlList: ["https://raw.githubusercontent.com/ojha-url/URL_Internal/master/test-cambridge.json"],
+  layerList: ["Reports"],
+  styleList: [reportIcon]
+};
+
+/* Function not defined. Update api.js to make call
+$.get('/reports/confirmed/', {}, function (error, response) {
+  console.log('Get All Reports successful');
+  console.log(response);
 });
+*/
 
-map.on('load', function () {
-  window.setInterval(function() {
-    map.getSource('report').setData(url);
-  }, 2000);
-
-  map.addSource('report', { type: 'geojson', data: url });
-
-  map.addLayer({
-    "id": "report",
-    "type": "symbol",
-    "source": "report",
-    "layout": {
-      "icon-image": "marker-15"
+function onEachFeature(feature, layer) {
+    if (feature.properties && feature.properties.status) {
+      layer.bindPopup('<center><img src="'+feature.properties.image_url+'" height="100%" width="100%"><br></center><br> <b>Status: </b>' + feature.properties.status + '<br><b>Water depth: </b>' + feature.properties.water_depth + 'cm');
+    } else if (feature.properties && feature.properties.name) {
+      layer.bindPopup('<b>Name: </b>' + feature.properties.name);
     }
+}
 
+function createLayer(url, name, icon) {
+  var newLayer;
+  $.getJSON(url, function (data) {
+    newLayer = L.geoJson(data, {
+      onEachFeature: onEachFeature,
+
+      pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {icon: icon});
+      },
+    style: function(feature) {
+          switch (feature.geometry.type) {
+              case 'LineString':return icon;
+              //case 'point':   return L.marker(feature.geometry.coordinates, {icon: icon});
+          }
+      }
+
+    });
+    cityLayers.addLayer(newLayer);
+    layerToggle.addOverlay(newLayer, name);
   });
+}
+
+function updateMapView(cityObject) {
+  if (layerToggle) {
+    map.removeControl(layerToggle);
+  }
+  layerToggle = L.control.layers();
+  cityLayers.clearLayers();
+  map.flyTo(cityObject.center, 12, { //TODO smooth curve flyTo
+    animate: true,
+    duration: 3
+  });
+  for (var i = 0; i < cityObject.urlList.length; i += 1) {
+    createLayer(cityObject.urlList[i], cityObject.layerList[i], cityObject.styleList[i]);
+  }
+  layerToggle.addTo(map);
+  cityLayers.addTo(map);
+}
+
+
+//Add click events for different cities
+$('#Cambridge').click(function () {
+  updateMapView(cambridgeParams);
+});
+$('#Jakarta').click(function () {
+  updateMapView(jakartaParams);
+});
+$('#Surabaya').click(function () {
+  updateMapView(SurabayaParams);
+});
+$('#Bandung').click(function () {
+  updateMapView(BandungParams);
 });
 
-
-//popup
-map.on('click', function (e) {
-  var features = map.queryRenderedFeatures(e.point, { layers: ['report'] });
-  var feature = features[0];
-
-  // Populate the popup and set its coordinates
-  // based on the feature found.
-  var popup = new mapboxgl.Popup()
-  .setLngLat(feature.geometry.coordinates)
-  .setHTML('<b>Live Report<br> Source: </b>' + feature.properties.source +'<b><br>Status:</b> '+ feature.properties.status)
-  .addTo(map);
-});
-
-// Use the same approach as above to indicate that the symbols are clickable
-// by changing the cursor style to 'pointer'.
-map.on('mousemove', function (e) {
-  var features = map.queryRenderedFeatures(e.point, { layers: ['report'] });
-  map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+//Default view jakarta
+$(document).ready(function () {
+  $('#Jakarta').trigger('click');
 });

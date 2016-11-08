@@ -28,7 +28,7 @@
   <script src="js/frontpage/plugins.js"></script>
   <script src="js/frontpage/jquery.counterup.js"></script>
   <script src="https://domoritz.github.io/leaflet-locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
-  <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+  <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 
 </head>
 <body>
@@ -59,7 +59,7 @@
                   <li><a href="index.html">Map</a>
                     <ul class="nav">
                       <!-- TODO: remove Cambridge_test after testing -->
-                      <li><a id='Cambridge_test' href="#">Cambridge_test</a></li>
+                      <li><a id='Cambridge' href="#">Cambridge</a></li>
                       <li><a id='Jakarta' href="#">Jakarta</a></li>
                       <li><a id='Surabaya' href="#">Surabaya</a></li>
                       <li><a id='Bandung' href="#">Bandung</a></li> </ul></li>
@@ -73,11 +73,7 @@
           </div>
         </div>
       </header><!-- header close -->
-
-
-
-
-      <div id='MapContain'></div>
+      <div class='custom-popup' id='MapContain'></div>
       <br/>
 
       <!-- footer Start -->
