@@ -1,0 +1,39 @@
+<template>
+  <require from="bootstrap/css/bootstrap.css"></require>
+  <require from="./styles.css"></require>
+  <require from="./routes/contacts/contact-list"></require>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <i class="fa fa-user"></i>
+          <span t="hello_world">Hello World</span>
+        </a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#/" t="menu_home">Home</a></li>
+        <li><a href="#/map" t="menu_map">Map</a></li>
+        <li><a href="#/cards" t="menu_card">Card</a></li>
+        <li><a href="#/test">Test</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#/login">Login</a></li>
+            <li><a href="#">Log Out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <loading-indicator loading.bind="router.isNavigating || api.isRequesting"></loading-indicator>
+
+  <div class="container">
+    <div class="row">
+      <!-- <contact-list class="col-md-4"></contact-list> -->
+      <router-view class="col-md-8"></router-view>
+    </div>
+  </div>
+
+</template>
