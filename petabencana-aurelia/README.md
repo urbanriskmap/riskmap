@@ -21,10 +21,12 @@ The project structure is as follows:
 
 To generate a production build run `npm run build` - this will generate new scripts in scripts/ and also auto increment the reference numbers in index.html.  Upload the following to the deployment destination (e.g. S3 bucket) protecting the structure:
 
+```
 assets/*
 locales/*
 scripts/*
 index.html
 favicon.ico
+```
 
 To test the build locally a static server can be used e.g. https://github.com/scottcorgan/pushstate-server
