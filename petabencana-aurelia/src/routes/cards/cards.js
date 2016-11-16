@@ -64,6 +64,6 @@ export class Cards {
   }
 
   testFn() {
-    console.log(this.description);
+    console.log(this.description.text );
   }
 }

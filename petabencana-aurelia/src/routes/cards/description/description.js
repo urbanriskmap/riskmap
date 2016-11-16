@@ -3,8 +3,8 @@ import {computedFrom} from 'aurelia-framework';
 
 export class Description {
   attached() {
-    this.descripText = "Enter text here...";
-    this.textLength = 0;
+    Description.descripText = "Enter text here...";
+    Description.textLength = 0;
   }
   clearText() {
     if (this.textLength === 0) {
@@ -13,13 +13,14 @@ export class Description {
   }
   charCount() {
     this.textLength = this.descripText.length;
+    Description.textLength = this.textLength;
+    Description.descripText = this.descripText;
   }
 
   @computedFrom('descripText')
   get text() {
-    if (this.textLength !== 0) {
-      console.log(this.descripText);
-      return `${this.descripText}`;
+    if (Description.descripText) {
+          return `${Description.descripText}`;
     }
   }
 }
