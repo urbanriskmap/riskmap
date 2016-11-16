@@ -1,4 +1,4 @@
-{ 
-  "esversion":6
-  "esnext": true //depracated but needed for jshint2 vim plugin 
+{
+  "esversion":6,
+  "esnext": true //depracated but needed for jshint2 vim plugin
 }
