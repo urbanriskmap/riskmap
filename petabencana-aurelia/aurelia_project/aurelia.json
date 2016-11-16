@@ -91,8 +91,7 @@
         "name": "vendor-bundle.js",
         "prepend": [
           "node_modules/bluebird/js/browser/bluebird.core.js",
-          "node_modules/requirejs/require.js",
-          "node_modules/leaflet/dist/leaflet.js"
+          "node_modules/requirejs/require.js"
         ],
         "dependencies": [
           "aurelia-binding",
@@ -132,6 +131,14 @@
             "path": "../node_modules/aurelia-testing/dist/amd",
             "main": "aurelia-testing",
             "env": "dev"
+          },
+          {
+            "name": "leaflet",
+            "path": "../node_modules/leaflet/dist",
+            "main": "leaflet",
+            "resources": [
+              "leaflet.css"
+            ]
           }
         ]
       }
