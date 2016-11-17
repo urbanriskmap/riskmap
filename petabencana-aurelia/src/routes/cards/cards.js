@@ -1,12 +1,12 @@
 /* jshint esversion: 6 */
 import {inject} from 'aurelia-framework';
 import {Location} from './location/location';
-import {Description} from './description/description';
+import {Depth} from './depth/depth';
 import {Photo} from './photo/photo';
+import {Description} from './description/description';
 
-@inject(Location, Description, Photo) //no semicolon
+@inject(Location, Depth, Photo, Description) //no semicolon
 export class Cards {
-
   configureRouter(config, router) {
     config.title = 'Flood report';
     config.map([
@@ -20,10 +20,11 @@ export class Cards {
     this.router = router;
   }
 
-  constructor(location, description, photo) { //Takes input from injected class, same order of params as injected class objects
+  constructor(location, depth, photo, description) { //Takes input from injected class, same order of params as injected class objects
     this.location = location;
-    this.description = description;
+    this.depth = depth;
     this.photo = photo;
+    this.description = description;
   }
 
   activate(params) { //get card id
@@ -32,7 +33,18 @@ export class Cards {
 
   attached() {
     this.totalCards = this.router.routes.length - 1; //exclude {route:'', redirect:'location')
-    this.count = this.router.currentInstruction.config.settings.cardNo;
+    this.inputs = [];
+    for (let i = 0; i < this.totalCards; i+=1) { //better es6 method? .push?
+      this.inputs[i] = {type: this.router.routes[i+1].route};
+    }
+  }
+
+  get count() {
+    this.cardNo = this.router.currentInstruction.config.settings.cardNo;
+    return this.cardNo;
+  }
+  set count(val) {
+    this.cardNo = this.count + val;
   }
 
   get cardTitle() {
@@ -40,32 +52,52 @@ export class Cards {
   }
 
   nextCard() {
-    if (this.count < this.totalCards) {
-      this.count+=1;
-      this.router.navigate(this.router.routes[this.count].route);
+    if (this.cardNo < this.totalCards) {
+      if (this.cardNo === 1) {
+        this.router.currentInstruction.config.settings.input = this.location.selectedLocation;
+        this.userInputs = {index: this.cardNo - 1, value: this.location.selectedLocation};
+      }
+      if (this.cardNo === 2) {
+        this.router.currentInstruction.config.settings.input = this.depth.waterDepth;
+        this.userInputs = {index: this.cardNo - 1, value: this.depth.waterDepth};
+      }
+      if (this.cardNo === 3) {
+        this.router.currentInstruction.config.settings.input = this.photo.imageFile;
+        this.userInputs = {index: this.cardNo - 1, value: this.photo.imageFile};
+      }
+      if (this.cardNo === 4) {
+        this.router.currentInstruction.config.settings.input = this.description.text;
+        this.userInputs = {index: this.cardNo - 1, value: this.description.text};
+      }
+      this.count = 1;
+      this.router.navigate(this.router.routes[this.cardNo].route);
     }
   }
 
   prevCard() {
-    if (this.count > 1) {
-      this.count-=1;
-      this.router.navigate(this.router.routes[this.count].route);
+    if (this.cardNo > 1) {
+      this.count = -1;
+      this.router.navigate(this.router.routes[this.cardNo].route);
     }
   }
 
   get nextDisabled() {
-    if (this.count === 1) {
+    if (this.cardNo === 1) {
       return !this.location.selectedLocation;
     } else {
-      return this.count === this.totalCards;
+      return this.cardNo === this.totalCards;
     }
   }
 
   get prevDisabled() {
-    return this.count === 1;
+    return this.cardNo === 1;
   }
 
-  get text() {
-    return this.description.text;
+  get userInputs() {
+    return this.inputs;
+  }
+
+  set userInputs(val) {
+    this.inputs[val.index].value = val.value;
   }
 }

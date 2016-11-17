@@ -1,5 +1,5 @@
 export class Depth {
   constructor() {
-    //this.title = 'Report water depth';
+    this.someName = 'Ignore, for test';
   }
 }

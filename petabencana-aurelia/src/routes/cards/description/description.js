@@ -6,6 +6,12 @@ export class Description {
     this.descripText = "Enter text here...";
     this.textLength = 0;
   }
+  activate(params, routerConfig) {
+    if (routerConfig.settings.input) {
+      this.descripText = routerConfig.settings.input;
+      this.textLength = this.descripText.length;
+    }
+  }
   clearHint() {
     if (this.textLength === 0) {
       this.descripText = "";

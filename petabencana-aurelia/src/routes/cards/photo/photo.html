@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <!--<button id="photoCapture"><i class="fa fa-camera" aria-hidden="true"></i></button>
-    <button id="photoSelector"><i class="fa fa-file-image-o" aria-hidden="true"></i></button>-->
-    <input id="photoCapture" type="file" accept="image/*" capture="camera" change.trigger="getPhoto()" files.bind="selectedPhoto">
-    <input id="photoSelector" type="file" accept="image/*" change.trigger="getPhoto()" files.bind="selectedPhoto">
-  </div>
+  <!--<button id="photoCapture"><i class="fa fa-camera" aria-hidden="true"></i></button>
+  <button id="photoSelector"><i class="fa fa-file-image-o" aria-hidden="true"></i></button>-->
+  <canvas data.bind="imageFile" style="border: 1px solid green">
+  </canvas>
+  <br><br>
+  <input ref="photoCapture" type="file" accept="image/*" capture="camera" files.bind="selectedPhoto">
 </template>

@@ -1,8 +1,21 @@
 /* jshint esversion: 6 */
-//import {DepthSlider} from '../../../components/slider/slider';
+import {computedFrom} from 'aurelia-framework';
 
 export class Depth {
   constructor() {
-    this.someName = 'Billu';
+    this.depthVal = 40;
+  }
+  activate(params, routerConfig) {
+    if (routerConfig.settings.input) {
+      this.depthVal = routerConfig.settings.input;
+    }
+  }
+  updateVal() {
+    Depth.depthVal = this.depthVal;
+  }
+
+  @computedFrom('depthVal')
+  get waterDepth() {
+    return Depth.depthVal;
   }
 }
