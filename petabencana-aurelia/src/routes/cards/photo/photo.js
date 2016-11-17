@@ -1,5 +1,17 @@
-export class Depth {
+/* jshint esversion: 6 */
+
+export class Photo {
   constructor() {
-    //this.title = 'Report water depth';
+    //this.selectedPhoto = false;
+  }
+
+  getPhoto() {
+  }
+
+  get imageFile() {
+    if (this.selectedPhoto) {
+      console.log(this.selectedPhoto[0]);
+      return this.selectedPhoto[0];
+    }
   }
 }

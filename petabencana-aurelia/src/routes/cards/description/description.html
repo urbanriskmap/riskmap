@@ -1,6 +1,6 @@
 <template>
   <div style="position: relative; width: 75%; margin: auto">
-    <textarea rows="6" style="width: 100%; resize: none" value.bind="descripText" keyup.trigger="charCount()" click.trigger="clearText()"></textarea>
+    <textarea rows="6" style="width: 100%; resize: none" value.bind="descripText" keyup.trigger="charCount()" click.trigger="clearHint()"></textarea>
     <div style="position: relative; float: right">
       <p>${textLength}/140</p>
     </div>

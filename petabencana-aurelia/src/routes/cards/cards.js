@@ -1,9 +1,11 @@
 /* jshint esversion: 6 */
 import {inject} from 'aurelia-framework';
+//import {BindingEngine} from 'aurelia-framework';
 import {Location} from './location/location';
 import {Description} from './description/description';
+import {Photo} from './photo/photo';
 
-@inject(Location, Description) //no semicolon
+@inject(Location, Description, Photo) //no semicolon
 export class Cards {
 
   configureRouter(config, router) {
@@ -19,12 +21,15 @@ export class Cards {
     this.router = router;
   }
 
-  constructor(location, description) { //Takes input from injected class, same order of params as injected class objects
+  constructor(location, description, photo) { //Takes input from injected class, same order of params as injected class objects
     this.location = location;
     this.description = description;
+    this.photo = photo;
+    //this.bindingEngine = bindingEngine;
+    //let subscription = this.bindingEngine.propertyObserver(this, 'description').subscribe(this.objectValueChanged);
   }
 
-  activate(params) {
+  activate(params) { //get card id
     this.id = params.id;
   }
 
@@ -63,7 +68,13 @@ export class Cards {
     return this.count === 1;
   }
 
+/*
+  objectValueChanged(newValue, oldValue) {
+    this.someText = newValue;
+  }
+*/
+
   testFn() {
-    console.log(this.description.text );
+    this.text = this.description.text;
   }
 }

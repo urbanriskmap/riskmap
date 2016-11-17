@@ -1,5 +1,8 @@
 <template>
   <div>
-    <p>Photo buttons here</p>
+    <!--<button id="photoCapture"><i class="fa fa-camera" aria-hidden="true"></i></button>
+    <button id="photoSelector"><i class="fa fa-file-image-o" aria-hidden="true"></i></button>-->
+    <input id="photoCapture" type="file" accept="image/*" capture="camera" change.trigger="getPhoto()" files.bind="selectedPhoto">
+    <input id="photoSelector" type="file" accept="image/*" change.trigger="getPhoto()" files.bind="selectedPhoto">
   </div>
 </template>
