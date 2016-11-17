@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-import * as L from '../../../../node_modules/leaflet/dist/leaflet';
+import * as L from 'leaflet';
 
 export class Location {
   constructor() {
