@@ -10,16 +10,16 @@
   font-size: 16px;
   background-color: #424242;
   padding-top: 2px;
-  }
+}
 
-  #cardContent {
-    position: relative;
-    width: 100%;
-    height: 380px;
-    text-align: center;
-    z-index: 3;
-    background-color: #808080;
-    }
+#cardContent {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  text-align: center;
+  z-index: 3;
+  background-color: #808080;
+}
 
 .navBtn {
   position: relative;
@@ -41,7 +41,7 @@
   z-index: 3;
 }
 
-.navBtn:hover {
+.navBtn:hover { 
   background: #5e5e5e;
   text-decoration: none;
   z-index: 3;
