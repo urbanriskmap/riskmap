@@ -1,13 +1,17 @@
-/* jshint esversion: 6 */
 import * as L from 'leaflet';
+import {inject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
+@inject(EventAggregator)
 export class Location {
+  constructor(ea) {
+    Location.ea = ea; //scope of 'this' limited in cardMap.on functions, using 'Location' (debug)
+  }
   activate(params, routerConfig) {
     if (routerConfig.settings.input) {
       this.userLocation = routerConfig.settings.input;
     }
   }
-
   attached() {
     let cardMap = L.map('mapWrapper');
     let markerIcon = L.icon({
@@ -21,8 +25,8 @@ export class Location {
     }).addTo(cardMap);
     if (this.userLocation) {
       cardMap.setView(this.userLocation, 12);
-      Location.center = this.userLocation;
-      marker = L.marker(Location.center, {icon: markerIcon}).addTo(cardMap);
+      marker = L.marker(this.userLocation, {icon: markerIcon}).addTo(cardMap);
+      Location.ea.publish('changedLocation', this.userLocation);
     } else {
       cardMap.locate({
         setView: true,
@@ -43,26 +47,27 @@ export class Location {
           fillOpacity: 1,
           radius: 8
         }).addTo(cardMap);
-        Location.center = cardMap.getCenter();
-        marker = L.marker(Location.center, {icon: markerIcon}).addTo(cardMap);
+        marker = L.marker(cardMap.getCenter(), {icon: markerIcon}).addTo(cardMap);
+        Location.ea.publish('changedLocation', cardMap.getCenter());
       });
       cardMap.on('locationerror', function () {
         cardMap.setView([-6.2, 106.83], 10);
-        Location.center = cardMap.getCenter();
+        Location.ea.publish('changedLocation', cardMap.getCenter());
       });
     }
     cardMap.on('moveend', function () {
       if (cardMap && marker) {
         cardMap.removeLayer(marker);
-        Location.center = cardMap.getCenter();
-        marker = L.marker(Location.center, {icon: markerIcon}).addTo(cardMap);
+        marker = L.marker(cardMap.getCenter(), {icon: markerIcon}).addTo(cardMap);
+        Location.ea.publish('changedLocation', cardMap.getCenter());
       }
     });
   }
-
+/*
   get selectedLocation() {
     if (Location.center) {
       return Location.center;
     }
   }
+  */
 }

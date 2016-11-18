@@ -1,11 +1,7 @@
-/* jshint esversion: 6 */
 import {inject} from 'aurelia-framework';
-import {Location} from './location/location';
-import {Depth} from './depth/depth';
-import {Photo} from './photo/photo';
-import {Description} from './description/description';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
-@inject(Location, Depth, Photo, Description) //no semicolon
+@inject(EventAggregator)
 export class Cards {
   configureRouter(config, router) {
     config.title = 'Flood report';
@@ -19,23 +15,22 @@ export class Cards {
     ]);
     this.router = router;
   }
-
-  constructor(location, depth, photo, description) { //Takes input from injected class, same order of params as injected class objects
-    this.location = location;
-    this.depth = depth;
-    this.photo = photo;
-    this.description = description;
+  constructor(ea) {
+    this.ea = ea;
   }
-
-  activate(params) { //get card id
+  activate(params) {
     this.id = params.id;
   }
-
   attached() {
     this.totalCards = this.router.routes.length - 1; //exclude {route:'', redirect:'location')
-    this.inputs = [];
-    for (let i = 0; i < this.totalCards; i+=1) { //better es6 method? .push?
-      this.inputs[i] = {type: this.router.routes[i+1].route};
+    let inputObjects = ['changedLocation', 'changedDepth', 'changedPhoto', 'changedDescription'];
+    this.inputs = []; //development stage only
+    for (let i = 0; i < this.totalCards - 1; i+=1) {
+      this.inputs[i] = {type: this.router.routes[i+1].route};  //development stage only
+      this.ea.subscribe(inputObjects[i], msg => {
+        this.userInputs = {index: i, value: msg};  //development stage only
+        this.router.routes[i+1].settings.input = msg;
+      });
     }
   }
 
@@ -53,27 +48,10 @@ export class Cards {
 
   nextCard() {
     if (this.cardNo < this.totalCards) {
-      if (this.cardNo === 1) {
-        this.router.currentInstruction.config.settings.input = this.location.selectedLocation;
-        this.userInputs = {index: this.cardNo - 1, value: this.location.selectedLocation};
-      }
-      if (this.cardNo === 2) {
-        this.router.currentInstruction.config.settings.input = this.depth.waterDepth;
-        this.userInputs = {index: this.cardNo - 1, value: this.depth.waterDepth};
-      }
-      if (this.cardNo === 3) {
-        this.router.currentInstruction.config.settings.input = this.photo.imageFile;
-        this.userInputs = {index: this.cardNo - 1, value: this.photo.imageFile};
-      }
-      if (this.cardNo === 4) {
-        this.router.currentInstruction.config.settings.input = this.description.text;
-        this.userInputs = {index: this.cardNo - 1, value: this.description.text};
-      }
       this.count = 1;
       this.router.navigate(this.router.routes[this.cardNo].route);
     }
   }
-
   prevCard() {
     if (this.cardNo > 1) {
       this.count = -1;
@@ -83,20 +61,19 @@ export class Cards {
 
   get nextDisabled() {
     if (this.cardNo === 1) {
-      return !this.location.selectedLocation;
+      return !this.inputs[0].value; //disable next button till location selected
     } else {
       return this.cardNo === this.totalCards;
     }
   }
-
   get prevDisabled() {
     return this.cardNo === 1;
   }
 
+  //User inputs getter/setter for development; not required for production
   get userInputs() {
     return this.inputs;
   }
-
   set userInputs(val) {
     this.inputs[val.index].value = val.value;
   }

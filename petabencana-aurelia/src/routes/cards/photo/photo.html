@@ -1,8 +1,6 @@
 <template>
-  <!--<button id="photoCapture"><i class="fa fa-camera" aria-hidden="true"></i></button>
-  <button id="photoSelector"><i class="fa fa-file-image-o" aria-hidden="true"></i></button>-->
-  <canvas data.bind="imageFile" style="border: 1px solid green">
+  <canvas style="border: 1px solid green" width.bind="w" height.bind="h" ref="preview">
   </canvas>
-  <br><br>
-  <input ref="photoCapture" type="file" accept="image/*" capture="camera" files.bind="selectedPhoto">
+  <br>
+  <input type="file" accept="image/*" change.delegate="drawImage()" capture="camera" files.bind="selectedPhoto">
 </template>
