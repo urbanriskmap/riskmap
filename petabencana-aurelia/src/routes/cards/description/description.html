@@ -1,7 +1,8 @@
 <template>
-  <div style="position: relative; width: 75%; margin: auto">
-    <textarea rows="6" style="width: 100%; resize: none" value.bind="descripText" keyup.trigger="charCount()" click.trigger="clearHint()"></textarea>
-    <div style="position: relative; float: right">
+  <require from="./description.css"></require>
+  <div id="description">
+    <textarea id="textarea" rows="6" value.bind="descripText" keyup.trigger="charCount()" click.trigger="clearHint()">Some text</textarea>
+    <div id="textmessage">
       <p>${textLength}/140</p>
     </div>
   </div>

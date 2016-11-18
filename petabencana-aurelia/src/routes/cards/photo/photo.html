@@ -1,8 +1,9 @@
 <template>
   <!--<button id="photoCapture"><i class="fa fa-camera" aria-hidden="true"></i></button>
   <button id="photoSelector"><i class="fa fa-file-image-o" aria-hidden="true"></i></button>-->
-  <canvas data.bind="imageFile" style="border: 1px solid green">
+<require from="./photo.css"></require>
+  <canvas id="camera" data.bind="imageFile">
   </canvas>
   <br><br>
-  <input ref="photoCapture" type="file" accept="image/*" capture="camera" files.bind="selectedPhoto">
+  <input id="photo" ref="photoCapture" type="file" accept="image/*" capture="camera" files.bind="selectedPhoto">
 </template>
