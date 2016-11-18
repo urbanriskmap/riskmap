@@ -1,11 +1,11 @@
-/* jshint esversion: 6 */
 import {inject} from 'aurelia-framework';
 import {Location} from './location/location';
 import {Depth} from './depth/depth';
 import {Photo} from './photo/photo';
 import {Description} from './description/description';
+import {EventAggregator} from 'aurelia-event-aggregator'; 
 
-@inject(Location, Depth, Photo, Description) //no semicolon
+@inject(EventAggregator, Location, Depth, Photo, Description) //no semicolon
 export class Cards {
   configureRouter(config, router) {
     config.title = 'Flood report';
@@ -20,11 +20,13 @@ export class Cards {
     this.router = router;
   }
 
-  constructor(location, depth, photo, description) { //Takes input from injected class, same order of params as injected class objects
+  constructor(ea, location, depth, photo, description) { //Takes input from injected class, same order of params as injected class objects
+    this.ea = ea; 
     this.location = location;
     this.depth = depth;
     this.photo = photo;
     this.description = description;
+    this.eaDescriptionText = "Initial eaDescriptionText"; 
   }
 
   activate(params) { //get card id
@@ -37,6 +39,8 @@ export class Cards {
     for (let i = 0; i < this.totalCards; i+=1) { //better es6 method? .push?
       this.inputs[i] = {type: this.router.routes[i+1].route};
     }
+    this.ea.subscribe('updateText', msg => this.eaDescriptionText = msg); 
+    this.ea.subscribe('updatePhoto', msg => this.eaPhoto = msg); 
   }
 
   get count() {
@@ -81,6 +85,13 @@ export class Cards {
     }
   }
 
+  testfn() {
+    console.log("testfn"); 
+    console.log(this.eaDescriptionText); 
+    console.log(this.eaPhoto); 
+    console.log("End testfn"); 
+  }
+
   get nextDisabled() {
     if (this.cardNo === 1) {
       return !this.location.selectedLocation;
@@ -100,4 +111,5 @@ export class Cards {
   set userInputs(val) {
     this.inputs[val.index].value = val.value;
   }
+
 }

@@ -4,5 +4,5 @@
   <canvas data.bind="imageFile" style="border: 1px solid green">
   </canvas>
   <br><br>
-  <input ref="photoCapture" type="file" accept="image/*" capture="camera" files.bind="selectedPhoto">
+  <input ref="photoCapture" type="file" accept="image/*" capture="camera" change.delegate="changedPhoto()" files.bind="selectedPhoto">
 </template>
