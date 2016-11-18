@@ -41,10 +41,11 @@
   z-index: 3;
 }
 
-.navBtn:hover {
+.navBtn:active {
   background: #5e5e5e;
   text-decoration: none;
   z-index: 3;
+  transform: translateY(1px);
 }
 
 #cardNavigation{

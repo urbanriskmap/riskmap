@@ -16,7 +16,10 @@
   resize: none;
   width: 85%;
   height: 75%;
-  margin:
+  font-family: "Roboto", Open Sans;
+  font-weight: 100;
+  color: #fff;
+  font-size: 14px;
   resize: none;
   border-radius: 5px;
   border-width: .5px;
@@ -25,6 +28,7 @@
   background-color: #424242;
   border-style: solid;
   margin: 30px 0 10px 0;
+  padding: 10px 5px 5px 10px;
 }
 
 
