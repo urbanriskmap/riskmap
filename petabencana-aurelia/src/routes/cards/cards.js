@@ -32,6 +32,8 @@ export class Cards {
         this.router.routes[i+1].settings.input = msg;
       });
     }
+    this.ea.subscribe('updateText', msg => this.eaDescriptionText = msg);
+    this.ea.subscribe('updatePhoto', msg => this.eaPhoto = msg);
   }
 
   get count() {
@@ -77,4 +79,5 @@ export class Cards {
   set userInputs(val) {
     this.inputs[val.index].value = val.value;
   }
+
 }

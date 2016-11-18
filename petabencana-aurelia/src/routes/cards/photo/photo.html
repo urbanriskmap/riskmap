@@ -1,6 +1,11 @@
 <template>
   <canvas style="border: 1px solid green" width.bind="w" height.bind="h" ref="preview">
   </canvas>
+<<<<<<< HEAD
   <br>
   <input type="file" accept="image/*" change.delegate="drawImage()" capture="camera" files.bind="selectedPhoto">
+=======
+  <br><br>
+  <input ref="photoCapture" type="file" accept="image/*" capture="camera" change.delegate="changedPhoto()" files.bind="selectedPhoto">
+>>>>>>> 9f41ab09ce33f18ee932d18db223edb2be79edda
 </template>

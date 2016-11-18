@@ -63,11 +63,4 @@ export class Location {
       }
     });
   }
-/*
-  get selectedLocation() {
-    if (Location.center) {
-      return Location.center;
-    }
-  }
-  */
 }

@@ -20,6 +20,7 @@ export class Description {
     }
   }
   charCount() {
+    this.ea.publish('updateText', this.descripText);
     this.textLength = this.descripText.length; //this.textLength requied to update bound helpers for description.html
     this.ea.publish('changedDescription', this.descripText);
   }
