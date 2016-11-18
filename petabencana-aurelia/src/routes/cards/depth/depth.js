@@ -1,8 +1,10 @@
-/* jshint esversion: 6 */
-import {computedFrom} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
+@inject(EventAggregator)
 export class Depth {
-  constructor() {
+  constructor(ea) {
+    this.ea = ea;
     this.depthVal = 40;
   }
   activate(params, routerConfig) {
@@ -11,11 +13,6 @@ export class Depth {
     }
   }
   updateVal() {
-    Depth.depthVal = this.depthVal;
-  }
-
-  @computedFrom('depthVal')
-  get waterDepth() {
-    return Depth.depthVal;
+    this.ea.publish('changedDepth', this.depthVal);
   }
 }

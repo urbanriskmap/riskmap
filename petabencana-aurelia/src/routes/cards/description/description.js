@@ -1,8 +1,10 @@
-/* jshint esversion: 6 */
-import {computedFrom} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
+@inject(EventAggregator)
 export class Description {
-  constructor() {
+  constructor(ea) {
+    this.ea = ea;
     this.descripText = "Enter text here...";
     this.textLength = 0;
   }
@@ -18,12 +20,8 @@ export class Description {
     }
   }
   charCount() {
+    this.ea.publish('updateText', this.descripText);
     this.textLength = this.descripText.length; //this.textLength requied to update bound helpers for description.html
-    Description.descripText = this.descripText; //workaround, otherwise injected data in cards does not update
-  }
-
-  @computedFrom('textLength') //prevents getter in cards.js to listen for changes every 120ms
-  get text() { //getter required to pass updated data
-    return Description.descripText;
+    this.ea.publish('changedDescription', this.descripText);
   }
 }

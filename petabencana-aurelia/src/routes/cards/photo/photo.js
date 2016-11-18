@@ -1,19 +1,40 @@
-/* jshint esversion: 6 */
-import {computedFrom} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
+@inject(EventAggregator)
 export class Photo {
+  constructor(ea) {
+    this.ea = ea;
+  }
   activate(params, routerConfig) {
     if (routerConfig.settings.input) {
       this.selectedPhoto = routerConfig.settings.input;
+      this.haveImg = true;
+    }
+    this.w = 300;
+    this.h = 300;
+  }
+  attached() {
+    if (this.haveImg) {
+      this.drawImage();
     }
   }
-
-  @computedFrom('selectedPhoto');
-  get imageFile() {
-    if (this.selectedPhoto) {
-      console.log(this.selectedPhoto[0]);
-      Photo.selectedPhoto = this.selectedPhoto;
-      return Photo.selectedPhoto[0];
-    }
+  //Add function to resize image for best-fit display within canvas;
+  //Add 'change image' button, once image is selected and displayed;
+  drawImage() {
+    this.ea.publish('changedPhoto', this.selectedPhoto);
+    let wrapper = this.preview;
+    let phW = this.w;
+    let phH = this.h;
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      let reviewImg = new Image();
+      reviewImg.onload = () => {
+        let cntxt = wrapper.getContext('2d');
+        cntxt.drawImage(reviewImg, 0, 0, phW, phH);
+      };
+      reviewImg.src = e.target.result;
+    };
+    reader.readAsDataURL(this.selectedPhoto[0]);
   }
 }
