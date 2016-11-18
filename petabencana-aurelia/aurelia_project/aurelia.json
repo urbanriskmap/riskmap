@@ -139,14 +139,6 @@
             "resources": [
               "leaflet.css"
             ]
-          },
-          {
-            "name": "less",
-            "path": "../node_modules/less/dist",
-            "main": "less",
-            "resources": [
-              "less.js"
-            ]
           }
         ]
       }

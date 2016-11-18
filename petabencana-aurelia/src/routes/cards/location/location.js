@@ -15,7 +15,7 @@ export class Location {
   attached() {
     let cardMap = L.map('mapWrapper');
     let markerIcon = L.icon({
-      iconUrl: '../../../assets/svg/marker-03.svg', //URL not working
+      iconUrl: 'dist/svg/marker-03.svg', //URL not working
       iconSize: [60, 60],
       iconAnchor: [30, 60]
     });
