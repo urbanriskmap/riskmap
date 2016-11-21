@@ -1,0 +1,25 @@
+<template>
+    <require from="./cards.css"></require>
+  <div id="cardTitle">
+    <p id="titleText">${cardTitle}</p>
+    <div id="tabRow">
+      <button repeat.for="i of userInputs" class="tabButtons" disabled.bind="!(i.card<count)"></button>
+    </div>
+  </div>
+
+  <div id="cardContent">
+    <router-view></router-view>
+  </div>
+
+  <div id="cardNavigation">
+      <button href="#" click.trigger="prevCard()" disabled.bind="prevDisabled" class="navBtn">PREV</button>
+      <button click.trigger="nextCard()" disabled.bind="nextDisabled" class="navBtn">NEXT</button>
+  </div>
+  <!--Temporary params for development-->
+  <p>OTL id: ${id}, card number: ${count}</p>
+  <ul>
+   <li repeat.for="input of userInputs">
+     <p>${input.card}, ${input.type}: ${input.value}</p>
+   </li>
+ </ul>
+</template>
