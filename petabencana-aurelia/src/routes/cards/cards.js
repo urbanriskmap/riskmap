@@ -48,15 +48,15 @@ export class Cards {
   }
 
   nextCard() {
-    if (this.count < this.totalCards) {
+    if (this.cardNo < this.totalCards) {
       this.count = 1;
-      this.router.navigate(this.router.routes[this.count].route);
+      this.router.navigate(this.router.routes[this.cardNo].route);
     }
   }
   prevCard() {
-    if (this.count > 1) {
+    if (this.cardNo > 1) {
       this.count = -1;
-      this.router.navigate(this.router.routes[this.count].route);
+      this.router.navigate(this.router.routes[this.cardNo].route);
     }
   }
 
