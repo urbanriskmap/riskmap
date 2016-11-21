@@ -15,7 +15,7 @@ export class Location {
   attached() {
     let cardMap = L.map('mapWrapper');
     let markerIcon = L.icon({
-      iconUrl: 'dist/svg/marker-03.svg', //URL not working
+      iconUrl: 'assets/svg/marker-03.svg', //URL not working
       iconSize: [60, 60],
       iconAnchor: [30, 60]
     });
@@ -25,7 +25,7 @@ export class Location {
     }).addTo(cardMap);
     if (this.userLocation) {
       cardMap.setView(this.userLocation, 12);
-      marker = L.marker(this.userLocation, {icon: markerIcon}).addTo(cardMap);
+      //marker = L.marker(this.userLocation, {icon: markerIcon}).addTo(cardMap);
       Location.ea.publish('changedLocation', this.userLocation);
     } else {
       cardMap.locate({
@@ -47,7 +47,7 @@ export class Location {
           fillOpacity: 1,
           radius: 8
         }).addTo(cardMap);
-        marker = L.marker(cardMap.getCenter(), {icon: markerIcon}).addTo(cardMap);
+        //marker = L.marker(cardMap.getCenter(), {icon: markerIcon}).addTo(cardMap);
         Location.ea.publish('changedLocation', cardMap.getCenter());
       });
       cardMap.on('locationerror', function () {
@@ -56,9 +56,9 @@ export class Location {
       });
     }
     cardMap.on('moveend', function () {
-      if (cardMap && marker) {
-        cardMap.removeLayer(marker);
-        marker = L.marker(cardMap.getCenter(), {icon: markerIcon}).addTo(cardMap);
+      if (cardMap) {
+        //cardMap.removeLayer(marker);
+        //marker = L.marker(cardMap.getCenter(), {icon: markerIcon}).addTo(cardMap);
         Location.ea.publish('changedLocation', cardMap.getCenter());
       }
     });

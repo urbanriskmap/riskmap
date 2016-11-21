@@ -1,0 +1,94 @@
+#bgRef {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: auto;
+  padding: 0px 0px;
+  width: 320px;
+  transform: translate(-50%, -50%);
+  border: 0px solid red;
+}
+
+#bgRef img {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  z-index: 11;
+}
+
+#hText {
+  position: absolute;
+  text-align: right;
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  font-family: 'Roboto-Light', 'Helvetica Neue', sans-serif;
+  padding: 6px 0px;
+}
+
+#waterFill {
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 20%;
+  transform: translateY(-100%);
+  background-color: rgba(128, 203, 196, 0.25);
+  border: none;
+  border-top: 3px dashed #009588;
+  z-index: 12;
+}
+
+#dragRef {
+  position: relative;
+  margin: auto;
+  border: 0px solid white;
+  width: 70%;
+  transform: translate(43%, 89%);
+  z-index: 15;
+}
+
+#slider { /* NOT UTILISED, remove...*/
+  position: absolute;
+  width: 48px;
+  height: 100%;
+  bottom: 0px; /*check safari & chrome, add width of border-top for waterFill */
+  right: 0px;
+  margin: 0px;
+  padding: 0px;
+  border: 0px solid white;
+  z-index: 13;
+  text-align: center;
+  transform: translateX(26%); /* to center knob within slider*/
+}
+
+#sliderKnob {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  top: 80%;
+  right: 0px;
+  width: 24px;
+  height: 24px;
+  transform: translateY(-50%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  background-color: #80cbc4;
+  outline: none;
+  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
+  z-index: 14;
+}
+
+#sliderKnob:active {
+  background-color: #9bbcb9;
+  box-shadow: none;
+}
+
+#hideZone {
+  position: relative;
+  width: 95px;
+  height: 100px;
+  transform: translate(275%, -15%);
+  z-index: 20;
+}

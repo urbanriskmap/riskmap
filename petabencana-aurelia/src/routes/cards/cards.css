@@ -1,53 +1,89 @@
 
-#cardTitle {
-  width: 100%;
-  height: 48px;
-  border: 1px;
-  font-family: "Roboto", Open Sans;
-  font-weight: 600;
-  color: #fff;
-  text-align: center;
-  font-size: 16px;
-  background-color: #424242;
-  padding-top: 2px;
+@media screen and (min-width: 320px){
+  #cardWrapper{width: 100%;
+    height: 100%;
+  }
+
+
+  #cardTitle {
+    width: 100%;
+    height: 50px;
+    border: 1px;
+    font-family: 'Roboto-Regular', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    background-color: #424242;
+    padding-top: 2px;
+  }
+
+  #cardContent {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    text-align: center;
+    z-index: 3;
+    
+    background-color: #808080;
+  }
+
+  .navBtn {
+    position: relative;
+    color: #ffffff;
+    width: 50%;
+    display: inline-block;
+    height: 50px;
+    font-size: 12px;
+    font-family: "Roboto", Open Sans;
+    background: #424242;
+    border-left: 1px;
+    border-color: #fff
+    /*padding: 10px 20px 10px 20px;*/
+    text-decoration: none;
+    z-index: 3;
+  }
+
+  .navBtn:disabled {
+    color: #808080;
+    text-decoration: none;
+    z-index: 3;
+  }
+
+  .navBtn:active {
+    background: #5e5e5e;
+    text-decoration: none;
+    z-index: 3;
+    transform: translateY(1px);
+  }
+
+  #cardNavigation{
+    align-content: center;
+  }
 }
 
-#cardContent {
-  position: relative;
-  width: 100%;
-  height: 380px;
-  text-align: center;
-  z-index: 3;
-  background-color: #808080;
+@media screen and (min-width: 600px){
+  /* For desktop: */
+  #cardWrapper{
+    width: 500px;
+    height: 100%;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(25%);}
+  }
+
 }
 
-.navBtn {
-  position: relative;
-  color: #ffffff;
-  width: 49.3%;
-  height: 50px;
-  font-size: 12px;
-  font-family: "Roboto", Open Sans;
-  background: #424242;
-  border: none;
-  /*padding: 10px 20px 10px 20px;*/
-  text-decoration: none;
-  z-index: 3;
-}
+@media screen and (min-width: 1200px){
+  /* For desktop: */
+  #cardWrapper{
+    width: 500px;
+    height: 100%;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);}
+  }
 
-.navBtn:disabled {
-  color: #808080;
-  text-decoration: none;
-  z-index: 3;
-}
-
-.navBtn:active {
-  background: #5e5e5e;
-  text-decoration: none;
-  z-index: 3;
-  transform: translateY(1px);
-}
-
-#cardNavigation{
-  align-content: center;
 }
