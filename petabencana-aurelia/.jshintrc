@@ -1,4 +1,6 @@
 {
-  "esversion":6,
-  "esnext": true //depracated but needed for jshint2 vim plugin
+  "ignoreDelimiters": [
+    { "start": "start-non-standard", "end": "end-non-standard" }
+  ],
+  "esversion":6
 }

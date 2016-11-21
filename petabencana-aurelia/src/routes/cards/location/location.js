@@ -2,7 +2,9 @@ import * as L from 'leaflet';
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
+//start-non-standard
 @inject(EventAggregator)
+//end-non-standard
 export class Location {
   constructor(ea) {
     Location.ea = ea; //scope of 'this' limited in cardMap.on functions, using 'Location' (debug)

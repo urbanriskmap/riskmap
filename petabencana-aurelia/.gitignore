@@ -2,5 +2,10 @@ node_modules
 .idea
 .DS_STORE
 
-scripts
-dist
+
+scripts/
+dist/
+
+#for vim:
+*.swp
+*.swo

@@ -6,7 +6,6 @@ export class App {
       {route: ['', 'maps'],               moduleId: 'routes/maps/maps'},
       {route: 'cards/:id',                moduleId: 'routes/cards/cards'}
     ]);
-
     this.router = router;
   }
 }

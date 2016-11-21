@@ -1,7 +1,9 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
+//start-non-standard
 @inject(EventAggregator)
+//end-non-standard
 export class Depth {
   constructor(ea) {
     this.ea = ea;
