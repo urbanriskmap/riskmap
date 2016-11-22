@@ -1,12 +1,14 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {I18N} from 'aurelia-i18n';
+import {Reportcard} from 'Reportcard'; 
 
 //start-non-standard
-@inject(EventAggregator, I18N)
+@inject(Reportcard, EventAggregator, I18N)
 //end-non-standard
 export class Cards {
-  constructor(ea, i18n) {
+  constructor(Reportcard, ea, i18n) {
+    this.reportcard = Reportcard; 
     this.ea = ea;
     this.i18n = i18n;
     this.options = this.i18n.i18next.languages;
@@ -55,6 +57,8 @@ export class Cards {
     if (this.cardNo < this.totalCards) {
       this.count = 1;
       this.router.navigate(this.router.routes[this.cardNo].route);
+    } else {//submit 
+      this.submitReport(); 
     }
   }
   prevCard() {
@@ -73,11 +77,16 @@ export class Cards {
     if (this.cardNo === 1) {
       return !this.inputs[0].value; //disable next button till location selected
     } else {
-      return this.cardNo === this.totalCards;
+      return this.cardNo === this.totalCards+1;
     }
   }
   get prevDisabled() {
     return this.cardNo === 1;
+  }
+
+  submitReport(){
+    this.reportcard.inputs = this.inputs; 
+    this.reportcard.submitReport(); 
   }
 
   //User inputs getter/setter for development stage only; not required for production

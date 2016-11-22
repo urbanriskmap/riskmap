@@ -17,7 +17,15 @@ export class ReportcardApi {
     this.client.configure( x => {
       x.withBaseUrl(this.apiBase); 
     }); 
+  }
 
+  getPhotoUploadUrl(id) {
+    return this.client.get( this.apiBase + 'cards/image/' +id); 
+  }
+
+  uploadPhoto(id, photo) {
+    return this.getPhotoUploadUrl(id)
+      .then( data => { this.client.put(data.signedRequest, photo); }); 
   }
 
   //returns a promise that when resolved is all of the reports available
@@ -30,7 +38,7 @@ export class ReportcardApi {
       }); 
   }
 
-  submitReport(Report) {
-    
+  submitReport(id, report) {
+    return this.client.put( this.apiBase + 'cards/'+ id, report); 
   }
 }
