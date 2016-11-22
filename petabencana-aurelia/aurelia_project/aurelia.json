@@ -7,6 +7,7 @@
     "output": "scripts",
     "index": "index.html"
   },
+  "mockapi": "true", 
   "transpiler": {
     "id": "babel",
     "displayName": "Babel",
@@ -106,6 +107,7 @@
           "aurelia-dependency-injection",
           "aurelia-event-aggregator",
           "aurelia-framework",
+          "aurelia-http-client",
           "aurelia-history",
           "aurelia-history-browser",
           "aurelia-loader",
