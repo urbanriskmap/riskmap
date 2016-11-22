@@ -1,4 +1,5 @@
 #camera {
-  background-image: url('/cork.png')
+  //background-image: url('/cork.png');
   background-color: #f05022;
-  border: 10px;}
+  border: 10px;
+}

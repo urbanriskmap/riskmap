@@ -24,6 +24,13 @@
     "fileExtension": ".html",
     "source": "src/**/*.html"
   },
+  "lessProcessor": {
+    "id": "none",
+    "displayName": "None",
+    "fileExtension": ".less",
+    "source": "src/routes/cards/**/*.less",
+    "output": "dist"
+  },
   "cssProcessor": {
     "id": "none",
     "displayName": "None",
