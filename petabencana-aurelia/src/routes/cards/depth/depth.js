@@ -1,7 +1,9 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
+//start-non-standard
 @inject(EventAggregator)
+//end-non-standard
 export class Depth {
   constructor(ea) {
     this.ea = ea;
@@ -11,8 +13,9 @@ export class Depth {
     if (routerConfig.settings.input) {
       this.depthVal = routerConfig.settings.input;
     }
+    this.msgName = routerConfig.settings.msgName;
   }
   updateVal() {
-    this.ea.publish('changedDepth', this.depthVal);
+    this.ea.publish(this.msgName, this.depthVal);
   }
 }

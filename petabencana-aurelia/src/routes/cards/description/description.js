@@ -1,11 +1,13 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
+//start-non-standard
 @inject(EventAggregator)
+//end-non-standard
 export class Description {
   constructor(ea) {
     this.ea = ea;
-    this.descripText = "Enter text here...";
+    this.descripText = "Tell us more...";
     this.textLength = 0;
   }
   activate(params, routerConfig) {
@@ -13,6 +15,7 @@ export class Description {
       this.descripText = routerConfig.settings.input;
       this.textLength = this.descripText.length;
     }
+    this.msgName = routerConfig.settings.msgName;
   }
   clearHint() {
     if (this.textLength === 0) {
@@ -22,6 +25,6 @@ export class Description {
   charCount() {
     this.ea.publish('updateText', this.descripText);
     this.textLength = this.descripText.length; //this.textLength requied to update bound helpers for description.html
-    this.ea.publish('changedDescription', this.descripText);
+    this.ea.publish(this.msgName, this.descripText);
   }
 }

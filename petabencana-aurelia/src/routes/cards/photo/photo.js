@@ -1,7 +1,9 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
+//start-non-standard
 @inject(EventAggregator)
+//end-non-standard
 export class Photo {
   constructor(ea) {
     this.ea = ea;
@@ -11,6 +13,7 @@ export class Photo {
       this.selectedPhoto = routerConfig.settings.input;
       this.haveImg = true;
     }
+    this.msgName = routerConfig.settings.msgName;
     this.w = 300;
     this.h = 300;
   }
@@ -22,7 +25,7 @@ export class Photo {
   //Add function to resize image for best-fit display within canvas;
   //Add 'change image' button, once image is selected and displayed;
   drawImage() {
-    this.ea.publish('changedPhoto', this.selectedPhoto);
+    this.ea.publish(this.msgName, this.selectedPhoto);
     let wrapper = this.preview;
     let phW = this.w;
     let phH = this.h;
