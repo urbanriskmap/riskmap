@@ -1,77 +1,108 @@
 
-#cardTitle {
-  margin: 0px;
-  padding: 4px 0px;
-  width: 100%;
-  height: 40px; /* height + padding-top + padding-bottom = 48px */
-  border: 1px;
-  font-family: "Roboto", Open Sans;
-  font-weight: 600;
-  color: #fff;
-  text-align: center;
-  font-size: 16px;
-  background-color: #424242;
+@media screen and (min-width: 320px) {
+  #cardWrapper{width: 100%;
+    height: 100%;
+  }
+
+  #cardTitle {
+    margin: 0px;
+    padding: 4px 0px;
+    width: 100%;
+    height: 40px; /* height + padding-top + padding-bottom = 48px */
+    border: 1px;
+    font-family: "Roboto-Medium", "Roboto", Open Sans;
+    /*font-weight: 600;*/
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    background-color: #424242;
+  }
+
+  #titleText {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  #tabRow {
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+  }
+
+  .tabButtons {
+    margin: 0px 2px;
+    padding: 0px;
+    width: 18%;
+    height: 5px;
+    border: none;
+    background-color: #31aade;
+  }
+
+  .tabButtons:disabled {
+    opacity: 0.25;
+  }
+
+  #cardContent {
+    position: relative;
+    width: 100%;
+    height: 380px; /*Change on the fly*/
+    text-align: center;
+    z-index: 3;
+    background-color: #808080;
+  }
+
+  #cardNavigation {
+    align-content: center;
+  }
+
+  .navBtn {
+    position: relative;
+    color: #ffffff;
+    width: 49.3%;
+    height: 50px;
+    font-size: 12px;
+    font-family: "Roboto", Open Sans;
+    background: #424242;
+    border: none;
+    outline: none;
+    z-index: 3;
+  }
+
+  .navBtn:disabled {
+    color: #808080;
+    text-decoration: none;
+    z-index: 3;
+  }
+
+  .navBtn:active {
+    background: #5e5e5e;
+    text-decoration: none;
+    z-index: 3;
+    transform: translateY(1px);
+  }
 }
 
-#titleText {
-  margin: 0px;
-  padding: 0px;
+@media screen and (min-width: 600px) {
+  /* For desktop: */
+  #cardWrapper {
+    width: 500px;
+    height: 100%;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(25%);
+  }
 }
 
-#tabRow {
-  position: relative;
-  margin: 0px;
-  padding: 0px;
-  text-align: center;
-}
-
-.tabButtons {
-  margin: 0px 2px;
-  padding: 0px;
-  width: 18%;
-  height: 5px;
-  border: none;
-  background-color: #31aade;
-}
-
-.tabButtons:disabled {
-  opacity: 0.25;
-}
-
-#cardContent {
-  position: relative;
-  width: 100%;
-  height: 380px;
-  text-align: center;
-  z-index: 3;
-  background-color: #808080;
-}
-
-.navBtn {
-  position: relative;
-  color: #ffffff;
-  width: 49.3%;
-  height: 50px;
-  font-size: 12px;
-  font-family: "Roboto", Open Sans;
-  background: #424242;
-  border: none;
-  outline: none;
-  z-index: 3;
-}
-
-.navBtn:disabled {
-  color: #808080;
-  text-decoration: none;
-  z-index: 3;
-}
-
-.navBtn:active {
-  background: #5e5e5e;
-  text-decoration: none;
-  z-index: 3;
-}
-
-#cardNavigation{
-  align-content: center;
+@media screen and (min-width: 1200px) {
+  /* For desktop: */
+  #cardWrapper {
+    width: 500px;
+    height: 100%;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
+  }
 }

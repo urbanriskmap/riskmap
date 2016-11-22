@@ -2,29 +2,28 @@
   position: relative;
   margin: auto;
   height: 75%;
-  border: 1px;
   font-family: "Roboto", Open Sans;
   font-weight: 600;
   color: #fff;
   text-align: center;
   font-size: 16px;
-  border-color:#f05022;
-  padding-top: 2px;
+    padding-top: 2px;
 }
 
 #textarea{
   resize: none;
   width: 85%;
   height: 75%;
-  margin:
+  font-family: "Roboto", Open Sans;
+  font-weight: 100;
+  color: #fff;
+  border:#808080;
+  border-bottom: 2px solid #31aade;
+  font-size: 14px;
   resize: none;
-  border-radius: 5px;
-  border-width: .5px;
-  border-color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-  background-color: #424242;
-  border-style: solid;
+  background-color: #808080;
   margin: 30px 0 10px 0;
+  padding: 10px 5px 5px 10px;
 }
 
 
@@ -32,7 +31,6 @@
   width: 90%;
   float: right;
   color: #000;
-  border-color: blue;
   margin: 0px 20px 10px 0px;
   font-weight: 100;
   font-size: 14px;

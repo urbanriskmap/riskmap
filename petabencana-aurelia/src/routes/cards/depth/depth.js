@@ -20,8 +20,21 @@ export class Depth {
     this.refHeightPx = this.sliderZone.clientHeight;
     this.fillHeight = this.floodZone.clientHeight;
     this.pressed = false;
+    document.getElementById('knobWrapper').addEventListener('mousedown', function (e) {
+      this.startPos = e.clientY;
+      console.log(this.startPos);
+    });
   }
-  
+  knobPress(e) {
+    this.startPos = e.clientY;
+    console.log(this.startPos);
+  }
+  knobDrag() {
+
+  }
+  knobRelease() {
+
+  }
   updateVal() {
     this.ea.publish(this.msgName, this.depthVal);
   }
