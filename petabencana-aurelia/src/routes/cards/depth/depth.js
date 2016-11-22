@@ -1,5 +1,6 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import $ from 'jquery';
 
 //start-non-standard
 @inject(EventAggregator)
@@ -20,22 +21,8 @@ export class Depth {
     this.refHeightPx = this.sliderZone.clientHeight;
     this.fillHeight = this.floodZone.clientHeight;
     this.pressed = false;
-    document.getElementById('knobWrapper').addEventListener('mousedown', function (e) {
+    $('knobWrapper').mousedown(function (e) {
       this.startPos = e.clientY;
-      console.log(this.startPos);
     });
-  }
-  knobPress(e) {
-    this.startPos = e.clientY;
-    console.log(this.startPos);
-  }
-  knobDrag() {
-
-  }
-  knobRelease() {
-
-  }
-  updateVal() {
-    this.ea.publish(this.msgName, this.depthVal);
   }
 }

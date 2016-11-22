@@ -6,14 +6,12 @@
       <div id="floodZone" ref="floodZone">
       </div>
       <div id="sliderZone" ref="sliderZone">
-        <!--<div id="knobWrapper" mousedown.trigger="knobPress()" mousemove.delegate="knobDrag()" mouseup.delegate="knobRelease()">-->
         <div id="knobWrapper">
           <div id="knob">
           </div>
         </div>
       </div>
     </div>
-    <input type="range" min="0" max="200" value.bind="depthVal" change.trigger="updateVal()">
     <p>Water depth: ${depthVal}cm</p>
   </div>
 </template>
