@@ -1,0 +1,63 @@
+#depthWrapper {
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 10%;
+  margin: 0px;
+  padding: 0px;
+}
+
+#imgWrapper {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+}
+
+#bgImage {
+  margin: 0px;
+  padding: 0px;
+}
+
+#floodZone {
+  position: absolute;
+  width: 87%;
+  height: 20%;
+  border: 1px solid blue;
+  left: 0px;
+  bottom: 0px;
+}
+
+#sliderZone {
+  position: absolute;
+  width: 12%;
+  height: 100%;
+  border: 1px solid white;
+  right: 0px;
+  bottom: 0px;
+  padding: 0px;
+}
+
+#knobWrapper {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  bottom: 20%;
+  transform: translateY(50%);
+  margin: 0px auto;
+  padding: 0px;
+  background-color: rgba(49, 170, 222, 0.4);
+  border-radius: 18px;
+}
+
+#knob {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  margin: 0px auto;
+  padding: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(49, 170, 222, 1);
+  border: 2px solid white;
+  border-radius: 11px; /* add border to width/2 */
+}

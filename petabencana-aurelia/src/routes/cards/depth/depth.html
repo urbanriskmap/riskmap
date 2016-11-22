@@ -1,5 +1,17 @@
 <template>
-  <div>
+  <require from="./depth.css"></require>
+  <div id="depthWrapper">
+    <div id="imgWrapper">
+      <img id="bgImage" src="assets/graphics/heightReference.svg">
+      <div id="floodZone" ref="floodZone">
+      </div>
+      <div id="sliderZone" ref="sliderZone">
+        <div id="knobWrapper" mousedown.trigger="dragStart()" mousemove.delegate="dragging()" mouseup.delegate="dragEnd()">
+          <div id="knob">
+          </div>
+        </div>
+      </div>
+    </div>
     <input type="range" min="0" max="200" value.bind="depthVal" change.trigger="updateVal()">
     <p>Water depth: ${depthVal}cm</p>
   </div>

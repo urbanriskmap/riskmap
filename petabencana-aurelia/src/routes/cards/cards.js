@@ -10,7 +10,6 @@ export class Cards {
     this.ea = ea;
     this.i18n = i18n;
     this.options = this.i18n.i18next.languages;
-    //console.log(this.i18n);
   }
   configureRouter(config, router) {
     config.title = this.i18n.tr('page_title');
@@ -30,7 +29,7 @@ export class Cards {
   attached() {
     this.totalCards = this.router.routes.length - 1; //exclude {route:'', redirect:'location')
     this.inputs = [];
-    for (let i = 0; i < this.totalCards; i+=1) { //exclude review card in loop
+    for (let i = 0; i < this.totalCards; i+=1) {
       this.inputs[i] = {card: i, type: this.router.routes[i+1].route};  //(type) required for development stage only
       this.ea.subscribe(this.router.routes[i+1].settings.msgName, msg => {
         this.userInputs = {index: i, value: msg};  //required for development stage only
@@ -64,7 +63,7 @@ export class Cards {
     }
   }
 
-  changeLanguage() {
+  changeLanguage() { //TODO: on the fly language change?
     this.i18n.i18next.changeLanguage(this.i18n.i18next.language);
     return true;
   }

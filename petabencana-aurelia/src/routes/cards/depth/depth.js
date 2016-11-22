@@ -15,6 +15,13 @@ export class Depth {
     }
     this.msgName = routerConfig.settings.msgName;
   }
+  attached() {
+    this.imgHeightCm = 200;
+    this.refHeightPx = this.sliderZone.clientHeight;
+    this.fillHeight = this.floodZone.clientHeight;
+    this.pressed = false;
+  }
+  
   updateVal() {
     this.ea.publish(this.msgName, this.depthVal);
   }
