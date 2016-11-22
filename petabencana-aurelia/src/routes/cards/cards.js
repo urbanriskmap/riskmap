@@ -1,24 +1,28 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import {I18N} from 'aurelia-i18n';
 
 //start-non-standard
-@inject(EventAggregator)
+@inject(EventAggregator, I18N)
 //end-non-standard
 export class Cards {
+  constructor(ea, i18n) {
+    this.ea = ea;
+    this.i18n = i18n;
+    this.options = this.i18n.i18next.languages;
+    //console.log(this.i18n);
+  }
   configureRouter(config, router) {
-    config.title = 'Flood report';
+    config.title = this.i18n.tr('page_title');
     config.map([
       {route: '',             redirect: 'location'},
-      {route: 'location',     moduleId: './location/location',        settings: {title: 'Select location',    cardNo: 1,  msgName: 'changedLocation'}},
-      {route: 'depth',        moduleId: './depth/depth',              settings: {title: 'Report water depth', cardNo: 2,  msgName: 'changedDepth'}},
-      {route: 'photo',        moduleId: './photo/photo',              settings: {title: 'Upload a photo',     cardNo: 3,  msgName: 'changedPhoto'}},
-      {route: 'description',  moduleId: './description/description',  settings: {title: 'Describe the event',    cardNo: 4,  msgName: 'changedDescription'}},
-      {route: 'review',       moduleId: './review/review',            settings: {title: 'Review & submit',    cardNo: 5,  msgName: 'getInputs'}}
+      {route: 'location',     moduleId: './location/location',        settings: {title: this.i18n.tr('location_title'),     cardNo: 1,  msgName: 'changedLocation'}},
+      {route: 'depth',        moduleId: './depth/depth',              settings: {title: this.i18n.tr('depth_title'),        cardNo: 2,  msgName: 'changedDepth'}},
+      {route: 'photo',        moduleId: './photo/photo',              settings: {title: this.i18n.tr('photo_title'),        cardNo: 3,  msgName: 'changedPhoto'}},
+      {route: 'description',  moduleId: './description/description',  settings: {title: this.i18n.tr('description_title'),  cardNo: 4,  msgName: 'changedDescription'}},
+      {route: 'review',       moduleId: './review/review',            settings: {title: this.i18n.tr('review_title'),       cardNo: 5,  msgName: 'getInputs'}}
     ]);
     this.router = router;
-  }
-  constructor(ea) {
-    this.ea = ea;
   }
   activate(params) {
     this.id = params.id;
@@ -58,6 +62,11 @@ export class Cards {
       this.count = -1;
       this.router.navigate(this.router.routes[this.cardNo].route);
     }
+  }
+
+  changeLanguage() {
+    this.i18n.i18next.changeLanguage(this.i18n.i18next.language);
+    return true;
   }
 
   get nextDisabled() { //Use this.cardNo instead of this.count

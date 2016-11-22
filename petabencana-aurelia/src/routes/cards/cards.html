@@ -16,6 +16,9 @@
       <button click.trigger="nextCard()" disabled.bind="nextDisabled" class="navBtn">NEXT</button>
   </div>
   <!--Temporary params for development-->
+  <label repeat.for="option of options">
+    <input type="radio" model.bind="option" checked.bind="i18n.i18next.language" click.delegate="changeLanguage()" />${option}
+  </label>
   <p>OTL id: ${id}, card number: ${count}</p>
   <ul>
    <li repeat.for="input of userInputs">
