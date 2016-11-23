@@ -22,7 +22,7 @@ export class Depth {
   }
   attached() {
     var imgHeightCm = 200;
-    var refHeightPx = $('#bgImage').height();
+    var refHeightPx = $('#imgWrapper').height();
     if (Depth.depthVal) {
       $('#floodZone').css({
         'height': (Depth.depthVal * refHeightPx / imgHeightCm) + 'px'
