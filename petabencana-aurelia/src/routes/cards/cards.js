@@ -1,6 +1,7 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {I18N} from 'aurelia-i18n';
+import $ from 'jquery';
 
 //start-non-standard
 @inject(EventAggregator, I18N)
@@ -9,7 +10,6 @@ export class Cards {
   constructor(ea, i18n) {
     this.ea = ea;
     this.i18n = i18n;
-    this.options = this.i18n.i18next.languages;
   }
   configureRouter(config, router) {
     config.title = this.i18n.tr('page_title');
@@ -19,7 +19,9 @@ export class Cards {
       {route: 'depth',        moduleId: './depth/depth',              settings: {title: this.i18n.tr('depth_title'),        cardNo: 2,  msgName: 'changedDepth'}},
       {route: 'photo',        moduleId: './photo/photo',              settings: {title: this.i18n.tr('photo_title'),        cardNo: 3,  msgName: 'changedPhoto'}},
       {route: 'description',  moduleId: './description/description',  settings: {title: this.i18n.tr('description_title'),  cardNo: 4,  msgName: 'changedDescription'}},
-      {route: 'review',       moduleId: './review/review',            settings: {title: this.i18n.tr('review_title'),       cardNo: 5,  msgName: 'getInputs'}}
+      {route: 'review',       moduleId: './review/review',            settings: {title: this.i18n.tr('review_title'),       cardNo: 5,  msgName: 'getInputs'}},
+      {route: 'terms',        moduleId: './terms/terms',              settings: {title: this.i18n.tr('terms_title'),        cardNo: 6}},
+      {route: 'thanks',        moduleId: './thanks/thanks',           settings: {title: this.i18n.tr('thanks_title'),       cardNo: 7}}
     ]);
     this.router = router;
   }
@@ -28,17 +30,17 @@ export class Cards {
   }
   attached() {
     this.totalCards = this.router.routes.length - 1; //exclude {route:'', redirect:'location')
-    this.inputs = [];
-    for (let i = 0; i < this.totalCards; i+=1) {
-      this.inputs[i] = {card: i, type: this.router.routes[i+1].route};  //(type) required for development stage only
-      this.ea.subscribe(this.router.routes[i+1].settings.msgName, msg => {
-        this.userInputs = {index: i, value: msg};  //required for development stage only
+    this.tabCount = [];
+    for (let i = 0; i < this.totalCards - 2; i += 1) {
+      this.tabCount[i] = i;
+      this.ea.subscribe(this.router.routes[i+1].settings.msgName, msg => { //TODO Replace with ReportCard object
         this.router.routes[i+1].settings.input = msg;
       });
     }
+    this.ccHeight = $(window).height() - ($('#cardTitle').height() + $('#cardNavigation').height());
   }
 
-  get count() { //TODO navigation does not work unless getter is called from the DOM or elsewhere in js; check by removing <p>OTL, card number</p>
+  get count() { //TODO navigation does not work unless getter is called from the DOM or elsewhere in js;
     this.cardNo = this.router.currentInstruction.config.settings.cardNo;
     return this.cardNo;
   }
@@ -63,27 +65,14 @@ export class Cards {
     }
   }
 
-  changeLanguage() { //TODO: on the fly language change?
-    this.i18n.i18next.changeLanguage(this.i18n.i18next.language);
-    return true;
-  }
-
-  get nextDisabled() { //Use this.cardNo instead of this.count
-    if (this.cardNo === 1) {
-      return !this.inputs[0].value; //disable next button till location selected
-    } else {
-      return this.cardNo === this.totalCards;
-    }
+  get nextDisabled() { //Replace if arguments with ReportCard object params
+    //if (this.cardNo === 1) {
+    //  return !this.inputs[0].value; //disable next button till location selected
+    //} else {
+      return this.cardNo === this.totalCards - 2;
+    //}
   }
   get prevDisabled() {
     return this.cardNo === 1;
-  }
-
-  //User inputs getter/setter for development stage only; not required for production
-  get userInputs() {
-    return this.inputs;
-  }
-  set userInputs(val) {
-    this.inputs[val.index].value = val.value;
   }
 }

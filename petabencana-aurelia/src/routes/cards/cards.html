@@ -1,33 +1,18 @@
 <template>
   <require from="./cards.css"></require>
-
   <div id="cardWrapper">
-
     <div id="cardTitle">
       <p id="titleText">${titleString}</p>
       <div id="tabRow">
-        <button repeat.for="i of userInputs" class="tabButtons" disabled.bind="!(i.card<count)"></button>
+        <button repeat.for="i of tabCount" class="tabButtons" disabled.bind="!(i < count)"></button>
       </div>
     </div>
-
-    <div id="cardContent">
+    <div id="cardContent" style="height: ${ccHeight}px; margin:0px; padding:0px;">
       <router-view></router-view>
     </div>
-
-    <div id="cardNavigation" ref="cardNavigation">
-      <button href="#" click.trigger="prevCard()" disabled.bind="prevDisabled" class="navBtn">PREV</button><button click.trigger="nextCard()" disabled.bind="nextDisabled" class="navBtn">NEXT</button>
+    <div id="cardNavigation">
+      <button href="#" click.trigger="prevCard()" disabled.bind="prevDisabled" class="navBtn">PREV</button>
+      <button click.trigger="nextCard()" disabled.bind="nextDisabled" class="navBtn">NEXT</button>
     </div>
-
   </div>
-
-  <!--Temporary params for development-->
-  <label repeat.for="option of options">
-    <input type="radio" model.bind="option" checked.bind="i18n.i18next.language" click.delegate="changeLanguage()" />${option}
-  </label>
-  <p>OTL id: ${id}, card number: ${cardNo}</p>
-  <ul>
-    <li repeat.for="input of userInputs">
-      <p>${input.card}, ${input.type}: ${input.value}</p>
-    </li>
-  </ul>
 </template>

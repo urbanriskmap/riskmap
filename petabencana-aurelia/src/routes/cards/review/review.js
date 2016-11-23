@@ -1,5 +1,9 @@
 export class Depth {
-  constructor() {
-    this.someName = 'Ignore, for test';
+  activate(params, routerConfig) {
+    this.termsLink = routerConfig.navModel.router.routes[6].route;
+    this.router = routerConfig.navModel.router;
+  }
+  readTerms() {
+    this.router.navigate(this.termsLink);
   }
 }

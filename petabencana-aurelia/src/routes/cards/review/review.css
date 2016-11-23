@@ -1,0 +1,133 @@
+#summaryCard {
+  position: absolute;
+  width: 80%;
+  /*padding: 10px;*/
+  background-color: #424242;
+  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  height: 50%;
+
+}
+
+#summaryPhoto {
+  margin: auto;
+  position: relative;
+  width: 48%;
+  height: 100%;
+  border: 1px solid red;
+  margin: 0px;
+  overflow: hidden;
+  display: flex;
+  float: left;
+}
+
+img {
+  width:125px;
+  }
+
+#summaryTextWrapper {
+  color: red;
+  margin-top: 10px;
+  position: relative;
+  border-left: 1px solid blue;
+  width: 50%;
+  height: 100%;
+  margin: 0px;
+  float: right;
+}
+
+#floodH {
+  margin: 10px;
+  color: #31aade;
+  font-family: 'Roboto-Medium', 'Roboto', 'Open-sans';
+  text-align:left;
+}
+#comment {
+  margin: 10px;
+  color: #fff;
+  font-family: 'Roboto-Light', 'Roboto', sans-serif;
+  text-align:left;
+}
+
+#reviewSubmit {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  width: 248px; /* width of nav buttons + margin */
+  padding: 0px;
+  margin: auto;
+  left: 50%;
+  top: 75%;
+  transform: translate(-50%, -50%);
+}
+
+#termsConditions {
+  width: 100%;
+  margin: 0px;
+  color: #fff;
+  font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;
+  font-size: 10px;
+}
+
+#termsConditions a {
+  cursor: pointer;
+  color: #fff;
+  font-family: 'Roboto-Regular', 'Helvetica Neue', sans-serif;
+}
+
+#submitSlider {
+  position: relative;
+  width: 90%;
+  
+  height: 36px;
+  margin: auto;
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 6px;
+  box-shadow: inset 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  z-index: 3;
+}
+
+#submitKnob {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  background-color: #31aade;
+  outline: none;
+  color: white;
+  font-size: 30px;
+  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
+  float: left;
+  z-index: 2;
+}
+
+#submitKnob:active {
+  background-color: #31aade;
+}
+
+#submitRef1 {
+  margin: 0px 6px;
+  padding: 0px;
+  color: white;
+  font-size: 30px;
+  opacity: 0.4;
+  z-index: 1;
+  float: left;
+}
+
+#submitRef2 {
+  margin: 0px;
+  padding: 0px;
+  color: white;
+  font-size: 14px;
+  line-height: 36px;
+  font-family: 'Roboto-Light', 'Roboto', Open-sans;
+  opacity: 0.4;
+  z-index: 1;
+  float: left;
+}

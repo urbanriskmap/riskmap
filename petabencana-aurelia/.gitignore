@@ -1,6 +1,7 @@
 node_modules
 .idea
 .DS_STORE
+npm-debug.log
 
 scripts/
 dist/
@@ -8,4 +9,3 @@ dist/
 #for vim:
 *.swp
 *.swo
-npm-debug.log

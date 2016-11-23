@@ -21,31 +21,31 @@ export class Depth {
     Depth.msgName = routerConfig.settings.msgName;
   }
   attached() {
-    let imgHeightCm = 200;
-    let refHeightPx = $('#bgImage').height();
+    var imgHeightCm = 200;
+    var refHeightPx = $('#bgImage').height();
     if (Depth.depthVal) {
       $('#floodZone').css({
         'height': (Depth.depthVal * refHeightPx / imgHeightCm) + 'px'
       });
     }
-    let fillHeight = $('#floodZone').height();
+    var fillHeight = $('#floodZone').height(); //TODO: DEBUG, if attached runs before CSS style is applied, results in 0.
     $('#sliderZone').css({
       'bottom': (fillHeight * 100 / refHeightPx) + '%'
     });
-    let heightInCm = Math.round((fillHeight * imgHeightCm) / refHeightPx);
+    var heightInCm = Math.round((fillHeight * imgHeightCm) / refHeightPx);
     Depth.depthVal = heightInCm;
     Depth.ea.publish(Depth.msgName, Depth.depthVal);
-    let sliderActive = false;
+    var sliderActive = false;
     $('#sliderZone').on('touchstart mousedown', function (e) {
       sliderActive = true;
-      let startPos;
+      var startPos;
       if (Depth.isMobile) {
         startPos = e.touches[0].pageY;
       } else {
         startPos = e.clientY;
       }
       $('#depthWrapper').on('touchmove mousemove', function (e) {
-        let dragPos;
+        var dragPos;
         if (Depth.isMobile) {
           e.preventDefault();
           dragPos = e.touches[0].pageY;

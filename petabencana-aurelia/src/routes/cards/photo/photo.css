@@ -1,5 +1,41 @@
+#photoWrapper {
+  position: absolute;
+  width: 120px;
+  height: 150px;
+  margin: 0px;
+  padding: 0px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#buttonWrapper {
+  position: relative;
+  width: 75%;
+  height: 60%;
+  margin: 0px auto;
+  background-color: #424242;
+  border: 1px solid white;
+}
+
+#cameraIcon {
+  width: 100%;
+  height: 100%;
+}
+
 #camera {
-  //background-image: url('/cork.png');
-  background-color: #f05022;
-  border: 10px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: translate(-12px, -12px);
+  margin: 0px;
+  padding: 0px;
+}
+
+#helpTextWrapper {
+  margin-top: 8px;
+  font-family: "Roboto", Open Sans;
+  font-weight: 100;
+  font-size: 14px;
+  color: #fff;
 }
