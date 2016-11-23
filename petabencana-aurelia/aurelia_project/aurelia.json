@@ -161,6 +161,11 @@
             "name": "i18next-xhr-backend",
             "path": "../node_modules/i18next-xhr-backend/dist/umd",
             "main": "i18nextXHRBackend"
+          },
+          {
+            "name": "jquery",
+            "path": "../node_modules/jquery/dist",
+            "main": "jquery"
           }
         ]
       }
