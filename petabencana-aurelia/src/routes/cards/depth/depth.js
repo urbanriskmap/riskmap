@@ -17,6 +17,7 @@ export class Depth {
   activate(params, routerConfig) {
     if (routerConfig.settings.input) {
       Depth.depthVal = routerConfig.settings.input;
+      console.log(Depth.depthVal);
     }
     Depth.msgName = routerConfig.settings.msgName;
   }
@@ -28,7 +29,8 @@ export class Depth {
         'height': (Depth.depthVal * refHeightPx / imgHeightCm) + 'px'
       });
     }
-    let fillHeight = $('#floodZone').height();
+    let fillHeight = $('#floodZone').height(); //TODO: DEBUG, if attached runs before CSS style is applied, results in 0.
+    console.log($('#floodZone').height());
     $('#sliderZone').css({
       'bottom': (fillHeight * 100 / refHeightPx) + '%'
     });

@@ -1,7 +1,15 @@
 <template>
   <require from="./photo.css"></require>
-  <canvas id="camera" width.bind="w" height.bind="h" ref="preview">
-  </canvas>
-  <br><br>
-  <input id="photo" ref="photoCapture" type="file" accept="image/*" capture="camera" change.delegate="drawImage()" files.bind="selectedPhoto">
+  <div id="photoWrapper">
+    <div id="buttonWrapper" click.delegate="sendClick()">
+      <canvas id="camera" ref="preview">
+      </canvas>
+      <img id="cameraIcon" src="assets/icons/camera.svg">
+    </div>
+    <div id="helpTextWrapper" textcontent.bind="helpText">
+    </div>
+  </div>
+  <div id="ghostButton" style="display: none">
+    <input id="photoCapture" type="file" accept="image/*" capture="camera" change.delegate="drawImage()" files.bind="selectedPhoto">
+  </div>
 </template>
