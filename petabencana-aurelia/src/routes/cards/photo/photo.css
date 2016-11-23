@@ -1,5 +1,5 @@
 #camera {
-  //background-image: url('/cork.png');
-  background-color: #f05022;
+  background-image: url('assets/icons/camera.svg');
+  /*background-color: #f05022;*/
   border: 10px;
 }

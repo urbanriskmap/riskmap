@@ -3,19 +3,20 @@
 
   <div id="cardWrapper">
 
-    <div id="cardTitle">
-      <p id="titleText">${cardTitle}</p>
+    <div id="cardTitle" ref="cardTitle">
+      <p id="titleText">${titleString}</p>
       <div id="tabRow">
         <button repeat.for="i of userInputs" class="tabButtons" disabled.bind="!(i.card<count)"></button>
       </div>
     </div>
 
-    <div id="cardContent">
+    <div id="cardContent" style="height: ${ccHeight}px; margin:0px; padding:0px;">
       <router-view></router-view>
     </div>
 
-    <div id="cardNavigation">
-      <button href="#" click.trigger="prevCard()" disabled.bind="prevDisabled" class="navBtn">PREV</button><button click.trigger="nextCard()" disabled.bind="nextDisabled" class="navBtn">NEXT</button>
+    <div id="cardNavigation" ref="cardNavigation">
+      <button click.trigger="prevCard()" disabled.bind="prevDisabled" class="navBtn">PREV</button>
+      <button click.trigger="nextCard()" disabled.bind="nextDisabled" class="navBtn">NEXT</button>
     </div>
 
   </div>
