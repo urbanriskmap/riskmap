@@ -1,94 +1,84 @@
-#bgRef {
+#depthWrapper {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: auto;
-  padding: 0px 0px;
-  width: 320px;
-  transform: translate(-50%, -50%);
-  border: 0px solid red;
-}
-
-#bgRef img {
-  position: relative;
-  margin: 0px;
-  padding: 0px;
-  z-index: 11;
-}
-
-#hText {
-  position: absolute;
-  text-align: right;
   width: 100%;
-  color: white;
-  font-size: 14px;
-  font-family: 'Roboto-Light', 'Helvetica Neue', sans-serif;
-  padding: 6px 0px;
-}
-
-#waterFill {
-  position: absolute;
-  margin: 0px;
-  padding: 0px;
-  width: 100%;
-  height: 20%;
-  transform: translateY(-100%);
-  background-color: rgba(128, 203, 196, 0.25);
-  border: none;
-  border-top: 3px dashed #009588;
-  z-index: 12;
-}
-
-#dragRef {
-  position: relative;
-  margin: auto;
-  border: 0px solid white;
-  width: 70%;
-  transform: translate(43%, 89%);
-  z-index: 15;
-}
-
-#slider { /* NOT UTILISED, remove...*/
-  position: absolute;
-  width: 48px;
   height: 100%;
-  bottom: 0px; /*check safari & chrome, add width of border-top for waterFill */
-  right: 0px;
   margin: 0px;
   padding: 0px;
-  border: 0px solid white;
-  z-index: 13;
-  text-align: center;
-  transform: translateX(26%); /* to center knob within slider*/
+  z-index: 9;
 }
 
-#sliderKnob {
+#imgWrapper {
   position: relative;
+  width: 80%;
+  left: 10%;
+  top: 10%;
   margin: 0px;
   padding: 0px;
-  top: 80%;
-  right: 0px;
-  width: 24px;
-  height: 24px;
-  transform: translateY(-50%);
-  color: white;
+  z-index: 1;
+}
+
+#bgImage {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+#floodZone {
+  position: absolute;
+  width: 90%;
+  height: 20%;
+  left: 0px;
+  bottom: 0px;
   border: none;
-  border-radius: 12px;
-  background-color: #80cbc4;
-  outline: none;
-  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
-  z-index: 14;
+  border-top: 2px dashed white;
+  background: linear-gradient(rgba(49, 170, 222, 0.6), rgba(49, 170, 222, 0));
+  z-index: 3;
 }
 
-#sliderKnob:active {
-  background-color: #9bbcb9;
-  box-shadow: none;
+#sliderZone {
+  position: absolute;
+  width: 100%;
+  height: 36px;
+  padding: 0px;
+  transform: translateY(50%);
+  z-index: 10;
 }
 
-#hideZone {
+#knobWrapper {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  right: 0px;
+  margin: 0px auto;
+  padding: 0px;
+  background-color: rgba(49, 170, 222, 0.4);
+  border-radius: 18px;
+  z-index: 7;
+}
+
+#knob {
   position: relative;
-  width: 95px;
-  height: 100px;
-  transform: translate(275%, -15%);
-  z-index: 20;
+  width: 18px;
+  height: 18px;
+  margin: 0px auto;
+  padding: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(49, 170, 222, 1);
+  border: 2px solid white;
+  border-radius: 11px; /* add border to width/2 */
+  z-index: 8;
+}
+
+#depthText {
+  position: absolute;
+  right: 0px;
+  margin: 0px;
+  padding: 0px;
+  font-family: "Roboto", Open Sans;
+  font-weight: 100;
+  font-size: 14px;
+  color: #fff;
 }

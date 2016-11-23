@@ -10,8 +10,6 @@ export class Cards {
   constructor(ea, i18n) {
     this.ea = ea;
     this.i18n = i18n;
-    this.options = this.i18n.i18next.languages;
-    //console.log(this.i18n);
   }
   configureRouter(config, router) {
     config.title = this.i18n.tr('page_title');
@@ -32,19 +30,17 @@ export class Cards {
   }
   attached() {
     this.totalCards = this.router.routes.length - 1; //exclude {route:'', redirect:'location')
-    this.inputs = [];
-    for (let i = 0; i < this.totalCards - 2; i+=1) { //exclude terms & thanks routes
-      this.inputs[i] = {card: i, type: this.router.routes[i+1].route};  //(type) required for development stage only
-      this.ea.subscribe(this.router.routes[i+1].settings.msgName, msg => {
-        this.userInputs = {index: i, value: msg};  //required for development stage only
+    this.tabCount = [];
+    for (let i = 0; i < this.totalCards - 2; i += 1) {
+      this.tabCount[i] = i;
+      this.ea.subscribe(this.router.routes[i+1].settings.msgName, msg => { //TODO Replace with ReportCard object
         this.router.routes[i+1].settings.input = msg;
       });
     }
-    console.log($(window).height() + '-' + this.cardTitle.clientHeight + '+' + this.cardNavigation.clientHeight);
-    this.ccHeight = $(window).height() - (this.cardTitle.clientHeight + this.cardNavigation.clientHeight);
+    this.ccHeight = $(window).height() - ($('#cardTitle').height() + $('#cardNavigation').height());
   }
 
-  get count() { //TODO navigation does not work unless getter is called from the DOM or elsewhere in js; check by removing <p>OTL, card number</p>
+  get count() { //TODO navigation does not work unless getter is called from the DOM or elsewhere in js;
     this.cardNo = this.router.currentInstruction.config.settings.cardNo;
     return this.cardNo;
   }
@@ -69,37 +65,14 @@ export class Cards {
     }
   }
 
-  changeLanguage() {
-    //this.i18n.i18next.changeLanguage(this.i18n.i18next.language);
-    //return true;
-  }
-
-  get nextDisabled() { //Use this.cardNo instead of this.count
-    if (this.cardNo === 1) {
-      return !this.inputs[0].value; //disable next button till location selected
-    } else {
-      return this.cardNo === this.totalCards;
-    }
+  get nextDisabled() { //Replace if arguments with ReportCard object params
+    //if (this.cardNo === 1) {
+    //  return !this.inputs[0].value; //disable next button till location selected
+    //} else {
+      return this.cardNo === this.totalCards - 2;
+    //}
   }
   get prevDisabled() {
     return this.cardNo === 1;
   }
-
-  //User inputs getter/setter for development stage only; not required for production
-  get userInputs() {
-    return this.inputs;
-  }
-  set userInputs(val) {
-    this.inputs[val.index].value = val.value;
-  }
-
-/*
-  get displayStyle() {
-    if (this.cardNo < this.totalCards) {
-      return "display: block;";
-    } else {
-      return "display: none;";
-    }
-  }
-  */
 }

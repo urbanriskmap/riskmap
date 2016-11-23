@@ -1,11 +1,11 @@
 <template>
   <require from="leaflet/leaflet.css"></require>
   <require from="./location.css"></require><!--place / access as per appropriate file structure-->
-  <div id="cardContent">
-    <div id="mapWrapper" ref="mapContainer">
+  <div id="locationWrapper">
+    <div id="mapWrapper">
     </div>
-  </div>
-  <div id="mapMarker">
-    <img src="assets/icons/marker-03.svg" width="36" height="36" style="margin: 0px;" mousedown.trigger="markerDrag()" draggable="false">
+    <div id="mapMarker">
+      <img src="assets/icons/marker-04.svg" width="48" height="48" style="margin: 0px;" mousedown.trigger="markerDrag()" draggable="false">
+    </div>
   </div>
 </template>

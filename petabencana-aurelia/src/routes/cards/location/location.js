@@ -7,7 +7,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 //end-non-standard
 export class Location {
   constructor(ea) {
-    Location.ea = ea; //scope of 'this' limited in cardMap.on functions, using 'Location' (debug)
+    Location.ea = ea; //scope of 'this' limited in cardMap.on functions, using 'Location'
   }
   activate(params, routerConfig) {
     if (routerConfig.settings.input) {
