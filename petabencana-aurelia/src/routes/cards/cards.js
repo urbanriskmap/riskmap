@@ -46,7 +46,7 @@ export class Cards {
     this.cardNo = this.count + val;
   }
 
-  get cardTitle() {
+  get titleString() {
     return this.router.currentInstruction.config.settings.title;
   }
 

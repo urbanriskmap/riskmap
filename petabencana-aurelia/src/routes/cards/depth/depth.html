@@ -2,7 +2,7 @@
   <require from="./depth.css"></require>
   <div id="depthWrapper">
     <div id="imgWrapper">
-      <img id="bgImage" src="assets/graphics/heightReference.svg">
+      <img id="bgImage" ref="bgImage" src="assets/graphics/heightReference.svg">
       <div id="floodZone" ref="floodZone">
       </div>
       <div id="sliderZone" ref="sliderZone">
@@ -11,7 +11,8 @@
           </div>
         </div>
       </div>
+      <div id="depthText" textcontent="${waterDepth}cm">
+      </div>
     </div>
-    <p>Water depth: ${depthVal}cm</p>
   </div>
 </template>

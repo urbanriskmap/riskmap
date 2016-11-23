@@ -4,7 +4,7 @@
   <div id="cardWrapper">
 
     <div id="cardTitle">
-      <p id="titleText">${cardTitle}</p>
+      <p id="titleText">${titleString}</p>
       <div id="tabRow">
         <button repeat.for="i of userInputs" class="tabButtons" disabled.bind="!(i.card<count)"></button>
       </div>
@@ -14,7 +14,7 @@
       <router-view></router-view>
     </div>
 
-    <div id="cardNavigation">
+    <div id="cardNavigation" ref="cardNavigation">
       <button href="#" click.trigger="prevCard()" disabled.bind="prevDisabled" class="navBtn">PREV</button><button click.trigger="nextCard()" disabled.bind="nextDisabled" class="navBtn">NEXT</button>
     </div>
 

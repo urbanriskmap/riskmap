@@ -8,3 +8,4 @@ dist/
 #for vim:
 *.swp
 *.swo
+npm-debug.log
