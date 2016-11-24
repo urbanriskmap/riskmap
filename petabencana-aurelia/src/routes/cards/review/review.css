@@ -8,25 +8,24 @@
 @media screen and (min-width: 600px)
 {
   /* For tablets: */
-  height: 350px;
+  #summaryCard {
+    height: 350px;
   }
+}
 
 #summaryCard {
   position: absolute;
   width: 80%;
-  /*padding: 10px;*/
   background-color: #424242;
   box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
   left: 50%;
   top: 30%;
   transform: translate(-50%, -50%);
-
 }
 
 #summaryPhoto {
-  margin: auto;
   position: relative;
-  width: 48%;
+  width: 45%;
   height: 100%;
   /*border: 1px solid red;*/ /* for test*/
   margin: 0px;
@@ -36,69 +35,60 @@
 }
 
 #img {
-  margin: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-  width:100%;
+  width: 100%;
   height: 100%;
-  }
+}
 
 #summaryTextWrapper {
-  color: red;
-  margin-top: 10px;
   position: relative;
-  /*border-left: 1px solid blue;*/ /* for test*/
-  width: 50%;
+  width: 55%;
   height: 100%;
-  margin: 0px;
-  float: right;
+  margin: 10px 0 0 0;
+  text-align: left;
+  font-size: 14px;
+  line-height: 18px;
+  float: left;
 }
 
 #floodH {
-  margin: 10px;
   color: #31aade;
-  font-family: 'Roboto-Medium', 'Roboto', 'Open-sans';
-  text-align:left;
+  font-family: 'Roboto-Medium', 'Roboto', sans-serif;
+  margin: 0px 10px;
 }
 #comment {
-  margin: 10px;
   color: #fff;
   font-family: 'Roboto-Light', 'Roboto', sans-serif;
-  text-align:left;
+  margin: 4px 10px;
 }
 
 #reviewSubmit {
   position: absolute;
-  bottom: 0px;
   left: 50%;
-  width: 248px; /* width of nav buttons + margin */
+  bottom: 36px;
+  transform: translateX(-50%);
+  width: 80%; /* width of nav buttons + margin */
   padding: 0px;
-  margin: auto;
-  left: 50%;
-  top: 75%;
-  transform: translate(-50%, -50%);
 }
 
 #termsConditions {
   width: 100%;
   margin: 0px;
   color: #fff;
-  font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;
-  font-size: 10px;
+  font-family: 'Roboto-Light', 'Roboto', sans-serif;
+  font-size: 14px;
 }
 
 #termsConditions a {
   cursor: pointer;
-  color: #fff;
-  font-family: 'Roboto-Regular', 'Helvetica Neue', sans-serif;
+  color: white;
+  font-family: 'Roboto-Medium', 'Roboto', sans-serif;
 }
 
 #submitSlider {
   position: relative;
-  width: 90%;
-
+  width: 75%;
   height: 36px;
-  margin: auto;
+  margin: 0px auto;
   padding: 3px;
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 6px;

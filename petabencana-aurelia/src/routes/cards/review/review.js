@@ -7,3 +7,5 @@ export class Depth {
     this.router.navigate(this.termsLink);
   }
 }
+
+//window.location.replace('maps');

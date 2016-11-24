@@ -40,7 +40,7 @@ export class Depth {
       sliderActive = true;
       var startPos;
       if (Depth.isMobile) {
-        startPos = e.touches[0].pageY;
+        startPos = e.originalEvent.touches[0].pageY;
       } else {
         startPos = e.clientY;
       }
@@ -48,7 +48,7 @@ export class Depth {
         var dragPos;
         if (Depth.isMobile) {
           e.preventDefault();
-          dragPos = e.touches[0].pageY;
+          dragPos = e.originalEvent.touches[0].pageY;
         } else {
           dragPos = e.clientY;
         }

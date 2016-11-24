@@ -26,35 +26,35 @@ export class Photo {
     $('#photoCapture').trigger('click');
   }
   drawImage() {
-    this.ea.publish(this.msgName, this.selectedPhoto);
-    let wrapper = this.preview;
-    wrapper.width = $('#camera').width();
-    wrapper.height = $('#camera').height();
-    let reader = new FileReader();
-    reader.onload = (e) => {
-      let reviewImg = new Image();
-      reviewImg.onload = () => {
-        let imgW;
-        let imgH;
-        if (reviewImg.width >= reviewImg.height) {
-          imgH = wrapper.height;
-          imgW = Math.round((reviewImg.width * imgH) / reviewImg.height);
-          console.log(wrapper.width + ', ' + wrapper.height);
-          console.log(reviewImg.width + ', ' + reviewImg.height);
-          console.log(imgW + ', ' + imgH);
-        } else {
-          imgW = wrapper.width;
-          imgH = Math.round((reviewImg.height * imgW) / reviewImg.width);
-          console.log(wrapper.width + ', ' + wrapper.height);
-          console.log(reviewImg.width + ', ' + reviewImg.height);
-          console.log(imgW + ', ' + imgH);
-        }
-        let cntxt = wrapper.getContext('2d');
-        cntxt.drawImage(reviewImg, 0, 0, imgW, imgH);
+    if (this.selectedPhoto[0]) {
+      this.ea.publish(this.msgName, this.selectedPhoto);
+      let wrapper = this.preview;
+      wrapper.width = $('#camera').width();
+      wrapper.height = $('#camera').height();
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        let reviewImg = new Image();
+        reviewImg.onload = () => {
+          let imgW;
+          let imgH;
+          let trlX = 0;
+          let trlY = 0;
+          if (reviewImg.width >= reviewImg.height) {
+            imgH = wrapper.height;
+            imgW = Math.round((reviewImg.width * imgH) / reviewImg.height);
+            trlX = Math.round((wrapper.width - imgW) / 2);
+          } else {
+            imgW = wrapper.width;
+            imgH = Math.round((reviewImg.height * imgW) / reviewImg.width);
+            trlY = Math.round((wrapper.height - imgH) / 2);
+          }
+          let cntxt = wrapper.getContext('2d');
+          cntxt.drawImage(reviewImg, trlX, trlY, imgW, imgH);
+        };
+        reviewImg.src = e.target.result;
       };
-      reviewImg.src = e.target.result;
-    };
-    reader.readAsDataURL(this.selectedPhoto[0]);
-    this.helpText = "Click to change";
+      reader.readAsDataURL(this.selectedPhoto[0]);
+      this.helpText = "Click to change";
+    }
   }
 }

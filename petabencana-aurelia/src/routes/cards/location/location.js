@@ -16,37 +16,39 @@ export class Location {
     Location.msgName = routerConfig.settings.msgName;
   }
   attached() {
+    if (navigator.geolocation) {
+      var gps = navigator.geolocation;
+    }
     let cardMap = L.map('mapWrapper');
     L.tileLayer('https://api.mapbox.com/styles/v1/asbarve/ciu0anscx00ac2ipgyvuieuu9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXNiYXJ2ZSIsImEiOiI4c2ZpNzhVIn0.A1lSinnWsqr7oCUo0UMT7w', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OSM</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA</a>, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>'
     }).addTo(cardMap);
     if (this.userLocation) {
-      cardMap.setView(this.userLocation, 12);
+      cardMap.setView(this.userLocation, 16);
       Location.ea.publish(Location.msgName, this.userLocation);
     } else {
       cardMap.locate({
-        setView: true,
-        zoom: 12
+        setView: true
         //watch: true
       });
       cardMap.on('locationfound', function (e) {
         L.circle(cardMap.getCenter(), {
           weight: 0,
-          fillColor: 'green',
+          fillColor: '#31aade',
           fillOpacity: 0.15,
           radius: e.accuracy / 2
         }).addTo(cardMap);
         L.circleMarker(cardMap.getCenter(), {
           color: 'white',
           weight: 1,
-          fillColor: 'green',
+          fillColor: '#31aade',
           fillOpacity: 1,
           radius: 8
         }).addTo(cardMap);
         Location.ea.publish(Location.msgName, cardMap.getCenter());
       });
       cardMap.on('locationerror', function () {
-        cardMap.setView([-6.2, 106.83], 10);
+        cardMap.setView([-6.2, 106.83], 16);
         Location.ea.publish(Location.msgName, cardMap.getCenter());
       });
     }
@@ -55,8 +57,5 @@ export class Location {
         Location.ea.publish(Location.msgName, cardMap.getCenter());
       }
     });
-  }
-  markerDrag(e) { //TODO: debug
-    e.preventDefault();
   }
 }

@@ -11,8 +11,8 @@
       <router-view></router-view>
     </div>
     <div id="cardNavigation">
-      <button href="#" click.trigger="prevCard()" disabled.bind="prevDisabled" class="navBtn">PREV</button>
-      <button click.trigger="nextCard()" disabled.bind="nextDisabled" class="navBtn">NEXT</button>
+      <button id="prv" click.trigger="prevCard()" disabled.bind="prevDisabled" class="navBtn">&#10094;</button>
+      <button id="nxt" click.trigger="nextCard()" disabled.bind="nextDisabled" class="navBtn">&#10095;</button>
     </div>
   </div>
 </template>

@@ -65,14 +65,10 @@ export class Cards {
     }
   }
 
-  get nextDisabled() { //Replace if arguments with ReportCard object params
-    //if (this.cardNo === 1) {
-    //  return !this.inputs[0].value; //disable next button till location selected
-    //} else {
-      return this.cardNo === this.totalCards - 2;
-    //}
+  get nextDisabled() { //Add arguments with ReportCard object params for mandatory inputs
+    return this.cardNo >= this.totalCards - 2;
   }
   get prevDisabled() {
-    return this.cardNo === 1;
+    return this.cardNo === 1 || this.cardNo === 7;
   }
 }

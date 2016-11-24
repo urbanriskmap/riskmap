@@ -1,15 +1,16 @@
 <template>
   <require from="./photo.css"></require>
   <div id="photoWrapper">
-    <div id="buttonWrapper" click.delegate="sendClick()">
+    <div id="previewWrapper" click.delegate="sendClick()">
       <canvas id="camera" ref="preview">
       </canvas>
       <img id="cameraIcon" src="assets/graphics/image_flood.svg">
     </div>
-    <div id="helpTextWrapper" textcontent.bind="helpText">
+    <div id="helpTextWrapper">
+      <button id="photoButton" click.delegate="sendClick()">${helpText}</button>
     </div>
   </div>
   <div id="ghostButton" style="display: none">
-    <input id="photoCapture" type="file" accept="image/*" capture="camera" change.delegate="drawImage()" files.bind="selectedPhoto">
+    <input id="photoCapture" type="file" accept="image/*" change.delegate="drawImage()" files.bind="selectedPhoto">
   </div>
 </template>
