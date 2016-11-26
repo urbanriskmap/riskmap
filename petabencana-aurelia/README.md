@@ -10,7 +10,7 @@ To get up and running...
 
 This will start a dev server on localhost:9000
 For Flood Maps,
-localhost:9000/#/maps
+localhost:9000/#/map
 
 For Report Cards,
 localhost:9000/#/cards/test_OTL
