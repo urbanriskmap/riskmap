@@ -333,12 +333,70 @@ define('routes/cards/cards',['exports', 'aurelia-framework', 'aurelia-event-aggr
     return Cards;
   }()) || _class);
 });
-define('routes/map/map',['exports'], function (exports) {
+define('routes/map/config',["module"], function (module) {
+  "use strict";
+
+  var config = {
+    "routes": {
+      "map/jakarta": "jbd",
+      "map/surabaya": "sby",
+      "map/bandung": "bdg",
+      "default/java": "java"
+    },
+
+    "instance_regions": {
+      "jbd": {
+        "bounds": {
+          "sw": [-6.5, 106.75],
+          "ne": [-6, 106.8]
+        },
+        "layers": []
+      },
+      "sby": {
+        "bounds": null,
+        "layers": []
+      },
+      "bdg": {
+        "bounds": null,
+        "layers": []
+      },
+      "java": {
+        "bounds": {
+          "sw": [-8, 107],
+          "ne": [-7, 113]
+        }
+      }
+    }
+  };
+
+  module.exports = config;
+});
+define('routes/map/map',['exports', 'aurelia-framework', './config'], function (exports, _aureliaFramework, _config) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+  exports.Map = undefined;
+
+  var config = _interopRequireWildcard(_config);
+
+  function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+      return obj;
+    } else {
+      var newObj = {};
+
+      if (obj != null) {
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+        }
+      }
+
+      newObj.default = obj;
+      return newObj;
+    }
+  }
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -346,26 +404,38 @@ define('routes/map/map',['exports'], function (exports) {
     }
   }
 
+  (0, _aureliaFramework.inject)(config);
+
   var Map = exports.Map = function () {
     function Map() {
       _classCallCheck(this, Map);
+
+      this.config = config;
     }
+
+    Map.prototype.parseMapRoute = function parseMapRoute(route) {
+      if (route in this.config.routes) {
+        return this.config.instance_regions[this.config.routes[route]];
+      } else {
+        return this.config.instance_regions.java;
+      }
+    };
 
     Map.prototype.activate = function activate(params, navigationInstruction) {
       this.route = navigationInstruction.route;
+      this.city = this.parseMapRoute(navigationInstruction.route);
     };
 
     Map.prototype.attached = function attached() {
-      alert(this.route);
-      var map = L.map('map');
+      this.map = L.map('map');
       var Stamen_Terrain = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
         attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         subdomains: 'abcd',
         minZoom: 0,
         maxZoom: 18,
         ext: 'png'
-      }).addTo(map);
-      map.locate({ setView: true, maxZoom: 16 });
+      }).addTo(this.map);
+      this.map.fitBounds([this.city.bounds.sw, this.city.bounds.ne]);
     };
 
     return Map;
@@ -4399,8 +4469,8 @@ define('text!routes/cards/review/review.css', ['module'], function(module) { mod
 define('text!routes/cards/location/location.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"leaflet/leaflet.css\"></require>\n  <require from=\"./location.css\"></require><!--place / access as per appropriate file structure-->\n  <div id=\"locationWrapper\">\n    <div id=\"mapWrapper\">\n    </div>\n    <div id=\"mapMarker\">\n      <img src=\"assets/icons/marker-04.svg\" width=\"48\" height=\"48\" style=\"margin: 0px;\" draggable=\"false\">\n    </div>\n  </div>\n</template>\n"; });
 define('text!routes/cards/terms/terms.css', ['module'], function(module) { module.exports = "#TandCWrapper {\n  position: relative;\n  width: 80%;\n  height: 80%;\n  margin: auto;\n  padding: 9px;\n  overflow: scroll;\n  color: #fff;\n  text-align: justify;\n  font-size: 14px;\n  font-family: 'Roboto-Regular', 'Helvetica Neue', sans-serif;\n  border:none;\n  border-bottom: 2px solid #31aade;\n  top: 10%;\n  transform: translateY(5%);\n}\n\n#TandCWrapper .headers {\n  text-align: left;\n  font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;\n}\n"; });
 define('text!routes/cards/photo/photo.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./photo.css\"></require>\n  <div id=\"photoWrapper\">\n    <div id=\"previewWrapper\" click.delegate=\"sendClick()\">\n      <canvas id=\"camera\" ref=\"preview\">\n      </canvas>\n      <img id=\"cameraIcon\" src=\"assets/graphics/image_flood.svg\">\n    </div>\n    <div id=\"helpTextWrapper\">\n      <button id=\"photoButton\" click.delegate=\"sendClick()\">${helpText}</button>\n    </div>\n  </div>\n  <div id=\"ghostButton\" style=\"display: none\">\n    <input id=\"photoCapture\" type=\"file\" accept=\"image/*\" change.delegate=\"drawImage()\" files.bind=\"selectedPhoto\">\n  </div>\n</template>\n"; });
-define('text!routes/cards/review/review.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./review.css\"></require>\n  <div id=\"summaryCard\">\n    <div id=\"summaryPhoto\">\n      <div id=\"img\">\n        <img id=\"img\" src=\"assets/images/chennai-floods-759.jpg\">\n      </div>\n    </div>\n    <div id=\"summaryTextWrapper\">\n      <p id=\"floodH\">Water depth: 45cm</p>\n      <p id=\"comment\">Comment goes here... because water is very high</p>\n    </div>\n  </div>\n  <div id=\"reviewSubmit\">\n    <div id=\"termsConditions\">\n      <p>By submitting this report, you are agreeing to the<br><a click.delegate=\"readTerms()\"><u>Terms &amp; Conditions</u></a></p>\n    </div>\n    <div id=\"submitSlider\">\n      <button id=\"submitKnob\"></button>\n      <p id=\"submitRef1\">&#10217;&#10217;&#10217;</p>\n      <p id=\"submitRef2\">Swipe to submit</p>\n    </div>\n  </div>\n</template>\n"; });
 define('text!routes/cards/thanks/thanks.css', ['module'], function(module) { module.exports = "#thanksText {\n  position: absolute;\n  width: 75%;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  color: #fff;\n  text-align: center;\n  font-size: 14px;\n  font-family: 'Roboto-Regular', 'Helvetica Neue', sans-serif;\n}\n\n#thanksBold {\n  color: white;\n  font-size: 21px;\n  font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;\n}\n\n#petalogo{\n  position: relative;\n  padding: 5px 30px 5px 30px;\n  width:60%;\n  left: 50%;\n  transform: translateX(-50%);\n  position:absolute; top:10px;\n  border: none;\n  border-bottom: 1px solid #2f2f2f\n}\n\n#URLlogo{\n  padding: 5px 30px 5px 30px;\n  position: relative;\n  width:70%;\n  left: 50%;\n  transform: translate(-50%,-50%);\n  position:absolute; bottom:0;\n  border: none;\n  border-top: 1px solid #2f2f2f\n}\n"; });
+define('text!routes/cards/review/review.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./review.css\"></require>\n  <div id=\"summaryCard\">\n    <div id=\"summaryPhoto\">\n      <div id=\"img\">\n        <img id=\"img\" src=\"assets/images/chennai-floods-759.jpg\">\n      </div>\n    </div>\n    <div id=\"summaryTextWrapper\">\n      <p id=\"floodH\">Water depth: 45cm</p>\n      <p id=\"comment\">Comment goes here... because water is very high</p>\n    </div>\n  </div>\n  <div id=\"reviewSubmit\">\n    <div id=\"termsConditions\">\n      <p>By submitting this report, you are agreeing to the<br><a click.delegate=\"readTerms()\"><u>Terms &amp; Conditions</u></a></p>\n    </div>\n    <div id=\"submitSlider\">\n      <button id=\"submitKnob\"></button>\n      <p id=\"submitRef1\">&#10217;&#10217;&#10217;</p>\n      <p id=\"submitRef2\">Swipe to submit</p>\n    </div>\n  </div>\n</template>\n"; });
 define('text!routes/cards/terms/terms.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./terms.css\"></require>\n\n    <div id=\"TandCWrapper\">\n      <p>These terms and conditions outline the rules and regulations for the use of  Urban Risk Lab's Website. <br>\n        <br><p>Urban Risk Lab is located at:\n          <br><address>\n            Urban Risk Lab, IDC, 235 Massachussets Ave , <br>\n            Cambridge, MA 02139<br>\n            United States<br>\n          </address>\n          <br>By accessing this website we assume you accept these terms and conditions in full. Do not continue to use Urban Risk Lab's website if you do not accept all of the terms and conditions stated on this page.</p>\n          <br><p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and any or all Agreements: \"Client\", “You” and “Your” refers to you, the person accessing this website and accepting the Company’s terms and conditions. \"The Company\", “Ourselves”, “We”, “Our” and \"Us\", refers to our Company. “Party”, “Parties”, or “Us”, refers to both the Client and ourselves, or either the Client or ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner, whether by formal meetings of a fixed duration, or any other means, for the express purpose of meeting the Client’s needs in respect of provision of the Company’s stated services/products, in accordance with and subject to, prevailing law of United States. Any use of the above terminology or other words in the singular, plural, capitalisation and/or he/she or they, are taken as interchangeable and therefore as referring to same.</p>\n          <br>\n          <p class=\"headers\">Cookies</p>\n          <p>We employ the use of cookies. By using <a href=\"http://petabencana.id\" onclick=\"__gaTracker('send', 'event', 'outbound-article', 'http://petabencana.id', 'Urban Risk Lab');\" title=\"Urban Risk Lab\">Urban Risk Lab</a>'s website you consent to the use of cookies in accordance with Urban Risk Lab’s privacy policy.</p>\n          <p>Most of the modern day interactive web sites use cookies to enable us to retrieve user details for each visit. Cookies are used in some areas of our site to enable the functionality of this area and ease of use for those people visiting. Some of our affiliate / advertising partners may also use cookies.</p>\n          <br>\n          <p class=\"headers\">License</p>\n          <p>Unless otherwise stated, Urban Risk Lab and/or it’s licensors own the intellectual property rights for all material on Urban Risk Lab All intellectual property rights are reserved. You may view and/or print pages from http://petabencana.id for your own personal use subject to restrictions set in these terms and conditions.</p>\n          <p>You must not:</p>\n          <ul>\n            <li>Republish material from http://petabencana.id</li>\n            <li>Sell, rent or sub-license material from http://petabencana.id</li>\n            <li>Reproduce, duplicate or copy material from http://petabencana.id</li>\n          </ul>\n          <p>Redistribute content from Urban Risk Lab (unless content is specifically made for redistribution).</p>\n          <br>\n          <p class=\"headers\">User Comments</p>\n          <ol>\n            <li>This Agreement shall begin on the date hereof.</li>\n            <li>Certain parts of this website offer the opportunity for users to post and exchange opinions, information, material and data ('Comments') in areas of the website. Urban Risk Lab does not screen, edit, publish or review Comments prior to their appearance on the website and Comments do not reflect the views or opinions of Urban Risk Lab, its agents or affiliates. Comments reflect the view and opinion of the person who posts such view or opinion. To the extent permitted by applicable laws Urban Risk Lab shall not be responsible or liable for the Comments or for any loss cost, liability, damages or expenses caused and or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.</li>\n            <li>Urban Risk Lab reserves the right to monitor all Comments and to remove any Comments which it considers in its absolute discretion to be inappropriate, offensive or otherwise in breach of these Terms and Conditions.</li>\n            <li>You warrant and represent that:\n              <ol>\n                <li>You are entitled to post the Comments on our website and have all necessary licenses and consents to do so;</li>\n                <li>The Comments do not infringe any intellectual property right, including without limitation copyright, patent or trademark, or other proprietary right of any third party;</li>\n                <li>The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful material or material which is an invasion of privacy</li>\n                <li>The Comments will not be used to solicit or promote business or custom or present commercial activities or unlawful activity.</li>\n              </ol>\n            </li>\n            <li>You hereby grant to <strong>Urban Risk Lab</strong> a non-exclusive royalty-free license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.</li>\n          </ol>\n          <br>\n          <p class=\"headers\">Hyperlinking to our Content</p>\n          <ol>\n            <li>The following organizations may link to our Web site without prior written approval:\n              <ul>\n                <li>Government agencies;</li>\n                <li>Search engines;</li>\n                <li>News organizations;</li>\n                <li>Online directory distributors when they list us in the directory may link to our Web site in the same manner as they hyperlink to the Web sites of other listed businesses; and</li>\n                <li>Systemwide Accredited Businesses except soliciting non-profit organizations, charity shopping malls, and charity fundraising groups which may not hyperlink to our Web site.</li>\n              </ul>\n            </li>\n          </ol>\n          <ol start=\"2\">\n            <li>These organizations may link to our home page, to publications or to other Web site information so long as the link: (a) is not in any way misleading; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products or services; and (c) fits within the context of the linking party's site.</li>\n            <li>We may consider and approve in our sole discretion other link requests from the following types of organizations:\n              <ul>\n                <li>commonly-known consumer and/or business information sources such as Chambers of Commerce, American Automobile Association, AARP and Consumers Union;</li>\n                <li>dot.com community sites;</li>\n                <li>associations or other groups representing charities, including charity giving sites,</li>\n                <li>online directory distributors;</li>\n                <li>internet portals;</li>\n                <li>accounting, law and consulting firms whose primary clients are businesses; and</li>\n                <li>educational institutions and trade associations.</li>\n              </ul>\n            </li>\n          </ol>\n          <br>\n          <p>We will approve link requests from these organizations if we determine that: (a) the link would not reflect unfavorably on us or our accredited businesses (for example, trade associations or other organizations representing inherently suspect types of business, such as work-at-home opportunities, shall not be allowed to link); (b)the organization does not have an unsatisfactory record with us; (c) the benefit to us from the visibility associated with the hyperlink outweighs the absence of Urban Risk Lab; and (d) where the link is in the context of general resource information or is otherwise consistent with editorial content in a newsletter or similar product furthering the mission of the organization.</p>\n          <p>These organizations may link to our home page, to publications or to other Web site information so long as the link: (a) is not in any way misleading; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and it products or services; and (c) fits within the context of the linking party's site.</p>\n          <p>If you are among the organizations listed in paragraph 2 above and are interested in linking to our website, you must notify us by sending an e-mail to <a href=\"mailto:floodreport@petabencana.org\" title=\"send an email to floodreport@petabencana.org\">floodreport@petabencana.org</a>. Please include your name, your organization name, contact information (such as a phone number and/or e-mail address) as well as the URL of your site, a list of any URLs from which you intend to link to our Web site, and a list of the URL(s) on our site to which you would like to link. Allow 2-3 weeks for a response.</p>\n          <br>\n          <p>Approved organizations may hyperlink to our Web site as follows:</p>\n          <ul>\n            <li>By use of our corporate name; or</li>\n            <li>By use of the uniform resource locator (Web address) being linked to; or</li>\n            <li>By use of any other description of our Web site or material being linked to that makes sense within the context and format of content on the linking party's site.</li>\n          </ul>\n          <p>No use of (cname)’s logo or other artwork will be allowed for linking absent a trademark license agreement.</p>\n          <br>\n          <p class=\"headers\">Iframes</p>\n          <p>Without prior approval and express written permission, you may not create frames around our Web pages or use other techniques that alter in any way the visual presentation or appearance of our Web site.</p>\n          <br>\n          <p class=\"headers\">Content Liability</p>\n          <p>We shall have no responsibility or liability for any content appearing on your Web site. You agree to indemnify and defend us against all claims arising out of or based upon your Website. No link(s) may appear on any page on your Web site or within any context containing content or materials that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third party rights.</p>\n          <br>\n          <p class=\"headers\">Reservation of Rights</p>\n          <p>We reserve the right at any time and in its sole discretion to request that you remove all links or any particular link to our Web site. You agree to immediately remove all links to our Web site upon such request. We also reserve the right to amend these terms and conditions and its linking policy at any time. By continuing to link to our Web site, you agree to be bound to and abide by these linking terms and conditions.</p>\n          <br>\n          <p class=\"headers\">Removal of links from our website</p>\n          <p>If you find any link on our Web site or any linked web site objectionable for any reason, you may contact us about this. We will consider requests to remove links but will have no obligation to do so or to respond directly to you.</p>\n          <p>Whilst we endeavour to ensure that the information on this website is correct, we do not warrant its completeness or accuracy; nor do we commit to ensuring that the website remains available or that the material on the website is kept up to date.</p>\n          <br>\n          <p class=\"headers\">Disclaimer</p>\n          <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website (including, without limitation, any warranties implied by law in respect of satisfactory quality, fitness for purpose and/or the use of reasonable care and skill). Nothing in this disclaimer will:</p>\n          <ol>\n            <li>limit or exclude our or your liability for death or personal injury resulting from negligence;</li>\n            <li>limit or exclude our or your liability for fraud or fraudulent misrepresentation;</li>\n            <li>limit any of our or your liabilities in any way that is not permitted under applicable law; or</li>\n            <li>exclude any of our or your liabilities that may not be excluded under applicable law.</li>\n          </ol>\n          <p>The limitations and exclusions of liability set out in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer or in relation to the subject matter of this disclaimer, including liabilities arising in contract, in tort (including negligence) and for breach of statutory duty.</p>\n          <p>To the extent that the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.</p>\n        </div>\n\n</template>\n"; });
 define('text!routes/cards/thanks/thanks.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./thanks.css\"></require>\n\n  <div id=\"petalogo\" class=\"cardInner\">\n    <img src=\"assets/icons/Peta_logo.svg\">\n  </div>\n\n  <div id=\"thanksText\">\n    <p id=\"thanksBold\">Thank you!</p>\n    <br>\n    <p>Your Report has been submitted,\n      and will be added to the map</p>\n      <br>\n      <p> Redirecting to PetaBencana.id</p>\n  </div>\n\n  <div id=\"URLlogo\" class=\"cardInner\">\n    <img src=\"assets/icons/URL_logo.svg\">\n  </div>\n\n</template>\n"; });
 define('text!routes/map/jakarta/jakarta.html', ['module'], function(module) { module.exports = "<template>\n  <p>Jakarta map layers</p>\n</template>\n"; });
