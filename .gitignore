@@ -3,7 +3,7 @@ node_modules
 .DS_STORE
 npm-debug.log
 
-scripts
+scripts/
 
 #for vim:
 *.swp

@@ -1,33 +1,32 @@
-var config = {
-  "routes":{
-    "map/jakarta": "jbd",
-    "map/surabaya": "sby",
-    "map/bandung": "bdg",
-    "default/java": "java"
-  },
+// PetaBencana.id Map configuration file, for CogniCity data
+// https://github.com/urbanriskmap/urbanriskmap-meta/wiki/Bounding-Boxes-for-Target-Cities
 
+var config = {
   "instance_regions":
     {
-      "jbd":{
+      "jakarta":{
+        "region": "jbd",
         "bounds": {
-          "sw":[-6.5, 106.75],
-          "ne":[-6, 106.8]
+          "sw":[-6.733, 106.480],
+          "ne":[-5.880, 107.175]
         },
         "layers": []
       },
-      "sby":{
-        "bounds": null,
-        "layers": []
-      },
-      "bdg":{
-        "bounds": null,
-        "layers": []
-      },
-      "java":{
+      "surabaya":{
+        "region": "sby",
         "bounds": {
-          "sw":[-8, 107],
-          "ne":[-7, 113]
-        }
+          "sw":[-7.5499, 112.3975],
+          "ne":[-7.0143, 113.0318]
+        },
+        "layers": null
+      },
+      "bandung":{
+        "region": "bdg",
+        "bounds": {
+          "sw":[-7.165, 107.369],
+          "ne":[-6.668, 107.931]
+        },
+        "layers": []
       }
     }
 }
