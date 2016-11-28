@@ -8,7 +8,7 @@ inject(config);
 
 // DEFAULT CITY TO RENDER
 let DEFAULT_CITY = 'jakarta';
-let START_POINT = [-7, 109]
+let START_POINT = [-7, 109];
 
 // Map class, requires map config.js (injected as Aurelia dependency)
 export class Map {
@@ -22,7 +22,7 @@ export class Map {
   parseMapCity(city){
     if (city in this.config.instance_regions){
       this.city_name = city;
-      return this.config.instance_regions[city]
+      return this.config.instance_regions[city];
     }
     else {
       this.city_name = DEFAULT_CITY;
