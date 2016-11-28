@@ -1,27 +1,53 @@
+/*
+PetaBencana.id Leaflet Map for CogniCity data, built within Aurelia framework
+*/
+
 import {inject} from 'aurelia-framework';
-import * as config from './config';
+import * as config from './config'; // Map config
 inject(config);
 
+// DEFAULT CITY TO RENDER
+let DEFAULT_CITY = 'jakarta';
+let START_POINT = [-7, 109]
+
+// Map class, requires map config.js (injected as Aurelia dependency)
 export class Map {
 
+  // Aurelia constructor
   constructor(){
     this.config = config;
   }
 
-  parseMapRoute(route){
-    if (route in this.config.routes){
-      return this.config.instance_regions[this.config.routes[route]]
+  // Get parameters from config based on city name, else return default
+  parseMapCity(city){
+    if (city in this.config.instance_regions){
+      this.city_name = city;
+      return this.config.instance_regions[city]
     }
     else {
-      return this.config.instance_regions.java;
+      this.city_name = DEFAULT_CITY;
+      return this.config.instance_regions[DEFAULT_CITY];
     }
   }
-  activate(params, navigationInstruction){
-    this.route = navigationInstruction.route;
-    this.city = this.parseMapRoute(navigationInstruction.route);
+
+  // Change city from within map without reloading window
+  changeCity(city_name){
+    var stateObj = { map: "city" };
+
+    this.city = this.parseMapCity(city_name);
+    this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
+    history.pushState(stateObj, "page 2", '#/map/'+this.city_name);
   }
+
+  // Aurelia activate
+  activate(params){
+    this.city_name = params.city;
+  }
+
+  // Aurelia attached
   attached(){
-    //alert(this.route);
+
+    // Create Leaflet map
     this.map = L.map('map');
     let Stamen_Terrain = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
     	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -30,8 +56,9 @@ export class Map {
     	maxZoom: 18,
     	ext: 'png'
     }).addTo(this.map);
-    this.map.fitBounds([this.city.bounds.sw, this.city.bounds.ne]);
 
-    //this.map.flyTo([-7, 109],15);
+    // Zoom to city
+    this.map.setView(START_POINT, 8);
+    this.changeCity(this.city_name);
   }
 }

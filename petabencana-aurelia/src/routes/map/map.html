@@ -2,5 +2,10 @@
   <require from="leaflet/leaflet.css"></require>
   <require from="./map.css"></require><!--place / access as per appropriate file structure-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <div id="nav">
+    <a href="#/map/jakarta" click.trigger="changeCity('jakarta')">Jakarta</a> |
+    <a href="#/map/bandung" onclick="" click.trigger="changeCity('bandung')">Bandung</a> |
+    <a href="#/map/surabaya" click.trigger="changeCity('surabaya')">Surabaya</a>
+  </div>
   <div id="map"></div>
 </template>
