@@ -68,7 +68,8 @@
     color: #ffffff;
     width: 50%;
     height: 50px;
-    font-size: 24px;
+    font-family: "Roboto-Medium", "Roboto", Open Sans;
+    font-size: 16px;
     line-height: 50px;
     background: #424242;
     border: none;

@@ -13,6 +13,14 @@
   }
 }
 
+#reviewWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
 #summaryCard {
   position: absolute;
   width: 80%;
@@ -34,9 +42,20 @@
   float: left;
 }
 
+#camera {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  z-index: 3;
+}
+
 #img {
   width: 100%;
   height: 100%;
+  z-index: 2;
+  opacity: 0.4;
 }
 
 #summaryTextWrapper {

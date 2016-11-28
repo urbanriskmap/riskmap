@@ -1,24 +1,87 @@
-.transition(@transition) {
-  -webkit-transition: @transition;
--moz-transition: @transition;
--o-transition: @transition;
-transition: @transition;
-}
-.opacity(@opacity) {
-  opacity: @opacity / 100;
-  filter: ~"alpha(opacity=@{opacity})";
+#depthWrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  z-index: 9;
 }
 
-a {
-.transition(all 0.5s);
-&:hover {
-  .opacity(70);
-  }
+#imgWrapper {
+  position: relative;
+  width: 300px; /*TODO check for the responsive design mode*/
+  height: 300px;  /* width = height */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0px;
+  padding: 0px;
+  z-index: 1;
 }
 
-// Selector interpolation only works in 1.3.1+. Try it!
-@theGoodThings: ~".food, .beer, .sleep, .javascript";
+#bgImage {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
 
-@{theGoodThings} {
-  font-weight: bold;
+#floodZone {
+  position: absolute;
+  width: 94%;
+  height: 20%;
+  left: 0px;
+  bottom: 0px;
+  border: none;
+  border-top: 2px dashed white;
+  background: linear-gradient(rgba(49, 170, 222, 0.6), rgba(49, 170, 222, 0));
+  z-index: 3;
+}
+
+#sliderZone {
+  position: absolute;
+  width: 100%;
+  height: 36px;
+  padding: 0px;
+  transform: translateY(50%);
+  z-index: 10;
+}
+
+#knobWrapper {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  right: 0px;
+  margin: 0px auto;
+  padding: 0px;
+  background-color: rgba(49, 170, 222, 0.4);
+  border-radius: 18px;
+  z-index: 7;
+
+}
+
+#knob {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  margin: 0px auto;
+  padding: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(49, 170, 222, 1);
+  border: 2px solid white;
+  border-radius: 11px; /* add border to width/2 */
+  z-index: 8;
+}
+
+#depthText {
+  position: relative;
+  right: 0px;
+  margin: 0px;
+  padding: 10px;
+  font-family: "Roboto", Open Sans;
+  font-weight: 100;
+  font-size: 14px;
+  color: #fff;
 }

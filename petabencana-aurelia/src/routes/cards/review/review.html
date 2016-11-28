@@ -1,24 +1,26 @@
 <template>
   <require from="./review.css"></require>
-  <div id="summaryCard">
-    <div id="summaryPhoto">
-      <div id="img">
-        <img id="img" src="assets/images/chennai-floods-759.jpg">
+  <div id="reviewWrapper">
+    <div id="summaryCard">
+      <div id="summaryPhoto">
+        <canvas id="camera" ref="preview">
+        </canvas>
+        <img id="img" src="assets/graphics/image_flood.svg">
+      </div>
+      <div id="summaryTextWrapper">
+        <p id="floodH">Water depth: ${selDepth}</p>
+        <p id="comment">${selDescription}</p>
       </div>
     </div>
-    <div id="summaryTextWrapper">
-      <p id="floodH">Water depth: 45cm</p>
-      <p id="comment">Comment goes here... because water is very high</p>
-    </div>
-  </div>
-  <div id="reviewSubmit">
-    <div id="termsConditions">
-      <p>By submitting this report, you are agreeing to the<br><a click.delegate="readTerms()"><u>Terms &amp; Conditions</u></a></p>
-    </div>
-    <div id="submitSlider">
-      <button id="submitKnob"></button>
-      <p id="submitRef1">&#10217;&#10217;&#10217;</p>
-      <p id="submitRef2">Swipe to submit</p>
+    <div id="reviewSubmit">
+      <div id="termsConditions">
+        <p>By submitting this report, you are agreeing to the<br><a click.delegate="readTerms()"><u>Terms &amp; Conditions</u></a></p>
+      </div>
+      <div id="submitSlider">
+        <button id="submitKnob"></button>
+        <p id="submitRef1">&#10217;&#10217;&#10217;</p>
+        <p id="submitRef2">Swipe to submit</p>
+      </div>
     </div>
   </div>
 </template>
