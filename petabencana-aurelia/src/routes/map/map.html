@@ -1,6 +1,6 @@
 <template>
   <require from="leaflet/leaflet.css"></require>
-  <require from="./map.css"></require><!--place / access as per appropriate file structure-->
+  <require from="./map.css"></require>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <div id="optionsPane">
     <div id="nav">
@@ -9,6 +9,8 @@
         <option repeat.for="city_region of city_regions" class="selOptions">${city_region}</option>
       </select>
     </div>
+    <p>${popupContent.name}</p>
+    <p>${popupContent.status}</p>
   </div>
   <div id="map"></div>
 </template>

@@ -5,6 +5,7 @@ PetaBencana.id Leaflet Map for CogniCity data, built within Aurelia framework
 import {inject} from 'aurelia-framework';
 import * as config from './config'; // Map config
 import $ from 'jquery';
+import * as L from 'leaflet';
 
 // DEFAULT CITY TO RENDER
 let DEFAULT_CITY = 'jakarta';
@@ -14,12 +15,14 @@ let START_POINT = [-7, 109];
 export class Map {
 
   // Aurelia constructor
-  constructor(){
+  constructor() {
     this.config = config;
     this.city_regions = []; //get city objects as array, to bind & repeat in router-view
     for (var city_region in this.config.instance_regions) {
       this.city_regions.push(city_region);
     }
+    this.cityLayers = L.layerGroup();
+    this.popupContent = null;
   }
 
   // Get parameters from config based on city name, else return default
@@ -33,16 +36,60 @@ export class Map {
     }
   }
 
+  parseIcon(icon) {
+    if (icon in this.config.map_icons) {
+      return L.icon({
+        iconUrl: this.config.map_icons[icon].iconUrl,
+        iconSize: this.config.map_icons[icon].iconSize,
+        iconAnchor: this.config.map_icons[icon].iconAnchor
+      });
+    }
+  }
+
+  onEachFeature(feature, layer) {
+    if (feature.properties && feature.properties.status) {
+      this.popupContent = {name: null, status: feature.properties.status};
+      //layer.bindPopup('<b>Status: </b>' + feature.properties.status + '<br><b>Water depth: </b>' + feature.properties.water_depth + 'cm');
+    } else if (feature.properties && feature.properties.name) {
+      this.popupContent = {name: feature.properties.name, status: null};
+      //layer.bindPopup('<b>Name: </b>' + feature.properties.name);
+    }
+  }
+
+  createLayer(group, toggle, url, name, icon) {
+    var newLayer;
+    $.getJSON(url, function (data) {
+      newLayer = L.geoJson(data, {
+        onEachFeature: this.onEachFeature,
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng, {icon: icon});
+        }
+      });
+      group.addLayer(newLayer);
+      toggle.addOverlay(newLayer, name);
+    });
+  }
+
   // Change city from within map without reloading window
   changeCity(city_name) {
-    var stateObj = { map: "city" };
-    this.city = this.parseMapCity(city_name);
-    this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
-    history.pushState(stateObj, "page 2", '#/map/'+this.city_name);
     $('#optionsPane').animate({
       'left': (-300) + 'px'
     }, 200);
     //$('#optionsPane').delay(200).hide(); //delay not working?
+    var stateObj = { map: "city" };
+    if (this.layerToggle) {
+      this.map.removeControl(this.layerToggle);
+    }
+    this.layerToggle = L.control.layers();
+    this.cityLayers.clearLayers();
+    this.city = this.parseMapCity(city_name);
+    this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
+    for (var i = 0; i < this.city.layers.length; i += 1) {
+      this.createLayer(this.cityLayers, this.layerToggle, this.city.layers[i].url, this.city.layers[i].name, this.parseIcon(this.city.layers[i].icon));
+    }
+    this.layerToggle.addTo(this.map);
+    this.cityLayers.addTo(this.map);
+    history.pushState(stateObj, "page 2", '#/map/'+this.city_name);
   }
 
   // Aurelia activate
