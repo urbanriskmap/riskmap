@@ -4,6 +4,7 @@ PetaBencana.id Leaflet Map for CogniCity data, built within Aurelia framework
 
 import {inject} from 'aurelia-framework';
 import * as config from './config'; // Map config
+import {Layers} from './layers';
 import $ from 'jquery';
 
 // DEFAULT CITY TO RENDER
@@ -16,6 +17,8 @@ export class Map {
   // Aurelia constructor
   constructor(){
     this.config = config;
+    this.layers  = new Layers();
+    this.layers.getReports('jakarta');
     this.city_regions = []; //get city objects as array, to bind & repeat in router-view
     for (var city_region in this.config.instance_regions) {
       this.city_regions.push(city_region);

@@ -264,7 +264,7 @@ define('routes/cards/cards',['exports', 'aurelia-framework', 'aurelia-event-aggr
 
     Cards.prototype.configureRouter = function configureRouter(config, router) {
       config.title = this.i18n.tr('page_title');
-      config.map([{ route: '', redirect: 'location' }, { route: 'location', moduleId: './location/location', settings: { title: this.i18n.tr('location_title'), cardNo: 1, msgName: 'changedLocation' } }, { route: 'depth', moduleId: './depth/depth', settings: { title: this.i18n.tr('depth_title'), cardNo: 2, msgName: 'changedDepth' } }, { route: 'photo', moduleId: './photo/photo', settings: { title: this.i18n.tr('photo_title'), cardNo: 3, msgName: 'changedPhoto' } }, { route: 'description', moduleId: './description/description', settings: { title: this.i18n.tr('description_title'), cardNo: 4, msgName: 'changedDescription' } }, { route: 'review', moduleId: './review/review', settings: { title: this.i18n.tr('review_title'), cardNo: 5, msgName: 'getInputs' } }, { route: 'terms', moduleId: './terms/terms', settings: { title: this.i18n.tr('terms_title'), cardNo: 6 } }, { route: 'thanks', moduleId: './thanks/thanks', settings: { title: this.i18n.tr('thanks_title'), cardNo: 7 } }]);
+      config.map([{ route: '', redirect: 'location' }, { route: 'location', moduleId: './location/location', settings: { title: this.i18n.tr('location_title'), cardNo: 1, msgName: 'changedLocation' } }, { route: 'depth', moduleId: './depth/depth', settings: { title: this.i18n.tr('depth_title'), cardNo: 2, msgName: 'changedDepth' } }, { route: 'photo', moduleId: './photo/photo', settings: { title: this.i18n.tr('photo_title'), cardNo: 3, msgName: 'changedPhoto' } }, { route: 'description', moduleId: './description/description', settings: { title: this.i18n.tr('description_title'), cardNo: 4, msgName: 'changedDescription' } }, { route: 'review', moduleId: './review/review', settings: { title: this.i18n.tr('review_title'), cardNo: 5, msgName: 'changedInputs' } }, { route: 'terms', moduleId: './terms/terms', settings: { title: this.i18n.tr('terms_title'), cardNo: 6 } }, { route: 'thanks', moduleId: './thanks/thanks', settings: { title: this.i18n.tr('thanks_title'), cardNo: 7 } }]);
       this.router = router;
     };
 
@@ -275,20 +275,28 @@ define('routes/cards/cards',['exports', 'aurelia-framework', 'aurelia-event-aggr
     Cards.prototype.attached = function attached() {
       var _this = this;
 
+      this.ccHeight = (0, _jquery2.default)(window).height() - ((0, _jquery2.default)('#cardTitle').height() + (0, _jquery2.default)('#cardNavigation').height());
       this.totalCards = this.router.routes.length - 1;
       this.tabCount = [];
-
-      var _loop = function _loop(i) {
-        _this.tabCount[i] = i;
-        _this.ea.subscribe(_this.router.routes[i + 1].settings.msgName, function (msg) {
-          _this.router.routes[i + 1].settings.input = msg;
-        });
-      };
-
       for (var i = 0; i < this.totalCards - 2; i += 1) {
-        _loop(i);
+        this.tabCount[i] = i;
       }
-      this.ccHeight = (0, _jquery2.default)(window).height() - ((0, _jquery2.default)('#cardTitle').height() + (0, _jquery2.default)('#cardNavigation').height());
+      this.ea.subscribe(this.router.routes[1].settings.msgName, function (msg) {
+        _this.router.routes[1].settings.input = msg;
+        _this.router.routes[5].settings.location = msg;
+      });
+      this.ea.subscribe(this.router.routes[2].settings.msgName, function (msg) {
+        _this.router.routes[2].settings.input = msg;
+        _this.router.routes[5].settings.depth = msg;
+      });
+      this.ea.subscribe(this.router.routes[3].settings.msgName, function (msg) {
+        _this.router.routes[3].settings.input = msg;
+        _this.router.routes[5].settings.photo = msg;
+      });
+      this.ea.subscribe(this.router.routes[4].settings.msgName, function (msg) {
+        _this.router.routes[4].settings.input = msg;
+        _this.router.routes[5].settings.description = msg;
+      });
     };
 
     Cards.prototype.nextCard = function nextCard() {
@@ -340,6 +348,7 @@ define('routes/map/config',["module"], function (module) {
   var config = {
     "instance_regions": {
       "jakarta": {
+        "name": "Jakarta",
         "region": "jbd",
         "bounds": {
           "sw": [-6.733, 106.480],
@@ -347,7 +356,8 @@ define('routes/map/config',["module"], function (module) {
         },
         "layers": []
       },
-      "surabaya": {
+      "surbaya": {
+        "name": "Surbaya",
         "region": "sby",
         "bounds": {
           "sw": [-7.5499, 112.3975],
@@ -356,6 +366,7 @@ define('routes/map/config',["module"], function (module) {
         "layers": null
       },
       "bandung": {
+        "name": "Bandung",
         "region": "bdg",
         "bounds": {
           "sw": [-7.165, 107.369],
@@ -368,7 +379,74 @@ define('routes/map/config',["module"], function (module) {
 
   module.exports = config;
 });
-define('routes/map/map',['exports', 'aurelia-framework', './config'], function (exports, _aureliaFramework, _config) {
+define('routes/map/data',['exports', 'aurelia-fetch-client'], function (exports, _aureliaFetchClient) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.Data = undefined;
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var client = new _aureliaFetchClient.HttpClient();
+
+  var Data = exports.Data = function () {
+    function Data() {
+      _classCallCheck(this, Data);
+    }
+
+    Data.prototype.getData = function getData(city_name) {
+      return new Promise(function (resolve, reject) {
+        client.fetch('/package.json').then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          resolve(city_name + '_');
+        }).catch(function (err) {
+          return reject(err);
+        });
+      });
+    };
+
+    return Data;
+  }();
+});
+define('routes/map/layers',['exports', './data'], function (exports, _data) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.Layers = undefined;
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var Layers = exports.Layers = function () {
+    function Layers() {
+      _classCallCheck(this, Layers);
+
+      this.data = new _data.Data();
+      this.layers_key;
+    }
+
+    Layers.prototype.getReports = function getReports(city_name) {
+      this.data.getData(city_name).then(function (data) {
+        return alert(data);
+      });
+    };
+
+    return Layers;
+  }();
+});
+define('routes/map/map',['exports', 'aurelia-framework', './config', './layers', 'jquery'], function (exports, _aureliaFramework, _config, _layers, _jquery) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -377,6 +455,14 @@ define('routes/map/map',['exports', 'aurelia-framework', './config'], function (
   exports.Map = undefined;
 
   var config = _interopRequireWildcard(_config);
+
+  var _jquery2 = _interopRequireDefault(_jquery);
+
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+      default: obj
+    };
+  }
 
   function _interopRequireWildcard(obj) {
     if (obj && obj.__esModule) {
@@ -401,8 +487,6 @@ define('routes/map/map',['exports', 'aurelia-framework', './config'], function (
     }
   }
 
-  (0, _aureliaFramework.inject)(config);
-
   var DEFAULT_CITY = 'jakarta';
   var START_POINT = [-7, 109];
 
@@ -411,6 +495,12 @@ define('routes/map/map',['exports', 'aurelia-framework', './config'], function (
       _classCallCheck(this, Map);
 
       this.config = config;
+      this.layers = new _layers.Layers();
+      this.layers.getReports('jakarta');
+      this.city_regions = [];
+      for (var city_region in this.config.instance_regions) {
+        this.city_regions.push(city_region);
+      }
     }
 
     Map.prototype.parseMapCity = function parseMapCity(city) {
@@ -425,10 +515,12 @@ define('routes/map/map',['exports', 'aurelia-framework', './config'], function (
 
     Map.prototype.changeCity = function changeCity(city_name) {
       var stateObj = { map: "city" };
-
       this.city = this.parseMapCity(city_name);
       this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
       history.pushState(stateObj, "page 2", '#/map/' + this.city_name);
+      (0, _jquery2.default)('#optionsPane').animate({
+        'left': -300 + 'px'
+      }, 200);
     };
 
     Map.prototype.activate = function activate(params) {
@@ -436,7 +528,7 @@ define('routes/map/map',['exports', 'aurelia-framework', './config'], function (
     };
 
     Map.prototype.attached = function attached() {
-      this.map = L.map('map');
+      this.map = L.map('map').setView(START_POINT, 8);
       var Stamen_Terrain = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
         attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         subdomains: 'abcd',
@@ -445,7 +537,28 @@ define('routes/map/map',['exports', 'aurelia-framework', './config'], function (
         ext: 'png'
       }).addTo(this.map);
 
-      this.map.setView(START_POINT, 8);
+      L.Control.Options = L.Control.extend({
+        onAdd: function onAdd(map) {
+          var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+          container.style.backgroundColor = 'white';
+          container.style.backgroundImage = 'url(assets/icons/options.svg)';
+          container.style.backgroundSize = '26px 26px';
+          container.style.width = '26px';
+          container.style.height = '26px';
+          container.onclick = function () {
+            (0, _jquery2.default)('#optionsPane').show();
+            (0, _jquery2.default)('#optionsPane').animate({
+              'left': 0 + 'px'
+            }, 200);
+          };
+          return container;
+        }
+      });
+      L.control.options = function (opts) {
+        return new L.Control.Options(opts);
+      };
+      L.control.options({ position: 'topleft' }).addTo(this.map);
+
       this.changeCity(this.city_name);
     };
 
@@ -680,54 +793,97 @@ define('routes/cards/location/location',['exports', 'leaflet', 'aurelia-framewor
       _classCallCheck(this, Location);
 
       Location.ea = ea;
+      Location.inputs = { markerLocation: null, gpsLocation: null, accuracy: null };
     }
 
     Location.prototype.activate = function activate(params, routerConfig) {
       if (routerConfig.settings.input) {
-        this.userLocation = routerConfig.settings.input;
+        Location.inputs = routerConfig.settings.input;
       }
+
       Location.msgName = routerConfig.settings.msgName;
     };
 
     Location.prototype.attached = function attached() {
-      if (navigator.geolocation) {
-        var gps = navigator.geolocation;
-      }
       var cardMap = L.map('mapWrapper');
       L.tileLayer('https://api.mapbox.com/styles/v1/asbarve/ciu0anscx00ac2ipgyvuieuu9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXNiYXJ2ZSIsImEiOiI4c2ZpNzhVIn0.A1lSinnWsqr7oCUo0UMT7w', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OSM</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA</a>, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>'
       }).addTo(cardMap);
-      if (this.userLocation) {
-        cardMap.setView(this.userLocation, 16);
-        Location.ea.publish(Location.msgName, this.userLocation);
-      } else {
-        cardMap.locate({
-          setView: true
-        });
-        cardMap.on('locationfound', function (e) {
-          L.circle(cardMap.getCenter(), {
+
+      L.Control.GeoLocate = L.Control.extend({
+        onAdd: function onAdd(map) {
+          var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+          container.style.backgroundColor = 'white';
+          container.style.backgroundImage = 'url(assets/icons/geolocate.svg)';
+          container.style.backgroundSize = '30px 30px';
+          container.style.width = '30px';
+          container.style.height = '30px';
+          container.onclick = function () {
+            if (Location.inputs.gpsLocation) {
+              cardMap.flyTo(Location.inputs.gpsLocation, 16);
+            }
+          };
+          return container;
+        }
+      });
+      L.control.geoLocate = function (opts) {
+        return new L.Control.GeoLocate(opts);
+      };
+
+      if (Location.inputs.markerLocation) {
+        cardMap.setView(Location.inputs.markerLocation, 16);
+
+        if (Location.inputs.gpsLocation) {
+          L.control.geoLocate({ position: 'bottomright' }).addTo(cardMap);
+          L.circle(Location.inputs.gpsLocation, {
             weight: 0,
             fillColor: '#31aade',
             fillOpacity: 0.15,
-            radius: e.accuracy / 2
+            radius: Location.inputs.accuracy / 2
           }).addTo(cardMap);
-          L.circleMarker(cardMap.getCenter(), {
+          L.circleMarker(Location.inputs.gpsLocation, {
             color: 'white',
             weight: 1,
             fillColor: '#31aade',
             fillOpacity: 1,
             radius: 8
           }).addTo(cardMap);
-          Location.ea.publish(Location.msgName, cardMap.getCenter());
+        }
+      } else {
+        cardMap.locate({
+          setView: false
         });
+        cardMap.on('locationfound', function (e) {
+          cardMap.setView(e.latlng, 16);
+          L.control.geoLocate({ position: 'bottomright' }).addTo(cardMap);
+          L.circle(e.latlng, {
+            weight: 0,
+            fillColor: '#31aade',
+            fillOpacity: 0.15,
+            radius: e.accuracy / 2
+          }).addTo(cardMap);
+          L.circleMarker(e.latlng, {
+            color: 'white',
+            weight: 1,
+            fillColor: '#31aade',
+            fillOpacity: 1,
+            radius: 8
+          }).addTo(cardMap);
+          Location.inputs = { markerLocation: e.latlng, gpsLocation: e.latlng, accuracy: e.accuracy };
+          Location.ea.publish(Location.msgName, Location.inputs);
+        });
+
         cardMap.on('locationerror', function () {
           cardMap.setView([-6.2, 106.83], 16);
-          Location.ea.publish(Location.msgName, cardMap.getCenter());
+          Location.inputs.markerLocation = cardMap.getCenter();
+          Location.ea.publish(Location.msgName, Location.inputs);
         });
       }
+
       cardMap.on('moveend', function () {
         if (cardMap) {
-          Location.ea.publish(Location.msgName, cardMap.getCenter());
+          Location.inputs.markerLocation = cardMap.getCenter();
+          Location.ea.publish(Location.msgName, Location.inputs);
         }
       });
     };
@@ -838,21 +994,127 @@ define('routes/cards/review/review',["exports"], function (exports) {
     }
   }
 
-  var Depth = exports.Depth = function () {
-    function Depth() {
-      _classCallCheck(this, Depth);
+  var Review = exports.Review = function () {
+    function Review() {
+      _classCallCheck(this, Review);
+
+      if (/Mobi/.test(navigator.userAgent)) {
+        Review.isMobile = true;
+      } else {
+        Review.isMobile = false;
+      }
     }
 
-    Depth.prototype.activate = function activate(params, routerConfig) {
-      this.termsLink = routerConfig.navModel.router.routes[6].route;
-      this.router = routerConfig.navModel.router;
+    Review.prototype.activate = function activate(params, routerConfig) {
+      Review.termsLink = routerConfig.navModel.router.routes[6].route;
+      Review.thanksLink = routerConfig.navModel.router.routes[7].route;
+      Review.router = routerConfig.navModel.router;
+      if (routerConfig.settings.depth) {
+        this.selDepth = routerConfig.settings.depth + "cm";
+      } else {
+        this.selDepth = "Not selected";
+      }
+      if (routerConfig.settings.photo) {
+        this.selPhoto = routerConfig.settings.photo;
+      }
+      if (routerConfig.settings.description) {
+        this.selDescription = routerConfig.settings.description;
+      } else {
+        this.selDescription = "No description provided";
+      }
     };
 
-    Depth.prototype.readTerms = function readTerms() {
-      this.router.navigate(this.termsLink);
+    Review.prototype.attached = function attached() {
+      if (this.selPhoto) {
+        this.drawImage();
+      }
+      var slideRange = $('#submitSlider').width() - $('#submitKnob').width(),
+          slideThreshold = 0.9,
+          slideTranslate = 0,
+          slidePressed = false;
+      $('#submitKnob').on('touchstart mousedown', function (e) {
+        var slideStartPos;
+        if (Review.isMobile) {
+          slideStartPos = e.originalEvent.touches[0].pageX;
+        } else {
+          slideStartPos = e.clientX;
+        }
+        slidePressed = true;
+        $('#reviewWrapper').on('touchmove mousemove', function (e) {
+          var slideDragPos;
+          if (Review.isMobile) {
+            e.preventDefault();
+            slideDragPos = e.originalEvent.touches[0].pageX;
+          } else {
+            slideDragPos = e.clientX;
+          }
+          slideTranslate = slideDragPos - slideStartPos;
+          if (slidePressed && slideTranslate >= 0 && slideTranslate < slideRange) {
+            $('#submitKnob').css({
+              'left': slideTranslate + 'px'
+            });
+            $('#submitSlider').css({
+              'background-color': 'rgba(31, 73, 99, ' + slideTranslate / (slideThreshold * slideRange) + ')'
+            });
+            if (slideTranslate >= slideThreshold * slideRange) {
+              Review.router.navigate(Review.thanksLink);
+            }
+          }
+        });
+        $(window).on('touchend mouseup', function () {
+          if (slidePressed && slideTranslate < slideThreshold * slideRange) {
+            slidePressed = false;
+            $('#submitKnob').animate({
+              'left': 0 + 'px'
+            }, 50);
+            $('#submitSlider').css({
+              'background-color': 'transparent'
+            });
+          }
+        });
+      });
     };
 
-    return Depth;
+    Review.prototype.readTerms = function readTerms() {
+      Review.router.navigate(Review.termsLink);
+    };
+
+    Review.prototype.drawImage = function drawImage() {
+      var _this = this;
+
+      if (this.selPhoto) {
+        (function () {
+          var wrapper = _this.preview;
+          wrapper.width = $('#camera').width();
+          wrapper.height = $('#camera').height();
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            var reviewImg = new Image();
+            reviewImg.onload = function () {
+              var imgW = void 0;
+              var imgH = void 0;
+              var trlX = 0;
+              var trlY = 0;
+              if (reviewImg.width >= reviewImg.height) {
+                imgH = wrapper.height;
+                imgW = Math.round(reviewImg.width * imgH / reviewImg.height);
+                trlX = Math.round((wrapper.width - imgW) / 2);
+              } else {
+                imgW = wrapper.width;
+                imgH = Math.round(reviewImg.height * imgW / reviewImg.width);
+                trlY = Math.round((wrapper.height - imgH) / 2);
+              }
+              var cntxt = wrapper.getContext('2d');
+              cntxt.drawImage(reviewImg, trlX, trlY, imgW, imgH);
+            };
+            reviewImg.src = e.target.result;
+          };
+          reader.readAsDataURL(_this.selPhoto[0]);
+        })();
+      }
+    };
+
+    return Review;
   }();
 });
 define('routes/cards/terms/terms',["exports"], function (exports) {
@@ -872,8 +1134,8 @@ define('routes/cards/terms/terms',["exports"], function (exports) {
     _classCallCheck(this, Terms);
   };
 });
-define('routes/cards/thanks/thanks',["exports"], function (exports) {
-  "use strict";
+define('routes/cards/thanks/thanks',['exports'], function (exports) {
+  'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -885,43 +1147,19 @@ define('routes/cards/thanks/thanks',["exports"], function (exports) {
     }
   }
 
-  var Thanks = exports.Thanks = function Thanks() {
-    _classCallCheck(this, Thanks);
-  };
-});
-define('routes/map/jakarta/jakarta',["exports"], function (exports) {
-  "use strict";
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
+  var Thanks = exports.Thanks = function () {
+    function Thanks() {
+      _classCallCheck(this, Thanks);
     }
-  }
 
-  var Jakarta = exports.Jakarta = function Jakarta() {
-    _classCallCheck(this, Jakarta);
-  };
-});
-define('routes/map/surbaya/surbaya',["exports"], function (exports) {
-  "use strict";
+    Thanks.prototype.attached = function attached() {
+      window.setTimeout(function () {
+        window.location.replace('/#/map');
+      }, 2500);
+    };
 
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  var Surbaya = exports.Surbaya = function Surbaya() {
-    _classCallCheck(this, Surbaya);
-  };
+    return Thanks;
+  }();
 });
 define('aurelia-templating-resources/compose',['exports', 'aurelia-dependency-injection', 'aurelia-task-queue', 'aurelia-templating', 'aurelia-pal'], function (exports, _aureliaDependencyInjection, _aureliaTaskQueue, _aureliaTemplating, _aureliaPal) {
   'use strict';
@@ -4462,29 +4700,27 @@ define('aurelia-i18n/base-i18n',['exports', './i18n', 'aurelia-event-aggregator'
   }(), _class.inject = [_i18n.I18N, Element, _aureliaEventAggregator.EventAggregator], _temp);
 });
 define('text!app.html', ['module'], function(module) { module.exports = "<template>\n  <div class=\"container\">\n    <router-view class=\"col-md-8\"></router-view>\n  </div>\n</template>\n"; });
-define('text!routes/cards/cards.css', ['module'], function(module) { module.exports = "\n@media screen and (min-width: 320px) {\n  #cardWrapper{\n    position: relative;\n    width: 100%;\n    height: 100%;\n  }\n\n  #cardTitle {\n    position: relative;\n    margin: 0px;\n    padding: 0px;\n    width: 100%;\n    height: 50px; /* height + padding-top + padding-bottom = 50px */\n    font-family: \"Roboto-Medium\", \"Roboto\", Open Sans;\n    color: #fff;\n    text-align: center;\n    font-size: 16px;\n    background-color: #424242;\n  }\n\n  #titleText {\n    position: relative;\n    margin: 0px;\n    padding: 12px 0px 0px 0px;\n  }\n\n  #tabRow {\n    position: relative;\n    margin: 12px 0 0 0;\n    padding: 0px;\n    text-align: center;\n  }\n\n  .tabButtons {\n    margin: 0px;\n    padding: 0px;\n    width: 20%;\n    height: 5px;\n    border: none;\n    background-color: #31aade;\n    float: left;\n  }\n\n  .tabButtons:disabled {\n    opacity: 0.25;\n  }\n\n  #cardContent {\n    position: relative;\n    width: 100%;\n    height: 380px; /*Change on the fly*/\n    text-align: center;\n    z-index: 3;\n    background-color: #808080;\n  }\n\n  #cardNavigation {\n    align-content: center;\n    margin: 0px;\n    padding: 0px;\n    background-color: #808080;\n    height: 50px;\n  }\n\n  .navBtn {\n    position: relative;\n    color: #ffffff;\n    width: 50%;\n    height: 50px;\n    font-size: 24px;\n    line-height: 50px;\n    background: #424242;\n    border: none;\n    outline: none;\n    z-index: 3;\n    margin: 0px;\n    padding: 0px;\n    float: left;\n  }\n\n  #prv {\n    border-right: 1px solid #808080;\n  }\n\n  #nxt {\n    border-left: 1px solid #808080;\n  }\n\n  .navBtn:disabled {\n    color: #5e5e5e;\n  }\n\n  .navBtn:active {\n    background: #5e5e5e;\n    transform: translateY(1px);\n  }\n}\n\n@media screen and (min-width: 600px) {\n  /* For desktop: */\n  #cardWrapper {\n    width: 500px;\n    height: 100%;\n    margin: auto;\n    position: relative;\n    /*top: 50%;\n    transform: translateY(25%);*/\n  }\n}\n\n@media screen and (min-width: 1200px) {\n  /* For desktop: */\n  #cardWrapper {\n    width: 800px;\n    height: 100%;\n    margin: auto;\n    position: relative;\n    /*top: 50%;\n    transform: translateY(-50%);*/\n    overflow: hidden;\n  }\n}\n"; });
+define('text!routes/cards/cards.css', ['module'], function(module) { module.exports = "\n@media screen and (min-width: 320px) {\n  #cardWrapper{\n    position: relative;\n    width: 100%;\n    height: 100%;\n  }\n\n  #cardTitle {\n    position: relative;\n    margin: 0px;\n    padding: 0px;\n    width: 100%;\n    height: 50px; /* height + padding-top + padding-bottom = 50px */\n    font-family: \"Roboto-Medium\", \"Roboto\", Open Sans;\n    color: #fff;\n    text-align: center;\n    font-size: 16px;\n    background-color: #424242;\n  }\n\n  #titleText {\n    position: relative;\n    margin: 0px;\n    padding: 12px 0px 0px 0px;\n  }\n\n  #tabRow {\n    position: relative;\n    margin: 12px 0 0 0;\n    padding: 0px;\n    text-align: center;\n  }\n\n  .tabButtons {\n    margin: 0px;\n    padding: 0px;\n    width: 20%;\n    height: 5px;\n    border: none;\n    background-color: #31aade;\n    float: left;\n  }\n\n  .tabButtons:disabled {\n    opacity: 0.25;\n  }\n\n  #cardContent {\n    position: relative;\n    width: 100%;\n    height: 380px; /*Change on the fly*/\n    text-align: center;\n    z-index: 3;\n    background-color: #808080;\n  }\n\n  #cardNavigation {\n    align-content: center;\n    margin: 0px;\n    padding: 0px;\n    background-color: #808080;\n    height: 50px;\n  }\n\n  .navBtn {\n    position: relative;\n    color: #ffffff;\n    width: 50%;\n    height: 50px;\n    font-family: \"Roboto-Medium\", \"Roboto\", Open Sans;\n    font-size: 16px;\n    line-height: 50px;\n    background: #424242;\n    border: none;\n    outline: none;\n    z-index: 3;\n    margin: 0px;\n    padding: 0px;\n    float: left;\n  }\n\n  #prv {\n    border-right: 1px solid #808080;\n  }\n\n  #nxt {\n    border-left: 1px solid #808080;\n  }\n\n  .navBtn:disabled {\n    color: #5e5e5e;\n  }\n\n  .navBtn:active {\n    background: #5e5e5e;\n    transform: translateY(1px);\n  }\n}\n\n@media screen and (min-width: 600px) {\n  /* For desktop: */\n  #cardWrapper {\n    width: 500px;\n    height: 100%;\n    margin: auto;\n    position: relative;\n    /*top: 50%;\n    transform: translateY(25%);*/\n  }\n}\n\n@media screen and (min-width: 1200px) {\n  /* For desktop: */\n  #cardWrapper {\n    width: 800px;\n    height: 100%;\n    margin: auto;\n    position: relative;\n    /*top: 50%;\n    transform: translateY(-50%);*/\n    overflow: hidden;\n  }\n}\n"; });
 define('text!components/depth-slider/depth-slider.html', ['module'], function(module) { module.exports = "<template>\n  \n</template>\n"; });
-define('text!routes/cards/depth/depth.css', ['module'], function(module) { module.exports = "a {\n  -webkit-transition: all 0.5s;\n  -moz-transition: all 0.5s;\n  -o-transition: all 0.5s;\n  transition: all 0.5s;\n}\na:hover {\n  opacity: 0.7;\n  filter: alpha(opacity=70);\n}\n.food, .beer, .sleep, .javascript {\n  font-weight: bold;\n}\n"; });
-define('text!routes/map/map.css', ['module'], function(module) { module.exports = "body {\n    padding: 0;\n    margin: 0;\n}\nhtml, body, #map {\n    height: 100vh;\n    width: 100vw;\n}\n"; });
+define('text!routes/cards/depth/depth.css', ['module'], function(module) { module.exports = "#depthWrapper {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  margin: 0px;\n  padding: 0px;\n  z-index: 9;\n}\n#imgWrapper {\n  position: relative;\n  width: 300px;\n  /*TODO check for the responsive design mode*/\n  height: 300px;\n  /* width = height */\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  margin: 0px;\n  padding: 0px;\n  z-index: 1;\n}\n#bgImage {\n  margin: 0px;\n  padding: 0px;\n  width: 100%;\n  height: 100%;\n  z-index: 2;\n}\n#floodZone {\n  position: absolute;\n  width: 94%;\n  height: 20%;\n  left: 0px;\n  bottom: 0px;\n  border: none;\n  border-top: 2px dashed white;\n  background: linear-gradient(rgba(49, 170, 222, 0.6), rgba(49, 170, 222, 0));\n  z-index: 3;\n}\n#sliderZone {\n  position: absolute;\n  width: 100%;\n  height: 36px;\n  padding: 0px;\n  transform: translateY(50%);\n  z-index: 10;\n}\n#knobWrapper {\n  position: absolute;\n  width: 36px;\n  height: 36px;\n  right: 0px;\n  margin: 0px auto;\n  padding: 0px;\n  background-color: rgba(49, 170, 222, 0.4);\n  border-radius: 18px;\n  z-index: 7;\n}\n#knob {\n  position: relative;\n  width: 18px;\n  height: 18px;\n  margin: 0px auto;\n  padding: 0px;\n  top: 50%;\n  transform: translateY(-50%);\n  background-color: #31aade;\n  border: 2px solid white;\n  border-radius: 11px;\n  /* add border to width/2 */\n  z-index: 8;\n}\n#depthText {\n  position: relative;\n  right: 0px;\n  margin: 0px;\n  padding: 10px;\n  font-family: \"Roboto\", Open Sans;\n  font-weight: 100;\n  font-size: 14px;\n  color: #fff;\n}\n"; });
+define('text!routes/map/map.css', ['module'], function(module) { module.exports = "body {\n    padding: 0;\n    margin: 0;\n}\n\nhtml, body, #map {\n    height: 100vh;\n    width: 100vw;\n}\n\n#optionsPane {\n  display: none;\n  position: absolute;\n  width: 300px;\n  height: 100%;\n  left: -300px;\n  margin: 0px;\n  padding: 0px;\n  background-color: white;\n  z-index: 1001; /* Leaflet options control z-index: 1000 (default) */\n}\n\n#nav {\n  position: relative;\n  width: 100%;\n  height: 90px;\n  margin: 0px;\n  padding: 4px 0px;\n  background-color: #808080;\n  font-family: \"Roboto-Medium\", \"Roboto\", Open Sans;\n  font-size: 16px;\n  color: white;\n}\n\n#nav p {\n  margin-left: 8px;\n}\n\n#cityOptions {\n  width: 150px;\n  height: 32px;\n  margin-left: 8px;\n  border: none;\n  background-color: white;\n  font-family: \"Roboto-Light\", \"Roboto\", Open Sans;\n  font-size: 12px;\n  color: #808080;\n  text-transform: capitalize;\n  outline: none;\n}\n"; });
 define('text!components/text-box/text-box.html', ['module'], function(module) { module.exports = "<template>\n  <textarea value.bind=\"inputText\" click.trigger=\"clearHint()\"></textarea>\n  <p>${charLength}/140</p>\n</template>\n"; });
-define('text!routes/cards/depth/depth.css', ['module'], function(module) { module.exports = "a {\n  -webkit-transition: all 0.5s;\n  -moz-transition: all 0.5s;\n  -o-transition: all 0.5s;\n  transition: all 0.5s;\n}\na:hover {\n  opacity: 0.7;\n  filter: alpha(opacity=70);\n}\n.food, .beer, .sleep, .javascript {\n  font-weight: bold;\n}\n"; });
-define('text!routes/cards/cards.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./cards.css\"></require>\n  <div id=\"cardWrapper\">\n    <div id=\"cardTitle\">\n      <p id=\"titleText\">${titleString}</p>\n      <div id=\"tabRow\">\n        <button repeat.for=\"i of tabCount\" class=\"tabButtons\" disabled.bind=\"!(i < count)\"></button>\n      </div>\n    </div>\n    <div id=\"cardContent\" style=\"height: ${ccHeight}px; margin:0px; padding:0px;\">\n      <router-view></router-view>\n    </div>\n    <div id=\"cardNavigation\">\n      <button id=\"prv\" click.trigger=\"prevCard()\" disabled.bind=\"prevDisabled\" class=\"navBtn\">&#10094;</button>\n      <button id=\"nxt\" click.trigger=\"nextCard()\" disabled.bind=\"nextDisabled\" class=\"navBtn\">&#10095;</button>\n    </div>\n  </div>\n</template>\n"; });
+define('text!routes/cards/depth/depth.css', ['module'], function(module) { module.exports = "#depthWrapper {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  margin: 0px;\n  padding: 0px;\n  z-index: 9;\n}\n#imgWrapper {\n  position: relative;\n  width: 300px;\n  /*TODO check for the responsive design mode*/\n  height: 300px;\n  /* width = height */\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  margin: 0px;\n  padding: 0px;\n  z-index: 1;\n}\n#bgImage {\n  margin: 0px;\n  padding: 0px;\n  width: 100%;\n  height: 100%;\n  z-index: 2;\n}\n#floodZone {\n  position: absolute;\n  width: 94%;\n  height: 20%;\n  left: 0px;\n  bottom: 0px;\n  border: none;\n  border-top: 2px dashed white;\n  background: linear-gradient(rgba(49, 170, 222, 0.6), rgba(49, 170, 222, 0));\n  z-index: 3;\n}\n#sliderZone {\n  position: absolute;\n  width: 100%;\n  height: 36px;\n  padding: 0px;\n  transform: translateY(50%);\n  z-index: 10;\n}\n#knobWrapper {\n  position: absolute;\n  width: 36px;\n  height: 36px;\n  right: 0px;\n  margin: 0px auto;\n  padding: 0px;\n  background-color: rgba(49, 170, 222, 0.4);\n  border-radius: 18px;\n  z-index: 7;\n}\n#knob {\n  position: relative;\n  width: 18px;\n  height: 18px;\n  margin: 0px auto;\n  padding: 0px;\n  top: 50%;\n  transform: translateY(-50%);\n  background-color: #31aade;\n  border: 2px solid white;\n  border-radius: 11px;\n  /* add border to width/2 */\n  z-index: 8;\n}\n#depthText {\n  position: relative;\n  right: 0px;\n  margin: 0px;\n  padding: 10px;\n  font-family: \"Roboto\", Open Sans;\n  font-weight: 100;\n  font-size: 14px;\n  color: #fff;\n}\n"; });
+define('text!routes/cards/cards.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./cards.css\"></require>\n  <div id=\"cardWrapper\">\n    <div id=\"cardTitle\">\n      <p id=\"titleText\">${titleString}</p>\n      <div id=\"tabRow\">\n        <button repeat.for=\"i of tabCount\" class=\"tabButtons\" disabled.bind=\"!(i < count)\"></button>\n      </div>\n    </div>\n    <div id=\"cardContent\" style=\"height: ${ccHeight}px; margin:0px; padding:0px;\">\n      <router-view></router-view>\n    </div>\n    <div id=\"cardNavigation\">\n      <button id=\"prv\" click.trigger=\"prevCard()\" disabled.bind=\"prevDisabled\" class=\"navBtn\">&#10094; PREV</button>\n      <button id=\"nxt\" click.trigger=\"nextCard()\" disabled.bind=\"nextDisabled\" class=\"navBtn\">NEXT &#10095;</button>\n    </div>\n  </div>\n</template>\n"; });
 define('text!routes/cards/description/description.css', ['module'], function(module) { module.exports = "#descriptionWrapper {\n  position: relative;\n  margin: 0px auto;\n  height: 75%;\n}\n\n#textarea {\n  position: relative;\n  width: 85%;\n  height: 80%;\n  font-family: \"Roboto-Light\", \"Roboto\", Open Sans;\n  color: #fff;\n  border: none;\n  border-bottom: 3px solid #31aade;\n  font-size: 14px;\n  resize: none;\n  background-color: #808080;\n  margin: 30px auto 10px auto;\n  padding: 10px;\n  outline: none;\n}\n\n#textarea:focus {\n  box-shadow: inset 2px 5px 8px 0px rgba(0, 0, 0, 0.4);\n}\n\n#textmessage {\n  font-family: \"Roboto-Light\", \"Roboto\", Open Sans;\n  color: #000;\n  margin: 0px;\n  font-size: 14px;\n}\n\n#textmessage p {\n  margin: 0px;\n  padding: 0px;\n}\n"; });
-define('text!routes/map/map.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"leaflet/leaflet.css\"></require>\n  <require from=\"./map.css\"></require><!--place / access as per appropriate file structure-->\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\" />\n  <div id=\"nav\">\n    <a href=\"#/map/jakarta\" click.trigger=\"changeCity('jakarta')\">Jakarta</a> |\n    <a href=\"#/map/bandung\" onclick=\"\" click.trigger=\"changeCity('bandung')\">Bandung</a> |\n    <a href=\"#/map/surabaya\" click.trigger=\"changeCity('surabaya')\">Surabaya</a>\n  </div>\n  <div id=\"map\"></div>\n</template>\n"; });
+define('text!routes/map/map.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"leaflet/leaflet.css\"></require>\n  <require from=\"./map.css\"></require><!--place / access as per appropriate file structure-->\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\" />\n  <div id=\"optionsPane\">\n    <div id=\"nav\">\n      <p>Choose a city</p>\n      <select value.bind=\"city_name\" change.delegate=changeCity(opts.value) ref=\"opts\" id=\"cityOptions\">\n        <option repeat.for=\"city_region of city_regions\" class=\"selOptions\">${city_region}</option>\n      </select>\n    </div>\n  </div>\n  <div id=\"map\"></div>\n</template>\n"; });
 define('text!routes/cards/errorCard/errorCard.css', ['module'], function(module) { module.exports = "#thanksText {\n  position: absolute;\n  width: 75%;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  color: #fff;\n  text-align: center;\n  font-size: 14px;\n  font-family: 'Roboto-Regular', 'Helvetica Neue', sans-serif;\n}\n\n#thanksBold {\n  color: white;\n  font-size: 21px;\n  font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;\n}\n\n#petalogo{\n  position: relative;\n  padding: 5px 30px 5px 30px;\n  width:60%;\n  left: 50%;\n  transform: translateX(-50%);\n  position:absolute; top:10px;\n  border: none;\n  border-bottom: 1px solid #2f2f2f\n}\n\n#URLlogo{\n  padding: 5px 30px 5px 30px;\n  position: relative;\n  width:70%;\n  left: 50%;\n  transform: translate(-50%,-50%);\n  position:absolute; bottom:0;\n  border: none;\n  border-top: 1px solid #2f2f2f\n}\n"; });
 define('text!routes/cards/depth/depth.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./depth.css\"></require>\n  <div id=\"depthWrapper\">\n    <div id=\"imgWrapper\">\n      <img id=\"bgImage\" ref=\"bgImage\" src=\"assets/graphics/heightReference.svg\">\n      <div id=\"floodZone\" ref=\"floodZone\">\n      </div>\n      <div id=\"sliderZone\" ref=\"sliderZone\">\n        <div id=\"knobWrapper\">\n          <div id=\"knob\">\n          </div>\n        </div>\n      </div>\n      <div id=\"depthText\" textcontent=\"${waterDepth}cm\">\n      </div>\n    </div>\n  </div>\n</template>\n"; });
 define('text!routes/cards/location/location.css', ['module'], function(module) { module.exports = "#locationWrapper {\n  width: 100%;\n  height: 100%;\n  margin: 0px;\n  padding: 0px;\n}\n\n#mapWrapper {\n  position: relative;\n  width:100%;\n  height:100%;\n  z-index: 1;\n}\n\n#mapMarker {\n  position: absolute;\n  width: 48px;\n  height: 48px;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -100%);\n  z-index: 100;\n}\n"; });
 define('text!routes/cards/description/description.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./description.css\"></require>\n  <div id=\"descriptionWrapper\">\n    <textarea id=\"textarea\" value.bind=\"descripText\" keyup.trigger=\"charCount()\" click.trigger=\"clearHint()\"></textarea>\n    <div id=\"textmessage\">\n      <p>${textLength}/140</p>\n    </div>\n  </div>\n</template>\n"; });
-define('text!routes/cards/errorCard/errorCard.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./errorCard.css\"></require>\n\n  <div id=\"petalogo\" class=\"cardInner\">\n    <img src=\"assets/icons/Peta_logo.svg\">\n  </div>\n    <div id=\"thanksText\">\n      <p id=\"thanksBold\">Thank you!</p>\n      <br>\n      <p>Your Report has been submitted,\n        and will be added to the map</p>\n        <br>\n        <p> Redirecting to PetaBencana.id</p>\n    </div>\n    <div id=\"URLlogo\" class=\"cardInner\">\n      <img src=\"assets/icons/URL_logo.svg\">\n    </div>\n\n</template>\n"; });
 define('text!routes/cards/photo/photo.css', ['module'], function(module) { module.exports = "#photoWrapper {\n  position: absolute;\n  width: 200px;\n  height: 230px;\n  margin: 0px;\n  padding: 0px;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n\n#previewWrapper {\n  position: relative;\n  width: 140px;\n  height: 140px;\n  margin: 0px auto;\n  border: 4px solid rgba(255, 255, 255, 0.4);\n}\n\n#cameraIcon {\n  width: 100%;\n  height: 100%;\n  opacity: 0.4;\n  z-index: 2;\n}\n\n#camera {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  margin: 0px;\n  padding: 0px;\n  z-index: 3;\n}\n\n#helpTextWrapper {\n  position: relative;\n  margin: 12px auto 0 auto;\n  width: 148px;\n  height: 36px;\n}\n\n#photoButton {\n  width: 100%;\n  height: 100%;\n  margin: 0px;\n  padding: 0px;\n  background-color: #424242;\n  border: none;\n  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);\n  font-family: 'Roboto-Light', 'Roboto', sans-serif;\n  font-size: 14px;\n  line-height: 36px;\n  color: #fff;\n  outline: none;\n}\n\n#photoButton:active {\n  background-color: #5e5e5e;\n  transform: translateY(1px);\n  box-shadow: 2px 3px 8px 0px rgba(0, 0, 0, 0.4);\n}\n"; });
+define('text!routes/cards/errorCard/errorCard.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./errorCard.css\"></require>\n\n  <div id=\"petalogo\" class=\"cardInner\">\n    <img src=\"assets/icons/Peta_logo.svg\">\n  </div>\n    <div id=\"thanksText\">\n      <p id=\"thanksBold\">Thank you!</p>\n      <br>\n      <p>Your Report has been submitted,\n        and will be added to the map</p>\n        <br>\n        <p> Redirecting to PetaBencana.id</p>\n    </div>\n    <div id=\"URLlogo\" class=\"cardInner\">\n      <img src=\"assets/icons/URL_logo.svg\">\n    </div>\n\n</template>\n"; });
+define('text!routes/cards/review/review.css', ['module'], function(module) { module.exports = "@media screen and (min-width: 300px)\n{\n  #summaryCard {\n    height: 200px;\n  }\n}\n\n@media screen and (min-width: 600px)\n{\n  /* For tablets: */\n  #summaryCard {\n    height: 350px;\n  }\n}\n\n#reviewWrapper {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  margin: 0px;\n  padding: 0px;\n}\n\n#summaryCard {\n  position: absolute;\n  width: 80%;\n  background-color: #424242;\n  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);\n  left: 50%;\n  top: 30%;\n  transform: translate(-50%, -50%);\n}\n\n#summaryPhoto {\n  position: relative;\n  width: 45%;\n  height: 100%;\n  /*border: 1px solid red;*/ /* for test*/\n  margin: 0px;\n  overflow: hidden;\n  display: flex;\n  float: left;\n}\n\n#camera {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  margin: 0px;\n  padding: 0px;\n  z-index: 3;\n}\n\n#img {\n  width: 100%;\n  height: 100%;\n  z-index: 2;\n  opacity: 0.4;\n}\n\n#summaryTextWrapper {\n  position: relative;\n  width: 55%;\n  height: 100%;\n  margin: 10px 0 0 0;\n  text-align: left;\n  font-size: 14px;\n  line-height: 18px;\n  float: left;\n}\n\n#floodH {\n  color: #31aade;\n  font-family: 'Roboto-Medium', 'Roboto', sans-serif;\n  margin: 0px 10px;\n}\n#comment {\n  color: #fff;\n  font-family: 'Roboto-Light', 'Roboto', sans-serif;\n  margin: 4px 10px;\n}\n\n#reviewSubmit {\n  position: absolute;\n  left: 50%;\n  bottom: 36px;\n  transform: translateX(-50%);\n  width: 80%; /* width of nav buttons + margin */\n  padding: 0px;\n}\n\n#termsConditions {\n  width: 100%;\n  margin: 0px;\n  color: #fff;\n  font-family: 'Roboto-Light', 'Roboto', sans-serif;\n  font-size: 14px;\n}\n\n#termsConditions a {\n  cursor: pointer;\n  color: white;\n  font-family: 'Roboto-Medium', 'Roboto', sans-serif;\n}\n\n#submitSlider {\n  position: relative;\n  width: 75%;\n  height: 36px;\n  margin: 0px auto;\n  padding: 3px;\n  border: 1px solid rgba(255, 255, 255, 0.4);\n  border-radius: 6px;\n  box-shadow: inset 2px 5px 8px 0px rgba(0, 0, 0, 0.4);\n  overflow: hidden;\n  z-index: 3;\n}\n\n#submitKnob {\n  position: relative;\n  width: 36px;\n  height: 36px;\n  border: none;\n  border-radius: 6px;\n  background-color: #31aade;\n  outline: none;\n  color: white;\n  font-size: 30px;\n  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);\n  float: left;\n  z-index: 2;\n}\n\n#submitKnob:active {\n  background-color: #31aade;\n}\n\n#submitRef1 {\n  margin: 0px 6px;\n  padding: 0px;\n  color: white;\n  font-size: 30px;\n  opacity: 0.4;\n  z-index: 1;\n  float: left;\n}\n\n#submitRef2 {\n  margin: 0px;\n  padding: 0px;\n  color: white;\n  font-size: 14px;\n  line-height: 36px;\n  font-family: 'Roboto-Light', 'Roboto', Open-sans;\n  opacity: 0.4;\n  z-index: 1;\n  float: left;\n}\n"; });
 define('text!routes/cards/location/location.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"leaflet/leaflet.css\"></require>\n  <require from=\"./location.css\"></require><!--place / access as per appropriate file structure-->\n  <div id=\"locationWrapper\">\n    <div id=\"mapWrapper\">\n    </div>\n    <div id=\"mapMarker\">\n      <img src=\"assets/icons/marker-04.svg\" width=\"48\" height=\"48\" style=\"margin: 0px;\" draggable=\"false\">\n    </div>\n  </div>\n</template>\n"; });
-define('text!routes/cards/review/review.css', ['module'], function(module) { module.exports = "@media screen and (min-width: 300px)\n{\n  #summaryCard {\n    height: 200px;\n  }\n}\n\n@media screen and (min-width: 600px)\n{\n  /* For tablets: */\n  #summaryCard {\n    height: 350px;\n  }\n}\n\n#summaryCard {\n  position: absolute;\n  width: 80%;\n  background-color: #424242;\n  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);\n  left: 50%;\n  top: 30%;\n  transform: translate(-50%, -50%);\n}\n\n#summaryPhoto {\n  position: relative;\n  width: 45%;\n  height: 100%;\n  /*border: 1px solid red;*/ /* for test*/\n  margin: 0px;\n  overflow: hidden;\n  display: flex;\n  float: left;\n}\n\n#img {\n  width: 100%;\n  height: 100%;\n}\n\n#summaryTextWrapper {\n  position: relative;\n  width: 55%;\n  height: 100%;\n  margin: 10px 0 0 0;\n  text-align: left;\n  font-size: 14px;\n  line-height: 18px;\n  float: left;\n}\n\n#floodH {\n  color: #31aade;\n  font-family: 'Roboto-Medium', 'Roboto', sans-serif;\n  margin: 0px 10px;\n}\n#comment {\n  color: #fff;\n  font-family: 'Roboto-Light', 'Roboto', sans-serif;\n  margin: 4px 10px;\n}\n\n#reviewSubmit {\n  position: absolute;\n  left: 50%;\n  bottom: 36px;\n  transform: translateX(-50%);\n  width: 80%; /* width of nav buttons + margin */\n  padding: 0px;\n}\n\n#termsConditions {\n  width: 100%;\n  margin: 0px;\n  color: #fff;\n  font-family: 'Roboto-Light', 'Roboto', sans-serif;\n  font-size: 14px;\n}\n\n#termsConditions a {\n  cursor: pointer;\n  color: white;\n  font-family: 'Roboto-Medium', 'Roboto', sans-serif;\n}\n\n#submitSlider {\n  position: relative;\n  width: 75%;\n  height: 36px;\n  margin: 0px auto;\n  padding: 3px;\n  border: 1px solid rgba(255, 255, 255, 0.4);\n  border-radius: 6px;\n  box-shadow: inset 2px 5px 8px 0px rgba(0, 0, 0, 0.4);\n  overflow: hidden;\n  z-index: 3;\n}\n\n#submitKnob {\n  position: relative;\n  width: 36px;\n  height: 36px;\n  border: none;\n  border-radius: 6px;\n  background-color: #31aade;\n  outline: none;\n  color: white;\n  font-size: 30px;\n  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);\n  float: left;\n  z-index: 2;\n}\n\n#submitKnob:active {\n  background-color: #31aade;\n}\n\n#submitRef1 {\n  margin: 0px 6px;\n  padding: 0px;\n  color: white;\n  font-size: 30px;\n  opacity: 0.4;\n  z-index: 1;\n  float: left;\n}\n\n#submitRef2 {\n  margin: 0px;\n  padding: 0px;\n  color: white;\n  font-size: 14px;\n  line-height: 36px;\n  font-family: 'Roboto-Light', 'Roboto', Open-sans;\n  opacity: 0.4;\n  z-index: 1;\n  float: left;\n}\n"; });
-define('text!routes/cards/photo/photo.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./photo.css\"></require>\n  <div id=\"photoWrapper\">\n    <div id=\"previewWrapper\" click.delegate=\"sendClick()\">\n      <canvas id=\"camera\" ref=\"preview\">\n      </canvas>\n      <img id=\"cameraIcon\" src=\"assets/graphics/image_flood.svg\">\n    </div>\n    <div id=\"helpTextWrapper\">\n      <button id=\"photoButton\" click.delegate=\"sendClick()\">${helpText}</button>\n    </div>\n  </div>\n  <div id=\"ghostButton\" style=\"display: none\">\n    <input id=\"photoCapture\" type=\"file\" accept=\"image/*\" change.delegate=\"drawImage()\" files.bind=\"selectedPhoto\">\n  </div>\n</template>\n"; });
 define('text!routes/cards/terms/terms.css', ['module'], function(module) { module.exports = "#TandCWrapper {\n  position: relative;\n  width: 80%;\n  height: 80%;\n  margin: auto;\n  padding: 9px;\n  overflow: scroll;\n  color: #fff;\n  text-align: justify;\n  font-size: 14px;\n  font-family: 'Roboto-Regular', 'Helvetica Neue', sans-serif;\n  border:none;\n  border-bottom: 2px solid #31aade;\n  top: 10%;\n  transform: translateY(5%);\n}\n\n#TandCWrapper .headers {\n  text-align: left;\n  font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;\n}\n"; });
-define('text!routes/cards/review/review.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./review.css\"></require>\n  <div id=\"summaryCard\">\n    <div id=\"summaryPhoto\">\n      <div id=\"img\">\n        <img id=\"img\" src=\"assets/images/chennai-floods-759.jpg\">\n      </div>\n    </div>\n    <div id=\"summaryTextWrapper\">\n      <p id=\"floodH\">Water depth: 45cm</p>\n      <p id=\"comment\">Comment goes here... because water is very high</p>\n    </div>\n  </div>\n  <div id=\"reviewSubmit\">\n    <div id=\"termsConditions\">\n      <p>By submitting this report, you are agreeing to the<br><a click.delegate=\"readTerms()\"><u>Terms &amp; Conditions</u></a></p>\n    </div>\n    <div id=\"submitSlider\">\n      <button id=\"submitKnob\"></button>\n      <p id=\"submitRef1\">&#10217;&#10217;&#10217;</p>\n      <p id=\"submitRef2\">Swipe to submit</p>\n    </div>\n  </div>\n</template>\n"; });
+define('text!routes/cards/photo/photo.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./photo.css\"></require>\n  <div id=\"photoWrapper\">\n    <div id=\"previewWrapper\" click.delegate=\"sendClick()\">\n      <canvas id=\"camera\" ref=\"preview\">\n      </canvas>\n      <img id=\"cameraIcon\" src=\"assets/graphics/image_flood.svg\">\n    </div>\n    <div id=\"helpTextWrapper\">\n      <button id=\"photoButton\" click.delegate=\"sendClick()\">${helpText}</button>\n    </div>\n  </div>\n  <div id=\"ghostButton\" style=\"display: none\">\n    <input id=\"photoCapture\" type=\"file\" accept=\"image/*\" change.delegate=\"drawImage()\" files.bind=\"selectedPhoto\">\n  </div>\n</template>\n"; });
 define('text!routes/cards/thanks/thanks.css', ['module'], function(module) { module.exports = "#thanksText {\n  position: absolute;\n  width: 75%;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  color: #fff;\n  text-align: center;\n  font-size: 14px;\n  font-family: 'Roboto-Regular', 'Helvetica Neue', sans-serif;\n}\n\n#thanksBold {\n  color: white;\n  font-size: 21px;\n  font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;\n}\n\n#petalogo{\n  position: relative;\n  padding: 5px 30px 5px 30px;\n  width:60%;\n  left: 50%;\n  transform: translateX(-50%);\n  position:absolute; top:10px;\n  border: none;\n  border-bottom: 1px solid #2f2f2f\n}\n\n#URLlogo{\n  padding: 5px 30px 5px 30px;\n  position: relative;\n  width:70%;\n  left: 50%;\n  transform: translate(-50%,-50%);\n  position:absolute; bottom:0;\n  border: none;\n  border-top: 1px solid #2f2f2f\n}\n"; });
+define('text!routes/cards/review/review.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./review.css\"></require>\n  <div id=\"reviewWrapper\">\n    <div id=\"summaryCard\">\n      <div id=\"summaryPhoto\">\n        <canvas id=\"camera\" ref=\"preview\">\n        </canvas>\n        <img id=\"img\" src=\"assets/graphics/image_flood.svg\">\n      </div>\n      <div id=\"summaryTextWrapper\">\n        <p id=\"floodH\">Water depth: ${selDepth}</p>\n        <p id=\"comment\">${selDescription}</p>\n      </div>\n    </div>\n    <div id=\"reviewSubmit\">\n      <div id=\"termsConditions\">\n        <p>By submitting this report, you are agreeing to the<br><a click.delegate=\"readTerms()\"><u>Terms &amp; Conditions</u></a></p>\n      </div>\n      <div id=\"submitSlider\">\n        <button id=\"submitKnob\"></button>\n        <p id=\"submitRef1\">&#10217;&#10217;&#10217;</p>\n        <p id=\"submitRef2\">Swipe to submit</p>\n      </div>\n    </div>\n  </div>\n</template>\n"; });
 define('text!routes/cards/terms/terms.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./terms.css\"></require>\n\n    <div id=\"TandCWrapper\">\n      <p>These terms and conditions outline the rules and regulations for the use of  Urban Risk Lab's Website. <br>\n        <br><p>Urban Risk Lab is located at:\n          <br><address>\n            Urban Risk Lab, IDC, 235 Massachussets Ave , <br>\n            Cambridge, MA 02139<br>\n            United States<br>\n          </address>\n          <br>By accessing this website we assume you accept these terms and conditions in full. Do not continue to use Urban Risk Lab's website if you do not accept all of the terms and conditions stated on this page.</p>\n          <br><p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and any or all Agreements: \"Client\", “You” and “Your” refers to you, the person accessing this website and accepting the Company’s terms and conditions. \"The Company\", “Ourselves”, “We”, “Our” and \"Us\", refers to our Company. “Party”, “Parties”, or “Us”, refers to both the Client and ourselves, or either the Client or ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner, whether by formal meetings of a fixed duration, or any other means, for the express purpose of meeting the Client’s needs in respect of provision of the Company’s stated services/products, in accordance with and subject to, prevailing law of United States. Any use of the above terminology or other words in the singular, plural, capitalisation and/or he/she or they, are taken as interchangeable and therefore as referring to same.</p>\n          <br>\n          <p class=\"headers\">Cookies</p>\n          <p>We employ the use of cookies. By using <a href=\"http://petabencana.id\" onclick=\"__gaTracker('send', 'event', 'outbound-article', 'http://petabencana.id', 'Urban Risk Lab');\" title=\"Urban Risk Lab\">Urban Risk Lab</a>'s website you consent to the use of cookies in accordance with Urban Risk Lab’s privacy policy.</p>\n          <p>Most of the modern day interactive web sites use cookies to enable us to retrieve user details for each visit. Cookies are used in some areas of our site to enable the functionality of this area and ease of use for those people visiting. Some of our affiliate / advertising partners may also use cookies.</p>\n          <br>\n          <p class=\"headers\">License</p>\n          <p>Unless otherwise stated, Urban Risk Lab and/or it’s licensors own the intellectual property rights for all material on Urban Risk Lab All intellectual property rights are reserved. You may view and/or print pages from http://petabencana.id for your own personal use subject to restrictions set in these terms and conditions.</p>\n          <p>You must not:</p>\n          <ul>\n            <li>Republish material from http://petabencana.id</li>\n            <li>Sell, rent or sub-license material from http://petabencana.id</li>\n            <li>Reproduce, duplicate or copy material from http://petabencana.id</li>\n          </ul>\n          <p>Redistribute content from Urban Risk Lab (unless content is specifically made for redistribution).</p>\n          <br>\n          <p class=\"headers\">User Comments</p>\n          <ol>\n            <li>This Agreement shall begin on the date hereof.</li>\n            <li>Certain parts of this website offer the opportunity for users to post and exchange opinions, information, material and data ('Comments') in areas of the website. Urban Risk Lab does not screen, edit, publish or review Comments prior to their appearance on the website and Comments do not reflect the views or opinions of Urban Risk Lab, its agents or affiliates. Comments reflect the view and opinion of the person who posts such view or opinion. To the extent permitted by applicable laws Urban Risk Lab shall not be responsible or liable for the Comments or for any loss cost, liability, damages or expenses caused and or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.</li>\n            <li>Urban Risk Lab reserves the right to monitor all Comments and to remove any Comments which it considers in its absolute discretion to be inappropriate, offensive or otherwise in breach of these Terms and Conditions.</li>\n            <li>You warrant and represent that:\n              <ol>\n                <li>You are entitled to post the Comments on our website and have all necessary licenses and consents to do so;</li>\n                <li>The Comments do not infringe any intellectual property right, including without limitation copyright, patent or trademark, or other proprietary right of any third party;</li>\n                <li>The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful material or material which is an invasion of privacy</li>\n                <li>The Comments will not be used to solicit or promote business or custom or present commercial activities or unlawful activity.</li>\n              </ol>\n            </li>\n            <li>You hereby grant to <strong>Urban Risk Lab</strong> a non-exclusive royalty-free license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.</li>\n          </ol>\n          <br>\n          <p class=\"headers\">Hyperlinking to our Content</p>\n          <ol>\n            <li>The following organizations may link to our Web site without prior written approval:\n              <ul>\n                <li>Government agencies;</li>\n                <li>Search engines;</li>\n                <li>News organizations;</li>\n                <li>Online directory distributors when they list us in the directory may link to our Web site in the same manner as they hyperlink to the Web sites of other listed businesses; and</li>\n                <li>Systemwide Accredited Businesses except soliciting non-profit organizations, charity shopping malls, and charity fundraising groups which may not hyperlink to our Web site.</li>\n              </ul>\n            </li>\n          </ol>\n          <ol start=\"2\">\n            <li>These organizations may link to our home page, to publications or to other Web site information so long as the link: (a) is not in any way misleading; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products or services; and (c) fits within the context of the linking party's site.</li>\n            <li>We may consider and approve in our sole discretion other link requests from the following types of organizations:\n              <ul>\n                <li>commonly-known consumer and/or business information sources such as Chambers of Commerce, American Automobile Association, AARP and Consumers Union;</li>\n                <li>dot.com community sites;</li>\n                <li>associations or other groups representing charities, including charity giving sites,</li>\n                <li>online directory distributors;</li>\n                <li>internet portals;</li>\n                <li>accounting, law and consulting firms whose primary clients are businesses; and</li>\n                <li>educational institutions and trade associations.</li>\n              </ul>\n            </li>\n          </ol>\n          <br>\n          <p>We will approve link requests from these organizations if we determine that: (a) the link would not reflect unfavorably on us or our accredited businesses (for example, trade associations or other organizations representing inherently suspect types of business, such as work-at-home opportunities, shall not be allowed to link); (b)the organization does not have an unsatisfactory record with us; (c) the benefit to us from the visibility associated with the hyperlink outweighs the absence of Urban Risk Lab; and (d) where the link is in the context of general resource information or is otherwise consistent with editorial content in a newsletter or similar product furthering the mission of the organization.</p>\n          <p>These organizations may link to our home page, to publications or to other Web site information so long as the link: (a) is not in any way misleading; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and it products or services; and (c) fits within the context of the linking party's site.</p>\n          <p>If you are among the organizations listed in paragraph 2 above and are interested in linking to our website, you must notify us by sending an e-mail to <a href=\"mailto:floodreport@petabencana.org\" title=\"send an email to floodreport@petabencana.org\">floodreport@petabencana.org</a>. Please include your name, your organization name, contact information (such as a phone number and/or e-mail address) as well as the URL of your site, a list of any URLs from which you intend to link to our Web site, and a list of the URL(s) on our site to which you would like to link. Allow 2-3 weeks for a response.</p>\n          <br>\n          <p>Approved organizations may hyperlink to our Web site as follows:</p>\n          <ul>\n            <li>By use of our corporate name; or</li>\n            <li>By use of the uniform resource locator (Web address) being linked to; or</li>\n            <li>By use of any other description of our Web site or material being linked to that makes sense within the context and format of content on the linking party's site.</li>\n          </ul>\n          <p>No use of (cname)’s logo or other artwork will be allowed for linking absent a trademark license agreement.</p>\n          <br>\n          <p class=\"headers\">Iframes</p>\n          <p>Without prior approval and express written permission, you may not create frames around our Web pages or use other techniques that alter in any way the visual presentation or appearance of our Web site.</p>\n          <br>\n          <p class=\"headers\">Content Liability</p>\n          <p>We shall have no responsibility or liability for any content appearing on your Web site. You agree to indemnify and defend us against all claims arising out of or based upon your Website. No link(s) may appear on any page on your Web site or within any context containing content or materials that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third party rights.</p>\n          <br>\n          <p class=\"headers\">Reservation of Rights</p>\n          <p>We reserve the right at any time and in its sole discretion to request that you remove all links or any particular link to our Web site. You agree to immediately remove all links to our Web site upon such request. We also reserve the right to amend these terms and conditions and its linking policy at any time. By continuing to link to our Web site, you agree to be bound to and abide by these linking terms and conditions.</p>\n          <br>\n          <p class=\"headers\">Removal of links from our website</p>\n          <p>If you find any link on our Web site or any linked web site objectionable for any reason, you may contact us about this. We will consider requests to remove links but will have no obligation to do so or to respond directly to you.</p>\n          <p>Whilst we endeavour to ensure that the information on this website is correct, we do not warrant its completeness or accuracy; nor do we commit to ensuring that the website remains available or that the material on the website is kept up to date.</p>\n          <br>\n          <p class=\"headers\">Disclaimer</p>\n          <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website (including, without limitation, any warranties implied by law in respect of satisfactory quality, fitness for purpose and/or the use of reasonable care and skill). Nothing in this disclaimer will:</p>\n          <ol>\n            <li>limit or exclude our or your liability for death or personal injury resulting from negligence;</li>\n            <li>limit or exclude our or your liability for fraud or fraudulent misrepresentation;</li>\n            <li>limit any of our or your liabilities in any way that is not permitted under applicable law; or</li>\n            <li>exclude any of our or your liabilities that may not be excluded under applicable law.</li>\n          </ol>\n          <p>The limitations and exclusions of liability set out in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer or in relation to the subject matter of this disclaimer, including liabilities arising in contract, in tort (including negligence) and for breach of statutory duty.</p>\n          <p>To the extent that the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.</p>\n        </div>\n\n</template>\n"; });
 define('text!routes/cards/thanks/thanks.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./thanks.css\"></require>\n\n  <div id=\"petalogo\" class=\"cardInner\">\n    <img src=\"assets/icons/Peta_logo.svg\">\n  </div>\n\n  <div id=\"thanksText\">\n    <p id=\"thanksBold\">Thank you!</p>\n    <br>\n    <p>Your Report has been submitted,\n      and will be added to the map</p>\n      <br>\n      <p> Redirecting to PetaBencana.id</p>\n  </div>\n\n  <div id=\"URLlogo\" class=\"cardInner\">\n    <img src=\"assets/icons/URL_logo.svg\">\n  </div>\n\n</template>\n"; });
-define('text!routes/map/jakarta/jakarta.html', ['module'], function(module) { module.exports = "<template>\n  <p>Jakarta map layers</p>\n</template>\n"; });
-define('text!routes/map/surbaya/surbaya.html', ['module'], function(module) { module.exports = "<template>\n  <p>Surbaya map layers</p>\n</template>\n"; });
 //# sourceMappingURL=app-bundle.js.map
