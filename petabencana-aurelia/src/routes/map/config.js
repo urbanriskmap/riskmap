@@ -5,6 +5,7 @@ var config = {
   "instance_regions":
     {
       "jakarta":{
+        "name": "Jakarta",
         "region": "jbd",
         "bounds": {
           "sw":[-6.733, 106.480],
@@ -12,7 +13,8 @@ var config = {
         },
         "layers": []
       },
-      "surabaya":{
+      "surbaya":{
+        "name": "Surbaya",
         "region": "sby",
         "bounds": {
           "sw":[-7.5499, 112.3975],
@@ -21,6 +23,7 @@ var config = {
         "layers": null
       },
       "bandung":{
+        "name": "Bandung",
         "region": "bdg",
         "bounds": {
           "sw":[-7.165, 107.369],

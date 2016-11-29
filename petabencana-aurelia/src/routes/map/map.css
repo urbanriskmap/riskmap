@@ -2,7 +2,29 @@ body {
     padding: 0;
     margin: 0;
 }
+
 html, body, #map {
     height: 100vh;
     width: 100vw;
+}
+
+#nav {
+  width: 100%;
+  height: 36px;
+  margin: 0px;
+  padding: 4px;
+  text-align: center;
+  background-color: #808080;
+}
+
+#cityOptions {
+  width: 150px;
+  height: 32px;
+  border: none;
+  background-color: white;
+  font-family: "Roboto-Light", "Roboto", Open Sans;
+  font-size: 14px;
+  color: #808080;
+  text-transform: capitalize;
+  outline: none;
 }
