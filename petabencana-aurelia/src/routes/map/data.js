@@ -1,28 +1,19 @@
 import {HttpClient} from 'aurelia-fetch-client';
 let client = new HttpClient();
+
+// PetaBencana.id Data Class - get data from CogniCity server
 export class Data {
 
-  constructor(){
-  }
+  // Get topojson data from server, return GeoJSON
+  getData(url){
 
-  getData(city_name){
-    //return new Promise();
-    //alert(city_name);
     return new Promise(function(resolve, reject){
-      client.fetch('/package.json')
+      client.fetch(url)
 	      .then(response => response.json())
 	      .then(data => {
-	        resolve(city_name+'_')
+	        resolve(data)
 	      })
 		    .catch((err) => reject(err));
     })
   }
-  //get data from server endpoints
-
-  //generic get data function
-
-  //generic topojson function
-
-  //return data to layers
-
 }

@@ -17,8 +17,6 @@ export class Map {
   // Aurelia constructor
   constructor(){
     this.config = config;
-    this.layers  = new Layers();
-    this.layers.getReports('jakarta');
     this.city_regions = []; //get city objects as array, to bind & repeat in router-view
     for (var city_region in this.config.instance_regions) {
       this.city_regions.push(city_region);
@@ -38,6 +36,8 @@ export class Map {
 
   // Change city from within map without reloading window
   changeCity(city_name) {
+    this.layers.removeReports();
+    this.layers.addReports(city_name);
     var stateObj = { map: "city" };
     this.city = this.parseMapCity(city_name);
     this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
@@ -57,6 +57,7 @@ export class Map {
   attached() {
     // Create Leaflet map
     this.map = L.map('map').setView(START_POINT, 8);
+    this.layers  = new Layers(this.map);
     let Stamen_Terrain = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
     	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     	subdomains: 'abcd',
