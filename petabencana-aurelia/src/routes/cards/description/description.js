@@ -1,21 +1,22 @@
 import {inject} from 'aurelia-framework';
-import {EventAggregator} from 'aurelia-event-aggregator';
+import {Reportcard} from 'Reportcard';
 
 //start-non-standard
-@inject(EventAggregator)
+@inject(Reportcard)
 //end-non-standard
 export class Description {
-  constructor(ea) {
-    this.ea = ea;
+  constructor(Reportcard) {
     this.descripText = "Tell us more...";
     this.textLength = 0;
+    this.reportcard = Reportcard;
   }
   activate(params, routerConfig) {
-    if (routerConfig.settings.input) {
-      this.descripText = routerConfig.settings.input;
+    var that = this;
+    var reportCardDescription = that.reportcard.getdescription();
+    if (reportCardDescription) {
+      this.descripText = reportCardDescription;
       this.textLength = this.descripText.length;
     }
-    this.msgName = routerConfig.settings.msgName;
   }
   clearHint() {
     if (this.textLength === 0) {
@@ -23,7 +24,8 @@ export class Description {
     }
   }
   charCount() {
+    var that = this;
     this.textLength = this.descripText.length; //this.textLength requied to update bound helpers for description.html
-    this.ea.publish(this.msgName, this.descripText);
+    that.reportcard.setdescription(this.descripText);
   }
 }

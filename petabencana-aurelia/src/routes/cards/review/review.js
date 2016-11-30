@@ -1,25 +1,35 @@
+import {Reportcard} from 'Reportcard';
+import {inject} from 'aurelia-framework';
+
+@inject(Reportcard)
+
 export class Review {
-  constructor() {
+  constructor(Reportcard) {
     if (/Mobi/.test(navigator.userAgent)) {
       Review.isMobile = true;
     } else {
       Review.isMobile = false;
     }
+    this.reportcard = Reportcard;
   }
   activate(params, routerConfig) {
+    var that = this;
     Review.termsLink = routerConfig.navModel.router.routes[6].route;
     Review.thanksLink = routerConfig.navModel.router.routes[7].route;
     Review.router = routerConfig.navModel.router;
-    if (routerConfig.settings.depth) {
-      this.selDepth = routerConfig.settings.depth + "cm";
+    var reportCardDepth = that.reportcard.getwaterdepth();
+    if (reportCardDepth) {
+      this.selDepth = reportCardDepth + "cm";
     } else {
       this.selDepth = "Not selected";
     }
-    if (routerConfig.settings.photo) {
-      this.selPhoto = routerConfig.settings.photo;
+    var reportCardPhoto = that.reportcard.getphoto();
+    if (reportCardPhoto) {
+      this.selPhoto = reportCardPhoto;
     }
-    if (routerConfig.settings.description) {
-      this.selDescription = routerConfig.settings.description;
+    var reportCardDescription = that.reportcard.getdescription();
+    if (reportCardDescription) {
+      this.selDescription = reportCardDescription;
     } else {
       this.selDescription = "No description provided";
     }

@@ -1,26 +1,29 @@
 import {inject} from 'aurelia-framework';
-import {EventAggregator} from 'aurelia-event-aggregator';
 import $ from 'jquery';
+import {Reportcard} from 'Reportcard';
 
 //start-non-standard
-@inject(EventAggregator)
+@inject(Reportcard)
 //end-non-standard
 export class Depth {
-  constructor(ea) {
-    Depth.ea = ea;
+  constructor(Reportcard) {
     if (/Mobi/.test(navigator.userAgent)) {
       Depth.isMobile = true;
     } else {
       Depth.isMobile = false;
     }
+    this.reportcard = Reportcard;
   }
+
   activate(params, routerConfig) {
-    if (routerConfig.settings.input) {
-      Depth.depthVal = routerConfig.settings.input;
+    var that = this;
+    var reportCardDepth = that.reportcard.getwaterdepth();
+    if (reportCardDepth) {
+      Depth.depthVal = reportCardDepth;
     }
-    Depth.msgName = routerConfig.settings.msgName;
   }
   attached() {
+    var that = this;
     var imgHeightCm = 200;
     var refHeightPx = $('#imgWrapper').height();
     if (Depth.depthVal) {
@@ -34,7 +37,7 @@ export class Depth {
     });
     var heightInCm = Math.round((fillHeight * imgHeightCm) / refHeightPx);
     Depth.depthVal = heightInCm;
-    Depth.ea.publish(Depth.msgName, Depth.depthVal);
+    that.reportcard.setwaterdepth(Depth.depthVal);
     var sliderActive = false;
     $('#sliderZone').on('touchstart mousedown', function (e) {
       sliderActive = true;
@@ -55,7 +58,7 @@ export class Depth {
         heightInCm = Math.round(((fillHeight + startPos - dragPos) * imgHeightCm) / refHeightPx);
         if (sliderActive && heightInCm > 0 && heightInCm <= imgHeightCm) {
           Depth.depthVal = heightInCm;
-          Depth.ea.publish(Depth.msgName, Depth.depthVal);
+          that.reportcard.setwaterdepth(Depth.depthVal);
           $('#floodZone').css({
             'height': (fillHeight + startPos - dragPos) + 'px'
           });

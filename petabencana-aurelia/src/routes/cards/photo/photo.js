@@ -1,21 +1,22 @@
 import {inject} from 'aurelia-framework';
-import {EventAggregator} from 'aurelia-event-aggregator';
 import $ from 'jquery';
+import {Reportcard} from 'Reportcard';
 
 //start-non-standard
-@inject(EventAggregator)
+@inject(Reportcard)
 //end-non-standard
 export class Photo {
-  constructor(ea) {
-    this.ea = ea;
+  constructor(Reportcard) {
     this.helpText = "Click to upload";
+    this.reportcard = Reportcard;
   }
   activate(params, routerConfig) {
-    if (routerConfig.settings.input) {
-      this.selectedPhoto = routerConfig.settings.input;
+    var that = this;
+    var reportCardPhoto = that.reportcard.getphoto();
+    if (reportCardPhoto) {
+      this.selectedPhoto = reportCardPhoto;
       this.haveImg = true;
     }
-    this.msgName = routerConfig.settings.msgName;
   }
   attached() {
     if (this.haveImg) {
@@ -26,8 +27,9 @@ export class Photo {
     $('#photoCapture').trigger('click');
   }
   drawImage() {
+    var that = this;
     if (this.selectedPhoto[0]) {
-      this.ea.publish(this.msgName, this.selectedPhoto);
+      that.reportcard.setphoto(this.selectedPhoto);
       let wrapper = this.preview;
       wrapper.width = $('#camera').width();
       wrapper.height = $('#camera').height();
