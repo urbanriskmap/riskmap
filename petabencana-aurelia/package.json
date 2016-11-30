@@ -1,24 +1,33 @@
 {
-  "name": "petabencana-aurelia",
-  "description": "An Aurelia client application.",
+  "name": "cognicity-web",
+  "description": "Petabencana.id client applications.",
   "version": "0.1.0",
   "repository": {
     "type": "???",
     "url": "???"
+  },
+  "scripts": {
+    "start": "au run --watch",
+    "test": "au test",
+    "build": "rm -rf scripts/* && au build --env prod"
   },
   "license": "MIT",
   "dependencies": {
     "aurelia-animator-css": "^1.0.0",
     "aurelia-bootstrapper": "^1.0.0",
     "aurelia-http-client": "^1.0.3",
+    "aurelia-fetch-client": "^1.0.1",
     "aurelia-i18n": "^1.2.1",
     "bluebird": "^3.4.1",
     "i18next": "^4.0.0",
     "i18next-xhr-backend": "^1.2.1",
+    "jquery": "^3.1.1",
     "leaflet": "^1.0.1",
     "less": "^2.7.1",
+    "nprogress": "^0.2.0",
     "requirejs": "^2.3.2",
-    "text": "github:requirejs/text#latest"
+    "text": "github:requirejs/text#latest",
+    "whatwg-fetch": "^1.0.0"
   },
   "peerDependencies": {},
   "devDependencies": {
@@ -44,6 +53,7 @@
     "gulp-changed-in-place": "^2.0.3",
     "gulp-cli": "^1.2.2",
     "gulp-eslint": "^2.0.0",
+    "gulp-flatten": "^0.3.1",
     "gulp-less": "^3.3.0",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",

@@ -26,11 +26,10 @@
     "source": "src/**/*.html"
   },
   "lessProcessor": {
-    "id": "none",
-    "displayName": "None",
+    "id": "less",
+    "displayName": "Less",
     "fileExtension": ".less",
-    "source": "src/routes/cards/**/*.less",
-    "output": "dist"
+    "source": "src/routes/cards/**/*.less"
   },
   "cssProcessor": {
     "id": "none",
@@ -106,6 +105,7 @@
           "aurelia-bootstrapper",
           "aurelia-dependency-injection",
           "aurelia-event-aggregator",
+          "aurelia-fetch-client",
           "aurelia-framework",
           "aurelia-http-client",
           "aurelia-history",
@@ -163,6 +163,11 @@
             "name": "i18next-xhr-backend",
             "path": "../node_modules/i18next-xhr-backend/dist/umd",
             "main": "i18nextXHRBackend"
+          },
+          {
+            "name": "jquery",
+            "path": "../node_modules/jquery/dist",
+            "main": "jquery"
           }
         ]
       }

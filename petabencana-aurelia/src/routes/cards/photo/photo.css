@@ -1,5 +1,62 @@
+#photoWrapper {
+  position: absolute;
+  width: 200px;
+  height: 230px;
+  margin: 0px;
+  padding: 0px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#previewWrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0px auto;
+  border: 4px solid rgba(255, 255, 255, 0.4);
+}
+
+#cameraIcon {
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  z-index: 2;
+}
+
 #camera {
-  //background-image: url('/cork.png');
-  background-color: #f05022;
-  border: 10px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  z-index: 3;
+}
+
+#helpTextWrapper {
+  position: relative;
+  margin: 12px auto 0 auto;
+  width: 148px;
+  height: 36px;
+}
+
+#photoButton {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  background-color: #424242;
+  border: none;
+  box-shadow: 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
+  font-family: 'Roboto-Light', 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 36px;
+  color: #fff;
+  outline: none;
+}
+
+#photoButton:active {
+  background-color: #5e5e5e;
+  transform: translateY(1px);
+  box-shadow: 2px 3px 8px 0px rgba(0, 0, 0, 0.4);
 }

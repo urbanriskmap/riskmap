@@ -1,25 +1,42 @@
-# petabencana.id
-Files for PetaBencana.id
+# petabencana-aurelia
 
-Run npm install after every git pull
+Example template using the [Aurelia Framework](http://aurelia.io/)
 
-Run npm install -g gulp
+To get up and running...
 
-Run npm install -g gulp-cli
+- Install Aurelia CLI: `npm install aurelia-cli -g`
+- Enter petabencana-aurelia folder
+- Install the project dependencies: `npm install`
+- Start the development server: `npm start`
 
-And run 'gulp images' before you run au run --watch
+This will start a dev server on localhost:9000
+For Flood Maps,
+localhost:9000/#/map
 
-If you face any errors on running this command, npm install -g "gulpjs/gulp-cli#4.0"
+For Report Cards,
+localhost:9000/#/cards/test_OTL
 
-----
-Add raster images (jpg, png, etc.) files in petabencana-aurelia/assets/img/*
-refer src as assets/img/*
+The project structure is as follows:
 
-Add vector images (svg) files in petabencana-aurelia/assets/svg/*
-refer src as assets/svg/*
+- **assets**: static assets such as images, vector graphics and icons
+- **auerlia_project**: Aurelia generated folder containing config and framework specific libraries
+- **locales**: translation files for supported locales (en and id currently)
+- **scripts**: generated scripts from the build process
+- **src**: the main application code
+- **test**: the tests to run (`npm test`)
 
-Add map icons, UI icons content in petabencana-aurelia/assets/ico/*
-refer src as assets/ico/*
+To generate a production build run `npm run build` - this will generate new scripts in scripts/ and also auto increment the reference numbers in index.html.  Upload the following to the deployment destination (e.g. S3 bucket) protecting the structure:
+
+```
+assets/*
+locales/*
+scripts/*
+index.html
+favicon.ico
+```
+
+To test the build locally a static server can be used e.g. https://github.com/scottcorgan/pushstate-server
+
 ----
 ### Testing
 Testing environment supported by [BrowserStack](https://www.browserstack.com/)
