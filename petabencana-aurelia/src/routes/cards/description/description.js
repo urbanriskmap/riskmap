@@ -6,26 +6,25 @@ import {Reportcard} from 'Reportcard';
 //end-non-standard
 export class Description {
   constructor(Reportcard) {
-    this.descripText = "Tell us more...";
-    this.textLength = 0;
     this.reportcard = Reportcard;
-  }
-  activate(params, routerConfig) {
-    var that = this;
-    var reportCardDescription = that.reportcard.getdescription();
+    var reportCardDescription = this.reportcard.getdescription();
     if (reportCardDescription) {
       this.descripText = reportCardDescription;
       this.textLength = this.descripText.length;
+    } else {
+      this.descripText = "Tell us more...";
+      this.textLength = 0;
     }
   }
+
   clearHint() {
     if (this.textLength === 0) {
       this.descripText = "";
     }
   }
+
   charCount() {
-    var that = this;
-    this.textLength = this.descripText.length; //this.textLength requied to update bound helpers for description.html
-    that.reportcard.setdescription(this.descripText);
+    this.textLength = this.descripText.length; //this.textLength required to update bound helpers for description.html
+    this.reportcard.setdescription(this.descripText);
   }
 }

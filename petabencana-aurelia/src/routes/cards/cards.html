@@ -4,10 +4,10 @@
     <div id="cardTitle">
       <p id="titleText">${titleString}</p>
       <div id="tabRow">
-        <button repeat.for="i of tabCount" class="tabButtons" disabled.bind="!(i < count)"></button>
+        <button repeat.for="i of (totalCards - 2)" class="tabButtons" disabled.bind="!(i < count)"></button>
       </div>
     </div>
-    <div id="cardContent" style="height: ${ccHeight}px; margin:0px; padding:0px;">
+    <div id="cardContent">
       <router-view></router-view>
     </div>
     <div id="cardNavigation">

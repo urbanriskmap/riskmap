@@ -7,29 +7,28 @@ import {Reportcard} from 'Reportcard';
 //end-non-standard
 export class Photo {
   constructor(Reportcard) {
-    this.helpText = "Click to upload";
     this.reportcard = Reportcard;
-  }
-  activate(params, routerConfig) {
-    var that = this;
-    var reportCardPhoto = that.reportcard.getphoto();
+    var reportCardPhoto = this.reportcard.getphoto();
     if (reportCardPhoto) {
       this.selectedPhoto = reportCardPhoto;
       this.haveImg = true;
     }
+    this.helpText = "Click to upload";
   }
+
   attached() {
     if (this.haveImg) {
       this.drawImage();
     }
   }
+
   sendClick() {
     $('#photoCapture').trigger('click');
   }
+
   drawImage() {
-    var that = this;
     if (this.selectedPhoto[0]) {
-      that.reportcard.setphoto(this.selectedPhoto);
+      this.reportcard.setphoto(this.selectedPhoto);
       let wrapper = this.preview;
       wrapper.width = $('#camera').width();
       wrapper.height = $('#camera').height();
