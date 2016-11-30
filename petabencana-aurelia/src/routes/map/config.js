@@ -5,32 +5,30 @@ var config = {
   "instance_regions":
     {
       "jakarta": {
-        "name": "Jakarta",
         "region": "jbd",
         "bounds": {
           "sw":[-6.733, 106.480],
           "ne":[-5.880, 107.175]
         },
-        "layers": [
-          {
-            "name": "Reports",
+        "layers": {
+          "reports": {
+            "name": "Flood reports",
             "url": "https://raw.githubusercontent.com/ojha-url/URL_Internal/master/Test_jakarta.json",
             "icon": "reportIcon"
           },
-          {
+          "pumps": {
             "name": "Pumps",
             "url": "https://petajakarta.org/banjir/data/api/v2/infrastructure/pumps",
             "icon": "pumpIcon"
           },
-          {
+          "floodGates": {
             "name": "Flood gates",
             "url": "https://petajakarta.org/banjir/data/api/v2/infrastructure/floodgates",
             "icon": "gateIcon"
           }
-        ]
+        }
       },
       "surabaya":{
-        "name": "Surabaya",
         "region": "sby",
         "bounds": {
           "sw":[-7.5499, 112.3975],
@@ -39,7 +37,6 @@ var config = {
         "layers": []
       },
       "bandung":{
-        "name": "Bandung",
         "region": "bdg",
         "bounds": {
           "sw":[-7.165, 107.369],

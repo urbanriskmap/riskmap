@@ -21,42 +21,52 @@ export class Map {
     for (var city_region in this.config.instance_regions) {
       this.city_regions.push(city_region);
     }
-    this.cityLayers = L.layerGroup();
     this.popupContent = {keys:[], values:[]};
+    this.all_layers = [];
     this.selectedLayers = [];
+    this.layerGroup = L.layerGroup();
+    this.isPaneOpen = false;
   }
 
-  // Get parameters from config based on city name, else return default
-  parseMapCity(city) {
-    if (city in this.config.instance_regions) {
-      this.city_name = city;
-      return this.config.instance_regions[city];
+  openPane() {
+    $('#optionsPane').animate({
+      'left': 0 + 'px'
+    }, 200);
+    $('#mapContainer').animate({
+      'left': 300 + 'px',
+      'width': (($(window).width() - 300) * 100 / $(window).width()) + '%'
+    }, 200);
+  }
+
+  closePane() {
+    $('#optionsPane').animate({
+      'left': (-300) + 'px'
+    }, 200);
+    $('#mapContainer').animate({
+      'left': 0 + 'px',
+      'width': 100 + '%'
+    }, 200);
+    this.popupContent = {keys:[], values:[]};
+  }
+
+  togglePane() {
+    if (this.isPaneOpen) {
+      this.closePane();
+      this.isPaneOpen = false;
     } else {
-      this.city_name = DEFAULT_CITY;
-      return this.config.instance_regions[DEFAULT_CITY];
+      this.openPane();
+      this.isPaneOpen = true;
     }
   }
 
-  parseIcon(icon) {
-    if (icon in this.config.map_icons) {
-      return L.icon({
-        iconUrl: this.config.map_icons[icon].iconUrl,
-        iconSize: this.config.map_icons[icon].iconSize,
-        iconAnchor: this.config.map_icons[icon].iconAnchor
-      });
-    }
-  }
-
-  createLayer(displayProp, group, toggle, url, name, icon) {
+  createLayer(openPane, displayProp, group, url, name, icon) {
     var newLayer;
     $.getJSON(url, function (data) {
       newLayer = L.geoJson(data, {
         onEachFeature: function (feature, layer) {
           layer.on({
             click: function () {
-              $('#optionsPane').animate({
-                'left': 0 + 'px'
-              }, 200);
+              openPane();
               displayProp.keys = [];
               for (let prop in feature.properties) {
                 displayProp.keys.push(prop);
@@ -75,50 +85,64 @@ export class Map {
         }
       });
       group.addLayer(newLayer);
-      toggle.addOverlay(newLayer, name);
     });
   }
 
-  closePane() {
-    $('#optionsPane').animate({
-      'left': (-300) + 'px'
-    }, 200);
-    this.popupContent = {keys:[], values:[]};
+  parseIcon(icon) {
+    if (icon in this.config.map_icons) {
+      return L.icon({
+        iconUrl: this.config.map_icons[icon].iconUrl,
+        iconSize: this.config.map_icons[icon].iconSize,
+        iconAnchor: this.config.map_icons[icon].iconAnchor
+      });
+    }
   }
 
-  selectedLayer() {
+  updateLayers() { //TODO: removes all layers, then re-renders selected layers on each change
+    this.layerGroup.clearLayers();
+    this.popupContent = {keys:[], values:[]};
+    for (let layer in this.selectedLayers) {
+      this.createLayer(this.openPane, this.popupContent, this.layerGroup, this.city.layers[this.selectedLayers[layer]].url, this.city.layers[this.selectedLayers[layer]].name, this.parseIcon(this.city.layers[this.selectedLayers[layer]].icon));
+    }
+    this.layerGroup.addTo(this.map);
+  }
 
+  // Get parameters from config based on city name, else return default
+  parseMapCity(city) {
+    if (city in this.config.instance_regions) {
+      this.city_name = city;
+      return this.config.instance_regions[city];
+    } else {
+      this.city_name = DEFAULT_CITY;
+      return this.config.instance_regions[DEFAULT_CITY];
+    }
   }
 
   // Change city from within map without reloading window
   changeCity(city_name) {
-    this.closePane();
-    //$('#optionsPane').delay(200).hide(); //delay not working?
-    var stateObj = { map: "city" };
-    if (this.layerToggle) {
-      this.map.removeControl(this.layerToggle);
-    }
-    this.layerToggle = L.control.layers();
-    this.cityLayers.clearLayers();
     this.city = this.parseMapCity(city_name);
     this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
-    for (var i = 0; i < this.city.layers.length; i += 1) {
-      this.createLayer(this.popupContent, this.cityLayers, this.layerToggle, this.city.layers[i].url, this.city.layers[i].name, this.parseIcon(this.city.layers[i].icon));
+    this.all_layers = [];
+    for (let layer in this.city.layers) {
+      this.all_layers.push(layer);
+      if (layer === "reports") {
+        this.selectedLayers.push(layer);
+      }
     }
-    this.layerToggle.addTo(this.map);
-    this.cityLayers.addTo(this.map);
-    history.pushState(stateObj, "page 2", '#/map/'+this.city_name);
+    this.updateLayers();
+    //var stateObj = { map: "city" };
+    //history.pushState(stateObj, "page 2", '#/map/' + this.city_name);
   }
 
-  // Aurelia activate
   activate(params) {
     this.city_name = params.city;
   }
 
-  // Aurelia attached
   attached() {
     // Create Leaflet map
-    this.map = L.map('map').setView(START_POINT, 8);
+    this.map = L.map('mapContainer', {
+      zoomControl: false //default position: 'topleft'
+    }).setView(START_POINT, 8);
     let Stamen_Terrain = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
     	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     	subdomains: 'abcd',
@@ -127,28 +151,10 @@ export class Map {
     	ext: 'png'
     }).addTo(this.map);
 
-    //Add custom leaflet control, to bring up options panel
-    L.Control.Options = L.Control.extend({
-      onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-        container.style.backgroundColor = 'white';
-        container.style.backgroundImage = 'url(assets/icons/options.svg)';
-        container.style.backgroundSize = '26px 26px';
-        container.style.width = '26px';
-        container.style.height = '26px';
-        container.onclick = function() {
-          //$('#optionsPane').show();
-          $('#optionsPane').animate({
-            'left': 0 + 'px'
-          }, 200);
-        };
-        return container;
-      }
-    });
-    L.control.options = function(opts) {
-      return new L.Control.Options(opts);
-    };
-    L.control.options({position: 'topleft'}).addTo(this.map);
+    //add zoom control
+    L.control.zoom({
+      position:'topright'
+    }).addTo(this.map);
 
     // Zoom to city
     this.changeCity(this.city_name);

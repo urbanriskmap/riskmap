@@ -5,20 +5,23 @@
   <div id="optionsPane">
     <div id="nav">
       <p>Choose a city</p>
-      <button click.delegate="closePane()" id="closeBtn">X</button>
       <select value.bind="city_name" change.delegate=changeCity(opts.value) ref="opts" id="cityOptions">
         <option repeat.for="city_region of city_regions" class="selOptions">${city_region}</option>
       </select>
     </div>
     <div id="layers">
-      <label repeat.for="layer of city.layers">
-        <input type="checkbox" model.bind="layer" checked.bind="selectedLayers">
-        ${layer.name} <br>
+      <label repeat.for="layer of all_layers">
+        <input type="checkbox" model.bind="layer" checked.bind="selectedLayers" change.delegate="updateLayers()">
+        ${layer} <br>
       </label>
     </div>
     <div id="popupInfo">
       <p repeat.for="i of popupContent.keys.length">${popupContent.keys[i]}: ${popupContent.values[i]}</p>
     </div>
   </div>
-  <div id="map"></div>
+  <div id="mapContainer">
+    <div id="optionsBtn" click.delegate="togglePane()">
+      <img src="assets/icons/options.svg">
+    </div>
+  </div>
 </template>
