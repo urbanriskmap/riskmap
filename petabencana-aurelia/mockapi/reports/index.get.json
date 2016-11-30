@@ -1,0 +1,335 @@
+{
+  "arcs": [],
+  "bbox": [
+    106.75093173980713,
+    -6.237340831532495,
+    106.9291752576828,
+    -6.112328414984203
+  ],
+  "objects": {
+    "output": {
+      "geometries": [
+        {
+          "coordinates": [
+            3388,
+            3002,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Karet"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            5466,
+            2358,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Manggarai"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            4306,
+            2623,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Kali Cideng"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            4533,
+            5557,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Istiqlal"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            4678,
+            7078,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Jembatan Merah"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            7364,
+            5997,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Honda"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            3903,
+            3442,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Sogo"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            5506,
+            2397,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Ciliwung Lama"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            7071,
+            5913,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air B Jago II"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            4394,
+            9262,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Pekapuran"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            6330,
+            9186,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Ancol Flusing Gate"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            3277,
+            8837,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Pasar Ikan"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            1986,
+            8145,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Duri"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            5931,
+            7775,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Sunter C"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            6330,
+            9240,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Sunter Utara"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            4895,
+            7654,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Kali Mati"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            4506,
+            8590,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Ancol"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            1104,
+            9999,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Muara Angke"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            1448,
+            7446,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Kampung Gusti"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            885,
+            6194,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Poglar"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            2068,
+            5610,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Citra Land"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            0,
+            7874,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Cengkareng Drain"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            3928,
+            7592,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Tangki"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            5293,
+            2221,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Minang Kabau"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            5198,
+            248,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Warung Pedok"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            6314,
+            0,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Kebon Baru"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            9999,
+            4080,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Cakung D"
+          },
+          "type": "Point"
+        },
+        {
+          "coordinates": [
+            8299,
+            2816,
+            0
+          ],
+          "properties": {
+            "name": "Pintu Air Pulo Gadung"
+          },
+          "type": "Point"
+        }
+      ],
+      "type": "GeometryCollection"
+    }
+  },
+  "transform": {
+    "scale": [
+      1.782613440100724e-05,
+      1.2502491904019577e-05
+    ],
+    "translate": [
+      106.75093173980713,
+      -6.237340831532495
+    ]
+  },
+  "type": "Topology"
+}

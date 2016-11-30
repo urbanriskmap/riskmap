@@ -2,6 +2,15 @@
   <require from="leaflet/leaflet.css"></require>
   <require from="./map.css"></require>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <div id="navBar">
+    <div id="logos">
+      <image src="assets/graphics/Peta_logo.svg">
+    </div>
+    <div id="links">
+      <div class="cityLinks" repeat.for="city_region of city_regions" textcontent.bind="city_region" click.delegate="changeCity(city_region)">
+      </div>
+    </div>
+  </div>
   <div id="optionsPane">
     <div id="nav">
       <p>Choose a city</p>
@@ -18,6 +27,7 @@
     <div id="popupInfo">
       <p repeat.for="i of popupContent.keys.length">${popupContent.keys[i]}: ${popupContent.values[i]}</p>
     </div>
+    <p>${layers.popupContent}</p>
   </div>
   <div id="mapContainer">
     <div id="optionsBtn" click.delegate="togglePane()">

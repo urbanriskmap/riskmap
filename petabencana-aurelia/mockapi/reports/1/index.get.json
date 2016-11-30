@@ -1,0 +1,38 @@
+{
+  "arcs": [],
+  "bbox": [
+    106.75093173980713,
+    -6.237340831532495,
+    106.9291752576828,
+    -6.112328414984203
+  ],
+  "objects": {
+    "output": {
+      "geometries": [
+        {
+          "coordinates": [
+            5466,
+            2358,
+            0
+          ],
+          "properties": {
+            "name": "Report id 1"
+          },
+          "type": "Point"
+        }
+      ],
+      "type": "GeometryCollection"
+    }
+  },
+  "transform": {
+    "scale": [
+      1.782613440100724e-05,
+      1.2502491904019577e-05
+    ],
+    "translate": [
+      106.75093173980713,
+      -6.237340831532495
+    ]
+  },
+  "type": "Topology"
+}
