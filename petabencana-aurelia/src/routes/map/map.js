@@ -22,7 +22,8 @@ export class Map {
       this.city_regions.push(city_region);
     }
     this.cityLayers = L.layerGroup();
-    this.popupContent = null;
+    this.popupContent = {keys:[], values:[]};
+    this.selectedLayers = [];
   }
 
   // Get parameters from config based on city name, else return default
@@ -46,21 +47,29 @@ export class Map {
     }
   }
 
-  onEachFeature(feature, layer) {
-    if (feature.properties && feature.properties.status) {
-      this.popupContent = {name: null, status: feature.properties.status};
-      //layer.bindPopup('<b>Status: </b>' + feature.properties.status + '<br><b>Water depth: </b>' + feature.properties.water_depth + 'cm');
-    } else if (feature.properties && feature.properties.name) {
-      this.popupContent = {name: feature.properties.name, status: null};
-      //layer.bindPopup('<b>Name: </b>' + feature.properties.name);
-    }
-  }
-
-  createLayer(group, toggle, url, name, icon) {
+  createLayer(displayProp, group, toggle, url, name, icon) {
     var newLayer;
     $.getJSON(url, function (data) {
       newLayer = L.geoJson(data, {
-        onEachFeature: this.onEachFeature,
+        onEachFeature: function (feature, layer) {
+          layer.on({
+            click: function () {
+              $('#optionsPane').animate({
+                'left': 0 + 'px'
+              }, 200);
+              displayProp.keys = [];
+              for (let prop in feature.properties) {
+                displayProp.keys.push(prop);
+              }
+              displayProp.values = [];
+              for (let prop in feature.properties) {
+                if (feature.properties.hasOwnProperty(prop)) {
+                  displayProp.values.push(feature.properties[prop]);
+                }
+              }
+            }
+          });
+        },
         pointToLayer: function (feature, latlng) {
           return L.marker(latlng, {icon: icon});
         }
@@ -70,11 +79,20 @@ export class Map {
     });
   }
 
-  // Change city from within map without reloading window
-  changeCity(city_name) {
+  closePane() {
     $('#optionsPane').animate({
       'left': (-300) + 'px'
     }, 200);
+    this.popupContent = {keys:[], values:[]};
+  }
+
+  selectedLayer() {
+
+  }
+
+  // Change city from within map without reloading window
+  changeCity(city_name) {
+    this.closePane();
     //$('#optionsPane').delay(200).hide(); //delay not working?
     var stateObj = { map: "city" };
     if (this.layerToggle) {
@@ -85,7 +103,7 @@ export class Map {
     this.city = this.parseMapCity(city_name);
     this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
     for (var i = 0; i < this.city.layers.length; i += 1) {
-      this.createLayer(this.cityLayers, this.layerToggle, this.city.layers[i].url, this.city.layers[i].name, this.parseIcon(this.city.layers[i].icon));
+      this.createLayer(this.popupContent, this.cityLayers, this.layerToggle, this.city.layers[i].url, this.city.layers[i].name, this.parseIcon(this.city.layers[i].icon));
     }
     this.layerToggle.addTo(this.map);
     this.cityLayers.addTo(this.map);
@@ -119,7 +137,7 @@ export class Map {
         container.style.width = '26px';
         container.style.height = '26px';
         container.onclick = function() {
-          $('#optionsPane').show();
+          //$('#optionsPane').show();
           $('#optionsPane').animate({
             'left': 0 + 'px'
           }, 200);
