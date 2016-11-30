@@ -5,12 +5,48 @@ body {
     width: 100%;
 }
 
+#navBar {
+  position: relative;
+  width: 100%;
+  height: 60px;
+}
+
+#logos {
+  position: absolute;
+  width: 150px;
+  height: auto;
+  left: 10px;
+  bottom: 10px;
+  padding: 0px;
+}
+
+#links {
+  position: absolute;
+  right: -1px;
+  bottom: 11px;
+}
+
+.cityLinks {
+  padding: 0px 6px;
+  border-right: 1px solid #2f2f2f;
+  float: left;
+  font-family: "Roboto-Light", "Roboto", Open Sans;
+  font-size: 14px;
+  color: #2f2f2f;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.cityLinks:hover {
+  color: #31aade;
+}
+
 #optionsPane {
   /*display: none;*/
   position: absolute;
-  width: 300px;
-  height: 100%;
-  left: -300px;
+  width: 100%;
+  height: 200px;
+  bottom: -200px;
   margin: 0px;
   padding: 0px;
   background-color: white;
