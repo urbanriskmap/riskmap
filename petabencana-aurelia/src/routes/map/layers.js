@@ -13,7 +13,7 @@ export class Layers {
   // Get flood reports as topojson, return Leaflet geojson layer
   addReports(city_name){
 
-    let url = DATASERVER + '/reports.' + city_name + '.geojson';
+    let url = DATASERVER + 'reports.' + city_name + '.geojson';
 
     this.layers.reports = L.geoJSON();
     var that = this;
