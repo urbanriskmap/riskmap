@@ -12,7 +12,7 @@ before_install:
 
 install:
   - npm install
-  - npm install --dev
+  - npm install aurelia-cli -g
 
 script:
   - au build
