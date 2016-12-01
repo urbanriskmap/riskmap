@@ -1,4 +1,4 @@
-import {HttpClient} from 'aurelia-fetch-client';
+import {HttpClient} from 'aurelia-http-client';
 let client = new HttpClient();
 
 // PetaBencana.id Data Class - get data from CogniCity server
@@ -8,12 +8,11 @@ export class Data {
   getData(url){
 
     return new Promise(function(resolve, reject){
-      client.fetch(url)
-	      .then(response => response.json())
+      client.get(url)
 	      .then(data => {
-	        resolve(data)
+	        resolve(JSON.parse(data.response));
 	      })
 		    .catch((err) => reject(err));
-    })
+    });
   }
 }
