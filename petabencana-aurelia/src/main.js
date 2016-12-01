@@ -31,7 +31,7 @@ export function configure(aurelia) {
       lng : 'en',
       attributes : ['t','i18n'],
       fallbackLng : 'id',
-      debug : true
+      debug : false
     });
   });
 

@@ -1,5 +1,7 @@
 # petabencana-aurelia
 
+[![Build Status](https://travis-ci.org/urbanriskmap/petabencana.id.svg?branch=master)](https://travis-ci.org/urbanriskmap/petabencana.id)
+
 Example template using the [Aurelia Framework](http://aurelia.io/)
 
 To get up and running...

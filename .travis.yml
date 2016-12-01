@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+   - "4.4.5"
+sudo: false
+
+branches:
+  only:
+    - master
+
+before_install:
+  - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
+  - cd petabencana-aurelia
+
+install:
+  - npm install
+  - npm install aurelia-cli -g
+
+script:
+  - au build

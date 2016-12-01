@@ -37,6 +37,20 @@ let serve = gulp.series(
       let urls = bs.options.get('urls').toJS();
       log(`Application Available At: ${urls.local}`);
       log(`BrowserSync Available At: ${urls.ui}`);
+      if (project.mockapi){
+        //start the mocking server
+        var canned = require('canned');
+        var http = require('http');
+        var opts = { logger: process.stdout, cors: true };
+        console.log(__dirname);
+        var mockApiPath = __dirname+'/../../mockapi/.';
+        var mockApiPort = 3000;
+        log('Serving mock api from '  +  mockApiPath + ' at localhost:' + mockApiPort);
+
+        var can = canned(mockApiPath, opts);
+
+        http.createServer(can).listen(mockApiPort);
+      }
       done();
     });
   }
