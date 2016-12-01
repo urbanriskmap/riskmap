@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+   - "4.2.1"
+sudo: false
+
+branches:
+  only:
+    - master
+
+before_install:
+  - cd petabencana-aurelia && npm install
+
+install:
+  - au build
