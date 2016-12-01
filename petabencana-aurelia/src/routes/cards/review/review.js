@@ -32,6 +32,14 @@ export class Review {
     }
   }
 
+  get checkRequiredInputs() { //TODO: Add checks for file / data types
+    if (this.reportcard.getlocation() && this.reportcard.getwaterdepth() && (this.reportcard.getphoto() || this.reportcard.getdescription())) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   activate(params, routerConfig) {
     this.termsLink = routerConfig.navModel.router.routes[6].route;
     this.thanksLink = routerConfig.navModel.router.routes[7].route;
@@ -45,67 +53,85 @@ export class Review {
 
     var that = this;
 
-    var slideRange = $('#submitSlider').width() - $('#submitKnob').width(),
-    slideThreshold = 0.9,
-    slideTranslate = 0,
-    slidePressed = false,
-    swiped = false;
+    if (this.checkRequiredInputs) {
+      var slideRange = $('#submitSlider').width() - $('#submitKnob').width(),
+      slideThreshold = 0.9,
+      slideTranslate = 0,
+      slidePressed = false,
+      swiped = false;
 
-    //Slider touch start
-    $('#submitKnob').on('touchstart mousedown', function (e) {
-      var slideStartPos;
-      if (that.isMobile) {
-        slideStartPos = e.originalEvent.touches[0].pageX;
-      } else {
-        slideStartPos = e.clientX;
-      }
-      slidePressed = true;
-
-      //Drag start
-      $('#reviewWrapper').on('touchmove mousemove', function (e) {
-        var slideDragPos;
+      //Slider touch start
+      $('#submitKnob').on('touchstart mousedown', function (e) {
+        var slideStartPos;
         if (that.isMobile) {
-          e.preventDefault();
-          slideDragPos = e.originalEvent.touches[0].pageX;
+          slideStartPos = e.originalEvent.touches[0].pageX;
         } else {
-          slideDragPos = e.clientX;
+          slideStartPos = e.clientX;
         }
-        slideTranslate = slideDragPos - slideStartPos;
-        if (slidePressed && slideTranslate >= 0 && slideTranslate < slideRange) {
-          $('#submitKnob').css({
-            'left': slideTranslate + 'px'
-          });
-          $('#submitSlider').css({
-            'background-color': 'rgba(31, 73, 99, ' + (slideTranslate / (slideThreshold * slideRange)) + ')'
-          });
+        slidePressed = true;
 
-          //Swipe threshold crossed - TODO: execute report card submit function here
-          if (slideTranslate >= (slideThreshold * slideRange) && !swiped) {
-            console.log('Report submitted with following values:');
-            console.log('Location: ' + that.reportcard.getlocation().markerLocation);
-            console.log('Water depth: ' + that.reportcard.getwaterdepth() + 'cm');
-            console.log('Photo: ' + that.reportcard.getphoto()[0].name);
-            console.log('Description: ' + that.reportcard.getdescription());
-            that.reportcard.submitReport();
-            that.router.navigate(that.thanksLink);
-            swiped = true;
+        //Drag start
+        $('#reviewWrapper').on('touchmove mousemove', function (e) {
+          var slideDragPos;
+          if (that.isMobile) {
+            e.preventDefault();
+            slideDragPos = e.originalEvent.touches[0].pageX;
+          } else {
+            slideDragPos = e.clientX;
           }
-        }
-      });
+          slideTranslate = slideDragPos - slideStartPos;
+          if (slidePressed && slideTranslate >= 0 && slideTranslate < slideRange) {
+            $('#submitKnob').css({
+              'left': slideTranslate + 'px'
+            });
+            $('#submitSlider').css({
+              'background-color': 'rgba(31, 73, 99, ' + (slideTranslate / (slideThreshold * slideRange)) + ')'
+            });
 
-      //Drag end
-      $(window).on('touchend mouseup', function () {
-        if (slidePressed && slideTranslate < (slideThreshold * slideRange) && !swiped) {
-          slidePressed = false;
-          $('#submitKnob').animate({ //Swing back to start position
-            'left': 0 + 'px'
-          }, 50);
-          $('#submitSlider').css({ //Reset slider background
-            'background-color': 'transparent'
-          });
-        }
+            //Swipe threshold crossed - TODO: execute report card submit function here
+            if (slideTranslate >= (slideThreshold * slideRange) && !swiped) {
+              //Development test logs
+              console.log('Report submitted with following values:');
+              console.log('Location: ' + that.reportcard.getlocation().markerLocation);
+              console.log('Water depth: ' + that.reportcard.getwaterdepth() + 'cm');
+              if (that.reportcard.getphoto()) {
+                console.log('Photo: ' + that.reportcard.getphoto()[0].name);
+              } else {
+                console.log('No photo provided');
+              }
+              if (that.reportcard.getdescription()) {
+                console.log('Description: ' + that.reportcard.getdescription());
+              } else {
+                console.log('No description provided');
+              }
+              //Execute reportcard submit function
+              that.reportcard.submitReport();
+              //Navigate to thanks card
+              that.router.navigate(that.thanksLink);
+              swiped = true;
+            }
+          }
+        });
+
+        //Drag end
+        $(window).on('touchend mouseup', function () {
+          if (slidePressed && slideTranslate < (slideThreshold * slideRange) && !swiped) {
+            slidePressed = false;
+            $('#submitKnob').animate({ //Swing back to start position
+              'left': 0 + 'px'
+            }, 50);
+            $('#submitSlider').css({ //Reset slider background
+              'background-color': 'transparent'
+            });
+          }
+        });
       });
-    });
+    } else {
+      $('#submitKnob').css({
+        'background-color': '#a0a0a0'
+      });
+      $('#termsConditions').html("Required flood location, water depth and atleast a photo or description to submit report");
+    }
   }
 
   readTerms() {

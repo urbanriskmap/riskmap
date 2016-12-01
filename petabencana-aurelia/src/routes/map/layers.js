@@ -7,7 +7,7 @@ export class Layers {
     this.map = leafletMap;
     this.data = new Data(); // Data class
     this.layers = {}; // Layers
-    this.popupContent = [];
+    this.popupContent = {};
   }
 
   // Get flood reports as topojson, return Leaflet geojson layer
@@ -18,21 +18,21 @@ export class Layers {
     return this.data.getData(url)
     .then(function(data) {
       that.layers.reports = L.geoJSON(data, {
-        onEachFeature: function(feature, layer) {
+        onEachFeature: function(feature, layer) { //TODO: create separate class function
           layer.on({
             click: function() {
-              openPane();
-              that.popupContent = [];
+              that.popupContent = {};
               for (let prop in feature.properties) {
-                that.popupContent.push(prop);
+                that.popupContent[prop] = feature.properties[prop];
               }
+              openPane('open');
             }
           });
         },
-        pointToLayer: function(feature, latlng) {
+        pointToLayer: function(feature, latlng) { //TODO: create separate class function
           return L.marker(latlng, {
             icon: L.icon({
-              iconUrl: 'assets/icons/marker.svg',
+              iconUrl: 'assets/icons/floodIcon.svg',
               iconSize: [30, 30],
               iconAnchor: [15, 15]
             })

@@ -11,27 +11,18 @@
       </div>
     </div>
   </div>
-  <div id="optionsPane">
-    <div id="nav">
-      <p>Choose a city</p>
-      <select value.bind="city_name" change.delegate=changeCity(opts.value) ref="opts" id="cityOptions">
-        <option repeat.for="city_region of city_regions" class="selOptions">${city_region}</option>
-      </select>
-    </div>
-    <div id="layers">
-      <label repeat.for="layer of all_layers">
-        <input type="checkbox" model.bind="layer" checked.bind="selectedLayers" change.delegate="updateLayers()">
-        ${layer} <br>
-      </label>
-    </div>
-    <div id="popupInfo">
-      <p repeat.for="i of popupContent.keys.length">${popupContent.keys[i]}: ${popupContent.values[i]}</p>
-    </div>
-    <p>${layers.popupContent}</p>
-  </div>
   <div id="mapContainer">
-    <div id="optionsBtn" click.delegate="togglePane()">
-      <img src="assets/icons/options.svg">
+  </div>
+  <div id="optionsPane">
+    <div id="optionsBtn" click.delegate="togglePane('toggle')">
+      <img id="optionsIcon" src="assets/icons/options-02.svg">
+    </div>
+    <div id="preview" if.bind="layers.popupContent.image_url">
+      <image id="photoPreview" src.bind="layers.popupContent.image_url">
+      <div id="textPreview">
+        <p id="previewTitle">${layers.popupContent.title}</p>
+        <p id="previewBody">${layers.popupContent.text}</p>
+      </div>
     </div>
   </div>
 </template>

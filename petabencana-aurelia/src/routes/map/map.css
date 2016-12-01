@@ -41,59 +41,6 @@ body {
   color: #31aade;
 }
 
-#optionsPane {
-  /*display: none;*/
-  position: absolute;
-  width: 100%;
-  height: 200px;
-  bottom: -200px;
-  margin: 0px;
-  padding: 0px;
-  background-color: white;
-  z-index: 1001; /* Leaflet options control z-index: 1000 (default) */
-  overflow: hidden;
-}
-
-#nav {
-  position: relative;
-  width: 100%;
-  height: 90px;
-  margin: 0px;
-  padding: 4px 0px;
-  background-color: #808080;
-  font-family: "Roboto-Medium", "Roboto", Open Sans;
-  font-size: 16px;
-  color: white;
-}
-
-#nav p {
-  margin-left: 8px;
-}
-
-#popupInfo {
-  position: relative;
-  color: #808080;
-  font-family: "Roboto-Light", "Roboto", Open Sans;
-  font-size: 12px;
-}
-
-#popupInfo p {
-  margin-left: 8px;
-}
-
-#cityOptions {
-  width: 150px;
-  height: 32px;
-  margin-left: 8px;
-  border: none;
-  background-color: white;
-  font-family: "Roboto-Light", "Roboto", Open Sans;
-  font-size: 12px;
-  color: #808080;
-  text-transform: capitalize;
-  outline: none;
-}
-
 #mapContainer {
   position: absolute;
   width: 100%;
@@ -102,14 +49,73 @@ body {
   float: left;
 }
 
+#optionsPane {
+  /*display: none;*/
+  position: absolute;
+  width: 100%;
+  height: 200px;
+  bottom: -176px;
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+  z-index: 1001; /* Leaflet options control z-index: 1000 (default) */
+}
+
 #optionsBtn {
   position: absolute;
-  width: 26px;
-  height: 26px;
-  margin: 15px 0px;
-  padding: 3px;
-  border-radius: 0px 6px 6px 0px;
+  width: 24px;
+  height: 24px;
+  top: -18px;
+  left: 50%;
+  padding: 6px;
+  border-radius: 18px;
   cursor: pointer;
-  z-index: 1000;
-  background-color: #808080;
+  z-index: 1500;
+  background-color: white;
+  transform: translate(-50%);
+  box-shadow: 1px 3px 6px 0px rgba(0, 0, 0, 0.3);
+}
+
+#optionsBtn:active {
+  transform: translate(-50%, 1px);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+#optionsIcon {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+#preview {
+  position: absolute;
+  width: 100%;
+  height: 75%;
+  padding: 30px 12px 0px 12px;
+}
+
+#photoPreview {
+  position: relative;
+  width: 40%;
+  height: 100%;
+  float: left;
+}
+
+#textPreview {
+  position: relative;
+  width: 54%;
+  height: 100%;
+  float: left;
+  font-size: 14px;
+  color: #2f2f2f;
+  padding: 0px 6px;
+}
+
+#previewTitle {
+  font-family: "Roboto-Medium", "Roboto", Open Sans;
+  margin: 0px;
+}
+
+#previewBody {
+  font-family: "Roboto-Light", "Roboto", Open Sans;
+  margin: 0px;
 }
