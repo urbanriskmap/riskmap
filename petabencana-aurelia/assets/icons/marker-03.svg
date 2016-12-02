@@ -3,25 +3,26 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="-281 373 48 48" style="enable-background:new -281 373 48 48;" xml:space="preserve">
 <style type="text/css">
-	.st0{stroke:#FFFFFF;stroke-miterlimit:10;}
-	.st1{fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
-	.st2{stroke:#FFFFFF;stroke-width:3;stroke-miterlimit:10;}
+	.st0{fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+	.st1{fill:none;}
 </style>
-<circle class="st0" cx="-19.1" cy="502.7" r="7.4"/>
 <g>
-	<circle class="st1" cx="-257" cy="397" r="12.2"/>
-	<circle class="st2" cx="-257" cy="397" r="7.4"/>
-</g>
-<g>
-	<line class="st1" x1="-257" y1="387.3" x2="-257" y2="376"/>
 	<g>
-		<line class="st1" x1="-257" y1="418" x2="-257" y2="406.7"/>
+		<circle class="st0" cx="-257" cy="397" r="12.2"/>
+		<circle cx="-257" cy="397" r="7.4"/>
+	</g>
+	<g>
+		<line class="st0" x1="-257" y1="387.3" x2="-257" y2="376"/>
+		<g>
+			<line class="st0" x1="-257" y1="418" x2="-257" y2="406.7"/>
+		</g>
+	</g>
+	<g>
+		<line class="st0" x1="-247.3" y1="397" x2="-236" y2="397"/>
+		<g>
+			<line class="st0" x1="-278" y1="397" x2="-266.7" y2="397"/>
+		</g>
 	</g>
 </g>
-<g>
-	<line class="st1" x1="-247.3" y1="397" x2="-236" y2="397"/>
-	<g>
-		<line class="st1" x1="-278" y1="397" x2="-266.7" y2="397"/>
-	</g>
-</g>
+<rect x="-281" y="373" class="st1" width="48" height="48"/>
 </svg>
