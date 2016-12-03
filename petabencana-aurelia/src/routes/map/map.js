@@ -20,29 +20,29 @@ export class Map {
     }
   }
 
-  togglePane(action) {
-    if ((($(window).height() - $('#optionsPane').offset().top) > 100) && (action === 'close' || action === 'toggle')) {
-      $('#optionsPane').animate({
-        'bottom': (-176) + 'px'
+  activate(params) {
+    this.city_name = params.city;
+  }
+
+  togglePane(action, pane) {
+    if ((($(window).height() - $(pane).offset().top) > 10) && (action === 'close' || action === 'toggle')) {
+      $(pane).animate({
+        'bottom': -$(pane).height() + 'px'
       }, 200);
       $('#mapContainer').animate({
-        'height': $(window).height() - $('#navBar').height() + 'px'
+        'height': $(window).height() + 'px'
       }, 200);
-      $('#optionsIcon').css({
-        'transform': 'rotate(' + 0 + 'deg)'
-      });
       //clear popup content
-      this.layers.popupContent = {};
-    } else if ((($(window).height() - $('#optionsPane').offset().top) < 100) && (action === 'open' || action === 'toggle')) {
-      $('#optionsPane').animate({
+      if (pane === '#reportPane') {
+        this.layers.popupContent = {};
+      }
+    } else if ((($(window).height() - $(pane).offset().top) < 10) && (action === 'open' || action === 'toggle')) {
+      $(pane).animate({
         'bottom': 0 + 'px'
       }, 200);
       $('#mapContainer').animate({
-        'height': (($(window).height() - $('#navBar').height() - $('#optionsPane').height()) * 100 / $(window).height()) + '%'
+        'height': (($(window).height() - $(pane).height()) * 100 / $(window).height()) + '%'
       }, 200);
-      $('#optionsIcon').css({
-        'transform': 'rotate(' + 180 + 'deg)'
-      });
     }
   }
 
@@ -59,23 +59,15 @@ export class Map {
 
   // Change city from within map without reloading window
   changeCity(city_name) {
+    this.city = this.parseMapCity(city_name);
     this.layers.removeReports();
     this.layers.addReports(city_name, this.togglePane);
-    this.city = this.parseMapCity(city_name);
     this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
     var stateObj = { map: "city" };
     history.pushState(stateObj, "page 2", '#/map/' + this.city_name);
   }
 
-  activate(params) {
-    this.city_name = params.city;
-  }
-
   attached() {
-    $('#mapContainer').css({
-      'height': $(window).height() - $('#navBar').height() + 'px'
-    });
-
     // Create Leaflet map
     this.map = L.map('mapContainer', {
       zoomControl: false, //default position: 'topleft'
@@ -84,7 +76,7 @@ export class Map {
     // Create Layer instance
     this.layers = new Layers(this.map);
 
-    let Stamen_Terrain = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
+    let Mapbox_Custom = L.tileLayer('https://api.mapbox.com/styles/v1/asbarve/ciw7y8ept000a2ppksalz68s6/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXNiYXJ2ZSIsImEiOiI4c2ZpNzhVIn0.A1lSinnWsqr7oCUo0UMT7w', {
     	//attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     	subdomains: 'abcd',
     	minZoom: 0,
@@ -94,12 +86,12 @@ export class Map {
 
     //add zoom control
     L.control.zoom({
-      position:'topright'
+      position:'topleft'
     }).addTo(this.map);
 
     var that = this;
     this.map.on('move', function() {
-      that.togglePane('close');
+      that.togglePane('close', '#reportPane');
     });
 
     // Zoom to city

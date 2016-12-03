@@ -1,0 +1,96 @@
+@import "../../styleSheets/themeGuide.less";
+
+#pageWrapper {
+  position: absolute;
+  .fullspan-mixin;
+}
+
+#mapContainer {
+  .fullspan-mixin;
+}
+
+.leaflet-top {
+  top: @bar-heights;
+}
+
+#topBar {
+  .mapbars-mixin(1);
+  top: 0px;
+  box-shadow: @spread-shadow;
+}
+
+#logos {
+  position: absolute;
+  left: 10px;
+  bottom: @bar-heights / 10;
+  width: 150px;
+  height: auto;
+  padding: 0px;
+}
+
+#optionsBtn {
+  position: absolute;
+  width: @bar-heights / 2;
+  height: @bar-heights / 2;
+  bottom: @bar-heights / 10;
+  right: @bar-heights / 10;
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+  z-index: 1015;
+  background-color: transparent;
+  &:active {
+    background-color: @snow-white;
+  }
+}
+
+#bottomBar {
+  .mapbars-mixin(2);
+  bottom: 0px;
+  box-shadow: @spread-shadow;
+}
+
+#links {
+  position: absolute;
+  right: -1px;
+  bottom: @bar-heights / 12;
+}
+
+.cityLinks {
+  padding: 0px 6px;
+  border-right: 1px solid #2f2f2f;
+  float: left;
+  text-transform: capitalize;
+  cursor: pointer;
+  .citylinks-mixin;
+}
+
+#reportPane {
+  position: absolute;
+  width: 100%;
+  height: 200px; //configured to pre-set pixels for now
+  bottom: -200px;
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+  z-index: 1006; /* Leaflet options control z-index: 1000 (default) */
+}
+
+#preview {
+  position: absolute;
+  width: 100%;
+  height: 75%;
+  padding: 30px 12px 0px 12px;
+  z-index: 1002;
+}
+
+#watchPane {
+  position: absolute;
+  width: 100%;
+  height: 400px; //configured to pre-set pixels for now
+  bottom: -400px;
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+  z-index: 1005;
+}
