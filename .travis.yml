@@ -7,6 +7,14 @@ branches:
   only:
     - master
 
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/562a1703af6080a4abb8
+    on_success: always  # options: [always|never|change] default: always
+    on_failure: always  # options: [always|never|change] default: always
+    on_start: always     # options: [always|never|change] default: always
+
 before_install:
   - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
   - cd petabencana-aurelia
