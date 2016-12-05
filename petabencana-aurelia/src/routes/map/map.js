@@ -53,10 +53,17 @@ export class Map {
 
   // Get parameters from config based on city name, else return default
   parseMapCity(city) {
-    if (city in this.config.instance_regions) {
+
+    if (typeof(city) == 'undefined' ) {
+      this.city_name = DEFAULT_CITY;
+      return this.config.instance_regions[DEFAULT_CITY]
+    }
+
+    else if (city in this.config.instance_regions) {
       this.city_name = city;
       return this.config.instance_regions[city];
-    } else {
+    }
+    else {
       this.city_name = DEFAULT_CITY;
       return this.config.instance_regions[DEFAULT_CITY];
     }
@@ -66,7 +73,7 @@ export class Map {
   changeCity(city_name) {
     this.city = this.parseMapCity(city_name);
     this.layers.removeReports();
-    this.layers.addReports(city_name, this.togglePane);
+    this.layers.addReports(this.city_name, this.togglePane);
     this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
     var stateObj = { map: "city" };
     history.pushState(stateObj, "page 2", '#/map/' + this.city_name);
