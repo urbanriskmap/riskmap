@@ -67,12 +67,18 @@
 
 #reportPane {
   position: absolute;
-  width: 100%;
-  height: 200px; //configured to pre-set pixels for now
+  @media screen {
+    @media (min-width: 320px) {
+      width: 100%;
+    }
+    @media (min-width: 420px) {
+      width: 420px;
+      right: 0px;
+    }
+  }  height: 200px; //configured to pre-set pixels for now
   bottom: -200px;
   margin: 0px;
   padding: 0px;
-  background-color: white;
   z-index: 1006; /* Leaflet options control z-index: 1000 (default) */
 }
 
@@ -81,12 +87,21 @@
   width: 100%;
   height: 75%;
   padding: 30px 12px 0px 12px;
+  background-color: white;
   z-index: 1002;
 }
 
 #watchPane {
   position: absolute;
-  width: 100%;
+  @media screen {
+    @media (min-width: 320px) {
+      width: 100%;
+    }
+    @media (min-width: 420px) {
+      width: 420px;
+      right: 0px;
+    }
+  }
   height: 400px; //configured to pre-set pixels for now
   bottom: -400px;
   margin: 0px;

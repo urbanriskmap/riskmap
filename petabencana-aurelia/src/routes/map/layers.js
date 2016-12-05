@@ -11,7 +11,7 @@ export class Layers {
   }
 
   // Get flood reports as topojson, return Leaflet geojson layer
-  addReports(city_name, openPane) {
+  addReports(city_name, togglePane) {
     let url = DATASERVER + 'reports.' + city_name + '.geojson';
     var that = this;
 
@@ -25,7 +25,9 @@ export class Layers {
               for (let prop in feature.properties) {
                 that.popupContent[prop] = feature.properties[prop];
               }
-              openPane('open', '#reportPane');
+              console.log(that.popupContent);
+              togglePane('close', '#watchPane');
+              togglePane('open', '#reportPane');
             }
           });
         },

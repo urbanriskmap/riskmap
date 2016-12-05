@@ -29,9 +29,9 @@ export class Map {
       $(pane).animate({
         'bottom': -$(pane).height() + 'px'
       }, 200);
-      $('#mapContainer').animate({
+      /*$('#mapContainer').animate({
         'height': $(window).height() + 'px'
-      }, 200);
+      }, 200);*/
       //clear popup content
       if (pane === '#reportPane') {
         this.layers.popupContent = {};
@@ -40,9 +40,9 @@ export class Map {
       $(pane).animate({
         'bottom': 0 + 'px'
       }, 200);
-      $('#mapContainer').animate({
+      /*$('#mapContainer').animate({
         'height': (($(window).height() - $(pane).height()) * 100 / $(window).height()) + '%'
-      }, 200);
+      }, 200);*/
     }
   }
 
@@ -96,10 +96,10 @@ export class Map {
       position:'topleft'
     }).addTo(this.map);
 
-    var that = this;
+    /*var that = this; //REPLACE with close button on panes
     this.map.on('move', function() {
       that.togglePane('close', '#reportPane');
-    });
+    });*/
 
     // Zoom to city
     this.changeCity(this.city_name);
