@@ -7,7 +7,7 @@
     "output": "scripts",
     "index": "index.html"
   },
-  "mockapi": "true", 
+  "mockapi": "true",
   "transpiler": {
     "id": "babel",
     "displayName": "Babel",
@@ -29,7 +29,7 @@
     "id": "less",
     "displayName": "Less",
     "fileExtension": ".less",
-    "source": "src/routes/cards/**/*.less"
+    "source": "src/**/*.less"
   },
   "cssProcessor": {
     "id": "none",

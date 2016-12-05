@@ -1,0 +1,26 @@
+#photoPreview {
+  position: relative;
+  width: 40%;
+  height: 100%;
+  float: left;
+}
+
+#textPreview {
+  position: relative;
+  width: 54%;
+  height: 100%;
+  float: left;
+  font-size: 14px;
+  color: #2f2f2f;
+  padding: 0px 6px;
+}
+
+#previewTitle {
+  font-family: "Roboto-Medium", "Roboto", Open Sans;
+  margin: 0px;
+}
+
+#previewBody {
+  font-family: "Roboto-Light", "Roboto", Open Sans;
+  margin: 0px;
+}

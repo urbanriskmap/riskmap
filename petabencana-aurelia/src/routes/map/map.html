@@ -1,28 +1,37 @@
 <template>
   <require from="leaflet/leaflet.css"></require>
   <require from="./map.css"></require>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <div id="navBar">
-    <div id="logos">
-      <image src="assets/graphics/Peta_logo.svg">
+  <require from="../../components/report-info/report-info"></require>
+  <require from="../../components/watch-card/watch-card"></require>
+
+  <div id="pageWrapper">
+    <div id="mapContainer">
     </div>
-    <div id="links">
-      <div class="cityLinks" repeat.for="city_region of city_regions" textcontent.bind="city_region" click.delegate="changeCity(city_region)">
+
+    <div id="topBar">
+      <div id="logos">
+        <image src="assets/graphics/Peta_logo.svg">
+      </div>
+      <div id="optionsBtn" click.delegate="openWatch()">
+        <img id="optionsIcon" src="assets/icons/options.svg">
       </div>
     </div>
-  </div>
-  <div id="mapContainer">
-  </div>
-  <div id="optionsPane">
-    <div id="optionsBtn" click.delegate="togglePane('toggle')">
-      <img id="optionsIcon" src="assets/icons/options-02.svg">
-    </div>
-    <div id="preview" if.bind="layers.popupContent.image_url">
-      <image id="photoPreview" src.bind="layers.popupContent.image_url">
-      <div id="textPreview">
-        <p id="previewTitle">${layers.popupContent.title}</p>
-        <p id="previewBody">${layers.popupContent.text}</p>
+
+    <div id="bottomBar">
+      <div id="links">
+        <div class="cityLinks" repeat.for="city_region of city_regions" textcontent.bind="city_region" click.delegate="changeCity(city_region)">
+        </div>
       </div>
+    </div>
+
+    <div id="reportPane">
+      <report-info id="preview" if.bind="layers.popupContent.image_url" source.bind="layers.popupContent.image_url" title.bind="layers.popupContent.title" body.bind="layers.popupContent.text">
+      </report-info>
+    </div>
+
+    <div id="watchPane">
+      <watch-card>
+      </watch-card>
     </div>
   </div>
 </template>

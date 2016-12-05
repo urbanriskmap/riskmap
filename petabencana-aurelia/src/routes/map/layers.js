@@ -25,7 +25,7 @@ export class Layers {
               for (let prop in feature.properties) {
                 that.popupContent[prop] = feature.properties[prop];
               }
-              openPane('open');
+              openPane('open', '#reportPane');
             }
           });
         },

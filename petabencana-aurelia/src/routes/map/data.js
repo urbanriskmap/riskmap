@@ -7,10 +7,10 @@ export class Data {
   getData(url){
     return new Promise(function(resolve, reject){
       client.get(url)
-	      .then(data => {
-	        resolve(JSON.parse(data.response));
-	      })
-		    .catch((err) => reject(err));
+      .then(data => {
+        resolve(JSON.parse(data.response));
+      })
+      .catch((err) => reject(err));
     });
   }
 }
