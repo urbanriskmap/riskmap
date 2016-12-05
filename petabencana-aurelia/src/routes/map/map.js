@@ -84,7 +84,7 @@ export class Map {
     // Create Layer instance
     this.layers = new Layers(this.map);
 
-    let Stamen_Terrain = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
+    let Stamen_Terrain = L.tileLayer('https://api.mapbox.com/styles/v1/asbarve/ciw9uids300302pw14f5mapkg/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXNiYXJ2ZSIsImEiOiI4c2ZpNzhVIn0.A1lSinnWsqr7oCUo0UMT7w', {
     	//attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     	subdomains: 'abcd',
     	minZoom: 0,
