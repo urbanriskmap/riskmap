@@ -1,4 +1,6 @@
 import {HttpClient} from 'aurelia-http-client';
+import * as topojson from 'topojson-client';
+
 let client = new HttpClient();
 
 // PetaBencana.id Data Class - get data from CogniCity server
@@ -8,7 +10,12 @@ export class Data {
     return new Promise(function(resolve, reject){
       client.get(url)
       .then(data => {
-        resolve(JSON.parse(data.response));
+        var response = JSON.parse(data.response);
+        if(response && response.objects !== null) {
+          resolve(topojson.feature(response, response.objects.output));
+        } else {
+          resolve(null);
+        }
       })
       .catch((err) => reject(err));
     });

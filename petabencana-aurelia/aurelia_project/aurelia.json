@@ -167,6 +167,11 @@
             "name": "jquery",
             "path": "../node_modules/jquery/dist",
             "main": "jquery"
+          },
+          {
+            "name": "topojson-client",
+            "path": "../node_modules/topojson-client/dist",
+            "main": "topojson-client"
           }
         ]
       }
