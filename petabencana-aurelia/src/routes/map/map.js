@@ -83,6 +83,7 @@ export class Map {
     this.layers.removeReports();
     this.layers.addReports(this.city_name, this.togglePane);
     this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
+    this.togglePane('close', '#reportPane');
     var stateObj = { map: "city" };
     history.pushState(stateObj, "page 2", '#/map/' + this.city_name);
   }
