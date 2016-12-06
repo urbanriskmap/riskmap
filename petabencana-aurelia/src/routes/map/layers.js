@@ -77,6 +77,18 @@ export class Layers {
     })
   }
 
+  addSingleReport(city_name, report_id){
+    var self = this;
+    return new Promise( function(resolve, reject){
+      let url = DATASERVER + 'reports/' + report_id + '.topojson';
+      self.getData(url).then(function(data){
+        console.log(data);
+        resolve(data);
+        // Add to reports data to add to map, and return to map.js to zoom in
+      });
+    })
+  }
+
   removeReports(){
     if (this.layers.reports) {
       this.map.removeLayer(this.layers.reports);

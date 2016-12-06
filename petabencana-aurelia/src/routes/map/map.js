@@ -86,9 +86,8 @@ export class Map {
     this.layers.addReports(this.city_name, this.togglePane).then(function(reports_layer){
       self.layers.reports = reports_layer;
       console.log(self.layers.reports.markerMap)
-      if (self.layers.reports.markerMap.hasOwnProperty(1)){
-        // zoom
-        
+      if (self.layers.reports.markerMap.hasOwnProperty(self.report_id)){
+        console.log('zoom to report')
       }
       else {
         // get report
