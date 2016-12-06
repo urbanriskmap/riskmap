@@ -43,24 +43,14 @@ export class Map {
   }
 
   togglePane(action, pane) {
-    if ((($(window).height() - $(pane).offset().top) > 10) && (action === 'close' || action === 'toggle')) {
-      $(pane).animate({
-        'bottom': -$(pane).height() + 'px'
-      }, 200);
-      $('#mapContainer').animate({
-        'height': $(window).height() + 'px'
-      }, 200);
+    if ($(pane).css('display') === 'block' && (action === 'close' || action === 'toggle')) {
+      $(pane).fadeOut(200);
       //clear popup content
       if (pane === '#reportPane') {
         this.layers.popupContent = {};
       }
-    } else if ((($(window).height() - $(pane).offset().top) < 10) && (action === 'open' || action === 'toggle')) {
-      $(pane).animate({
-        'bottom': 0 + 'px'
-      }, 200);
-      $('#mapContainer').animate({
-        'height': (($(window).height() - $(pane).height()) * 100 / $(window).height()) + '%'
-      }, 200);
+    } else if ($(pane).css('display') === 'none' && (action === 'open' || action === 'toggle')) {
+      $(pane).fadeIn(200);
     }
   }
 
@@ -74,10 +64,8 @@ export class Map {
 
     if (typeof(city) == 'undefined' ) {
       this.city_name = DEFAULT_CITY;
-      return this.config.instance_regions[DEFAULT_CITY]
-    }
-
-    else if (city in this.config.instance_regions) {
+      return this.config.instance_regions[DEFAULT_CITY];
+    } else if (city in this.config.instance_regions) {
       this.city_name = city;
       return this.config.instance_regions[city];
     }
@@ -100,6 +88,11 @@ export class Map {
   }
 
   attached() {
+    // Modify popup pane css on the fly
+    $('#watchPane').css({
+      'height': ($(window).height() - $('#topBar').height() - $('#bottomBar').height()) + 'px'
+    });
+
     // Create Leaflet map
     this.map = L.map('mapContainer', {
       zoomControl: false, //default position: 'topleft'
@@ -108,9 +101,7 @@ export class Map {
     // Create Layer instance
     this.layers = new Layers(this.map);
 
-
     let Mapbox_Custom = L.tileLayer('https://api.mapbox.com/styles/v1/urbanriskmap/ciwce3tim00532pocrokb7ojf/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidXJiYW5yaXNrbWFwIiwiYSI6ImNpdmVhbTFraDAwNHIyeWw1ZDB6Y2hhbTYifQ.tpgt1PB5lkJ-wITS02c96Q', {
-
     	//attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     	subdomains: 'abcd',
     	minZoom: 0,
@@ -122,11 +113,6 @@ export class Map {
     L.control.zoom({
       position:'topleft'
     }).addTo(this.map);
-
-    var that = this;
-    this.map.on('move', function() {
-      that.togglePane('close', '#reportPane');
-    });
 
     // Zoom to city
     this.changeCity(this.city_name);

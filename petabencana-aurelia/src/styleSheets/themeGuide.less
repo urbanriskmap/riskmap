@@ -2,9 +2,9 @@
 //Card layouts & background fills
 @dark-gray:       #2f2f2f; //darken(@steel-gray, 20%);
 @steel-gray:      #424242; //can make this base gray - ease of corrections
-@light-gray:      #808008; //lighten(@steel-gray, 20%);
+@light-gray:      #808080; //lighten(@steel-gray, 20%);
 @snow-white:      #ffffff;
-@translucent-white: rgba(255, 255, 255, 0.8);
+@translucent-white: rgba(255, 255, 255, 0.7);
 
 //Card highlights
 @banjir-blue:      #31aade;
@@ -15,7 +15,6 @@
 @flash-yellow:    #ede838;
 @flash-orange:    #eaaf1c; //real flash-orange
 @flash-red:       #ef4f21;
-
 
 //Text
 @title-color:     #ffffff;
@@ -32,11 +31,27 @@
 @inset-shadow:    inset 0px 0px 10px rgba(0, 0, 0, 0.2);
 
 //_Font styles Variables_
-.citylinks-mixin() {
-  font-family: "Roboto-Medium", "Roboto", Open Sans;
-  font-size: 14px;
+.linklight-mixin(@var) {
+  font-family: "Roboto-Light", "Roboto", Open Sans;
+  font-size: @var;
   color: @steel-gray;
+  cursor: pointer;
   &:hover {
+    color: @banjir-blue;
+  }
+}
+
+.linkmedium-mixin(@var) {
+  font-family: "Roboto-Medium", "Roboto", Open Sans;
+  font-size: @var;
+  color: @steel-gray;
+  cursor: pointer;
+  @media (min-width: 420px) {
+    &:hover {
+      color: @banjir-blue;
+    }
+  }
+  &:active {
     color: @banjir-blue;
   }
 }
@@ -60,4 +75,26 @@
   height: @bar-heights / @var;
   background-color: @translucent-white;
   z-index: 1010;
+  box-shadow: @spread-shadow;
+}
+
+.mappane-mixin(@ht) {
+  display: none;
+  position: absolute;
+  @media screen {
+    @media (min-width: 320px) {
+      width: 100%;
+    }
+    @media (min-width: 420px) {
+      width: 420px;
+      right: 0px;
+    }
+  }
+  height: @ht; //configured to pre-set pixels here, change in js on the fly
+  bottom: @bar-heights / 2;
+  padding: 0px;
+  margin: 0px;
+  z-index: 1005;
+  background-color: @translucent-white;
+  box-shadow: @spread-shadow;
 }

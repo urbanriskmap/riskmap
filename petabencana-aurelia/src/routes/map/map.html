@@ -13,7 +13,7 @@
         <image src="assets/graphics/Peta_logo.svg">
       </div>
       <div id="optionsBtn" click.delegate="openWatch()">
-        <img id="optionsIcon" src="assets/icons/options.svg">
+        &equiv;
       </div>
     </div>
 
@@ -25,11 +25,15 @@
     </div>
 
     <div id="reportPane">
+      <div class="closeBtn" click.delegate="togglePane('close', '#reportPane')">&times;
+      </div>
       <report-info id="preview" if.bind="layers.popupContent.image_url" source.bind="layers.popupContent.image_url" title.bind="layers.popupContent.title" body.bind="layers.popupContent.text">
       </report-info>
     </div>
 
     <div id="watchPane">
+      <div class="closeBtn" click.delegate="togglePane('close', '#watchPane')">&times;
+      </div>
       <watch-card>
       </watch-card>
     </div>
