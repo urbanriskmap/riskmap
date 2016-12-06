@@ -40,6 +40,7 @@ export class Map {
 
   activate(params) {
     this.city_name = params.city;
+    this.report_id = params.report;
   }
 
   togglePane(action, pane) {
@@ -79,9 +80,23 @@ export class Map {
 
   // Change city from within map without reloading window
   changeCity(city_name) {
+    var self = this;
     this.city = this.parseMapCity(city_name);
     this.layers.removeReports();
-    this.layers.addReports(this.city_name, this.togglePane);
+    this.layers.addReports(this.city_name, this.togglePane).then(function(reports_layer){
+      self.layers.reports = reports_layer;
+      console.log(self.layers.reports.markerMap)
+      if (self.layers.reports.markerMap.hasOwnProperty(1)){
+        // zoom
+        
+      }
+      else {
+        // get report
+        // check id and city
+        // zooom
+      }
+
+    });
     this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
     var stateObj = { map: "city" };
     history.pushState(stateObj, "page 2", '#/map/' + this.city_name);
