@@ -25,7 +25,7 @@ export class Cards {
       {route: 'thanks',       moduleId: './thanks/thanks',            settings: {cardNo: 7}},
       {route: 'error',        moduleId: './error/error',              settings: {cardNo: 8}}
     ]);
-    config.mapUnknownRoutes({redirect: 'error'});
+    config.mapUnknownRoutes({redirect: '#/map'});
     this.router = router;
   }
   activate(params) {
@@ -76,7 +76,7 @@ export class Cards {
   }
 
   get nextDisabled() { //TODO: Add arguments with ReportCard object params for mandatory inputs
-    return this.cardNo >= this.totalCards - 2;
+    return this.cardNo >= this.totalCards - 3;
   }
   get prevDisabled() {
     return this.cardNo === 1 || this.cardNo === 7;
