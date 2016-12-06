@@ -25,24 +25,14 @@ export class Map {
   }
 
   togglePane(action, pane) {
-    if ((($(window).height() - $(pane).offset().top) > 10) && (action === 'close' || action === 'toggle')) {
-      $(pane).animate({
-        'bottom': -$(pane).height() + 'px'
-      }, 200);
-      /*$('#mapContainer').animate({
-        'height': $(window).height() + 'px'
-      }, 200);*/
+    if ($(pane).css('display') === 'block' && (action === 'close' || action === 'toggle')) {
+      $(pane).fadeOut(200);
       //clear popup content
       if (pane === '#reportPane') {
         this.layers.popupContent = {};
       }
-    } else if ((($(window).height() - $(pane).offset().top) < 10) && (action === 'open' || action === 'toggle')) {
-      $(pane).animate({
-        'bottom': 0 + 'px'
-      }, 200);
-      /*$('#mapContainer').animate({
-        'height': (($(window).height() - $(pane).height()) * 100 / $(window).height()) + '%'
-      }, 200);*/
+    } else if ($(pane).css('display') === 'none' && (action === 'open' || action === 'toggle')) {
+      $(pane).fadeIn(200);
     }
   }
 
@@ -77,6 +67,11 @@ export class Map {
   }
 
   attached() {
+    // Modify popup pane css on the fly
+    $('#watchPane').css({
+      'height': ($(window).height() - $('#topBar').height() - $('#bottomBar').height()) + 'px'
+    });
+
     // Create Leaflet map
     this.map = L.map('mapContainer', {
       zoomControl: false, //default position: 'topleft'
@@ -97,11 +92,6 @@ export class Map {
     L.control.zoom({
       position:'topleft'
     }).addTo(this.map);
-
-    /*var that = this; //REPLACE with close button on panes
-    this.map.on('move', function() {
-      that.togglePane('close', '#reportPane');
-    });*/
 
     // Zoom to city
     this.changeCity(this.city_name);
