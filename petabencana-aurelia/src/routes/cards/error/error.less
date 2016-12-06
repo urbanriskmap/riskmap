@@ -1,9 +1,11 @@
+@import '../../../styleSheets/themeGuide.less';
+
 #thanksText {
   position: absolute;
   width: 75%;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  .translate-mixin(-50%, -50%);
   color: #fff;
   text-align: center;
   font-size: 14px;
@@ -16,24 +18,24 @@
   font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;
 }
 
-#petalogo{
-  position: relative;
+#petalogo {
+  position:absolute;
   padding: 5px 30px 5px 30px;
-  width:60%;
+  width: 60%;
+  top: 10px;
   left: 50%;
-  transform: translateX(-50%);
-  position:absolute; top:10px;
+  .translate-mixin(-50%, 0);
   border: none;
-  border-bottom: 1px solid #2f2f2f
+  border-bottom: 1px solid #2f2f2f;
 }
 
 #URLlogo{
+  position: absolute;
   padding: 5px 30px 5px 30px;
-  position: relative;
-  width:70%;
+  width: 70%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  position:absolute; bottom:0;
+  bottom: 0;
+  .translate-mixin(-50%,-50%);
   border: none;
-  border-top: 1px solid #2f2f2f
+  border-top: 1px solid #2f2f2f;
 }

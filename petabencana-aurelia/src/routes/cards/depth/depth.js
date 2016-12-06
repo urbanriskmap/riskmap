@@ -42,6 +42,10 @@ export class Depth {
     //Touch start
     $('#sliderZone').on('touchstart mousedown', function (e) {
       sliderActive = true;
+      $('.knobHelper').fadeOut(100);
+      $('#knob').css({
+        'box-shadow': '0px 0px 12px 8px rgba(179, 214, 239, 0.5)'
+      });
       var startPos;
       if (that.isMobile) {
         startPos = e.originalEvent.touches[0].pageY;
@@ -76,6 +80,10 @@ export class Depth {
     $(window).on('touchend mouseup', function () {
       if (sliderActive) {
         sliderActive = false;
+        $('#knob').css({
+          'box-shadow': '0px 0px 12px 8px rgba(49, 170, 222, 0.4)'
+        });
+        $('.knobHelper').fadeIn(200);
         fillHeight = $('#floodZone').height();
       }
     });

@@ -1,8 +1,11 @@
 <template>
   <require from="./report-info.css"></require>
-  <image id="photoPreview" src.bind="source">
+  <div  id="photoPreview">
+    <image id="image" src.bind="source" >
+  </div>
   <div id="textPreview">
     <p id="textTitle">${title}</p>
-    <p id="textBody">${body}</p>
+    <p id="textBody">${body} ${status}</p>
+
   </div>
 </template>

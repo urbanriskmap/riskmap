@@ -1,14 +1,12 @@
+@import '../../../styleSheets/themeGuide.less';
+
 #locationWrapper {
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-  padding: 0px;
+  .fullspan-mixin;
 }
 
 #mapWrapper {
   position: relative;
-  width:100%;
-  height:100%;
+  .fullspan-mixin;
   z-index: 1;
 }
 
@@ -18,6 +16,6 @@
   height: 48px;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -100%);
+  .translate-mixin(-50%, -100%);
   z-index: 100;
 }

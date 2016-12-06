@@ -5,6 +5,7 @@ npm-debug.log
 
 scripts/
 dist/
+src/environment.js
 
 #for vim:
 *.swp

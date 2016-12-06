@@ -10,6 +10,7 @@ export class Cards {
   constructor(Reportcard, i18n) {
     this.reportcard = Reportcard;
     this.i18n = i18n;
+    this.titleString = "title translation error"; //TODO: REMOVE after debugging translation error
   }
   configureRouter(config, router) {
     config.title = this.i18n.tr('page_title');
@@ -21,8 +22,10 @@ export class Cards {
       {route: 'description',  moduleId: './description/description',  settings: {title: this.i18n.tr('description_title'),  cardNo: 4}},
       {route: 'review',       moduleId: './review/review',            settings: {title: this.i18n.tr('review_title'),       cardNo: 5}},
       {route: 'terms',        moduleId: './terms/terms',              settings: {title: this.i18n.tr('terms_title'),        cardNo: 6}},
-      {route: 'thanks',       moduleId: './thanks/thanks',            settings: {title: this.i18n.tr('thanks_title'),       cardNo: 7}}
+      {route: 'thanks',       moduleId: './thanks/thanks',            settings: {cardNo: 7}},
+      {route: 'error',        moduleId: './error/error',              settings: {cardNo: 8}}
     ]);
+    config.mapUnknownRoutes({redirect: 'error'});
     this.router = router;
   }
   activate(params) {
@@ -43,8 +46,20 @@ export class Cards {
     this.cardNo = this.count + val;
   }
 
+  /*
   get titleString() {
     return this.router.currentInstruction.config.settings.title;
+  }
+  */
+  //TODO: DEBUG translation error, remove following getter + setter
+  get titleString() {
+    if (this.router.currentInstruction.config.settings.title) {
+      this.someString = this.router.currentInstruction.config.settings.title;
+    }
+    return this.someString;
+  }
+  set titleString(string) {
+    this.someString = string;
   }
 
   nextCard() {
