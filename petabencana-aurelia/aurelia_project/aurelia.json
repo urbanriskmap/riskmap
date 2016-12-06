@@ -172,6 +172,11 @@
             "name": "topojson-client",
             "path": "../node_modules/topojson-client/dist",
             "main": "topojson-client"
+          },
+          {
+            "name": "notifyjs-browser",
+            "path": "../node_modules/notifyjs-browser/dist",
+            "main": "notify"
           }
         ]
       }
