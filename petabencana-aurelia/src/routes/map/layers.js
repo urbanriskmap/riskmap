@@ -1,5 +1,23 @@
 import {Data} from './data';
 let DATASERVER = 'https://raw.githubusercontent.com/urbanriskmap/sampledata/master/';
+import $ from 'jquery';
+import {notify} from 'notifyjs-browser'; //Jquery plugin
+
+$.notify.addStyle('mapInfo', {
+  html: "<div><span data-notify-text/></div>",
+  classes: {
+    info: {
+      "font-family": "Arial, sans-serif",
+      "white-space": "nowrap",
+      "background-color": "gray",
+      "padding": "5px"
+    },
+    error: {
+      "color": "white",
+      "background-color": "red"
+    }
+  }
+});
 
 // PetaBencana.id Layers class - manage leaflet data layers
 export class Layers {
@@ -8,6 +26,7 @@ export class Layers {
     this.data = new Data(); // Data class
     this.layers = {}; // Layers
     this.popupContent = {};
+
   }
 
   // Get flood reports as topojson, return Leaflet geojson layer
@@ -42,7 +61,10 @@ export class Layers {
       });
       return that.layers.reports
       .addTo(that.map);
-    }).catch((err) => console.log(err));
+    }).catch((err) => {
+      $.notify("Error fetching reports data", {style:"mapInfo", className:"error" });
+      console.log('ERROR [layers.js] fetching reports data: '+JSON.stringify(err));
+    });
   }
 
   removeReports(){

@@ -6,6 +6,24 @@ import {Layers} from './layers';
 import $ from 'jquery';
 import * as L from 'leaflet';
 
+import {notify} from 'notifyjs-browser'; //Jquery plugin
+
+$.notify.addStyle('mapInfo', {
+  html: "<div><span data-notify-text/></div>",
+  classes: {
+    info: {
+      "font-family": "Arial, sans-serif",
+      "white-space": "nowrap",
+      "background-color": "gray",
+      "padding": "5px"
+    },
+    error: {
+      "color": "white",
+      "background-color": "red"
+    }
+  }
+});
+
 // DEFAULT CITY TO RENDER
 let DEFAULT_CITY = 'jakarta';
 let START_POINT = [-7, 109];
@@ -50,7 +68,10 @@ export class Map {
     } else if (city in this.config.instance_regions) {
       this.city_name = city;
       return this.config.instance_regions[city];
-    } else {
+    }
+    else {
+      $.notify('Unsupported city: '+JSON.stringify(city), {style:"mapInfo", className:"info" });
+      console.log('Unsupported city: '+JSON.stringify(city));
       this.city_name = DEFAULT_CITY;
       return this.config.instance_regions[DEFAULT_CITY];
     }
