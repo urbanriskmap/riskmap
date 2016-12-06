@@ -1,5 +1,10 @@
 export class Error {
   constructor() {
-    this.customErrorMsg = "Custom error message";
+    this.customErrorMsg = "Page not found";
+  }
+  attached() {
+    window.setTimeout(function () {
+      window.location.replace('/#/map');
+    }, 3000);
   }
 }

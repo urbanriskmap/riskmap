@@ -25,6 +25,7 @@ export class Cards {
       {route: 'thanks',       moduleId: './thanks/thanks',            settings: {cardNo: 7}},
       {route: 'error',        moduleId: './error/error',              settings: {cardNo: 8}}
     ]);
+    config.mapUnknownRoutes({redirect: 'error'});
     this.router = router;
   }
   activate(params) {

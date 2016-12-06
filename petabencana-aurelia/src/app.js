@@ -6,7 +6,7 @@ export class App {
       {route: ['', 'map', 'map/:city'],   moduleId: 'routes/map/map'},
       {route: 'cards/:id',                moduleId: 'routes/cards/cards'}
     ]);
-    config.mapUnknownRoutes({redirect: '#/map'});
+    config.mapUnknownRoutes({redirect: '#/cards/error/error'});
     this.router = router;
 
   }
