@@ -9,26 +9,14 @@ import {activationStrategy} from 'aurelia-router';
 import {notify} from 'notifyjs-browser'; //Jquery plugin
 
 $.notify.addStyle('mapInfo', {
-  html: "<div><span data-notify-text/></div>",
+  html: "<div id=notification><span data-notify-text/></div>",
   classes: {
     info: {
-      "font-family": "Roboto-Light, Roboto, sans-serif",
-      "font-size": "12px",
-      "white-space": "nowrap",
-      "background-color": "rgba(0, 0, 0, 0.5)",
-      "padding": "5px",
-      "border-radius": "5px",
-      "color": "#ffffff"
-    },
+            "background-color": "rgba(0, 0, 0, 0.5)",
+          },
     error: {
-      "font-family": "Roboto-Light, Roboto, sans-serif",
-      "font-size": "12px",
-      "white-space": "nowrap",
       "background-color": "rgba(255, 0, 0, 0.4)",
-      "padding": "5px",
-      "border-radius": "5px",
-      "color": "#ffffff"
-    }
+      }
   }
 });
 
