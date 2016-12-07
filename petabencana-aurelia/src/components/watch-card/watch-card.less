@@ -5,33 +5,45 @@
   margin: auto;
   bottom: @bar-heights / 10;
   width: 70%;
-  padding: 20px 0px 0px 0px;
+  padding: 30px 0px 0px 0px;
+}
+
+#projectIntro {
+  margin: auto;
+  padding: 20px;
+  .bodylight-mixin(22px);
+  line-height: 150%;
+  text-align: center;
+  color: @banjir-blue;
+  & .headers {
+    text-align: center;
+    .bodymedium-mixin(16px);
+  }
+}
+
+#videoWrapper {
+  position: relative;
+  margin: auto;
+  width: 95%;
+}
+
+#video {
+  width: 100%;
 }
 
 #about {
   margin: auto;
   padding: 10px;
   .bodylight-mixin(14px);
-  & .headers {
-    text-align: center;
-    .bodymedium-mixin(10px);
-  }
-}
-
-#videoWrapper {
-	position: relative;
-  margin: auto;
-  width: 95%;
-}
-
-#video {
-	width: 100%;
+  line-height: 150%;
+  text-align: justify;
+  color: @steel-gray;
+  padding: 30px;
 }
 
 #partners{
   position: relative;
   margin: auto;
-  padding: 10px;
   color: #000;
   font-size: 12px;
   font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;
@@ -40,7 +52,6 @@
 #partnerLogo{
   position: relative;
   margin: auto;
-  height: 36px;
+  height: 40px;
   width: auto;
-  padding: 10px;
 }
