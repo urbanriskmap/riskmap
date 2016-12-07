@@ -17,7 +17,6 @@ export class Layers {
     let url = DATASERVER + 'reports/?city=' + city_region;
     var self = this;
     return new Promise(function(resolve, reject) {
-      console.log('before call');
       self.data.getData(url)
       .then(function(data) {
         self.reports = L.geoJSON(data, {
