@@ -6,25 +6,28 @@ import {Layers} from './layers';
 import $ from 'jquery';
 import * as L from 'leaflet';
 import {activationStrategy} from 'aurelia-router';
-
 import {notify} from 'notifyjs-browser'; //Jquery plugin
-
-$(window).on('popstate', (event) => {
-  console.log('popstate fired!');
-});
 
 $.notify.addStyle('mapInfo', {
   html: "<div><span data-notify-text/></div>",
   classes: {
     info: {
-      "font-family": "Arial, sans-serif",
+      "font-family": "Roboto-Light, Roboto, sans-serif",
+      "font-size": "12px",
       "white-space": "nowrap",
-      "background-color": "gray",
-      "padding": "5px"
+      "background-color": "rgba(0, 0, 0, 0.5)",
+      "padding": "5px",
+      "border-radius": "5px",
+      "color": "#ffffff"
     },
     error: {
-      "color": "white",
-      "background-color": "red"
+      "font-family": "Roboto-Light, Roboto, sans-serif",
+      "font-size": "12px",
+      "white-space": "nowrap",
+      "background-color": "rgba(255, 0, 0, 0.4)",
+      "padding": "5px",
+      "border-radius": "5px",
+      "color": "#ffffff"
     }
   }
 });
@@ -101,19 +104,23 @@ export class Map {
         self.layers.popupContent = self.layers.pkeyList[self.report_id].feature.properties;
         self.togglePane('open', '#reportPane');
         history.pushState(stateObj, "map", '#/map/' + self.city_name + '/' + self.report_id);
+      } else if (self.report_id && !self.layers.pkeyList.hasOwnProperty(self.report_id)) {
+        $.notify("No such report key in " + self.city_name, {style:"mapInfo", className:"error" });
+        self.flyToCity(self.city, stateObj);
       } else {
-        this.report_id = null;
-        self.map.flyToBounds([self.city.bounds.sw, self.city.bounds.ne], 20);
-        this.togglePane('close', '#reportPane');
-        history.pushState(stateObj, "map", '#/map/' + self.city_name);
-
+        self.flyToCity(self.city, stateObj);
       }
+    }).catch((err) => {
+      $.notify("No reports found for " + self.city_name, {style:"mapInfo", className:"info" });
+      self.flyToCity(self.city, stateObj);
     });
   }
 
-  flyToCity(city_name) {
+  flyToCity(city, stateObj) {
     this.report_id = null;
-    this.changeCity(city_name);
+    this.map.flyToBounds([city.bounds.sw, city.bounds.ne], 20);
+    this.togglePane('close', '#reportPane');
+    history.pushState(stateObj, "map", '#/map/' + this.city_name);
   }
 
   attached() {

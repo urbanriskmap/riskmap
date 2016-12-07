@@ -26,9 +26,8 @@
     </div>
 
     <div id="bottomBar">
-      <input type="text" value.bind="report_id" change.delegate="changeCity(city_name)">
       <div id="links">
-        <div class="cityLinks" repeat.for="city_region of city_regions" textcontent.bind="city_region" click.delegate="flyToCity(city_region)">
+        <div class="cityLinks" repeat.for="city_region of city_regions" textcontent.bind="city_region" click.delegate="changeCity(city_region)">
         </div>
       </div>
     </div>
