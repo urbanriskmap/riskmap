@@ -100,14 +100,15 @@ export class Map {
         self.map.flyTo(self.layers.pkeyList[self.report_id]._latlng, 16);
         self.layers.popupContent = self.layers.pkeyList[self.report_id].feature.properties;
         self.togglePane('open', '#reportPane');
-        //history.pushState(stateObj, "page 2", '#/map/' + self.city_name + '/' + self.report_id);
+        history.pushState(stateObj, "map", '#/map/' + self.city_name + '/' + self.report_id);
       } else {
         this.report_id = null;
         self.map.flyToBounds([self.city.bounds.sw, self.city.bounds.ne], 20);
         this.togglePane('close', '#reportPane');
+        history.pushState(stateObj, "map", '#/map/' + self.city_name);
+
       }
     });
-    history.pushState(stateObj, "page 2", '#/map/' + self.city_name);
   }
 
   flyToCity(city_name) {
