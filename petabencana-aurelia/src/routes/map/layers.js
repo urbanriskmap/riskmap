@@ -24,36 +24,34 @@ export class Layers {
   constructor(leafletMap) {
     this.map = leafletMap;
     this.data = new Data(); // Data class
-    this.layers = {}; // Layers
+    this.reports = {}; // Layers
     this.popupContent = {};
-
+    this.pkeyList = {};
   }
 
   // Get flood reports as topojson, return Leaflet geojson layer
   addReports(city_name, togglePane) {
     var self = this;
-    var reports_layer;
-    var markerMap = {};
 
-    return new Promise( function(resolve, reject){
+    return new Promise(function(resolve, reject) {
       let url = DATASERVER + 'reports.' + city_name + '.topojson';
 
       self.data.getData(url)
       .then(function(data) {
-        reports_layer = L.geoJSON(data, {
+        self.reports = L.geoJSON(data, {
           onEachFeature: function(feature, layer) { //TODO: create separate class function
+            self.pkeyList[feature.properties.pkey] = layer;
             layer.on({
               click: function() {
                 self.popupContent = {};
                 for (let prop in feature.properties) {
                   self.popupContent[prop] = feature.properties[prop];
                 }
+                self.map.flyTo(layer._latlng, 16);
                 togglePane('close', '#watchPane');
                 togglePane('open', '#reportPane');
               }
             });
-            markerMap[feature.pkey] = layer;
-            console.log(feature.pkey)
           },
           pointToLayer: function(feature, latlng) { //TODO: create separate class function
             return L.marker(latlng, {
@@ -65,33 +63,18 @@ export class Layers {
             });
           }
         });
-        console.log(markerMap)
-        reports_layer.markerMap = markerMap;
-
-        reports_layer.addTo(self.map)
-        resolve(reports_layer);
+        self.reports.addTo(self.map);
+        resolve(data);
       }).catch((err) => {
         $.notify("Error fetching reports data", {style:"mapInfo", className:"error" });
         console.log('ERROR [layers.js] fetching reports data: '+JSON.stringify(err));
       });
-    })
-  }
-
-  addSingleReport(city_name, report_id){
-    var self = this;
-    return new Promise( function(resolve, reject){
-      let url = DATASERVER + 'reports/' + report_id + '.topojson';
-      self.getData(url).then(function(data){
-        console.log(data);
-        resolve(data);
-        // Add to reports data to add to map, and return to map.js to zoom in
-      });
-    })
+    });
   }
 
   removeReports(){
-    if (this.layers.reports) {
-      this.map.removeLayer(this.layers.reports);
+    if (this.reports) {
+      this.map.removeLayer(this.reports);
     }
   }
 }
