@@ -8,7 +8,7 @@
 #summaryCard {
   position: absolute;
   width: 80%;
-  height: 200px;
+  height: 160px;
   background-color: #424242;
   box-shadow: @boxshadow-normal;
   left: 50%;
@@ -73,13 +73,12 @@
 #termsConditions {
   width: 100%;
   margin: 0px;
-  color: #fff;
-  font-family: 'Roboto-Light', 'Roboto', sans-serif;
-  font-size: 14px;
+  .bodylight-mixin(12px);
+  color: @steel-gray;
   & a {
     cursor: pointer;
-    color: white;
-    font-family: 'Roboto-Medium', 'Roboto', sans-serif;
+    .bodylight-mixin(12px);
+    color: @steel-gray;
   }
 }
 

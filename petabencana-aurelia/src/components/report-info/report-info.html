@@ -1,9 +1,14 @@
 <template>
   <require from="./report-info.css"></require>
-  <image id="photoPreview" src.bind="source">
+  <div  id="photoPreview">
+    <image id="image" src.bind="source" >
+  </div>
   <div id="textPreview">
     <p id="textTitle">${title}</p>
-    <p id="textBody">${body}</p>
+    <p id="textBody">${body} ${status}</p>
+    <p id="textBody">${body} ${source}</p>
   </div>
-  <a id="twitterShareBtn" href="https://twitter.com/intent/tweet?text=Check%20out%20my%20flood%20report%0A&url=http://localhost:9000/%23/map/jakarta">Tweet</a> 
+  <div id="tweet">
+  <a id="twitterShareBtn" href="https://twitter.com/intent/tweet?text=Check%20out%20my%20flood%20report%0A&url=http://localhost:9000/%23/map/jakarta">Tweet your Report</a>
+</div>
 </template>

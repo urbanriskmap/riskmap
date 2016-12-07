@@ -4,7 +4,8 @@
 @steel-gray:      #424242; //can make this base gray - ease of corrections
 @light-gray:      #808080; //lighten(@steel-gray, 20%);
 @snow-white:      #ffffff;
-@translucent-white: rgba(255, 255, 255, 0.7);
+@translucent-white: rgba(255, 255, 255, .8);
+@translucent-black: rgba(0, 0, 0, .8);
 
 //Card highlights
 @banjir-blue:      #31aade;
@@ -26,8 +27,8 @@
 
 //__SHADOW VARIABLES__
 //Shadow styles
-@drop-shadow:       0px 4px 8px 0px rgba(0, 0, 0, 0.2);
-@spread-shadow:     0px 6px 20px 0px rgba(0, 0, 0, 0.2);
+@drop-shadow:       0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+@spread-shadow:     0px 6px 20px 0px rgba(0, 0, 0, 0.4);
 @inset-shadow:      inset 2px 5px 8px 0px rgba(0, 0, 0, 0.4);
 @boxshadow-normal:  2px 5px 8px 0px rgba(0, 0, 0, 0.4);
 @boxshadow-pressed: 2px 3px 6px 0px rgba(0, 0, 0, 0.4);
@@ -39,6 +40,37 @@
 }
 
 //_Font styles Variables_
+.bodylight-mixin(@var) {
+  font-family: "Roboto-Light", "Roboto", Open Sans;
+  font-size: @var;
+  font-weight: 300;
+  color: @steel-gray;
+}
+
+.bodyregular-mixin(@var) {
+  font-family: "Roboto-Regular", "Roboto", Open Sans;
+  font-size: @var;
+  font-weight: 300;
+  color: @steel-gray;
+}
+
+.bodymedium-mixin(@var) {
+  font-family: "Roboto-Medium", "Roboto", Open Sans;
+  font-size: @var;
+  color: @steel-gray;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.bodybold-mixin(@var) {
+  font-family: "Roboto-Bold", "Roboto", Open Sans;
+  font-size: @var;
+  color: @steel-gray;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+
 .linklight-mixin(@var) {
   font-family: "Roboto-Light", "Roboto", Open Sans;
   font-size: @var;
@@ -99,7 +131,7 @@
     }
   }
   height: @ht; //configured to pre-set pixels here, change in js on the fly
-  bottom: @bar-heights / 2;
+  bottom: @bar-heights / (3/2);
   padding: 0px;
   margin: 0px;
   z-index: 1005;

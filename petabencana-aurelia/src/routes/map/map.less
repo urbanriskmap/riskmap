@@ -31,27 +31,53 @@
   padding: 0px;
 }
 
+
 #optionsBtn {
   position: absolute;
-  top: @bar-heights / 6;
-  right: @bar-heights / 6;
+  right: 10px;
+  top: 5px;
+  height: 75%;
   padding: 0px;
-  margin: 0px;
-  .linkmedium-mixin(42px);
-  text-align: right;
-  z-index: 1015;
-  background-color: transparent;
+  margin: auto;
+}
+
+#optionImg{
+  position:relative;
+  height: 100%;
+  .linkmedium-mixin(24px);
 }
 
 #bottomBar {
-  .mapbars-mixin(2);
+  .mapbars-mixin(3/2);
   bottom: 0px;
+
+}
+
+#logos_bottom {
+  @media screen {
+    position: absolute;
+    @media (min-width: 320px) {
+      display: none;
+    }
+    @media (min-width: 420px) {
+      display: block;
+      left: 10px;
+      top: 0px;
+      height: 75%;
+      padding: 0px;
+      margin: 0px;
+    }
+  }
+}
+
+#mitLogo {
+  height: 100%;
 }
 
 #links {
   position: absolute;
   right: -1px;
-  bottom: @bar-heights / 12;
+  bottom: @bar-heights / 6;
 }
 
 .cityLinks {
@@ -66,16 +92,37 @@
   .mappane-mixin(200px);
 }
 
-#watchPane {
-  .mappane-mixin(400px);
+#watchPane{
+  .mappane-mixin(320px);
+  overflow: scroll;
 }
 
 .closeBtn {
   position: absolute;
-  right: @bar-heights / 6;
+  width: 100%;
   margin: 0px;
   padding: 0px;
+  right: @bar-heights / 6;
   text-align: right;
   z-index: 1010;
   .linkmedium-mixin(24px);
+}
+
+#notification{
+    font-family: Roboto-Light, Roboto, sans-serif;
+    font-size: 12px;
+    white-space: nowrap;
+    padding: 5px;
+    border-radius: 5px;
+    color: #ffffff;
+    position:relative;
+    top:@bar-heights;
+}
+
+.error {
+  background-color: rgba(255, 0, 0, 0.4);
+  }
+
+.info {
+  background-color: rgba(0, 0, 0, 0.5);
 }

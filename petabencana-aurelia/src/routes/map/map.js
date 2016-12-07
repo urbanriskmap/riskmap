@@ -5,28 +5,25 @@ import * as config from './config'; // Map config
 import {Layers} from './layers';
 import $ from 'jquery';
 import * as L from 'leaflet';
-
+import {activationStrategy} from 'aurelia-router';
 import {notify} from 'notifyjs-browser'; //Jquery plugin
 
 $.notify.addStyle('mapInfo', {
-  html: "<div><span data-notify-text/></div>",
+  html: "<div id=notification><span data-notify-text/></div>",
   classes: {
     info: {
-      "font-family": "Arial, sans-serif",
-      "white-space": "nowrap",
-      "background-color": "gray",
-      "padding": "5px"
-    },
+            "background-color": "rgba(0, 0, 0, 0.5)",
+          },
     error: {
-      "color": "white",
-      "background-color": "red"
-    }
+      "background-color": "rgba(255, 0, 0, 0.4)",
+      }
   }
 });
 
 // DEFAULT CITY TO RENDER
 let DEFAULT_CITY = 'jakarta';
 let START_POINT = [-7, 109];
+let START_ZOOM = 8;
 
 // Map class, requires map config.js (injected as Aurelia dependency)
 export class Map {
@@ -40,6 +37,12 @@ export class Map {
 
   activate(params) {
     this.city_name = params.city;
+    this.report_id = params.report;
+  }
+
+  //Allows page refresh when adding query parameters
+  determineActivationStrategy() {
+    return activationStrategy.replace;
   }
 
   togglePane(action, pane) {
@@ -61,7 +64,6 @@ export class Map {
 
   // Get parameters from config based on city name, else return default
   parseMapCity(city) {
-
     if (typeof(city) == 'undefined' ) {
       this.city_name = DEFAULT_CITY;
       return this.config.instance_regions[DEFAULT_CITY];
@@ -79,13 +81,34 @@ export class Map {
 
   // Change city from within map without reloading window
   changeCity(city_name) {
+    var self = this;
+    var stateObj = {map: "city"};
     this.city = this.parseMapCity(city_name);
     this.layers.removeReports();
-    this.layers.addReports(this.city_name, this.city.region, this.togglePane);
-    this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
+    this.layers.addReports(this.city_name, this.city.region, this.togglePane)
+    .then(() => {
+      if (self.report_id && self.layers.pkeyList.hasOwnProperty(self.report_id)) {
+        self.map.flyTo(self.layers.pkeyList[self.report_id]._latlng, 16);
+        self.layers.popupContent = self.layers.pkeyList[self.report_id].feature.properties;
+        self.togglePane('open', '#reportPane');
+        history.pushState(stateObj, "map", '#/map/' + self.city_name + '/' + self.report_id);
+      } else if (self.report_id && !self.layers.pkeyList.hasOwnProperty(self.report_id)) {
+        $.notify("No such report key in " + self.city_name, {style:"mapInfo", className:"error" });
+        self.flyToCity(self.city, stateObj);
+      } else {
+        self.flyToCity(self.city, stateObj);
+      }
+    }).catch((err) => {
+      $.notify("No reports found for " + self.city_name, {style:"mapInfo", className:"info" });
+      self.flyToCity(self.city, stateObj);
+    });
+  }
+
+  flyToCity(city, stateObj) {
+    this.report_id = null;
+    this.map.flyToBounds([city.bounds.sw, city.bounds.ne], 20);
     this.togglePane('close', '#reportPane');
-    var stateObj = { map: "city" };
-    history.pushState(stateObj, "page 2", '#/map/' + this.city_name);
+    history.pushState(stateObj, "map", '#/map/' + this.city_name);
   }
 
   attached() {
@@ -98,7 +121,7 @@ export class Map {
     this.map = L.map('mapContainer', {
       zoomControl: false, //default position: 'topleft'
       attributionControl: false //include in bottom popup panel
-    }).setView(START_POINT, 8);
+    }).setView(START_POINT, START_ZOOM);
     // Create Layer instance
     this.layers = new Layers(this.map);
 
@@ -115,7 +138,15 @@ export class Map {
       position:'topleft'
     }).addTo(this.map);
 
+    var self = this;
+
     // Zoom to city
     this.changeCity(this.city_name);
+
+    this.map.on('move', () => {
+      START_POINT = self.map.getCenter();
+      START_ZOOM = self.map.getZoom();
+    });
+
   }
 }
