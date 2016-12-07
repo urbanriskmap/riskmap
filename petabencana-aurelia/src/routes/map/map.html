@@ -18,14 +18,17 @@
 
     <div id="topBar">
       <div id="logos">
-        <image src="assets/graphics/Peta_logo.svg">
+        <img src="assets/graphics/Peta_logo.svg">
       </div>
       <div id="optionsBtn" click.delegate="openWatch()">
-        &equiv;
+        <img id="optionImg" src="assets/icons/options.svg">
       </div>
     </div>
 
     <div id="bottomBar">
+      <div id="logos_bottom">
+        <a href="#"><img id="mitLogo" src="assets/graphics/URL_logo.svg"></a>
+      </div>
       <div id="links">
         <div class="cityLinks" repeat.for="city_region of city_regions" textcontent.bind="city_region" click.delegate="changeCity(city_region)">
         </div>

@@ -31,21 +31,47 @@
   padding: 0px;
 }
 
+
 #optionsBtn {
   position: absolute;
-  top: @bar-heights / 6;
-  right: @bar-heights / 6;
+  right: 10px;
+  top: 5px;
+  height: 75%;
   padding: 0px;
-  margin: 0px;
-  .linkmedium-mixin(42px);
-  text-align: right;
-  z-index: 1015;
-  background-color: transparent;
+  margin: auto;
+}
+
+#optionImg{
+  position:relative;
+  height: 100%;
+  .linkmedium-mixin(24px);
 }
 
 #bottomBar {
   .mapbars-mixin(2);
   bottom: 0px;
+
+}
+
+#logos_bottom {
+  @media screen {
+    position: absolute;
+    @media (min-width: 320px) {
+      display: none;
+    }
+    @media (min-width: 420px) {
+      display: block;
+      left: 10px;
+      top: 0px;
+      height: 75%;
+      padding: 0px;
+      margin: 0px;
+    }
+  }
+}
+
+#mitLogo {
+  height: 100%;
 }
 
 #links {
