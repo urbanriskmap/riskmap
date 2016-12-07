@@ -10,9 +10,14 @@ export class Data {
     return new Promise(function(resolve, reject) {
       client.get(url)
       .then(data => {
-        var response = JSON.parse(data.response);
-        if(response && response.objects !== null) {
-          resolve(topojson.feature(response, response.objects.output));
+        var topology = JSON.parse(data.response);
+        if(topology.statusCode === 200) {
+          var topoJson = topology.result;
+          if(topoJson && topoJson.objects !== null) {
+            resolve(topojson.feature(topoJson, topoJson.objects.output));
+          } else {
+            resolve(null);
+          }
         } else {
           resolve(null);
         }

@@ -85,7 +85,7 @@ export class Map {
     var stateObj = {map: "city"};
     this.city = this.parseMapCity(city_name);
     this.layers.removeReports();
-    this.layers.addReports(this.city_name, this.togglePane)
+    this.layers.addReports(this.city_name, this.city.region, this.togglePane)
     .then(() => {
       if (self.report_id && self.layers.pkeyList.hasOwnProperty(self.report_id)) {
         self.map.flyTo(self.layers.pkeyList[self.report_id]._latlng, 16);

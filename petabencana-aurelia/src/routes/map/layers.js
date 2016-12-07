@@ -1,5 +1,5 @@
 import {Data} from './data';
-let DATASERVER = 'https://raw.githubusercontent.com/urbanriskmap/sampledata/master/';
+let DATASERVER = 'https://data.petabencana.id/';
 import $ from 'jquery';
 
 // PetaBencana.id Layers class - manage leaflet data layers
@@ -13,10 +13,9 @@ export class Layers {
   }
 
   // Get flood reports as topojson, return Leaflet geojson layer
-  addReports(city_name, togglePane) {
+  addReports(city_name, city_region, togglePane) {
+    let url = DATASERVER + 'reports/?city=' + city_region;
     var self = this;
-    let url = DATASERVER + 'reports.' + city_name + '.topojson';
-
     return new Promise(function(resolve, reject) {
       self.data.getData(url)
       .then(function(data) {
