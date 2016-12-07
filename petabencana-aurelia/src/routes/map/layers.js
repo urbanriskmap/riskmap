@@ -1,5 +1,5 @@
 import {Data} from './data';
-let DATASERVER = 'https://raw.githubusercontent.com/urbanriskmap/sampledata/master/';
+let DATASERVER = 'https://data.petabencana.id/';
 import $ from 'jquery';
 import {notify} from 'notifyjs-browser'; //Jquery plugin
 
@@ -30,8 +30,9 @@ export class Layers {
   }
 
   // Get flood reports as topojson, return Leaflet geojson layer
-  addReports(city_name, togglePane) {
-    let url = DATASERVER + 'reports.' + city_name + '.topojson';
+  addReports(city_name, city_region, togglePane) {
+    let url = DATASERVER + 'reports/?city=' + city_region;
+    console.log(url);
     var that = this;
 
     return this.data.getData(url)

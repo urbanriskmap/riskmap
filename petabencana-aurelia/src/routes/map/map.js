@@ -81,7 +81,7 @@ export class Map {
   changeCity(city_name) {
     this.city = this.parseMapCity(city_name);
     this.layers.removeReports();
-    this.layers.addReports(this.city_name, this.togglePane);
+    this.layers.addReports(this.city_name, this.city.region, this.togglePane);
     this.map.flyToBounds([this.city.bounds.sw, this.city.bounds.ne], 20);
     this.togglePane('close', '#reportPane');
     var stateObj = { map: "city" };
