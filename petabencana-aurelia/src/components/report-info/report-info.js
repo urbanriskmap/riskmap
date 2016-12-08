@@ -12,12 +12,4 @@ export class ReportInfo {
   @bindable body;
   @bindable status;
   //end-non-standard
-
-  attached(){
-    var w; var h;
-    var img=$('#image');
- img.src=this.source;
- img.onload=function(){w=this.width; h=this.height;};
-    console.log(w +', '+ h);
-  }
 }
