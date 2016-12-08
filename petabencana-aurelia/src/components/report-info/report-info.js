@@ -7,17 +7,16 @@ export class ReportInfo {
   //@bindable attributes do not work with camelCase...
 
   //start-non-standard
-  @bindable source;
+  @bindable imageurl;
+  @bindable height;
   @bindable title;
-  @bindable body;
-  @bindable status;
-  //end-non-standard
+  @bindable text;
 
-  attached(){
-    var w; var h;
-    var img=$('#image');
- img.src=this.source;
- img.onload=function(){w=this.width; h=this.height;};
-    console.log(w +', '+ h);
+  //end-non-standard
+attached(){
+  if (this.height) {
+    this.heighttext="Water depth: " + this.height + "cm";
   }
+}
+
 }

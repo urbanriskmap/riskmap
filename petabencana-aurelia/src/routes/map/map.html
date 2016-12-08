@@ -38,7 +38,7 @@
     <div id="reportPane">
       <div class="closeBtn" click.delegate="togglePane('close', '#reportPane')">&times;
       </div>
-      <report-info id="preview" if.bind="layers.popupContent.image_url" status.bind="layers.popupContent.status" source.bind="layers.popupContent.image_url" title.bind="layers.popupContent.title" body.bind="layers.popupContent.text">
+      <report-info id="preview" if.bind="layers.popupContent.pkey" imageurl.bind="layers.popupContent.image_url" height.bind="layers.popupContent.report_data" title.bind="layers.popupContent.title" text.bind="layers.popupContent.text">
       </report-info>
     </div>
 

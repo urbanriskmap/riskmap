@@ -46,7 +46,8 @@ export class Layers {
         });
         self.reports.addTo(self.map);
         resolve(data);
-      }).catch(() => reject(null));
+      })
+      .catch(() => reject(null));
     });
   }
 
