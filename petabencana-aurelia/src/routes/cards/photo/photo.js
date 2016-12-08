@@ -1,6 +1,9 @@
 import {inject} from 'aurelia-framework';
 import $ from 'jquery';
 import {Reportcard} from 'Reportcard';
+var wrapper;
+var cntxt;
+var degree = 90;
 
 //start-non-standard
 @inject(Reportcard)
@@ -20,16 +23,18 @@ export class Photo {
     if (this.haveImg) {
       this.drawImage();
     }
+    wrapper = this.preview;
+    cntxt = wrapper.getContext('2d');
   }
 
   sendClick() {
     $('#photoCapture').trigger('click');
   }
 
-  drawImage() {
+  drawImage(degree) {
     if (this.selectedPhoto[0]) {
       this.reportcard.setphoto(this.selectedPhoto);
-      let wrapper = this.preview;
+      //let wrapper = this.preview;
       wrapper.width = $('#camera').width();
       wrapper.height = $('#camera').height();
       let reader = new FileReader();
@@ -49,13 +54,21 @@ export class Photo {
             imgH = Math.round((reviewImg.height * imgW) / reviewImg.width);
             trlY = Math.round((wrapper.height - imgH) / 2);
           }
-          let cntxt = wrapper.getContext('2d');
+          cntxt.translate(wrapper.width / 2, wrapper.height / 2);
+          cntxt.rotate(degree * Math.PI / 180);
+          cntxt.translate(- wrapper.width / 2, - wrapper.height / 2);
           cntxt.drawImage(reviewImg, trlX, trlY, imgW, imgH);
         };
         reviewImg.src = e.target.result;
       };
       reader.readAsDataURL(this.selectedPhoto[0]);
       this.helpText = "Click to change";
+      $('#rotateButton').show();
     }
+  }
+
+  rotatePhoto() {
+    this.drawImage(degree);
+    degree += 90;
   }
 }

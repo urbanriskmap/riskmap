@@ -7,10 +7,11 @@
       <img id="cameraIcon" src="assets/graphics/image_flood.svg">
     </div>
     <div id="helpTextWrapper">
-      <button id="photoButton" click.delegate="sendClick()">${helpText}</button>
+      <button id="photoButton" class="btn" click.delegate="sendClick()">${helpText}</button>
+      <button id="rotateButton" class="btn" click.delegate="rotatePhoto()">&#8635;</button>
     </div>
   </div>
   <div id="ghostButton" style="display: none">
-    <input id="photoCapture" type="file" accept="image/*" change.delegate="drawImage()" files.bind="selectedPhoto">
+    <input id="photoCapture" type="file" accept="image/*" change.delegate="drawImage(0)" files.bind="selectedPhoto">
   </div>
 </template>

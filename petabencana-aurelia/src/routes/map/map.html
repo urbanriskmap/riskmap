@@ -21,7 +21,9 @@
 
     <div id="topBar">
       <div id="logos">
-        <a href="https://dev.petabencana.id"><img src="assets/graphics/Peta_logo.svg"></a>
+        <a href="https://dev.petabencana.id">
+          <img src="assets/graphics/Peta_logo.svg">
+        </a>
       </div>
       <div id="optionsBtn" click.delegate="openWatch()">
         <img id="optionImg" src="assets/icons/options.svg">
@@ -30,7 +32,9 @@
 
     <div id="bottomBar">
       <div id="logos_bottom">
-        <a href="http://urbanrisklab.org"><img id="mitLogo" src="assets/graphics/URL_logo.svg"></a>
+        <a href="http://urbanrisklab.org">
+          <img id="mitLogo" src="assets/graphics/URL_logo.svg">
+        </a>
       </div>
       <div id="links">
         <div class="cityLinks" repeat.for="city_region of city_regions" textcontent.bind="city_region" click.delegate="changeCity(city_region)">
