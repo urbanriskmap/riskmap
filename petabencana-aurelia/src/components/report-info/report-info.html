@@ -1,14 +1,13 @@
 <template>
   <require from="./report-info.css"></require>
   <div  id="photoPreview">
-    <image id="image" src.bind="source" >
+    <image id="image" src.bind="imageurl" >
   </div>
   <div id="textPreview">
-    <p id="textTitle">${title}</p>
-    <p id="textBody">${body} ${status}</p>
-    <p id="textBody">${body} ${source}</p>
+    <p id="textTitle">${title}${heighttext}</p>
+    <p id="textBody">${text}</p>
   </div>
   <div id="tweet">
-  <a id="twitterShareBtn" href="https://twitter.com/intent/tweet?text=Check%20out%20my%20flood%20report%0A&url=http://dev.petabencana.id/%23/map/jakarta">Tweet your Report</a>
+  <a id="twitterShareBtn" href.bind="hreftext">Tweet your Report</a>
 </div>
 </template>
