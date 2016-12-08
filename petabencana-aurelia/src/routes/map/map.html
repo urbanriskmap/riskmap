@@ -4,12 +4,16 @@
   <require from="../../components/report-info/report-info"></require>
   <require from="../../components/watch-card/watch-card"></require>
   <!-- Use to test twitter cards, https://cards-dev.twitter.com/validator
-  Binding metatags with view-model works -->
-  <meta name="twitter-card" content="summary_large_image">
-  <meta property="og:title" content="Flood report">
+  Binding metatags with view-model works
   <meta property="og:url" content="http://dev.petabencana.id/&23/map/jakarta/${layers.popupContent.pkey}">
   <meta property="og:image" content.bind="layers.popupContent.image_url">
   <meta property="og:description" content.bind="layers.popupContent.text">
+  -->
+  <meta name="twitter-card" content="summary_large_image">
+  <meta property="og:title" content="Flood report">
+  <meta property="og:url" content="http://dev.petabencana.id">
+  <meta property="og:image" content="assets/images/social_image.png">
+  <meta property="og:description" content="PetaBencana harnesses the power of social media to gather, sort and display information about disasters in real time">
 
   <div id="pageWrapper">
     <div id="mapContainer">
