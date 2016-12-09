@@ -91,7 +91,6 @@ export class Map {
         self.map.flyTo(self.layers.pkeyList[self.report_id]._latlng, 16);
         self.layers.popupContent = self.layers.pkeyList[self.report_id].feature.properties;
         self.togglePane('open', '#reportPane');
-        history.pushState(stateObj, "map", '#/map/' + self.city_name + '/' + self.report_id);
       } else if (self.report_id && !self.layers.pkeyList.hasOwnProperty(self.report_id)) {
         $.notify("No such report key in " + self.city_name, {style:"mapInfo", className:"error" });
         self.flyToCity(self.city, stateObj);
@@ -108,7 +107,6 @@ export class Map {
     this.report_id = null;
     this.map.flyToBounds([city.bounds.sw, city.bounds.ne], 20);
     this.togglePane('close', '#reportPane');
-    history.pushState(stateObj, "map", '#/map/' + this.city_name);
   }
 
   attached() {
