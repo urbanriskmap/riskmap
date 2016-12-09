@@ -1,39 +1,39 @@
 @import '../../../styleSheets/themeGuide.less';
 
 #descriptionWrapper {
-  position: relative;
-  margin: 0px auto;
-  height: 75%;
+  .insetWrapper;
 }
 
 #textarea {
   position: relative;
-  width: 85%;
-  height: 80%;
+  width: 280px;
+  height: 260px;
   font-family: "Roboto-Light", "Roboto", Open Sans;
   color: #fff;
   border: none;
-  border-bottom: 3px solid #31aade;
+  border-bottom: 3px solid @banjir-blue;
   font-size: 14px;
   resize: none;
-  background-color: #808080;
-  margin: 30px auto 10px auto;
+  background-color: @light-gray;
+  margin: 0px;
   padding: 10px;
   outline: none;
-}
-
-#textarea:focus {
-  box-shadow: @inset-shadow;
+  &:focus {
+    margin-top: -1px;
+    margin-top: -1px;
+    border-top: 1px solid @banjir-blue;
+    border-left: 1px solid @banjir-blue;
+    border-right: 1px solid @banjir-blue;
+  }
 }
 
 #textmessage {
   font-family: "Roboto-Light", "Roboto", Open Sans;
-  color: #000;
+  color: @dark-gray;
   margin: 0px;
   font-size: 14px;
-}
-
-#textmessage p {
-  margin: 0px;
-  padding: 0px;
+  & p {
+    margin: 0px;
+    padding: 12px 0px 0px 0px;
+  }
 }
