@@ -31,26 +31,17 @@
   padding: 0px;
 }
 
-
 #optionsBtn {
   position: absolute;
+  background: transparent;
   right: 10px;
-  top: 5px;
-  height: 75%;
-  padding: 0px;
-  margin: auto;
-}
-
-#optionImg{
-  position:relative;
-  height: 100%;
-  .linkmedium-mixin(24px);
+  bottom: @bar-heights / 10;
+  .linkmedium-mixin(21px);
 }
 
 #bottomBar {
   .mapbars-mixin(3/2);
   bottom: 0px;
-
 }
 
 #logos_bottom {
@@ -62,8 +53,8 @@
     @media (min-width: 420px) {
       display: block;
       left: 10px;
-      top: 0px;
-      height: 75%;
+      bottom: @bar-heights / 7;
+      height: 65%;
       padding: 0px;
       margin: 0px;
     }
@@ -99,13 +90,14 @@
 
 .closeBtn {
   position: absolute;
-  width: 100%;
+  background: transparent;
   margin: 0px;
   padding: 0px;
-  right: @bar-heights / 6;
+  top: @bar-heights/8;
+  right: @bar-heights/8;
   text-align: right;
   z-index: 1010;
-  .linkmedium-mixin(24px);
+  .linkmedium-mixin(21px);
 }
 
 #notification{

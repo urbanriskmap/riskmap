@@ -1,10 +1,9 @@
 {
   "page_title": "Flood report",
-  "location_title": "Select location",
+  "location_title": "Pick location",
   "depth_title": "Report water depth",
   "photo_title": "Upload a photo",
-  "description_title": "Describe the event",
+  "description_title": "Tell us more",
   "review_title": "Review & submit",
-  "thanks_title": "Your report has been submitted",
   "terms_title": "Terms & Conditions"
 }

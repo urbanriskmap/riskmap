@@ -11,8 +11,8 @@
       <router-view></router-view>
     </div>
     <div id="cardNavigation" if.bind="(count < 7)">
-      <button id="prv" click.trigger="prevCard()" disabled.bind="prevDisabled" class="navBtn">&#10094; PREV</button>
-      <button id="nxt" click.trigger="nextCard()" disabled.bind="nextDisabled" class="navBtn">NEXT &#10095;</button>
+      <button id="prv" click.trigger="prevCard()" disabled.bind="prevDisabled" class="navBtn"><i class="fa fa-chevron-left"></i> PREV</button>
+      <button id="nxt" click.trigger="nextCard()" disabled.bind="nextDisabled" class="navBtn">NEXT <i class="fa fa-chevron-right"></i></button>
     </div>
   </div>
 </template>

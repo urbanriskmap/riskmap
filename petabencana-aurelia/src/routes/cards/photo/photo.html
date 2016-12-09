@@ -2,15 +2,17 @@
   <require from="./photo.css"></require>
   <div id="photoWrapper">
     <div id="previewWrapper" click.delegate="sendClick()">
-      <canvas id="camera" ref="preview">
+      <i id="cameraIcon" class="fa fa-camera"></i>
+      <canvas id="canvas" ref="preview">
       </canvas>
-      <img id="cameraIcon" src="assets/graphics/image_flood.svg">
-    </div>
-    <div id="helpTextWrapper">
-      <button id="photoButton" click.delegate="sendClick()">${helpText}</button>
     </div>
   </div>
+  <div id="modBtnWrapper">
+    <button id="changeButton" class="modBtn" click.delegate="sendClick()"><i class="fa fa-camera"></i></button>
+    <button id="rotateButton" class="modBtn" click.delegate="rotatePhoto()" disabled="true"><i class="fa fa-repeat"></i></button>
+    <button id="deleteButton" class="modBtn" click.delegate="deletePhoto()" disabled="true"><i class="fa fa-trash"></i></button>
+  </div>
   <div id="ghostButton" style="display: none">
-    <input id="photoCapture" type="file" accept="image/*" change.delegate="drawImage()" files.bind="selectedPhoto">
+    <input id="photoCapture" type="file" accept="image/*" change.delegate="drawImage(0)" files.bind="selectedPhoto">
   </div>
 </template>

@@ -12,7 +12,7 @@ export class Description {
       this.descripText = reportCardDescription;
       this.textLength = this.descripText.length;
     } else {
-      this.descripText = "Tell us more...";
+      this.descripText = "Enter description here...";
       this.textLength = 0;
     }
   }
@@ -23,7 +23,13 @@ export class Description {
     }
   }
 
-  charCount() {
+  checkEntry() {
+    if (this.textLength === 0) {
+      this.descripText = "Enter description here...";
+    }
+  }
+
+  storeInput() {
     this.textLength = this.descripText.length; //this.textLength required to update bound helpers for description.html
     this.reportcard.setdescription(this.descripText);
   }
