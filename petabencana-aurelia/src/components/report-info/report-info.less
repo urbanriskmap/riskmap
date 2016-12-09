@@ -1,10 +1,9 @@
 @import "../../styleSheets/themeGuide.less";
 
-
 #preview {
   position: absolute;
   width: 100%;
-  height: 75%;
+  height: 100%;
   padding: 30px 12px 0px 12px;
   z-index: 1002;
 }
@@ -29,7 +28,6 @@
   width: 45%;
   height: 80%;
   float: left;
-  .bodyregular-mixin(12px);
   padding: 0px 6px;
   overflow: scroll;
   /* border: 1px solid green; */
@@ -51,30 +49,14 @@
   /*border: 1px solid black;*/
 }
 
-
-#previewTitle {
-  .bodybold-mixin(16px);
-}
-
-#previewBody {
-  font-family: "Roboto-Light", "Roboto", Open Sans;
-  margin: 0px;
-}
-
-#tweet{
+#tweet {
   position: absolute;
+  left: 10px;
   bottom: 0px;
-  width: 85%; /* #photopreview + textpreview */
-  .bodyregular-mixin(12px);
-  margin: 0;
+  margin: 0px;
   padding: 0px;
-
-
-}
-
-#twitterShareBtn{
-  position: relative;
-  padding-right: 5px;
-/*  border: 1px solid green;*/
-
+  & a {
+    .linklight-mixin(14px);
+    text-decoration: none;
+  }
 }

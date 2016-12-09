@@ -8,7 +8,7 @@
 @translucent-black: rgba(0, 0, 0, .8);
 
 //Card highlights
-@banjir-blue:      #31aade;
+@banjir-blue:     #31aade;
 @dark-blue:       #1f4963;
 
 //Icons & graphs
@@ -77,8 +77,13 @@
   font-size: @var;
   color: @steel-gray;
   cursor: pointer;
-  &:hover {
-    color: @banjir-blue;
+  @media (min-width: 420px) {
+    &:hover {
+      color: @banjir-blue;
+    }
+  }
+  &:active {
+    color: @dark-blue;
   }
 }
 
@@ -93,7 +98,7 @@
     }
   }
   &:active {
-    color: @banjir-blue;
+    color: @dark-blue;
   }
 }
 

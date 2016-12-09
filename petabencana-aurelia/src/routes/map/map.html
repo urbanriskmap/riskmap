@@ -26,7 +26,7 @@
         </a>
       </div>
       <div id="optionsBtn" click.delegate="openWatch()">
-        <img id="optionImg" src="assets/icons/options.svg">
+        <i class="fa fa-bars"></i>
       </div>
     </div>
 
@@ -43,14 +43,16 @@
     </div>
 
     <div id="reportPane">
-      <div class="closeBtn" click.delegate="togglePane('close', '#reportPane')">&times;
+      <div class="closeBtn" click.delegate="togglePane('close', '#reportPane')">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
       </div>
       <report-info id="preview" if.bind="layers.popupContent.pkey" pkey.bind="layers.popupContent.pkey" city.bind="city_name" imageurl.bind="layers.popupContent.image_url" height.bind="layers.popupContent.report_data" title.bind="layers.popupContent.title" text.bind="layers.popupContent.text">
       </report-info>
     </div>
 
     <div id="watchPane">
-      <div class="closeBtn" click.delegate="togglePane('close', '#watchPane')">&times;
+      <div class="closeBtn" click.delegate="togglePane('close', '#watchPane')">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
       </div>
       <watch-card>
       </watch-card>
