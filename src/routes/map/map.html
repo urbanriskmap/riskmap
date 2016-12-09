@@ -37,7 +37,8 @@
         </a>
       </div>
       <div id="links">
-        <div class="cityLinks" repeat.for="city_region of city_regions" textcontent.bind="city_region" click.delegate="changeCity(city_region)">
+        <div repeat.for="city_region of city_regions">
+          <a class="cityLinks" route-href="route:map; params.bind:{city:city_region}" click.delegate="changeCity(city_region)">${city_region} </a>
         </div>
       </div>
     </div>

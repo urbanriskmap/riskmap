@@ -29,7 +29,7 @@ let START_ZOOM = 8;
 export class Map {
   constructor() {
     this.config = config;
-    this.city_regions = []; //get city objects as array, to bind & repeat in router-view
+    this.city_regions = [];
     for (var city_region in this.config.instance_regions) {
       this.city_regions.push(city_region);
     }
@@ -42,13 +42,12 @@ export class Map {
 
   //Allows page refresh when adding query parameters
   determineActivationStrategy() {
-    return activationStrategy.replace;
+    //return activationStrategy.replace;
   }
 
   togglePane(action, pane) {
     if ($(pane).css('display') === 'block' && (action === 'close' || action === 'toggle')) {
       $(pane).fadeOut(200);
-      //clear popup content
       if (pane === '#reportPane') {
         this.layers.popupContent = {};
       }
@@ -105,7 +104,7 @@ export class Map {
 
   flyToCity(city, stateObj) {
     this.report_id = null;
-    this.map.flyToBounds([city.bounds.sw, city.bounds.ne], 20);
+    this.map.flyToBounds([city.bounds.sw, city.bounds.ne], {'zoom': 20, 'duration':0.15});
     this.togglePane('close', '#reportPane');
   }
 
