@@ -2,10 +2,6 @@ import * as L from 'leaflet';
 import {inject} from 'aurelia-framework';
 import {Reportcard} from 'Reportcard';
 
-//TODO: get twitter location? to determine city in case of geolocate error.
-//Replace DEFAULT_MAP_CENTER with latlng of that city.
-var DEFAULT_MAP_CENTER = [-6.2, 106.83];
-
 //start-non-standard
 @inject(Reportcard)
 //end-non-standard
@@ -45,7 +41,7 @@ export class Location {
       detectRetina: true
     }).addTo(cardMap);
 
-    var that = this;
+    var self = this;
 
     //Add custom leaflet control, to navigate back to browser located user location
     L.Control.GeoLocate = L.Control.extend({
@@ -57,8 +53,8 @@ export class Location {
         container.style.width = '30px';
         container.style.height = '30px';
         container.onclick = function() {
-          if (that.inputs.gpsLocation) {
-            cardMap.flyTo(that.inputs.gpsLocation, 16);
+          if (self.inputs.gpsLocation) {
+            cardMap.flyTo(self.inputs.gpsLocation, 16);
           }
         };
         return container;
@@ -69,12 +65,12 @@ export class Location {
     };
 
     //If previous inputs available, setView to user selected location
-    if (that.inputs.markerLocation) {
-      cardMap.setView(that.inputs.markerLocation, 16);
+    if (self.inputs.markerLocation) {
+      cardMap.setView(self.inputs.markerLocation, 16);
       //If previous geolocation inputs available, add circle markers at gps location
-      if (that.inputs.gpsLocation) {
+      if (self.inputs.gpsLocation) {
         L.control.geoLocate({position: 'bottomright'}).addTo(cardMap);
-        that.drawGpsMarkers(that.inputs.gpsLocation, that.inputs.accuracy, cardMap);
+        self.drawGpsMarkers(self.inputs.gpsLocation, self.inputs.accuracy, cardMap);
       }
     } else {
 
@@ -85,24 +81,24 @@ export class Location {
       cardMap.on('locationfound', function(e) {
         cardMap.setView(e.latlng, 16);
         L.control.geoLocate({position: 'bottomright'}).addTo(cardMap);
-        that.drawGpsMarkers(e.latlng, e.accuracy, cardMap);
-        that.inputs = {markerLocation: e.latlng, gpsLocation: e.latlng, accuracy: e.accuracy};
-        that.reportcard.setlocation(that.inputs);
+        self.drawGpsMarkers(e.latlng, e.accuracy, cardMap);
+        self.inputs = {markerLocation: e.latlng, gpsLocation: e.latlng, accuracy: e.accuracy};
+        self.reportcard.setlocation(self.inputs);
       });
 
       //If geolocation unavailable, go to default city center;
       cardMap.on('locationerror', function () {
-        cardMap.setView(DEFAULT_MAP_CENTER, 16);
-        that.inputs.markerLocation = cardMap.getCenter();
-        that.reportcard.setlocation(that.inputs);
+        cardMap.setView([-6.2, 106.83], 16);
+        self.inputs.markerLocation = cardMap.getCenter();
+        self.reportcard.setlocation(self.inputs);
       });
     }
 
     //Get map center (corresponding to overlaid marker image) if user pans map
     cardMap.on('moveend', function () {
       if (cardMap) {
-        that.inputs.markerLocation = cardMap.getCenter();
-        that.reportcard.setlocation(that.inputs);
+        self.inputs.markerLocation = cardMap.getCenter();
+        self.reportcard.setlocation(self.inputs);
       }
     });
   }

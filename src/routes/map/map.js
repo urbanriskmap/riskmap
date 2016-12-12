@@ -108,6 +108,32 @@ export class Map {
     this.togglePane('close', '#reportPane');
   }
 
+  drawGpsMarkers(center, accuracy, map) {
+    L.circle(center, {
+      weight: 0,
+      fillColor: '#31aade',
+      fillOpacity: 0.15,
+      radius: accuracy / 2
+    }).addTo(map);
+    L.circleMarker(center, {
+      color: 'white',
+      weight: 1,
+      fillColor: '#31aade',
+      fillOpacity: 1,
+      radius: 8
+    }).addTo(map);
+  }
+
+  findLocation() {
+    var self = this;
+    this.map.locate({
+      setView: true
+    });
+    this.map.on('locationfound', (e) => {
+      self.drawGpsMarkers(e.latlng, e.accuracy, self.map);
+    });
+  }
+
   attached() {
     // Modify popup pane css on the fly
     $('#watchPane').css({
@@ -132,11 +158,29 @@ export class Map {
     }).addTo(this.map);
 
     //add zoom control
-    L.control.zoom({
-      position:'topleft'
-    }).addTo(this.map);
+    L.control.zoom({position: 'topleft'}).addTo(this.map);
 
     var self = this;
+
+    //Add custom leaflet control, to navigate back to browser located user location
+    L.Control.GeoLocate = L.Control.extend({
+      onAdd: (map) => {
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+        container.style.backgroundColor = 'white';
+        container.style.backgroundImage = 'url(assets/icons/geolocate.svg)';
+        container.style.backgroundSize = '30px 30px';
+        container.style.width = '30px';
+        container.style.height = '30px';
+        container.onclick = () => {
+          self.findLocation();
+        };
+        return container;
+      }
+    });
+    L.control.geoLocate = (opts) => {
+      return new L.Control.GeoLocate(opts);
+    };
+    L.control.geoLocate({position: 'topright'}).addTo(self.map);
 
     // Zoom to city
     this.changeCity(this.city_name);
