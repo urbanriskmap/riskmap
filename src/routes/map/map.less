@@ -14,7 +14,7 @@
 }
 
 .leaflet-control-zoom a {
-  background-color: @translucent-white;
+  background-color: @snow-white;
 }
 
 #topBar {
@@ -75,8 +75,11 @@
   padding: 0px 6px;
   border-right: 1px solid #2f2f2f;
   float: left;
-  text-transform: capitalize;
-  .linklight-mixin(14px);
+  & a {
+    .linklight-mixin(14px);
+    text-transform: capitalize;
+    text-decoration: none;
+  }
 }
 
 #reportPane {
