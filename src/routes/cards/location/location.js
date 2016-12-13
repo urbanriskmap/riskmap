@@ -8,13 +8,6 @@ import {Reportcard} from 'Reportcard';
 export class Location {
   constructor(Reportcard) {
     this.reportcard = Reportcard;
-    var reportCardLocation = this.reportcard.getlocation();
-    if (reportCardLocation) { //Check for available inputs, when user navigates back to location card
-      this.inputs = reportCardLocation;
-    } else {
-      //object to gather user as well as geolocate inputs
-      this.inputs = {markerLocation: null, gpsLocation: null, accuracy: null};
-    }
   }
 
   drawGpsMarkers(center, accuracy, map) {
@@ -53,8 +46,8 @@ export class Location {
         container.style.width = '30px';
         container.style.height = '30px';
         container.onclick = function() {
-          if (self.inputs.gpsLocation) {
-            cardMap.flyTo(self.inputs.gpsLocation, 16);
+          if (self.reportcard.location.gpsLocation) {
+            cardMap.flyTo(self.reportcard.location.gpsLocation, 16);
           }
         };
         return container;
@@ -65,12 +58,12 @@ export class Location {
     };
 
     //If previous inputs available, setView to user selected location
-    if (self.inputs.markerLocation) {
-      cardMap.setView(self.inputs.markerLocation, 16);
+    if (self.reportcard.location.markerLocation) {
+      cardMap.setView(self.reportcard.location.markerLocation, 16);
       //If previous geolocation inputs available, add circle markers at gps location
-      if (self.inputs.gpsLocation) {
+      if (self.reportcard.location.gpsLocation) {
         L.control.geoLocate({position: 'bottomright'}).addTo(cardMap);
-        self.drawGpsMarkers(self.inputs.gpsLocation, self.inputs.accuracy, cardMap);
+        self.drawGpsMarkers(self.reportcard.location.gpsLocation, self.reportcard.location.accuracy, cardMap);
       }
     } else {
 
@@ -82,23 +75,20 @@ export class Location {
         cardMap.setView(e.latlng, 16);
         L.control.geoLocate({position: 'bottomright'}).addTo(cardMap);
         self.drawGpsMarkers(e.latlng, e.accuracy, cardMap);
-        self.inputs = {markerLocation: e.latlng, gpsLocation: e.latlng, accuracy: e.accuracy};
-        self.reportcard.setlocation(self.inputs);
+        self.reportcard.location = {markerLocation: e.latlng, gpsLocation: e.latlng, accuracy: e.accuracy};
       });
 
       //If geolocation unavailable, go to default city center;
       cardMap.on('locationerror', function () {
         cardMap.setView([-6.2, 106.83], 16);
-        self.inputs.markerLocation = cardMap.getCenter();
-        self.reportcard.setlocation(self.inputs);
+        self.reportcard.location.markerLocation = cardMap.getCenter();
       });
     }
 
     //Get map center (corresponding to overlaid marker image) if user pans map
     cardMap.on('moveend', function () {
       if (cardMap) {
-        self.inputs.markerLocation = cardMap.getCenter();
-        self.reportcard.setlocation(self.inputs);
+        self.reportcard.location.markerLocation = cardMap.getCenter();
       }
     });
   }

@@ -7,30 +7,29 @@ import {Reportcard} from 'Reportcard';
 export class Description {
   constructor(Reportcard) {
     this.reportcard = Reportcard;
-    var reportCardDescription = this.reportcard.getdescription();
-    if (reportCardDescription) {
-      this.descripText = reportCardDescription;
-      this.textLength = this.descripText.length;
+    if (this.reportcard.description.value) {
+      this.textLength = this.reportcard.description.value.length;
+      this.text = this.reportcard.description.value;
     } else {
-      this.descripText = "Enter description here...";
       this.textLength = 0;
+      this.text = this.reportcard.description.hint;
     }
   }
 
   clearHint() {
     if (this.textLength === 0) {
-      this.descripText = "";
+      this.text = this.reportcard.description.value;
     }
   }
 
   checkEntry() {
     if (this.textLength === 0) {
-      this.descripText = "Enter description here...";
+      this.text = this.reportcard.description.hint;
     }
   }
 
   storeInput() {
-    this.textLength = this.descripText.length; //this.textLength required to update bound helpers for description.html
-    this.reportcard.setdescription(this.descripText);
+    this.reportcard.description.value = this.text; 
+    this.textLength = this.reportcard.description.value.length;
   }
 }

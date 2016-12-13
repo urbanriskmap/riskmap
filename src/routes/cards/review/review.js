@@ -14,26 +14,20 @@ export class Review {
       this.isMobile = false;
     }
     //Check for available user inputs
-    var reportCardDepth = this.reportcard.getwaterdepth();
-    if (reportCardDepth) {
-      this.selDepth = reportCardDepth + "cm";
+    if (this.reportcard.waterDepth) {
+      this.selDepth = this.reportcard.waterDepth + "cm";
     } else {
       this.selDepth = "Not selected";
     }
-    var reportCardPhoto = this.reportcard.getphoto();
-    if (reportCardPhoto) {
-      this.selPhoto = reportCardPhoto;
-    }
-    var reportCardDescription = this.reportcard.getdescription();
-    if (reportCardDescription) {
-      this.selDescription = reportCardDescription;
+    if (this.reportcard.description.value) {
+      this.selDescription = this.reportcard.description.value;
     } else {
       this.selDescription = "No description provided";
     }
   }
 
   get checkRequiredInputs() { //TODO: Add checks for file / data types
-    if (this.reportcard.getlocation() && this.reportcard.getwaterdepth() && (this.reportcard.getphoto() || this.reportcard.getdescription())) {
+    if (this.reportcard.location.markerLocation && this.reportcard.waterDepth && (this.reportcard.photo.file || this.reportcard.description.value)) {
       return true;
     } else {
       return false;
@@ -47,11 +41,11 @@ export class Review {
   }
 
   attached() {
-    if (this.selPhoto) {
-      this.drawImage();
+    if (this.reportcard.photo.file) {
+      this.drawImage(this.reportcard.photo.rotation);
     }
 
-    var that = this;
+    var self = this;
 
     if (this.checkRequiredInputs) {
       var slideRange = $('#submitSlider').width() - $('#submitKnob').width(),
@@ -63,7 +57,7 @@ export class Review {
       //Slider touch start
       $('#submitKnob').on('touchstart mousedown', function (e) {
         var slideStartPos;
-        if (that.isMobile) {
+        if (self.isMobile) {
           slideStartPos = e.originalEvent.touches[0].pageX;
         } else {
           slideStartPos = e.clientX;
@@ -73,7 +67,7 @@ export class Review {
         //Drag start
         $('#reviewWrapper').on('touchmove mousemove', function (e) {
           var slideDragPos;
-          if (that.isMobile) {
+          if (self.isMobile) {
             e.preventDefault();
             slideDragPos = e.originalEvent.touches[0].pageX;
           } else {
@@ -90,25 +84,11 @@ export class Review {
 
             //Swipe threshold crossed - TODO: execute report card submit function here
             if (slideTranslate >= (slideThreshold * slideRange) && !swiped) {
-              //Development test logs
-              console.log('Report submitted with following values:');
-              console.log('Location: ' + that.reportcard.getlocation().markerLocation);
-              console.log('Water depth: ' + that.reportcard.getwaterdepth() + 'cm');
-              if (that.reportcard.getphoto()) {
-                console.log('Photo: ' + that.reportcard.getphoto()[0].name);
-              } else {
-                console.log('No photo provided');
-              }
-              if (that.reportcard.getdescription()) {
-                console.log('Description: ' + that.reportcard.getdescription());
-              } else {
-                console.log('No description provided');
-              }
-              //Execute reportcard submit function
-              that.reportcard.submitReport();
-              //Navigate to thanks card
-              that.router.navigate(that.thanksLink);
               swiped = true;
+              //Execute reportcard submit function
+              self.reportcard.submitReport();
+              //Navigate to thanks card
+              self.router.navigate(self.thanksLink);
             }
           }
         });
@@ -138,34 +118,34 @@ export class Review {
     this.router.navigate(this.termsLink);
   }
 
-  drawImage() {
-    if (this.selPhoto) {
-      let wrapper = this.preview;
-      wrapper.width = $('#camera').width();
-      wrapper.height = $('#camera').height();
-      let reader = new FileReader();
-      reader.onload = (e) => {
-        let reviewImg = new Image();
-        reviewImg.onload = () => {
-          let imgW;
-          let imgH;
-          let trlX = 0;
-          let trlY = 0;
-          if (reviewImg.width >= reviewImg.height) {
-            imgH = wrapper.height;
-            imgW = Math.round((reviewImg.width * imgH) / reviewImg.height);
-            trlX = Math.round((wrapper.width - imgW) / 2);
-          } else {
-            imgW = wrapper.width;
-            imgH = Math.round((reviewImg.height * imgW) / reviewImg.width);
-            trlY = Math.round((wrapper.height - imgH) / 2);
-          }
-          let cntxt = wrapper.getContext('2d');
-          cntxt.drawImage(reviewImg, trlX, trlY, imgW, imgH);
-        };
-        reviewImg.src = e.target.result;
+  drawImage(deg) {
+    let wrapper = this.preview;
+    wrapper.width = $('#camera').width();
+    wrapper.height = $('#camera').height();
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      let reviewImg = new Image();
+      reviewImg.onload = () => {
+        let imgW;
+        let imgH;
+        let trlX = -wrapper.width/2;
+        let trlY = -wrapper.height/2;
+        if (reviewImg.width >= reviewImg.height) {
+          imgH = wrapper.height;
+          imgW = Math.round((reviewImg.width * imgH) / reviewImg.height);
+          trlX = trlX + Math.round((wrapper.width - imgW) / 2);
+        } else {
+          imgW = wrapper.width;
+          imgH = Math.round((reviewImg.height * imgW) / reviewImg.width);
+          trlY = trlY + Math.round((wrapper.height - imgH) / 2);
+        }
+        let cntxt = wrapper.getContext('2d');
+        cntxt.translate(wrapper.width / 2, wrapper.height / 2);
+        cntxt.rotate(deg * Math.PI / 180);
+        cntxt.drawImage(reviewImg, trlX, trlY, imgW, imgH);
       };
-      reader.readAsDataURL(this.selPhoto[0]);
-    }
+      reviewImg.src = e.target.result;
+    };
+    reader.readAsDataURL(this.reportcard.photo.file[0]);
   }
 }

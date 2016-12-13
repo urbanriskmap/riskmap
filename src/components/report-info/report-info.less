@@ -1,5 +1,6 @@
 @import "../../styleSheets/themeGuide.less";
 
+/* Move #preview styles to map.less */
 #preview {
   position: absolute;
   width: 100%;
@@ -13,8 +14,7 @@
   width: 40%;
   height: 80%;
   float: left;
-/*  border: 1px solid red; */
-  }
+}
 
 #image{
   position: relative;
@@ -33,12 +33,11 @@
   /* border: 1px solid green; */
 }
 
-#textTitle {
+.textTitle {
   width: 80%;
   .bodybold-mixin(14px);
   padding: 0px 6px;
   color: @banjir-blue;
-  /*border: 1px solid blue;*/
 }
 
 #textBody {
@@ -46,7 +45,6 @@
   padding: 0px 6px;
   width: 80%;
   word-wrap: break-word;
-  /*border: 1px solid black;*/
 }
 
 #tweet {

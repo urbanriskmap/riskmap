@@ -14,20 +14,15 @@ export class Depth {
     } else {
       this.isMobile = false;
     }
-    //Check previously available user inputs - from same session
-    var reportCardDepth = this.reportcard.getwaterdepth();
-    if (reportCardDepth) {
-      this.depthVal = reportCardDepth;
-    }
   }
 
   attached() {
-    var that = this;
+    var self = this;
     var imgHeightCm = 200;
     var refHeightPx = $('#imgWrapper').height();
-    if (that.depthVal) {
+    if (self.reportcard.waterDepth) {
       $('#floodZone').css({
-        'height': (that.depthVal * refHeightPx / imgHeightCm) + 'px'
+        'height': (self.reportcard.waterDepth * refHeightPx / imgHeightCm) + 'px'
       });
     }
     var fillHeight = $('#floodZone').height();
@@ -35,8 +30,7 @@ export class Depth {
       'bottom': (fillHeight * 100 / refHeightPx) + '%'
     });
     var heightInCm = Math.round((fillHeight * imgHeightCm) / refHeightPx);
-    that.depthVal = heightInCm;
-    that.reportcard.setwaterdepth(that.depthVal);
+    self.reportcard.waterDepth = heightInCm;
     var sliderActive = false;
 
     //Touch start
@@ -47,7 +41,7 @@ export class Depth {
         'box-shadow': '0px 0px 12px 8px rgba(179, 214, 239, 0.5)'
       });
       var startPos;
-      if (that.isMobile) {
+      if (self.isMobile) {
         startPos = e.originalEvent.touches[0].pageY;
       } else {
         startPos = e.clientY;
@@ -56,7 +50,7 @@ export class Depth {
       //Drag start
       $('#depthWrapper').on('touchmove mousemove', function (e) {
         var dragPos;
-        if (that.isMobile) {
+        if (self.isMobile) {
           e.preventDefault();
           dragPos = e.originalEvent.touches[0].pageY;
         } else {
@@ -64,8 +58,7 @@ export class Depth {
         }
         heightInCm = Math.round(((fillHeight + startPos - dragPos) * imgHeightCm) / refHeightPx);
         if (sliderActive && heightInCm > 0 && heightInCm <= imgHeightCm) {
-          that.depthVal = heightInCm;
-          that.reportcard.setwaterdepth(that.depthVal);
+          self.reportcard.waterDepth = heightInCm;
           $('#floodZone').css({
             'height': (fillHeight + startPos - dragPos) + 'px'
           });
@@ -87,9 +80,5 @@ export class Depth {
         fillHeight = $('#floodZone').height();
       }
     });
-  }
-
-  get waterDepth() { //bind waterDepth in DOM
-    return this.depthVal;
   }
 }

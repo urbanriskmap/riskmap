@@ -14,5 +14,5 @@
     <button id="deleteButton" class="modBtn" click.delegate="deletePhoto()" disabled="true"><i class="fa fa-trash"></i></button>
   </div>
 
-  <input id="ghostButton" style="display: none" type="file" accept="image/*" files.bind="selectedPhoto" change.delegate="drawImage(0)">
+  <input id="ghostButton" style="display: none" type="file" accept="image/*" files.bind="reportcard.photo.file" change.delegate="drawImage(0)">
 </template>

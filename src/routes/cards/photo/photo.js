@@ -3,7 +3,6 @@ import $ from 'jquery';
 import {Reportcard} from 'Reportcard';
 var wrapper;
 var cntxt;
-var degree = 0;
 
 //start-non-standard
 @inject(Reportcard)
@@ -11,9 +10,7 @@ var degree = 0;
 export class Photo {
   constructor(Reportcard) {
     this.reportcard = Reportcard;
-    var reportCardPhoto = this.reportcard.getphoto();
-    if (reportCardPhoto) {
-      this.selectedPhoto = reportCardPhoto;
+    if (this.reportcard.photo.file) {
       this.haveImg = true;
     }
   }
@@ -22,7 +19,7 @@ export class Photo {
     wrapper = this.preview;
     cntxt = wrapper.getContext('2d');
     if (this.haveImg) {
-      this.drawImage(degree);
+      this.drawImage(this.reportcard.photo.rotation);
       $('#rotateButton').prop("disabled", false);
       $('#deleteButton').prop("disabled", false);
     }
@@ -33,7 +30,6 @@ export class Photo {
   }
 
   drawImage(deg) {
-    this.reportcard.setphoto(this.selectedPhoto);
     wrapper.width = $('#canvas').width();
     wrapper.height = $('#canvas').height();
     let reader = new FileReader();
@@ -61,22 +57,20 @@ export class Photo {
     };
     $('#rotateButton').prop("disabled", false);
     $('#deleteButton').prop("disabled", false);
-    reader.readAsDataURL(this.selectedPhoto[0]);
-    degree = deg;
+    reader.readAsDataURL(this.reportcard.photo.file[0]);
   }
 
   rotatePhoto() {
-    degree += 90;
-    this.drawImage(degree);
+    this.reportcard.photo.rotation += 90;
+    this.drawImage(this.reportcard.photo.rotation);
   }
 
   deletePhoto() {
     cntxt.translate(-wrapper.width / 2, -wrapper.height / 2);
     cntxt.clearRect(0, 0, wrapper.width, wrapper.height);
-    this.selectedPhoto = null;
-    this.reportcard.setphoto(null);
+    this.reportcard.photo.file = null;
     $('#rotateButton').prop("disabled", true);
     $('#deleteButton').prop("disabled", true);
-    degree = 0;
+    this.reportcard.photo.rotation = 0;
   }
 }

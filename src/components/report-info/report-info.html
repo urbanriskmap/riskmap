@@ -4,7 +4,8 @@
     <image id="image" src.bind="imageurl" >
   </div>
   <div id="textPreview">
-    <p id="textTitle">${title}${heighttext}</p>
+    <p if.bind="title" class="textTitle">${title}</p>
+    <p if.bind="height" class="textTitle">Water depth: ${height}cm</p>
     <p id="textBody">${text}</p>
     <div id="tweet">
       <a href.bind="hreftext">
