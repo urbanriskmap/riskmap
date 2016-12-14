@@ -1,5 +1,5 @@
+import * as config from './config'; // Map config
 import {Data} from './data';
-let DATASERVER = 'https://data.petabencana.id/';
 import $ from 'jquery';
 
 // PetaBencana.id Layers class - manage leaflet data layers
@@ -14,7 +14,7 @@ export class Layers {
 
   // Get flood reports as topojson, return Leaflet geojson layer
   addReports(city_name, city_region, togglePane) {
-    let url = DATASERVER + 'reports/?city=' + city_region;
+    let url = config.data_server + 'reports/?city=' + city_region;
     var self = this;
     return new Promise(function(resolve, reject) {
       self.data.getData(url)

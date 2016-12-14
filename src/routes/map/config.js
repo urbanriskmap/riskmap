@@ -33,7 +33,8 @@ var config = {
       "sw":[-10.293, 104.677],
       "ne":[-3.974, 115.290]
     }
-  }
+  },
+  "data_server" : "https://data.petabencana.id/"
 };
 
 module.exports = config;
