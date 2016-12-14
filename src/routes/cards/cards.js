@@ -1,15 +1,18 @@
 import {inject} from 'aurelia-framework';
 import {I18N} from 'aurelia-i18n';
-import {Reportcard} from 'Reportcard';
 import $ from 'jquery';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {HttpClient} from 'aurelia-http-client';
+
+let client = new HttpClient();
 
 //start-non-standard
-@inject(Reportcard, I18N)
+@inject(I18N, EventAggregator)
 //end-non-standard
 export class Cards {
-  constructor(Reportcard, i18n) {
-    this.reportcard = Reportcard;
+  constructor(i18n, ea) {
     this.i18n = i18n;
+    this.ea = ea;
     this.titleString = "title translation error"; //TODO: REMOVE after debugging translation error
   }
   configureRouter(config, router) {
@@ -36,6 +39,35 @@ export class Cards {
       'height': $(window).height() - ($('#cardTitle').height() + $('#cardNavigation').height()) + 'px'
     });
     this.totalCards = this.router.routes.length - 1; //exclude (route:'', redirect:'location')
+    var self = this;
+    // photo separate
+    this.ea.subscribe('submit', (report, imageObject) => {
+      client.put('http://localhost:8001/cards/' + self.id, report).then(
+        response => {
+          // stop the spin wheel
+          if (response.statusCode !== 200){
+            // redirect to error card + error
+            console.log('error: '+response.statusCode);
+            // resolve(null);
+          }
+          else {
+            console.log('Submitted');
+            // report successful report completion to user
+            // now/also, send the image.
+            if (imageObject){
+              client.post('http://localhost:8001/cards/' + self.id + '/images', imageObject).then(
+                response => {
+                  console.log('image upload: '+response.statusCode);
+                }
+              )
+            }
+          }
+        }
+      ).catch(function(err){
+        // redirect to error card -> "there was an error submitting your report"
+        console.log(err);
+      });
+    });
   }
 
   get count() { //TODO navigation does not work unless getter is called from the DOM or elsewhere in js;
