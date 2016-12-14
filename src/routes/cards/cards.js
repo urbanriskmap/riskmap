@@ -33,6 +33,30 @@ export class Cards {
   }
   activate(params) {
     this.id = params.id; //TODO: pass to webApi? to check against one-time-link
+    let client = new HttpClient();
+    client.get('http://localhost:8001/cards/' + this.id)
+      .then(response => {
+        var msg = JSON.parse(response.response);
+        console.log(msg.result);
+        if (msg.result.received === true){
+          // redirect the user to an error card
+          console.log('Error - we alread have a report for this card')
+        }
+        else {
+          // continue as normal
+          console.log(response);
+        }
+      }).catch(function(response){
+        if (response.statusCode === 404){
+          // error this card does not exist
+          console.log('card not exist');
+        }
+        else {
+          // unhandled error
+          console.log('unhandled error verifying card id with server');
+        }
+      });
+    // navigate to error card
   }
   attached() {
     $('#cardContent').css({
