@@ -34,7 +34,7 @@ export class Cards {
   activate(params) {
     this.id = params.id; //TODO: pass to webApi? to check against one-time-link
     let client = new HttpClient();
-    client.get('http://localhost:8001/cards/' + this.id)
+    client.get('https://data-dev.petabencana.id/cards/' + this.id)
       .then(response => {
         var msg = JSON.parse(response.response);
         console.log(msg.result);
