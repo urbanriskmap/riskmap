@@ -1,10 +1,11 @@
 export class Error {
-  constructor() {
-    this.customErrorMsg = "Page not found";
+  activate(params, routerConfig) {
+    this.errorCode = routerConfig.settings.errorCode;
+    this.errorText = routerConfig.settings.errorText;
   }
   attached() {
-    window.setTimeout(function () {
+    /*window.setTimeout(function () {
       window.location.replace('/map');
-    }, 3000);
+    }, 3000);*/
   }
 }

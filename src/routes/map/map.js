@@ -38,15 +38,6 @@ export class Map {
     this.report_id = params.report;
   }
 
-  //start_dev_stage_only
-  //Allows page refresh when testing query parameters
-  /*
-  determineActivationStrategy() {
-    return activationStrategy.replace;
-  }
-  */
-  //end_dev_stage_only
-
   togglePane(action, pane) {
     if ($(pane).css('display') === 'block' && (action === 'close' || action === 'toggle')) {
       $(pane).fadeOut(200);
@@ -73,14 +64,19 @@ export class Map {
     }
   }
 
+  switchReports(city_name) {
+    var self = this;
+    this.togglePane('close', '#reportPane');
+    this.layers.removeReports();
+    return this.layers.addReports(this.city_name, this.city.region, this.togglePane);
+  }
+
   // Change city from within map without reloading window
   changeCity(city_name) {
     var self = this;
-    var stateObj = {map: "city"};
     this.city = this.parseMapCity(city_name);
-    this.flyToCity(self.city, stateObj);
-    this.layers.removeReports();
-    this.layers.addReports(this.city_name, this.city.region, this.togglePane)
+    this.map.flyToBounds([self.city.bounds.sw, self.city.bounds.ne]);
+    this.switchReports(city_name)
     .then(() => {
       if (self.report_id && self.layers.pkeyList.hasOwnProperty(self.report_id)) {
         //Case 1: Valid report id
@@ -91,19 +87,12 @@ export class Map {
         //Case 2: Invalid report id
         $.notify("No such report key in " + self.city_name, {style:"mapInfo", className:"error" });
         self.report_id = null;
-      } else {
-        //Case 3: No report id, .addReports resolved
       }
     }).catch((err) => {
-      //Case 4: .addReports not resolved
+      //Case 3: .addReports not resolved
       $.notify("No reports found for " + self.city_name, {style:"mapInfo", className:"info" });
       self.report_id = null;
     });
-  }
-
-  flyToCity(city, stateObj) {
-    this.map.flyToBounds([city.bounds.sw, city.bounds.ne], {'zoom': 20, 'duration': 1.50});
-    this.togglePane('close', '#reportPane');
   }
 
   drawGpsMarkers(center, accuracy, map) {
@@ -124,23 +113,15 @@ export class Map {
     this.gpsMarker.addTo(map);
   }
 
-  findLocation() {
+  goToClientLocation() {
     var self = this;
-    if (this.gpsMarker) {
-      this.map.flyTo(self.gpsMarker._latlng);
-    } else if (this.clientLocation) {
-      var inValidCity;
-      for (let city_region in this.config.instance_regions) {
-        inValidCity = false;
-        if (self.clientLocation.latitude > self.config.instance_regions[city_region].bounds.sw[0] && self.clientLocation.longitude > self.config.instance_regions[city_region].bounds.sw[1] && self.clientLocation.latitude < self.config.instance_regions[city_region].bounds.ne[0] && self.clientLocation.longitude < self.config.instance_regions[city_region].bounds.ne[1]) {
-          //self.changeCity(city_region); //also add reports for city
-          self.map.flyTo(self.clientLocation.latlng, 16); //dev, use self.changeCity()
-          self.drawGpsMarkers(self.clientLocation.latlng, self.clientLocation.accuracy, self.map);
-          inValidCity = true;
-          break;
-        }
-      }
-      if (!inValidCity) {
+    if (this.clientLocation) {
+      if (this.clientCityIsValid) {
+        self.map.flyTo(self.clientLocation.latlng, 16);
+        self.drawGpsMarkers(self.clientLocation.latlng, self.clientLocation.accuracy, self.map);
+        self.switchReports(self.clientCity);
+        //history.push(name of city to url)
+      } else {
         $.notify("Location out of bounds", {style: "mapInfo", className: "error"});
       }
     } else {
@@ -161,6 +142,7 @@ export class Map {
       zoomControl: false, //default position: 'topleft'
       attributionControl: false //include in bottom popup panel
     }).fitBounds([self.config.default_region.bounds.sw, self.config.default_region.bounds.ne]);
+
     // Create Layer instance
     this.layers = new Layers(this.map);
 
@@ -170,6 +152,14 @@ export class Map {
     });
     this.map.on('locationfound', (e) => {
       self.clientLocation = e;
+      for (let city_region in self.config.instance_regions) {
+        self.clientCityIsValid = false;
+        if (self.clientLocation.latitude > self.config.instance_regions[city_region].bounds.sw[0] && self.clientLocation.longitude > self.config.instance_regions[city_region].bounds.sw[1] && self.clientLocation.latitude < self.config.instance_regions[city_region].bounds.ne[0] && self.clientLocation.longitude < self.config.instance_regions[city_region].bounds.ne[1]) {
+          self.clientCity = city_region;
+          self.clientCityIsValid = true;
+          break;
+        }
+      }
     });
     this.map.on('locationerror', () => {
       self.clientLocation = null;
@@ -197,7 +187,7 @@ export class Map {
         container.style.width = '26px';
         container.style.height = '26px';
         container.onclick = () => {
-          self.findLocation();
+          self.goToClientLocation();
         };
         return container;
       }

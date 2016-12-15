@@ -1,18 +1,20 @@
 <template>
   <require from="./error.css"></require>
 
-  <div id="petalogo" class="cardInner">
+  <div id="petalogo">
     <img src="assets/graphics/Peta_logo.svg">
   </div>
-    <div id="thanksText">
-      <p id="thanksBold">Error</p>
-      <br>
-      <p>${customErrorMsg}</p>
-        <br>
-        <p> Redirecting to PetaBencana.id</p>
-    </div>
-    <div id="URLlogo" class="cardInner">
-      <img src="assets/graphics/URL_logo.svg">
-    </div>
 
+  <div id="msgWrapper">
+    <h2 if.bind="errorCode">Error : ${errorCode}</h2>
+    <h2 if.bind="!errorCode">Error</h2>
+    <br>
+    <p>${errorText}</p>
+    <br>
+    <a href="https://dev.petabencana.id">Go to PetaBencana.id</a>
+  </div>
+
+  <div id="URLlogo">
+    <img src="assets/graphics/URL_logo.svg">
+  </div>
 </template>

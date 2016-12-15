@@ -1,41 +1,40 @@
 @import '../../../styleSheets/themeGuide.less';
 
-#thanksText {
-  position: absolute;
-  width: 75%;
-  top: 50%;
-  left: 50%;
-  .translate-mixin(-50%, -50%);
-  color: #fff;
-  text-align: center;
-  font-size: 14px;
-  font-family: 'Roboto-Regular', 'Helvetica Neue', sans-serif;
-}
-
-#thanksBold {
-  color: white;
-  font-size: 21px;
-  font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;
-}
-
 #petalogo {
-  position:absolute;
-  padding: 5px 30px 5px 30px;
-  width: 60%;
-  top: 10px;
-  left: 50%;
-  .translate-mixin(-50%, 0);
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px 0 10px 0;
   border: none;
-  border-bottom: 1px solid #2f2f2f;
+  border-bottom: 1px solid @dark-gray;
+  & img {
+    width: 60%;
+  }
+}
+
+#msgWrapper {
+  position: relative;
+  width: 60%;
+  margin: auto;
+  & h2 {
+    .bodymedium-mixin(21px);
+  }
+  & p {
+    .bodyregular-mixin(14px);
+  }
+  & a {
+    .linkmedium-mixin(14px);
+  }
 }
 
 #URLlogo{
-  position: absolute;
-  padding: 5px 30px 5px 30px;
-  width: 70%;
-  left: 50%;
-  bottom: 0;
-  .translate-mixin(-50%,-50%);
+  position: relative;
+  width: 80%;
+  margin: 20px auto 0 auto;
+  padding: 8px 0 0 0;
   border: none;
-  border-top: 1px solid #2f2f2f;
+  border-top: 1px solid @dark-gray;
+  & img {
+    width: 60%;
+  }
 }

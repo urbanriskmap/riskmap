@@ -20,9 +20,9 @@ export class Depth {
     var self = this;
     var imgHeightCm = 200;
     var refHeightPx = $('#imgWrapper').height();
-    if (self.reportcard.waterDepth) {
+    if (self.reportcard.depth) {
       $('#floodZone').css({
-        'height': (self.reportcard.waterDepth * refHeightPx / imgHeightCm) + 'px'
+        'height': (self.reportcard.depth * refHeightPx / imgHeightCm) + 'px'
       });
     }
     var fillHeight = $('#floodZone').height();
@@ -30,7 +30,7 @@ export class Depth {
       'bottom': (fillHeight * 100 / refHeightPx) + '%'
     });
     var heightInCm = Math.round((fillHeight * imgHeightCm) / refHeightPx);
-    self.reportcard.waterDepth = heightInCm;
+    self.reportcard.depth = heightInCm;
     var sliderActive = false;
 
     //Touch start
@@ -58,7 +58,7 @@ export class Depth {
         }
         heightInCm = Math.round(((fillHeight + startPos - dragPos) * imgHeightCm) / refHeightPx);
         if (sliderActive && heightInCm > 0 && heightInCm <= imgHeightCm) {
-          self.reportcard.waterDepth = heightInCm;
+          self.reportcard.depth = heightInCm;
           $('#floodZone').css({
             'height': (fillHeight + startPos - dragPos) + 'px'
           });

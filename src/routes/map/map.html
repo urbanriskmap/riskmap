@@ -47,7 +47,7 @@
       <div class="closeBtn" click.delegate="togglePane('close', '#reportPane')">
         <i class="fa fa-times-circle" aria-hidden="true"></i>
       </div>
-      <report-info id="preview" if.bind="layers.popupContent.pkey" pkey.bind="layers.popupContent.pkey" city.bind="city_name" imageurl.bind="layers.popupContent.image_url" height.bind="layers.popupContent.report_data" title.bind="layers.popupContent.title" text.bind="layers.popupContent.text">
+      <report-info id="preview" if.bind="layers.popupContent.pkey" pkey.bind="layers.popupContent.pkey" city.bind="city_name" imageurl.bind="layers.popupContent.image_url" height.bind="layers.popupContent.report_data.flood_depth" title.bind="layers.popupContent.title" text.bind="layers.popupContent.text">
       </report-info>
     </div>
 
