@@ -1,12 +1,24 @@
 import {Reportcard} from 'Reportcard';
 import {inject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 //start-non-standard
-@inject(Reportcard)
+@inject(Reportcard, EventAggregator)
 //end-non-standard
 export class Review {
-  constructor(Reportcard) {
+  constructor(Reportcard, ea) {
     this.reportcard = Reportcard;
+    this.ea = ea;
+    this.report = {
+      text: this.reportcard.description.value,
+      water_depth: this.reportcard.waterDepth,
+      created_at: new Date().toISOString(),
+      image_url: '',
+      location: this.reportcard.location.markerLocation,
+    }
+    this.imageObject = this.reportcard.photo.file;
+
+
     //Check for mobile or desktop device
     if (/Mobi/.test(navigator.userAgent)) {
       this.isMobile = true;
@@ -86,9 +98,11 @@ export class Review {
             if (slideTranslate >= (slideThreshold * slideRange) && !swiped) {
               swiped = true;
               //Execute reportcard submit function
-              self.reportcard.submitReport();
+              //TODO callback in self.reportcard.submitReport to send user to thank you card
+              self.ea.publish('submit', self.report, self.imageObject);
+              //self.reportcard.submitReport();
               //Navigate to thanks card
-              self.router.navigate(self.thanksLink);
+              //self.router.navigate(self.thanksLink);
             }
           }
         });

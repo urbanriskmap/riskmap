@@ -28,7 +28,7 @@ export class Map {
   constructor() {
     this.config = config;
     this.city_regions = [];
-    for (var city_region in this.config.instance_regions) {
+    for (let city_region in this.config.instance_regions) {
       this.city_regions.push(city_region);
     }
   }
@@ -128,17 +128,23 @@ export class Map {
     var self = this;
     if (this.gpsMarker) {
       this.map.flyTo(self.gpsMarker._latlng);
+    } else if (this.clientLocation) {
+      var inValidCity;
+      for (let city_region in this.config.instance_regions) {
+        inValidCity = false;
+        if (self.clientLocation.latitude > self.config.instance_regions[city_region].bounds.sw[0] && self.clientLocation.longitude > self.config.instance_regions[city_region].bounds.sw[1] && self.clientLocation.latitude < self.config.instance_regions[city_region].bounds.ne[0] && self.clientLocation.longitude < self.config.instance_regions[city_region].bounds.ne[1]) {
+          //self.changeCity(city_region); //also add reports for city
+          self.map.flyTo(self.clientLocation.latlng, 16); //dev, use self.changeCity()
+          self.drawGpsMarkers(self.clientLocation.latlng, self.clientLocation.accuracy, self.map);
+          inValidCity = true;
+          break;
+        }
+      }
+      if (!inValidCity) {
+        $.notify("Location out of bounds", {style: "mapInfo", className: "error"});
+      }
     } else {
-      this.map.locate({
-        setView: true
-      });
-      this.map.on('locationfound', (e) => {
-        self.drawGpsMarkers(e.latlng, e.accuracy, self.map);
-        console.log(this.gpsMarker);
-      });
-      this.map.on('locationerror', () => {
-        $.notify("GPS location not found", {style: "mapInfo", className: "error"});
-      });
+      $.notify("GPS location not found", {style: "mapInfo", className: "error"});
     }
   }
 
@@ -157,6 +163,17 @@ export class Map {
     }).fitBounds([self.config.default_region.bounds.sw, self.config.default_region.bounds.ne]);
     // Create Layer instance
     this.layers = new Layers(this.map);
+
+    // Find user location & store in background
+    this.map.locate({
+      setView: false
+    });
+    this.map.on('locationfound', (e) => {
+      self.clientLocation = e;
+    });
+    this.map.on('locationerror', () => {
+      self.clientLocation = null;
+    });
 
     let Mapbox_Custom = L.tileLayer('https://api.mapbox.com/styles/v1/urbanriskmap/ciwce3tim00532pocrokb7ojf/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidXJiYW5yaXNrbWFwIiwiYSI6ImNpdmVhbTFraDAwNHIyeWw1ZDB6Y2hhbTYifQ.tpgt1PB5lkJ-wITS02c96Q', {
     	//attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',

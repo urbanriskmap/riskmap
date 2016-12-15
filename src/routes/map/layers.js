@@ -16,14 +16,14 @@ export class Layers {
   addReports(city_name, city_region, togglePane) {
     let url = config.data_server + 'reports/?city=' + city_region;
     var self = this;
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       self.data.getData(url)
-      .then(function(data) {
+      .then((data) => {
         self.reports = L.geoJSON(data, {
-          onEachFeature: function(feature, layer) { //TODO: create separate class function
+          onEachFeature: (feature, layer) => { //TODO: create separate class function
             self.pkeyList[feature.properties.pkey] = layer;
             layer.on({
-              click: function() {
+              click: () => {
                 self.popupContent = {};
                 for (let prop in feature.properties) {
                   self.popupContent[prop] = feature.properties[prop];
@@ -34,7 +34,7 @@ export class Layers {
               }
             });
           },
-          pointToLayer: function(feature, latlng) { //TODO: create separate class function
+          pointToLayer: (feature, latlng) => { //TODO: create separate class function
             return L.marker(latlng, {
               icon: L.icon({
                 iconUrl: 'assets/icons/floodIcon.svg',
