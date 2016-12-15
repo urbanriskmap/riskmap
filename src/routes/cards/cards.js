@@ -46,7 +46,7 @@ export class Cards {
     var self = this;
 
     let client = new HttpClient();
-    client.get('http://localhost:8001/cards/' + this.id)
+    client.get('https://data-dev.petabencana.id/' + this.id)
     .then(response => {
       var msg = JSON.parse(response.response);
       console.log(msg.result);
@@ -54,7 +54,7 @@ export class Cards {
         //self.router.routes[8].settings.errorCode = response.statusCode;
         self.router.routes[8].settings.errorText = "Report already received from this link";
         self.router.navigate('error');
-      } 
+      }
     })
     .catch(response => {
       if (response.statusCode === 404){
@@ -77,12 +77,12 @@ export class Cards {
 
     // photo separate
     this.ea.subscribe('submit', (report, imageObject) => {
-      client.put('http://localhost:8001/cards/' + self.id, report)
+      client.put('https://data-dev.petabencana.id/' + self.id, report)
       .then(response => {
         self.router.navigate('thanks');
         // now/also, send the image.
         if (imageObject) {
-          client.post('http://localhost:8001/cards/' + self.id + '/images', imageObject)
+          client.post('https://data-dev.petabencana.id/' + self.id + '/images', imageObject)
           .then(response => {
             console.log('image upload: ' + response.statusCode);
           });

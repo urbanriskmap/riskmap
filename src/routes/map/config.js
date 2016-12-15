@@ -42,7 +42,7 @@ var config = {
       "ne":[-3.974, 115.290]
     }
   },
-  "data_server" : "http://localhost:8001/"
+  "data_server" : "https://data-dev.petabencana.id/"
 };
 
 module.exports = config;
