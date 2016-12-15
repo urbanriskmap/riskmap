@@ -66,13 +66,13 @@ export class Cards {
     var self = this;
     // photo separate
     this.ea.subscribe('submit', (report, imageObject) => {
-      client.put('http://localhost:8001/cards/' + self.id, report).then(
+      client.put('https://data-dev.petabencana.id/cards/' + self.id, report).then(
         response => {
           console.log('Submitted');
           // report successful report completion to user
           // now/also, send the image.
           if (imageObject){
-            client.post('http://localhost:8001/cards/' + self.id + '/images', imageObject).then(
+            client.post('https://data-dev.petabencana.id/cards/' + self.id + '/images', imageObject).then(
               response => {
                 console.log('image upload: '+response.statusCode);
               }
