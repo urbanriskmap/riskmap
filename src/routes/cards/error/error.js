@@ -4,7 +4,7 @@ export class Error {
   }
   attached() {
     window.setTimeout(function () {
-      window.location.replace('/#/map');
+      window.location.replace('/map');
     }, 3000);
   }
 }

@@ -1,9 +1,17 @@
 // PetaBencana.id Map configuration file, for CogniCity data
 // https://github.com/urbanriskmap/urbanriskmap-meta/wiki/Bounding-Boxes-for-Target-Cities
 
+// Retain cambridge for dev; 
 var config = {
   "instance_regions":
   {
+    "cambridge": {
+      "region": "cmb",
+      "bounds": {
+        "sw":[42.348, -71.124],
+        "ne":[42.384, -71.068]
+      }
+    },
     "jakarta": {
       "region": "jbd",
       "bounds": {
