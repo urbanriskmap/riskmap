@@ -4,7 +4,8 @@ import $ from 'jquery';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
 
-let client = new HttpClient();
+var CONFIG_DATASRC1 = "https://data-dev.petabencana.id/";
+var CONFIG_DATASRC2 = "http://localhost:8001/";
 
 //start-non-standard
 @inject(I18N, EventAggregator)
@@ -19,7 +20,7 @@ export class Cards {
   configureRouter(config, router) {
     config.title = this.i18n.tr('page_title');
     config.map([
-      {route: '',             redirect: 'location'},
+      {route: '',             redirect: 'location'}, //TODO: remove, redirect after card_id validation
       {route: 'location',     moduleId: './location/location',        settings: {title: this.i18n.tr('location_title'),     cardNo: 1}},
       {route: 'depth',        moduleId: './depth/depth',              settings: {title: this.i18n.tr('depth_title'),        cardNo: 2}},
       {route: 'photo',        moduleId: './photo/photo',              settings: {title: this.i18n.tr('photo_title'),        cardNo: 3}},
@@ -46,10 +47,10 @@ export class Cards {
     var self = this;
 
     let client = new HttpClient();
-    client.get('https://data-dev.petabencana.id/' + this.id)
+    client.get(CONFIG_DATASRC2 + 'cards/' + this.id)
     .then(response => {
       var msg = JSON.parse(response.response);
-      console.log(msg.result);
+      //console.log(msg.result);
       if (msg.result.received === true) {
         //self.router.routes[8].settings.errorCode = response.statusCode;
         self.router.routes[8].settings.errorText = "Report already received from this link";
@@ -75,20 +76,32 @@ export class Cards {
       self.router.navigate('terms');
     });
 
-    // photo separate
     this.ea.subscribe('submit', (report, imageObject) => {
-      client.put('https://data-dev.petabencana.id/' + self.id, report)
+      client.put(CONFIG_DATASRC2 + 'cards/' + self.id, report)
       .then(response => {
-        self.router.navigate('thanks');
         // now/also, send the image.
         if (imageObject) {
-          client.post('https://data-dev.petabencana.id/' + self.id + '/images', imageObject)
+          let client = new HttpClient()
+          .configure(x => {
+            x.withBaseUrl(CONFIG_DATASRC1); //REPLACE with aws s3 response url?
+            x.withHeader('Content-Type', imageObject.type);
+          });
+
+          client.post(self.id + '/images', imageObject)
           .then(response => {
-            console.log('image upload: ' + response.statusCode);
+            console.log("Image upload SUCCESS response:");
+            console.log(response);
+          })
+          .catch(response => {
+            console.log("Image upload ERROR response:");
+            console.log(response);
           });
         }
+        // Proceed to thanks page if report submit resolved; regardless of image upload
+        self.router.navigate('thanks');
       })
       .catch(response => {
+        console.log(response);
         self.router.routes[8].settings.errorCode = response.statusCode;
         self.router.routes[8].settings.errorText = response.statusText;
         self.router.navigate('error');
