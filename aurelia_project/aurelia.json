@@ -164,11 +164,6 @@
             "main": "i18nextXHRBackend"
           },
           {
-            "name": "intl",
-            "path": "../node_modules/intl/dist",
-            "main": "Intl"
-          },
-          {
             "name": "jquery",
             "path": "../node_modules/jquery/dist",
             "main": "jquery"
