@@ -3,11 +3,9 @@ export class Reportcard {
     return Metadata.singleton(true);
   } //true indicates to register in the root container
 
-  constructor(id) {
-    this.id = id;
-
+  constructor() {
     this.location = {markerLocation: null, gpsLocation: null, accuracy: null};
-    this.waterDepth = null;
+    this.depth = null;
     this.photo = {file: null, rotation: 0};
     this.description = {hint: "Enter description here...", value: null};
   }

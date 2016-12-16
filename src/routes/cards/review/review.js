@@ -6,18 +6,17 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 @inject(Reportcard, EventAggregator)
 //end-non-standard
 export class Review {
-  constructor(Reportcard, ea) {
-    this.reportcard = Reportcard;
+  constructor(rc, ea) {
+    this.reportcard = rc;
     this.ea = ea;
     this.report = {
       text: this.reportcard.description.value,
-      water_depth: this.reportcard.waterDepth,
+      water_depth: this.reportcard.depth,
       created_at: new Date().toISOString(),
       image_url: '',
       location: this.reportcard.location.markerLocation,
-    }
+    };
     this.imageObject = this.reportcard.photo.file;
-
 
     //Check for mobile or desktop device
     if (/Mobi/.test(navigator.userAgent)) {
@@ -25,35 +24,30 @@ export class Review {
     } else {
       this.isMobile = false;
     }
+
     //Check for available user inputs
-    if (this.reportcard.waterDepth) {
-      this.selDepth = this.reportcard.waterDepth + "cm";
+    if (this.report.water_depth) {
+      this.selDepth = this.report.water_depth + "cm";
     } else {
       this.selDepth = "Not selected";
     }
-    if (this.reportcard.description.value) {
-      this.selDescription = this.reportcard.description.value;
+    if (this.report.text) {
+      this.selDescription = this.report.text;
     } else {
       this.selDescription = "No description provided";
     }
   }
 
   get checkRequiredInputs() { //TODO: Add checks for file / data types
-    if (this.reportcard.location.markerLocation && this.reportcard.waterDepth && (this.reportcard.photo.file || this.reportcard.description.value)) {
+    if (this.report.location && this.report.water_depth && (this.imageObject || this.report.text)) {
       return true;
     } else {
       return false;
     }
   }
 
-  activate(params, routerConfig) {
-    this.termsLink = routerConfig.navModel.router.routes[6].route;
-    this.thanksLink = routerConfig.navModel.router.routes[7].route;
-    this.router = routerConfig.navModel.router;
-  }
-
   attached() {
-    if (this.reportcard.photo.file) {
+    if (this.imageObject) {
       this.drawImage(this.reportcard.photo.rotation);
     }
 
@@ -94,15 +88,11 @@ export class Review {
               'background-color': 'rgba(31, 73, 99, ' + (slideTranslate / (slideThreshold * slideRange)) + ')'
             });
 
-            //Swipe threshold crossed - TODO: execute report card submit function here
+            //Swipe threshold crossed
             if (slideTranslate >= (slideThreshold * slideRange) && !swiped) {
               swiped = true;
-              //Execute reportcard submit function
-              //TODO callback in self.reportcard.submitReport to send user to thank you card
+              slidePressed = false;
               self.ea.publish('submit', self.report, self.imageObject);
-              //self.reportcard.submitReport();
-              //Navigate to thanks card
-              //self.router.navigate(self.thanksLink);
             }
           }
         });
@@ -129,7 +119,7 @@ export class Review {
   }
 
   readTerms() {
-    this.router.navigate(this.termsLink);
+    this.ea.publish('readTerms', 'click');
   }
 
   drawImage(deg) {

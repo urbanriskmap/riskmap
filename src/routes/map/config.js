@@ -1,7 +1,7 @@
 // PetaBencana.id Map configuration file, for CogniCity data
 // https://github.com/urbanriskmap/urbanriskmap-meta/wiki/Bounding-Boxes-for-Target-Cities
 
-// Retain cambridge for dev; 
+// Retain cambridge for dev;
 var config = {
   "instance_regions":
   {
