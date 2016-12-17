@@ -15,8 +15,6 @@ export class Cards {
     this.i18n = i18n;
     this.ea = ea;
     this.titleString = "title translation error"; //TODO: REMOVE after debugging translation error
-    console.log(this.i18n.getLocale());
-    console.log(this.i18n.tr('page_title'));
   }
 
   configureRouter(config, router) {
@@ -41,6 +39,8 @@ export class Cards {
   }
 
   attached() {
+    console.log(this.i18n.getLocale());
+    console.log(this.i18n.tr('page_title'));
     $('#cardContent').css({
       'height': $(window).height() - ($('#cardTitle').height() + $('#cardNavigation').height()) + 'px'
     });
