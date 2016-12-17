@@ -7,7 +7,7 @@
     "url": "???"
   },
   "scripts": {
-    "start": "au run --watch",
+    "start": "au run --env dev --watch",
     "test": "au test",
     "build": "rm -rf scripts/* && au build --env prod"
   },
