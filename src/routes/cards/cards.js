@@ -15,6 +15,12 @@ export class Cards {
     this.i18n = i18n;
     this.ea = ea;
     this.titleString = "title translation error"; //TODO: REMOVE after debugging translation error
+    this.i18n
+    .setLocale('id')
+    .then( () => {
+      // locale is loaded
+      console.log(this.i18n.getLocale());
+    });
   }
 
   configureRouter(config, router) {
