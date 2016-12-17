@@ -5,7 +5,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
 
 var CONFIG_DATASRC1 = "https://data-dev.petabencana.id/";
-var CONFIG_DATASRC2 = "http://localhost:8001/";
+var CONFIG_DATASRC2 = "https://data-dev.petabencana.id/";
 
 //start-non-standard
 @inject(I18N, EventAggregator)
