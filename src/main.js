@@ -28,9 +28,9 @@ export function configure(aurelia) {
       backend: {
         loadPath: './locales/{{lng}}/{{ns}}.json'
       },
-      lng : 'en',
+      lng : 'id',
       attributes : ['t','i18n'],
-      fallbackLng : 'id',
+      fallbackLng : 'en',
       debug : true
     });
   });
