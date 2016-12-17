@@ -92,7 +92,7 @@ export class Cards {
           let client = new HttpClient()
           .configure(x => {
             x.withBaseUrl(CONFIG_DATASRC1); //REPLACE with aws s3 response url?
-            x.withHeader('Content-Type', imageObject.type);
+            x.withHeader('Content-Type', 'image/png');
           });
 
           client.post(self.id + '/images', imageObject)
