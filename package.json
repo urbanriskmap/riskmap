@@ -9,7 +9,8 @@
   "scripts": {
     "start": "au run --env dev --watch",
     "test": "au test",
-    "build": "rm -rf scripts/* && au build --env prod"
+    "build": "rm -rf scripts/* && au build --env prod",
+    "build-dev" : "rm -rf scripts/* && au build --env dev"
   },
   "license": "MIT",
   "dependencies": {
