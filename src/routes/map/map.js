@@ -118,7 +118,13 @@ export class Map {
     if (this.clientLocation) {
       if (this.clientCityIsValid) {
         self.map.flyTo(self.clientLocation.latlng, 16);
-        self.drawGpsMarkers(self.clientLocation.latlng, self.clientLocation.accuracy, self.map);
+        if (self.gpsMarker) {
+          self.gpsMarker.removeFrom(map);
+          self.gpsAccuracy.removeFrom(map);
+        }
+        self.map.once('moveend', () => { //execute only once, after fly to location ends, ignores user map drag events
+          self.drawGpsMarkers(self.clientLocation.latlng, self.clientLocation.accuracy, self.map);
+        });
         self.switchReports(self.clientCity);
         //history.push(name of city to url)
       } else {
