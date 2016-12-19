@@ -1,4 +1,5 @@
 import environment from './environment';
+import {I18N} from 'aurelia-i18n';
 import Backend from 'i18next-xhr-backend';
 
 //Configure Bluebird Promises.
@@ -28,12 +29,12 @@ export function configure(aurelia) {
       backend: {
         loadPath: './locales/{{lng}}/{{ns}}.json'
       },
-      lng : 'en',
+      lng : 'id',
       attributes : ['t','i18n'],
-      fallbackLng : 'id',
+      fallbackLng : 'en',
       debug : true
     });
   });
 
-  aurelia.start().then(() => aurelia.setRoot());
+  aurelia.start().then(a => a.setRoot());
 }

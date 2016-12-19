@@ -5,7 +5,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
 
 var CONFIG_DATASRC1 = "https://data-dev.petabencana.id/";
-var CONFIG_DATASRC2 = "http://localhost:8001/";
+var CONFIG_DATASRC2 = "https://data-dev.petabencana.id/";
 
 //start-non-standard
 @inject(I18N, EventAggregator)
@@ -15,6 +15,12 @@ export class Cards {
     this.i18n = i18n;
     this.ea = ea;
     this.titleString = "title translation error"; //TODO: REMOVE after debugging translation error
+    this.i18n
+    .setLocale('id')
+    .then( () => {
+      // locale is loaded
+      console.log(this.i18n.getLocale());
+    });
   }
 
   configureRouter(config, router) {
@@ -39,6 +45,8 @@ export class Cards {
   }
 
   attached() {
+    console.log(this.i18n.getLocale());
+    console.log(this.i18n.tr('page_title'));
     $('#cardContent').css({
       'height': $(window).height() - ($('#cardTitle').height() + $('#cardNavigation').height()) + 'px'
     });
@@ -84,7 +92,7 @@ export class Cards {
           let client = new HttpClient()
           .configure(x => {
             x.withBaseUrl(CONFIG_DATASRC1); //REPLACE with aws s3 response url?
-            x.withHeader('Content-Type', imageObject.type);
+            x.withHeader('Content-Type', 'image/png');
           });
 
           client.post(self.id + '/images', imageObject)
