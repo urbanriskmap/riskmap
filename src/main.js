@@ -32,7 +32,7 @@ export function configure(aurelia) {
       lng : 'id',
       attributes : ['t','i18n'],
       fallbackLng : 'en',
-      debug : true
+      debug : false
     });
   });
 
