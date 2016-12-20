@@ -1,7 +1,10 @@
 <template>
   <require from="./report-info.css"></require>
   <div  id="photoPreview">
-    <image id="image" src.bind="imageurl" >
+    <image id="image" if.bind="imageurl" src.bind="imageurl" >
+    <div id="image" if.bind="!imageurl">
+      <i style="font-size:100px; color:#808080; margin:auto"id="image" class="icon-picture"></i>
+    </div>
   </div>
   <div id="textPreview">
     <p if.bind="title" class="textTitle">${title}</p>
@@ -9,7 +12,7 @@
     <p id="textBody">${text}</p>
     <div id="tweet">
       <a href.bind="hreftext">
-        <i class="fa fa-twitter">
+        <i class="icon-twitter">
         </i>&nbsp;Tweet
       </a>
     </div>

@@ -5,7 +5,7 @@ import processLESS from './process-less';
 import processCSS from './process-css';
 import {build} from 'aurelia-cli';
 import project from '../aurelia.json';
-import prepareFontAwesome from './prepare-font-awesome'; // for font awasom icons
+
 
 export default gulp.series(
   readProjectConfiguration,
@@ -13,8 +13,7 @@ export default gulp.series(
     transpile,
     processMarkup,
     processLESS,
-    processCSS,
-    prepareFontAwesome
+    processCSS
   ),
   writeBundles
 );

@@ -2,16 +2,16 @@
   <require from="./photo.css"></require>
   <div id="photoWrapper">
     <div id="previewWrapper" click.delegate="sendClick()">
-      <i id="cameraIcon" class="fa fa-camera"></i>
+      <i id="cameraIcon" class="icon-camera"></i>
       <canvas id="canvas" ref="preview">
       </canvas>
     </div>
   </div>
 
   <div id="modBtnWrapper">
-    <button id="changeButton" class="modBtn" click.delegate="sendClick()"><i class="fa fa-camera"></i></button>
-    <button id="rotateButton" class="modBtn" click.delegate="rotatePhoto()" disabled="true"><i class="fa fa-repeat"></i></button>
-    <button id="deleteButton" class="modBtn" click.delegate="deletePhoto()" disabled="true"><i class="fa fa-trash"></i></button>
+    <button id="changeButton" class="modBtn" click.delegate="sendClick()"><i class="icon-camera"></i></button>
+    <button id="rotateButton" class="modBtn" click.delegate="rotatePhoto()" disabled="true"><i class="icon-cw"></i></button>
+    <button id="deleteButton" class="modBtn" click.delegate="deletePhoto()" disabled="true"><i class="icon-trash-empty"></i></button>
   </div>
 
   <input id="ghostButton" style="display: none" type="file" accept="image/*" files.bind="reportcard.photo.file" change.delegate="drawImage(0)">
