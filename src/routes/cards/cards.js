@@ -50,32 +50,38 @@ export class Cards {
     var self = this;
 
     let client = new HttpClient();
-    //Navigate to location card OR error card, then resize card height to fill screen
-    client.get(this.datasrc + 'cards/' + this.id)
-    .then(response => {
-      var msg = JSON.parse(response.response);
-      //console.log(msg.result);
-      if (msg.result.received === true) {
-        //self.router.routes[8].settings.errorCode = response.statusCode;
-        self.router.routes[8].settings.errorText = "Report already received from this link";
-        self.router.navigate('error', {replace: true});
-      } else {
-        self.router.navigate('location', {replace: true});
-      }
-    })
-    .catch(response => {
-      if (response.statusCode === 404) {
-        // error this card does not exist
-        self.router.routes[8].settings.errorCode = response.statusCode;
-        self.router.routes[8].settings.errorText = "Report link does not exist";
-        self.router.navigate('error', {replace: true});
-      } else {
-        // unhandled error
-        self.router.routes[8].settings.errorCode = response.statusCode;
-        self.router.routes[8].settings.errorText = "Unhandled report link verification error (" + response.statusText + ")";
-        self.router.navigate('error', {replace: true});
-      }
-    });
+
+    //DEV - TEST report id
+    if (this.id !== 'test123') {
+      //Navigate to location card OR error card, then resize card height to fill screen
+      client.get(this.datasrc + 'cards/' + this.id)
+      .then(response => {
+        var msg = JSON.parse(response.response);
+        //console.log(msg.result);
+        if (msg.result.received === true) {
+          //self.router.routes[8].settings.errorCode = response.statusCode;
+          self.router.routes[8].settings.errorText = "Report already received from this link";
+          self.router.navigate('error', {replace: true});
+        } else {
+          self.router.navigate('location', {replace: true});
+        }
+      })
+      .catch(response => {
+        if (response.statusCode === 404) {
+          // error this card does not exist
+          self.router.routes[8].settings.errorCode = response.statusCode;
+          self.router.routes[8].settings.errorText = "Report link does not exist";
+          self.router.navigate('error', {replace: true});
+        } else {
+          // unhandled error
+          self.router.routes[8].settings.errorCode = response.statusCode;
+          self.router.routes[8].settings.errorText = "Unhandled report link verification error (" + response.statusText + ")";
+          self.router.navigate('error', {replace: true});
+        }
+      });
+    } else {
+      self.router.navigate('location', {replace: true});
+    }
 
     this.ea.subscribe('readTerms', msg => {
       self.router.navigate('terms');

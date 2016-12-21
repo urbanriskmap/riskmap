@@ -47,76 +47,78 @@ export class Review {
   }
 
   attached() {
-    if (this.imageObject) {
-      this.drawImage(this.reportcard.photo.rotation);
-    }
+    $(document).ready(() => {
+      if (this.imageObject) {
+        this.drawImage(this.reportcard.photo.rotation);
+      }
 
-    var self = this;
+      var self = this;
 
-    if (this.checkRequiredInputs) {
-      var slideRange = $('#submitSlider').width() - $('#submitKnob').width(),
-      slideThreshold = 0.9,
-      slideTranslate = 0,
-      slidePressed = false,
-      swiped = false;
+      if (this.checkRequiredInputs) {
+        var slideRange = $('#submitSlider').width() - $('#submitKnob').width(),
+        slideThreshold = 0.9,
+        slideTranslate = 0,
+        slidePressed = false,
+        swiped = false;
 
-      //Slider touch start
-      $('#submitKnob').on('touchstart mousedown', function (e) {
-        var slideStartPos;
-        if (self.isMobile) {
-          slideStartPos = e.originalEvent.touches[0].pageX;
-        } else {
-          slideStartPos = e.clientX;
-        }
-        slidePressed = true;
-
-        //Drag start
-        $('#reviewWrapper').on('touchmove mousemove', function (e) {
-          var slideDragPos;
+        //Slider touch start
+        $('#submitKnob').on('touchstart mousedown', function (e) {
+          var slideStartPos;
           if (self.isMobile) {
-            e.preventDefault();
-            slideDragPos = e.originalEvent.touches[0].pageX;
+            slideStartPos = e.originalEvent.touches[0].pageX;
           } else {
-            slideDragPos = e.clientX;
+            slideStartPos = e.clientX;
           }
-          slideTranslate = slideDragPos - slideStartPos;
-          if (slidePressed && slideTranslate >= 0 && slideTranslate < slideRange) {
-            $('#submitKnob').css({
-              'left': slideTranslate + 'px'
-            });
-            $('#submitSlider').css({
-              'background-color': 'rgba(31, 73, 99, ' + (slideTranslate / (slideThreshold * slideRange)) + ')'
-            });
+          slidePressed = true;
 
-            //Swipe threshold crossed
-            if (slideTranslate >= (slideThreshold * slideRange) && !swiped) {
-              swiped = true;
-              slidePressed = false;
-              self.ea.publish('submit', self.report);
-              self.ea.publish('image', self.imageObject);
+          //Drag start
+          $('#reviewWrapper').on('touchmove mousemove', function (e) {
+            var slideDragPos;
+            if (self.isMobile) {
+              e.preventDefault();
+              slideDragPos = e.originalEvent.touches[0].pageX;
+            } else {
+              slideDragPos = e.clientX;
             }
-          }
-        });
+            slideTranslate = slideDragPos - slideStartPos;
+            if (slidePressed && slideTranslate >= 0 && slideTranslate < slideRange) {
+              $('#submitKnob').css({
+                'left': slideTranslate + 'px'
+              });
+              $('#submitSlider').css({
+                'background-color': 'rgba(31, 73, 99, ' + (slideTranslate / (slideThreshold * slideRange)) + ')'
+              });
 
-        //Drag end
-        $(window).on('touchend mouseup', function () {
-          if (slidePressed && slideTranslate < (slideThreshold * slideRange) && !swiped) {
-            slidePressed = false;
-            $('#submitKnob').animate({ //Swing back to start position
-              'left': 0 + 'px'
-            }, 50);
-            $('#submitSlider').css({ //Reset slider background
-              'background-color': 'transparent'
-            });
-          }
+              //Swipe threshold crossed
+              if (slideTranslate >= (slideThreshold * slideRange) && !swiped) {
+                swiped = true;
+                slidePressed = false;
+                self.ea.publish('submit', self.report);
+                self.ea.publish('image', self.imageObject);
+              }
+            }
+          });
+
+          //Drag end
+          $(window).on('touchend mouseup', function () {
+            if (slidePressed && slideTranslate < (slideThreshold * slideRange) && !swiped) {
+              slidePressed = false;
+              $('#submitKnob').animate({ //Swing back to start position
+                'left': 0 + 'px'
+              }, 50);
+              $('#submitSlider').css({ //Reset slider background
+                'background-color': 'transparent'
+              });
+            }
+          });
         });
-      });
-    } else {
-      $('#submitKnob').css({
-        'background-color': '#a0a0a0'
-      });
-      $('#termsConditions').html("Required flood location, water depth and atleast a photo or description to submit report");
-    }
+      } else {
+        $('#submitKnob').css({
+          'background-color': '#a0a0a0'
+        });
+        $('#termsConditions').html("Required flood location, water depth and atleast a photo or description to submit report");
+      }
+    });
   }
 
   readTerms() {
