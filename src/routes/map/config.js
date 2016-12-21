@@ -34,9 +34,8 @@ var config = {
       }
     }
   },
-  "default_region":
-  {
-    "region": "java",
+  "default_region": {
+    "region": "jva",
     "bounds": {
       "sw":[-10.293, 104.677],
       "ne":[-3.974, 115.290]

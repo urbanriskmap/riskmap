@@ -19,7 +19,7 @@
           <img src="assets/graphics/Peta_logo.svg">
         </a>
       </div>
-      <div id="optionsBtn" click.delegate="openWatch()">
+      <div id="optionsBtn" click.delegate="showMenu()">
         <i class="icon-menu"></i>
       </div>
     </div>
@@ -32,7 +32,7 @@
       </div>
       <div id="links">
         <div repeat.for="city_region of city_regions" class="cityLinks">
-          <a route-href="route:map; params.bind:{city:city_region}" click.delegate="changeCity(city_region)">${city_region} </a>
+          <a click.delegate="viewReport(city_region, true)">${city_region}</a>
         </div>
       </div>
     </div>
