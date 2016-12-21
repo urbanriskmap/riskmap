@@ -92,7 +92,8 @@ export class Review {
             if (slideTranslate >= (slideThreshold * slideRange) && !swiped) {
               swiped = true;
               slidePressed = false;
-              self.ea.publish('submit', self.report, self.imageObject);
+              self.ea.publish('submit', self.report);
+              self.ea.publish('image', self.imageObject);
             }
           }
         });

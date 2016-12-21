@@ -81,24 +81,33 @@ export class Cards {
       self.router.navigate('terms');
     });
 
-    this.ea.subscribe('submit', (report, imageObject) => {
+    this.ea.subscribe('image', fileList => {
+      self.photoToUpload = fileList[0];
+    });
+
+    this.ea.subscribe('submit', report => {
       client.put(self.datasrc + 'cards/' + self.id, report)
       .then(response => {
         // now/also, send the image.
-        if (imageObject) {
+        if (self.photoToUpload) {
+          console.log(self.photoToUpload);
+
           let client = new HttpClient()
           .configure(x => {
             x.withBaseUrl(self.datasrc); //REPLACE with aws s3 response url?
-            x.withHeader('Content-Type', 'image/jpeg');
+            x.withHeader('Content-Type', self.photoToUpload.type);
           });
-          client.post('cards/' + self.id + '/images', imageObject)
+          client.post('cards/' + self.id + '/images', self.photoToUpload)
           .then(response => {
+            // Proceed to thanks page if report submit resolved & image uploaded;
+            self.router.navigate('thanks');
           })
           .catch(response => {
           });
+        } else {
+          // Proceed to thanks page if report submit resolved
+          self.router.navigate('thanks');
         }
-        // Proceed to thanks page if report submit resolved; regardless of image upload
-        self.router.navigate('thanks');
       })
       .catch(response => {
         console.log(response);
