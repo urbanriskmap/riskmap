@@ -4,12 +4,10 @@ PetaBencana.id Leaflet Map for CogniCity data, built within Aurelia framework
 import * as config from './config'; // Map config
 import {Layers} from './layers';
 import $ from 'jquery';
+import {inject} from 'aurelia-framework';
 import * as L from 'leaflet';
 import {notify} from 'notifyjs-browser'; //Jquery plugin
-
-//start_dev_stage_only
-import {activationStrategy} from 'aurelia-router';
-//end_dev_stage_only
+import {I18N} from 'aurelia-i18n';
 
 $.notify.addStyle('mapInfo', {
   html: "<div id=notification><span data-notify-text/></div>",
@@ -23,9 +21,14 @@ $.notify.addStyle('mapInfo', {
   }
 });
 
+//start-non-standard
+@inject(I18N)
+//end-non-standard
 // Map class, requires map config.js (injected as Aurelia dependency)
 export class Map {
-  constructor() {
+  constructor(i18n) {
+    this.i18n = i18n;
+    this.languages = this.i18n.i18next.languages;
     this.config = config;
     this.city_regions = [];
     for (let city_region in this.config.instance_regions) {
@@ -39,6 +42,11 @@ export class Map {
     if (!this.city_name) {
       routerConfig.navModel.router.navigate('map', {replace: true});
     }
+  }
+
+  changeLanguage() { //TODO: on the fly language change
+    /*this.i18n.i18next.changeLanguage(this.i18n.i18next.language);*/
+    this.i18n.setLocale(this.i18n.i18next.language);
   }
 
   togglePane(action, pane) {
@@ -152,6 +160,8 @@ export class Map {
   }
 
   attached() {
+    this.title = this.i18n.tr('location_title');
+
     // Modify popup pane css on the fly
     $('#watchPane').css({
       'height': ($(window).height() - $('#topBar').height() - $('#bottomBar').height()) + 'px'

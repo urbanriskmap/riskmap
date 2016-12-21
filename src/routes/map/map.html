@@ -14,6 +14,10 @@
     </div>
 
     <div id="topBar">
+        <label repeat.for="language of languages">
+          <input type="radio" model.bind="language" checked.bind="i18n.i18next.language" change.delegate="changeLanguage()">${language}
+        </label>
+        &nbsp;${title}
       <div id="logos">
         <a href="https://dev.petabencana.id">
           <img src="assets/graphics/Peta_logo.svg">
