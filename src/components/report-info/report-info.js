@@ -16,7 +16,7 @@ export class ReportInfo {
 
   attached() {
     if (this.pkey) {
-      this.hreftext = "https://twitter.com/intent/tweet?text=Check%20out%20my%20flood%20report%0A&url=http://dev.petabencana.id/%23/map/" + this.city + "/" + this.pkey;
+      this.hreftext = "https://twitter.com/intent/tweet?text=Check%20out%20my%20flood%20report%0A&url=https://dev.petabencana.id/map/" + this.city + "/" + this.pkey;
     }
   }
 }
