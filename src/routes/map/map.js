@@ -43,15 +43,15 @@ export class Map {
       routerConfig.navModel.router.navigate('map', {replace: true});
     }
   }
-
+  /*
   changeLanguage() { //TODO: on the fly language change
-    /*this.i18n.i18next.changeLanguage(this.i18n.i18next.language);*/
     this.i18n.setLocale(this.i18n.i18next.language);
   }
-
+  */
   togglePane(action, pane) {
     if ($(pane).css('display') === 'block' && (action === 'close' || action === 'toggle')) {
       $(pane).fadeOut(200);
+      this.watchPaneOpen = false;
     } else if ($(pane).css('display') === 'none' && (action === 'open' || action === 'toggle')) {
       $(pane).fadeIn(200);
     }
@@ -59,7 +59,8 @@ export class Map {
 
   showMenu() {
     this.togglePane('close', '#reportPane');
-    this.togglePane('toggle', '#watchPane');
+    this.togglePane('open', '#watchPane');
+    this.watchPaneOpen = true;
   }
 
   // Get parameters from config based on city name, else return default
@@ -80,14 +81,17 @@ export class Map {
     this.togglePane('close', '#reportPane');
     var cityObj = this.parseMapCity(cityName);
     if (pushState) {
-      if (cityObj.region !== 'jva') {
+      if (cityObj.region !== 'java') {
         history.pushState({city: cityName}, "city", "map/" + cityName);
       } else {
         history.pushState({city: null}, "city", "map");
       }
     }
     this.map.flyToBounds([cityObj.bounds.sw, cityObj.bounds.ne]);
-    //this.map.setMaxBounds([cityObj.bounds.sw, cityObj.bounds.ne]);
+    /*//Set map bounds after flyToBounds ends
+    this.map.once('moveend', (e) => { //execute only once, ignores user map drag events
+      this.map.setMaxBounds(e.target.options.maxBounds);
+    });*/
     this.layers.removeReports();
     return this.layers.addReports(cityName, cityObj.region, this.togglePane);
   }
@@ -160,7 +164,7 @@ export class Map {
   }
 
   attached() {
-    this.title = this.i18n.tr('location_title');
+    //this.title = this.i18n.tr('location_title');
 
     // Modify popup pane css on the fly
     $('#watchPane').css({
@@ -183,8 +187,6 @@ export class Map {
       zoomControl: false, //default position: 'topleft'
       attributionControl: false //include in bottom popup panel
     }).fitBounds([self.config.default_region.bounds.sw, self.config.default_region.bounds.ne]);
-
-    //this.map.setMaxBounds([self.config.default_region.bounds.sw, self.config.default_region.bounds.ne]);
 
     // Create Layer instance
     this.layers = new Layers(this.map);
