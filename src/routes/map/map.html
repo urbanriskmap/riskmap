@@ -3,28 +3,28 @@
   <require from="./map.css"></require>
   <require from="../../components/report-info/report-info"></require>
   <require from="../../components/watch-card/watch-card"></require>
-  <!--<meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@mayankojha" />
-  <meta name="twitter:title" content="Petabencana.id" />
-  <meta name="twitter:description" content="Crowd sourced flood mapping" />
-  <meta name="twitter:image" content="https://dev.petabencana.id/assets/images/cards_image.png" />-->
 
   <div id="pageWrapper">
     <div id="mapContainer">
     </div>
 
     <div id="topBar">
-        <label repeat.for="language of languages">
-          <input type="radio" model.bind="language" checked.bind="i18n.i18next.language" change.delegate="changeLanguage()">${language}
-        </label>
-        &nbsp;${title}
+      <!--
+      <label repeat.for="language of languages">
+        <input type="radio" model.bind="language" checked.bind="i18n.i18next.language" change.delegate="changeLanguage()">${language}
+      </label>
+      &nbsp;${title}
+      -->
       <div id="logos">
         <a href="https://dev.petabencana.id">
           <img src="assets/graphics/Peta_logo.svg">
         </a>
       </div>
-      <div id="optionsBtn" click.delegate="showMenu()">
+      <div id="optionsBtn" if.bind="!watchPaneOpen" click.delegate="showMenu()">
         <i class="icon-menu"></i>
+      </div>
+      <div id="optionsBtn" if.bind="watchPaneOpen" click.delegate="togglePane('close', '#watchPane')">
+        <i class="icon-cancel-1"></i>
       </div>
     </div>
 
@@ -50,9 +50,6 @@
     </div>
 
     <div id="watchPane">
-      <div class="closeBtn" click.delegate="togglePane('close', '#watchPane')">
-        <i class="icon-cancel-1" aria-hidden="true"></i>
-      </div>
       <watch-card>
       </watch-card>
     </div>

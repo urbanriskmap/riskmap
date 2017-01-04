@@ -27,3 +27,8 @@ assets/images/*
 - list of current icons
   icon-cancel-1, icon-target, icon-down-open, icon-left-open, icon-right-open, icon-camera, icon-cw, icon-trash-empty
   ,icon-up-open, icon-picture, icon-facebook, icon-angle-double-right, icon-whatsapp, icon-twitter, icon-picture
+
+  **fontello icons**
+  - Roboto fonts css and font files are in assets
+  - font is then imported into themeGuide
+  

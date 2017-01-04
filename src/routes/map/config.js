@@ -5,13 +5,6 @@
 var config = {
   "instance_regions":
   {
-    "cambridge": {
-      "region": "cmb",
-      "bounds": {
-        "sw":[42.348, -71.124],
-        "ne":[42.384, -71.068]
-      }
-    },
     "jakarta": {
       "region": "jbd",
       "bounds": {
@@ -35,7 +28,7 @@ var config = {
     }
   },
   "default_region": {
-    "region": "jva",
+    "region": "java",
     "bounds": {
       "sw":[-10.293, 104.677],
       "ne":[-3.974, 115.290]
