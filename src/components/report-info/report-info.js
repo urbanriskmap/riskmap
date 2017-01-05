@@ -19,7 +19,7 @@ export class ReportInfo {
   attached() {
     if (this.pkey) {
       this.twitterText = "https://twitter.com/intent/tweet?text=" + messageText + "%20https://dev.petabencana.id/map/" + this.city + "/" + this.pkey;
-      this.whatsappText = "whatsapp://send?text=" + messageText + "https://dev.petabencana.id/map/" + this.city + "/" + this.pkey;
+      this.whatsappText = "whatsapp://send?text=" + messageText + "%20https://dev.petabencana.id/map/" + this.city + "/" + this.pkey;
       this.facebookText = "http://www.facebook.com/sharer/sharer.php?u=dev.petabencana.id/map/" + this.city + "/" + this.pkey;
     }
   }
