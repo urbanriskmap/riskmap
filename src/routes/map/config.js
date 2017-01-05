@@ -37,8 +37,8 @@ var config = {
       "ne":[-3.974, 115.290]
     }
   },
-  "data_server" : "https://data-dev.petabencana.id/",
-  "tilelayer": env.tilelayer
+  "data_server" : env.data_server,
+  "tile_layer": env.tile_layer
 };
 
 module.exports = config;

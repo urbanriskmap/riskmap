@@ -210,7 +210,7 @@ export class Map {
       self.clientLocation = null;
     });
 
-    let Mapbox_Custom = L.tileLayer(config.tilelayer, {
+    let Mapbox_Custom = L.tileLayer(self.config.tile_layer, {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OSM</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA</a>, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>',
       detectRetina: true,
       subdomains: 'abcd',
