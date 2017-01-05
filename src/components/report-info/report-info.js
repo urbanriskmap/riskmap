@@ -1,5 +1,7 @@
 import {bindable, customElement} from 'aurelia-framework';
 
+var messageText;
+
 //start-non-standard
 @customElement('report-info')
 //end-non-standard
@@ -16,7 +18,9 @@ export class ReportInfo {
 
   attached() {
     if (this.pkey) {
-      this.hreftext = "https://twitter.com/intent/tweet?text=Check%20out%20my%20flood%20report%0A&url=https://dev.petabencana.id/map/" + this.city + "/" + this.pkey;
+      this.twitterText = "https://twitter.com/intent/tweet?text=" + messageText + "Check%20out%20my%20flood%20report%0A&url=https://dev.petabencana.id/map/" + this.city + "/" + this.pkey;
+      this.whatsappText = messageText + "https://dev.petabencana.id/map/" + this.city + "/" + this.pkey;
+      this.facebookText = "https://www.facebook.com/dialog/share?app_id=637960346329078&display=popup&href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=https%3A%2F%2Fdev.petabencana.id%2Fmap%2F" + this.city + "%2F" + this.pkey;
     }
   }
 }
