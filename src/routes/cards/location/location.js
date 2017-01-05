@@ -1,3 +1,4 @@
+import * as config from '../config'; // Cards config
 import * as L from 'leaflet';
 import {inject} from 'aurelia-framework';
 import {Reportcard} from 'Reportcard';
@@ -8,6 +9,7 @@ import {Reportcard} from 'Reportcard';
 export class Location {
   constructor(Reportcard) {
     this.reportcard = Reportcard;
+    this.config = config;
   }
 
   drawGpsMarkers(center, accuracy, map) {
@@ -28,13 +30,15 @@ export class Location {
 
   attached() {
     $(document).ready(() => {
-      //Add leaflet map
-      var cardMap = L.map('mapWrapper');
-      L.tileLayer('https://api.mapbox.com/styles/v1/urbanriskmap/ciwwgpt9j004a2prwm9cylsrc/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidXJiYW5yaXNrbWFwIiwiYSI6ImNpdmVhbTFraDAwNHIyeWw1ZDB6Y2hhbTYifQ.tpgt1PB5lkJ-wITS02c96Q', {
-        detectRetina: true
-      }).addTo(cardMap);
 
       var self = this;
+
+      //Add leaflet map
+      var cardMap = L.map('mapWrapper');
+      L.tileLayer(self.config.tile_layer, {
+        detectRetina: true,
+        ext: 'png'
+      }).addTo(cardMap);
 
       //Add custom leaflet control, to navigate back to browser located user location
       L.Control.GeoLocate = L.Control.extend({
