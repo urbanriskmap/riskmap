@@ -103,16 +103,14 @@ export class Map {
     .then(() => {
       if (self.report_id && self.layers.pkeyList.hasOwnProperty(self.report_id)) {
         //Case 1: Valid report id in current city
-        self.map.flyTo(self.layers.pkeyList[self.report_id]._latlng, {
-          zoom: 16,
-          duration: 1
+        self.layers.pkeyList[self.report_id].fire('click')
+      }
+        else if (self.report_id && !self.layers.pkeyList.hasOwnProperty(self.report_id)) {
+        //Case 2: Report id not available in current city, attempt to get from server
+        self.layers.addSingleReport(self.report_id).then(report => {
+          report.fire('click');
+          self.report_id = null;
         });
-        self.layers.popupContent = self.layers.pkeyList[self.report_id].feature.properties;
-        self.togglePane('open', '#reportPane');
-      } else if (self.report_id && !self.layers.pkeyList.hasOwnProperty(self.report_id)) {
-        //Case 2: Report id not available in current city
-        $.notify("No such report key in " + cityName, {style:"mapInfo", className:"error" });
-        self.report_id = null;
       }
     }).catch((err) => {
       //Case 3: .addReports not resolved for specified city
