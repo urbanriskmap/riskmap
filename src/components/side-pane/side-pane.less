@@ -1,0 +1,87 @@
+@import "../../styleSheets/themeGuide.less";
+
+#tabsBar {
+  position: relative;
+  width: 100%;
+  height: @bar-heights;
+  border: none;
+  border-bottom: 1px solid @banjir-blue;
+}
+
+ul.tabs {
+  position: absolute;
+  bottom: 0px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 40px;
+  & li {
+    float: left;
+    height: 100%;
+    text-align: center;
+    &.paneTabs {
+      width: 24%;
+      & div.tabLinks {
+        width: 100%;
+        cursor: pointer;
+        line-height: 40px;
+        .bodylight-mixin(21px);
+        &:hover {
+          color: @banjir-blue;
+        }
+        &.active {
+          color: @banjir-blue;
+          border-bottom: 4px solid @banjir-blue;
+        }
+      }
+    }
+    &.langTab {
+      position: absolute;
+      right: 0;
+      width: 24%;
+      margin-top: 6px;
+      padding: 0;
+      & div {
+        position: relative;
+        float: left;
+        width: 30%;
+        height: 80%;
+        &:first-child {
+          border-right: 1px solid @banjir-blue;
+        }
+        & label {
+          .bodylight-mixin(16px);
+          line-height: 32px;
+          & input {
+            display: none;
+          }
+          &.active {
+            color: @banjir-blue;
+          }
+        }
+      }
+    }
+  }
+}
+
+#paneContent {
+  position: absolute;
+  width: 100%;
+  top: @bar-heights;
+  left: 0px;
+  overflow: scroll;
+  & div.contentWrapper {
+    padding: 16px 8px;
+    .bodylight-mixin(14px);
+  }
+  & #content-map label {
+    text-transform: capitalize;
+  }
+}
+
+#logoBar {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}

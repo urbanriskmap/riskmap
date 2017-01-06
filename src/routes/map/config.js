@@ -34,7 +34,7 @@ var config = {
       "ne":[-3.974, 115.290]
     }
   },
-  "data_server" : "https://data-dev.petabencana.id/"
+  "data_server" : "https://data.petabencana.id/"
 };
 
 module.exports = config;

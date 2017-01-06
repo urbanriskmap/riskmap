@@ -1,0 +1,40 @@
+<template>
+  <require from="./side-pane.css"></require>
+  <div id="tabsBar">
+    <ul class="tabs">
+      <li class="paneTabs" repeat.for="tab of tabs">
+        <div class="tabLinks" id.bind="'button-' + tab" click.delegate="switchTab(tab)">
+          <i class.bind="'icon-' + tab"></i>
+        </div>
+      </li>
+      <li class="langTab">
+        <div repeat.for="language of languages">
+          <label id.bind="language" class="langLabels">
+            <input type="radio" model.bind="language" checked.bind="selLanguage" change.delegate="switchLang(language)">
+            ${language}
+          </label>
+      </div>
+      </li>
+    </ul>
+  </div>
+
+  <div id="paneContent">
+    <div id="content-map" if.bind="selTab==='map'" class="contentWrapper">
+      <p>${locale.map_helper}</p>
+      <label repeat.for="city of cities">
+        <input type="radio" model.bind="city" checked.bind="selected" change.delegate="switchCity(city)">
+        ${city}
+        <br>
+      </label>
+    </div>
+    <div id="content-watch" if.bind="selTab==='watch'" class="contentWrapper">
+      ${locale.watch_title}
+    </div>
+    <div id="content-info" if.bind="selTab==='info'" class="contentWrapper">
+      ${locale.info_title}
+    </div>
+  </div>
+
+  <div id="logoBar">
+  </div>
+</template>

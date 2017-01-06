@@ -39,54 +39,11 @@
   .linkmedium-mixin(21px);
 }
 
-#bottomBar {
-  .mapbars-mixin(3/2);
-  bottom: 0px;
-}
-
-#logos_bottom {
-  @media screen {
-    position: absolute;
-    @media (min-width: 320px) {
-      display: none;
-    }
-    @media (min-width: 420px) {
-      display: block;
-      left: 10px;
-      bottom: @bar-heights / 7;
-      height: 65%;
-      padding: 0px;
-      margin: 0px;
-    }
-  }
-}
-
-#mitLogo {
-  height: 100%;
-}
-
-#links {
-  position: absolute;
-  right: -1px;
-  bottom: @bar-heights / 6;
-}
-
-.cityLinks {
-  padding: 0px 6px;
-  border-right: 1px solid #2f2f2f;
-  float: left;
-  & a {
-    .linklight-mixin(14px);
-    text-transform: capitalize;
-    text-decoration: none;
-  }
-}
-
 #reportPane {
   .mappane-mixin(200px);
 }
 
-#watchPane{
+#sidePane{
   .mappane-mixin(320px);
   overflow: scroll;
 }
@@ -120,4 +77,24 @@
 
 .info {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+#cityPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  .translate-mixin(-50%, -50%);
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: @spread-shadow;
+  z-index: 1500;
+  .bodylight-mixin(14px);
+  text-transform: capitalize;
+  text-decoration: none;
+  background: @translucent-white;
+  & p {
+    margin: 0 0 6px 0;
+  }
 }

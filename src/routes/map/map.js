@@ -4,10 +4,8 @@ PetaBencana.id Leaflet Map for CogniCity data, built within Aurelia framework
 import * as config from './config'; // Map config
 import {Layers} from './layers';
 import $ from 'jquery';
-import {inject} from 'aurelia-framework';
 import * as L from 'leaflet';
 import {notify} from 'notifyjs-browser'; //Jquery plugin
-import {I18N} from 'aurelia-i18n';
 
 $.notify.addStyle('mapInfo', {
   html: "<div id=notification><span data-notify-text/></div>",
@@ -21,14 +19,9 @@ $.notify.addStyle('mapInfo', {
   }
 });
 
-//start-non-standard
-@inject(I18N)
-//end-non-standard
 // Map class, requires map config.js (injected as Aurelia dependency)
 export class Map {
-  constructor(i18n) {
-    this.i18n = i18n;
-    this.languages = this.i18n.i18next.languages;
+  constructor() {
     this.config = config;
     this.city_regions = [];
     for (let city_region in this.config.instance_regions) {
@@ -43,15 +36,11 @@ export class Map {
       routerConfig.navModel.router.navigate('map', {replace: true});
     }
   }
-  /*
-  changeLanguage() { //TODO: on the fly language change
-    this.i18n.setLocale(this.i18n.i18next.language);
-  }
-  */
+
   togglePane(action, pane) {
     if ($(pane).css('display') === 'block' && (action === 'close' || action === 'toggle')) {
       $(pane).fadeOut(200);
-      this.watchPaneOpen = false;
+      this.sidePaneOpen = false;
     } else if ($(pane).css('display') === 'none' && (action === 'open' || action === 'toggle')) {
       $(pane).fadeIn(200);
     }
@@ -59,8 +48,8 @@ export class Map {
 
   showMenu() {
     this.togglePane('close', '#reportPane');
-    this.togglePane('open', '#watchPane');
-    this.watchPaneOpen = true;
+    this.togglePane('open', '#sidePane');
+    this.sidePaneOpen = true;
   }
 
   // Get parameters from config based on city name, else return default
@@ -72,6 +61,7 @@ export class Map {
       return this.config.instance_regions[cityName];
     } else {
       $.notify('Unsupported city: ' + JSON.stringify(cityName), {style:"mapInfo", className:"info" });
+      $('#cityPopup').fadeIn(500);
       return this.config.default_region;
     }
   }
@@ -121,6 +111,12 @@ export class Map {
     });
   }
 
+  //Execute changeCity & viewReport from initial load select city popup
+  selectCity(city) {
+    this.viewReport(city, true);
+    $('#cityPopup').fadeOut(1000);
+  }
+
   drawGpsMarkers(center, accuracy, map) {
     this.gpsAccuracy = L.circle(center, {
       weight: 0,
@@ -164,11 +160,9 @@ export class Map {
   }
 
   attached() {
-    //this.title = this.i18n.tr('location_title');
-
     // Modify popup pane css on the fly
-    $('#watchPane').css({
-      'height': ($(window).height() - $('#topBar').height() - $('#bottomBar').height()) + 'px'
+    $('#sidePane').css({
+      'height': ($(window).height() - $('#topBar').height()) + 'px'
     });
 
     var self = this;
@@ -244,6 +238,7 @@ export class Map {
 
     // Zoom to city
     if (this.city_name) {
+      $('#cityPopup').hide();
       this.viewReport(this.city_name, true);
     } else {
       this.changeCity(null, false);
