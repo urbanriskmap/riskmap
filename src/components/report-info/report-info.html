@@ -6,14 +6,29 @@
       <i style="font-size:100px; color:#808080; margin:auto"id="image" class="icon-picture"></i>
     </div>
   </div>
+
   <div id="textPreview">
     <p if.bind="title" class="textTitle">${title}</p>
     <p if.bind="height" class="textTitle">Water depth: ${height}cm</p>
-    <p id="textBody">${text}</p>
-    <div id="tweet">
-      <a href.bind="hreftext">
+
+    <div id="bodyWrapper">
+      <p id="textBody">${text}</p>
+    </div>
+
+    <div id="socialIcons">
+      <a href.bind="twitterText">
         <i class="icon-twitter">
-        </i>&nbsp;Tweet
+        </i>
+      </a>
+
+      <a href.bind="whatsappText">
+        <i class="icon-whatsapp">
+        </i>
+      </a>
+
+      <a href.bind="facebookText">
+        <i class="icon-facebook">
+        </i>
       </a>
     </div>
   </div>

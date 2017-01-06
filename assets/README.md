@@ -25,3 +25,7 @@ assets/images/*
 - add/remove icons
 - click on 'download webfont' button to get package
 - replace css & font folders, and config.json in directory's fontello folder
+
+**Custom fonts**
+- Roboto fonts css and font files are in assets
+- font is then imported into themeGuide

@@ -1,6 +1,9 @@
 // PetaBencana.id Map configuration file, for CogniCity data
 // https://github.com/urbanriskmap/urbanriskmap-meta/wiki/Bounding-Boxes-for-Target-Cities
 
+// Import environment variables from Aurelia build
+import env from '../../environment';
+
 // Retain cambridge for dev;
 var config = {
   "instance_regions":
@@ -34,7 +37,8 @@ var config = {
       "ne":[-3.974, 115.290]
     }
   },
-  "data_server" : "https://data.petabencana.id/"
+  "data_server" : env.data_server,
+  "tile_layer": env.tile_layer
 };
 
 module.exports = config;

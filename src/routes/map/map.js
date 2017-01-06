@@ -93,16 +93,14 @@ export class Map {
     .then(() => {
       if (self.report_id && self.layers.pkeyList.hasOwnProperty(self.report_id)) {
         //Case 1: Valid report id in current city
-        self.map.flyTo(self.layers.pkeyList[self.report_id]._latlng, {
-          zoom: 16,
-          duration: 1
+        self.layers.pkeyList[self.report_id].fire('click')
+      }
+        else if (self.report_id && !self.layers.pkeyList.hasOwnProperty(self.report_id)) {
+        //Case 2: Report id not available in current city, attempt to get from server
+        self.layers.addSingleReport(self.report_id).then(report => {
+          report.fire('click');
+          self.report_id = null;
         });
-        self.layers.popupContent = self.layers.pkeyList[self.report_id].feature.properties;
-        self.togglePane('open', '#reportPane');
-      } else if (self.report_id && !self.layers.pkeyList.hasOwnProperty(self.report_id)) {
-        //Case 2: Report id not available in current city
-        $.notify("No such report key in " + cityName, {style:"mapInfo", className:"error" });
-        self.report_id = null;
       }
     }).catch((err) => {
       //Case 3: .addReports not resolved for specified city
@@ -204,7 +202,7 @@ export class Map {
       self.clientLocation = null;
     });
 
-    let Mapbox_Custom = L.tileLayer('https://api.mapbox.com/styles/v1/urbanriskmap/ciwwgpt9j004a2prwm9cylsrc/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidXJiYW5yaXNrbWFwIiwiYSI6ImNpdmVhbTFraDAwNHIyeWw1ZDB6Y2hhbTYifQ.tpgt1PB5lkJ-wITS02c96Q', {
+    let Mapbox_Custom = L.tileLayer(self.config.tile_layer, {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OSM</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA</a>, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>',
       detectRetina: true,
       subdomains: 'abcd',

@@ -10,7 +10,7 @@
     "start": "au run --env dev --watch",
     "test": "au test",
     "build": "rm -rf scripts/* && au build --env prod",
-    "build-dev" : "rm -rf scripts/* && au build --env dev"
+    "build-dev": "rm -rf scripts/* && au build --env dev"
   },
   "license": "MIT",
   "dependencies": {
@@ -20,8 +20,6 @@
     "aurelia-fetch-client": "^1.0.1",
     "aurelia-i18n": "^1.2.1",
     "bluebird": "^3.4.1",
-    "i18next": "^4.0.0",
-    "i18next-xhr-backend": "^1.2.1",
     "jquery": "^3.1.1",
     "leaflet": "^1.0.1",
     "less": "^2.7.1",
