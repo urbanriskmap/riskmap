@@ -22,13 +22,16 @@
   top: 0px;
 }
 
-#logos {
+#logo_top {
   position: absolute;
   left: 10px;
   bottom: @bar-heights / 10;
-  width: 150px;
-  height: auto;
+  width: 180px;
   padding: 0px;
+  margin: 0px;
+  & #pbLogo {
+    width: 100%;
+  }
 }
 
 #optionsBtn {
@@ -37,6 +40,19 @@
   right: 10px;
   bottom: @bar-heights / 10;
   .linkmedium-mixin(21px);
+}
+
+#logo_bottom {
+  position: absolute;
+  left: 10px;
+  bottom: @bar-heights / 7;
+  width: 180px;
+  padding: 0px;
+  margin: 0px;
+  z-index: 1500;
+  & #mitLogo {
+    width: 100%;
+  }
 }
 
 #reportPane {
@@ -57,18 +73,18 @@
   right: @bar-heights/8;
   text-align: right;
   z-index: 1010;
-  .linkmedium-mixin(21px);
+  .linkmedium-mixin(18px);
 }
 
-#notification{
-    font-family: Roboto-Light, Roboto, sans-serif;
-    font-size: 12px;
-    white-space: nowrap;
-    padding: 5px;
-    border-radius: 5px;
-    color: #ffffff;
-    position:relative;
-    top:@bar-heights;
+#notification {
+  font-family: Roboto-Light, Roboto, sans-serif;
+  font-size: 12px;
+  white-space: nowrap;
+  padding: 5px;
+  border-radius: 5px;
+  color: #ffffff;
+  position:relative;
+  top:@bar-heights;
 }
 
 .error {
@@ -90,11 +106,14 @@
   border-radius: 6px;
   box-shadow: @spread-shadow;
   z-index: 1500;
-  .bodylight-mixin(14px);
-  text-transform: capitalize;
-  text-decoration: none;
   background: @translucent-white;
   & p {
+    .bodymedium-mixin(14px);
     margin: 0 0 6px 0;
+  }
+  & label {
+    .linklight-mixin(14px);
+    text-transform: capitalize;
+    text-decoration: none;
   }
 }

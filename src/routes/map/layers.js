@@ -12,7 +12,6 @@ export class Layers {
     this.pkeyList = {};
   }
 
-
   // Adds a single report from data server to existing map layer
   addSingleReport(report_id) {
     var self = this;
@@ -25,12 +24,12 @@ export class Layers {
           var report = self.pkeyList[data.features[0].properties.pkey];
           resolve(report);
         })
-        .catch(() => reject(null))
-    })
+        .catch(() => reject(null));
+    });
   }
 
   // Get flood reports as topojson, return Leaflet geojson layer
-  addReports(city_name, city_region, togglePane) {
+  addReports(city_name, city_region, showPane) {
     let url = config.data_server + 'reports/?city=' + city_region;
     var self = this;
 
@@ -45,8 +44,7 @@ export class Layers {
               self.popupContent[prop] = feature.properties[prop];
             }
             self.map.flyTo(layer._latlng, 16);
-            togglePane('close', '#watchPane');
-            togglePane('open', '#reportPane');
+            showPane('#reportPane');
           }
         });
       },

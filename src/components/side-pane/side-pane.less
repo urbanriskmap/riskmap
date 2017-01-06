@@ -74,10 +74,15 @@ ul.tabs {
   overflow: scroll;
   & div.contentWrapper {
     padding: 16px 8px;
-    .bodylight-mixin(14px);
   }
-  & #content-map label {
-    text-transform: capitalize;
+  & #content-map {
+    & p {
+      .bodymedium-mixin(14px);
+    }
+    & label {
+      .linklight-mixin(14px);
+      text-transform: capitalize;
+    }
   }
 }
 

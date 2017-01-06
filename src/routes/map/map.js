@@ -37,19 +37,19 @@ export class Map {
     }
   }
 
-  togglePane(action, pane) {
-    if ($(pane).css('display') === 'block' && (action === 'close' || action === 'toggle')) {
-      $(pane).fadeOut(200);
+  hidePane(ref) {
+    $(ref).fadeOut(200);
+    if (ref === '#sidePane') {
       this.sidePaneOpen = false;
-    } else if ($(pane).css('display') === 'none' && (action === 'open' || action === 'toggle')) {
-      $(pane).fadeIn(200);
     }
   }
 
-  showMenu() {
-    this.togglePane('close', '#reportPane');
-    this.togglePane('open', '#sidePane');
-    this.sidePaneOpen = true;
+  showPane(ref) {
+    $(ref).fadeIn(200);
+    if (ref === '#sidePane') {
+      this.sidePaneOpen = true;
+      this.hidePane('#reportPane');
+    }
   }
 
   // Get parameters from config based on city name, else return default
@@ -68,7 +68,6 @@ export class Map {
 
   // Change city from within map without reloading window
   changeCity(cityName, pushState) {
-    this.togglePane('close', '#reportPane');
     var cityObj = this.parseMapCity(cityName);
     if (pushState) {
       if (cityObj.region !== 'java') {
@@ -77,13 +76,17 @@ export class Map {
         history.pushState({city: null}, "city", "map");
       }
     }
-    this.map.flyToBounds([cityObj.bounds.sw, cityObj.bounds.ne]);
-    /*//Set map bounds after flyToBounds ends
-    this.map.once('moveend', (e) => { //execute only once, ignores user map drag events
+    this.map.fitBounds([cityObj.bounds.sw, cityObj.bounds.ne]).once('moveend', (e) => {
       this.map.setMaxBounds(e.target.options.maxBounds);
-    });*/
+    });
+    /*
+    //Set map bounds once, after flyToBounds ends
+    this.map.flyToBounds([cityObj.bounds.sw, cityObj.bounds.ne]).once('moveend', (e) => {
+      this.map.setMaxBounds(e.target.options.maxBounds);
+    });
+    */
     this.layers.removeReports();
-    return this.layers.addReports(cityName, cityObj.region, this.togglePane);
+    return this.layers.addReports(cityName, cityObj.region, this.showPane);
   }
 
   // View all reports for city, or zoom to single queried report id
@@ -165,7 +168,7 @@ export class Map {
 
     var self = this;
 
-    //User navigates through history, load city, but do not pushState
+    //If user navigates through history, load city as per stateObj, but do not register new pushState
     window.onpopstate = (e) => {
       if (e.state.city !== null) {
         this.viewReport(e.state.city, false);
@@ -178,7 +181,7 @@ export class Map {
     this.map = L.map('mapContainer', {
       zoomControl: false, //default position: 'topleft'
       attributionControl: false //include in bottom popup panel
-    }).fitBounds([self.config.default_region.bounds.sw, self.config.default_region.bounds.ne]);
+    }).setView([-7, 109], 8);
 
     // Create Layer instance
     this.layers = new Layers(this.map);

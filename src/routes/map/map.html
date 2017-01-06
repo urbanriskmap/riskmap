@@ -9,29 +9,35 @@
     </div>
 
     <div id="topBar">
-      <div id="logos">
+      <div id="logo_top">
         <a href="https://dev.petabencana.id">
-          <img src="assets/graphics/Peta_logo.svg">
+          <img id="pbLogo" src="assets/graphics/Peta_logo.svg">
         </a>
       </div>
-      <div id="optionsBtn" if.bind="!sidePaneOpen" click.delegate="showMenu()">
+      <div id="optionsBtn" if.bind="!sidePaneOpen" click.delegate="showPane('#sidePane')">
         <i class="icon-menu"></i>
       </div>
-      <div id="optionsBtn" if.bind="sidePaneOpen" click.delegate="togglePane('close', '#sidePane')">
+      <div id="optionsBtn" if.bind="sidePaneOpen" click.delegate="hidePane('#sidePane')">
         <i class="icon-cancel-2"></i>
       </div>
     </div>
 
+    <div id="logo_bottom">
+      <a href="http://urbanrisklab.org">
+        <img id="mitLogo" src="assets/graphics/URL_logo.svg">
+      </a>
+    </div>
+
     <div id="reportPane">
-      <div class="closeBtn" click.delegate="togglePane('close', '#reportPane')">
-        <i class="icon-cancel-1" aria-hidden="true"></i>
+      <div class="closeBtn" click.delegate="hidePane('#reportPane')">
+        <i class="icon-cancel-2" aria-hidden="true"></i>
       </div>
       <report-info id="preview" if.bind="layers.popupContent.pkey" pkey.bind="layers.popupContent.pkey" city.bind="city_name" imageurl.bind="layers.popupContent.image_url" height.bind="layers.popupContent.report_data.flood_depth" title.bind="layers.popupContent.title" text.bind="layers.popupContent.text">
       </report-info>
     </div>
 
-    <div id="sidePane">
-      <side-pane cities.bind="city_regions" selected.bind="city_name" change-city.call="viewReport($event, $event)">
+    <div id="sidePane" ref="sidePane">
+      <side-pane cities.bind="city_regions" selected.bind="city_name" change-city.call="viewReport($event, $event)" close-pane.call="hidePane('#sidePane')">
       </side-pane>
     </div>
 
