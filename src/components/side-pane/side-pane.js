@@ -49,6 +49,6 @@ export class SidePane {
   }
 
   switchCity(city) {
-    this.changeCity(city);
+    this.changeCity(city, true);
   }
 }

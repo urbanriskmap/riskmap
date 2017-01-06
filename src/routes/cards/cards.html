@@ -2,7 +2,13 @@
   <require from="./cards.css"></require>
   <div id="cardWrapper">
     <div id="cardTitle" if.bind="(count < 7)">
-      <p id="titleText">${titleString}</p>
+      <p id="titleText">${locale.card_titles[count]}</p>
+      <div id="langSwitch">
+        <label repeat.for="language of languages" id.bind="language" class="langLabels">
+          <input type="radio" model.bind="language" checked.bind="selLanguage" change.delegate="switchLang(language)">
+          &nbsp;&nbsp;${language}&nbsp;
+        </label>
+      </div>
       <div id="tabRow">
         <button repeat.for="i of (totalCards - 3)" class="tabButtons" disabled.bind="!(i < count)"></button>
       </div>

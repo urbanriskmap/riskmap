@@ -93,7 +93,7 @@ export class Map {
     .then(() => {
       if (self.report_id && self.layers.pkeyList.hasOwnProperty(self.report_id)) {
         //Case 1: Valid report id in current city
-        self.layers.pkeyList[self.report_id].fire('click')
+        self.layers.pkeyList[self.report_id].fire('click');
       }
         else if (self.report_id && !self.layers.pkeyList.hasOwnProperty(self.report_id)) {
         //Case 2: Report id not available in current city, attempt to get from server

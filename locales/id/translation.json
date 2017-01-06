@@ -1,10 +1,13 @@
 {
   "page_title": "Laporan Banjir",
-  "location_title": "Pilih Lokasi",
-  "depth_title": "Laporkan Tinggi Genangan",
-  "photo_title": "Unggah Foto",
-  "description_title": "Tambahkan Deskripsi",
-  "review_title": "Tinjau & Laporkan",
+  "card_titles": {
+    "1": "Pilih Lokasi",
+    "2": "Laporkan Tinggi Genangan",
+    "3": "Unggah Foto",
+    "4": "Tambahkan Deskripsi",
+    "5": "Tinjau & Laporkan",
+    "6": "Syarat dan ketentuan"
+  },
   "map_helper": "Pilih kota:",
   "watch_title": "Melihat bagaimana melaporkan:",
   "info_title": "Tentang PetaBencana.id"

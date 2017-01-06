@@ -1,11 +1,13 @@
 {
   "page_title": "Flood reports",
-  "location_title": "Pick location",
-  "depth_title": "Report water depth",
-  "photo_title": "Upload a photo",
-  "description_title": "Tell us more",
-  "review_title": "Review & submit",
-  "terms_title": "Terms & Conditions",
+  "card_titles": {
+    "1": "Pick location",
+    "2": "Report water depth",
+    "3": "Upload a photo",
+    "4": "Tell us more",
+    "5": "Review & submit",
+    "6": "Terms & Conditions"
+  },
   "map_helper": "Select city:",
   "watch_title": "Watch how to report:",
   "info_title": "About PetaBencana.id"

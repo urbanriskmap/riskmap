@@ -31,7 +31,6 @@ export class Depth {
       var heightInCm = Math.round((fillHeight * imgHeightCm) / refHeightPx);
       self.reportcard.depth = heightInCm;
       var sliderActive = false;
-      console.log(fillHeight + ', ' + refHeightPx);
       $('#sliderZone').css({
         'bottom': (fillHeight * 100 / refHeightPx) + '%'
       });

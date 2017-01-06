@@ -33,6 +33,27 @@
   text-align: center;
 }
 
+#langSwitch {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  & label {
+    font-size: 14px;
+    font-family: "Roboto Medium", "Roboto", Open Sans;
+    color: @snow-white;
+    cursor: pointer;
+    & input {
+      display: none;
+    }
+    &:first-child {
+      border-right: 1px solid @snow-white;
+    }
+    &.active {
+      color: @banjir-blue;
+    }
+  }
+}
+
 #tabRow {
   position: absolute;
   width: 100%;

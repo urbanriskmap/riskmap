@@ -1,33 +1,35 @@
 import {inject} from 'aurelia-framework';
-import {I18N} from 'aurelia-i18n';
 import $ from 'jquery';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
 import * as config from './config'; // Cards config
 
 //start-non-standard
-@inject(I18N, EventAggregator)
+@inject(EventAggregator)
 //end-non-standard
 export class Cards {
-  constructor(i18n, ea) {
-    this.i18n = i18n;
+  constructor(ea) {
     this.ea = ea;
-    this.titleString = "title translation error"; //TODO: REMOVE after debugging translation error
     this.datasrc = config.data_server;
+    this.languages = ["en", "id"];
+    //initial language, TODO: set using detected browser language
+    this.selLanguage = "en";
+    this.locale = {};
+    this.changeLanguage(this.selLanguage);
   }
 
   configureRouter(config, router) {
-    config.title = this.i18n.tr('page_title');
+    config.title = this.locale.page_title;
     config.map([
-      {route: '',             moduleId: './landing/landing',          settings: {cardNo: 0}}, //requires cardNo for count getter to set cardNo as 0, resizing dependent on cardTitle & cardNavigation div's displayed, in turn dependent on 'count'
-      {route: 'location',     name: 'location', moduleId: './location/location',        settings: {title: this.i18n.tr('location_title'),     cardNo: 1}},
-      {route: 'depth',        moduleId: './depth/depth',              settings: {title: this.i18n.tr('depth_title'),        cardNo: 2}},
-      {route: 'photo',        moduleId: './photo/photo',              settings: {title: this.i18n.tr('photo_title'),        cardNo: 3}},
-      {route: 'description',  moduleId: './description/description',  settings: {title: this.i18n.tr('description_title'),  cardNo: 4}},
-      {route: 'review',       moduleId: './review/review',            settings: {title: this.i18n.tr('review_title'),       cardNo: 5}},
-      {route: 'terms',        moduleId: './terms/terms',              settings: {title: this.i18n.tr('terms_title'),        cardNo: 6}},
-      {route: 'thanks',       moduleId: './thanks/thanks',            settings: {cardNo: 7}},
-      {route: 'error',        name: 'error', moduleId: './error/error',              settings: {cardNo: 8}},
+      {route: '',                               moduleId: './landing/landing',          settings: {cardNo: 0}}, //requires cardNo for count getter to set cardNo as 0, resizing dependent on cardTitle & cardNavigation div's displayed, in turn dependent on 'count'
+      {route: 'location',     name: 'location', moduleId: './location/location',        settings: {cardNo: 1}},
+      {route: 'depth',                          moduleId: './depth/depth',              settings: {cardNo: 2}},
+      {route: 'photo',                          moduleId: './photo/photo',              settings: {cardNo: 3}},
+      {route: 'description',                    moduleId: './description/description',  settings: {cardNo: 4}},
+      {route: 'review',                         moduleId: './review/review',            settings: {cardNo: 5}},
+      {route: 'terms',                          moduleId: './terms/terms',              settings: {cardNo: 6}},
+      {route: 'thanks',                         moduleId: './thanks/thanks',            settings: {cardNo: 7}},
+      {route: 'error',        name: 'error',    moduleId: './error/error',              settings: {cardNo: 8}},
     ]);
     config.mapUnknownRoutes({redirect: '/map'});
     this.router = router;
@@ -35,6 +37,21 @@ export class Cards {
 
   activate(params) {
     this.id = params.id;
+  }
+
+  changeLanguage(lang) {
+    $.getJSON("../../../locales/" + lang + "/translation.json", (data) => {
+      $.each(data, (key, val) => {
+        this.locale[key] = val;
+      });
+    });
+  }
+
+  //switch on-the-fly
+  switchLang(lang) {
+    this.changeLanguage(lang);
+    $('.langLabels').removeClass("active");
+    $('#' + lang).addClass("active");
   }
 
   resizeCardHt() {
@@ -46,9 +63,9 @@ export class Cards {
   attached() {
     this.resizeCardHt();
     this.totalCards = this.router.routes.length - 1; //exclude (route:'', redirect:'location')
+    $('#' + this.selLanguage).addClass("active");
 
     var self = this;
-
     let client = new HttpClient();
 
     //DEV - TEST report id
@@ -131,22 +148,6 @@ export class Cards {
   }
   set count(val) {
     this.cardNo = this.count + val;
-  }
-
-  /*
-  get titleString() {
-    return this.router.currentInstruction.config.settings.title;
-  }
-  */
-  //TODO: DEBUG translation error, remove following getter + setter
-  get titleString() {
-    if (this.router.currentInstruction.config.settings.title) {
-      this.someString = this.router.currentInstruction.config.settings.title;
-    }
-    return this.someString;
-  }
-  set titleString(string) {
-    this.someString = string;
   }
 
   nextCard() {
