@@ -48,8 +48,6 @@ export class Map {
     }
   }
 
-
-
   // Get parameters from config based on city name, else return default
   parseMapCity(cityName) {
     if (typeof(cityName) === 'undefined' || cityName === null) {
