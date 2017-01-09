@@ -5,7 +5,7 @@
   <require from="../../components/side-pane/side-pane"></require>
 
   <div id="pageWrapper">
-    <div id="cityPopup" if.bind="!city_name">
+    <div id="cityPopup">
       <p>Select city :</p>
       <label repeat.for="city_region of city_regions">
         <input type="radio" model.bind="city_region" checked.bind="city_name" change.delegate="selectCity(city_region)">

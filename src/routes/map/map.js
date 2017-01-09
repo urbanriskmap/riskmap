@@ -59,7 +59,7 @@ export class Map {
       return this.config.instance_regions[cityName];
     } else {
       $.notify('Unsupported city: ' + JSON.stringify(cityName), {style:"mapInfo", className:"info" });
-      $('#cityPopup').fadeIn(500);
+      $('#cityPopup').fadeIn(200);
       return this.config.default_region;
     }
   }
@@ -107,7 +107,7 @@ export class Map {
   //Execute changeCity & viewReport from initial load select city popup
   selectCity(city) {
     this.viewReport(city, true);
-    $('#cityPopup').fadeOut(1000);
+    $('#cityPopup').fadeOut(200);
   }
 
   drawGpsMarkers(center, accuracy, map) {
@@ -186,6 +186,7 @@ export class Map {
 
     // Zoom to city
     if (this.city_name) {
+      $('#cityPopup').hide();
       this.viewReport(this.city_name, true);
     }
 
