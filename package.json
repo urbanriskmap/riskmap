@@ -1,10 +1,10 @@
 {
-  "name": "cognicity-web",
-  "description": "Petabencana.id client applications.",
+  "name": "petabencana.id",
+  "description": "Petabencana.id crowd source flood map - client application.",
   "version": "0.1.0",
   "repository": {
-    "type": "???",
-    "url": "???"
+    "type": "git",
+    "url": "git+https://github.com/urbanriskmap/petabencana.id"
   },
   "scripts": {
     "start": "au run --env dev --watch",
@@ -12,7 +12,7 @@
     "build": "rm -rf scripts/* && au build --env prod",
     "build-dev": "rm -rf scripts/* && au build --env dev"
   },
-  "license": "MIT",
+  "license": "GPL-3.0",
   "dependencies": {
     "aurelia-animator-css": "^1.0.0",
     "aurelia-bootstrapper": "^1.0.0",
