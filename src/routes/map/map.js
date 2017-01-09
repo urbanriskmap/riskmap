@@ -23,10 +23,6 @@ $.notify.addStyle('mapInfo', {
 export class Map {
   constructor() {
     this.config = config;
-    this.city_regions = [];
-    for (let city_region in this.config.instance_regions) {
-      this.city_regions.push(city_region);
-    }
   }
 
   activate(params, routerConfig) {
@@ -51,6 +47,8 @@ export class Map {
       this.hidePane('#reportPane');
     }
   }
+
+
 
   // Get parameters from config based on city name, else return default
   parseMapCity(cityName) {
@@ -79,12 +77,6 @@ export class Map {
     this.map.fitBounds([cityObj.bounds.sw, cityObj.bounds.ne]).once('moveend', (e) => {
       this.map.setMaxBounds(e.target.options.maxBounds);
     });
-    /*
-    //Set map bounds once, after flyToBounds ends
-    this.map.flyToBounds([cityObj.bounds.sw, cityObj.bounds.ne]).once('moveend', (e) => {
-      this.map.setMaxBounds(e.target.options.maxBounds);
-    });
-    */
     this.layers.removeReports();
     return this.layers.addReports(cityName, cityObj.region, this.showPane);
   }
@@ -161,12 +153,27 @@ export class Map {
   }
 
   attached() {
-    // Modify popup pane css on the fly
-    $('#sidePane').css({
-      'height': ($(window).height() - $('#topBar').height()) + 'px'
-    });
-
     var self = this;
+
+    this.city_regions = [];
+    for (let city_region in this.config.instance_regions) {
+      this.city_regions.push(city_region);
+    }
+
+    // Create Leaflet map
+    this.map = L.map('mapContainer', {
+      attributionControl: false //include in side pane
+    }).setView([-7, 110], 8);
+
+    // Add base tile layers
+    L.tileLayer(this.config.tile_layer, {
+      detectRetina: true,
+      subdomains: 'abcd',
+      ext: 'png'
+    }).addTo(this.map);
+
+    // Create new Layer instance (for reports)
+    this.layers = new Layers(this.map);
 
     //If user navigates through history, load city as per stateObj, but do not register new pushState
     window.onpopstate = (e) => {
@@ -177,45 +184,10 @@ export class Map {
       }
     };
 
-    // Create Leaflet map
-    this.map = L.map('mapContainer', {
-      zoomControl: false, //default position: 'topleft'
-      attributionControl: false //include in bottom popup panel
-    }).setView([-7, 109], 8);
-
-    // Create Layer instance
-    this.layers = new Layers(this.map);
-
-    // Find user location & store in background
-    this.map.locate({
-      setView: false
-    });
-    this.map.on('locationfound', (e) => {
-      self.clientLocation = e;
-      for (let city_region in self.config.instance_regions) {
-        self.clientCityIsValid = false;
-        if (self.clientLocation.latitude > self.config.instance_regions[city_region].bounds.sw[0] && self.clientLocation.longitude > self.config.instance_regions[city_region].bounds.sw[1] && self.clientLocation.latitude < self.config.instance_regions[city_region].bounds.ne[0] && self.clientLocation.longitude < self.config.instance_regions[city_region].bounds.ne[1]) {
-          self.clientCity = city_region;
-          self.clientCityIsValid = true;
-          break;
-        }
-      }
-    });
-    this.map.on('locationerror', () => {
-      self.clientLocation = null;
-    });
-
-    let Mapbox_Custom = L.tileLayer(self.config.tile_layer, {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OSM</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA</a>, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>',
-      detectRetina: true,
-      subdomains: 'abcd',
-      minZoom: 0,
-      maxZoom: 18,
-      ext: 'png'
-    }).addTo(this.map);
-
-    //add zoom control
-    L.control.zoom({position: 'topleft'}).addTo(this.map);
+    // Zoom to city
+    if (this.city_name) {
+      this.viewReport(this.city_name, true);
+    }
 
     //Add custom leaflet control, to navigate back to browser located user location
     L.Control.GeoLocate = L.Control.extend({
@@ -237,12 +209,28 @@ export class Map {
     };
     L.control.geoLocate({position: 'topleft'}).addTo(self.map);
 
-    // Zoom to city
-    if (this.city_name) {
-      $('#cityPopup').hide();
-      this.viewReport(this.city_name, true);
-    } else {
-      this.changeCity(null, false);
-    }
+    // Find user location & store in background
+    this.map.locate({
+      setView: false
+    });
+    this.map.on('locationfound', (e) => {
+      self.clientLocation = e;
+      for (let city_region in self.config.instance_regions) {
+        self.clientCityIsValid = false;
+        if (self.clientLocation.latitude > self.config.instance_regions[city_region].bounds.sw[0] && self.clientLocation.longitude > self.config.instance_regions[city_region].bounds.sw[1] && self.clientLocation.latitude < self.config.instance_regions[city_region].bounds.ne[0] && self.clientLocation.longitude < self.config.instance_regions[city_region].bounds.ne[1]) {
+          self.clientCity = city_region;
+          self.clientCityIsValid = true;
+          break;
+        }
+      }
+    });
+    this.map.on('locationerror', () => {
+      self.clientLocation = null;
+    });
+
+    // Modify side pane css on the fly
+    $('#sidePane').css({
+      'height': ($(window).height() - $('#topBar').height()) + 'px'
+    });
   }
 }

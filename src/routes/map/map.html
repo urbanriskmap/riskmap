@@ -5,13 +5,22 @@
   <require from="../../components/side-pane/side-pane"></require>
 
   <div id="pageWrapper">
+    <div id="cityPopup" if.bind="!city_name">
+      <p>Select city :</p>
+      <label repeat.for="city_region of city_regions">
+        <input type="radio" model.bind="city_region" checked.bind="city_name" change.delegate="selectCity(city_region)">
+        ${city_region}
+        <br>
+      </label>
+    </div>
+
     <div id="mapContainer">
     </div>
 
     <div id="topBar">
       <div id="logo_top">
         <a href="https://dev.petabencana.id">
-          <img id="pbLogo" src="assets/graphics/Peta_logo.svg">
+          <img id="pbLogo" src="assets/graphics/Peta_logo.svg" width="180">
         </a>
       </div>
       <div id="optionsBtn" if.bind="!sidePaneOpen" click.delegate="showPane('#sidePane')">
@@ -24,7 +33,7 @@
 
     <div id="logo_bottom">
       <a href="http://urbanrisklab.org">
-        <img id="mitLogo" src="assets/graphics/URL_logo.svg">
+        <img id="mitLogo" src="assets/graphics/URL_logo.svg" width="180">
       </a>
     </div>
 
@@ -39,15 +48,6 @@
     <div id="sidePane" ref="sidePane">
       <side-pane cities.bind="city_regions" selected.bind="city_name" change-city.call="viewReport($event, $event)" close-pane.call="hidePane('#sidePane')">
       </side-pane>
-    </div>
-
-    <div id="cityPopup">
-      <p>Select city :</p>
-      <label repeat.for="city_region of city_regions">
-        <input type="radio" model.bind="city_region" checked.bind="city_name" change.delegate="selectCity(city_region)">
-        ${city_region}
-        <br>
-      </label>
     </div>
   </div>
 </template>
