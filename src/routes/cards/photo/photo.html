@@ -5,6 +5,7 @@
       <i class="icon-camera"></i>
       <canvas ref="preview" id="canvas">
       </canvas>
+      <p if.bind="notify">${locale.card_hints.photo_too_large}</p>
     </div>
     <div id="previewWrapper" if.bind="!enableUpload">
       <i class="icon-camera-1"></i>

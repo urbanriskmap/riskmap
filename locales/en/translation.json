@@ -22,7 +22,8 @@
     "agreement_text": "By submitting this report you are agreeing to the",
     "agreement_title": "PetaBencana.id Contributors Agreement",
     "more_details_required": "Description or Photo required to submit report",
-    "swipe": "Swipe to submit"
+    "swipe": "Swipe to submit",
+    "photo_too_large": "Maximum file size is 4.2mb"
   },
 
   "termsContents":
