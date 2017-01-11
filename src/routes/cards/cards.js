@@ -13,7 +13,6 @@ export class Cards {
     this.ea = ea;
     this.datasrc = config.data_server;
     this.reportcard = rc;
-    this.reportcard.changeLanguage(this.reportcard.selLanguage);
     this.locale = this.reportcard.locale;
   }
 
@@ -65,6 +64,10 @@ export class Cards {
 
     var self = this;
     let client = new HttpClient();
+
+    //self.locale.card_error_messages.already_received
+    this.reportcard.description = {hint: self.locale.card_hints.description, value:null}
+
 
     //DEV - TEST report id
     if (this.id !== 'test123') {

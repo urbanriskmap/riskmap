@@ -17,13 +17,15 @@ export class Reportcard {
   }
 
   constructor() {
-    this.location = {markerLocation: null, gpsLocation: null, accuracy: null};
-    this.depth = null;
-    this.photo = {file: null, rotation: 0};
-    this.description = {hint: "Enter description here...", value: null};
+    var self = this;
     //initial language, TODO: set using detected browser language
-    this.selLanguage = env.default_language;
-    this.languages = env.supported_languages;
-    this.locale = {};
+    self.selLanguage = env.default_language;
+    self.languages = env.supported_languages;
+    self.location = {markerLocation: null, gpsLocation: null, accuracy: null};
+    self.depth = null;
+    self.photo = {file: null, rotation: 0};
+    self.description = {value: null};
+    self.locale = {};
+    self.changeLanguage(this.selLanguage);
   }
 }
