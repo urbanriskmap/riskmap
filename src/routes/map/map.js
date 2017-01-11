@@ -76,7 +76,15 @@ export class Map {
       this.map.setMaxBounds(e.target.options.maxBounds);
     });
     this.layers.removeReports();
-    return this.layers.addReports(cityName, cityObj.region, this.showPane);
+
+    // TODO - we're returning a nested promise from layers, cleaner to have a changeCity promise?
+    // TODO - remove conditional returns
+    if (cityObj.region !== 'java'){
+      return this.layers.addReports(cityName, cityObj.region, this.showPane);
+    }
+    else {
+      return new Promise((resolve, reject)=>{resolve()});
+    }
   }
 
   // View all reports for city, or zoom to single queried report id
