@@ -1,11 +1,11 @@
 <template>
   <require from="./description.css"></require>
   <div id="descriptionWrapper">
-    <textarea id="textarea" maxlength="140" value.bind="text" focus.delegate="onFocus()" click.delegate="onFocus()" keyup.delegate="storeInput()" blur.delegate="onBlur()"></textarea>
+    <textarea id="textarea" maxlength="140" placeholder.bind="reportcard.locale.card_hints.description" value.bind="reportcard.description" focus.delegate="onFocus()" blur.delegate="onBlur()"></textarea>
     <div id="modBtnWrapper">
-      <button id="clearButton" class="modBtn" click.delegate="clearText()" disabled.bind="textLength === 0"><i class="icon-block"></i></button>
+      <button id="clearButton" class="modBtn" click.delegate="clearText()" disabled.bind="!reportcard.description"><i class="icon-block"></i></button>
       <button id="closeButton" class="modBtn" if.bind="isMobile" disabled.bind="!keypadEnabled"><i class="icon-keyboard"></i></button>
-      <p>${textLength}/140</p>
+      <p if.bind="reportcard.description">${reportcard.description.length}/140</p>
     </div>
   </div>
 </template>

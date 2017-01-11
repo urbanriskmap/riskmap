@@ -10,8 +10,8 @@ export class Review {
     this.reportcard = rc;
     this.ea = ea;
     this.report = {
-      text: this.reportcard.description.value,
-      water_depth: this.reportcard.depth,
+      text: this.reportcard.description,
+      water_depth: Math.round(this.reportcard.depth),
       created_at: new Date().toISOString(),
       image_url: '',
       location: this.reportcard.location.markerLocation,
@@ -23,18 +23,6 @@ export class Review {
       this.isMobile = true;
     } else {
       this.isMobile = false;
-    }
-
-    //Check for available user inputs
-    if (this.report.water_depth) {
-      this.selDepth = this.report.water_depth + "cm";
-    } else {
-      this.selDepth = "Not selected";
-    }
-    if (this.report.text) {
-      this.selDescription = this.report.text;
-    } else {
-      this.selDescription = "No description provided";
     }
   }
 
@@ -116,7 +104,7 @@ export class Review {
         $('#submitKnob').css({
           'background-color': '#a0a0a0'
         });
-        $('#termsConditions').html("Required flood location, water depth and atleast a photo or description to submit report");
+        //$('#termsConditions').html("Required flood location, water depth and atleast a photo or description to submit report");
       }
     });
   }

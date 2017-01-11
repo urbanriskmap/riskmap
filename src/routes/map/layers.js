@@ -44,6 +44,7 @@ export class Layers {
               self.popupContent[prop] = feature.properties[prop];
             }
             self.map.flyTo(layer._latlng, 16);
+            history.pushState({city: city_name}, "city", "map/" + city_name + "/" + feature.properties.pkey);
             showPane('#reportPane');
           }
         });

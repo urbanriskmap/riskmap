@@ -10,6 +10,7 @@ var cntxt;
 export class Photo {
   constructor(Reportcard) {
     this.reportcard = Reportcard;
+    this.locale = Reportcard.locale;
     if (this.reportcard.photo.file) {
       this.haveImg = true;
     }
@@ -45,6 +46,7 @@ export class Photo {
 
   sendClick() {
     $('#ghostButton').trigger('click');
+    this.notify = false;
   }
 
   drawImage(deg) {
@@ -73,9 +75,20 @@ export class Photo {
       };
       reviewImg.src = e.target.result;
     };
+    reader.readAsDataURL(this.reportcard.photo.file[0]);
     $('#rotateButton').prop("disabled", false);
     $('#deleteButton').prop("disabled", false);
-    reader.readAsDataURL(this.reportcard.photo.file[0]);
+  }
+
+  sizeCheck() {
+    if (this.reportcard.photo.file[0]) {
+      if (this.reportcard.photo.file[0].size < 4404019) {
+        this.drawImage(0);
+      } else {
+        this.notify = true;
+        this.reportcard.photo.file = null;
+      }
+    }
   }
 
   rotatePhoto() {

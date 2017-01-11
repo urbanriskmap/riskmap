@@ -13,42 +13,44 @@
     box-shadow: @boxshadow-normal;
     & #summaryPhoto {
       position: relative;
-      width: 45%;
+      width: 140px;
       height: 100%;
-      margin: 0px;
       overflow: hidden;
       float: left;
+      text-align: left;
       & #photo {
         position: absolute;
         .fullspan-mixin;
         z-index: 3;
       }
-      & #img {
-        width: 100%;
-        height: 100%;
+      & i {
+        font-size: 80px;
+        line-height: 140px;
+        color: @snow-white;
         z-index: 2;
         opacity: 0.4;
       }
     }
     & #summaryTextWrapper {
       position: relative;
-      width: 55%;
+      width: 50%;
       height: 100%;
       margin: 0;
       text-align: left;
-      font-size: 14px;
       line-height: 18px;
-      float: left;
+      float: right;
       overflow: scroll;
       & #floodH {
         color: @banjir-blue;
         font-family: 'Roboto-Medium', 'Roboto', sans-serif;
+        font-size: 14px;
         margin: 4px 10px 0 0;
       }
       & #comment {
         color: @snow-white;
         font-family: 'Roboto-Light', 'Roboto', sans-serif;
         margin: 4px 10px 0 0;
+        font-size: 12px;
       }
     }
   }
@@ -120,6 +122,7 @@
       z-index: 3;
       font-size: 42px;
       color: @banjir-blue;
+      text-shadow: 1px 1px 4px @steel-gray;
     }
   }
 }
