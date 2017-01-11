@@ -4,8 +4,8 @@
     <div id="cardTitle" if.bind="(count < 7)">
       <p id="titleText">${locale.card_titles[count]}</p>
       <div id="langSwitch">
-        <label repeat.for="language of languages" id.bind="language" class="langLabels">
-          <input type="radio" model.bind="language" checked.bind="selLanguage" change.delegate="switchLang(language)">
+        <label repeat.for="language of reportcard.languages" id.bind="language" class="langLabels">
+          <input type="radio" model.bind="language" checked.bind="reportcard.selLanguage" change.delegate="switchLang(language)">
           &nbsp;&nbsp;${language}&nbsp;
         </label>
       </div>
