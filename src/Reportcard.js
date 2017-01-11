@@ -7,6 +7,7 @@ export class Reportcard {
   } //true indicates to register in the root container
 
   // Support language changing
+  // TODO - error handling for
   changeLanguage(lang) {
     $.getJSON("../../../locales/" + lang + "/translation.json", (data) => {
       $.each(data, (key, val) => {
