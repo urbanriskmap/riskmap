@@ -3,19 +3,18 @@ import $ from 'jquery';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
 import * as config from './config'; // Cards config
+import {Reportcard} from 'Reportcard';
 
 //start-non-standard
-@inject(EventAggregator)
+@inject(EventAggregator, Reportcard)
 //end-non-standard
 export class Cards {
-  constructor(ea) {
+  constructor(ea, rc) {
     this.ea = ea;
     this.datasrc = config.data_server;
-    this.languages = ["en", "id"];
-    //initial language, TODO: set using detected browser language
-    this.selLanguage = "en";
-    this.locale = {};
-    this.changeLanguage(this.selLanguage);
+    this.reportcard = rc;
+    this.reportcard.changeLanguage(this.reportcard.selLanguage);
+    this.locale = this.reportcard.locale;
   }
 
   configureRouter(config, router) {
@@ -39,17 +38,9 @@ export class Cards {
     this.id = params.id;
   }
 
-  changeLanguage(lang) {
-    $.getJSON("../../../locales/" + lang + "/translation.json", (data) => {
-      $.each(data, (key, val) => {
-        this.locale[key] = val;
-      });
-    });
-  }
-
   //switch on-the-fly
   switchLang(lang) {
-    this.changeLanguage(lang);
+    this.reportcard.changeLanguage(lang);
     $('.langLabels').removeClass("active");
     $('#' + lang).addClass("active");
   }
@@ -63,7 +54,7 @@ export class Cards {
   attached() {
     this.resizeCardHt();
     this.totalCards = this.router.routes.length - 1; //exclude (route:'', redirect:'location')
-    $('#' + this.selLanguage).addClass("active");
+    $('#' + this.reportcard.selLanguage).addClass("active");
 
     var self = this;
     let client = new HttpClient();
