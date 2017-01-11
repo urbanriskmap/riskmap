@@ -47,12 +47,19 @@ export class Cards {
 
   resizeCardHt() {
     $('#cardContent').css({
-      'height': $(window).height() - ($('#cardTitle').height() + $('#cardNavigation').height()) + 'px'
+      'height': $('#cardWrapper').height() - ($('#cardTitle').height() + $('#cardNavigation').height()) + 'px'
     });
   }
 
   attached() {
+    //Execute resize on initial page load
     this.resizeCardHt();
+
+    //Add resize listener to browser window
+    $(window).resize(() => {
+      this.resizeCardHt();
+    });
+
     this.totalCards = this.router.routes.length - 1; //exclude (route:'', redirect:'location')
     $('#' + this.reportcard.selLanguage).addClass("active");
 

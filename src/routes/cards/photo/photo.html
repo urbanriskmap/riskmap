@@ -1,18 +1,21 @@
 <template>
   <require from="./photo.css"></require>
   <div id="photoWrapper">
-    <div id="previewWrapper" click.delegate="sendClick()">
-      <i id="cameraIcon" class="icon-camera"></i>
-      <canvas id="canvas" ref="preview">
+    <div id="previewWrapper" click.delegate="sendClick()" if.bind="enableUpload">
+      <i class="icon-camera"></i>
+      <canvas ref="preview" id="canvas">
       </canvas>
+    </div>
+    <div id="previewWrapper" if.bind="!enableUpload">
+      <i class="icon-camera-1"></i>
+      <p>Photo upload is not supported by your browser;<br> press 'NEXT' to continue</p>
+    </div>
+    <div id="modBtnWrapper">
+      <button id="changeButton" class="modBtn" click.delegate="sendClick()" disabled.bind="!enableUpload"><i class="icon-camera-1"></i></button>
+      <button id="rotateButton" class="modBtn" click.delegate="rotatePhoto()" disabled="true"><i class="icon-cw-1"></i></button>
+      <button id="deleteButton" class="modBtn" click.delegate="deletePhoto()" disabled="true"><i class="icon-trash-empty"></i></button>
     </div>
   </div>
 
-  <div id="modBtnWrapper">
-    <button id="changeButton" class="modBtn" click.delegate="sendClick()"><i class="icon-camera"></i></button>
-    <button id="rotateButton" class="modBtn" click.delegate="rotatePhoto()" disabled="true"><i class="icon-cw"></i></button>
-    <button id="deleteButton" class="modBtn" click.delegate="deletePhoto()" disabled="true"><i class="icon-trash-empty"></i></button>
-  </div>
-
-  <input id="ghostButton" style="display: none" type="file" accept="image/*" files.bind="reportcard.photo.file" change.delegate="drawImage(0)">
+  <input id="ghostButton" style="display: none" type="file" accept="image/*;capture=camera" files.bind="reportcard.photo.file" change.delegate="drawImage(0)">
 </template>

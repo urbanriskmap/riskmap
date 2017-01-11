@@ -34,7 +34,9 @@ export class Location {
       var self = this;
 
       //Add leaflet map
-      var cardMap = L.map('mapWrapper');
+      var cardMap = L.map('mapWrapper', {
+        attributionControl: false
+      });
       L.tileLayer(self.config.tile_layer, {
         detectRetina: true,
         ext: 'png'

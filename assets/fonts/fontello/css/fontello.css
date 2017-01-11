@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'fontello';
-  src: url('../font/fontello.eot?84064835');
-  src: url('../font/fontello.eot?84064835#iefix') format('embedded-opentype'),
-       url('../font/fontello.woff2?84064835') format('woff2'),
-       url('../font/fontello.woff?84064835') format('woff'),
-       url('../font/fontello.ttf?84064835') format('truetype'),
-       url('../font/fontello.svg?84064835#fontello') format('svg');
+  src: url('../font/fontello.eot?18940539');
+  src: url('../font/fontello.eot?18940539#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff2?18940539') format('woff2'),
+       url('../font/fontello.woff?18940539') format('woff'),
+       url('../font/fontello.ttf?18940539') format('truetype'),
+       url('../font/fontello.svg?18940539#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?84064835#fontello') format('svg');
+    src: url('../font/fontello.svg?18940539#fontello') format('svg');
   }
 }
 */
@@ -61,13 +61,17 @@
 .icon-up-open:before { content: '\e803'; } /* '' */
 .icon-target:before { content: '\e804'; } /* '' */
 .icon-camera:before { content: '\e805'; } /* '' */
-.icon-cw:before { content: '\e806'; } /* '' */
+.icon-keyboard:before { content: '\e806'; } /* '' */
 .icon-trash-empty:before { content: '\e807'; } /* '' */
 .icon-cancel-2:before { content: '\e808'; } /* '' */
 .icon-picture:before { content: '\e809'; } /* '' */
 .icon-pin:before { content: '\e80a'; } /* '' */
 .icon-watch:before { content: '\e80b'; } /* '' */
 .icon-info:before { content: '\e80c'; } /* '' */
+.icon-block:before { content: '\e80d'; } /* '' */
+.icon-camera-1:before { content: '\e80e'; } /* '' */
+.icon-cw-1:before { content: '\e80f'; } /* '' */
+.icon-spin4:before { content: '\e834'; } /* '' */
 .icon-menu:before { content: '\f0c9'; } /* '' */
 .icon-angle-double-right:before { content: '\f101'; } /* '' */
 .icon-whatsapp:before { content: '\f232'; } /* '' */

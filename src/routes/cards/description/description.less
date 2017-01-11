@@ -1,39 +1,64 @@
 @import '../../../styleSheets/themeGuide.less';
 
 #descriptionWrapper {
-  .insetWrapper;
-}
-
-#textarea {
-  position: relative;
-  width: 280px;
-  height: 260px;
-  font-family: "Roboto-Light", "Roboto", Open Sans;
-  color: #fff;
-  border: none;
-  border-bottom: 3px solid @banjir-blue;
-  font-size: 14px;
-  resize: none;
-  background-color: @light-gray;
-  margin: 0px;
-  padding: 10px;
-  outline: none;
-  &:focus {
-    margin-top: -1px;
-    margin-top: -1px;
-    border-top: 1px solid @banjir-blue;
-    border-left: 1px solid @banjir-blue;
-    border-right: 1px solid @banjir-blue;
+  .fixed-content-wrapper;
+  & #textarea {
+    position: relative;
+    width: 208px;
+    height: 192px;
+    margin: 8px 0 0 0;
+    padding: 6px;
+    font-family: "Roboto-Light", "Roboto", Open Sans;
+    color: @snow-white;
+    border: none;
+    font-size: 14px;
+    resize: none;
+    background-color: @light-gray;
+    outline: none;
+    &:focus {
+      margin-top: 7px;
+      height: 191px;
+      border: 1px solid @banjir-blue;
+    }
   }
-}
-
-#textmessage {
-  font-family: "Roboto-Light", "Roboto", Open Sans;
-  color: @dark-gray;
-  margin: 0px;
-  font-size: 14px;
-  & p {
-    margin: 0px;
-    padding: 12px 0px 0px 0px;
+  & #modBtnWrapper {
+    position: relative;
+    width: 226px;
+    height: 36px;
+    border-top: 3px solid @banjir-blue;
+    margin: 12px auto;
+    & .modBtn {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      padding: 3px 0 0 0;
+      margin: 0 0 0 6px;
+      background-color: transparent;
+      border: none;
+      line-height: 36px;
+      color: @snow-white;
+      outline: none;
+      float: left;
+      & .icon-keyboard {
+        font-size: 24px;
+      }
+      & .icon-block {
+        font-size: 20px;
+      }
+      &:active {
+        border-bottom: 2px solid @banjir-blue;
+        color: @banjir-blue;
+      }
+      &:disabled {
+        border: none;
+        color: rgba(0, 0, 0, 0.15);
+      }
+    }
+    & p {
+      margin: 0px;
+      padding: 12px 0px 0px 0px;
+      float: right;
+      .bodylight-mixin(14px);
+    }
   }
 }

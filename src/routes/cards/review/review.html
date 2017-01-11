@@ -3,7 +3,7 @@
   <div id="reviewWrapper">
     <div id="summaryCard">
       <div id="summaryPhoto">
-        <canvas id="camera" ref="preview">
+        <canvas id="photo" ref="preview">
         </canvas>
         <img id="img" src="assets/graphics/image_flood.svg">
       </div>
@@ -13,14 +13,16 @@
       </div>
     </div>
     <div id="reviewSubmit">
-      <div id="termsConditions">
+      <div id="termsConditions" if.bind="!swiped">
         <p>By submitting this report, you are agreeing to the<br><a click.delegate="readTerms()"><u>Terms &amp; Conditions</u></a></p>
       </div>
-      <br>
-      <div id="submitSlider">
+      <div id="submitSlider" if.bind="!swiped">
         <button id="submitKnob"></button>
-        <p id="submitRef1">&nbsp;<i class="icon-angle-double-right"></i></p>
-        <p id="submitRef2">Swipe to submit</p>
+        <p id="ref1" class="refText"><i class="icon-angle-double-right"></i></p>
+        <p id="ref2" class="refText">Swipe to submit</p>
+      </div>
+      <div id="spinWheel" if.bind="swiped">
+        <i class="icon-spin4 animate-spin"></i>
       </div>
     </div>
   </div>
