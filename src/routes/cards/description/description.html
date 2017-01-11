@@ -1,8 +1,10 @@
 <template>
   <require from="./description.css"></require>
   <div id="descriptionWrapper">
-    <textarea id="textarea" maxlength="140" value.bind="text" click.trigger="clearHint()" keyup.trigger="storeInput()" blur.trigger="checkEntry()"></textarea>
-    <div id="textmessage">
+    <textarea id="textarea" maxlength="140" value.bind="text" focus.delegate="onFocus()" keyup.delegate="storeInput()" blur.delegate="onBlur()"></textarea>
+    <div id="modBtnWrapper">
+      <button id="closeButton" class="modBtn" if.bind="isMobile" disabled.bind="!keypadEnabled"><i class="icon-keyboard"></i></button>
+      <button id="clearButton" class="modBtn" click.delegate="clearText()" disabled.bind="textLength === 0"><i class="icon-block"></i></button>
       <p>${textLength}/140</p>
     </div>
   </div>

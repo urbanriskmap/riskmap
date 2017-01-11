@@ -1,135 +1,125 @@
 @import '../../../styleSheets/themeGuide.less';
 
 #reviewWrapper {
-  position: relative;
-  .fullspan-mixin;
-}
-
-#summaryCard {
-  position: absolute;
-  width: 80%;
-  height: 160px;
-  background-color: #424242;
-  box-shadow: @boxshadow-normal;
-  left: 50%;
-  top: 30%;
-  .translate-mixin(-50%, -50%);
-}
-
-#summaryPhoto {
-  position: relative;
-  width: 45%;
-  height: 100%;
-  margin: 0px;
-  overflow: hidden;
-  display: flex;
-  float: left;
-}
-
-#camera {
-  position: absolute;
-  .fullspan-mixin;
-  z-index: 3;
-}
-
-#img {
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  opacity: 0.4;
-}
-
-#summaryTextWrapper {
-  position: relative;
-  width: 55%;
-  height: 100%;
-  margin: 10px 0 0 0;
-  text-align: left;
-  font-size: 14px;
-  line-height: 18px;
-  float: left;
-}
-
-#floodH {
-  color: #31aade;
-  font-family: 'Roboto-Medium', 'Roboto', sans-serif;
-  margin: 0px 10px;
-}
-#comment {
-  color: #fff;
-  font-family: 'Roboto-Light', 'Roboto', sans-serif;
-  margin: 4px 10px;
-}
-
-#reviewSubmit {
-  position: absolute;
-  left: 50%;
-  bottom: 36px;
-  .translate-mixin(-50%, 0);
-  width: 80%; /* width of nav buttons + margin */
-  padding: 0px;
-}
-
-#termsConditions {
-  width: 100%;
-  margin: 0px;
-  .bodylight-mixin(12px);
-  color: @snow-white;
-  & a {
-    cursor: pointer;
-    .bodylight-mixin(12px);
-    color: @snow-white;
-  }
-}
-
-#submitSlider {
-  position: relative;
-  width: 75%;
-  height: 36px;
-  margin: 0px auto;
-  padding: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 6px;
-  box-shadow: @inset-shadow;
-  overflow: hidden;
-  z-index: 3;
-}
-
-#submitKnob {
-  position: relative;
-  width: 36px;
-  height: 36px;
-  border: none;
-  border-radius: 6px;
-  background-color: #31aade;
-  outline: none;
-  box-shadow: @boxshadow-normal;
-  float: left;
-  z-index: 2;
-  &:active {
-    background-color: #31aade;
+  .fixed-content-wrapper;
+  & #summaryCard {
+    position: absolute;
+    width: 100%;
+    height: 140px;
+    left: 50%;
+    top: 12px;
+    .translate-mixin(-50%, 0);
+    background-color: #424242;
     box-shadow: @boxshadow-normal;
+    & #summaryPhoto {
+      position: relative;
+      width: 45%;
+      height: 100%;
+      margin: 0px;
+      overflow: hidden;
+      float: left;
+      & #photo {
+        position: absolute;
+        .fullspan-mixin;
+        z-index: 3;
+      }
+      & #img {
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        opacity: 0.4;
+      }
+    }
+    & #summaryTextWrapper {
+      position: relative;
+      width: 55%;
+      height: 100%;
+      margin: 0;
+      text-align: left;
+      font-size: 14px;
+      line-height: 18px;
+      float: left;
+      overflow: scroll;
+      & #floodH {
+        color: @banjir-blue;
+        font-family: 'Roboto-Medium', 'Roboto', sans-serif;
+        margin: 4px 10px 0 0;
+      }
+      & #comment {
+        color: @snow-white;
+        font-family: 'Roboto-Light', 'Roboto', sans-serif;
+        margin: 4px 10px 0 0;
+      }
+    }
   }
-}
-
-#submitRef1 {
-  margin: 0px;
-  padding: 0px;
-  color: white;
-  font-size: 30px;
-  opacity: 0.4;
-  z-index: 1;
-  float: left;
-}
-
-#submitRef2 {
-  margin: 0px;
-  padding: 0px;
-  color: white;
-  font-size: 12px;
-  line-height: 36px;
-  font-family: 'Roboto-Light', 'Roboto', Open-sans;
-  opacity: 0.4;
-  z-index: 1;
-  float: left;
+  & #reviewSubmit {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    width: 100%; /* width of nav buttons + margin */
+    .translate-mixin(-50%, 0);
+    padding: 0px;
+    & #termsConditions {
+      width: 100%;
+      margin: 0 0 12px 0;
+      .bodylight-mixin(12px);
+      color: @snow-white;
+      & a {
+        cursor: pointer;
+        .bodylight-mixin(12px);
+        color: @snow-white;
+      }
+    }
+    & #submitSlider {
+      position: relative;
+      width: 64%;
+      height: 36px;
+      margin: 0px auto;
+      padding: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 6px;
+      box-shadow: @inset-shadow;
+      overflow: hidden;
+      z-index: 3;
+      & #submitKnob {
+        position: relative;
+        width: 36px;
+        height: 36px;
+        border: none;
+        border-radius: 6px;
+        background-color: #31aade;
+        outline: none;
+        box-shadow: @boxshadow-normal;
+        float: left;
+        z-index: 2;
+        &:active {
+          background-color: #31aade;
+          box-shadow: @boxshadow-normal;
+        }
+      }
+      & .refText {
+        margin: 0px;
+        padding: 0px;
+        color: @snow-white;
+        opacity: 0.4;
+        z-index: 1;
+        float: left;
+        &#ref1 {
+          font-size: 30px;
+        }
+        &#ref2 {
+          font-size: 12px;
+          line-height: 36px;
+          font-family: 'Roboto-Light', 'Roboto', Open-sans;
+        }
+      }
+    }
+    & #spinWheel {
+      position: relative;
+      margin: 0 auto 18px auto;
+      z-index: 3;
+      font-size: 42px;
+      color: @banjir-blue;
+    }
+  }
 }

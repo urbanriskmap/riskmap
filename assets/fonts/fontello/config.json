@@ -37,18 +37,6 @@
       "src": "fontawesome"
     },
     {
-      "uid": "dc3f1d5b1d006f7f7b3b6295eccab9da",
-      "css": "camera",
-      "code": 59397,
-      "src": "fontawesome"
-    },
-    {
-      "uid": "bc71f4c6e53394d5ba46b063040014f1",
-      "css": "cw",
-      "code": 59398,
-      "src": "fontawesome"
-    },
-    {
       "uid": "f48ae54adfb27d8ada53d0fd9e34ee10",
       "css": "trash-empty",
       "code": 59399,
@@ -119,6 +107,42 @@
       "css": "menu",
       "code": 61641,
       "src": "fontawesome"
+    },
+    {
+      "uid": "9bd60140934a1eb9236fd7a8ab1ff6ba",
+      "css": "spin4",
+      "code": 59444,
+      "src": "fontelico"
+    },
+    {
+      "uid": "29e7f6072d5935d7818204d9b088508b",
+      "css": "block",
+      "code": 59405,
+      "src": "entypo"
+    },
+    {
+      "uid": "85017ab6ca074831a8de771b40e9640c",
+      "css": "camera",
+      "code": 59397,
+      "src": "entypo"
+    },
+    {
+      "uid": "b59cc4d390a6df564a055f43c03a6af5",
+      "css": "camera-1",
+      "code": 59406,
+      "src": "linecons"
+    },
+    {
+      "uid": "bb46b15cb78cc4cc05d3d715d522ac4d",
+      "css": "cw-1",
+      "code": 59407,
+      "src": "entypo"
+    },
+    {
+      "uid": "005a38f6af74b31aeb817fedb09d2175",
+      "css": "keyboard",
+      "code": 59398,
+      "src": "entypo"
     }
   ]
 }

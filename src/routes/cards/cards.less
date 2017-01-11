@@ -3,14 +3,26 @@
 #cardWrapper {
   @media screen {
     position: relative;
-    @media (min-width: 320px) {
-      .fullspan-mixin;
+    @media (min-width: 240px) {
+      width: 100%;
+      @media (min-height: 200px) {
+        height: 100%;
+      }
+      @media (min-height: 640px) {
+        height: 640px;
+        box-shadow: @drop-shadow;
+      }
     }
     @media (min-width: 420px) {
       width: 420px;
-      height: 100%;
       margin: auto;
       box-shadow: @drop-shadow;
+      @media (min-height: 200px) {
+        height: 100%;
+      }
+      @media (min-height: 640px) {
+        height: 640px;
+      }
     }
   }
 }

@@ -45,7 +45,7 @@
 
 //_Font styles Variables_
 .bodylight-mixin(@var) {
-  font-family: "Roboto Light", "Roboto", Open Sans;
+  font-family: "Roboto-Light", "Roboto", Open Sans;
   font-size: @var;
   color: @steel-gray;
 }
@@ -57,21 +57,21 @@
 }
 
 .bodymedium-mixin(@var) {
-  font-family: "Roboto Medium", "Roboto", Open Sans;
+  font-family: "Roboto-Medium", "Roboto", Open Sans;
   font-size: @var;
   color: @steel-gray;
   cursor: pointer;
 }
 
 .bodybold-mixin(@var) {
-  font-family: "Roboto Bold", "Roboto", Open Sans;
+  font-family: "Roboto-Bold", "Roboto", Open Sans;
   font-size: @var;
   color: @steel-gray;
   cursor: pointer;
 }
 
 .linklight-mixin(@var) {
-  font-family: "Roboto Light", "Roboto", Open Sans;
+  font-family: "Roboto-Light", "Roboto", Open Sans;
   font-size: @var;
   color: @steel-gray;
   cursor: pointer;
@@ -86,7 +86,7 @@
 }
 
 .linkmedium-mixin(@var) {
-  font-family: "Roboto Medium", "Roboto", Open Sans;
+  font-family: "Roboto-Medium", "Roboto", Open Sans;
   font-size: @var;
   color: @steel-gray;
   cursor: pointer;
@@ -100,10 +100,30 @@
   }
 }
 
-
 //Custom layout configs
+.fullspan-mixin() {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
 //Card variables
-.insetWrapper() {
+.fixed-content-wrapper() {
+  position: absolute;
+  width: 300px;
+  height: 272px;
+  left: 50%;
+  top: 0px;
+  .translate-mixin(-50%, 0);
+  @media screen and (min-height: 372px) {
+    top: 50%;
+    .translate-mixin(-50%, -50%);
+  }
+  overflow: visible;
+}
+
+.inset-content-wrapper() {
   position: relative;
   width: 300px;
   height: 280px;
@@ -112,17 +132,8 @@
   border: none;
 }
 
-
-//Custom layout configs
 //Map page variables
 @bar-heights: 60px;
-
-.fullspan-mixin() {
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-  padding: 0px;
-}
 
 .mapbars-mixin(@var) {
   position: absolute;

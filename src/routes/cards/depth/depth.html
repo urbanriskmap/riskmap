@@ -1,20 +1,21 @@
 <template>
   <require from="./depth.css"></require>
   <div id="depthWrapper">
-    <div id="imgWrapper">
-      <img id="bgImage" ref="bgImage" src="assets/graphics/heightReference.svg">
-      <div id="floodZone" ref="floodZone">
+    <img id="bgImage" src="assets/graphics/heightReference.svg">
+    <div id="floodZone">
+    </div>
+    <div id="sliderZone">
+      <div id="knob">
       </div>
-      <div id="sliderZone" ref="sliderZone">
-        <div id="knob">
-        </div>
-        <div id="hTop" class="knobHelper"><i class="icon-up-open"></i>
-        </div>
-        <div id="hBottom" class="knobHelper"><i class="icon-down-open"></i>
-        </div>
+      <div id="hTop" class="knobHelper">
+        <i class="icon-up-open"></i>
       </div>
-      <div id="depthText" textcontent="${reportcard.depth}cm">
+      <div id="hBottom" class="knobHelper">
+        <i class="icon-down-open"></i>
       </div>
+    </div>
+    <div id="depthText">
+      ${displayDepth}&nbsp;cm
     </div>
   </div>
 </template>

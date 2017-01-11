@@ -14,22 +14,45 @@ export class Description {
       this.textLength = 0;
       this.text = this.reportcard.description.hint;
     }
-  }
-
-  clearHint() {
-    if (this.textLength === 0) {
-      this.text = this.reportcard.description.value;
+    if (/Mobi/.test(navigator.userAgent)) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
     }
   }
 
-  checkEntry() {
+  clearText() {
+    this.textLength = 0;
+    this.text = this.reportcard.description.hint;
+    this.reportcard.description.value = null;
+  }
+
+  onBlur() {
     if (this.textLength === 0) {
       this.text = this.reportcard.description.hint;
+    }
+    if (this.isMobile) {
+      this.keypadEnabled = false;
+      $('#textarea').css({
+        'height': 192 + 'px'
+      });
     }
   }
 
   storeInput() {
-    this.reportcard.description.value = this.text; 
+    this.reportcard.description.value = this.text;
     this.textLength = this.reportcard.description.value.length;
+  }
+
+  onFocus() {
+    if (this.textLength === 0) {
+      this.text = this.reportcard.description.value;
+    }
+    if (this.isMobile) {
+      this.keypadEnabled = true;
+      $('#textarea').css({
+        'height': 80 + 'px'
+      });
+    }
   }
 }

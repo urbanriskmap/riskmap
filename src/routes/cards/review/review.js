@@ -56,10 +56,10 @@ export class Review {
 
       if (this.checkRequiredInputs) {
         var slideRange = $('#submitSlider').width() - $('#submitKnob').width(),
-        slideThreshold = 0.9,
-        slideTranslate = 0,
-        slidePressed = false,
-        swiped = false;
+            slideThreshold = 0.9,
+            slideTranslate = 0,
+            slidePressed = false;
+        self.swiped = false;
 
         //Slider touch start
         $('#submitKnob').on('touchstart mousedown', function (e) {
@@ -90,8 +90,8 @@ export class Review {
               });
 
               //Swipe threshold crossed
-              if (slideTranslate >= (slideThreshold * slideRange) && !swiped) {
-                swiped = true;
+              if (slideTranslate >= (slideThreshold * slideRange) && !self.swiped) {
+                self.swiped = true;
                 slidePressed = false;
                 self.ea.publish('submit', self.report);
                 self.ea.publish('image', self.imageObject);
@@ -101,7 +101,7 @@ export class Review {
 
           //Drag end
           $(window).on('touchend mouseup', function () {
-            if (slidePressed && slideTranslate < (slideThreshold * slideRange) && !swiped) {
+            if (slidePressed && slideTranslate < (slideThreshold * slideRange) && !self.swiped) {
               slidePressed = false;
               $('#submitKnob').animate({ //Swing back to start position
                 'left': 0 + 'px'
@@ -127,8 +127,8 @@ export class Review {
 
   drawImage(deg) {
     let wrapper = this.preview;
-    wrapper.width = $('#camera').width();
-    wrapper.height = $('#camera').height();
+    wrapper.width = $('#photo').width();
+    wrapper.height = $('#photo').height();
     let reader = new FileReader();
     reader.onload = (e) => {
       let reviewImg = new Image();

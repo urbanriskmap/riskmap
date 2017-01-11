@@ -1,80 +1,77 @@
 @import '../../../styleSheets/themeGuide.less';
 
 #photoWrapper {
-  .insetWrapper;
-  border-bottom: 3px solid @banjir-blue;
-}
-
-#previewWrapper {
-  position: relative;
-  width: 240px;
-  height: 240px;
-  margin: 0px auto;
-  border: 4px solid rgba(255, 255, 255, 0.4);
-  & i {
-    position: absolute;
-    top: 58px;
-    left: 48%;
-    padding: 0px;
-    font-size: 120px;
-    color: rgba(255, 255, 255, 0.4);
-    z-index: 2;
-    .translate-mixin(-50%, 0);
-  }
-  &:active {
-    border: 4px solid @banjir-blue;
-    & i {
-      color: @banjir-blue;
+  .fixed-content-wrapper;
+  & #modBtnWrapper {
+    position: relative;
+    margin: 12px auto;
+    width: 226px;
+    height: 36px;
+    border-top: 3px solid @banjir-blue;
+    & .modBtn {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      padding: 3px 0 0 0;
+      background-color: transparent;
+      border: none;
+      font-size: 24px;
+      line-height: 36px;
+      color: @snow-white;
+      outline: none;
+      &:active {
+        border-bottom: 2px solid @banjir-blue;
+        color: @banjir-blue;
+      }
+      &:disabled {
+        border: none;
+        color: rgba(0, 0, 0, 0.15);
+      }
+    }
+    & #changeButton, #rotateButton {
+      float: left;
+      margin-right: 6px;
+    }
+    & #deleteButton {
+      float: right;
     }
   }
-}
-
-#canvas {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  margin: 0px;
-  padding: 0px;
-  z-index: 3;
-}
-
-#modBtnWrapper {
-  position: relative;
-  margin: 12px auto 0 auto;
-  width: 300px;
-  height: 36px;
-}
-
-.modBtn {
-  position: relative;
-  width: 36px;
-  heigth: 36px;
-  padding: 0px;
-  background-color: transparent;
-  border: none;
-  border-radius: 6px;
-  font-family: 'Roboto-Light', 'Roboto', sans-serif;
-  font-size: 24px;
-  line-height: 36px;
-  text-align: center;
-  color: @banjir-blue;
-  outline: none;
-  &:active {
-    border: 1px solid #31aade;
-    color: #31aade;
-  }
-  &:disabled {
+  & #previewWrapper {
+    position: relative;
+    width: 208px;
+    height: 208px;
+    margin: 4px auto;
     color: rgba(0, 0, 0, 0.15);
+    border: 2px solid @light-gray;
+    &.enabled {
+      color: rgba(255, 255, 255, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      &:active i {
+        color: @banjir-blue;
+      }
+    }
+    & i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      padding: 0px;
+      .translate-mixin(-50%, -50%);
+      font-size: 120px;
+      z-index: 2;
+    }
+    & canvas {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      z-index: 3;
+    }
+    & p {
+      position: absolute;
+      width: 100%;
+      bottom: -22px;
+      .bodylight-mixin(14px);
+    }
   }
-}
-
-#changeButton, #rotateButton {
-  float: left;
-  margin-right: 6px;
-}
-
-#deleteButton {
-  float: right;
 }
