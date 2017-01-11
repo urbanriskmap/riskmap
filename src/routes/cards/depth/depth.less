@@ -28,41 +28,40 @@
     .translate-mixin(0, 20%);
     overflow: visible;
     z-index: 10;
-  }
-  & .knobHelper {
-    position: absolute;
-    right: 10.5px;
-    color: @translucent-white;
-    font-size: 12px;
-    line-height: 12px;
-    z-index: 9;
-  }
-  & #hTop {
-    top: -10px;
-  }
-  & #hBottom {
-    bottom: -5px;
-  }
-  & #knob {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    top: 5px;
-    right: 8px;
-    background-color: @banjir-blue;
-    border: 2px solid @snow-white;
-    border-radius: 11px; /* add border to width/2 */
-    z-index: 8;
-    box-shadow: 0px 0px 12px 8px rgba(49, 170, 222, 0.4);
-  }
-  & #depthText {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    margin: 0px;
-    padding: 19px;
-    font-family: "Roboto-Light", "Roboto", Open Sans;
-    font-size: 14px;
-    color: @snow-white;
+    & #depthText {
+      position: absolute;
+      top: -4px;
+      left: 20px;
+      font-family: "Roboto-Light", "Roboto", Open Sans;
+      font-size: 14px;
+      color: @snow-white;
+      text-shadow: 1px 1px 3px @steel-gray;
+    }
+    & .knobHelper {
+      position: absolute;
+      right: 10.5px;
+      color: @translucent-white;
+      font-size: 12px;
+      line-height: 12px;
+      z-index: 9;
+      &#hTop {
+        top: -10px;
+      }
+      &#hBottom {
+        bottom: -5px;
+      }
+    }
+    & #knob {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      top: 5px;
+      right: 8px;
+      background-color: @banjir-blue;
+      border: 2px solid @snow-white;
+      border-radius: 11px; /* add border to width/2 */
+      z-index: 8;
+      box-shadow: 0px 0px 12px 8px rgba(49, 170, 222, 0.4);
+    }
   }
 }
