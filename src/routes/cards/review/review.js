@@ -116,7 +116,7 @@ export class Review {
         $('#submitKnob').css({
           'background-color': '#a0a0a0'
         });
-        $('#termsConditions').html("Required flood location, water depth and atleast a photo or description to submit report");
+        //$('#termsConditions').html("Required flood location, water depth and atleast a photo or description to submit report");
       }
     });
   }

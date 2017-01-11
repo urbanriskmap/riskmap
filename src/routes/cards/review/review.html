@@ -8,18 +8,20 @@
         <img id="img" src="assets/graphics/image_flood.svg">
       </div>
       <div id="summaryTextWrapper">
-        <p id="floodH">Water depth: ${selDepth}</p>
-        <p id="comment">${selDescription}</p>
+        <p id="floodH">${locale.card_hints.water_depth}: ${selDepth}</p>
+        <!--<p if.bind="reportcard.depth">${reportcard.depth}</p><p if.bind="!reportcard.depth">no depth</p>-->
+        <p id="comment" if.bind="reportcard.description.value">${reportcard.description.value}</p>
       </div>
     </div>
     <div id="reviewSubmit">
       <div id="termsConditions" if.bind="!swiped">
-        <p>By submitting this report, you are agreeing to the<br><a click.delegate="readTerms()"><u>Terms &amp; Conditions</u></a></p>
+        <p if.bind="!reportcard.description.value && !reportcard.photo.file">${locale.card_hints.more_details_required}</p>
+        <p if.bind="reportcard.description.value || reportcard.photo.file">${locale.card_hints.agreement_text}<br><a click.delegate="readTerms()"><u>${locale.card_hints.agreement_title}</u></a></p>
       </div>
       <div id="submitSlider" if.bind="!swiped">
         <button id="submitKnob"></button>
         <p id="ref1" class="refText"><i class="icon-angle-double-right"></i></p>
-        <p id="ref2" class="refText">Swipe to submit</p>
+        <p id="ref2" class="refText">${locale.card_hints.swipe}</p>
       </div>
       <div id="spinWheel" if.bind="swiped">
         <i class="icon-spin4 animate-spin"></i>
