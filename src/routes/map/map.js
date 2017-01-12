@@ -84,7 +84,7 @@ export class Map {
       return this.layers.addReports(cityName, cityObj.region, this.showPane);
     }
     else {
-      return new Promise((resolve, reject)=>{resolve()});
+      return new Promise((resolve, reject)=>{resolve();});
     }
   }
 
@@ -168,9 +168,10 @@ export class Map {
     }
 
     // Create Leaflet map
+    var defaultRegion = this.config.default_region.bounds; 
     this.map = L.map('mapContainer', {
       attributionControl: false //include in side pane
-    }).setView([-7, 110], 8);
+    }).setView(defaultRegion.sw, 10);
 
     // Add base tile layers
     L.tileLayer(this.config.tile_layer, {
