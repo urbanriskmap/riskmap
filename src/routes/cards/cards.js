@@ -70,12 +70,14 @@ export class Cards {
       //Navigate to location card OR error card, then resize card height to fill screen
       client.get(this.datasrc + 'cards/' + this.id)
       .then(response => {
-        var msg = JSON.parse(response.response);
+         var msg = JSON.parse(response.response);
          // card already exists
          if (msg.result.received === true) {
           self.router.routes[8].settings.errorText = self.locale.card_error_messages.already_received;
           self.router.navigate('error', {replace: true});
         } else {
+          self.reportcard.network = msg.result.network;
+          self.router.routes[7].settings.errorCode = response.statusCode;
           self.router.navigate('location', {replace: true});
         }
       })

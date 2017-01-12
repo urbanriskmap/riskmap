@@ -25,6 +25,7 @@ export class Reportcard {
     self.depth = null;
     self.photo = {file: null, rotation: 0};
     self.description = {value: null};
+    self.network = null;
     self.locale = {};
     self.changeLanguage(this.selLanguage);
   }
