@@ -14,7 +14,8 @@
   "card_error_messages":{
     "already_received": "Report already received",
     "unknown_link": "Report link does not exist",
-    "unknown_error": "Unhandled report link verification error"
+    "unknown_error": "Unhandled report link verification error",
+    "link": "Go to PetaBencana.id"
   },
   "card_hints":{
     "description": "Enter description here...",
@@ -23,7 +24,11 @@
     "agreement_title": "PetaBencana.id Contributors Agreement",
     "more_details_required": "Description or Photo required to submit report",
     "swipe": "Swipe to submit",
-    "photo_too_large": "File size exceeds limit of 4.2mb"
+    "photo_too_large": "File size exceeds limit of 4.2mb",
+    "thanks": "Thank you for your report",
+    "redirect": "Redirecting to PetaBencana.id",
+    "next": "NEXT",
+    "previous": "PREV"
   },
 
   "termsContents":
