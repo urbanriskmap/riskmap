@@ -3,19 +3,17 @@ import $ from 'jquery';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
 import * as config from './config'; // Cards config
+import {Reportcard} from 'Reportcard';
 
 //start-non-standard
-@inject(EventAggregator)
+@inject(EventAggregator, Reportcard)
 //end-non-standard
 export class Cards {
-  constructor(ea) {
+  constructor(ea, rc) {
     this.ea = ea;
     this.datasrc = config.data_server;
-    this.languages = ["en", "id"];
-    //initial language, TODO: set using detected browser language
-    this.selLanguage = "en";
-    this.locale = {};
-    this.changeLanguage(this.selLanguage);
+    this.reportcard = rc;
+    this.locale = this.reportcard.locale;
   }
 
   configureRouter(config, router) {
@@ -39,31 +37,30 @@ export class Cards {
     this.id = params.id;
   }
 
-  changeLanguage(lang) {
-    $.getJSON("../../../locales/" + lang + "/translation.json", (data) => {
-      $.each(data, (key, val) => {
-        this.locale[key] = val;
-      });
-    });
-  }
-
   //switch on-the-fly
   switchLang(lang) {
-    this.changeLanguage(lang);
+    this.reportcard.changeLanguage(lang);
     $('.langLabels').removeClass("active");
     $('#' + lang).addClass("active");
   }
 
   resizeCardHt() {
     $('#cardContent').css({
-      'height': $(window).height() - ($('#cardTitle').height() + $('#cardNavigation').height()) + 'px'
+      'height': $('#cardWrapper').height() - ($('#cardTitle').height() + $('#cardNavigation').height()) + 'px'
     });
   }
 
   attached() {
+    //Execute resize on initial page load
     this.resizeCardHt();
+
+    //Add resize listener to browser window
+    $(window).resize(() => {
+      this.resizeCardHt();
+    });
+
     this.totalCards = this.router.routes.length - 1; //exclude (route:'', redirect:'location')
-    $('#' + this.selLanguage).addClass("active");
+    $('#' + this.reportcard.selLanguage).addClass("active");
 
     var self = this;
     let client = new HttpClient();
@@ -74,10 +71,9 @@ export class Cards {
       client.get(this.datasrc + 'cards/' + this.id)
       .then(response => {
         var msg = JSON.parse(response.response);
-        //console.log(msg.result);
-        if (msg.result.received === true) {
-          //self.router.routes[8].settings.errorCode = response.statusCode;
-          self.router.routes[8].settings.errorText = "Report already received from this link";
+         // card already exists
+         if (msg.result.received === true) {
+          self.router.routes[8].settings.errorText = self.locale.card_error_messages.already_received;
           self.router.navigate('error', {replace: true});
         } else {
           self.router.navigate('location', {replace: true});
@@ -87,12 +83,13 @@ export class Cards {
         if (response.statusCode === 404) {
           // error this card does not exist
           self.router.routes[8].settings.errorCode = response.statusCode;
-          self.router.routes[8].settings.errorText = "Report link does not exist";
+          self.router.routes[8].settings.errorText = self.locale.card_error_messages.unknown_link;
           self.router.navigate('error', {replace: true});
         } else {
+          console.log(self);
           // unhandled error
           self.router.routes[8].settings.errorCode = response.statusCode;
-          self.router.routes[8].settings.errorText = "Unhandled report link verification error (" + response.statusText + ")";
+          self.router.routes[8].settings.errorText = self.locale.card_error_messages.unknown_error + "(" + response.statusText + ")";
           self.router.navigate('error', {replace: true});
         }
       });
@@ -164,7 +161,11 @@ export class Cards {
   }
 
   get nextDisabled() {
-    return this.cardNo >= this.totalCards - 3;
+    if (this.cardNo === 1) { //Disables next button until map is loaded
+      return !this.reportcard.location.markerLocation;
+    } else {
+      return this.cardNo >= this.totalCards - 3;
+    }
   }
   get prevDisabled() {
     return this.cardNo === 1 || this.cardNo === 7;

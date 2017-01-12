@@ -3,24 +3,27 @@
   <div id="reviewWrapper">
     <div id="summaryCard">
       <div id="summaryPhoto">
-        <canvas id="camera" ref="preview">
+        <canvas id="photo" ref="preview">
         </canvas>
-        <img id="img" src="assets/graphics/image_flood.svg">
+        <i class="icon-flood"></i>
       </div>
       <div id="summaryTextWrapper">
-        <p id="floodH">Water depth: ${selDepth}</p>
-        <p id="comment">${selDescription}</p>
+        <p id="floodH">${locale.card_hints.water_depth}: ${report.water_depth} cm</p>
+        <p id="comment" if.bind="report.text">${report.text}</p>
       </div>
     </div>
     <div id="reviewSubmit">
-      <div id="termsConditions">
-        <p>By submitting this report, you are agreeing to the<br><a click.delegate="readTerms()"><u>Terms &amp; Conditions</u></a></p>
+      <div id="termsConditions" if.bind="!swiped">
+        <p if.bind="!report.text && !reportcard.photo.file">${locale.card_hints.more_details_required}</p>
+        <p if.bind="report.text || reportcard.photo.file">${locale.card_hints.agreement_text}<br><a click.delegate="readTerms()"><u>${locale.card_hints.agreement_title}</u></a></p>
       </div>
-      <br>
-      <div id="submitSlider">
+      <div id="submitSlider" if.bind="!swiped">
         <button id="submitKnob"></button>
-        <p id="submitRef1">&nbsp;<i class="icon-angle-double-right"></i></p>
-        <p id="submitRef2">Swipe to submit</p>
+        <p id="ref1" class="refText"><i class="icon-angle-double-right"></i></p>
+        <p id="ref2" class="refText">${locale.card_hints.swipe}</p>
+      </div>
+      <div id="spinWheel" if.bind="swiped">
+        <i class="icon-spin4 animate-spin"></i>
       </div>
     </div>
   </div>

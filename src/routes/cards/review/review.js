@@ -11,7 +11,7 @@ export class Review {
     this.ea = ea;
     this.report = {
       text: this.reportcard.description.value,
-      water_depth: this.reportcard.depth,
+      water_depth: Math.round(this.reportcard.depth),
       created_at: new Date().toISOString(),
       image_url: '',
       location: this.reportcard.location.markerLocation,
@@ -23,18 +23,6 @@ export class Review {
       this.isMobile = true;
     } else {
       this.isMobile = false;
-    }
-
-    //Check for available user inputs
-    if (this.report.water_depth) {
-      this.selDepth = this.report.water_depth + "cm";
-    } else {
-      this.selDepth = "Not selected";
-    }
-    if (this.report.text) {
-      this.selDescription = this.report.text;
-    } else {
-      this.selDescription = "No description provided";
     }
   }
 
@@ -56,10 +44,10 @@ export class Review {
 
       if (this.checkRequiredInputs) {
         var slideRange = $('#submitSlider').width() - $('#submitKnob').width(),
-        slideThreshold = 0.9,
-        slideTranslate = 0,
-        slidePressed = false,
-        swiped = false;
+            slideThreshold = 0.9,
+            slideTranslate = 0,
+            slidePressed = false;
+        self.swiped = false;
 
         //Slider touch start
         $('#submitKnob').on('touchstart mousedown', function (e) {
@@ -90,8 +78,8 @@ export class Review {
               });
 
               //Swipe threshold crossed
-              if (slideTranslate >= (slideThreshold * slideRange) && !swiped) {
-                swiped = true;
+              if (slideTranslate >= (slideThreshold * slideRange) && !self.swiped) {
+                self.swiped = true;
                 slidePressed = false;
                 self.ea.publish('submit', self.report);
                 self.ea.publish('image', self.imageObject);
@@ -101,7 +89,7 @@ export class Review {
 
           //Drag end
           $(window).on('touchend mouseup', function () {
-            if (slidePressed && slideTranslate < (slideThreshold * slideRange) && !swiped) {
+            if (slidePressed && slideTranslate < (slideThreshold * slideRange) && !self.swiped) {
               slidePressed = false;
               $('#submitKnob').animate({ //Swing back to start position
                 'left': 0 + 'px'
@@ -116,7 +104,6 @@ export class Review {
         $('#submitKnob').css({
           'background-color': '#a0a0a0'
         });
-        $('#termsConditions').html("Required flood location, water depth and atleast a photo or description to submit report");
       }
     });
   }
@@ -127,8 +114,8 @@ export class Review {
 
   drawImage(deg) {
     let wrapper = this.preview;
-    wrapper.width = $('#camera').width();
-    wrapper.height = $('#camera').height();
+    wrapper.width = $('#photo').width();
+    wrapper.height = $('#photo').height();
     let reader = new FileReader();
     reader.onload = (e) => {
       let reviewImg = new Image();

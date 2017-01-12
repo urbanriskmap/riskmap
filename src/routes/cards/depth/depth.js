@@ -8,6 +8,7 @@ import {Reportcard} from 'Reportcard';
 export class Depth {
   constructor(Reportcard) {
     this.reportcard = Reportcard;
+    this.sliderActive = false;
     //Check for mobile or desktop device
     if (/Mobi/.test(navigator.userAgent)) {
       this.isMobile = true;
@@ -17,27 +18,32 @@ export class Depth {
   }
 
   attached() {
-    $(document).ready(() => {
+    $(document).ready(() => { //TODO: test if required
       var self = this;
-      var imgHeightCm = 200;
-      var refHeightPx = $('#imgWrapper').height();
+      var imgHeightCm = 220;
+      var heightLimit = 195;
+      var refHeightPx = $('#bgImage').height();
       var fillHeight;
       if (self.reportcard.depth) {
+        if (self.reportcard.depth > heightLimit) {
+          self.reportcard.depth = heightLimit;
+        } else if (self.reportcard.depth < 0) {
+          self.reportcard.depth = 0;
+        }
         $('#floodZone').css({
           'height': (self.reportcard.depth * refHeightPx / imgHeightCm) + 'px'
         });
       }
       fillHeight = $('#floodZone').height();
-      var heightInCm = Math.round((fillHeight * imgHeightCm) / refHeightPx);
-      self.reportcard.depth = heightInCm;
-      var sliderActive = false;
       $('#sliderZone').css({
-        'bottom': (fillHeight * 100 / refHeightPx) + '%'
+        'bottom': fillHeight + 'px'
       });
+      self.reportcard.depth = (fillHeight * imgHeightCm) / refHeightPx;
+      self.displayDepth = Math.round(self.reportcard.depth);
 
       //Touch start
       $('#sliderZone').on('touchstart mousedown', function (e) {
-        sliderActive = true;
+        self.sliderActive = true;
         $('.knobHelper').fadeOut(100);
         $('#knob').css({
           'box-shadow': '0px 0px 12px 8px rgba(179, 214, 239, 0.5)'
@@ -58,23 +64,23 @@ export class Depth {
           } else {
             dragPos = e.clientY;
           }
-          heightInCm = Math.round(((fillHeight + startPos - dragPos) * imgHeightCm) / refHeightPx);
-          if (sliderActive && heightInCm > 0 && heightInCm <= imgHeightCm) {
-            self.reportcard.depth = heightInCm;
+          self.reportcard.depth = ((fillHeight + startPos - dragPos) * imgHeightCm) / refHeightPx;
+          if (self.sliderActive && (self.reportcard.depth > 0 && self.reportcard.depth <= heightLimit)) {
+            self.displayDepth = Math.round(self.reportcard.depth);
             $('#floodZone').css({
               'height': (fillHeight + startPos - dragPos) + 'px'
             });
             $('#sliderZone').css({
-              'bottom': (((fillHeight + startPos - dragPos) * 100) / refHeightPx) + '%'
+              'bottom': (fillHeight + startPos - dragPos) + 'px'
             });
           }
         });
       });
 
       //Drag end
-      $(window).on('touchend mouseup', function () {
-        if (sliderActive) {
-          sliderActive = false;
+      $(document).on('touchend mouseup', function () {
+        if (self.sliderActive) {
+          self.sliderActive = false;
           $('#knob').css({
             'box-shadow': '0px 0px 12px 8px rgba(49, 170, 222, 0.4)'
           });

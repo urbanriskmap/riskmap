@@ -2,20 +2,17 @@
 
 #locationWrapper {
   .fullspan-mixin;
-}
-
-#mapWrapper {
-  position: relative;
-  .fullspan-mixin;
-  z-index: 1;
-}
-
-#mapMarker {
-  position: absolute;
-  width: 48px;
-  height: 48px;
-  left: 50%;
-  top: 50%;
-  .translate-mixin(-50%, -100%);
-  z-index: 100;
+  & #mapWrapper {
+    position: relative;
+    .fullspan-mixin;
+    z-index: 1;
+  }
+  & #mapMarker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    .translate-mixin(-50%, -90%);
+    font-size: 48px;
+    z-index: 100;
+  }
 }

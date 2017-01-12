@@ -7,29 +7,32 @@ import {Reportcard} from 'Reportcard';
 export class Description {
   constructor(Reportcard) {
     this.reportcard = Reportcard;
-    if (this.reportcard.description.value) {
-      this.textLength = this.reportcard.description.value.length;
-      this.text = this.reportcard.description.value;
+    if (/Mobi/.test(navigator.userAgent)) {
+      this.isMobile = true;
     } else {
-      this.textLength = 0;
-      this.text = this.reportcard.description.hint;
+      this.isMobile = false;
     }
   }
 
-  clearHint() {
-    if (this.textLength === 0) {
-      this.text = this.reportcard.description.value;
+  clearText() {
+    this.reportcard.description.value = null;
+  }
+
+  onBlur() {
+    if (this.isMobile) {
+      this.keypadEnabled = false;
+      $('#textarea').css({
+        'height': 192 + 'px'
+      });
     }
   }
 
-  checkEntry() {
-    if (this.textLength === 0) {
-      this.text = this.reportcard.description.hint;
+  onFocus() {
+    if (this.isMobile) {
+      this.keypadEnabled = true;
+      $('#textarea').css({
+        'height': 80 + 'px'
+      });
     }
-  }
-
-  storeInput() {
-    this.reportcard.description.value = this.text; 
-    this.textLength = this.reportcard.description.value.length;
   }
 }

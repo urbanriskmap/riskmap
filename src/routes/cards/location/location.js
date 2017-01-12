@@ -34,7 +34,9 @@ export class Location {
       var self = this;
 
       //Add leaflet map
-      var cardMap = L.map('mapWrapper');
+      var cardMap = L.map('mapWrapper', {
+        attributionControl: false
+      });
       L.tileLayer(self.config.tile_layer, {
         detectRetina: true,
         ext: 'png'
@@ -44,9 +46,12 @@ export class Location {
       L.Control.GeoLocate = L.Control.extend({
         onAdd: function (map) {
           var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+          container.innerHTML = '<i class="icon-geolocate"></i>';
+          container.style.fontSize = '21px';
+          container.style.textAlign = 'center';
+          container.style.lineHeight = '28px';
+          container.style.color = 'black';
           container.style.backgroundColor = 'white';
-          container.style.backgroundImage = 'url(assets/icons/geolocate.svg)';
-          container.style.backgroundSize = '30px 30px';
           container.style.width = '30px';
           container.style.height = '30px';
           container.onclick = function() {
