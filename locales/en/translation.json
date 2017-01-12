@@ -28,7 +28,8 @@
     "thanks": "Thank you for your report",
     "redirect": "Redirecting to PetaBencana.id",
     "next": "NEXT",
-    "previous": "PREV"
+    "previous": "PREV",
+    "confirmation": "We will send you a confirmation message via" 
   },
 
   "termsContents":

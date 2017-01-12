@@ -11,7 +11,7 @@ export class Thanks {
 
   attached() {
     var self = this;
-    console.log(self.reportcard.network);
+    self.network_name = this.reportcard.network.charAt(0).toUpperCase() + this.reportcard.network.slice(1);
     window.setTimeout(function () {
       window.location.replace('/map');
     }, 3000);
