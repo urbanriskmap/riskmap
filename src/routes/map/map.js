@@ -84,7 +84,9 @@ export class Map {
       return this.layers.addReports(cityName, cityObj.region, this.showPane);
     }
     else {
-      return new Promise((resolve, reject)=>{resolve()});
+      return new Promise((resolve, reject) => {
+        resolve();
+      });
     }
   }
 
@@ -201,11 +203,14 @@ export class Map {
     L.Control.GeoLocate = L.Control.extend({
       onAdd: (map) => {
         var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+        container.innerHTML = '<i class="icon-geolocate"></i>';
+        container.style.fontSize = '21px';
+        container.style.textAlign = 'center';
+        container.style.lineHeight = '28px';
+        container.style.color = 'black';
         container.style.backgroundColor = 'white';
-        container.style.backgroundImage = 'url(assets/icons/geolocate.svg)';
-        container.style.backgroundSize = '26px 26px';
-        container.style.width = '26px';
-        container.style.height = '26px';
+        container.style.width = '30px';
+        container.style.height = '30px';
         container.onclick = () => {
           self.viewLocation();
         };
