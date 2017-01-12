@@ -81,6 +81,7 @@ export class Map {
     // TODO - we're returning a nested promise from layers, cleaner to have a changeCity promise?
     // TODO - remove conditional returns
     if (cityObj.region !== 'java'){
+      this.layers.addFloodExtents(cityName);
       return this.layers.addReports(cityName, cityObj.region, this.showPane);
     }
     else {
