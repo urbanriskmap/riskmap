@@ -8,7 +8,7 @@ import env from '../../environment';
 var config = {
   "instance_regions":
   {
-    "Chennai": {
+    "chennai": {
       "region": "tn",
       "bounds": {
         "sw":[ 13.017163, 80.185031],

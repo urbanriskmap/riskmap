@@ -166,6 +166,7 @@ export class Map {
     for (let city_region in this.config.instance_regions) {
       this.city_regions.push(city_region);
     }
+    this.show_city_select_popup = this.city_regions.length > 1;
 
     // Create Leaflet map
     var defaultRegion = this.config.default_region.bounds; 
