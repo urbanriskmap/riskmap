@@ -38,7 +38,8 @@ var config = {
     }
   },
   "data_server" : env.data_server,
-  "tile_layer": env.tile_layer
+  "tile_layer": env.tile_layer,
+  "app": env.app
 };
 
 module.exports = config;
