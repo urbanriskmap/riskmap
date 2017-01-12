@@ -24,7 +24,7 @@ export class Reportcard {
     self.location = {markerLocation: null, gpsLocation: null, accuracy: null};
     self.depth = null;
     self.photo = {file: null, rotation: 0};
-    self.description = null;
+    self.description = {value: null};
     self.locale = {};
     self.changeLanguage(this.selLanguage);
   }

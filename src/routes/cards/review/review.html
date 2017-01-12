@@ -9,13 +9,13 @@
       </div>
       <div id="summaryTextWrapper">
         <p id="floodH">${locale.card_hints.water_depth}: ${report.water_depth} cm</p>
-        <p id="comment" if.bind="reportcard.description">${report.text}</p>
+        <p id="comment" if.bind="report.text">${report.text}</p>
       </div>
     </div>
     <div id="reviewSubmit">
       <div id="termsConditions" if.bind="!swiped">
-        <p if.bind="!reportcard.description && !reportcard.photo.file">${locale.card_hints.more_details_required}</p>
-        <p if.bind="reportcard.description || reportcard.photo.file">${locale.card_hints.agreement_text}<br><a click.delegate="readTerms()"><u>${locale.card_hints.agreement_title}</u></a></p>
+        <p if.bind="!report.text && !reportcard.photo.file">${locale.card_hints.more_details_required}</p>
+        <p if.bind="report.text || reportcard.photo.file">${locale.card_hints.agreement_text}<br><a click.delegate="readTerms()"><u>${locale.card_hints.agreement_title}</u></a></p>
       </div>
       <div id="submitSlider" if.bind="!swiped">
         <button id="submitKnob"></button>

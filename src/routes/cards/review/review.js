@@ -10,7 +10,7 @@ export class Review {
     this.reportcard = rc;
     this.ea = ea;
     this.report = {
-      text: this.reportcard.description,
+      text: this.reportcard.description.value,
       water_depth: Math.round(this.reportcard.depth),
       created_at: new Date().toISOString(),
       image_url: '',
@@ -104,7 +104,6 @@ export class Review {
         $('#submitKnob').css({
           'background-color': '#a0a0a0'
         });
-        //$('#termsConditions').html("Required flood location, water depth and atleast a photo or description to submit report");
       }
     });
   }

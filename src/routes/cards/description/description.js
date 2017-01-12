@@ -15,7 +15,7 @@ export class Description {
   }
 
   clearText() {
-    this.reportcard.description = null;
+    this.reportcard.description.value = null;
   }
 
   onBlur() {
