@@ -65,10 +65,6 @@ export class Cards {
     var self = this;
     let client = new HttpClient();
 
-    //self.locale.card_error_messages.already_received
-    this.reportcard.description = {hint: self.locale.card_hints.description, value:null}
-
-
     //DEV - TEST report id
     if (this.id !== 'test123') {
       //Navigate to location card OR error card, then resize card height to fill screen
@@ -165,7 +161,11 @@ export class Cards {
   }
 
   get nextDisabled() {
-    return this.cardNo >= this.totalCards - 3;
+    if (this.cardNo === 1) { //Disables next button until map is loaded
+      return !this.reportcard.location.markerLocation;
+    } else {
+      return this.cardNo >= this.totalCards - 3;
+    }
   }
   get prevDisabled() {
     return this.cardNo === 1 || this.cardNo === 7;

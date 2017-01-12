@@ -20,8 +20,8 @@ export class Depth {
   attached() {
     $(document).ready(() => { //TODO: test if required
       var self = this;
-      var imgHeightCm = 238;
-      var heightLimit = 190;
+      var imgHeightCm = 220;
+      var heightLimit = 195;
       var refHeightPx = $('#bgImage').height();
       var fillHeight;
       if (self.reportcard.depth) {
@@ -65,7 +65,7 @@ export class Depth {
             dragPos = e.clientY;
           }
           self.reportcard.depth = ((fillHeight + startPos - dragPos) * imgHeightCm) / refHeightPx;
-          if (self.sliderActive && (self.reportcard.depth > 0 && self.reportcard.depth <= 190)) {
+          if (self.sliderActive && (self.reportcard.depth > 0 && self.reportcard.depth <= heightLimit)) {
             self.displayDepth = Math.round(self.reportcard.depth);
             $('#floodZone').css({
               'height': (fillHeight + startPos - dragPos) + 'px'

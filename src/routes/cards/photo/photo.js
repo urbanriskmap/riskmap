@@ -46,40 +46,48 @@ export class Photo {
 
   sendClick() {
     $('#ghostButton').trigger('click');
+    this.notify = false;
   }
 
   drawImage(deg) {
-    if (this.reportcard.photo.file[0].size < 4404019) {
-      wrapper.width = $('#canvas').width();
-      wrapper.height = $('#canvas').height();
-      let reader = new FileReader();
-      reader.onload = (e) => {
-        let reviewImg = new Image();
-        reviewImg.onload = () => {
-          let imgW;
-          let imgH;
-          let trlX = -wrapper.width/2;
-          let trlY = -wrapper.height/2;
-          if (reviewImg.width >= reviewImg.height) {
-            imgH = wrapper.height;
-            imgW = Math.round((reviewImg.width * imgH) / reviewImg.height);
-            trlX = trlX + Math.round((wrapper.width - imgW) / 2);
-          } else {
-            imgW = wrapper.width;
-            imgH = Math.round((reviewImg.height * imgW) / reviewImg.width);
-            trlY = trlY + Math.round((wrapper.height - imgH) / 2);
-          }
-          cntxt.translate(wrapper.width / 2, wrapper.height / 2);
-          cntxt.rotate(deg * Math.PI / 180);
-          cntxt.drawImage(reviewImg, trlX, trlY, imgW, imgH);
-        };
-        reviewImg.src = e.target.result;
+    wrapper.width = $('#canvas').width();
+    wrapper.height = $('#canvas').height();
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      let reviewImg = new Image();
+      reviewImg.onload = () => {
+        let imgW;
+        let imgH;
+        let trlX = -wrapper.width/2;
+        let trlY = -wrapper.height/2;
+        if (reviewImg.width >= reviewImg.height) {
+          imgH = wrapper.height;
+          imgW = Math.round((reviewImg.width * imgH) / reviewImg.height);
+          trlX = trlX + Math.round((wrapper.width - imgW) / 2);
+        } else {
+          imgW = wrapper.width;
+          imgH = Math.round((reviewImg.height * imgW) / reviewImg.width);
+          trlY = trlY + Math.round((wrapper.height - imgH) / 2);
+        }
+        cntxt.translate(wrapper.width / 2, wrapper.height / 2);
+        cntxt.rotate(deg * Math.PI / 180);
+        cntxt.drawImage(reviewImg, trlX, trlY, imgW, imgH);
       };
-      $('#rotateButton').prop("disabled", false);
-      $('#deleteButton').prop("disabled", false);
-      reader.readAsDataURL(this.reportcard.photo.file[0]);
-    } else {
-      this.notify = true;
+      reviewImg.src = e.target.result;
+    };
+    reader.readAsDataURL(this.reportcard.photo.file[0]);
+    $('#rotateButton').prop("disabled", false);
+    $('#deleteButton').prop("disabled", false);
+  }
+
+  sizeCheck() {
+    if (this.reportcard.photo.file[0]) {
+      if (this.reportcard.photo.file[0].size < 4404019) {
+        this.drawImage(0);
+      } else {
+        this.notify = true;
+        this.reportcard.photo.file = null;
+      }
     }
   }
 

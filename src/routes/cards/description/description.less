@@ -32,18 +32,22 @@
       width: 36px;
       height: 36px;
       padding: 3px 0 0 0;
-      margin: 0 0 0 6px;
+      margin: 0px;
       background-color: transparent;
       border: none;
       line-height: 36px;
       color: @snow-white;
+      text-shadow: 1px 1px 2px @steel-gray;
       outline: none;
       float: left;
-      & .icon-keyboard {
-        font-size: 24px;
+      &:first-child {
+        margin-right: 6px;
       }
       & .icon-block {
         font-size: 20px;
+      }
+      & .icon-keyboard {
+        font-size: 24px;
       }
       &:active {
         border-bottom: 2px solid @banjir-blue;
@@ -52,6 +56,7 @@
       &:disabled {
         border: none;
         color: rgba(0, 0, 0, 0.15);
+        text-shadow: none;
       }
     }
     & p {
