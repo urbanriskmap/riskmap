@@ -64,6 +64,7 @@ export class Map {
 
   // Change city from within map without reloading window
   changeCity(cityName, pushState) {
+    $('#cityPopup').fadeOut(200);
     var cityObj = this.parseMapCity(cityName);
     if (pushState) {
       if (cityObj.region !== 'java') {
