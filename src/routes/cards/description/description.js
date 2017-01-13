@@ -20,7 +20,7 @@ export class Description {
 
   onBlur() {
     if (this.isMobile) {
-      this.keypadEnabled = false;
+      this.focussed = false;
       $('#textarea').css({
         'height': 192 + 'px'
       });
@@ -29,10 +29,14 @@ export class Description {
 
   onFocus() {
     if (this.isMobile) {
-      this.keypadEnabled = true;
+      this.focussed = true;
       $('#textarea').css({
         'height': 80 + 'px'
       });
     }
+  }
+
+  setFocus() {
+    $('#textarea').focus();
   }
 }

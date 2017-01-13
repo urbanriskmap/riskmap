@@ -2,9 +2,9 @@
   <require from="./side-pane.css"></require>
   <div id="tabsBar">
     <ul class="tabs">
-      <li class="paneTabs" repeat.for="tab of tabs">
-        <div class="tabLinks" id.bind="'button-' + tab" click.delegate="switchTab(tab)">
-          <i class.bind="'icon-' + tab"></i>
+      <li class="paneTabs" repeat.for="tabName of tabList">
+        <div class="tabLinks" id.bind="'button-' + tabName" click.delegate="switchTab(tabName)">
+          <i class.bind="'icon-' + tabName"></i>
         </div>
       </li>
       <li class="langTab">
@@ -19,7 +19,7 @@
   </div>
 
   <div id="paneContent">
-    <div id="content-map" if.bind="selTab==='map'" class="contentWrapper">
+    <div id="content-map" if.bind="tab === 'map'" class="contentWrapper">
       <p>${locale.map_helper}</p>
       <label repeat.for="city of cities">
         <input type="radio" model.bind="city" checked.bind="selected" change.delegate="switchCity(city)">
@@ -27,10 +27,10 @@
         <br>
       </label>
     </div>
-    <div id="content-watch" if.bind="selTab==='watch'" class="contentWrapper">
+    <div id="content-watch" if.bind="tab === 'watch'" class="contentWrapper">
       ${locale.watch_title}
     </div>
-    <div id="content-info" if.bind="selTab==='info'" class="contentWrapper">
+    <div id="content-info" if.bind="tab === 'info'" class="contentWrapper">
       ${locale.info_title}
     </div>
   </div>

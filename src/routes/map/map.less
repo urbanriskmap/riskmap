@@ -5,26 +5,32 @@
   .fullspan-mixin;
 }
 
-#cityPopup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 200px;
-  .translate-mixin(-50%, -50%);
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  box-shadow: @spread-shadow;
+#screen {
+  position: absolute;
+  .fullspan-mixin;
+  background-color: rgba(128, 128, 128, 0.25);
   z-index: 1025;
-  background: @translucent-white;
-  & p {
-    .bodymedium-mixin(14px);
-    margin: 0 0 6px 0;
-  }
-  & label {
-    .linklight-mixin(14px);
-    text-transform: capitalize;
-    text-decoration: none;
+  & #cityPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    .translate-mixin(-50%, -50%);
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: @spread-shadow;
+    z-index: 1030;
+    background: @translucent-white;
+    & p {
+      .bodymedium-mixin(14px);
+      margin: 0 0 6px 0;
+    }
+    & label {
+      .linklight-mixin(14px);
+      text-transform: capitalize;
+      text-decoration: none;
+    }
   }
 }
 

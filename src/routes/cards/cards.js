@@ -51,6 +51,13 @@ export class Cards {
   }
 
   attached() {
+    var nua = navigator.userAgent.toLowerCase();
+    if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1) {
+      $('#cardNavigation').css({
+        'height': 100 + 'px'
+      });
+    }
+
     //Execute resize on initial page load
     this.resizeCardHt();
 

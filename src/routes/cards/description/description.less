@@ -2,6 +2,7 @@
 
 #descriptionWrapper {
   .fixed-content-wrapper;
+
   & #textarea {
     position: relative;
     width: 208px;
@@ -15,6 +16,18 @@
     resize: none;
     background-color: @light-gray;
     outline: none;
+    &::-webkit-input-placeholder {
+      color: @dark-gray;
+    }
+    &::-moz-placeholder {
+      color: @dark-gray;
+    }
+    &:-moz-placeholder {
+      color: @dark-gray;
+    }
+    &:-ms-input-placeholder {
+      color: @dark-gray;
+    }
     &:focus {
       margin-top: 7px;
       height: 191px;
@@ -35,7 +48,6 @@
       margin: 0px;
       background-color: transparent;
       border: none;
-      line-height: 36px;
       color: @snow-white;
       text-shadow: 1px 1px 2px @steel-gray;
       outline: none;
@@ -44,10 +56,26 @@
         margin-right: 6px;
       }
       & .icon-block {
+        line-height: 36px;
         font-size: 20px;
       }
       & .icon-keyboard {
-        font-size: 24px;
+        position: absolute;
+        font-size: 20px;
+        left: 3px;
+        bottom: 3.5px;
+      }
+      & .icon-down-open {
+        position: absolute;
+        font-size: 12px;
+        left: 8.5px;
+        bottom: -3px;
+      }
+      & .icon-up-open {
+        position: absolute;
+        font-size: 12px;
+        left: 8.5px;
+        bottom: 20px;
       }
       &:active {
         border-bottom: 2px solid @banjir-blue;
