@@ -1,7 +1,7 @@
 {
   "page_title": "Flood reports",
   "card_titles": {
-    "1": "Pick location",
+    "1": "Select flood location",
     "2": "Report water depth",
     "3": "Upload a photo",
     "4": "Tell us more",
@@ -29,7 +29,7 @@
     "redirect": "Redirecting to PetaBencana.id",
     "next": "NEXT",
     "previous": "PREV",
-    "confirmation": "We will send you a confirmation message via" 
+    "confirmation": "We will send you a confirmation message via"
   },
 
   "termsContents":

@@ -41,11 +41,11 @@ export class Map {
   }
 
   showPane(ref) {
-    $(ref).fadeIn(200);
     if (ref === '#sidePane') {
       this.sidePaneOpen = true;
       this.hidePane('#reportPane');
     }
+    $(ref).fadeIn(200);
   }
 
   // Get parameters from config based on city name, else return default
@@ -58,6 +58,7 @@ export class Map {
     } else {
       $.notify('Unsupported city: ' + JSON.stringify(cityName), {style:"mapInfo", className:"info" });
       $('#cityPopup').fadeIn(200);
+      $('#screen').fadeIn(200);
       return this.config.default_region;
     }
   }
@@ -65,6 +66,7 @@ export class Map {
   // Change city from within map without reloading window
   changeCity(cityName, pushState) {
     $('#cityPopup').fadeOut(200);
+    $('#screen').fadeOut(200);
     var cityObj = this.parseMapCity(cityName);
     if (pushState) {
       if (cityObj.region !== 'java') {
@@ -73,8 +75,8 @@ export class Map {
         history.pushState({city: null}, "city", "map");
       }
     }
-    this.map.fitBounds([cityObj.bounds.sw, cityObj.bounds.ne]).once('moveend', (e) => {
-      this.map.setMaxBounds(e.target.options.maxBounds);
+    this.map.flyToBounds([cityObj.bounds.sw, cityObj.bounds.ne]).once('moveend zoomend', (e) => {
+      this.map.setMaxBounds([cityObj.bounds.sw, cityObj.bounds.ne]);
     });
     this.layers.removeReports();
     this.layers.removeFloodExtents();
@@ -100,8 +102,7 @@ export class Map {
       if (self.report_id && self.layers.pkeyList.hasOwnProperty(self.report_id)) {
         //Case 1: Valid report id in current city
         self.layers.pkeyList[self.report_id].fire('click');
-      }
-        else if (self.report_id && !self.layers.pkeyList.hasOwnProperty(self.report_id)) {
+      } else if (self.report_id && !self.layers.pkeyList.hasOwnProperty(self.report_id)) {
         //Case 2: Report id not available in current city, attempt to get from server
         self.layers.addSingleReport(self.report_id).then(report => {
           report.fire('click');
@@ -119,6 +120,7 @@ export class Map {
   selectCity(city) {
     this.viewReport(city, true);
     $('#cityPopup').fadeOut(200);
+    $('#screen').fadeOut(200);
   }
 
   drawGpsMarkers(center, accuracy, map) {
@@ -144,7 +146,10 @@ export class Map {
     if (this.clientLocation) {
       if (this.clientCityIsValid) {
         //case 1: location found, location in a supported city
-        self.map.flyTo(self.clientLocation.latlng, 16);
+        self.map.flyTo(self.clientLocation.latlng, {
+          zoom: 15,
+          duration: 1
+        });
         if (self.gpsMarker) {
           self.gpsMarker.removeFrom(self.map);
           self.gpsAccuracy.removeFrom(self.map);
@@ -173,8 +178,11 @@ export class Map {
 
     // Create Leaflet map
     this.map = L.map('mapContainer', {
-      attributionControl: false //include in side pane
-    }).setView([-7, 110], 8);
+      attributionControl: false, //include in side pane
+      center: [-7, 110],
+      zoom: 8,
+      minZoom: 8
+    });
 
     // Add base tile layers
     L.tileLayer(this.config.tile_layer, {
@@ -198,6 +206,7 @@ export class Map {
     // Zoom to city
     if (this.city_name) {
       $('#cityPopup').hide();
+      $('#screen').hide();
       this.viewReport(this.city_name, true);
     }
 
