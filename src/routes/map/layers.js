@@ -82,16 +82,13 @@ export class Layers {
   }
 
   // Function to add flooded polygon layer for Jakarta to map
-  addFloodExtents(city){
-
-    // Create empty geojson layer with styles, as a global variable
-    // Ask getData to get data with url
-    // Add to map
+  addFloodExtents(city_region){
 
     var self = this;
 
+    // Create geojson object
     self.flood_extents = L.geoJSON(null, {
-      style: function(feature){
+      style: function(feature, layer){
         switch (feature.properties.state) {
     			case 4: return {fillColor:"#CC2A41",weight:1,color:"#CC2A41", opacity:0.8,fillOpacity: 0.8};
     			case 3: return {fillColor:"#FF8300",weight:1,color:"#FF8300", opacity:0.8,fillOpacity: 0.8};
@@ -102,24 +99,34 @@ export class Layers {
       }
     });
 
-    var url = "https://gist.githubusercontent.com/talltom/ed44510806135af2fe9c67f44cfd4ca1/raw/45854e009e1947b77b472c5e04a5208ad6e4497b/gistfile1.topojson";
+    // Get areas where flooding is happening
+    var url = config.data_server + "floods?city=" + city_region + "&minimum_state=1"
     // Get data and add to layer
     return new Promise((resolve, reject) => {
       self.data.getData(url)
       .then((data) => {
-        self.flood_extents.addData(data);
-        self.flood_extents.addTo(self.map);
-        resolve(data);
+        if (data === null){
+          console.log('Could not load flood extents for '+city);
+          resolve(data);
+        }
+        else {
+          self.flood_extents.addData(data);
+          self.flood_extents.addTo(self.map);
+          resolve(data);
+        }
       })
-      .catch(() => reject(null));
+      .catch((err) => reject(null));
     });
 
   }
 
+  // Remove layer from map, referencing global variable defined in addFloodExtents()
   removeFloodExtents(){
-
-    // Remove layer from map, referencing global variable defined in addFloodExtents()
+    var self = this;
+    if (self.flood_extents){
+      self.map.removeLayer(self.flood_extents);
+      self.flood_extents = null;
+    }
   }
-
 
 }

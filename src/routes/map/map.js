@@ -77,11 +77,12 @@ export class Map {
       this.map.setMaxBounds(e.target.options.maxBounds);
     });
     this.layers.removeReports();
+    this.layers.removeFloodExtents();
 
     // TODO - we're returning a nested promise from layers, cleaner to have a changeCity promise?
     // TODO - remove conditional returns
     if (cityObj.region !== 'java'){
-      this.layers.addFloodExtents(cityName);
+      this.layers.addFloodExtents(cityObj.region); // Added flooded area if possible
       return this.layers.addReports(cityName, cityObj.region, this.showPane);
     }
     else {

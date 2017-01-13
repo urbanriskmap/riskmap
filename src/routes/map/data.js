@@ -22,7 +22,9 @@ export class Data {
           resolve(null);
         }
       })
-      .catch(() => reject(null));
-    });
+      .catch((err) => {
+        reject(err);
+      });
+    })
   }
 }
