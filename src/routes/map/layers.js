@@ -103,7 +103,7 @@ export class Layers {
     });
 
     // Get areas where flooding is happening
-    var url = config.data_server + "floods?city=" + city_region + "&minimum_state=1"
+    var url = config.data_server + "floods?city=" + city_region + "&minimum_state=1";
     // Get data and add to layer
     return new Promise((resolve, reject) => {
       self.data.getData(url)

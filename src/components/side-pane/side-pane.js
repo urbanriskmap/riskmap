@@ -40,7 +40,7 @@ export class SidePane {
   switchTab(tab) {
     $('.tabLinks').removeClass("active");
     $('#button-' + tab).addClass("active");
-    //this.tab = tab;
+    //this.tab = tab; TODO: remove comment after adding content in tabs
   }
 
   switchLang(lang) {
