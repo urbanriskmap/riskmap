@@ -74,9 +74,8 @@ export class Location {
           L.control.geoLocate({position: 'bottomright'}).addTo(cardMap);
           self.drawGpsMarkers(self.reportcard.location.gpsLocation, self.reportcard.location.accuracy, cardMap);
         }
-      } else {
-
-        //If previous inputs unavailable, i.e. at session start; try geolocation
+      } else if (!!navigator.geolocation) {
+        //If previous inputs unavailable, i.e. at session start; try geolocation if supported by browser
         cardMap.locate({
           setView: false
         });
@@ -86,12 +85,15 @@ export class Location {
           self.drawGpsMarkers(e.latlng, e.accuracy, cardMap);
           self.reportcard.location = {markerLocation: e.latlng, gpsLocation: e.latlng, accuracy: e.accuracy};
         });
-
         //If geolocation unavailable, go to default city center;
         cardMap.on('locationerror', function () {
           cardMap.setView([-6.2, 106.83], 16);
           self.reportcard.location.markerLocation = cardMap.getCenter();
         });
+      } else {
+        //Go to default city center if geolocation not supported by browser
+        cardMap.setView([-6.2, 106.83], 16);
+        self.reportcard.location.markerLocation = cardMap.getCenter();
       }
 
       //Get map center (corresponding to overlaid marker image) if user pans map
