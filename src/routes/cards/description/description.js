@@ -38,5 +38,6 @@ export class Description {
 
   setFocus() {
     $('#textarea').focus();
+    this.onFocus();
   }
 }
