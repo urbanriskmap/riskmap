@@ -14,8 +14,8 @@ export class SidePane {
   //end-non-standard
 
   constructor() {
-    this.tabs = ["map", "watch", "info"]; //elements match names of fontello icons
-    this.selTab = "map";
+    this.tabList = ["map", "watch", "info"]; //elements match names of fontello icons
+    this.tab = "map";
     this.languages = ["en", "id"];
     //initial language, TODO: set using detected browser language
     this.selLanguage = "en";
@@ -34,13 +34,13 @@ export class SidePane {
   attached() {
     this.changeLanguage(this.selLanguage);
     $('#' + this.selLanguage).addClass("active");
-    $('#button-' + this.selTab).addClass("active");
+    $('#button-' + this.tab).addClass("active");
   }
 
   switchTab(tab) {
     $('.tabLinks').removeClass("active");
     $('#button-' + tab).addClass("active");
-    this.selTab = tab;
+    //this.tab = tab;
   }
 
   switchLang(lang) {

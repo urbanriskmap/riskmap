@@ -5,13 +5,15 @@
   <require from="../../components/side-pane/side-pane"></require>
 
   <div id="pageWrapper">
-    <div id="cityPopup">
-      <p>Select city :</p>
-      <label repeat.for="city_region of city_regions">
-        <input type="radio" model.bind="city_region" checked.bind="city_name" change.delegate="selectCity(city_region)">
-        ${city_region}
-        <br>
-      </label>
+    <div id="screen">
+      <div id="cityPopup">
+        <p>Select city to load flood data:</p>
+        <label repeat.for="city_region of city_regions">
+          <input type="radio" model.bind="city_region" checked.bind="city_name" change.delegate="selectCity(city_region)">
+          ${city_region}
+          <br>
+        </label>
+      </div>
     </div>
 
     <div id="mapContainer">
