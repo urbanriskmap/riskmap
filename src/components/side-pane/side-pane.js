@@ -21,6 +21,20 @@ export class SidePane {
     //initial language, TODO: set using detected browser language
     this.selLanguage = "en";
     this.locale = {};
+    this.videos = [
+      {
+        platform: "twitter",
+        source: "https://www.youtube.com/embed/cfT-89IfdCU?autoplay=0&origin=https://petabencana.id"
+      },
+      {
+        platform: "twilio",
+        source: "https://www.youtube.com/embed/IzjDqjFcYzc?autoplay=0&origin=https://petabencana.id"
+      },
+      {
+        platform: "telegram",
+        source: "https://www.youtube.com/embed/cfT-89IfdCU?autoplay=0&origin=https://petabencana.id"
+      }
+    ];
   }
 
   //on the fly language change
@@ -41,7 +55,7 @@ export class SidePane {
   switchTab(tab) {
     $('.tabLinks').removeClass("active");
     $('#button-' + tab).addClass("active");
-    //this.tab = tab; TODO: remove comment after adding content in tabs
+    this.tab = tab;
   }
 
   switchLang(lang) {
@@ -54,5 +68,10 @@ export class SidePane {
     this.changeCity(city, true);
     this.reportId = null;
     this.closePane();
+  }
+
+  showVideo(video) {
+    $('.videoWrapper').slideUp("fast");
+    $('#vid_' + video).slideDown("fast");
   }
 }

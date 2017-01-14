@@ -5,6 +5,7 @@
       <li class="paneTabs" repeat.for="tabName of tabList">
         <div class="tabLinks" id.bind="'button-' + tabName" click.delegate="switchTab(tabName)">
           <i class.bind="'icon-' + tabName"></i>
+          <p>${tabName}</p>
         </div>
       </li>
       <li class="langTab">
@@ -27,11 +28,84 @@
         <br>
       </label>
     </div>
+
     <div id="content-watch" if.bind="tab === 'watch'" class="contentWrapper">
-      ${locale.watch_title}
+      <table id="watchTable">
+        <tr repeat.for="video of videos" class="vidRows">
+          <td>
+            <table class="vidTable">
+              <tr click.delegate="showVideo(video.platform)">
+                <td class="labelRow" id="'label_' + video.platform">
+                  <p textcontent.bind="locale.watch_content.helper + video.platform"></p>
+                </td>
+              </tr>
+              <tr class="wrapRow">
+                <td>
+                  <div class="videoWrapper" id.bind="'vid_' + video.platform">
+                    <iframe frameborder="0" src.bind="video.source"></iframe>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          <td>
+        </tr>
+      </table>
     </div>
+
     <div id="content-info" if.bind="tab === 'info'" class="contentWrapper">
-      ${locale.info_title}
+      <div id="pbLogo">
+        <img src="assets/graphics/Peta_logo.svg">
+      </div>
+      <div id="urlLogo">
+        <img src="assets/graphics/URL_logo.svg">
+      </div>
+      <p id="intro">${locale.info_content.intro}</p>
+      <div id="partners">
+        <table id="table">
+          <tr class="label">
+            <td colspan="2" cellpadding="0">
+              <p>${locale.info_content.partners}</p>
+            </td>
+          </tr>
+          <tr class="logos">
+            <td>
+              <a href="https://www.usaid.gov/">
+                <img class="partnerLogo" src="assets/graphics/USAID-logo.png">
+              </a>
+            </td>
+            <td>
+              <a href="http://www.bnpb.go.id/">
+                <img class="partnerLogo" src="assets/graphics/bnpb_logo.png">
+              </a>
+            </td>
+          </tr>
+          <tr class="logos">
+            <td>
+              <a href="https://hotosm.org/">
+                <img class="partnerLogo" src="assets/graphics/Hot_logo.png">
+              </a>
+            </td>
+            <td>
+              <a href="http://www.pdc.org/">
+                <img class="partnerLogo" src="assets/graphics/pcd_logo.png">
+              </a>
+            </td>
+          </tr>
+          <tr class="label">
+            <td colspan="2">
+              <p>${locale.info_content.mapCredits}</p>
+            </td>
+          </tr>
+          <tr class="label">
+            <td colspan="2">
+              <p><a href="https://leafletjs.com">Leaflet</a> &#124; &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>${locale.info_content.p1}</p>
+      <p>${locale.info_content.p2}</p>
+      <p>${locale.info_content.p3}</p>
     </div>
   </div>
 

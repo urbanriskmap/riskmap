@@ -6,59 +6,73 @@
   height: @bar-heights;
   border: none;
   border-bottom: 1px solid @banjir-blue;
-}
-
-ul.tabs {
-  position: absolute;
-  bottom: 0px;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 40px;
-  & li {
-    float: left;
-    height: 100%;
-    text-align: center;
-    &.paneTabs {
-      width: 24%;
-      & div.tabLinks {
-        width: 100%;
-        cursor: pointer;
-        line-height: 40px;
-        .bodylight-mixin(21px);
-        &:hover {
-          color: @banjir-blue;
-        }
-        &.active {
-          color: @banjir-blue;
-          border-bottom: 4px solid @banjir-blue;
-        }
-      }
-    }
-    &.langTab {
-      position: absolute;
-      right: 0;
-      width: 24%;
-      margin-top: 6px;
-      padding: 0;
-      & div {
-        position: relative;
-        float: left;
-        width: 30%;
-        height: 80%;
-        &:first-child {
-          border-right: 1px solid @banjir-blue;
-        }
-        & label {
-          .bodylight-mixin(16px);
-          line-height: 32px;
+  & ul.tabs {
+    position: absolute;
+    bottom: -4px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    & li {
+      float: left;
+      height: 100%;
+      text-align: center;
+      &.paneTabs {
+        width: 24%;
+        & div.tabLinks {
+          width: 100%;
           cursor: pointer;
-          & input {
+          line-height: 40px;
+          .bodylight-mixin(21px);
+          & p {
             display: none;
+            position: absolute;
+            bottom: -75%;
+            width: 24%;
+            .bodylight-mixin(14px);
+            color: @banjir-blue;
+            line-height: 14px;
+            text-transform: capitalize;
+          }
+          &:hover {
+            color: @banjir-blue;
+            & p {
+              display: block;
+            }
           }
           &.active {
             color: @banjir-blue;
+            border-bottom: 4px solid @banjir-blue;
+            & p {
+              display: block;
+            }
+          }
+        }
+      }
+      &.langTab {
+        position: absolute;
+        right: 0;
+        width: 24%;
+        margin-top: 6px;
+        padding: 0;
+        & div {
+          position: relative;
+          float: left;
+          width: 30%;
+          height: 80%;
+          &:first-child {
+            border-right: 1px solid @banjir-blue;
+          }
+          & label {
+            .bodylight-mixin(16px);
+            line-height: 32px;
+            cursor: pointer;
+            & input {
+              display: none;
+            }
+            &.active {
+              color: @banjir-blue;
+            }
           }
         }
       }
@@ -67,21 +81,105 @@ ul.tabs {
 }
 
 #paneContent {
-  position: absolute;
+  position: relative;
   width: 100%;
-  top: @bar-heights;
-  left: 0px;
   overflow: scroll;
   & div.contentWrapper {
-    padding: 16px 8px;
-  }
-  & #content-map {
-    & p {
-      .bodymedium-mixin(14px);
+    padding: 30px 12px 0 12px;
+
+    &#content-map {
+      & p {
+        .bodymedium-mixin(14px);
+        margin-bottom: 8px;
+      }
+      & label {
+        .linklight-mixin(14px);
+        text-transform: capitalize;
+      }
     }
-    & label {
-      .linklight-mixin(14px);
-      text-transform: capitalize;
+
+    &#content-info {
+      & #pbLogo {
+        position: relative;
+        width: 200px;
+        margin: auto;
+      }
+      & #urlLogo {
+        position: relative;
+        width: 200px;
+        margin: auto;
+      }
+      & p {
+        .bodyregular-mixin(14px);
+        & a {
+          .linkmedium-mixin(14px);
+        }
+        &#intro {
+          .bodylight-mixin(21px);
+          text-align: center;
+          color: @banjir-blue;
+        }
+      }
+      & #partners {
+        width: 100%;
+        & table {
+          margin: auto;
+          & tr.label {
+            height: 18px;
+            & p {
+              margin: 0;
+              padding: 0;
+            }
+          }
+          & .partnerLogo {
+            margin: auto;
+            height: 40px;
+            width: auto;
+          }
+        }
+      }
+    }
+
+    &#content-watch{
+      & table#watchTable {
+        width: 100%;
+        & tr.vidRows {
+          width: 100%;
+          & table.vidTable {
+            width: 100%;
+            margin: 0;
+            & tr {
+              width: 100%;
+              & td {
+                border-bottom: 1px solid @banjir-blue;
+                &.labelRow {
+                  cursor: pointer;
+                  border: none;
+                  .bodyregular-mixin(14px);
+                  &:hover {
+                    color: @banjir-blue;
+                  }
+                  & p {
+                    margin: 0;
+                    padding: 0;
+                  }
+                }
+              }
+            }
+            & tr.wrapRow {
+              width: 100%;
+              & .videoWrapper {
+                display: none;
+                width: 100%;
+                height: auto;
+                & iframe {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -39,7 +39,9 @@ export class Map {
 
   hidePane(ref) {
     $(ref).fadeOut(200);
-    $('#logo_bottom').show();
+    if ($(window).width() < 620) {
+      $('#logo_bottom').show();
+    }
     if (ref === '#sidePane') {
       this.sidePaneOpen = false;
     }
@@ -55,7 +57,9 @@ export class Map {
       this.hidePane('#reportPane');
     }
     $(ref).fadeIn(200);
-    $('#logo_bottom').hide();
+    if ($(window).width() < 620) {
+      $('#logo_bottom').hide();
+    }
   }
 
   // Get parameters from config based on city name, else return default
