@@ -75,7 +75,8 @@ export class SidePane {
     $('#vid_' + video).slideToggle("fast");
     $('.labelRow:not(#label_' + video + ')').removeClass("active");
     $('#label_' + video).toggleClass("active");
-    $('#down_' + video).toggle();
-    $('#up_' + video).toggle();
+    $('#down_' + video + ', #up_' + video).toggle();
+    $('.up:not(#up_' + video + ')').hide();
+    $('.down:not(#down_' + video + ')').show();
   }
 }

@@ -31,7 +31,8 @@
       "steps": [
         "You can report flood from Qlue, PasangMata, and Z-Alert.",
         "Your report is now on the map. Check PetaBencana.id for up-to-date flood information."
-      ]
+      ],
+      "links": "<br><a href='http://www.qlue.co.id/'>Qlue</a><br><a href='http://pasangmata.detik.com/'>PasangMata</a><br><a href='https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need'>Z-Alert</a>"
     }
   },
   "info_content": {

@@ -54,6 +54,7 @@
                       <li repeat.for="step of locale.report_content[video.platform].steps">
                         <p>${step}</p>
                       </li>
+                      <p if.bind="video.platform==='other'" innerhtml.bind="locale.report_content.other.links"></p>
                     </ul>
                   </div>
                 </td>

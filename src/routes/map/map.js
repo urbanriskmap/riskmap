@@ -43,7 +43,7 @@ export class Map {
       $('#logo_bottom').show();
     }
     if (ref === '#sidePane') {
-      this.sidePaneOpen = false;
+      $('.menuBtn').toggleClass("active");
     }
     if (ref === '#reportPane') {
       this.report_id = null;
@@ -53,8 +53,12 @@ export class Map {
 
   showPane(ref) {
     if (ref === '#sidePane') {
-      this.sidePaneOpen = true;
+      $('.menuBtn').toggleClass("active");
       this.hidePane('#reportPane');
+    }
+    if (ref === '#reportPane' && $('#closeSidePane').hasClass("active")) {
+      $('.menuBtn').toggleClass("active");
+      $('#sidePane').hide();
     }
     $(ref).fadeIn(200);
     if ($(window).width() < 620) {

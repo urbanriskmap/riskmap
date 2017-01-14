@@ -181,15 +181,16 @@
                 display: none;
                 width: 100%;
                 height: auto;
+                .bodyregular-mixin(14px);
                 & iframe {
                   width: 100%;
                   border: none;
                 }
-                & ul {
-                  .bodyregular-mixin(14px);
-                  & p {
-                    margin: 0;
-                    padding: 0;
+                & p {
+                  margin: 0;
+                  padding: 0;
+                  & a {
+                    .linklight-mixin(14px);
                   }
                 }
               }
