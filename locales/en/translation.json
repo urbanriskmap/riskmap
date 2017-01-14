@@ -9,8 +9,30 @@
     "6": "Terms & Conditions"
   },
   "map_helper": "Select city :",
-  "watch_content": {
-    "helper": "Report with " 
+  "report_content": {
+    "twitter": {
+      "title": "Report with Twitter",
+      "steps": [
+        "Tweet #banjir to @petabencana.",
+        "Open the link and follow the instructions to input flood location, upload photo, and description.",
+        "You can see your report on the map via the link provided. Check PetaBencana.id for up-to-date flood information."
+      ]
+    },
+    "telegram": {
+      "title": "Report with Telegram",
+      "steps": [
+        "Text /banjir to @BencanaBot.",
+        "Open the link and follow the instructions to input flood location, upload photo, and description.",
+        "You can see your report on the map via the link provided. Check PetaBencana.id for up-to-date flood information."
+      ]
+    },
+    "other": {
+      "title": "Report with local applications",
+      "steps": [
+        "You can report flood from Qlue, PasangMata, and Z-Alert.",
+        "Your report is now on the map. Check PetaBencana.id for up-to-date flood information."
+      ]
+    }
   },
   "info_content": {
     "intro": "PetaBencana harnesses the power of social media to gather, sort, and display information about flooding in real time.",

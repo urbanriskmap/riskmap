@@ -59,13 +59,13 @@
           position: relative;
           float: left;
           width: 30%;
-          height: 80%;
+          height: 60%;
           &:first-child {
             border-right: 1px solid @banjir-blue;
           }
           & label {
             .bodylight-mixin(16px);
-            line-height: 32px;
+            line-height: 28px;
             cursor: pointer;
             & input {
               display: none;
@@ -140,40 +140,57 @@
       }
     }
 
-    &#content-watch{
-      & table#watchTable {
+    &#content-report{
+      & table, tr, td {
+        padding: 0;
         width: 100%;
+      }
+      & table#reportTable {
         & tr.vidRows {
-          width: 100%;
           & table.vidTable {
-            width: 100%;
             margin: 0;
             & tr {
-              width: 100%;
               & td {
                 border-bottom: 1px solid @banjir-blue;
                 &.labelRow {
                   cursor: pointer;
                   border: none;
                   .bodyregular-mixin(14px);
-                  &:hover {
+                  &:hover, &.active {
                     color: @banjir-blue;
                   }
                   & p {
                     margin: 0;
                     padding: 0;
+                    &.labelText {
+                      float: left;
+                    }
+                    &.arrows {
+                      float: right;
+                      display: block;
+                    }
+                    &.up {
+                      display: none;
+                    }
                   }
                 }
               }
             }
             & tr.wrapRow {
-              width: 100%;
               & .videoWrapper {
                 display: none;
                 width: 100%;
                 height: auto;
                 & iframe {
                   width: 100%;
+                  border: none;
+                }
+                & ul {
+                  .bodyregular-mixin(14px);
+                  & p {
+                    margin: 0;
+                    padding: 0;
+                  }
                 }
               }
             }

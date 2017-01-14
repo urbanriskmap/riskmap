@@ -15,7 +15,7 @@ export class SidePane {
   //end-non-standard
 
   constructor() {
-    this.tabList = ["map", "watch", "info"]; //elements match names of fontello icons
+    this.tabList = ["map", "report", "info"]; //elements match names of fontello icons
     this.tab = "map";
     this.languages = ["en", "id"];
     //initial language, TODO: set using detected browser language
@@ -23,15 +23,15 @@ export class SidePane {
     this.locale = {};
     this.videos = [
       {
-        platform: "twitter",
+        platform: "twitter", //Match string to locale/*/translation.json > report_content.*
         source: "https://www.youtube.com/embed/cfT-89IfdCU?autoplay=0&origin=https://petabencana.id"
       },
       {
-        platform: "twilio",
+        platform: "telegram",
         source: "https://www.youtube.com/embed/IzjDqjFcYzc?autoplay=0&origin=https://petabencana.id"
       },
       {
-        platform: "telegram",
+        platform: "other",
         source: "https://www.youtube.com/embed/cfT-89IfdCU?autoplay=0&origin=https://petabencana.id"
       }
     ];
@@ -71,7 +71,11 @@ export class SidePane {
   }
 
   showVideo(video) {
-    $('.videoWrapper').slideUp("fast");
-    $('#vid_' + video).slideDown("fast");
+    $('.videoWrapper:not(#vid_' + video + ')').slideUp("fast");
+    $('#vid_' + video).slideToggle("fast");
+    $('.labelRow:not(#label_' + video + ')').removeClass("active");
+    $('#label_' + video).toggleClass("active");
+    $('#down_' + video).toggle();
+    $('#up_' + video).toggle();
   }
 }

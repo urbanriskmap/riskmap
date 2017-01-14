@@ -9,8 +9,30 @@
     "6": "Syarat dan ketentuan"
   },
   "map_helper": "Pilih kota:",
-  "watch_content": {
-    "helper": "Report with "
+  "report_content": {
+    "twitter": {
+      "title": "Laporan dengan Twitter",
+      "steps": [
+        "Tweet #banjir ke @petabencana.",
+        "Buka linknya, dan ikuti panduan untuk menginput lokasi, foto, dan deskripsi.",
+        "Anda dapat melihat laporan Anda di peta lewat link balasan. Cek PetaBencana.id untuk info banjir terkini."
+      ]
+    },
+    "telegram": {
+      "title": "Laporan dengan Telegram",
+      "steps": [
+        "Kirim /banjir ke @BencanaBot.",
+        "Buka linknya, dan ikuti panduan untuk menginput lokasi, foto, dan deskripsi.",
+        "Anda dapat melihat laporan Anda di peta lewat link balasan. Cek PetaBencana.id untuk info banjir terkini."
+      ]
+    },
+    "other": {
+      "title": "Laporan dengan aplikasi lokal",
+      "steps": [
+        "Anda dapat melapor lewat Qlue, PasangMata, dan Z-Alert.",
+        "Laporan Anda sudah tampil di peta. Cek PetaBencana.id untuk info banjir terkini."
+      ]
+    }
   },
   "info_content": {
     "intro": "PetaBencana harnesses the power of social media to gather, sort, and display information about flooding in real time.",

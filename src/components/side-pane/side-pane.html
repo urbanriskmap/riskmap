@@ -29,20 +29,32 @@
       </label>
     </div>
 
-    <div id="content-watch" if.bind="tab === 'watch'" class="contentWrapper">
-      <table id="watchTable">
+    <div id="content-report" if.bind="tab === 'report'" class="contentWrapper">
+      <table id="reportTable">
         <tr repeat.for="video of videos" class="vidRows">
           <td>
             <table class="vidTable">
               <tr click.delegate="showVideo(video.platform)">
-                <td class="labelRow" id="'label_' + video.platform">
-                  <p textcontent.bind="locale.watch_content.helper + video.platform"></p>
+                <td class="labelRow" id.bind="'label_' + video.platform">
+                  <p class="labelText" textcontent.bind="locale.report_content[video.platform].title"></p>
+                  <p class="arrows down" id.bind="'down_' + video.platform">
+                    <i class="icon-down-open"></i>
+                  </p>
+                  <p class="arrows up" id.bind="'up_' + video.platform">
+                    <i class="icon-up-open"></i>
+                  </p>
                 </td>
               </tr>
               <tr class="wrapRow">
                 <td>
-                  <div class="videoWrapper" id.bind="'vid_' + video.platform">
+                  <div class="videoWrapper" id.bind="'vid_' + video.platform" ref.bind="'vid_' + video.platform">
                     <iframe frameborder="0" src.bind="video.source"></iframe>
+                    <br>
+                    <ul>
+                      <li repeat.for="step of locale.report_content[video.platform].steps">
+                        <p>${step}</p>
+                      </li>
+                    </ul>
                   </div>
                 </td>
               </tr>
