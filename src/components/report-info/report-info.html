@@ -1,9 +1,9 @@
 <template>
   <require from="./report-info.css"></require>
   <div  id="photoPreview">
-    <image id="image" if.bind="imageurl" src.bind="imageurl" >
-    <div id="image" if.bind="!imageurl">
-      <i style="font-size:100px; color:#808080; margin:auto"id="image" class="icon-picture"></i>
+    <image class="image" id="hasPhoto" if.bind="imageurl" src.bind="imageurl">
+    <div class="image" id="noPhoto" if.bind="!imageurl">
+      <i class="icon-flood"></i>
     </div>
   </div>
 
