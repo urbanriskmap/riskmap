@@ -12,7 +12,7 @@
 #photoPreview {
   position: relative;
   width: 40%;
-  height: 80%;
+  height: 90%;
   float: left;
   background-color: @light-gray;
   & .image {
@@ -36,20 +36,20 @@
 #textPreview {
   position: relative;
   width: 55%;
-  height: 80%;
+  height: 90%;
   float: right;
   overflow: none;
-  & .textTitle {
-    width: 85%;
-    .bodybold-mixin(14px);
-    padding: 0;
-    margin: 0 0 2px 0;
-    color: @banjir-blue;
-  }
   & #bodyWrapper {
     width: 85%;
-    height: 100px;
+    height: 80%;
+    border-bottom: 1px solid @banjir-blue;
     overflow: scroll;
+    & .textTitle {
+      .bodybold-mixin(14px);
+      padding: 0;
+      margin: 0 0 2px 0;
+      color: @banjir-blue;
+    }
     & #textBody {
       .bodyregular-mixin(14px);
       word-wrap: break-word;
@@ -57,6 +57,7 @@
   }
   & #socialIcons {
     position: absolute;
+    height: 20%;
     bottom: 0px;
     & a {
       .linklight-mixin(20px);

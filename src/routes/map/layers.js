@@ -47,7 +47,7 @@ export class Layers {
               self.popupContent[prop] = feature.properties[prop];
             }
             self.map.flyTo(layer._latlng, 16);
-            history.pushState({city: city_name}, "city", "map/" + city_name + "/" + feature.properties.pkey);
+            history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
             showPane('#reportPane');
           }
         });
@@ -124,12 +124,11 @@ export class Layers {
   }
 
   // Remove layer from map, referencing global variable defined in addFloodExtents()
-  removeFloodExtents(){
+  removeFloodExtents() {
     var self = this;
     if (self.flood_extents){
       self.map.removeLayer(self.flood_extents);
       self.flood_extents = null;
     }
   }
-
 }

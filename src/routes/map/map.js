@@ -23,6 +23,10 @@ $.notify.addStyle('mapInfo', {
 export class Map {
   constructor() {
     this.config = config;
+    this.city_regions = [];
+    for (let city_region in this.config.instance_regions) {
+      this.city_regions.push(city_region);
+    }
   }
 
   activate(params, routerConfig) {
@@ -35,8 +39,13 @@ export class Map {
 
   hidePane(ref) {
     $(ref).fadeOut(200);
+    $('#logo_bottom').show();
     if (ref === '#sidePane') {
       this.sidePaneOpen = false;
+    }
+    if (ref === '#reportPane') {
+      this.report_id = null;
+      history.pushState({city: this.city_name, report_id: null}, "city", "map/" + this.city_name);
     }
   }
 
@@ -46,6 +55,7 @@ export class Map {
       this.hidePane('#reportPane');
     }
     $(ref).fadeIn(200);
+    $('#logo_bottom').hide();
   }
 
   // Get parameters from config based on city name, else return default
@@ -63,6 +73,15 @@ export class Map {
     }
   }
 
+  cityFromRegion(regionCode) {
+    var self = this;
+    for (var i = 0; i < self.city_regions.length; i+=1) {
+      if (self.parseMapCity(self.city_regions[i]).region === regionCode) {
+        return self.city_regions[i];
+      }
+    }
+  }
+
   // Change city from within map without reloading window
   changeCity(cityName, pushState) {
     $('#cityPopup').fadeOut(200);
@@ -70,9 +89,13 @@ export class Map {
     var cityObj = this.parseMapCity(cityName);
     if (pushState) {
       if (cityObj.region !== 'java') {
-        history.pushState({city: cityName}, "city", "map/" + cityName);
+        if (self.report_id) {
+          history.pushState({city: cityName, report_id: self.report_id}, "city", "map/" + cityName + '/' + self.report_id);
+        } else {
+          history.pushState({city: cityName, report_id: null}, "city", "map/" + cityName);
+        }
       } else {
-        history.pushState({city: null}, "city", "map");
+        history.pushState({city: null, report_id: null}, "city", "map");
       }
     }
     this.map.flyToBounds([cityObj.bounds.sw, cityObj.bounds.ne]).once('moveend zoomend', (e) => {
@@ -86,8 +109,7 @@ export class Map {
     if (cityObj.region !== 'java'){
       this.layers.addFloodExtents(cityObj.region); // Added flooded area if possible
       return this.layers.addReports(cityName, cityObj.region, this.showPane);
-    }
-    else {
+    } else {
       return new Promise((resolve, reject) => {
         resolve();
       });
@@ -100,13 +122,28 @@ export class Map {
     this.changeCity(cityName, pushState)
     .then(() => {
       if (self.report_id && self.layers.pkeyList.hasOwnProperty(self.report_id)) {
-        //Case 1: Valid report id in current city
-        self.layers.pkeyList[self.report_id].fire('click');
+        //Case 1: Active report id in current city
+        if (self.layers.pkeyList[self.report_id].instance_region_code === self.parseMapCity[cityName].region) {
+          self.layers.pkeyList[self.report_id].fire('click');
+        }
       } else if (self.report_id && !self.layers.pkeyList.hasOwnProperty(self.report_id)) {
-        //Case 2: Report id not available in current city, attempt to get from server
-        self.layers.addSingleReport(self.report_id).then(report => {
-          report.fire('click');
-          self.report_id = null;
+        //Case 2: No active report, check availability on server
+        self.layers.addSingleReport(self.report_id)
+        .then(report => {
+          var reportRegion = self.layers.pkeyList[self.report_id].feature.properties.tags.instance_region_code;
+          if (reportRegion === self.parseMapCity(cityName).region) {
+            //Case 2A: in current city?
+            report.fire('click');
+          } else {
+            //Case 2B: fly to city with report id
+            self.changeCity(self.cityFromRegion(reportRegion), true)
+            .then(() => {
+              self.layers.addSingleReport(self.report_id).
+              then(queriedReport => {
+                queriedReport.fire('click');
+              });
+            });
+          }
         });
       }
     }).catch((err) => {
@@ -170,11 +207,6 @@ export class Map {
 
   attached() {
     var self = this;
-
-    this.city_regions = [];
-    for (let city_region in this.config.instance_regions) {
-      this.city_regions.push(city_region);
-    }
 
     // Create Leaflet map
     this.map = L.map('mapContainer', {

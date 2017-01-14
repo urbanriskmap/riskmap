@@ -48,7 +48,7 @@
     </div>
 
     <div id="sidePane" ref="sidePane">
-      <side-pane cities.bind="city_regions" selected.bind="city_name" change-city.call="viewReport($event, $event)" close-pane.call="hidePane('#sidePane')">
+      <side-pane cities.bind="city_regions" selected.bind="city_name" change-city.call="viewReport($event, $event)" close-pane.call="hidePane('#sidePane')" reportId="report_id">
       </side-pane>
     </div>
   </div>

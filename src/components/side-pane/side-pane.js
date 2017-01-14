@@ -11,6 +11,7 @@ export class SidePane {
   @bindable selected;
   @bindable changeCity;
   @bindable closePane;
+  @bindable reportId;
   //end-non-standard
 
   constructor() {
@@ -51,6 +52,7 @@ export class SidePane {
 
   switchCity(city) {
     this.changeCity(city, true);
+    this.reportId = null;
     this.closePane();
   }
 }
