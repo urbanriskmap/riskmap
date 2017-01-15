@@ -32,7 +32,7 @@ export class Layers {
   }
 
   // Get flood reports as topojson, return Leaflet geojson layer
-  addReports(city_name, city_region, showPane, closePane) {
+  addReports(city_name, city_region, showPane) {
     let url = config.data_server + 'reports/?city=' + city_region;
     var self = this;
 
@@ -40,24 +40,70 @@ export class Layers {
     self.reports = L.geoJSON(null, {
       onEachFeature: (feature, layer) => { //TODO: create separate class function
         self.pkeyList[feature.properties.pkey] = layer;
-        let clicked = false
+        this.selectedReport = null;
         layer.on({
-          click: () => {
-            if (clicked === false){
+          click: (e) => {
+            // This report hasn't been clicked on
+            if (this.selectedReport === null){
+              // Style as selected
+              e.target.setIcon(L.icon({
+                iconUrl: 'assets/icons/floodSelectedIcon.svg',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+              }));
+              // Set popup content
               self.popupContent = {};
               for (let prop in feature.properties) {
                 self.popupContent[prop] = feature.properties[prop];
               }
+              // Fly to
               self.map.flyTo(layer._latlng, 15);
               history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
+              // Show report
               showPane('#reportPane');
-              clicked = true;
+              this.selectedReport = e;
             }
-            else {
-              // Close the open report if clicked a second time
-              // TODO - bad mixed use of showPane() and jQuery.hide()
+            else if (e.target === this.selectedReport.target){
+              // This was the last report clicked so set it back to normal
+              this.selectedReport.target.setIcon(L.icon({
+                iconUrl: 'assets/icons/floodIcon.svg',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+              }));
               $('#reportPane').hide();
-              clicked = false;
+              history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
+              this.selectedReport.target.setIcon(L.icon({
+                iconUrl: 'assets/icons/floodIcon.svg',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+              }));
+              this.selectedReport = null; // No longer selected
+            }
+            else if (e.target !== this.selectedReport.target){
+              // This is a new report, so..
+              // reset the old report
+              this.selectedReport.target.setIcon(L.icon({
+                iconUrl: 'assets/icons/floodIcon.svg',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+              }));
+              // Style as selected the new report
+              e.target.setIcon(L.icon({
+                iconUrl: 'assets/icons/floodSelectedIcon.svg',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+              }));
+              // Set popup content
+              self.popupContent = {};
+              for (let prop in feature.properties) {
+                self.popupContent[prop] = feature.properties[prop];
+              }
+              // Fly to
+              self.map.flyTo(layer._latlng, 15);
+              history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
+              // Show report
+              showPane('#reportPane');
+              this.selectedReport = e; // Update memory
             }
           }
         });
