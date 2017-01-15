@@ -48,12 +48,14 @@ export class Map {
     if (ref === '#reportPane') {
       this.report_id = null;
       history.pushState({city: this.city_name, report_id: null}, "city", "map/" + this.city_name);
-      this.layers.selectedReport.target.setIcon(L.icon({
-        iconUrl: 'assets/icons/floodIcon.svg',
-        iconSize: [30, 30],
-        iconAnchor: [15, 15]
-      }));
-      this.layers.selectedReport = null;
+      if (this.layers.selectedReport !== null){
+        this.layers.selectedReport.target.setIcon(L.icon({
+          iconUrl: 'assets/icons/floodIcon.svg',
+          iconSize: [30, 30],
+          iconAnchor: [15, 15]
+        }));
+        this.layers.selectedReport = null;
+      }
     }
   }
 
