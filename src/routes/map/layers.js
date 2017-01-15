@@ -32,7 +32,7 @@ export class Layers {
   }
 
   // Get flood reports as topojson, return Leaflet geojson layer
-  addReports(city_name, city_region, showPane) {
+  addReports(city_name, city_region, showPane, closePane) {
     let url = config.data_server + 'reports/?city=' + city_region;
     var self = this;
 
@@ -40,15 +40,25 @@ export class Layers {
     self.reports = L.geoJSON(null, {
       onEachFeature: (feature, layer) => { //TODO: create separate class function
         self.pkeyList[feature.properties.pkey] = layer;
+        let clicked = false
         layer.on({
           click: () => {
-            self.popupContent = {};
-            for (let prop in feature.properties) {
-              self.popupContent[prop] = feature.properties[prop];
+            if (clicked === false){
+              self.popupContent = {};
+              for (let prop in feature.properties) {
+                self.popupContent[prop] = feature.properties[prop];
+              }
+              self.map.flyTo(layer._latlng, 16);
+              history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
+              showPane('#reportPane');
+              clicked = true;
             }
-            self.map.flyTo(layer._latlng, 16);
-            history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
-            showPane('#reportPane');
+            else {
+              // Close the open report if clicked a second time
+              // TODO - bad mixed use of showPane() and jQuery.hide()
+              $('#reportPane').hide();
+              clicked = false;
+            }
           }
         });
       },
