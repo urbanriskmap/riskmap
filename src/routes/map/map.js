@@ -222,7 +222,7 @@ export class Map {
 
     // Add base tile layers
     L.tileLayer(this.config.tile_layer, {
-      detectRetina: true,
+      detectRetina: false,
       subdomains: 'abcd',
       ext: 'png'
     }).addTo(this.map);
