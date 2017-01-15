@@ -8,6 +8,13 @@
     "5": "Review & submit",
     "6": "Terms & Conditions"
   },
+  "web_menu": {
+    "tab_names": {
+      "map": "map",
+      "report": "report",
+      "info": "info"
+    }
+  },
   "map_helper": "Select city :",
   "report_content": {
     "twitter": {
@@ -31,16 +38,19 @@
       "steps": [
         "You can report flood from Qlue, PasangMata, and Z-Alert.",
         "Your report is now on the map. Check PetaBencana.id for up-to-date flood information."
-      ]
+      ],
+      "links": "<br><a href='http://www.qlue.co.id/'>Qlue</a><br><a href='http://pasangmata.detik.com/'>PasangMata</a><br><a href='https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need'>Z-Alert</a>"
     }
   },
   "info_content": {
     "intro": "PetaBencana harnesses the power of social media to gather, sort, and display information about flooding in real time.",
     "p1": "PetaBencana.id is a project initiated by the Urban Risk Lab at MIT as a free, transparent platform for emergency response and disaster management in megacities in South and Southeast Asia.",
-    "p2": "The platform adopts a “people as sensors” paradigm, where confirmed reports are collected directly from the users at street level in a manner that removes expensive and time-consuming data processing. This framework creates accurate, real-time data which is immediately made available for users and first responders.",
-    "p3": "PetaBencana.id gathers, sorts, and visualizes data using specially developed CogniCity Open Source Software - an enterprise-level platform for emergency response and disaster management - to transforms the noise of social and digital media into critical information for residents, communities, and government agencies.",
+    "p2": "The platform adopts a <b>“people are the best sensors”</b> paradigm, where confirmed reports are collected directly from the users at street level in a manner that removes expensive and time-consuming data processing. This framework creates accurate, real-time data which is immediately made available for users and first responders.",
+    "p3": "PetaBencana.id gathers, sorts, and <b>visualizes</b> data using specially developed CogniCity Open Source Software - an enterprise-level platform for emergency response and disaster management - to transforms the noise of social and digital media into critical information for residents, communities, and government agencies.",
     "partners": "Partners:",
-    "mapCredits": "Map credits:"
+    "mapCredits": "Map credits:",
+    "privacy": "Privacy:",
+    "disclaimer": "We do not store any information about users. Information derived from location-enabled mobile devices is mapped in real-time; this information is available through an open API for additional applications."
   },
   "card_error_messages":{
     "already_received": "Report already received",

@@ -25,10 +25,10 @@
           <img id="pbLogo" src="assets/graphics/Peta_logo_noSub.svg" width="180">
         </a>
       </div>
-      <div id="optionsBtn" if.bind="!sidePaneOpen" click.delegate="showPane('#sidePane')">
+      <div class="menuBtn active" click.delegate="showPane('#sidePane')">
         <i class="icon-menu"></i>
       </div>
-      <div id="optionsBtn" if.bind="sidePaneOpen" click.delegate="hidePane('#sidePane')">
+      <div class="menuBtn" id="closeSidePane" click.delegate="hidePane('#sidePane')">
         <i class="icon-cancel-2"></i>
       </div>
     </div>
@@ -39,7 +39,7 @@
       </a>
     </div>
 
-    <div id="reportPane">
+    <div id="reportPane" class="popupPane">
       <div class="closeBtn" click.delegate="hidePane('#reportPane')">
         <i class="icon-cancel-2" aria-hidden="true"></i>
       </div>
@@ -47,7 +47,7 @@
       </report-info>
     </div>
 
-    <div id="sidePane" ref="sidePane">
+    <div id="sidePane" class="popupPane">
       <side-pane cities.bind="city_regions" selected.bind="city_name" change-city.call="viewReport($event, $event)" close-pane.call="hidePane('#sidePane')" reportId="report_id">
       </side-pane>
     </div>

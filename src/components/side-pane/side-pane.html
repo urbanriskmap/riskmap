@@ -5,7 +5,7 @@
       <li class="paneTabs" repeat.for="tabName of tabList">
         <div class="tabLinks" id.bind="'button-' + tabName" click.delegate="switchTab(tabName)">
           <i class.bind="'icon-' + tabName"></i>
-          <p>${tabName}</p>
+          <p textcontent.bind="locale.web_menu.tab_names[tabName]"></p>
         </div>
       </li>
       <li class="langTab">
@@ -54,6 +54,7 @@
                       <li repeat.for="step of locale.report_content[video.platform].steps">
                         <p>${step}</p>
                       </li>
+                      <p if.bind="video.platform==='other'" innerhtml.bind="locale.report_content.other.links"></p>
                     </ul>
                   </div>
                 </td>
@@ -75,49 +76,70 @@
       <div id="partners">
         <table id="table">
           <tr class="label">
-            <td colspan="2" cellpadding="0">
+            <td colspan="4" cellpadding="0">
               <p>${locale.info_content.partners}</p>
             </td>
           </tr>
           <tr class="logos">
-            <td>
+            <td colspan="2">
               <a href="https://www.usaid.gov/">
                 <img class="partnerLogo" src="assets/graphics/USAID-logo.png">
               </a>
             </td>
-            <td>
+            <td colspan="2">
               <a href="http://www.bnpb.go.id/">
                 <img class="partnerLogo" src="assets/graphics/bnpb_logo.png">
               </a>
             </td>
           </tr>
           <tr class="logos">
-            <td>
+            <td colspan="2">
               <a href="https://hotosm.org/">
                 <img class="partnerLogo" src="assets/graphics/Hot_logo.png">
               </a>
             </td>
-            <td>
+            <td colspan="2">
               <a href="http://www.pdc.org/">
                 <img class="partnerLogo" src="assets/graphics/pcd_logo.png">
               </a>
             </td>
           </tr>
-          <tr class="label">
+          <tr class="logos">
+            <td>
+              <a href="http://www.qlue.co.id/">
+                <img class="partnerLogo" src="assets/graphics/qlue_logo.png">
+              </a>
+            </td>
             <td colspan="2">
+              <a href="https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need">
+                <img class="partnerLogo" src="assets/graphics/zAlert_logo.png">
+              </a>
+            </td>
+            <td>
+              <a href="http://pasangmata.detik.com/">
+                <img class="partnerLogo" src="assets/graphics/pasang_logo.png">
+              </a>
+            </td>
+          </tr>
+          <tr class="label">
+            <td colspan="4">
               <p>${locale.info_content.mapCredits}</p>
             </td>
           </tr>
           <tr class="label">
-            <td colspan="2">
+            <td colspan="4">
               <p><a href="https://leafletjs.com">Leaflet</a> &#124; &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors</p>
             </td>
           </tr>
         </table>
       </div>
-      <p>${locale.info_content.p1}</p>
-      <p>${locale.info_content.p2}</p>
-      <p>${locale.info_content.p3}</p>
+      <p innerhtml.bind="locale.info_content.p1"></p>
+      <p innerhtml.bind="locale.info_content.p2"></p>
+      <p innerhtml.bind="locale.info_content.p3"></p>
+      <p id="disclaimer">
+        ${locale.info_content.privacy}<br>
+        <i>${locale.info_content.disclaimer}</i>
+      </p>
     </div>
   </div>
 
