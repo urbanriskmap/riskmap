@@ -24,15 +24,24 @@ export class SidePane {
     this.videos = [
       {
         platform: "twitter", //Match string to locale/*/translation.json > report_content.*
-        source: "https://www.youtube.com/embed/cfT-89IfdCU?autoplay=0&origin=https://petabencana.id"
+        source: {
+          "id": "https://www.youtube.com/embed/Gb_BAAiRw2U?autoplay=0&origin=https://petabencana.id",
+          "en": "https://www.youtube.com/embed/EfJRa9sF89Y?autoplay=0&origin=https://petabencana.id"
+        }
       },
       {
         platform: "telegram",
-        source: "https://www.youtube.com/embed/IzjDqjFcYzc?autoplay=0&origin=https://petabencana.id"
+        source: {
+          "id": "https://www.youtube.com/embed/Gb_BAAiRw2U?autoplay=0&origin=https://petabencana.id",
+          "en": "https://www.youtube.com/embed/EfJRa9sF89Y?autoplay=0&origin=https://petabencana.id"
+        }
       },
       {
         platform: "other",
-        source: "https://www.youtube.com/embed/cfT-89IfdCU?autoplay=0&origin=https://petabencana.id"
+        source: {
+          "id": "https://www.youtube.com/embed/Gb_BAAiRw2U?autoplay=0&origin=https://petabencana.id",
+          "en": "https://www.youtube.com/embed/EfJRa9sF89Y?autoplay=0&origin=https://petabencana.id"
+        }
       }
     ];
   }
