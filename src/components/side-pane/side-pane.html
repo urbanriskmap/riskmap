@@ -48,7 +48,7 @@
               <tr class="wrapRow">
                 <td>
                   <div class="videoWrapper" id.bind="'vid_' + video.platform" ref.bind="'vid_' + video.platform">
-                    <iframe frameborder="0" src.bind="video.source"></iframe>
+                    <iframe width="300" height="225" allowfullscreen="allowfullscreen" frameborder="0" src.bind="video.source[selLanguage]"></iframe>
                     <br>
                     <ul>
                       <li repeat.for="step of locale.report_content[video.platform].steps">

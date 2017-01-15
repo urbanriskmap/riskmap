@@ -224,9 +224,11 @@ export class Map {
       minZoom: 8
     });
 
+    L.control.scale({position:'topright', metric:true, imperial:false}).addTo(this.map);
+
     // Add base tile layers
     L.tileLayer(this.config.tile_layer, {
-      detectRetina: true,
+      detectRetina: false,
       subdomains: 'abcd',
       ext: 'png'
     }).addTo(this.map);
