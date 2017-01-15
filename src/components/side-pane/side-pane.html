@@ -5,7 +5,7 @@
       <li class="paneTabs" repeat.for="tabName of tabList">
         <div class="tabLinks" id.bind="'button-' + tabName" click.delegate="switchTab(tabName)">
           <i class.bind="'icon-' + tabName"></i>
-          <p>${tabName}</p>
+          <p textcontent.bind="locale.web_menu.tab_names[tabName]"></p>
         </div>
       </li>
       <li class="langTab">
@@ -136,7 +136,10 @@
       <p innerhtml.bind="locale.info_content.p1"></p>
       <p innerhtml.bind="locale.info_content.p2"></p>
       <p innerhtml.bind="locale.info_content.p3"></p>
-      <p><i>${locale.info_content.disclaimer}</i></p>
+      <p id="disclaimer">
+        ${locale.info_content.privacy}<br>
+        <i>${locale.info_content.disclaimer}</i>
+      </p>
     </div>
   </div>
 

@@ -19,7 +19,7 @@ export class SidePane {
     this.tab = "map";
     this.languages = ["en", "id"];
     //initial language, TODO: set using detected browser language
-    this.selLanguage = "en";
+    this.selLanguage = "id";
     this.locale = {};
     this.videos = [
       {

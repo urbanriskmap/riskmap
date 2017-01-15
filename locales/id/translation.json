@@ -8,10 +8,17 @@
     "5": "Tinjau & Laporkan",
     "6": "Syarat dan ketentuan"
   },
+  "web_menu": {
+    "tab_names": {
+      "map": "peta",
+      "report": "laporkan",
+      "info": "info"
+    }
+  },
   "map_helper": "Pilih kota:",
   "report_content": {
     "twitter": {
-      "title": "Laporan dengan Twitter",
+      "title": "Laporan lewat Twitter",
       "steps": [
         "Tweet #banjir ke @petabencana.",
         "Buka linknya, dan ikuti panduan untuk menginput lokasi, foto, dan deskripsi.",
@@ -19,7 +26,7 @@
       ]
     },
     "telegram": {
-      "title": "Laporan dengan Telegram",
+      "title": "Laporan lewat Telegram",
       "steps": [
         "Kirim /banjir ke @BencanaBot.",
         "Buka linknya, dan ikuti panduan untuk menginput lokasi, foto, dan deskripsi.",
@@ -27,7 +34,7 @@
       ]
     },
     "other": {
-      "title": "Laporan dengan aplikasi lokal",
+      "title": "Laporan lewat aplikasi lokal",
       "steps": [
         "Anda dapat melapor lewat Qlue, PasangMata, dan Z-Alert.",
         "Laporan Anda sudah tampil di peta. Cek PetaBencana.id untuk info banjir terkini."
@@ -42,6 +49,7 @@
     "p3": "PetaBencana.id mengumpulkan, menyortir, dan <b>“memvisualisasikan”</b> data menggunakan CogniCity Open Source Software - sebuah platform untuk manajemen kebencanaan - untuk mengubah kicauan di media sosial dan digital menjadi informasi penting bagi warga, komunitas, dan instansi pemerintah.",
     "partners": "Partner:",
     "mapCredits": "Sumber peta:",
+    "privacy": "Privadi:",
     "disclaimer": "Kami tidak menyimpan informasi tentang pengguna. Semua informasi yang berasal dari perangkat seluler bergeolokasi dipetakan secara real time; informasi ini dapat dilihat lewat API terbuka untuk aplikasi lain."
   },
   "card_error_messages":{
