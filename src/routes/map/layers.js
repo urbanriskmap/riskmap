@@ -48,7 +48,7 @@ export class Layers {
               for (let prop in feature.properties) {
                 self.popupContent[prop] = feature.properties[prop];
               }
-              self.map.flyTo(layer._latlng, 16);
+              self.map.flyTo(layer._latlng, 15);
               history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
               showPane('#reportPane');
               clicked = true;
