@@ -9,7 +9,7 @@ var config = {
   "instance_regions":
   {
     "chennai": {
-      "region": "tn",
+      "region": "chn",
       "bounds": {
         "sw":[ 13.017163, 80.185031],
         "ne":[ 13.151873, 80.309767]
@@ -17,7 +17,7 @@ var config = {
     }
   },
   "default_region": {
-    "region": "chennaiCity",
+    "region": "chn",
     "bounds": {
       "sw":[ 13.017163, 80.185031],
       "ne":[ 13.151873, 80.309767]
