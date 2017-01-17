@@ -16,6 +16,7 @@ export class ReportInfo {
   @bindable pkey;
   @bindable city;
   @bindable time;
+  @bindable timestamp;
   @bindable currenttime;
   //end-non-standard
 

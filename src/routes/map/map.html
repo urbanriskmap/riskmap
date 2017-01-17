@@ -43,7 +43,7 @@
       <div class="closeBtn" click.delegate="hidePane('#reportPane')">
         <i class="icon-cancel-2" aria-hidden="true"></i>
       </div>
-      <report-info id="preview" if.bind="layers.popupContent.pkey" pkey.bind="layers.popupContent.pkey" city.bind="city_name" imageurl.bind="layers.popupContent.image_url" height.bind="layers.popupContent.report_data.flood_depth" title.bind="layers.popupContent.title" text.bind="layers.popupContent.text" time.bind="layers.popupContent.created_at" currenttime.bind="timeNow">
+      <report-info id="preview" if.bind="layers.popupContent.pkey" pkey.bind="layers.popupContent.pkey" city.bind="city_name" imageurl.bind="layers.popupContent.image_url" height.bind="layers.popupContent.report_data.flood_depth" title.bind="layers.popupContent.title" text.bind="layers.popupContent.text" time.bind="layers.popupContent.created_at" currenttime.bind="timeNow" timestamp.bind="layers.popupContent.timestamp">
       </report-info>
     </div>
 

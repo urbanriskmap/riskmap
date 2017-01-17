@@ -53,8 +53,13 @@ export class Layers {
               }));
               // Set popup content
               self.popupContent = {};
+              let localTimestamp = new Date(feature.properties.created_at);
+              // Create local timestamp
+              self.popupContent['timestamp'] = (localTimestamp.toLocaleDateString('id', {timeZone: "Asia/Jakarta"} ) + " " + localTimestamp.toLocaleTimeString('en', { hour12: false, timeZone: "Asia/Jakarta" }));
+
               for (let prop in feature.properties) {
                 self.popupContent[prop] = feature.properties[prop];
+
               }
               // Fly to
               self.map.flyTo(layer._latlng, 15);
@@ -95,6 +100,10 @@ export class Layers {
               }));
               // Set popup content
               self.popupContent = {};
+              let localTimestamp = new Date(feature.properties.created_at);
+              // Create local timestamp
+              self.popupContent['timestamp'] = (localTimestamp.toLocaleDateString('id', {timeZone: "Asia/Jakarta"} ) + " " + localTimestamp.toLocaleTimeString('en', { hour12: false, timeZone: "Asia/Jakarta" }));
+
               for (let prop in feature.properties) {
                 self.popupContent[prop] = feature.properties[prop];
               }
