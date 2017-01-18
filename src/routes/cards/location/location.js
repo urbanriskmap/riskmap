@@ -89,7 +89,7 @@ export class Location {
 
         //If geolocation unavailable, go to default city center;
         cardMap.on('locationerror', function () {
-          cardMap.setView([-6.2, 106.83], 16);
+          cardMap.setView([13.017163, 80.185031], 16);
           self.reportcard.location.markerLocation = cardMap.getCenter();
         });
       }

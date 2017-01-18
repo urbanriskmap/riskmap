@@ -121,23 +121,38 @@ export class Cards {
           //To get AWS Signed URL
           client.get(this.datasrc + 'cards/' + this.id + '/images')
           .then(response => {
-            var signedURL = JSON.parse(response.response);
+            console.log(response);
+            var msg = JSON.parse(response.response);
+            var signedURL = msg.signedRequest;
+            console.log('signedURL');
+            console.log(signedURL);
+            //Post image to the Signed URL
+            $.ajax({
+              url: signedURL,
+              type: 'PUT',
+              data: self.photoToUpload,
+              contentType: false,
+              processData: false,
+              cache: false,
+              error: function (data) {
+                console.log("Error uploading image to AWS");
+              },
+              success: function () {
+                console.log("Uploaded image to AWS successfully!");
+                //Update the DB entries
+                client.post('cards/' + self.id + '/images', self.photoToUpload)
+                .then(response => {
+                  // Proceed to thanks page if report submit resolved & image uploaded;
+                  self.router.navigate('thanks');
+                })
+                .catch(response => {
+                });
+              }
+            });
 
           })
           .catch(response => {
             //Need to be updated based on Abe's server code
-          });
-
-          //Post image to the Signed URL
-          uploadPhoto(signedURL, file);
-
-          //Update the DB entries
-          client.post('cards/' + self.id + '/images', self.photoToUpload)
-          .then(response => {
-            // Proceed to thanks page if report submit resolved & image uploaded;
-            self.router.navigate('thanks');
-          })
-          .catch(response => {
           });
         } else {
           // Proceed to thanks page if report submit resolved
@@ -184,21 +199,5 @@ export class Cards {
   }
   get prevDisabled() {
     return this.cardNo === 1 || this.cardNo === 7;
-  }
-  uploadPhoto(signedURL, file) {
-    $.ajax({
-      url: signedURL,
-      type: 'PUT',
-      data: file,
-      contentType: false,
-      processData: false,
-      cache: false,
-      error: function (data) {
-        console.log("Error uploading image to AWS");
-      },
-      success: function () {
-        console.log("Uploaded image to AWS successfully!");
-      }
-    });
   }
 }
