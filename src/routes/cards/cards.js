@@ -139,14 +139,8 @@ export class Cards {
               },
               success: function () {
                 console.log("Uploaded image to AWS successfully!");
-                //Update the DB entries
-                client.post('cards/' + self.id + '/images', self.photoToUpload)
-                .then(response => {
-                  // Proceed to thanks page if report submit resolved & image uploaded;
-                  self.router.navigate('thanks');
-                })
-                .catch(response => {
-                });
+                // Proceed to thanks page if report submit resolved & image uploaded;
+                self.router.navigate('thanks');
               }
             });
 
