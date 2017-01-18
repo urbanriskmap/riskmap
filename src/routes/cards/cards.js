@@ -117,6 +117,21 @@ export class Cards {
             x.withBaseUrl(self.datasrc); //REPLACE with aws s3 response url?
             x.withHeader('Content-Type', self.photoToUpload.type);
           });
+
+          //To get AWS Signed URL
+          client.get(this.datasrc + 'cards/' + this.id + '/images')
+          .then(response => {
+            var signedURL = JSON.parse(response.response);
+
+          })
+          .catch(response => {
+            //Need to be updated based on Abe's server code
+          });
+
+          //Post image to the Signed URL
+          uploadPhoto(signedURL, file);
+
+          //Update the DB entries
           client.post('cards/' + self.id + '/images', self.photoToUpload)
           .then(response => {
             // Proceed to thanks page if report submit resolved & image uploaded;
@@ -169,5 +184,21 @@ export class Cards {
   }
   get prevDisabled() {
     return this.cardNo === 1 || this.cardNo === 7;
+  }
+  uploadPhoto(signedURL, file) {
+    $.ajax({
+      url: signedURL,
+      type: 'PUT',
+      data: file,
+      contentType: false,
+      processData: false,
+      cache: false,
+      error: function (data) {
+        console.log("Error uploading image to AWS");
+      },
+      success: function () {
+        console.log("Uploaded image to AWS successfully!");
+      }
+    });
   }
 }
