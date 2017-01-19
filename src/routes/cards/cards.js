@@ -3,16 +3,16 @@ import $ from 'jquery';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
 import * as config from './config'; // Cards config
-import {Reportcard} from 'Reportcard';
+import {ReportCard} from 'resources/report-card';
 
 //start-non-standard
-@inject(EventAggregator, Reportcard)
+@inject(EventAggregator, ReportCard)
 //end-non-standard
 export class Cards {
-  constructor(ea, rc) {
+  constructor(ea, ReportCard) {
     this.ea = ea;
     this.datasrc = config.data_server;
-    this.reportcard = rc;
+    this.reportcard = ReportCard;
     this.locale = this.reportcard.locale;
   }
 

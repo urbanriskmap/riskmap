@@ -1,7 +1,11 @@
 // Import environment variables
-import env from './environment';
+import env from '../environment';
+import {noView} from 'aurelia-framework';
 
-export class Reportcard {
+//start-non-standard
+@noView
+//end-non-standard
+export class ReportCard {
   static metadata() {
     return Metadata.singleton(true);
   } //true indicates to register in the root container

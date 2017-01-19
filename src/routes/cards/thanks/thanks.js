@@ -1,12 +1,12 @@
-import {Reportcard} from 'Reportcard';
+import {ReportCard} from 'resources/report-card';
 import {inject} from 'aurelia-framework';
 
-@inject(Reportcard)
-
+//start-non-standard
+@inject(ReportCard)
+//end-non-standard
 export class Thanks {
-
-  constructor(rc){
-    this.reportcard = rc;
+  constructor(ReportCard) {
+    this.reportcard = ReportCard;
   }
 
   attached() {

@@ -1,13 +1,13 @@
-import {Reportcard} from 'Reportcard';
+import {ReportCard} from 'resources/report-card';
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
 //start-non-standard
-@inject(Reportcard, EventAggregator)
+@inject(ReportCard, EventAggregator)
 //end-non-standard
 export class Review {
-  constructor(rc, ea) {
-    this.reportcard = rc;
+  constructor(ReportCard, ea) {
+    this.reportcard = ReportCard;
     this.ea = ea;
     this.report = {
       text: this.reportcard.description.value,
@@ -16,6 +16,7 @@ export class Review {
       image_url: '',
       location: this.reportcard.location.markerLocation,
     };
+    console.log(this.report);
     this.imageObject = this.reportcard.photo.file;
 
     //Check for mobile or desktop device

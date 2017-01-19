@@ -1,12 +1,12 @@
 import {inject} from 'aurelia-framework';
-import {Reportcard} from 'Reportcard';
+import {ReportCard} from 'resources/report-card';
 
 //start-non-standard
-@inject(Reportcard)
+@inject(ReportCard)
 //end-non-standard
 export class Description {
-  constructor(Reportcard) {
-    this.reportcard = Reportcard;
+  constructor(ReportCard) {
+    this.reportcard = ReportCard;
     if (/Mobi/.test(navigator.userAgent)) {
       this.isMobile = true;
     } else {

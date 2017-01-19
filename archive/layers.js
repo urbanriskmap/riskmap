@@ -1,9 +1,6 @@
 import * as config from './config'; // Map config
 import {Data} from './data';
 import $ from 'jquery';
-//import * as moment from 'moment';
-//var moment = require('moment');
-
 
 // PetaBencana.id Layers class - manage leaflet data layers
 export class Layers {

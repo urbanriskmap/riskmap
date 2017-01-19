@@ -1,16 +1,16 @@
 import {inject} from 'aurelia-framework';
 import $ from 'jquery';
-import {Reportcard} from 'Reportcard';
+import {ReportCard} from 'resources/report-card';
 var wrapper;
 var cntxt;
 
 //start-non-standard
-@inject(Reportcard)
+@inject(ReportCard)
 //end-non-standard
 export class Photo {
-  constructor(Reportcard) {
-    this.reportcard = Reportcard;
-    this.locale = Reportcard.locale;
+  constructor(ReportCard) {
+    this.reportcard = ReportCard;
+    this.locale = this.reportcard.locale;
     if (this.reportcard.photo.file) {
       this.haveImg = true;
     }

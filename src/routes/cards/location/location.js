@@ -1,14 +1,14 @@
 import * as config from '../config'; // Cards config
 import * as L from 'leaflet';
 import {inject} from 'aurelia-framework';
-import {Reportcard} from 'Reportcard';
+import {ReportCard} from 'resources/report-card';
 
 //start-non-standard
-@inject(Reportcard)
+@inject(ReportCard)
 //end-non-standard
 export class Location {
-  constructor(Reportcard) {
-    this.reportcard = Reportcard;
+  constructor(ReportCard) {
+    this.reportcard = ReportCard;
     this.config = config;
   }
 
