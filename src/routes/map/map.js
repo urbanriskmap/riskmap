@@ -48,7 +48,7 @@ export class Map {
     if (ref === '#reportPane') {
       this.report_id = null;
       history.pushState({city: this.city_name, report_id: null}, "city", "map/" + this.city_name);
-      if (!!this.layers.selectedReport && this.layers.selectedReport !== null){
+      if (!!this.layers.selectedReport) {
         this.layers.selectedReport.target.setIcon(L.icon({
           iconUrl: 'assets/icons/floodIcon.svg',
           iconSize: [30, 30],
