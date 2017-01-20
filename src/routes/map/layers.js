@@ -299,7 +299,7 @@ export class Layers {
     }
 
     // Get areas where flooding is happening
-    // TODO change to env config
+    // TODO change to env config when there is data in dev for flood gauges
     var url = 'https://data.petabencana.id/' + "floodgauges?city=" + city_region;
     // Get data and add to layer
     return new Promise((resolve, reject) => {
