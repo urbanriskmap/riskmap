@@ -60,14 +60,21 @@ export class Map {
   }
 
   showPane(ref) {
+    let self = this;
     if (ref === '#sidePane') {
       $('.menuBtn').toggleClass("active");
       this.hidePane('#reportPane');
+      this.hidePane('#chartPane');
     }
-    if (ref === '#reportPane' && $('#closeSidePane').hasClass("active")) {
+    else if ((ref === '#reportPane' || ref === '#chartPane') && $('#closeSidePane').hasClass("active")) {
       $('.menuBtn').toggleClass("active");
       $('#sidePane').hide();
     }
+
+    else if (ref === '#reportPane'){
+      $('#chartPane').hide();
+    }
+
     $(ref).fadeIn(200);
     if ($(window).width() < 620) {
       $('#logo_bottom').hide();
@@ -119,11 +126,13 @@ export class Map {
     });
     this.layers.removeReports();
     this.layers.removeFloodExtents();
+    this.layers.removeFloodGauges();
 
     // TODO - we're returning a nested promise from layers, cleaner to have a changeCity promise?
     // TODO - remove conditional returns
     if (cityObj.region !== 'java'){
       this.layers.addFloodExtents(cityObj.region); // Added flooded area if possible
+      this.layers.addFloodGauges(cityName, cityObj.region, this.showPane); // Add flood gauges if possible
       return this.layers.addReports(cityName, cityObj.region, this.showPane);
     } else {
       return new Promise((resolve, reject) => {
