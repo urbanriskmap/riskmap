@@ -148,7 +148,7 @@ export class Map {
     .then(() => {
       if (self.report_id && self.layers.pkeyList.hasOwnProperty(self.report_id)) {
         //Case 1: Active report id in current city
-        if (self.layers.pkeyList[self.report_id].instance_region_code === self.parseMapCity[cityName].region) {
+        if (self.layers.pkeyList[self.report_id].instance_region_code === self.parseMapCity(cityName).region) {
           self.layers.pkeyList[self.report_id].fire('click');
         }
       } else if (self.report_id && !self.layers.pkeyList.hasOwnProperty(self.report_id)) {

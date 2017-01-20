@@ -44,6 +44,18 @@ export class SidePane {
         }
       }
     ];
+    this.gauge_levels = [
+      {text: {"en": "Alert Level 1", "id": "Siaga 1"}, icon: 'assets/icons/floodgauge_1.png'},
+      {text: {"en": "Alert Level 2", "id": "Siaga 2"}, icon: 'assets/icons/floodgauge_2.png'},
+      {text: {"en": "Alert Level 3", "id": "Siaga 3"}, icon: 'assets/icons/floodgauge_3.png'},
+      {text: {"en": "Alert Level 4", "id": "Siaga 4"}, icon: 'assets/icons/floodgauge.png'}
+    ];
+    this.flood_depth = [
+      {text: {"en": "> 150", "id": "> 150"}, color: '#CC2A41'},
+      {text: {"en": "71 - 150", "id": "71 - 150"}, color: '#FF8300'},
+      {text: {"en": "10 - 70", "id": "10 - 70"}, color: '#FFFF00'},
+      {text: {"en": "Use Caution", "id": "Hati-hati"}, color: '#A0A9F7'}
+    ];
   }
 
   //on the fly language change

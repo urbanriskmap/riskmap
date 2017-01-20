@@ -229,7 +229,7 @@ export class Layers {
             click: (e) => {
 
               // Handle flood reports layer selection and popup
-              if (this.selectedReport !== null){
+              if (this.selectedReport && this.selectedReport !== null){
                 this.selectedReport.target.setIcon(L.icon({
                   iconUrl: 'assets/icons/floodIcon.svg',
                   iconSize: [30, 30],
