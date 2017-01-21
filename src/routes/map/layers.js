@@ -240,7 +240,11 @@ export class Layers {
                 history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
               }
 
+              //TODO - set via Aurelia binding
               $('#chart-title').html(feature.properties.gaugenameid)
+              $('#chart-pane').html('<canvas id="modalChart"></canvas>');
+
+              $('#modalChart').empty();
               var ctx = $('#modalChart').get(0).getContext("2d");
 
     					var data = {
