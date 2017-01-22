@@ -1,6 +1,6 @@
 import {inject, bindable, customElement} from 'aurelia-framework';
-import $ from 'jquery';
 import * as L from 'leaflet';
+import $ from 'jquery';
 import {MapLayers} from './map-layers';
 import {MapUtility} from './map-utility';
 
@@ -9,10 +9,10 @@ import {MapUtility} from './map-utility';
 @inject(MapLayers, MapUtility)
 //end-non-standard
 export class DisasterMap {
-//start-non-standard
-@bindable selcity;
-@bindable reportid;
-//end-non-standard
+  //start-non-standard
+  @bindable selcity;
+  @bindable reportid;
+  //end-non-standard
 
   constructor(MapLayers, MapUtility) {
     this.layers = MapLayers;
@@ -23,14 +23,46 @@ export class DisasterMap {
     }
   }
 
-  // Load all reports for a given city, or zoom to single queried report id
-  viewReports(cityName, pushState) {
+  togglePane(ref, action, clear_selection) {
     var self = this;
-    self.utility.changeCity(cityName, self.reportid, self.map, self.layers, pushState)
+    if (action === 'hide') {
+      $(ref).fadeOut(200);
+      if ($(window).width() < 620) {
+        $('#logo_bottom').show();
+      }
+      if (ref === '#reportPane' && clear_selection) {
+        self.reportid = null;
+        history.pushState({city: self.selcity, report_id: null}, "city", "map/" + self.selcity);
+        if (self.layers.selected_report) {
+          self.layers.selected_report.target.setIcon(self.layers.mapIcons.report_normal);
+          self.layers.selected_report = null;
+        }
+      } else if (ref === '#sidePane') {
+        $('.menuBtn').toggleClass("active");
+      }
+    } else if (action === 'show') {
+      $(ref).fadeIn(200);
+      if ($(window).width() < 620) {
+        $('#logo_bottom').hide();
+      }
+      if (ref === '#reportPane' && $('#closeSidePane').hasClass("active")) {
+        $('.menuBtn').toggleClass("active");
+        $('#sidePane').fadeOut(200);
+      } else if (ref === '#sidePane') {
+        $('.menuBtn').toggleClass("active");
+        self.togglePane('#reportPane', 'hide', true);
+      }
+    }
+  }
+
+  // Load all reports for a given city, or zoom to single queried report id
+  viewReports(city_name, push_state) {
+    var self = this;
+    self.utility.changeCity(city_name, self.reportid, self.map, self.layers, push_state, self.togglePane)
     .then(() => {
       if (self.reportid && self.layers.activeReports.hasOwnProperty(self.reportid)) {
         //Case 1: Active report id in current city
-        if (self.layers.activeReports[self.reportid].instance_region_code === self.utility.parseCityObj(cityName)) {
+        if (self.layers.activeReports[self.reportid].instance_region_code === self.utility.parseCityObj(city_name)) {
           self.layers.activeReports[self.reportid].fire('click');
         }
       } else if (self.reportid && !self.layers.activeReports.hasOwnProperty(self.reportid)) {
@@ -38,12 +70,12 @@ export class DisasterMap {
         self.layers.addSingleReport(self.reportid)
         .then(report => {
           var reportRegion = self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code;
-          if (reportRegion === self.utility.parseCityObj(cityName).region) {
+          if (reportRegion === self.utility.parseCityObj(city_name).region) {
             //Case 2A: in current city?
             report.fire('click');
           } else {
             //Case 2B: fly to city with report id
-            self.utility.changeCity(self.utility.parseCityName(reportRegion, self.cities), self.reportid, self.map, self.layers, true)
+            self.utility.changeCity(self.utility.parseCityName(reportRegion, self.cities), self.reportid, self.map, self.layers, true, self.togglePane)
             .then(() => {
               self.layers.addSingleReport(self.reportid)
               .then(queriedReport => {
@@ -55,7 +87,7 @@ export class DisasterMap {
       }
     }).catch((err) => {
       //Case 3: .addReports not resolved for specified city
-      self.utility.noReportsNotification(cityName);
+      self.utility.noReportsNotification(city_name);
       self.report_id = null;
     });
   }
@@ -108,5 +140,10 @@ export class DisasterMap {
     self.map.on('locationerror', () => {
       self.utility.clientLocation = null;
     });
+
+    // Check against queried city param
+    if (self.selcity) {
+      self.viewReports(self.selcity, true);
+    }
   }
 }

@@ -1,8 +1,6 @@
+import $ from 'jquery';
+
 export class Landing {
-  constructor() {
-
-  }
-
   activate(params, routerConfig) {
     this.selected_city = params.city;
     this.report_id = params.report;

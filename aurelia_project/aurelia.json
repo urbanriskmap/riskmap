@@ -141,6 +141,11 @@
             "env": "dev"
           },
           {
+            "name": "chart",
+            "path": "../node_modules/chart.js/dist",
+            "main": "chart.bundle"
+          },
+          {
             "name": "leaflet",
             "path": "../node_modules/leaflet/dist",
             "main": "leaflet",
