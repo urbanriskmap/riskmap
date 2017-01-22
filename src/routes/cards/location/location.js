@@ -1,15 +1,15 @@
-import * as config from '../config'; // Cards config
+import * as config from 'resources/config'; // Cards config
 import * as L from 'leaflet';
 import {inject} from 'aurelia-framework';
-import {Reportcard} from 'Reportcard';
+import {ReportCard} from 'resources/report-card';
 
 //start-non-standard
-@inject(Reportcard)
+@inject(ReportCard)
 //end-non-standard
 export class Location {
-  constructor(Reportcard) {
-    this.reportcard = Reportcard;
-    this.config = config;
+  constructor(ReportCard) {
+    this.reportcard = ReportCard;
+    this.tileLayer = config.cards.tile_layer;
   }
 
   drawGpsMarkers(center, accuracy, map) {
@@ -39,7 +39,7 @@ export class Location {
         center: [-6.1754, 106.8271],
         zoom: 15
       });
-      L.tileLayer(self.config.tile_layer, {
+      L.tileLayer(self.tileLayer, {
         detectRetina: true,
         ext: 'png'
       }).addTo(cardMap);

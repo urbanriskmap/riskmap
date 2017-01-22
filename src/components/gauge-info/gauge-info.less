@@ -1,0 +1,24 @@
+@import "../../styleSheets/themeGuide.less";
+
+#chart-title {
+  position: relative;
+  width: 92%;
+  & p {
+    margin: 0;
+    padding: 0;
+    .bodymedium-mixin(13px);
+    color: @banjir-blue;
+    text-align: center;
+  }
+}
+
+#chart-pane {
+  position: relative;
+  width: 92%;
+  & canvas {
+    width: 80%!important;
+    height: 80%!important;
+    margin: 0 auto;
+    padding: 0;
+  }
+}

@@ -2,32 +2,32 @@ import {inject} from 'aurelia-framework';
 import $ from 'jquery';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
-import * as config from './config'; // Cards config
-import {Reportcard} from 'Reportcard';
+import * as config from 'resources/config'; // Cards config
+import {ReportCard} from 'resources/report-card';
 
 //start-non-standard
-@inject(EventAggregator, Reportcard)
+@inject(EventAggregator, ReportCard)
 //end-non-standard
 export class Cards {
-  constructor(ea, rc) {
+  constructor(ea, ReportCard) {
     this.ea = ea;
-    this.datasrc = config.data_server;
-    this.reportcard = rc;
+    this.datasrc = config.cards.data_server;
+    this.reportcard = ReportCard;
     this.locale = this.reportcard.locale;
   }
 
   configureRouter(config, router) {
     config.title = this.locale.page_title;
     config.map([
-      {route: '',                               moduleId: './landing/landing',          settings: {cardNo: 0}}, //requires cardNo for count getter to set cardNo as 0, resizing dependent on cardTitle & cardNavigation div's displayed, in turn dependent on 'count'
-      {route: 'location',     name: 'location', moduleId: './location/location',        settings: {cardNo: 1}},
-      {route: 'depth',                          moduleId: './depth/depth',              settings: {cardNo: 2}},
-      {route: 'photo',                          moduleId: './photo/photo',              settings: {cardNo: 3}},
-      {route: 'description',                    moduleId: './description/description',  settings: {cardNo: 4}},
-      {route: 'review',                         moduleId: './review/review',            settings: {cardNo: 5}},
-      {route: 'terms',                          moduleId: './terms/terms',              settings: {cardNo: 6}},
-      {route: 'thanks',                         moduleId: './thanks/thanks',            settings: {cardNo: 7}},
-      {route: 'error',        name: 'error',    moduleId: './error/error',              settings: {cardNo: 8}},
+      {route: '',                               moduleId: './card-landing/card-landing', settings: {cardNo: 0}}, //requires cardNo for count getter to set cardNo as 0, on-the-fly resizing dependent on cardTitle & cardNavigation div's displayed, in turn dependent on 'count'
+      {route: 'location',     name: 'location', moduleId: './location/location',         settings: {cardNo: 1}},
+      {route: 'depth',                          moduleId: './depth/depth',               settings: {cardNo: 2}},
+      {route: 'photo',                          moduleId: './photo/photo',               settings: {cardNo: 3}},
+      {route: 'description',                    moduleId: './description/description',   settings: {cardNo: 4}},
+      {route: 'review',                         moduleId: './review/review',             settings: {cardNo: 5}},
+      {route: 'terms',                          moduleId: './terms/terms',               settings: {cardNo: 6}},
+      {route: 'thanks',                         moduleId: './thanks/thanks',             settings: {cardNo: 7}},
+      {route: 'error',        name: 'error',    moduleId: './error/error',               settings: {cardNo: 8}},
     ]);
     config.mapUnknownRoutes({redirect: '/map'});
     this.router = router;
