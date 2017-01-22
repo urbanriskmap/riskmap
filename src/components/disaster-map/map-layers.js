@@ -86,12 +86,12 @@ export class MapLayers {
           self.popupContent.timestamp = (localTimestamp.toLocaleDateString('id', {timeZone: "Asia/Jakarta"}) + " " + localTimestamp.toLocaleTimeString('en', {hour12: false, timeZone: "Asia/Jakarta"}));
           map.flyTo(layer._latlng, 15);
           history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
-          togglePane('#reportPane', 'show', false);
+          togglePane('#infoPane', 'show', false);
           self.selected_report = e;
         } else if (e.target === self.selected_report.target) {
           e.target.setIcon(self.mapIcons.report_normal);
           history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
-          togglePane('#reportPane', 'hide', false);
+          togglePane('#infoPane', 'hide', false);
           self.selected_report = null;
         } else if (e.target !== self.selected_report.target) {
           self.selected_report.target.setIcon(self.mapIcons.report_normal);
@@ -104,7 +104,7 @@ export class MapLayers {
           self.popupContent.timestamp = (localTimestamp.toLocaleDateString('id', {timeZone: "Asia/Jakarta"}) + " " + localTimestamp.toLocaleTimeString('en', {hour12: false, timeZone: "Asia/Jakarta"}));
           map.flyTo(layer._latlng, 15);
           history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
-          togglePane('#reportPane', 'show', false);
+          togglePane('#infoPane', 'show', false);
           self.selected_report = e;
         }
       }
@@ -189,7 +189,6 @@ export class MapLayers {
   addFloodGauges(city_region, map, togglePane) {
     var self = this;
     if (city_region === 'jbd') {
-
       // Create flood gauge layer and add to the map
       self.gaugeLayer = L.geoJSON(null, {
         pointToLayer: (feature, latlng) => {
@@ -201,17 +200,16 @@ export class MapLayers {
           layer.on({
             click: (e) => {
               // Handle flood reports layer selection and popup
-              if (this.selected_report) {
-                this.selected_report.target.setIcon(self.mapIcons.report_normal);
-                togglePane('#reportPane', 'hide', false);
-                this.selected_report = null;
+              if (self.selected_report) {
+                self.selected_report.target.setIcon(self.mapIcons.report_normal);
+                togglePane('#infoPane', 'hide', false);
+                self.selected_report = null;
                 history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
               }
-              //TODO - set via Aurelia binding
-              $('#chart-title').html(feature.properties.gaugenameid);
-              $('#chart-pane').html('<canvas id="modalChart"></canvas>');
+              self.popupContent = {};
+              self.popupContent.gauge_name = feature.properties.gaugenameid;
               $('#modalChart').empty();
-              var ctx = $('#modalChart').get(0).getContext("2d");
+              var ctx = $('#modalChart').get(0).getContext('2d');
               var data = {
                 labels : [],
                 datasets : [{
@@ -224,16 +222,16 @@ export class MapLayers {
                   data: [1,2,3]
                 }]
               };
-              for (var i = 0; i < feature.properties.observations.length; i++){
+              for (var i = 0; i < feature.properties.observations.length; i+=1) {
                 data.labels.push(feature.properties.observations[i].f1);
                 data.datasets[0].data.push(feature.properties.observations[i].f2);
               }
-              var gaugeChart = new Chart(ctx,
-                {type: 'line',
-                data:data,
+              var gaugeChart = new Chart(ctx, {
+                type: 'line',
+                data: data,
                 options: {
-                  bezierCurve:true,
-                  legend: {display:true},
+                  bezierCurve: true,
+                  legend: {display: true},
                   scaleLabel: "<%= ' ' + value%>",
                   scales: {
                     xAxes: [{
@@ -255,21 +253,17 @@ export class MapLayers {
                       }
                     }]
                   },
-                  tooltips:{
+                  tooltips: {
                     enabled: false
                   }
                 }
               });
-              togglePane('#chartPane', 'show', false);
+              togglePane('#infoPane', 'show', false);
             }
           });
         }
       });
     }
-
-    // Get areas where flooding is happening
-    // TODO change to env config when there is data in dev for flood gauges
-    // Get data and add to layer
     return self.appendData('floodgauges?city=' + city_region, self.gaugeLayer, map);
   }
 

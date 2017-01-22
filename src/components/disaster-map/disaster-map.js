@@ -30,7 +30,7 @@ export class DisasterMap {
       if ($(window).width() < 620) {
         $('#logo_bottom').show();
       }
-      if (ref === '#reportPane' && clear_selection) {
+      if (ref === '#infoPane' && clear_selection) {
         self.reportid = null;
         history.pushState({city: self.selcity, report_id: null}, "city", "map/" + self.selcity);
         if (self.layers.selected_report) {
@@ -45,12 +45,12 @@ export class DisasterMap {
       if ($(window).width() < 620) {
         $('#logo_bottom').hide();
       }
-      if (ref === '#reportPane' && $('#closeSidePane').hasClass("active")) {
+      if (ref === '#infoPane' && $('#closeSidePane').hasClass("active")) {
         $('.menuBtn').toggleClass("active");
         $('#sidePane').fadeOut(200);
       } else if (ref === '#sidePane') {
         $('.menuBtn').toggleClass("active");
-        self.togglePane('#reportPane', 'hide', true);
+        self.togglePane('#infoPane', 'hide', true);
       }
     }
   }
