@@ -16,7 +16,6 @@ export class Review {
       image_url: '',
       location: this.reportcard.location.markerLocation,
     };
-    console.log(this.report);
     this.imageObject = this.reportcard.photo.file;
 
     //Check for mobile or desktop device

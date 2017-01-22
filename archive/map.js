@@ -125,7 +125,7 @@ export class Map {
     if (cityObj.region !== 'java'){
       this.layers.addFloodExtents(cityObj.region); // Added flooded area if possible
       return this.layers.addReports(cityName, cityObj.region, this.showPane);
-    } else {
+    } else { //bypasses no reports notifications???
       return new Promise((resolve, reject) => {
         resolve();
       });

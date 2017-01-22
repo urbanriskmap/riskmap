@@ -1,7 +1,56 @@
 <template>
   <require from="./landing.css"></require>
+  <require from="leaflet/leaflet.css"></require>
   <require from="../../components/disaster-map/disaster-map"></require>
+  <require from="../../components/report-info/report-info"></require>
+  <require from="../../components/side-pane/side-pane"></require>
 
-  <disaster-map id="map">
-  </disaster-map>
+  <div id="pageWrapper">
+    <div id="screen" if.bind="!mapModel.selcity">
+      <div id="cityPopup">
+        <p>Select city to load flood data:</p>
+        <label repeat.for="city of mapModel.cities">
+          <input type="radio" model.bind="city" selected.two-way="mapModel.selcity" change.delegate="mapModel.viewReports(city, true)">
+          ${city}
+          <br>
+        </label>
+      </div>
+    </div>
+
+    <disaster-map id="map" view-model.ref="mapModel" selcity.two-way="selected_city" reportid.two-way="report_id">
+    </disaster-map>
+
+    <div id="topBar">
+      <div id="logo_top">
+        <a href="map">
+          <img id="pbLogo" src="assets/graphics/Peta_logo_noSub.svg" width="180">
+        </a>
+      </div>
+      <div class="menuBtn active" click.delegate="showPane('#sidePane')">
+        <i class="icon-menu"></i>
+      </div>
+      <div class="menuBtn" id="closeSidePane" click.delegate="hidePane('#sidePane')">
+        <i class="icon-cancel-2"></i>
+      </div>
+    </div>
+
+    <div id="logo_bottom">
+      <a href="http://urbanrisklab.org">
+        <img id="mitLogo" src="assets/graphics/URL_logo.svg" width="180">
+      </a>
+    </div>
+
+    <div id="reportPane" class="popupPane">
+      <div class="closeBtn" click.delegate="hidePane('#reportPane')">
+        <i class="icon-cancel-2" aria-hidden="true"></i>
+      </div>
+      <report-info id="preview" if.bind="layers.popupContent.pkey" pkey.bind="layers.popupContent.pkey" city.bind="city_name" imageurl.bind="layers.popupContent.image_url" height.bind="layers.popupContent.report_data.flood_depth" title.bind="layers.popupContent.title" text.bind="layers.popupContent.text" time.bind="layers.popupContent.created_at" currenttime.bind="timeNow" timestamp.bind="layers.popupContent.timestamp">
+      </report-info>
+    </div>
+
+    <div id="sidePane" class="popupPane">
+      <side-pane cities.bind="mapModel.cities" selected.two-way="mapModel.selcity" change-city.call="mapModel.viewReport($event, $event)" close-pane.call="hidePane('#sidePane')" reportId="report_id">
+      </side-pane>
+    </div>
+  </div>
 </template>
