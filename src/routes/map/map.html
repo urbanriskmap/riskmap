@@ -3,6 +3,8 @@
   <require from="./map.css"></require>
   <require from="../../components/report-info/report-info"></require>
   <require from="../../components/side-pane/side-pane"></require>
+  <require from="../../components/chart-pane/chart-pane"></require>
+
 
   <div id="pageWrapper">
     <div id="screen">
@@ -45,6 +47,14 @@
       </div>
       <report-info id="preview" if.bind="layers.popupContent.pkey" pkey.bind="layers.popupContent.pkey" city.bind="city_name" imageurl.bind="layers.popupContent.image_url" height.bind="layers.popupContent.report_data.flood_depth" title.bind="layers.popupContent.title" text.bind="layers.popupContent.text" time.bind="layers.popupContent.created_at" currenttime.bind="timeNow" timestamp.bind="layers.popupContent.timestamp">
       </report-info>
+    </div>
+
+    <div id="chartPane" class="popupPane">
+      <div class="closeBtn" click.delegate="hidePane('#chartPane')">
+        <i class="icon-cancel-2" aria-hidden="true"></i>
+      </div>
+      <div id="chart-title"></div>
+      <div id="chart-pane"></div>
     </div>
 
     <div id="sidePane" class="popupPane">

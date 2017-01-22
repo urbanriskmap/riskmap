@@ -27,6 +27,18 @@
         ${city}
         <br>
       </label>
+      <p>${locale.legend.flood_gauges}</p>
+      <table repeat.for="level of gauge_levels">
+        <tr>
+          <td><img src.bind=level.icon></td><td><label>${level.text[selLanguage]}</label></td>
+        </tr>
+      </table>
+      <p>${locale.legend.flood_depth}</p>
+      <table repeat.for="height of flood_depth">
+        <tr>
+          <td style.bind="'width:20px; background-color: ' + height.color"></td><td><label>${height.text[selLanguage]}</label></td>
+        </tr>
+      </table>
     </div>
 
     <div id="content-report" if.bind="tab === 'report'" class="contentWrapper">

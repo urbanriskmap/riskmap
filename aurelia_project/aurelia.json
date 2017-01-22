@@ -162,6 +162,11 @@
             "name": "notifyjs-browser",
             "path": "../node_modules/notifyjs-browser/dist",
             "main": "notify"
+          },
+          {
+            "name": "chartjs",
+            "path": "../node_modules/chart.js/dist",
+            "main": "Chart.bundle.js"
           }
         ]
       }

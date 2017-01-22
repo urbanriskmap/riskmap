@@ -1,9 +1,7 @@
 import * as config from './config'; // Map config
 import {Data} from './data';
 import $ from 'jquery';
-//import * as moment from 'moment';
-//var moment = require('moment');
-
+import Chart from 'chartjs';
 
 // PetaBencana.id Layers class - manage leaflet data layers
 export class Layers {
@@ -77,11 +75,6 @@ export class Layers {
               }));
               $('#reportPane').hide();
               history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
-              this.selectedReport.target.setIcon(L.icon({
-                iconUrl: 'assets/icons/floodIcon.svg',
-                iconSize: [30, 30],
-                iconAnchor: [15, 15]
-              }));
               this.selectedReport = null; // No longer selected
             }
             else if (e.target !== this.selectedReport.target){
@@ -196,4 +189,147 @@ export class Layers {
       self.flood_extents = null;
     }
   }
+
+  // Function to add flooded polygon layer for Jakarta to map
+  addFloodGauges(city_name, city_region, showPane){
+
+    var self = this;
+    self.city_region = city_region;
+
+    //TODO - add multiregion support
+    if (self.city_region === 'jbd'){
+      // Setup icons
+      self.gaugeIcons = function(level){
+        switch (level) {
+          case 1:
+            return {'color':'#FF4000','icon':'assets/icons/floodgauge_1.png'};
+          case 2:
+            return {'color':'#FF8000','icon':'assets/icons/floodgauge_2.png'};
+          case 3:
+            return {'color':'#F7D358','icon':'assets/icons/floodgauge_3.png'};
+          default:
+            return {'color':'#01DF01','icon':'assets/icons/floodgauge.png'};
+        }
+      };
+
+      // Create flood gauge layer and add to the map
+      self.gaugeLayer = L.geoJSON(null, {
+        pointToLayer: (feature, latlng) => {
+          return L.marker(latlng, {
+                  icon: L.icon({
+                    iconUrl: this.gaugeIcons(feature.properties.observations[feature.properties.observations.length-1].f3).icon,
+                    iconSize: [22,22],
+      							iconAnchor: [11, 11],
+      							popupAnchor: [0, 0]
+                  })
+                })
+        },
+        onEachFeature: (feature, layer) => {
+          layer.on({
+            click: (e) => {
+
+              // Handle flood reports layer selection and popup
+              if (this.selectedReport && this.selectedReport !== null){
+                this.selectedReport.target.setIcon(L.icon({
+                  iconUrl: 'assets/icons/floodIcon.svg',
+                  iconSize: [30, 30],
+                  iconAnchor: [15, 15]
+                }));
+                $('#reportPane').hide();
+                this.selectedReport = null;
+                history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
+              }
+
+              //TODO - set via Aurelia binding
+              $('#chart-title').html(feature.properties.gaugenameid)
+              $('#chart-pane').html('<canvas id="modalChart"></canvas>');
+
+              $('#modalChart').empty();
+              var ctx = $('#modalChart').get(0).getContext("2d");
+
+    					var data = {
+    						labels : [],
+    						datasets : [{
+    							label: "Tinggi Muka Air / Water Depth (cm)",
+    							backgroundColor: "rgba(151,187,205,0.2)",
+    							borderColor: "rgba(151,187,205,1)",
+    							pointBackgroundColor: "rgba(151,187,205,1)",
+    							pointBorderColor: "#fff",
+    	            pointRadius: 4,
+    							data: [1,2,3]
+    						}]
+    					};
+    					for (var i = 0; i < feature.properties.observations.length; i++){
+    						data.labels.push(feature.properties.observations[i].f1);
+    						data.datasets[0].data.push(feature.properties.observations[i].f2);
+    					}
+    					var gaugeChart = new Chart(ctx,
+    					{type: 'line',
+    					data:data,
+    					options: {
+                bezierCurve:true,
+                legend: {display:true},
+                scaleLabel: "<%= ' ' + value%>",
+                scales: {
+                  xAxes: [{
+                    type: 'time',
+                    time: {
+                      unit: 'hour',
+                      unitStepSize: 1,
+                      displayFormats: {
+                        'millisecond': 'HH:mm',
+                				'second': 'HH:mm',
+  											'minute': 'HH:mm',
+  											'hour': 'HH:mm',
+  											'day': 'HH:mm',
+  											'week': 'HH:mm',
+  											'month': 'HH:mm',
+  											'quarter': 'HH:mm',
+  											'year': 'HH:mm'
+                        }
+                      }
+                    }]
+                  },
+                  tooltips:{
+                    enabled: false
+                  }
+    						}
+    					});
+              showPane('#chartPane');
+            }
+          });
+        }
+      })
+    }
+
+    // Get areas where flooding is happening
+    // TODO change to env config when there is data in dev for flood gauges
+    var url = 'https://data.petabencana.id/' + "floodgauges?city=" + city_region;
+    // Get data and add to layer
+    return new Promise((resolve, reject) => {
+      self.data.getData(url)
+      .then((data) => {
+        if (data === null){
+          console.log('Could not load flood extents for '+city);
+          resolve(data);
+        }
+        else {
+          self.gaugeLayer.addData(data);
+          self.gaugeLayer.addTo(self.map);
+          resolve(data);
+        }
+      })
+      .catch((err) => reject(null));
+    });
+  }
+
+  // Function to remove reports from map, and clear layer
+  removeFloodGauges(){
+    var self = this;
+    if (self.gaugeLayer) {
+      self.map.removeLayer(self.gaugeLayer);
+      self.gaugeLayer = null;
+    }
+  }
+
 }

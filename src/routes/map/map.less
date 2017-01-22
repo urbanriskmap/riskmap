@@ -93,6 +93,25 @@ div.active {
   background-color: @snow-white;
 }
 
+#chartPane {
+  .mappane-mixin(200px);
+  background-color: @snow-white;
+  & canvas#modalChart{
+    width:83%!important;
+    height:83%!important;
+    margin: 0 auto;
+  }
+  & #chart-title {
+    padding-top:4px;
+    .bodylight-mixin(13px);
+    color: @banjir-blue;
+    text-align: center;
+  }
+}
+
+
+
+
 #sidePane{
   .mappane-mixin(320px);
   overflow: scroll;
