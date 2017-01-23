@@ -2,7 +2,9 @@ import $ from 'jquery';
 
 export class Landing {
   activate(params, routerConfig) {
-    this.selected_city = params.city;
+    if (params.city) {
+      this.queried_city = params.city;
+    }
     this.report_id = params.report;
   }
 

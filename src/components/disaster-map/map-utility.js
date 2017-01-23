@@ -51,34 +51,22 @@ export class MapUtility {
     } else {
       // invalid city
       $('#screen').show();
-      $.notify('Unsupported city: ' + city_name, {style:"mapInfo", className:"error"});
       return self.config.default_region;
     }
   }
 
   // Change city from within map without reloading window
-  changeCity(city_name, report_id, map, layers, push_state, togglePane) {
+  changeCity(city_name, report_id, map, layers, togglePane) {
     var self = this,
         cityObj = self.parseCityObj(city_name);
     // Remove previous layers
     layers.removeFloodExtents(map);
     layers.removeFloodGauges(map);
-    layers.removeReports(map);
     // Fly to new city bounds
     map.flyToBounds([cityObj.bounds.sw, cityObj.bounds.ne])
-      .once('moveend zoomend', (e) => {
-        map.setMaxBounds([cityObj.bounds.sw, cityObj.bounds.ne]);
-      });
-    // Update browser url to match map state
-    if (push_state) {
-      if (report_id) {
-        history.pushState({city: city_name, report_id: report_id}, 'city', "map/" + city_name + "/" + report_id);
-      } else if (cityObj.region === 'java') {
-        history.pushState({city: null, report_id: null}, 'city', "map");
-      } else {
-        history.pushState({city: city_name, report_id: null}, 'city', "map/" + city_name);
-      }
-    }
+    .once('moveend zoomend', (e) => {
+      map.setMaxBounds([cityObj.bounds.sw, cityObj.bounds.ne]);
+    });
     // Add new layers
     if (cityObj.region !== 'java') {
       layers.addFloodExtents(self.parseCityObj(city_name).region, map);
@@ -91,8 +79,14 @@ export class MapUtility {
     }
   }
 
-  noReportsNotification(city_name) {
-    $.notify("No reports found for " + city_name, {style:"mapInfo", className:"info" });
+  noReportNotification(city_name, report_id) {
+    if (report_id && city_name) {
+      $.notify("Report id: " + report_id + " not found in " + city_name, {style:"mapInfo", className:"info"});
+    } else if (city_name) {
+      $.notify("No reports found for " + city_name, {style:"mapInfo", className:"info"});
+    } else if (!city_name) {
+      $.notify('Unsupported city', {style:"mapInfo", className:"error"});
+    }
   }
 
   onLocationFound(e) {

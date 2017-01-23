@@ -11,14 +11,14 @@
       <div id="cityPopup">
         <p>Select city to load flood data:</p>
         <label repeat.for="city of mapModel.cities">
-          <input type="radio" model.bind="city" selected.two-way="mapModel.selcity" change.delegate="mapModel.viewReports(city, true)">
+          <input type="radio" model.bind="city" selected.two-way="mapModel.selected_city" change.delegate="mapModel.viewReports(city, true)">
           ${city}
           <br>
         </label>
       </div>
     </div>
 
-    <disaster-map id="map" view-model.ref="mapModel" selcity.two-way="selected_city" reportid.two-way="report_id">
+    <disaster-map id="map" view-model.ref="mapModel" querycity.two-way="queried_city" reportid.two-way="report_id">
     </disaster-map>
 
     <div id="topBar">
@@ -42,17 +42,17 @@
     </div>
 
     <div id="infoPane">
-      <div class="closeBtn" click.delegate="mapModel.togglePane('#infoPane', 'hide', false)">
+      <div class="closeBtn" click.delegate="mapModel.togglePane('#infoPane', 'hide', true)">
         <i class="icon-cancel-2" aria-hidden="true"></i>
       </div>
-      <report-info class="infoWrapper" if.bind="mapModel.layers.popupContent.pkey" pkey.bind="mapModel.layers.popupContent.pkey" city.bind="city_name" imageurl.bind="mapModel.layers.popupContent.image_url" height.bind="mapModel.layers.popupContent.report_data.flood_depth" title.bind="mapModel.layers.popupContent.title" text.bind="mapModel.layers.popupContent.text" time.bind="mapModel.layers.popupContent.created_at" currenttime.bind="timeNow" timestamp.bind="mapModel.layers.popupContent.timestamp">
-      </report-info>
       <gauge-info class="infoWrapper" name.bind="mapModel.layers.popupContent.gauge_name">
       </gauge-info>
+      <report-info class="infoWrapper" if.bind="mapModel.layers.popupContent.pkey" pkey.bind="mapModel.layers.popupContent.pkey" city.bind="city_name" imageurl.bind="mapModel.layers.popupContent.image_url" height.bind="mapModel.layers.popupContent.report_data.flood_depth" title.bind="mapModel.layers.popupContent.title" text.bind="mapModel.layers.popupContent.text" timestamp.bind="mapModel.layers.popupContent.timestamp">
+      </report-info>
     </div>
 
     <div id="sidePane">
-      <side-pane cities.bind="mapModel.cities" selected.two-way="mapModel.selcity" change-city.call="mapModel.viewReports($event, $event)" close-pane.call="mapModel.togglePane('#sidePane', 'hide', false)" reportId="report_id">
+      <side-pane cities.bind="mapModel.cities" selected.two-way="mapModel.selected_city" change-city.call="mapModel.viewReports($event, $event)" close-pane.call="mapModel.togglePane('#sidePane', 'hide', false)" reportId.two-way="report_id">
       </side-pane>
     </div>
   </div>

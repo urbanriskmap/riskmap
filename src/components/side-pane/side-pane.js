@@ -18,7 +18,6 @@ export class SidePane {
     this.tabList = ["map", "report", "info"]; //elements match names of fontello icons
     this.tab = "map";
     this.languages = ["en", "id"];
-    //initial language, TODO: set using detected browser language
     this.selLanguage = "id";
     this.locale = {};
     this.videos = [
@@ -48,7 +47,7 @@ export class SidePane {
       {text: {"en": "Alert Level 1", "id": "Siaga 1"}, icon: 'assets/icons/floodgauge_1.svg'},
       {text: {"en": "Alert Level 2", "id": "Siaga 2"}, icon: 'assets/icons/floodgauge_2.svg'},
       {text: {"en": "Alert Level 3", "id": "Siaga 3"}, icon: 'assets/icons/floodgauge_3.svg'},
-      {text: {"en": "Alert Level 4", "id": "Siaga 4"}, icon: 'assets/icons/floodgauge.svg'}
+      {text: {"en": "Alert Level 4", "id": "Siaga 4"}, icon: 'assets/icons/floodgauge_4.svg'}
     ];
     this.flood_depth = [
       {text: {"en": "> 150", "id": "> 150"}, color: '#CC2A41'},
