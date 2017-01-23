@@ -34,6 +34,19 @@ export class MapLayers {
     };
   }
 
+  // Format timestamps to local time
+  formatTime(timestamp_ISO8601){
+    let utc = new Date(timestamp_ISO8601).getTime();
+    let ict = utc + 3600 * 7 * 1000; // Add 7 hours for UTC+7
+    let timestring = new Date(ict).toISOString();
+    timestring = timestring.split('T'); // Split time and ate
+    let t1 = timestring[1].slice(0,5); // Extract HH:MM
+    let d1 = timestring[0].split('-'); // Extract DD-MM-YY
+    let d2 = d1[2]+'-'+d1[1]+'-'+d1[0];
+    return (t1 + ' ' + d2);
+  };
+
+  // Get icon for flood gauge
   gaugeIconUrl(level) {
     switch(level) {
       case 1:
@@ -47,7 +60,7 @@ export class MapLayers {
     }
   }
 
-  //Get topojson data from server, return geojson
+  // Get topojson data from server, return geojson
   getData(end_point) {
     var self = this,
         url = self.config.data_server + end_point;
@@ -70,7 +83,7 @@ export class MapLayers {
       .catch(err => reject(err));
     });
   }
-
+  // Report interaction
   onEachFeature(feature, layer, city_name, map, togglePane) {
     var self = this;
     self.activeReports[feature.properties.pkey] = layer;
@@ -82,8 +95,9 @@ export class MapLayers {
           for (let prop in feature.properties) {
             self.popupContent[prop] = feature.properties[prop];
           }
-          let localTimestamp = new Date(feature.properties.created_at);
-          self.popupContent.timestamp = (localTimestamp.toLocaleDateString('id', {timeZone: "Asia/Jakarta"}) + " " + localTimestamp.toLocaleTimeString('en', {hour12: false, timeZone: "Asia/Jakarta"}));
+          // Get timestamp
+          self.popupContent.timestamp = self.formatTime(feature.properties.created_at);
+
           map.flyTo(layer._latlng, 15);
           history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
           togglePane('#infoPane', 'show', true);
@@ -100,8 +114,9 @@ export class MapLayers {
           for (let prop in feature.properties) {
             self.popupContent[prop] = feature.properties[prop];
           }
-          let localTimestamp = new Date(feature.properties.created_at);
-          self.popupContent.timestamp = (localTimestamp.toLocaleDateString('id', {timeZone: "Asia/Jakarta"}) + " " + localTimestamp.toLocaleTimeString('en', {hour12: false, timeZone: "Asia/Jakarta"}));
+          // Get timestamp
+          self.popupContent.timestamp = self.formatTime(feature.properties.created_at);
+
           map.flyTo(layer._latlng, 15);
           history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
           togglePane('#infoPane', 'show', true);
