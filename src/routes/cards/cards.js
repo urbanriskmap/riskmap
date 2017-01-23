@@ -52,7 +52,9 @@ export class Cards {
 
   attached() {
     var nua = navigator.userAgent.toLowerCase();
-    if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1) {
+    //______________is Mobile______________________an iPhone_________________browser not safari (in-app)____
+    if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1) {
+      // Double height for bottom navigation bar, due to floating browser bar in telegram / twitter app browsers
       $('#cardNavigation').css({
         'height': 100 + 'px'
       });
