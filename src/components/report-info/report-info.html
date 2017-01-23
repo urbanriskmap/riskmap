@@ -15,14 +15,8 @@
     </div>
 
     <div id="socialIcons">
-      <a href.bind="twitterText">
-        <i class="icon-twitter"></i>
-      </a>
-      <a href.bind="whatsappText">
-        <i class="icon-whatsapp"></i>
-      </a>
-      <a href.bind="facebookText">
-        <i class="icon-facebook"></i>
+      <a repeat.for="button of shareButtons" href.bind="button.intent">
+        <i class.bind="'icon-' + button.name"></i>
       </a>
     </div>
   </div>

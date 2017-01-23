@@ -193,6 +193,12 @@
       "search": [
         "icon"
       ]
+    },
+    {
+      "uid": "531359183f9fedb14b23666f1308591f",
+      "css": "telegram",
+      "code": 62150,
+      "src": "fontawesome"
     }
   ]
 }

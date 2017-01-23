@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'fontello';
-  src: url('../font/fontello.eot?48349229');
-  src: url('../font/fontello.eot?48349229#iefix') format('embedded-opentype'),
-       url('../font/fontello.woff2?48349229') format('woff2'),
-       url('../font/fontello.woff?48349229') format('woff'),
-       url('../font/fontello.ttf?48349229') format('truetype'),
-       url('../font/fontello.svg?48349229#fontello') format('svg');
+  src: url('../font/fontello.eot?90725768');
+  src: url('../font/fontello.eot?90725768#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff2?90725768') format('woff2'),
+       url('../font/fontello.woff?90725768') format('woff'),
+       url('../font/fontello.ttf?90725768') format('truetype'),
+       url('../font/fontello.svg?90725768#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?48349229#fontello') format('svg');
+    src: url('../font/fontello.svg?90725768#fontello') format('svg');
   }
 }
 */
@@ -78,5 +78,6 @@
 .icon-angle-double-right:before { content: '\f101'; } /* '' */
 .icon-whatsapp:before { content: '\f232'; } /* '' */
 .icon-map:before { content: '\f279'; } /* '' */
+.icon-telegram:before { content: '\f2c6'; } /* '' */
 .icon-twitter:before { content: '\f309'; } /* '' */
 .icon-facebook:before { content: '\f30c'; } /* '' */

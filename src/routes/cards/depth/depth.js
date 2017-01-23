@@ -21,19 +21,20 @@ export class Depth {
     $(document).ready(() => { //TODO: test if required
       var self = this,
           imgHeightCm = 220,
-          heightLimitCm = 195,
+          maxHtLimitCm = 195,
+          minHtLimitCm = 1,
           refHeightPx = $('#bgImage').height(),
           fillHeightPx,
           reportHeightCm;
       if (self.reportcard.depth) {
         //reset value within limits
-        if (self.reportcard.depth > heightLimitCm) {
-          reportHeightCm = heightLimitCm;
-        } else if (self.reportcard.depth < 0) {
-          reportHeightCm = 0;
+        if (self.reportcard.depth > maxHtLimitCm) {
+          reportHeightCm = maxHtLimitCm;
+        } else if (self.reportcard.depth < minHtLimitCm) {
+          reportHeightCm = minHtLimitCm;
         }
         $('#floodZone').css({
-          'height': (reportHeightCm * refHeightPx / imgHeightCm) + 'px'
+          'height': (self.reportcard.depth * refHeightPx / imgHeightCm) + 'px'
         });
       }
       fillHeightPx = $('#floodZone').height();
@@ -68,7 +69,7 @@ export class Depth {
           }
           reportHeightCm = ((fillHeightPx + startPos - dragPos) * imgHeightCm) / refHeightPx;
           if (self.sliderActive) {
-            if (reportHeightCm > 0 && reportHeightCm < heightLimitCm) {
+            if (reportHeightCm > minHtLimitCm && reportHeightCm < maxHtLimitCm) {
               $('#floodZone').css({
                 'height': (fillHeightPx + startPos - dragPos) + 'px'
               });
@@ -76,22 +77,22 @@ export class Depth {
                 'bottom': (fillHeightPx + startPos - dragPos) + 'px'
               });
               self.reportcard.depth = Math.round(reportHeightCm);
-            } else if (reportHeightCm >= heightLimitCm) {
+            } else if (reportHeightCm >= maxHtLimitCm) {
               $('#floodZone').css({
-                'height': ((refHeightPx * heightLimitCm) / imgHeightCm) + 'px'
+                'height': ((refHeightPx * maxHtLimitCm) / imgHeightCm) + 'px'
               });
               $('#sliderZone').css({
-                'bottom': ((refHeightPx * heightLimitCm) / imgHeightCm) + 'px'
+                'bottom': ((refHeightPx * maxHtLimitCm) / imgHeightCm) + 'px'
               });
-              self.reportcard.depth = heightLimitCm;
-            } else if (reportHeightCm <= 0) {
+              self.reportcard.depth = maxHtLimitCm;
+            } else if (reportHeightCm <= minHtLimitCm) {
               $('#floodZone').css({
-                'height': 0 + 'px'
+                'height': minHtLimitCm + 'px'
               });
               $('#sliderZone').css({
-                'bottom': 0 + 'px'
+                'bottom': minHtLimitCm + 'px'
               });
-              self.reportcard.depth = 0;
+              self.reportcard.depth = minHtLimitCm;
             }
           }
         });

@@ -47,7 +47,7 @@
       </div>
       <gauge-info class="infoWrapper" name.bind="mapModel.layers.popupContent.gauge_name">
       </gauge-info>
-      <report-info class="infoWrapper" if.bind="mapModel.layers.popupContent.pkey" pkey.bind="mapModel.layers.popupContent.pkey" city.bind="city_name" imageurl.bind="mapModel.layers.popupContent.image_url" height.bind="mapModel.layers.popupContent.report_data.flood_depth" title.bind="mapModel.layers.popupContent.title" text.bind="mapModel.layers.popupContent.text" timestamp.bind="mapModel.layers.popupContent.timestamp">
+      <report-info class="infoWrapper" if.bind="mapModel.layers.popupContent.pkey" pkey.bind="mapModel.layers.popupContent.pkey" city.bind="mapModel.utility.parseCityName(mapModel.layers.popupContent.tags.instance_region_code, mapModel.cities)" imageurl.bind="mapModel.layers.popupContent.image_url" height.bind="mapModel.layers.popupContent.report_data.flood_depth" title.bind="mapModel.layers.popupContent.title" text.bind="mapModel.layers.popupContent.text" timestamp.bind="mapModel.layers.popupContent.timestamp">
       </report-info>
     </div>
 

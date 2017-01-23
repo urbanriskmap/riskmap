@@ -33,5 +33,6 @@
 .icon-angle-double-right { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf101;&nbsp;'); }
 .icon-whatsapp { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf232;&nbsp;'); }
 .icon-map { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf279;&nbsp;'); }
+.icon-telegram { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf2c6;&nbsp;'); }
 .icon-twitter { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf309;&nbsp;'); }
 .icon-facebook { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf30c;&nbsp;'); }

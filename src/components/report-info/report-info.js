@@ -1,8 +1,6 @@
 import {bindable, customElement} from 'aurelia-framework';
 import env from '../../environment';
 
-var messageText = "Laporan banjir pada petabencana.id";
-
 //start-non-standard
 @customElement('report-info')
 //end-non-standard
@@ -18,11 +16,29 @@ export class ReportInfo {
   @bindable timestamp;
   //end-non-standard
 
+  constructor() {
+    this.msgText = "Laporan banjir pada petabencana.id";
+  }
+
   attached() {
-    if (this.pkey) {
-      this.twitterText = "https://twitter.com/intent/tweet?text=" + messageText + "%20"+ env.app + "map/" + this.city + "/" + this.pkey;
-      this.whatsappText = "whatsapp://send?text=" + messageText + "%20" + env.app + "map/" + this.city + "/" + this.pkey;
-      this.facebookText = "http://www.facebook.com/sharer/sharer.php?u=" + env.app + "map/" + this.city + "/" + this.pkey;
-    }
+    var self = this;
+    self.shareButtons = [
+      {
+        name: "twitter",
+        intent: "https://twitter.com/intent/tweet?text=" + self.msgText + "%20"+ env.app + "map/" + self.city + "/" + self.pkey
+      },
+      {
+        name: "telegram",
+        intent: "https://telegram.me/share/url?url={" + env.app + "map/" + self.city + "/" + self.pkey + "}&text={" + self.msgText + "}"
+      },
+      {
+        name: "whatsapp",
+        intent: "whatsapp://send?text=" + self.msgText + "%20" + env.app + "map/" + self.city + "/" + self.pkey
+      },
+      {
+        name: "facebook",
+        intent: "http://www.facebook.com/sharer/sharer.php?u=" + env.app + "map/" + self.city + "/" + self.pkey
+      }
+    ];
   }
 }
