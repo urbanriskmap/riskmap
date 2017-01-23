@@ -2,16 +2,16 @@ import {inject} from 'aurelia-framework';
 import $ from 'jquery';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
-import * as config from 'resources/config'; // Cards config
+import {Config} from 'resources/config'; // Cards config
 import {ReportCard} from 'resources/report-card';
 
 //start-non-standard
-@inject(EventAggregator, ReportCard)
+@inject(EventAggregator, ReportCard, Config)
 //end-non-standard
 export class Cards {
-  constructor(ea, ReportCard) {
+  constructor(ea, ReportCard, Config) {
     this.ea = ea;
-    this.datasrc = config.cards.data_server;
+    this.datasrc = Config.cards.data_server;
     this.reportcard = ReportCard;
     this.locale = this.reportcard.locale;
   }

@@ -1,15 +1,15 @@
-import * as config from 'resources/config'; // Cards config
+import {Config} from 'resources/config'; // Cards config
 import * as L from 'leaflet';
 import {inject} from 'aurelia-framework';
 import {ReportCard} from 'resources/report-card';
 
 //start-non-standard
-@inject(ReportCard)
+@inject(ReportCard, Config)
 //end-non-standard
 export class Location {
-  constructor(ReportCard) {
+  constructor(ReportCard, Config) {
     this.reportcard = ReportCard;
-    this.tileLayer = config.cards.tile_layer;
+    this.tileLayer = Config.cards.tile_layer;
   }
 
   drawGpsMarkers(center, accuracy, map) {
