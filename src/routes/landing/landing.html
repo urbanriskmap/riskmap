@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <disaster-map id="map" view-model.ref="mapModel" querycity.two-way="queried_city" reportid.two-way="report_id" reset-tab.call="webMenu.switchTab($event)">
+    <disaster-map id="map" view-model.ref="mapModel" querycity.bind="queried_city" reportid.two-way="report_id" reset-tab.call="webMenu.switchTab($event)">
     </disaster-map>
 
     <div id="topBar">

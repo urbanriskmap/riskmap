@@ -69,8 +69,10 @@ export class DisasterMap {
         //Case 1: Active report id in current city
         if (self.layers.activeReports[self.reportid].instance_region_code === self.utility.parseCityObj(city_name)) {
           self.layers.activeReports[self.reportid].fire('click');
-          history.pushState({city: city_name, report_id: self.reportid}, 'city', "map/" + city_name + "/" + self.reportid);
           self.selected_city = city_name;
+          if (push_state) {
+            history.pushState({city: city_name, report_id: self.reportid}, 'city', "map/" + city_name + "/" + self.reportid);
+          }
         }
       } else if (self.reportid && !self.layers.activeReports.hasOwnProperty(self.reportid)) {
         //Case 2: No active report, check availability on server
@@ -80,8 +82,10 @@ export class DisasterMap {
           if (reportRegion === self.utility.parseCityObj(city_name).region) {
             //Case 2A: in current city?
             report.fire('click');
-            history.pushState({city: city_name, report_id: self.reportid}, 'city', "map/" + city_name + "/" + self.reportid);
             self.selected_city = city_name;
+            if (push_state) {
+              history.pushState({city: city_name, report_id: self.reportid}, 'city', "map/" + city_name + "/" + self.reportid);
+            }
           } else {
             //Case 2B: fly to city with report id
             var queryReportCity = self.utility.parseCityName(reportRegion, self.cities);
@@ -90,25 +94,33 @@ export class DisasterMap {
               self.layers.addSingleReport(self.reportid)
               .then(queriedReport => {
                 queriedReport.fire('click');
-                history.pushState({city: queryReportCity, report_id: self.reportid}, 'city', "map/" + queryReportCity + "/" + self.reportid);
                 self.selected_city = queryReportCity;
+                if (push_state) {
+                  history.pushState({city: queryReportCity, report_id: self.reportid}, 'city', "map/" + queryReportCity + "/" + self.reportid);
+                }
               });
             });
           }
         }).catch(() => {
           self.utility.noReportNotification(city_name, self.reportid);
-          history.pushState({city: city_name, report_id: null}, 'city', "map/" + city_name);
           self.selected_city = city_name;
           self.reportid = null;
+          if (push_state) {
+            history.pushState({city: city_name, report_id: null}, 'city', "map/" + city_name);
+          }
         });
       } else if (!self.reportid) {
         if (self.utility.parseCityObj(city_name).region === 'java') {
           self.utility.noReportNotification(null, null);
-          history.pushState({city: null, report_id: null}, 'city', "map");
           self.selected_city = null;
+          if (push_state) {
+            history.pushState({city: null, report_id: null}, 'city', "map");
+          }
         } else {
-          history.pushState({city: city_name, report_id: null}, 'city', "map/" + city_name);
           self.selected_city = city_name;
+          if (push_state) {
+            history.pushState({city: city_name, report_id: null}, 'city', "map/" + city_name);
+          }
         }
       }
     }).catch(() => {
@@ -171,5 +183,14 @@ export class DisasterMap {
     if (self.querycity) {
       self.viewReports(self.querycity, true);
     }
+
+    //If user navigates through history, load city as per stateObj, but do not register new pushState
+    window.onpopstate = (e) => {
+      if (e.state.city !== null) {
+        this.viewReports(e.state.city, false);
+      } else {
+        this.viewReports(null, false);
+      }
+    };
   }
 }
