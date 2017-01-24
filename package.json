@@ -17,7 +17,6 @@
     "aurelia-animator-css": "^1.0.0",
     "aurelia-bootstrapper": "^1.0.0",
     "aurelia-fetch-client": "^1.0.1",
-    "aurelia-google-analytics": "^1.0.4",
     "aurelia-http-client": "^1.0.3",
     "aurelia-i18n": "^1.2.1",
     "bluebird": "^3.4.1",
