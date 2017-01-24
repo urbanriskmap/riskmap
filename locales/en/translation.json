@@ -48,7 +48,7 @@
     "p2": "The platform adopts a “people are the best sensors” paradigm, where confirmed reports are collected directly from the users at street level in a manner that removes expensive and time-consuming data processing. This framework creates accurate, real-time data which is immediately made available for users and first responders.",
     "p3": "PetaBencana.id gathers, sorts, and visualizes data using specially developed CogniCity Open Source Software - an enterprise-level platform for emergency response and disaster management - to transforms the noise of social and digital media into critical information for residents, communities, and government agencies.",
     "partners": "Partners:",
-    "mapCredits": "Map credits:",
+    "mapCredits": "Basemap tiles:",
     "privacy": "Privacy:",
     "disclaimer": "We do not store any information about users. Information derived from location-enabled mobile devices is mapped in real-time; this information is available through an open API for additional applications."
   },
