@@ -12,6 +12,7 @@ export class DisasterMap {
   //start-non-standard
   @bindable querycity;
   @bindable reportid;
+  @bindable resetTab;
   //end-non-standard
 
   constructor(MapLayers, MapUtility) {
@@ -28,9 +29,6 @@ export class DisasterMap {
     var self = this;
     if (action === 'hide') {
       $(ref).fadeOut(200);
-      if ($(window).width() < 620) {
-        $('#logo_bottom').show();
-      }
       if (ref === '#infoPane') {
         if (clear_selection) {
           self.reportid = null;
@@ -44,10 +42,6 @@ export class DisasterMap {
         $('.menuBtn').toggleClass("active");
       }
     } else if (action === 'show') {
-      $(ref).fadeIn(200);
-      if ($(window).width() < 620) {
-        $('#logo_bottom').hide();
-      }
       if (ref === '#infoPane') {
         if ($('#closeSidePane').hasClass("active")) {
           $('.menuBtn').toggleClass("active");
@@ -57,9 +51,11 @@ export class DisasterMap {
           $('#chart-pane').empty();
         }
       } else if (ref === '#sidePane') {
+        self.resetTab('map');
         $('.menuBtn').toggleClass("active");
         self.togglePane('#infoPane', 'hide', true);
       }
+      $(ref).fadeIn(200);
     }
   }
 
