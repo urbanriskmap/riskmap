@@ -36,6 +36,7 @@ export class DisasterMap {
           if (self.layers.selected_report) {
             self.layers.selected_report.target.setIcon(self.layers.mapIcons.report_normal);
             self.layers.selected_report = null;
+            self.layers.popupContent = null;
           }
         }
       } else if (ref === '#sidePane') {
