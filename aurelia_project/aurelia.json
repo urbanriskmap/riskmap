@@ -149,7 +149,7 @@
           {
             "name": "chart",
             "path": "../node_modules/chart.js/dist",
-            "main": "chart.bundle"
+            "main": "Chart.bundle"
           },
           {
             "name": "leaflet",
