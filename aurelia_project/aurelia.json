@@ -147,6 +147,11 @@
             "env": "local"
           },
           {
+            "name": "aurelia-google-analytics",
+            "path": "../node_modules/aurelia-google-analytics/dist",
+            "main": "analytics"
+          },
+          {
             "name": "chart",
             "path": "../node_modules/chart.js/dist",
             "main": "chart.bundle"
