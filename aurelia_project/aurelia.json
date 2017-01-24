@@ -123,7 +123,6 @@
           "aurelia-task-queue",
           "aurelia-templating",
           "aurelia-templating-binding",
-          "aurelia-google-analytics",
           "text",
           {
             "name": "aurelia-templating-resources",
@@ -146,6 +145,11 @@
             "path": "../node_modules/aurelia-testing/dist/amd",
             "main": "aurelia-testing",
             "env": "local"
+          },
+          {
+            "name": "aurelia-google-analytics",
+            "path": "../node_modules/aurelia-google-analytics/dist",
+            "main": "analytics"
           },
           {
             "name": "chart",

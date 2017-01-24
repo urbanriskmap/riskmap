@@ -25,6 +25,7 @@ export function configure(aurelia) {
                 enabled: false // Set to `false` to disable in non-production environments.
             }
     });
+  });
 
   if (environment.debug) {
     aurelia.use.developmentLogging();
