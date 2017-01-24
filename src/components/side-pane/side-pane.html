@@ -27,16 +27,31 @@
         ${city}
         <br>
       </label>
-      <p>${locale.legend.flood_gauges}</p>
-      <table repeat.for="level of gauge_levels">
+
+      <table>
         <tr>
-          <td><img src.bind="level.icon" height="30"></td><td><label>${level.text[selLanguage]}</label></td>
+          <p>${locale.legend.flood_gauges}</p>
+        </tr>
+        <tr repeat.for="level of gauge_levels">
+          <td>
+            <img src.bind="level.icon" height="30">
+          </td>
+          <td>
+            <label>${level.text[selLanguage]}</label>
+          </td>
         </tr>
       </table>
-      <p>${locale.legend.flood_depth}</p>
-      <table repeat.for="height of flood_depth">
+
+      <table>
         <tr>
-          <td style.bind="'width:20px; background-color: ' + height.color"></td><td><label>${height.text[selLanguage]}</label></td>
+          <p>${locale.legend.flood_depth}</p>
+        </tr>
+        <tr repeat.for="height of flood_depth">
+          <td style.bind="'width:20px; background-color: ' + height.color">
+          </td>
+          <td>
+            <label>${height.text[selLanguage]}</label>
+          </td>
         </tr>
       </table>
     </div>
@@ -92,41 +107,49 @@
               <p>${locale.info_content.partners}</p>
             </td>
           </tr>
-          <tr class="logos">
-            <td colspan="2">
-              <a href="https://www.usaid.gov/">
-                <img class="partnerLogo1" src="assets/graphics/USAID-logo.png">
-              </a>
-            </td>
+          <tr>
             <td colspan="2">
               <a href="http://www.bnpb.go.id/">
-                <img class="partnerLogo1" src="assets/graphics/bnpb_logo.png">
-              </a>
-            </td>
-          </tr>
-          <tr class="logos">
-            <td colspan="2">
-              <a href="https://hotosm.org/">
-                <img class="partnerLogo1" src="assets/graphics/Hot_logo.png">
-              </a>
-            </td>
-            <td colspan="2">
-              <a href="http://www.pdc.org/">
-                <img class="partnerLogo1" src="assets/graphics/pcd_logo.png">
+                <img class="partnerLogo" src="assets/graphics/bnpb_logo.png">
               </a>
             </td>
           </tr>
           <tr class="logos">
             <td>
+              <a href="https://www.usaid.gov/">
+                <img class="partnerLogo" src="assets/graphics/USAID-logo.png">
+              </a>
+            </td>
+            <td>
+              <a href="https://hotosm.org/">
+                <img class="partnerLogo" src="assets/graphics/Hot_logo.png">
+              </a>
+            </td>
+          </tr>
+          <tr class="logos">
+            <td>
+              <a href="http://www.pdc.org/">
+                <img class="partnerLogo" src="assets/graphics/pcd_logo.png">
+              </a>
+            </td>
+            <td>
               <a href="http://www.qlue.co.id/">
-                <img class="partnerLogo2" src="assets/graphics/qlue_logo.png">
+                <img class="partnerLogo" src="assets/graphics/qlue_logo.png">
               </a>
             </td>
-            <td colspan="2">
+          </tr>
+          <tr class="logos">
+            <td>
               <a href="https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need">
-                <img class="partnerLogo2" src="assets/graphics/zAlert_logo.png">
+                <img class="partnerLogo" src="assets/graphics/zAlert_logo.png">
               </a>
             </td>
+            <td>
+              <a href="http://pasangmata.detik.com/">
+                <img class="partnerLogo" src="assets/graphics/pasang_logo.png">
+              </a>
+            </td>
+          </tr>
         </table>
       </div>
       <p innerhtml.bind="locale.info_content.p1"></p>
