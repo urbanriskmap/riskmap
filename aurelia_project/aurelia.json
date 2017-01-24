@@ -123,6 +123,7 @@
           "aurelia-task-queue",
           "aurelia-templating",
           "aurelia-templating-binding",
+          "aurelia-google-analytics",
           "text",
           {
             "name": "aurelia-templating-resources",
