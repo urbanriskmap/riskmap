@@ -5,5 +5,6 @@ export default {
   data_server: 'https://data-dev.petabencana.id/',
   app: 'https://dev.petabencana.id/',
   default_language: 'en',
-  supported_languages: ['en', 'id']
+  supported_languages: ['en', 'id'],
+  enable_test_cardid: true 
 };

@@ -12,7 +12,8 @@ export class Config {
   constructor() {
     this.cards = {
       "data_server" : env.data_server,
-      "tile_layer": env.tile_layer
+      "tile_layer": env.tile_layer,
+      "enable_test_cardid": env.enable_test_cardid
     };
 
     this.map = {

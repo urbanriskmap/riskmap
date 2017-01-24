@@ -12,6 +12,7 @@ export class Cards {
   constructor(ea, ReportCard, Config) {
     this.ea = ea;
     this.datasrc = Config.cards.data_server;
+    this.testCard = Config.cards.enable_test_cardid;
     this.reportcard = ReportCard;
     this.locale = this.reportcard.locale;
   }
@@ -74,8 +75,9 @@ export class Cards {
     var self = this;
     let client = new HttpClient();
 
-    //DEV - TEST report id
-    if (this.id !== 'test123') {
+    // Escape test in dev & local environment for 'test123'
+    //_______is Prod____________otl:test123_______
+    if (!this.testCard || this.id !== 'test123') {
       //Navigate to location card OR error card, then resize card height to fill screen
       client.get(this.datasrc + 'cards/' + this.id)
       .then(response => {
