@@ -12,7 +12,7 @@ export function configure(aurelia) {
   aurelia.use
   .standardConfiguration();
 
-  aurelia.use.plugin('aurelia-google-analytics', config => {
+  /*aurelia.use.plugin('aurelia-google-analytics', config => {
         config.init('UA-46996603-3');
         config.attach({
             logging: {
@@ -25,7 +25,7 @@ export function configure(aurelia) {
                 enabled: false // Set to `false` to disable in non-production environments.
             }
     });
-  });
+  });*/
 
   if (environment.debug) {
     aurelia.use.developmentLogging();
