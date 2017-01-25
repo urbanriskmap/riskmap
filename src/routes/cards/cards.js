@@ -11,10 +11,14 @@ import {ReportCard} from 'resources/report-card';
 export class Cards {
   constructor(ea, ReportCard, Config) {
     this.ea = ea;
-    this.datasrc = Config.cards.data_server;
-    this.testCard = Config.cards.enable_test_cardid;
+    this.data_src = Config.cards.data_server;
+    this.test_card = Config.cards.enable_test_cardid;
     this.reportcard = ReportCard;
     this.locale = this.reportcard.locale;
+    this.region_bounds = {};
+    for (let city in Config.map.instance_regions) {
+      this.region_bounds[city] = Config.map.instance_regions[city].bounds;
+    }
   }
 
   configureRouter(config, router) {
@@ -77,9 +81,9 @@ export class Cards {
 
     // Escape test in dev & local environment for 'test123'
     //_______is Prod____________otl:test123_______
-    if (!this.testCard || this.id !== 'test123') {
+    if (!this.test_card || this.id !== 'test123') {
       //Navigate to location card OR error card, then resize card height to fill screen
-      client.get(this.datasrc + 'cards/' + this.id)
+      client.get(this.data_src + 'cards/' + this.id)
       .then(response => {
          var msg = JSON.parse(response.response);
          // card already exists
@@ -119,7 +123,7 @@ export class Cards {
     });
 
     this.ea.subscribe('submit', report => {
-      client.put(self.datasrc + 'cards/' + self.id, report)
+      client.put(self.data_src + 'cards/' + self.id, report)
       .then(response => {
         // now/also, send the image.
         if (self.photoToUpload) {
@@ -127,7 +131,7 @@ export class Cards {
 
           let client = new HttpClient()
           .configure(x => {
-            x.withBaseUrl(self.datasrc); //REPLACE with aws s3 response url?
+            x.withBaseUrl(self.data_src); //REPLACE with aws s3 response url?
             x.withHeader('Content-Type', self.photoToUpload.type);
           });
           client.post('cards/' + self.id + '/images', self.photoToUpload)
@@ -150,6 +154,13 @@ export class Cards {
         // resolve(null);
       });
     });
+
+    self.ea.subscribe('size', error => {
+      this.showNotification(error, 'photo_1', 'photo_1');
+    });
+    self.ea.subscribe('upload', error => {
+      this.showNotification(error, 'photo_2', 'photo_2');
+    });
   }
 
   get count() { //TODO navigation does not work unless getter is called from the DOM or elsewhere in js;
@@ -160,9 +171,40 @@ export class Cards {
     this.cardNo = this.count + val;
   }
 
+  isLocationSupported() {
+    var self = this,
+        l = self.reportcard.location.markerLocation,
+        supported = false;
+    for (let city in self.region_bounds) {
+      if (l.latitude > self.region_bounds[city].sw[0] && l.longitude > self.region_bounds[city].sw[1] && l.latitude < self.region_bounds[city].ne[0] && l.longitude < self.region_bounds[city].ne[1]) {
+        supported = true;
+        break;
+      }
+    }
+    return supported;
+  }
+
+  showNotification(type, header, message) {
+    var self = this;
+    self.notify_type = type;
+    self.notify_header = header;
+    self.notify_message = message;
+    $('#notifyWrapper').slideDown(300).delay(5000).slideUp(300, () => {
+      self.notify_type = null;
+      self.notify_header = null;
+      self.notify_message = null;
+    });
+    self.location_check = true; // execute once
+  }
+
   nextCard() {
-    if (this.cardNo < this.totalCards) {
-      this.count = 1;
+    if (this.cardNo === 1 && !this.isLocationSupported() && !this.location_check) {
+      this.showNotification('warning', 'location_1', 'location_1');
+    } else if (this.cardNo === 1 && this.location_check) {
+      this.count = 1; //count setter to increment cardNo by 1
+      this.router.navigate(this.router.routes[this.cardNo].route);
+    } else if (this.cardNo !== 1 && this.cardNo < this.totalCards) {
+      this.count = 1; //count setter to increment cardNo by 1
       this.router.navigate(this.router.routes[this.cardNo].route);
     }
   }
@@ -174,7 +216,7 @@ export class Cards {
   }
 
   get nextDisabled() {
-    if (this.cardNo === 1) { //Disables next button until map is loaded
+    if (this.cardNo === 1) {
       return !this.reportcard.location.markerLocation;
     } else {
       return this.cardNo >= this.totalCards - 3;

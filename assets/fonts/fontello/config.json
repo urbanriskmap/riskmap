@@ -199,6 +199,18 @@
       "css": "telegram",
       "code": 62150,
       "src": "fontawesome"
+    },
+    {
+      "uid": "b035c28eba2b35c6ffe92aee8b0df507",
+      "css": "attention-circled",
+      "code": 59411,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "c759418c008e9562944080fee617fc76",
+      "css": "cancel-circled",
+      "code": 59410,
+      "src": "entypo"
     }
   ]
 }

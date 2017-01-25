@@ -8,6 +8,18 @@
     "5": "Review & submit",
     "6": "Terms & Conditions"
   },
+  "notification": {
+    "header": {
+      "location_1": "Unsupported city",
+      "photo_1": "Size limit exceeded",
+      "photo_2": "Unsupported browser"
+    },
+    "message": {
+      "location_1": "Supported cities: Jakarta, Surabaya & Bandung.<br>Reports marked outside these cities will not show on the map.",
+      "photo_1": "Selected photo exceeds size limit of 4.2mb",
+      "photo_2": "Photo upload is not supported by your browser"
+    }
+  },
   "web_menu": {
     "tab_names": {
       "map": "map",
@@ -66,7 +78,6 @@
     "agreement_title": "PetaBencana.id Contributors Agreement",
     "more_details_required": "Description or Photo required to submit report",
     "swipe": "Swipe to submit",
-    "photo_too_large": "File size exceeds limit of 4.2mb",
     "thanks": "Thank you for your report",
     "redirect": "Redirecting to PetaBencana.id",
     "next": "NEXT",

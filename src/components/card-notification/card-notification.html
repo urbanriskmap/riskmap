@@ -1,0 +1,13 @@
+<template>
+  <require from="./card-notification.css"></require>
+  <div id="notifyWrapper">
+    <div id="symbol">
+      <i class="icon-attention-circled" if.bind="type === 'warning'"></i>
+      <i class="icon-cancel-circled" if.bind="type === 'error'"></i>
+    </div>
+    <div id="msg">
+      <h3>${locale.notification.header[header]}</h3>
+      <p innerhtml.bind="locale.notification.message[message]"><p>
+    </div>
+  </div>
+</template>

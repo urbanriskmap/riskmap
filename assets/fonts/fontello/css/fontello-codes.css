@@ -17,6 +17,8 @@
 .icon-cw-1:before { content: '\e80f'; } /* '' */
 .icon-banjir-pin:before { content: '\e810'; } /* '' */
 .icon-report:before { content: '\e811'; } /* '' */
+.icon-cancel-circled:before { content: '\e812'; } /* '' */
+.icon-attention-circled:before { content: '\e813'; } /* '' */
 .icon-spin4:before { content: '\e834'; } /* '' */
 .icon-menu:before { content: '\f0c9'; } /* '' */
 .icon-angle-double-right:before { content: '\f101'; } /* '' */
