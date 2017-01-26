@@ -67,7 +67,7 @@ export class DisasterMap {
     .then(() => {
       if (self.reportid && self.layers.activeReports.hasOwnProperty(self.reportid)) {
         //Case 1: Active report id in current city
-        if (self.layers.activeReports[self.reportid].instance_region_code === self.utility.parseCityObj(city_name)) {
+        if (self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code === self.utility.parseCityObj(city_name).region) {
           self.layers.activeReports[self.reportid].fire('click');
           self.selected_city = city_name;
           if (push_state) {
