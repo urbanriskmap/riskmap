@@ -191,6 +191,7 @@ export class Cards {
   isLocationSupported() {
     var self = this,
         l = self.reportcard.location.markerLocation;
+    self.reportcard.location.supported = false;
     for (let city in self.region_bounds) {
       if (l.lat > self.region_bounds[city].sw[0] && l.lng > self.region_bounds[city].sw[1] && l.lat < self.region_bounds[city].ne[0] && l.lng < self.region_bounds[city].ne[1]) {
         self.reportcard.location.supported = true;
@@ -202,7 +203,7 @@ export class Cards {
 
   nextCard() {
     if (this.cardNo === 1) {
-      if (this.location_check || this.isLocationSupported()) {
+      if (this.isLocationSupported() || this.location_check) {
         this.count = 1; //count setter to increment cardNo by 1
         this.router.navigate(this.router.routes[this.cardNo].route);
       }
