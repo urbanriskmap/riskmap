@@ -114,15 +114,15 @@ export class Cards {
       self.router.navigate('location', {replace: true});
     }
 
-    this.ea.subscribe('readTerms', msg => {
+    self.ea.subscribe('readTerms', msg => {
       self.router.navigate('terms');
     });
 
-    this.ea.subscribe('image', fileList => {
+    self.ea.subscribe('image', fileList => {
       self.photoToUpload = fileList[0];
     });
 
-    this.ea.subscribe('submit', report => {
+    self.ea.subscribe('submit', report => {
       client.put(self.data_src + 'cards/' + self.id, report)
       .then(response => {
         // now/also, send the image.
@@ -155,12 +155,29 @@ export class Cards {
       });
     });
 
-    self.ea.subscribe('size', error => {
-      this.showNotification(error, 'photo_1', 'photo_1');
+    self.ea.subscribe('geolocate', error => {
+      self.showNotification(error, 'location_1', 'location_1');
     });
     self.ea.subscribe('upload', error => {
-      this.showNotification(error, 'photo_2', 'photo_2');
+      self.showNotification(error, 'photo_2', 'photo_2');
     });
+    self.ea.subscribe('size', error => {
+      self.showNotification(error, 'photo_1', 'photo_1');
+    });
+  }
+
+  showNotification(type, header, message) {
+    var self = this;
+    self.notify_type = type;
+    self.notify_header = header;
+    self.notify_message = message;
+    if (!$('#notifyWrapper').hasClass('active')) {
+      $('#notifyWrapper').slideDown(300, () => {
+        $('#notifyWrapper').addClass('active');
+      }).delay(5000).slideUp(300, () => {
+        $('#notifyWrapper').removeClass('active');
+      });
+    }
   }
 
   get count() { //TODO navigation does not work unless getter is called from the DOM or elsewhere in js;
@@ -173,36 +190,26 @@ export class Cards {
 
   isLocationSupported() {
     var self = this,
-        l = self.reportcard.location.markerLocation,
-        supported = false;
+        l = self.reportcard.location.markerLocation;
     for (let city in self.region_bounds) {
-      if (l.latitude > self.region_bounds[city].sw[0] && l.longitude > self.region_bounds[city].sw[1] && l.latitude < self.region_bounds[city].ne[0] && l.longitude < self.region_bounds[city].ne[1]) {
-        supported = true;
+      if (l.lat > self.region_bounds[city].sw[0] && l.lng > self.region_bounds[city].sw[1] && l.lat < self.region_bounds[city].ne[0] && l.lng < self.region_bounds[city].ne[1]) {
+        self.reportcard.location.supported = true;
         break;
       }
     }
-    return supported;
-  }
-
-  showNotification(type, header, message) {
-    var self = this;
-    self.notify_type = type;
-    self.notify_header = header;
-    self.notify_message = message;
-    $('#notifyWrapper').slideDown(300).delay(5000).slideUp(300, () => {
-      self.notify_type = null;
-      self.notify_header = null;
-      self.notify_message = null;
-    });
-    self.location_check = true; // execute once
+    return self.reportcard.location.supported;
   }
 
   nextCard() {
-    if (this.cardNo === 1 && !this.isLocationSupported() && !this.location_check) {
-      this.showNotification('warning', 'location_1', 'location_1');
-    } else if (this.cardNo === 1 && this.location_check) {
-      this.count = 1; //count setter to increment cardNo by 1
-      this.router.navigate(this.router.routes[this.cardNo].route);
+    if (this.cardNo === 1) {
+      if (this.location_check || this.isLocationSupported()) {
+        this.count = 1; //count setter to increment cardNo by 1
+        this.router.navigate(this.router.routes[this.cardNo].route);
+      }
+      if (!this.location_check && !this.isLocationSupported()) {
+        this.showNotification('warning', 'location_2', 'location_2');
+        this.location_check = true; // execute once
+      }
     } else if (this.cardNo !== 1 && this.cardNo < this.totalCards) {
       this.count = 1; //count setter to increment cardNo by 1
       this.router.navigate(this.router.routes[this.cardNo].route);

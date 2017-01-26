@@ -25,7 +25,7 @@ export class ReportCard {
     //initial language, TODO: set using detected browser language
     self.selLanguage = env.default_language;
     self.languages = env.supported_languages;
-    self.location = {markerLocation: null, gpsLocation: null, accuracy: null};
+    self.location = {markerLocation: null, gpsLocation: null, accuracy: null, supported: false};
     self.depth = null;
     self.photo = {file: null, rotation: 0};
     self.description = {value: null};

@@ -2,12 +2,14 @@ import {Config} from 'resources/config'; // Cards config
 import * as L from 'leaflet';
 import {inject} from 'aurelia-framework';
 import {ReportCard} from 'resources/report-card';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 //start-non-standard
-@inject(ReportCard, Config)
+@inject(EventAggregator, ReportCard, Config)
 //end-non-standard
 export class Location {
-  constructor(ReportCard, Config) {
+  constructor(EventAggregator, ReportCard, Config) {
+    this.ea = EventAggregator;
     this.reportcard = ReportCard;
     this.tileLayer = Config.cards.tile_layer;
   }
@@ -34,7 +36,7 @@ export class Location {
       var self = this;
 
       //Add leaflet map
-      var cardMap = L.map('mapWrapper', {
+      self.map = L.map('mapWrapper', {
         attributionControl: false,
         center: [-6.1754, 106.8271],
         zoom: 15
@@ -42,7 +44,7 @@ export class Location {
       L.tileLayer(self.tileLayer, {
         detectRetina: true,
         ext: 'png'
-      }).addTo(cardMap);
+      }).addTo(self.map);
 
       //Add custom leaflet control, to navigate back to browser located user location
       L.Control.GeoLocate = L.Control.extend({
@@ -58,7 +60,7 @@ export class Location {
           container.style.height = '30px';
           container.onclick = function() {
             if (self.reportcard.location.gpsLocation) {
-              cardMap.flyTo(self.reportcard.location.gpsLocation, 16);
+              self.map.flyTo(self.reportcard.location.gpsLocation, 16);
             }
           };
           return container;
@@ -70,35 +72,36 @@ export class Location {
 
       //If previous inputs available, setView to user selected location
       if (self.reportcard.location.markerLocation) {
-        cardMap.setView(self.reportcard.location.markerLocation, 15);
+        self.map.setView(self.reportcard.location.markerLocation, 15);
         //If previous geolocation inputs available, add circle markers at gps location
         if (self.reportcard.location.gpsLocation) {
-          L.control.geoLocate({position: 'bottomright'}).addTo(cardMap);
-          self.drawGpsMarkers(self.reportcard.location.gpsLocation, self.reportcard.location.accuracy, cardMap);
+          L.control.geoLocate({position: 'bottomright'}).addTo(self.map);
+          self.drawGpsMarkers(self.reportcard.location.gpsLocation, self.reportcard.location.accuracy, self.map);
         }
       } else if (!!navigator.geolocation) {
         //If previous inputs unavailable, i.e. at session start; try geolocation if supported by browser
-        cardMap.locate({
+        self.map.locate({
           setView: true
         });
-        cardMap.on('locationfound', (e) => {
-          L.control.geoLocate({position: 'bottomright'}).addTo(cardMap);
-          self.drawGpsMarkers(e.latlng, e.accuracy, cardMap);
+        self.map.on('locationfound', (e) => {
+          L.control.geoLocate({position: 'bottomright'}).addTo(self.map);
+          self.drawGpsMarkers(e.latlng, e.accuracy, self.map);
           self.reportcard.location = {markerLocation: e.latlng, gpsLocation: e.latlng, accuracy: e.accuracy};
         });
         //If geolocation unavailable, go to default city center;
-        cardMap.on('locationerror', () => {
-          self.reportcard.location.markerLocation = cardMap.getCenter();
+        self.map.on('locationerror', () => {
+          self.reportcard.location.markerLocation = self.map.getCenter();
+          self.ea.publish('geolocate', 'error');
         });
       } else {
         //Go to default city center if geolocation not supported by browser
-        self.reportcard.location.markerLocation = cardMap.getCenter();
+        self.reportcard.location.markerLocation = self.map.getCenter();
       }
 
       //Get map center (corresponding to overlaid marker image) if user pans map
-      cardMap.on('moveend', function () {
-        if (cardMap) {
-          self.reportcard.location.markerLocation = cardMap.getCenter();
+      self.map.on('moveend', () => {
+        if (self.map) {
+          self.reportcard.location.markerLocation = self.map.getCenter();
         }
       });
     });

@@ -10,12 +10,14 @@
   },
   "notification": {
     "header": {
-      "location_1": "Unsupported city",
+      "location_1": "GPS location error",
+      "location_2": "Unsupported city",
       "photo_1": "Size limit exceeded",
       "photo_2": "Unsupported browser"
     },
     "message": {
-      "location_1": "Supported cities: Jakarta, Surabaya & Bandung.<br>Reports marked outside these cities will not show on the map.",
+      "location_1": "Drag map to pick a location",
+      "location_2": "Supported cities: Jakarta, Surabaya & Bandung.<br>Reports marked outside these cities will not show on the map.",
       "photo_1": "Selected photo exceeds size limit of 4.2mb",
       "photo_2": "Photo upload is not supported by your browser"
     }
