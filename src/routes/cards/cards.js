@@ -55,6 +55,11 @@ export class Cards {
     });
   }
 
+  logUserAgent() {
+    var nua = navigator.userAgent.toLowerCase();
+    alert(nua);
+  }
+
   attached() {
     var nua = navigator.userAgent.toLowerCase();
     //______________is Mobile______________________an iPhone_________________browser not safari (in-app)____

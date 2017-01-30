@@ -3,6 +3,9 @@
   <require from="../../components/card-notification/card-notification"></require>
   <div id="cardWrapper">
     <div id="cardTitle" if.bind="(count < 7)">
+      <div id="alert" if.bind="test_card" click.trigger="logUserAgent()">
+        <p><i class="icon-attention-circled"></i></p>
+      </div>
       <p id="titleText">${locale.card_titles[count]}</p>
       <div id="langSwitch">
         <label repeat.for="language of reportcard.languages" id.bind="language" class="langLabels">
