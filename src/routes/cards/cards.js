@@ -50,24 +50,20 @@ export class Cards {
   }
 
   resizeCardHt(factor) {
+    var glitchHeight = 106;
     $('#cardContent').css({
-      'height': $('#cardWrapper').height() - ($('#cardTitle').height() + $('#cardNavigation').height() + (factor * 100)) + 'px'
+      'height': $('#cardWrapper').height() - ($('#cardTitle').height() + $('#cardNavigation').height() + (factor * glitchHeight)) + 'px'
     });
     $('#cardNavigation').css({
-      'bottom': (factor * 100) + 'px'
+      'bottom': (factor * glitchHeight) + 'px'
     });
   }
 
   attached() {
     var nua = navigator.userAgent.toLowerCase();
-    //______________is Mobile______________________an iPhone_________________browser not safari (in-app)____
-    if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1) {
-      //Execute resize on initial page load
+    //______________is Mobile______________________an iPhone_________________browser not safari (in-app)___________app is twitter________________app is facebook______________not facebook messenger_________
+    if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1 && (nua.indexOf('twitter') > -1 || (nua.indexOf('fban') > -1 && nua.indexOf('messenger') === -1))) {
       this.resizeCardHt(1);
-      //Add resize listener to browser window
-      //$(window).resize(() => {
-        //this.resizeCardHt(1);
-      //});
     } else {
       //Execute resize on initial page load
       this.resizeCardHt(0);
