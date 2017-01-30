@@ -193,7 +193,7 @@ export class Cards {
     } else {
       inAppCheck = 'No!';
     }
-    this.showNotification('warning', 'User agent', nua + "; in-App browser = " + safariId, true);
+    this.showNotification('warning', 'User agent', nua + "; in-App browser = " + inAppCheck, true);
   }
 
   get count() { //TODO navigation does not work unless getter is called from the DOM or elsewhere in js;
