@@ -65,10 +65,9 @@ export class Cards {
         'bottom': 50 + 'px'
       });
       //Add resize listener to browser window
-      $(window).resize(() => {
-        this.resizeCardHt(1);
-      });
-
+      //$(window).resize(() => {
+        //this.resizeCardHt(1);
+      //});
     } else {
       //Execute resize on initial page load
       this.resizeCardHt(0);
