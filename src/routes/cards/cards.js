@@ -49,9 +49,9 @@ export class Cards {
     $('#' + lang).addClass("active");
   }
 
-  resizeCardHt() {
+  resizeCardHt(factor) {
     $('#cardContent').css({
-      'height': $('#cardWrapper').height() - ($('#cardTitle').height() + $('#cardNavigation').height()) + 'px'
+      'height': $('#cardWrapper').height() - ($('#cardTitle').height() + (factor * $('#cardNavigation').height())) + 'px'
     });
   }
 
@@ -59,17 +59,20 @@ export class Cards {
     var nua = navigator.userAgent.toLowerCase();
     //______________is Mobile______________________an iPhone_________________browser not safari (in-app)____
     if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1) {
-      // Double height for bottom navigation bar, due to floating browser bar in telegram / twitter app browsers
-      $('#cardNavigation').height(100);
+      //Execute resize on initial page load
+      this.resizeCardHt(2);
+      //Add resize listener to browser window
+      $(window).resize(() => {
+        this.resizeCardHt(2);
+      });
+    } else {
+      //Execute resize on initial page load
+      this.resizeCardHt(1);
+      //Add resize listener to browser window
+      $(window).resize(() => {
+        this.resizeCardHt(1);
+      });
     }
-
-    //Execute resize on initial page load
-    this.resizeCardHt();
-
-    //Add resize listener to browser window
-    $(window).resize(() => {
-      this.resizeCardHt();
-    });
 
     this.totalCards = this.router.routes.length - 1; //exclude (route:'', redirect:'location')
     $('#' + this.reportcard.selLanguage).addClass("active");
