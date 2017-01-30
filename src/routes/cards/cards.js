@@ -51,7 +51,7 @@ export class Cards {
 
   resizeCardHt(factor) {
     $('#cardContent').css({
-      'height': $('#cardWrapper').height() - ($('#cardTitle').height() + $('#cardNavigation').height() + (factor * 50)) + 'px'
+      'height': $('#cardWrapper').height() - ($('#cardTitle').height() + $('#cardNavigation').height() + (factor * 100)) + 'px'
     });
   }
 
