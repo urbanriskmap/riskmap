@@ -121,11 +121,10 @@
   bottom: 0px;
   width: 100%;
   height: 50px;
-  overflow: hidden; 
+  overflow: hidden;
   & .navBtn {
-    position: absolute;
+    position: relative;
     color: #ffffff;
-    top: 0px;
     width: 50%;
     height: 50px;
     font-family: "Roboto-Medium", "Roboto", Open Sans;
@@ -137,12 +136,9 @@
     z-index: 4;
     margin: 0px;
     padding: 0px;
+    float: left;
     &#prv {
-      left: 0px;
       border-right: 1px solid #808080;
-    }
-    &#nxt {
-      left: 50%;
     }
     &:disabled {
       color: #5e5e5e;

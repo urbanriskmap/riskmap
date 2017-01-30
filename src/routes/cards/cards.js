@@ -51,7 +51,7 @@ export class Cards {
 
   resizeCardHt(factor) {
     $('#cardContent').css({
-      'height': $('#cardWrapper').height() - ($('#cardTitle').height() + (factor * $('#cardNavigation').height())) + 'px'
+      'height': $('#cardWrapper').height() - ($('#cardTitle').height() + $('#cardNavigation').height() + (factor * 50)) + 'px'
     });
   }
 
@@ -60,17 +60,17 @@ export class Cards {
     //______________is Mobile______________________an iPhone_________________browser not safari (in-app)____
     if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1) {
       //Execute resize on initial page load
-      this.resizeCardHt(2);
-      //Add resize listener to browser window
-      $(window).resize(() => {
-        this.resizeCardHt(2);
-      });
-    } else {
-      //Execute resize on initial page load
       this.resizeCardHt(1);
       //Add resize listener to browser window
       $(window).resize(() => {
         this.resizeCardHt(1);
+      });
+    } else {
+      //Execute resize on initial page load
+      this.resizeCardHt(0);
+      //Add resize listener to browser window
+      $(window).resize(() => {
+        this.resizeCardHt(0);
       });
     }
 
