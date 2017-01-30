@@ -6,8 +6,10 @@
       <i class="icon-cancel-circled" if.bind="type === 'error'"></i>
     </div>
     <div id="msg">
-      <h3>${locale.notification.header[header]}</h3>
-      <p innerhtml.bind="locale.notification.message[message]"><p>
+      <h3 if.bind="!bespoke">${locale.notification.header[header]} Test</h3>
+      <h3 if.bind="bespoke">${header} Check</h3>
+      <p if.bind="!bespoke" innerhtml.bind="locale.notification.message[message]"></p>
+      <p if.bind="bespoke">${message} Check</p>
     </div>
   </div>
 </template>

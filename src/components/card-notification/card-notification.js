@@ -7,16 +7,9 @@ export class CardNotification {
   //@bindable attributes do not work with camelCase...
   //start-non-standard
   @bindable locale;
+  @bindable type;
   @bindable header;
   @bindable message;
-  @bindable type;
+  @bindable bespoke;
   //end-non-standard
-
-  get headerText() {
-    return this.locale.notification.header[this.header];
-  }
-
-  get messageText() {
-    return this.locale.notification.message[this.message];
-  }
 }

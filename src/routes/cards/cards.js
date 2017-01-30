@@ -55,11 +55,6 @@ export class Cards {
     });
   }
 
-  logUserAgent() {
-    var nua = navigator.userAgent.toLowerCase();
-    alert(nua);
-  }
-
   attached() {
     var nua = navigator.userAgent.toLowerCase();
     //______________is Mobile______________________an iPhone_________________browser not safari (in-app)____
@@ -161,21 +156,26 @@ export class Cards {
     });
 
     self.ea.subscribe('geolocate', error => {
-      self.showNotification(error, 'location_1', 'location_1');
+      self.showNotification(error, 'location_1', 'location_1', false);
     });
     self.ea.subscribe('upload', error => {
-      self.showNotification(error, 'photo_2', 'photo_2');
+      self.showNotification(error, 'photo_2', 'photo_2', false);
     });
     self.ea.subscribe('size', error => {
-      self.showNotification(error, 'photo_1', 'photo_1');
+      self.showNotification(error, 'photo_1', 'photo_1', false);
     });
   }
 
-  showNotification(type, header, message) {
+  showNotification(type, header, message, bespoke) {
     var self = this;
     self.notify_type = type;
     self.notify_header = header;
     self.notify_message = message;
+    if (bespoke) {
+      self.notify_custom = true;
+    } else {
+      self.notify_custom = false;
+    }
     if (!$('#notifyWrapper').hasClass('active')) {
       $('#notifyWrapper').slideDown(300, () => {
         $('#notifyWrapper').addClass('active');
@@ -183,6 +183,11 @@ export class Cards {
         $('#notifyWrapper').removeClass('active');
       });
     }
+  }
+
+  logUserAgent() {
+    var nua = navigator.userAgent.toLowerCase();
+    this.showNotification('warning', 'User agent', nua, true);
   }
 
   get count() { //TODO navigation does not work unless getter is called from the DOM or elsewhere in js;
@@ -213,7 +218,7 @@ export class Cards {
         this.router.navigate(this.router.routes[this.cardNo].route);
       }
       if (!this.location_check && !this.isLocationSupported()) {
-        this.showNotification('warning', 'location_2', 'location_2');
+        this.showNotification('warning', 'location_2', 'location_2', false);
         this.location_check = true; // execute once
       }
     } else if (this.cardNo !== 1 && this.cardNo < this.totalCards) {
