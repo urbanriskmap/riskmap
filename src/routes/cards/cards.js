@@ -181,7 +181,6 @@ export class Cards {
         $('#notifyWrapper').addClass('active');
       }).delay(5000).slideUp(300, () => {
         $('#notifyWrapper').removeClass('active');
-        self.nextCard();
       });
     }
   }
