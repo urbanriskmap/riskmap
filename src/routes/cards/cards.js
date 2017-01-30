@@ -60,12 +60,7 @@ export class Cards {
     //______________is Mobile______________________an iPhone_________________browser not safari (in-app)____
     if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1) {
       // Double height for bottom navigation bar, due to floating browser bar in telegram / twitter app browsers
-      $('#cardNavigation').css({
-        'height': 100 + 'px'
-      });
-      $('#cardTitle').css({
-        'background-color': 'red'
-      });
+      $('#cardNavigation').height(100);
     }
 
     //Execute resize on initial page load
@@ -184,19 +179,14 @@ export class Cards {
         $('#notifyWrapper').addClass('active');
       }).delay(5000).slideUp(300, () => {
         $('#notifyWrapper').removeClass('active');
+        self.nextCard();
       });
     }
   }
 
   logUserAgent() {
     var nua = navigator.userAgent.toLowerCase();
-    var inAppCheck = null;
-    if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1) {
-      inAppCheck = 'Yes!';
-    } else {
-      inAppCheck = 'No!';
-    }
-    this.showNotification('warning', 'User agent', nua + "; in-App = " + inAppCheck, true);
+    this.showNotification('warning', 'User agent', nua, true);
   }
 
   get count() { //TODO navigation does not work unless getter is called from the DOM or elsewhere in js;
