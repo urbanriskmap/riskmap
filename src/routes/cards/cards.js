@@ -63,6 +63,9 @@ export class Cards {
       $('#cardNavigation').css({
         'height': 100 + 'px'
       });
+      $('#cardTitle').css({
+        'background-color': 'red'
+      });
     }
 
     //Execute resize on initial page load
