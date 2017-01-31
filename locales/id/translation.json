@@ -11,15 +11,16 @@
   "notification": {
     "header": {
       "location_1": "Lokasi GPS bermasalah",
-      "location_2": "Unsupported city",
-      "photo_1": "Size limit exceeded",
-      "photo_2": "Unsupported browser"
+      "location_2": "Kota belum terjangkau",
+      "photo_1": "Ukuran terlalu besar",
+      "photo_2": "Browser tidak mendukung"
     },
     "message": {
-      "location_1": "Drag map to pick a location",
-      "location_2": "Supported cities: Jakarta, Surabaya & Bandung.<br>Reports marked outside these cities will not show on the map.",
-      "photo_1": "Selected photo exceeds size limit of 4.2mb",
-      "photo_2": "Photo upload is not supported by your browser"
+      "location_1": "Drag peta untuk memilih lokasi",
+      "location_2": "Cakupan wilayah: Jakarta, Surabaya, Bandung.
+Laporan dari luar area ini tidak dapat ditampilkan pada peta.",
+      "photo_1": "Foto yang dipilih melebihi kapasitas 4.2mb",
+      "photo_2": "Foto yang dipilih tidak didukung oleh browser"
     }
   },
   "web_menu": {
@@ -79,7 +80,7 @@
     "agreement_text": "Dengan mengirimkan laporan ini Anda setuju dengan",
     "agreement_title": "Kesepakatan Kontribusi PetaBencana.id",
     "more_details_required": "Deskripsi atau Foto diperlukan untuk melapor",
-    "location_check": "Unsupported location, report will not appear on map",
+    "location_check": "Lokasi tidak terbaca, laporan tidak dapat ditampilkan di peta",
     "swipe": "Geser",
     "thanks": "Terima kasih atas laporan Anda",
     "redirect": "Mengalihkan ke PetaBencana.id",
