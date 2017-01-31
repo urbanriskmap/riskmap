@@ -11,5 +11,10 @@ export class CardNotification {
   @bindable header;
   @bindable message;
   @bindable bespoke;
+  @bindable closeNotification;
   //end-non-standard
+
+  callClose() {
+    this.closeNotification();
+  }
 }

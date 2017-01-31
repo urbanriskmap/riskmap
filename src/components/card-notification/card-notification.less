@@ -4,7 +4,7 @@
   position: absolute;
   top: 0px;
   width: 100%;
-  padding-top: 18px;
+  padding: 18px 0 0 0;
   display: none;
   background-color: fade(@dark-gray, 80%);
   z-index: 1500;
@@ -35,5 +35,12 @@
       .bodylight-mixin(14px);
       color: @snow-white;
     }
+  }
+  & #closeNotification {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    .linklight-mixin(18px);
+    color: fade(@snow-white, 80%);
   }
 }

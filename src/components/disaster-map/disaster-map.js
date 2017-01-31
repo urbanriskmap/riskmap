@@ -52,7 +52,7 @@ export class DisasterMap {
           $('#chart-pane').empty();
         }
       } else if (ref === '#sidePane') {
-        self.resetTab('map');
+        self.resetTab('report');
         $('.menuBtn').toggleClass("active");
         self.togglePane('#infoPane', 'hide', true);
       }

@@ -175,12 +175,19 @@ export class Cards {
     } else {
       self.notify_custom = false;
     }
-    if (!$('#notifyWrapper').hasClass('active')) {
-      $('#notifyWrapper').slideDown(300, () => {
-        $('#notifyWrapper').addClass('active');
-      }).delay(5000).slideUp(300, () => {
-        $('#notifyWrapper').removeClass('active');
-      });
+    if ($('#notifyWrapper').hasClass('active')) {
+      $('#notifyWrapper').finish();
+    }
+    $('#notifyWrapper').slideDown(300, () => {
+      $('#notifyWrapper').addClass('active');
+    }).delay(5000).slideUp(300, () => {
+      $('#notifyWrapper').removeClass('active');
+    });
+  }
+
+  closeNotification() {
+    if ($('#notifyWrapper').hasClass('active')) {
+      $('#notifyWrapper').dequeue();
     }
   }
 
@@ -215,6 +222,7 @@ export class Cards {
       if (this.isLocationSupported() || this.location_check) {
         this.count = 1; //count setter to increment cardNo by 1
         this.router.navigate(this.router.routes[this.cardNo].route);
+        this.closeNotification();
       }
       if (!this.location_check && !this.isLocationSupported()) {
         this.showNotification('warning', 'location_2', 'location_2', false);
@@ -223,6 +231,7 @@ export class Cards {
     } else if (this.cardNo !== 1 && this.cardNo < this.totalCards) {
       this.count = 1; //count setter to increment cardNo by 1
       this.router.navigate(this.router.routes[this.cardNo].route);
+      this.closeNotification();
     }
   }
   prevCard() {

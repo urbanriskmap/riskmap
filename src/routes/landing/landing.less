@@ -42,6 +42,9 @@
     & .leaflet-control-zoom a {
       background-color: @snow-white;
     }
+    & .leaflet-bottom {
+      bottom: @bar-heights/2;
+    }
   }
 
   & #topBar {
@@ -62,7 +65,8 @@
       background: transparent;
       right: 10px;
       bottom: @bar-heights / 10;
-      .linkmedium-mixin(21px);
+      font-size: 28px;
+      color: @banjir-blue;
     }
     & div.active {
       display: block;

@@ -150,10 +150,9 @@ export class MapUtility {
     var self = this;
     var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
     container.innerHTML = '<i class="icon-geolocate"></i>';
-    container.style.fontSize = '21px';
+    container.style.fontSize = '22px';
     container.style.textAlign = 'center';
-    container.style.lineHeight = '28px';
-    container.style.color = 'black';
+    container.style.lineHeight = '30px';
     container.style.backgroundColor = 'white';
     container.style.width = '30px';
     container.style.height = '30px';
@@ -162,10 +161,4 @@ export class MapUtility {
     };
     return container;
   }
-
-  attached() {
-    var self = this;
-
-  }
-
 }

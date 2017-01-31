@@ -15,8 +15,8 @@ export class SidePane {
   //end-non-standard
 
   constructor() {
-    this.tabList = ["map", "report", "info"]; //elements match names of fontello icons
-    this.tab = "map";
+    this.tabList = ["report", "map", "info"]; //elements match names of fontello icons
+    this.tab = "report";
     this.languages = ["en", "id"];
     this.selLanguage = "id";
     this.locale = {};

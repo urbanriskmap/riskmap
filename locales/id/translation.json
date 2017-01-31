@@ -17,8 +17,7 @@
     },
     "message": {
       "location_1": "Drag peta untuk memilih lokasi",
-      "location_2": "Cakupan wilayah: Jakarta, Surabaya, Bandung.
-Laporan dari luar area ini tidak dapat ditampilkan pada peta.",
+      "location_2": "Cakupan wilayah: Jakarta, Surabaya, Bandung. Laporan dari luar area ini tidak dapat ditampilkan pada peta.",
       "photo_1": "Foto yang dipilih melebihi kapasitas 4.2mb",
       "photo_2": "Foto yang dipilih tidak didukung oleh browser"
     }
