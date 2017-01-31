@@ -53,7 +53,7 @@ export class Location {
           container.innerHTML = '<i class="icon-geolocate"></i>';
           container.style.fontSize = '21px';
           container.style.textAlign = 'center';
-          container.style.lineHeight = '28px';
+          container.style.lineHeight = '30px';
           container.style.color = 'black';
           container.style.backgroundColor = 'white';
           container.style.width = '30px';

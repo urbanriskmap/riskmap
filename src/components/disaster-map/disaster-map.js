@@ -150,7 +150,7 @@ export class DisasterMap {
 
     // Add scale control
     L.control.scale({
-      position: 'topright',
+      position: 'bottomright',
       metric: true,
       imperial: false
     }).addTo(self.map);
