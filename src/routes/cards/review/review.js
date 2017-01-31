@@ -9,8 +9,12 @@ export class Review {
   constructor(ReportCard, ea) {
     this.reportcard = ReportCard;
     this.ea = ea;
+    var description = "";
+    if (this.reportcard.description.value) {
+      description = this.reportcard.description.value;
+    }
     this.report = {
-      text: this.reportcard.description.value,
+      text: description,
       water_depth: Math.round(this.reportcard.depth),
       created_at: new Date().toISOString(),
       image_url: '',
