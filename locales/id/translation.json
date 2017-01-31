@@ -10,7 +10,7 @@
   },
   "notification": {
     "header": {
-      "location_1": "GPS location error",
+      "location_1": "Lokasi GPS bermasalah",
       "location_2": "Unsupported city",
       "photo_1": "Size limit exceeded",
       "photo_2": "Unsupported browser"
