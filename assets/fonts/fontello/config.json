@@ -67,12 +67,6 @@
       "src": "fontawesome"
     },
     {
-      "uid": "06301c50d89b5d3e651bd07ebd6d7de7",
-      "css": "cancel-2",
-      "code": 59400,
-      "src": "mfglabs"
-    },
-    {
       "uid": "c5fd349cbd3d23e4ade333789c29c729",
       "css": "watch",
       "code": 59403,
@@ -231,6 +225,12 @@
       "search": [
         "addreport"
       ]
+    },
+    {
+      "uid": "517522647a556192fbc78aa391b7b0c2",
+      "css": "cancel-circled-outline",
+      "code": 59400,
+      "src": "typicons"
     }
   ]
 }

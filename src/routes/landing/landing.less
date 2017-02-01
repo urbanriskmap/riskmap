@@ -43,20 +43,25 @@
       background-color: @snow-white;
     }
     & .leaflet-bottom {
-      bottom: @bar-heights / 10;
+      bottom: 10px;
       left: 10px;
     }
-
   }
 
   & #topBar {
-    .mapbars-mixin(1);
+    position: absolute;
     top: 0px;
+    left: 0px;
+    width: 100%;
+    height: @bar-heights;
+    background-color: @translucent-white;
+    z-index: 1020;
+    border-bottom: 1px solid @light-gray;
     & #logo_top {
       position: absolute;
-      left: 10px;
-      bottom: @bar-heights / 16;
-      width: 180px;
+      left: 12px;
+      bottom: 2px;
+      width: 125px;
       & #pbLogo {
         width: 100%;
       }
@@ -65,20 +70,11 @@
       display: none;
       position: absolute;
       background: transparent;
+      top: 8px;
       right: 10px;
-      bottom: 8px;
-      width: 36px;
-      height: 36px;
-      cursor: pointer; // Fix for safari button bug
       line-height: 30px;
-      color: @banjir-blue;
-      text-align: center;
-      & .icon-add-report {
-        font-size: 30px;
-      }
-      & .icon-cancel-2 {
-        font-size: 21px;
-        color: @dark-gray;
+      & i {
+        .linklight-mixin(30px);
       }
     }
     & div.active {
@@ -107,8 +103,8 @@
       background: transparent;
       margin: 0px;
       padding: 0px;
-      top: @bar-heights/8;
-      right: @bar-heights/8;
+      top: 6px;
+      right: 6px;
       text-align: right;
       z-index: 1015;
       .linkmedium-mixin(18px);

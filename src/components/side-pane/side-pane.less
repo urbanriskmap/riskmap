@@ -100,18 +100,21 @@
 
     &#content-info {
       overflow: hidden;
-      & #pbLogo {
-        position: relative;
-        width: 200px;
+      & #headLogos {
+        width: 90%;
         margin: auto;
-      }
-      & #urlLogo {
-        position: relative;
-        width: 200px;
-        margin: auto;
+        table-layout: fixed;
+        & #usaidLogo {
+          width: 75%;
+        }
+        & #urlLogo {
+          width: 100%;
+        }
       }
       & p {
         .bodyregular-mixin(14px);
+        width: 90%;
+        margin: 15px auto;
         & a {
           .linkmedium-mixin(14px);
         }
@@ -120,9 +123,10 @@
           color: @banjir-blue;
         }
         &#intro {
-          .bodylight-mixin(21px);
+          .bodyregular-mixin(20px);
           text-align: center;
-          color: @banjir-blue;
+          margin: 12px auto;
+          width: 90%;
         }
         &#disclaimer {
           & i {
@@ -132,23 +136,33 @@
         }
       }
       & #partners {
-        width: 100%;
-        & table {
-          margin: auto;
-          text-align: center;
-          & tr.label {
-            height: 18px;
-            text-align: left;
-            & p {
-              margin: 0;
-              padding: 0;
-            }
+        width: 90%;
+        margin: auto;
+        table-layout: fixed;
+        border-bottom: 1px solid @banjir-blue;
+        padding-bottom: 10px;
+        & tr.label {
+          height: 18px;
+          & p {
+            .bodylight-mixin(12px);
+            margin: 10px 0 4px 0;
+            padding: 0;
           }
-          & .partnerLogo {
-            margin: auto;
-            height: 40px;
-            width: auto;
-          }
+        }
+        & .bnpbLogo {
+          width: 240px;
+        }
+        & .partnerLogo {
+          height: 40px;
+          width: auto;
+        }
+      }
+      & #pbLogo {
+        width: 90%;
+        margin: 8px auto;
+        text-align: center;
+        & img {
+          width: 180px;
         }
       }
     }

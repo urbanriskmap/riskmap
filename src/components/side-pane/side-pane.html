@@ -93,65 +93,77 @@
     </div>
 
     <div id="content-info" if.bind="tab === 'info'" class="contentWrapper">
-      <div id="pbLogo">
-        <img src="assets/graphics/Peta_logo.svg">
-      </div>
-      <div id="urlLogo">
-        <img src="assets/graphics/URL_logo.svg">
-      </div>
+      <table id="headLogos">
+        <tr>
+          <td align="left">
+            <a href="https://www.usaid.gov/">
+              <img id="usaidLogo" src="assets/graphics/USAID-logo.png">
+            </a>
+          </td>
+          <td align="right">
+            <a href="http://urbanrisklab.org/">
+              <img id="urlLogo" src="assets/graphics/URL_logo.svg">
+            </a>
+          </td>
+        </tr>
+      </table>
+
       <p id="intro">${locale.info_content.intro}</p>
-      <div id="partners">
-        <table id="table">
-          <tr class="label">
-            <td colspan="4" cellpadding="0">
-              <p>${locale.info_content.partners}</p>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <a href="http://www.bnpb.go.id/">
-                <img class="partnerLogo" src="assets/graphics/bnpb_logo.png">
-              </a>
-            </td>
-          </tr>
-          <tr class="logos">
-            <td>
-              <a href="https://www.usaid.gov/">
-                <img class="partnerLogo" src="assets/graphics/USAID-logo.png">
-              </a>
-            </td>
-            <td>
-              <a href="https://hotosm.org/">
-                <img class="partnerLogo" src="assets/graphics/Hot_logo.png">
-              </a>
-            </td>
-          </tr>
-          <tr class="logos">
-            <td>
-              <a href="http://www.pdc.org/">
-                <img class="partnerLogo" src="assets/graphics/pcd_logo.png">
-              </a>
-            </td>
-            <td>
-              <a href="http://www.qlue.co.id/">
-                <img class="partnerLogo" src="assets/graphics/qlue_logo.png">
-              </a>
-            </td>
-          </tr>
-          <tr class="logos">
-            <td>
-              <a href="https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need">
-                <img class="partnerLogo" src="assets/graphics/zAlert_logo.png">
-              </a>
-            </td>
-            <td>
-              <a href="http://pasangmata.detik.com/">
-                <img class="partnerLogo" src="assets/graphics/pasang_logo.png">
-              </a>
-            </td>
-          </tr>
-        </table>
-      </div>
+
+      <table id="partners">
+        <tr class="label">
+          <td colspan="4" cellpadding="0" align="left">
+            <p>${locale.info_content.partners.implementing}</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" align="center">
+            <a href="http://www.bnpb.go.id/">
+              <img class="bnpbLogo" src="assets/graphics/bnpb_logo.png">
+            </a>
+          </td>
+        </tr>
+        <tr class="label">
+          <td colspan="4" cellpadding="0" align="left">
+            <p>${locale.info_content.partners.project}</p>
+          </td>
+        </tr>
+        <tr class="logos">
+          <td colspan="2" align="center">
+            <a href="http://www.pdc.org/">
+              <img class="partnerLogo" src="assets/graphics/pcd_logo.png">
+            </a>
+          </td>
+          <td colspan="2" align="center">
+            <a href="https://hotosm.org/">
+              <img class="partnerLogo" src="assets/graphics/Hot_logo.png">
+            </a>
+          </td>
+        </tr>
+        <tr class="label">
+          <td colspan="4" cellpadding="0" align="left">
+            <p>${locale.info_content.partners.data}</p>
+          </td>
+        </tr>
+        <tr class="logos">
+          <td align="center">
+            <a href="http://www.qlue.co.id/">
+              <img class="partnerLogo" src="assets/graphics/qlue_logo.png">
+            </a>
+          </td>
+          <td colspan="2" align="center">
+            <a href="http://pasangmata.detik.com/">
+              <img class="partnerLogo" src="assets/graphics/pasang_logo.png">
+            </a>
+          </td>
+          <td align="center">
+            <a href="https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need">
+              <img class="partnerLogo" src="assets/graphics/zAlert_logo.png">
+            </a>
+          </td>
+        </tr>
+      </table>
+
       <p innerhtml.bind="locale.info_content.p1"></p>
       <p innerhtml.bind="locale.info_content.p2"></p>
       <p innerhtml.bind="locale.info_content.p3"></p>
@@ -160,6 +172,9 @@
         <i>${locale.info_content.disclaimer}</i>
       </p>
       <p>${locale.info_content.mapCredits} © <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a></p>
+      <div id="pbLogo">
+        <img src="assets/graphics/Peta_logo.svg">
+      </div>
     </div>
   </div>
 
