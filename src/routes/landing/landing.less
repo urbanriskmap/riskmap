@@ -42,6 +42,11 @@
     & .leaflet-control-zoom a {
       background-color: @snow-white;
     }
+    & .leaflet-bottom {
+      bottom: @bar-heights / 10;
+      left: 10px;
+    }
+
   }
 
   & #topBar {
@@ -64,6 +69,7 @@
       bottom: 8px;
       width: 36px;
       height: 36px;
+      cursor: pointer; // Fix for safari button bug
       line-height: 30px;
       color: @banjir-blue;
       text-align: center;

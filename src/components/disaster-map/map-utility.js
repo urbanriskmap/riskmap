@@ -156,6 +156,7 @@ export class MapUtility {
     container.style.backgroundColor = 'white';
     container.style.width = '30px';
     container.style.height = '30px';
+    container.style.cursor = 'pointer';
     container.onclick = () => {
       self.viewClientLocation(map, layers, togglePane);
     };
