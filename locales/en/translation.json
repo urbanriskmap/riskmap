@@ -101,6 +101,7 @@
     "confirmation": "We will send you a confirmation message via"
   },
   "legend":{
+    "title": "Legend",
     "flood_gauges": "Flood Gauges",
     "flood_depth": "Flood Depth (cm)"
   },

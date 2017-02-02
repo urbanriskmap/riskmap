@@ -25,35 +25,49 @@
       <label repeat.for="city of cities">
         <input type="radio" model.bind="city" checked.bind="selected" change.delegate="switchCity(city)">
         ${city}
-        <br>
+
       </label>
 
-      <table>
+      <table  width="300px">
         <tr>
-          <p>${locale.legend.flood_gauges}</p>
-        </tr>
-        <tr repeat.for="level of gauge_levels">
           <td>
-            <img src.bind="level.icon" height="30">
-          </td>
+          <p id="legend">${locale.legend.title}</p>
           <td>
-            <label>${level.text[selLanguage]}</label>
-          </td>
         </tr>
-      </table>
-
-      <table>
         <tr>
-          <p>${locale.legend.flood_depth}</p>
+          <td vertical-align="bottom">
+            <p>${locale.legend.flood_gauges}</p>
+          </td>
+          <td vertical-align="bottom">
+            <p>${locale.legend.flood_depth}</p>
+          </td>
         </tr>
-        <tr repeat.for="height of flood_depth">
-          <td style.bind="'width:20px; background-color: ' + height.color">
+        <tr>
+          <td>
+            <table >
+              <tr repeat.for="level of gauge_levels">
+                <td>
+                  <img src.bind="level.icon" height="30">
+                </td>
+                <td>
+                  <p class="normal">${level.text[selLanguage]}</p>
+                </td>
+              </tr>
+            </table>
           </td>
           <td>
-            <label>${height.text[selLanguage]}</label>
+            <table>
+              <tr repeat.for="height of flood_depth">
+                <td style.bind="'padding:0;font-size:30px;color: ' + height.color">&#9632;
+                </td>
+                <td>
+                  <p class="normal">${height.text[selLanguage]}</p>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
-      </table>
+        </table>
     </div>
 
     <div id="content-report" if.bind="tab === 'report'" class="contentWrapper">
@@ -89,100 +103,100 @@
                 </td>
               </tr>
             </table>
-          <td>
-        </tr>
-      </table>
-    </div>
+            <td>
+            </tr>
+          </table>
+        </div>
 
-    <div id="content-info" if.bind="tab === 'info'" class="contentWrapper">
-      <table id="headLogos">
-        <tr>
-          <td align="left">
-            <a href="https://www.usaid.gov/">
-              <img id="usaidLogo" src="assets/graphics/USAID-logo.png">
-            </a>
-          </td>
-          <td align="right">
-            <a href="http://urbanrisklab.org/">
-              <img id="urlLogo" src="assets/graphics/URL_logo.svg">
-            </a>
-          </td>
-        </tr>
-      </table>
+        <div id="content-info" if.bind="tab === 'info'" class="contentWrapper">
+          <table id="headLogos">
+            <tr>
+              <td align="left">
+                <a href="https://www.usaid.gov/">
+                  <img id="usaidLogo" src="assets/graphics/USAID-logo.png">
+                </a>
+              </td>
+              <td align="right">
+                <a href="http://urbanrisklab.org/">
+                  <img id="urlLogo" src="assets/graphics/URL_logo.svg">
+                </a>
+              </td>
+            </tr>
+          </table>
 
-      <p id="intro">${locale.info_content.intro}</p>
+          <p id="intro">${locale.info_content.intro}</p>
 
-      <table id="partners">
-        <tr class="label">
-          <td colspan="4" cellpadding="0" align="left">
-            <p>${locale.info_content.partners.implementing}</p>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="4" align="center">
-            <a href="http://www.bnpb.go.id/">
-              <img class="bnpbLogo" src="assets/graphics/bnpb_logo.png">
-            </a>
-          </td>
-        </tr>
-        <tr class="label">
-          <td colspan="4" cellpadding="0" align="left">
-            <p>${locale.info_content.partners.project}</p>
-          </td>
-        </tr>
-        <tr class="logos">
-          <td colspan="2" align="center">
-            <a href="http://www.pdc.org/">
-              <img class="partnerLogo" src="assets/graphics/pcd_logo.png">
-            </a>
-          </td>
-          <td colspan="2" align="center">
-            <a href="https://hotosm.org/">
-              <img class="partnerLogo" src="assets/graphics/Hot_logo.png">
-            </a>
-          </td>
-        </tr>
-        <tr class="label">
-          <td colspan="4" cellpadding="0" align="left">
-            <p>${locale.info_content.partners.data}</p>
-          </td>
-        </tr>
-        <tr class="logos">
-          <td align="center">
-            <a href="http://www.qlue.co.id/">
-              <img class="partnerLogo" src="assets/graphics/qlue_logo.png">
-            </a>
-          </td>
-          <td colspan="2" align="center">
-            <a href="http://pasangmata.detik.com/">
-              <img class="partnerLogo" src="assets/graphics/pasang_logo.png">
-            </a>
-          </td>
-          <td align="center">
-            <a href="https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need">
-              <img class="partnerLogo" src="assets/graphics/zAlert_logo.png">
-            </a>
-          </td>
-        </tr>
-      </table>
+          <table id="partners">
+            <tr class="label">
+              <td colspan="4" cellpadding="0" align="left">
+                <p>${locale.info_content.partners.implementing}</p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" align="center">
+                <a href="http://www.bnpb.go.id/">
+                  <img class="bnpbLogo" src="assets/graphics/bnpb_logo.png">
+                </a>
+              </td>
+            </tr>
+            <tr class="label">
+              <td colspan="4" cellpadding="0" align="left">
+                <p>${locale.info_content.partners.project}</p>
+              </td>
+            </tr>
+            <tr class="logos">
+              <td colspan="2" align="center">
+                <a href="http://www.pdc.org/">
+                  <img class="partnerLogo" src="assets/graphics/pcd_logo.png">
+                </a>
+              </td>
+              <td colspan="2" align="center">
+                <a href="https://hotosm.org/">
+                  <img class="partnerLogo" src="assets/graphics/Hot_logo.png">
+                </a>
+              </td>
+            </tr>
+            <tr class="label">
+              <td colspan="4" cellpadding="0" align="left">
+                <p>${locale.info_content.partners.data}</p>
+              </td>
+            </tr>
+            <tr class="logos">
+              <td align="center">
+                <a href="http://www.qlue.co.id/">
+                  <img class="partnerLogo" src="assets/graphics/qlue_logo.png">
+                </a>
+              </td>
+              <td colspan="2" align="center">
+                <a href="http://pasangmata.detik.com/">
+                  <img class="partnerLogo" src="assets/graphics/pasang_logo.png">
+                </a>
+              </td>
+              <td align="center">
+                <a href="https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need">
+                  <img class="partnerLogo" src="assets/graphics/zAlert_logo.png">
+                </a>
+              </td>
+            </tr>
+          </table>
 
-      <p innerhtml.bind="locale.info_content.p1"></p>
-      <p innerhtml.bind="locale.info_content.p2"></p>
-      <p innerhtml.bind="locale.info_content.p3"></p>
-      <p id="disclaimer">
-        ${locale.info_content.privacy}<br>
-        <i>${locale.info_content.disclaimer}</i>
-      </p>
-      <p>${locale.info_content.mapCredits} © <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a></p>
-      <p>
-        ${locale.info_content.USAID}
-      </p>
-      <div id="pbLogo">
-        <img src="assets/graphics/Peta_logo.svg">
+          <p innerhtml.bind="locale.info_content.p1"></p>
+          <p innerhtml.bind="locale.info_content.p2"></p>
+          <p innerhtml.bind="locale.info_content.p3"></p>
+          <p id="disclaimer">
+            ${locale.info_content.privacy}<br>
+            <i>${locale.info_content.disclaimer}</i>
+          </p>
+          <p>${locale.info_content.mapCredits} © <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a></p>
+          <p id="usaid">
+            ${locale.info_content.USAID}
+          </p>
+          <div id="pbLogo">
+            <img src="assets/graphics/Peta_logo.svg">
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div id="logoBar">
-  </div>
-</template>
+      <div id="logoBar">
+      </div>
+    </template>
