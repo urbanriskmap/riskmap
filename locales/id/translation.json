@@ -69,7 +69,8 @@
     },
     "mapCredits": "Peta Dasar",
     "privacy": "Privasi:",
-    "disclaimer": "Kami tidak menyimpan informasi tentang pengguna. Semua informasi yang berasal dari perangkat seluler bergeolokasi dipetakan secara real time; informasi ini dapat dilihat lewat API terbuka untuk aplikasi lain."
+    "disclaimer": "Kami tidak menyimpan informasi tentang pengguna. Semua informasi yang berasal dari perangkat seluler bergeolokasi dipetakan secara real time; informasi ini dapat dilihat lewat API terbuka untuk aplikasi lain.",
+    "USAID": "This website was made possible with the support of the American People through the U.S. Agency for International Development. This is not an official USAID or U.S. Government website. The contents of this website are the sole responsibility of the authors and do not necessarily reflect the views of USAID of the U.S. Government."
   },
   "card_error_messages":{
     "already_received": "Laporan sudah diterima",
