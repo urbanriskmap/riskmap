@@ -175,17 +175,41 @@ export class MapLayers {
     return self.appendData('reports/?city=' + city_region, self.reports, map);
   }
 
-  addFloodExtents(city_region, map) {
+  addFloodExtents(city_name, city_region, map, togglePane) {
     var self = this;
     self.flood_extents = L.geoJSON(null, {
       style: (feature, layer) => {
         switch (feature.properties.state) {
-          case 4: return {fillColor:"#CC2A41", weight:1, color:"#CC2A41", opacity:0.8, fillOpacity: 0.8};
-          case 3: return {fillColor:"#FF8300", weight:1, color:"#FF8300", opacity:0.8, fillOpacity: 0.8};
-          case 2: return {fillColor:"#FFFF00", weight:1, color:"#FFFF00", opacity:0.8, fillOpacity: 0.8};
-          case 1: return {fillColor:"#A0A9F7", weight:1, color:"#A0A9F7", opacity:0.8, fillOpacity: 0.8};
+          case 4: return {cursor:"pointer", fillColor:"#CC2A41", weight:1, color:"#CC2A41", opacity:0.8, fillOpacity: 0.8};
+          case 3: return {cursor:"pointer", fillColor:"#FF8300", weight:1, color:"#FF8300", opacity:0.8, fillOpacity: 0.8};
+          case 2: return {cursor:"pointer", fillColor:"#FFFF00", weight:1, color:"#FFFF00", opacity:0.8, fillOpacity: 0.8};
+          case 1: return {cursor:"pointer", fillColor:"#A0A9F7", weight:1, color:"#A0A9F7", opacity:0.8, fillOpacity: 0.8};
           default: return {color:"rgba(0,0,0,0)", weight:0, fillOpacity:0};
         }
+      },
+      onEachFeature: (feature, layer) => {
+        layer.on({
+          click: (e) => {
+            console.log(e.target);
+            if (self.selected_report) {
+              self.selected_report.target.setIcon(self.mapIcons.report_normal);
+              self.selected_report = null;
+              history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
+            }
+            $('#chart-pane').empty();
+            self.popupContent = {};
+            for (let prop in feature.properties) {
+              self.popupContent[prop] = feature.properties[prop];
+            }
+            togglePane('#infoPane', 'show', false);
+            e.target.setStyle({
+              weight: 2,
+              color: '#000000',
+              dashArray: '',
+              fillOpacity: 0.7
+            });
+          }
+        });
       }
     });
     return self.appendData('floods?city=' + city_region + '&minimum_state=1', self.flood_extents, map);

@@ -29,7 +29,15 @@
       "info": "info"
     }
   },
-  "share_msg": "Laporan%20banjir%20pada%20petabencana%2Eid",
+  "report_info": {
+    "share_msg": "Laporan%20banjir%20pada%20petabencana%2Eid",
+    "water_depth": "Tinggi"
+  },
+  "flood_info": {
+    "title": "Flood affected area",
+    "level_hint": "Alert level",
+    "time_hint": "Last updated"
+  },
   "map_helper": "Pilih kota:",
   "report_content": {
     "twitter": {

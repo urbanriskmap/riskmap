@@ -4,6 +4,7 @@
   <require from="../../components/disaster-map/disaster-map"></require>
   <require from="../../components/report-info/report-info"></require>
   <require from="../../components/gauge-info/gauge-info"></require>
+  <require from="../../components/flood-info/flood-info"></require>
   <require from="../../components/side-pane/side-pane"></require>
 
   <div id="pageWrapper">
@@ -35,18 +36,14 @@
       </div>
     </div>
 
-    <!--<div id="logo_bottom">
-      <a href="http://urbanrisklab.org">
-        <img id="mitLogo" src="assets/graphics/URL_logo.svg" width="180">
-      </a>
-    </div>-->
-
     <div id="infoPane">
       <div class="closeBtn" click.delegate="mapModel.togglePane('#infoPane', 'hide', true)">
         <i class="icon-cancel-circled-outline" aria-hidden="true"></i>
       </div>
       <gauge-info class="infoWrapper" name.bind="mapModel.layers.popupContent.gauge_name">
       </gauge-info>
+      <flood-info class="infoWrapper" if.bind="mapModel.layers.popupContent.state" locale.bind="webMenu.locale" areaname.bind="mapModel.layers.popupContent.area_name" districtname.bind="mapModel.layers.popupContent.parent_name" state.bind="mapModel.layers.popupContent.state" updated.bind="mapModel.layers.formatTime(mapModel.layers.popupContent.last_updated)">
+      </flood-info>
       <report-info class="infoWrapper" if.bind="mapModel.layers.popupContent.pkey" locale.two-way="webMenu.locale" pkey.bind="mapModel.layers.popupContent.pkey" city.bind="mapModel.utility.parseCityName(mapModel.layers.popupContent.tags.instance_region_code, mapModel.cities)" imageurl.bind="mapModel.layers.popupContent.image_url" height.bind="mapModel.layers.popupContent.report_data.flood_depth" title.bind="mapModel.layers.popupContent.title" text.bind="mapModel.layers.popupContent.text" timestamp.bind="mapModel.layers.popupContent.timestamp">
       </report-info>
     </div>

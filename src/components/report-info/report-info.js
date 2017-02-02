@@ -18,7 +18,7 @@ export class ReportInfo {
   //end-non-standard
 
   get msgText() {
-    return this.locale.share_msg;
+    return this.locale.report_info.share_msg;
   }
 
   get reportUrl() {

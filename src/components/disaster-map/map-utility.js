@@ -69,7 +69,7 @@ export class MapUtility {
     });
     // Add new layers
     if (cityObj.region !== 'java') {
-      layers.addFloodExtents(self.parseCityObj(city_name).region, map);
+      layers.addFloodExtents(city_name, self.parseCityObj(city_name).region, map, togglePane);
       layers.addFloodGauges(city_name, self.parseCityObj(city_name).region, map, togglePane);
       return layers.addReports(city_name, self.parseCityObj(city_name).region, map, togglePane);
     } else {
