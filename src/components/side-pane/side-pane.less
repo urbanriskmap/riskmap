@@ -99,6 +99,17 @@
       & label {
         .linklight-mixin(14px);
         text-transform: capitalize;
+        padding-right: 10px;
+      }
+      & .normal {
+        .bodylight-mixin(14px);
+        text-transform: capitalize;
+        padding-right: 10px;
+        margin: 0;
+      }
+      & #legend {
+        margin-top: 20px;
+        border-bottom: 1px solid @banjir-blue;
       }
     }
 
@@ -138,6 +149,11 @@
             color: @steel-gray;
           }
         }
+        &#usaid {
+          .bodylight-mixin(12px);
+          color: @steel-gray;
+        }
+
       }
       & #partners {
         width: 90%;
@@ -236,6 +252,7 @@
     }
   }
 }
+
 
 #logoBar {
   position: absolute;

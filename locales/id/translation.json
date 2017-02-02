@@ -119,6 +119,7 @@
     "confirmation": "Kami akan mengirimkan pesan konfirmasi melalui"
   },
   "legend":{
+    "title": "Legenda",
     "flood_gauges": "Tinggi Muka Air",
     "flood_depth": "Tinggi Banjir (cm)"
   },
