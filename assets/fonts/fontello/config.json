@@ -231,6 +231,12 @@
       "css": "cancel-circled-outline",
       "code": 59400,
       "src": "typicons"
+    },
+    {
+      "uid": "767fede84586366cd7d6c835be745454",
+      "css": "otherapps",
+      "code": 59414,
+      "src": "entypo"
     }
   ]
 }

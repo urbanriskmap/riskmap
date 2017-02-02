@@ -56,7 +56,7 @@
         "You can see your report on the map via the link provided. Check PetaBencana.id for up-to-date flood information."
       ]
     },
-    "other": {
+    "otherapps": {
       "title": "Report with local applications",
       "steps": [
         "You can report flood from Qlue, PasangMata, and Z-Alert.",
@@ -77,7 +77,8 @@
     },
     "mapCredits": "Basemap tiles",
     "privacy": "Privacy:",
-    "disclaimer": "We do not store any information about users. Information derived from location-enabled mobile devices is mapped in real-time; this information is available through an open API for additional applications."
+    "disclaimer": "We do not store any information about users. Information derived from location-enabled mobile devices is mapped in real-time; this information is available through an open API for additional applications.",
+    "USAID": "This website was made possible with the support of the American People through the U.S. Agency for International Development. This is not an official USAID or U.S. Government website. The contents of this website are the sole responsibility of the authors and do not necessarily reflect the views of USAID of the U.S. Government."
   },
   "card_error_messages":{
     "already_received": "Report already received",

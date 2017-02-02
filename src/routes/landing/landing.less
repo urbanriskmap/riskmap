@@ -39,8 +39,14 @@
     & .leaflet-top {
       top: @bar-heights;
     }
-    & .leaflet-control-zoom a {
-      background-color: @snow-white;
+    & .leaflet-control-zoom {
+      & a {
+        background-color: @snow-white;
+      }
+      &-in, &-out {
+        width: 30px;
+        height: 28px;
+      }
     }
     & .leaflet-bottom {
       bottom: 10px;

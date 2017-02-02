@@ -34,17 +34,18 @@
             line-height: 14px;
             text-transform: capitalize;
           }
-          &:hover {
-            color: @banjir-blue;
-            & p {
-              display: block;
-            }
-          }
           &.active {
             color: @banjir-blue;
             border-bottom: 4px solid @banjir-blue;
             & p {
               display: block;
+            }
+          }
+          &:hover {
+            color: @blue-hover;
+            & p {
+              display: block;
+              color: @blue-hover;
             }
           }
         }
@@ -67,11 +68,14 @@
             .bodylight-mixin(16px);
             line-height: 28px;
             cursor: pointer;
-            & input {
-              display: none;
-            }
             &.active {
               color: @banjir-blue;
+            }
+            &:hover {
+              color: @blue-hover;
+            }
+            & input {
+              display: none;
             }
           }
         }
@@ -184,8 +188,11 @@
                   cursor: pointer;
                   border: none;
                   .bodyregular-mixin(14px);
-                  &:hover, &.active {
+                  &.active {
                     color: @banjir-blue;
+                  }
+                  &:hover {
+                    color: @blue-hover;
                   }
                   & p {
                     margin: 0;

@@ -36,7 +36,7 @@ export class SidePane {
         }
       },
       {
-        platform: "other",
+        platform: "otherapps",
         source: {
           "id": "https://www.youtube.com/embed/Gb_BAAiRw2U?autoplay=0&origin=https://petabencana.id&rel=0",
           "en": "https://www.youtube.com/embed/EfJRa9sF89Y?autoplay=0&origin=https://petabencana.id&rel=0"
