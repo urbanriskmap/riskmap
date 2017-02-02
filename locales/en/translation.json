@@ -36,7 +36,25 @@
   "flood_info": {
     "title": "Flood affected area",
     "level_hint": "Alert level",
-    "time_hint": "Last updated"
+    "time_hint": "Last updated",
+    "state_codes": {
+      "1": {
+        "severity": "Unknown",
+        "description": "An unknown level of flooding, use caution"
+      },
+      "2": {
+        "severity": "Minor",
+        "description": "Flooding between 10 to 70 cm"
+      },
+      "3": {
+        "severity": "Moderate",
+        "description": "Flooding between 71 to 150 cm"
+      },
+      "4": {
+        "severity": "Severe",
+        "description": "Flooding over 150 cm"
+      }
+    }
   },
   "map_helper": "Select city :",
   "report_content": {

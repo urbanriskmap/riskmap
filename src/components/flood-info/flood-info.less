@@ -2,14 +2,16 @@
 
 #flood-title {
   position: relative;
-
   width: 92%;
   & p {
     margin: 0;
     padding: 10px;
-    .bodymedium-mixin(13px);
+    .bodymedium-mixin(14px);
     color: @banjir-blue;
     text-align: center;
+    & b {
+      color: @dark-gray;
+    }
   }
 }
 
@@ -22,17 +24,12 @@
     .bodymedium-mixin(14px);
     color: @dark-gray;
     text-align: center;
-    }
-}
-
-#flood-pane {
-  position: relative;
-  width: 92%;
-  & p {
-    margin: 0;
-    padding: 0;
-    .bodylight-mixin(13px);
-    color: @dark-gray;
-    text-align: center;
+  }
+  & #severity {
+    color: @banjir-blue;
+    text-transform: uppercase;
+  }
+  & #updated {
+    .bodylight-mixin(12px);
   }
 }

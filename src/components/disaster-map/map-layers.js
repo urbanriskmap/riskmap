@@ -32,6 +32,16 @@ export class MapLayers {
         iconAnchor: [15, 15]
       })
     };
+    this.floodAreaStyles = {
+      normal: {
+        weight: 0,
+        opacity: 0
+      },
+      selected: {
+        weight: 1,
+        opacity: 1
+      }
+    };
   }
 
   // Format timestamps to local time
@@ -89,6 +99,10 @@ export class MapLayers {
     self.activeReports[feature.properties.pkey] = layer;
     layer.on({
       click: (e) => {
+        if (self.selected_extent) {
+          self.selected_extent.target.setStyle(self.floodAreaStyles.normal);
+          self.selected_extent = null;
+        }
         if (!self.selected_report) {
           // Case 1 : no previous selection, click on report icon
           e.target.setIcon(self.mapIcons.report_selected);
@@ -120,6 +134,52 @@ export class MapLayers {
           history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
           togglePane('#infoPane', 'show', true);
           self.selected_report = e;
+        }
+      }
+    });
+  }
+
+  floodExtentInteraction(feature, layer, city_name, map, togglePane) {
+    var self = this;
+    layer.on({
+      click: (e) => {
+        // Check for selected report, restore icon to normal, clear variable, update browser URL
+        if (self.selected_report) {
+          self.selected_report.target.setIcon(self.mapIcons.report_normal);
+          self.selected_report = null;
+          history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
+        }
+        if (!self.selected_extent) {
+          // Case 1 : no previous selection, click on flood extent polygon
+          map.panTo(e.target.getCenter());
+          // Selection feedback, add stroke
+          e.target.setStyle(self.floodAreaStyles.selected);
+          // Reset and fill popupContent
+          self.popupContent = {};
+          for (let prop in feature.properties) {
+            self.popupContent[prop] = feature.properties[prop];
+          }
+          // open infoPane, set 'clear_selection' var to true, to empty flood gauge chart
+          togglePane('#infoPane', 'show', true);
+          // set local variable to target
+          self.selected_extent = e;
+        } else if (e.target === self.selected_extent.target) {
+          // Case 2 : clicked polygon same as selected flood extent
+          e.target.setStyle(self.floodAreaStyles.normal);
+          self.popupContent = {};
+          togglePane('#infoPane', 'hide', false);
+          self.selected_extent = null;
+        } else if (e.target !== self.selected_extent.target) {
+          // Case 3 : clicked new polygon, while previous selection needs to be reset
+          self.selected_extent.target.setStyle(self.floodAreaStyles.normal);
+          map.panTo(e.target.getCenter());
+          e.target.setStyle(self.floodAreaStyles.selected);
+          self.popupContent = {};
+          for (let prop in feature.properties) {
+            self.popupContent[prop] = feature.properties[prop];
+          }
+          togglePane('#infoPane', 'show', true);
+          self.selected_extent = e;
         }
       }
     });
@@ -180,36 +240,15 @@ export class MapLayers {
     self.flood_extents = L.geoJSON(null, {
       style: (feature, layer) => {
         switch (feature.properties.state) {
-          case 4: return {cursor:"pointer", fillColor:"#CC2A41", weight:1, color:"#CC2A41", opacity:0.8, fillOpacity: 0.8};
-          case 3: return {cursor:"pointer", fillColor:"#FF8300", weight:1, color:"#FF8300", opacity:0.8, fillOpacity: 0.8};
-          case 2: return {cursor:"pointer", fillColor:"#FFFF00", weight:1, color:"#FFFF00", opacity:0.8, fillOpacity: 0.8};
-          case 1: return {cursor:"pointer", fillColor:"#A0A9F7", weight:1, color:"#A0A9F7", opacity:0.8, fillOpacity: 0.8};
-          default: return {color:"rgba(0,0,0,0)", weight:0, fillOpacity:0};
+          case 4: return {cursor:"pointer", fillColor:"#CC2A41", weight:0, color:"#000000", opacity:0, fillOpacity: 0.7};
+          case 3: return {cursor:"pointer", fillColor:"#FF8300", weight:0, color:"#000000", opacity:0, fillOpacity: 0.7};
+          case 2: return {cursor:"pointer", fillColor:"#FFFF00", weight:0, color:"#000000", opacity:0, fillOpacity: 0.7};
+          case 1: return {cursor:"pointer", fillColor:"#A0A9F7", weight:0, color:"#000000", opacity:0, fillOpacity: 0.7};
+          default: return {weight:0, opacity: 0, fillOpacity:0};
         }
       },
       onEachFeature: (feature, layer) => {
-        layer.on({
-          click: (e) => {
-            console.log(e.target);
-            if (self.selected_report) {
-              self.selected_report.target.setIcon(self.mapIcons.report_normal);
-              self.selected_report = null;
-              history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
-            }
-            $('#chart-pane').empty();
-            self.popupContent = {};
-            for (let prop in feature.properties) {
-              self.popupContent[prop] = feature.properties[prop];
-            }
-            togglePane('#infoPane', 'show', false);
-            e.target.setStyle({
-              weight: 2,
-              color: '#000000',
-              dashArray: '',
-              fillOpacity: 0.7
-            });
-          }
-        });
+        self.floodExtentInteraction(feature, layer, city_name, map, togglePane);
       }
     });
     return self.appendData('floods?city=' + city_region + '&minimum_state=1', self.flood_extents, map);
@@ -236,13 +275,17 @@ export class MapLayers {
         onEachFeature: (feature, layer) => {
           layer.on({
             click: (e) => {
+              map.panTo(layer._latlng);
               togglePane('#infoPane', 'show', false);
               // Handle flood reports layer selection and popup
               if (self.selected_report) {
                 self.selected_report.target.setIcon(self.mapIcons.report_normal);
-                //togglePane('#infoPane', 'hide', false);
                 self.selected_report = null;
                 history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
+              }
+              if (self.selected_extent) {
+                self.selected_extent.target.setStyle(self.floodAreaStyles.normal);
+                self.selected_extent = null;
               }
               self.popupContent = {};
               self.popupContent.gauge_name = feature.properties.gaugenameid;
