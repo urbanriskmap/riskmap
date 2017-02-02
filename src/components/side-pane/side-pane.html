@@ -63,7 +63,9 @@
             <table class="vidTable">
               <tr click.delegate="showVideo(video.platform)">
                 <td class="labelRow" id.bind="'label_' + video.platform">
-                  <p class="labelText" textcontent.bind="locale.report_content[video.platform].title"></p>
+                  <p class="labelText">
+                    <i class.bind="'icon-' + video.platform"></i>&nbsp;${locale.report_content[video.platform].title}
+                  </p>
                   <p class="arrows down" id.bind="'down_' + video.platform">
                     <i class="icon-down-open"></i>
                   </p>
@@ -81,7 +83,7 @@
                       <li repeat.for="step of locale.report_content[video.platform].steps">
                         <p>${step}</p>
                       </li>
-                      <p if.bind="video.platform==='other'" innerhtml.bind="locale.report_content.other.links"></p>
+                      <p if.bind="video.platform==='otherapps'" innerhtml.bind="locale.report_content.otherapps.links"></p>
                     </ul>
                   </div>
                 </td>

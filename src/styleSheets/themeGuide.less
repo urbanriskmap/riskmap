@@ -12,7 +12,7 @@
 //Card highlights
 @banjir-blue:     #31aade;
 @dark-blue:       #1f4963;
-@blue-hover: rgba(49, 170, 222, .75);
+@blue-hover: saturate(@banjir-blue, 100%);
 
 //Icons & graphs
 @flash-green:     #99cc33;
@@ -77,7 +77,7 @@
   cursor: pointer;
   @media (min-width: 420px) {
     &:hover {
-      color: @banjir-blue;
+      color: @blue-hover;
     }
   }
   &:active {
@@ -92,7 +92,7 @@
   cursor: pointer;
   @media (min-width: 420px) {
     &:hover {
-      color: @banjir-blue;
+      color: @blue-hover;
     }
   }
   &:active {
