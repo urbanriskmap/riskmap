@@ -319,6 +319,8 @@ export class MapLayers {
 
   addReports(city_name, city_region, map, togglePane) {
     var self = this;
+    map.createPane('reports');
+    map.getPane('reports').style.zIndex = 700;
     // clear previous reports
     if (self.reports) {
       map.removeLayer(self.reports);
@@ -331,7 +333,8 @@ export class MapLayers {
       },
       pointToLayer: (feature, latlng) => {
         return L.marker(latlng, {
-          icon: self.mapIcons.report_normal
+          icon: self.mapIcons.report_normal,
+          pane: 'reports'
         });
       }
     });
@@ -368,12 +371,15 @@ export class MapLayers {
 
   addFloodGauges(city_name, city_region, map, togglePane) {
     var self = this;
+    map.createPane('gauges');
+    map.getPane('gauges').style.zIndex = 650;
     if (city_region === 'jbd') {
       // Create flood gauge layer and add to the map
       self.gaugeLayer = L.geoJSON(null, {
         pointToLayer: (feature, latlng) => {
           return L.marker(latlng, {
-            icon: self.mapIcons.gauge_normal(self.gaugeIconUrl(feature.properties.observations[feature.properties.observations.length-1].f3))
+            icon: self.mapIcons.gauge_normal(self.gaugeIconUrl(feature.properties.observations[feature.properties.observations.length-1].f3)),
+            pane: 'gauges'
           });
         },
         onEachFeature: (feature, layer) => {
