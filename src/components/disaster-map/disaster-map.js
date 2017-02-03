@@ -31,17 +31,21 @@ export class DisasterMap {
       $(ref).fadeOut(200);
       if (ref === '#infoPane') {
         if (clear_selection) {
-          self.reportid = null;
-          history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
-          self.layers.popupContent = null;
           if (self.layers.selected_report) {
+            self.reportid = null;
+            history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
             self.layers.selected_report.target.setIcon(self.layers.mapIcons.report_normal);
             self.layers.selected_report = null;
           }
           if (self.layers.selected_extent) {
-            self.layers.selected_extent.target.setStyle(self.layers.floodAreaStyles.normal);
+            self.layers.selected_extent.target.setStyle(self.layers.mapPolygons.normal);
             self.layers.selected_extent = null;
           }
+          if (self.layers.selected_gauge) {
+            self.layers.selected_gauge.target.setIcon(self.layers.mapIcons.gauge_normal(self.layers.gaugeIconUrl(self.layers.selected_gauge.target.feature.properties.observations[self.layers.selected_gauge.target.feature.properties.observations.length-1].f3)));
+            self.layers.selected_gauge = null;
+          }
+          self.layers.popupContent = null;
         }
       } else if (ref === '#sidePane') {
         $('.menuBtn').toggleClass("active");
