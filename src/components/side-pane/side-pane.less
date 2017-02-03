@@ -240,8 +240,18 @@
                 & p {
                   margin: 0;
                   padding: 0;
+                  & ul {
+                    list-style: none;
+                    .bodylight-mixin(14px);
+                    line-height: 21px;
+                    padding: 0;
+                  }
                   & a {
                     .linklight-mixin(14px);
+                    line-height: 21px;
+                    & i {
+                      font-size: 18px;
+                    }
                   }
                 }
               }
@@ -251,11 +261,4 @@
       }
     }
   }
-}
-
-
-#logoBar {
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
 }
