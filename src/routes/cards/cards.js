@@ -105,7 +105,7 @@ export class Cards {
         } else {
           // unhandled error
           self.router.routes[8].settings.errorCode = response.statusCode;
-          self.router.routes[8].settings.errorText = self.locale.card_error_messages.unknown_error + "(" + response.statusText + ")";
+          self.router.routes[8].settings.errorText = self.locale.card_error_messages.unknown_error + " (" + response.statusText + ")";
           self.router.navigate('error', {replace: true});
         }
       });

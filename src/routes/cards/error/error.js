@@ -4,6 +4,7 @@ export class Error {
     this.errorText = routerConfig.settings.errorText;
   }
   attached() {
+    console.log(this.locale);
     /*window.setTimeout(function () {
       window.location.replace('/map');
     }, 3000);*/
