@@ -25,6 +25,8 @@
 .icon-spin4:before { content: '\e834'; } /* '' */
 .icon-menu:before { content: '\f0c9'; } /* '' */
 .icon-angle-double-right:before { content: '\f101'; } /* '' */
+.icon-apple:before { content: '\f179'; } /* '' */
+.icon-android:before { content: '\f17b'; } /* '' */
 .icon-whatsapp:before { content: '\f232'; } /* '' */
 .icon-map:before { content: '\f279'; } /* '' */
 .icon-telegram:before { content: '\f2c6'; } /* '' */

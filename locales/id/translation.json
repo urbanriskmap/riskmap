@@ -80,7 +80,7 @@
         "Anda dapat melapor lewat Qlue, PasangMata, dan Z-Alert.",
         "Laporan Anda sudah tampil di peta. Cek PetaBencana.id untuk info banjir terkini."
       ],
-      "links": "<br><a href='https://play.google.com/store/apps/details?id=org.qluein.android'>Qlue</a><br><a href='http://pasangmata.detik.com/'>PasangMata</a><br><a href='https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need'>Z-Alert</a>"
+      "links": "<br><ul><li>Qlue:&nbsp;<a href='https://play.google.com/store/apps/details?id=org.qluein.android'><i class='icon-android'></i></a>&nbsp;&#124;&nbsp;<a href='https://itunes.apple.com/us/app/qlue-jakarta-smart-city/id987432944?ls=1&mt=8'><i class='icon-apple'></i></a></li><li><a href='http://pasangmata.detik.com/'>PasangMata</a></li><li><a href='https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need'>Z-Alert</a></li></ul>"
     }
   },
   "info_content": {
@@ -96,7 +96,7 @@
     "mapCredits": "Peta Dasar",
     "privacy": "Privasi:",
     "disclaimer": "Kami tidak menyimpan informasi tentang pengguna. Semua informasi yang berasal dari perangkat seluler bergeolokasi dipetakan secara real time; informasi ini dapat dilihat lewat API terbuka untuk aplikasi lain.",
-    "USAID": "This website was made possible with the support of the American People through the U.S. Agency for International Development. This is not an official USAID or U.S. Government website. The contents of this website are the sole responsibility of the authors and do not necessarily reflect the views of USAID of the U.S. Government."
+    "USAID": "Situs web ini dapat terselenggara dengan dukungan dari warga Amerika melalui USAID (U.S. Agency for International Development). Situs ini bukan merupakan situs resmi USAID atau Pemerintah Amerika Serikat. Konten situs ini seluruhnya merupakan tanggung jawab dari para pencipta dan belum tentu merefleksikan pandangan dari USAID dan Pemerintah Amerika Serikat."
   },
   "card_error_messages":{
     "already_received": "Laporan sudah diterima",

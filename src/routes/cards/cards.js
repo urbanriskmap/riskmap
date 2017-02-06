@@ -60,6 +60,7 @@ export class Cards {
   }
 
   attached() {
+    $('#depthBG').attr('fill', '#ff0000');
     var nua = navigator.userAgent.toLowerCase();
     //______________is Mobile______________________an iPhone_________________browser not safari (in-app)___________app is twitter________________app is facebook______________not facebook messenger_________
     if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1 && (nua.indexOf('twitter') > -1 || (nua.indexOf('fban') > -1 && nua.indexOf('messenger') === -1))) {
