@@ -89,9 +89,9 @@
     "p2": "Platform ini menggunakan paradigma “manusia sebagai sensor terbaik”, di mana laporan terkonfirmasi dikumpulkan secara langsung dari pengguna di lapangan, dengan metode yang memungkinkan pengolahan data yang cepat dengan biaya minimum. Kerangka kerja ini menghasilkan data real-time dan akurat, yang langsung tersedia untuk pengguna dan petugas darurat berwenang.",
     "p3": "PetaBencana.id mengumpulkan, menyortir, dan “memvisualisasikan” data menggunakan CogniCity Open Source Software - sebuah platform untuk manajemen kebencanaan - untuk mengubah kicauan di media sosial dan digital menjadi informasi penting bagi warga, komunitas, dan instansi pemerintah.",
     "partners": {
-      "implementing": "Implementing partner",
-      "project": "Project partners",
-      "data": "Data partners"
+      "implementing": "Mitra Pelaksana",
+      "project": "Mitra Proyek",
+      "data": "Mitra Penyedia Data"
     },
     "mapCredits": "Peta Dasar",
     "privacy": "Privasi:",
