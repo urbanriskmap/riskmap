@@ -22,24 +22,40 @@ export class Cards {
   }
 
   configureRouter(config, router) {
+    var self = this;
     config.title = this.locale.page_title;
+    //TODO: fix issue with card numbers, this.router.routes array numbers
+    // when route: '' is added (IMPORTANT, '*foo' required mostly for dev,
+    // but also if user hits refresh & url is appended with route name)
+    // Alternatively: retain only '*foo' & append /report in url??
     config.map([
-      {route: '',                               moduleId: './card-landing/card-landing', settings: {cardNo: 0}}, //requires cardNo for count getter to set cardNo as 0, on-the-fly resizing dependent on cardTitle & cardNavigation div's displayed, in turn dependent on 'count'
-      {route: 'location',     name: 'location', moduleId: './location/location',         settings: {cardNo: 1}},
-      {route: 'depth',                          moduleId: './depth/depth',               settings: {cardNo: 2}},
-      {route: 'photo',                          moduleId: './photo/photo',               settings: {cardNo: 3}},
-      {route: 'description',                    moduleId: './description/description',   settings: {cardNo: 4}},
-      {route: 'review',                         moduleId: './review/review',             settings: {cardNo: 5}},
-      {route: 'terms',                          moduleId: './terms/terms',               settings: {cardNo: 6}},
-      {route: 'thanks',                         moduleId: './thanks/thanks',             settings: {cardNo: 7}},
-      {route: 'error',        name: 'error',    moduleId: './error/error',               settings: {cardNo: 8}},
+      {route: '*foo', moduleId: './card-landing/card-landing'}
     ]);
-    config.mapUnknownRoutes({redirect: '/map'});
-    this.router = router;
+    config.mapUnknownRoutes({route: '/map'});
+    self.router = router;
   }
 
   activate(params) {
-    this.id = params.id;
+    var self = this;
+    self.id = params.id;
+    if (params.disaster === 'flood' || params.disaster === 'hurricane') {
+      $.getJSON("./src/routes/card-decks/" + params.disaster + ".json", data => {
+        for (let obj of data) {
+          self.router.addRoute(obj);
+        }
+      }).then(() => {
+        $.getJSON("./src/routes/card-decks/staple.json", data => {
+          for (let obj of data) {
+            self.router.addRoute(obj);
+          }
+        }).then(() => {
+          for (let route in self.router.routes) {
+            self.router.routes[route].settings = {cardNo: parseInt(route)};
+          }
+          self.router.refreshNavigation();
+        });
+      });
+    }
   }
 
   //switch on-the-fly
@@ -60,58 +76,64 @@ export class Cards {
   }
 
   attached() {
+    var self = this;
+
     $('#depthBG').attr('fill', '#ff0000');
     var nua = navigator.userAgent.toLowerCase();
     //______________is Mobile______________________an iPhone_________________browser not safari (in-app)___________app is twitter________________app is facebook______________not facebook messenger_________
     if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1 && (nua.indexOf('twitter') > -1 || (nua.indexOf('fban') > -1 && nua.indexOf('messenger') === -1))) {
-      this.resizeCardHt(1);
+      self.resizeCardHt(1);
     } else {
       //Execute resize on initial page load
-      this.resizeCardHt(0);
+      self.resizeCardHt(0);
       //Add resize listener to browser window
       $(window).resize(() => {
-        this.resizeCardHt(0);
+        self.resizeCardHt(0);
       });
     }
 
-    this.totalCards = this.router.routes.length - 1; //exclude (route:'', redirect:'location')
-    $('#' + this.reportcard.selLanguage).addClass("active");
+    self.totalCards = self.router.routes.length - 1; //exclude routes:'', '*path' (card-landing)
+    $('#' + self.reportcard.selLanguage).addClass("active");
+    $(document).ready(() => {
+      $('.tabButtons').width((100 / (self.totalCards - 3)) + '%'); //fit 'n' tab buttons on-the-fly, n = (total - staple) cards
+    });
 
-    var self = this;
     let client = new HttpClient();
 
     // Escape test in dev & local environment for 'test123'
     //_______is Prod____________otl:test123_______
-    if (!this.test_card || this.id !== 'test123') {
+    if (!self.test_card || self.id !== 'test123') {
       //Navigate to location card OR error card, then resize card height to fill screen
-      client.get(this.data_src + 'cards/' + this.id)
+      client.get(self.data_src + 'cards/' + self.id)
       .then(response => {
          var msg = JSON.parse(response.response);
-         // card already exists
          if (msg.result.received === true) {
-          self.router.routes[8].settings.errorText = self.locale.card_error_messages.already_received;
+           // card already exists
+           // self.router.routes[self.totalCards] to always be error card route
+          self.router.routes[self.totalCards].settings.errorText = self.locale.card_error_messages.already_received;
           self.router.navigate('error', {replace: true});
         } else {
+          // populate network property of reportcard, accessed in thanks card
           self.reportcard.network = msg.result.network;
-          self.router.routes[7].settings.errorCode = response.statusCode;
-          self.router.navigate('location', {replace: true});
+          // proceed to first card
+          self.router.navigate(self.router.routes[1].route, {replace: true});
         }
       })
       .catch(response => {
         if (response.statusCode === 404) {
           // error this card does not exist
-          self.router.routes[8].settings.errorCode = response.statusCode;
-          self.router.routes[8].settings.errorText = self.locale.card_error_messages.unknown_link;
+          self.router.routes[self.totalCards].settings.errorCode = response.statusCode;
+          self.router.routes[self.totalCards].settings.errorText = self.locale.card_error_messages.unknown_link;
           self.router.navigate('error', {replace: true});
         } else {
           // unhandled error
-          self.router.routes[8].settings.errorCode = response.statusCode;
-          self.router.routes[8].settings.errorText = self.locale.card_error_messages.unknown_error + " (" + response.statusText + ")";
+          self.router.routes[self.totalCards].settings.errorCode = response.statusCode;
+          self.router.routes[self.totalCards].settings.errorText = self.locale.card_error_messages.unknown_error + " (" + response.statusText + ")";
           self.router.navigate('error', {replace: true});
         }
       });
     } else {
-      self.router.navigate('location', {replace: true});
+      self.router.navigate(self.router.routes[1].route, {replace: true});
     }
 
     self.ea.subscribe('readTerms', msg => {
@@ -148,8 +170,8 @@ export class Cards {
       })
       .catch(response => {
         console.log(response);
-        self.router.routes[8].settings.errorCode = response.statusCode;
-        self.router.routes[8].settings.errorText = response.statusText;
+        self.router.routes[self.totalCards].settings.errorCode = response.statusCode;
+        self.router.routes[self.totalCards].settings.errorText = response.statusText;
         self.router.navigate('error');
         // resolve(null);
       });
@@ -219,20 +241,21 @@ export class Cards {
   }
 
   nextCard() {
-    if (this.cardNo === 1) {
-      if (this.isLocationSupported() || this.location_check) {
-        this.count = 1; //count setter to increment cardNo by 1
-        this.router.navigate(this.router.routes[this.cardNo].route);
-        this.closeNotification();
+    var self = this;
+    if (self.router.currentInstruction.fragment === 'location') {
+      if (self.isLocationSupported() || self.location_check) {
+        self.count = 1; //count setter to increment cardNo by 1
+        self.router.navigate(self.router.routes[self.cardNo].route);
+        self.closeNotification();
       }
-      if (!this.location_check && !this.isLocationSupported()) {
-        this.showNotification('warning', 'location_2', 'location_2', false);
-        this.location_check = true; // execute once
+      if (!self.location_check && !self.isLocationSupported()) {
+        self.showNotification('warning', 'location_2', 'location_2', false);
+        self.location_check = true; // execute once
       }
-    } else if (this.cardNo !== 1 && this.cardNo < this.totalCards) {
-      this.count = 1; //count setter to increment cardNo by 1
-      this.router.navigate(this.router.routes[this.cardNo].route);
-      this.closeNotification();
+    } else if (self.router.currentInstruction.fragment !== 'location' && self.cardNo < self.totalCards) {
+      self.count = 1; //count setter to increment cardNo by 1
+      self.router.navigate(self.router.routes[self.cardNo].route);
+      self.closeNotification();
     }
   }
   prevCard() {
@@ -243,13 +266,13 @@ export class Cards {
   }
 
   get nextDisabled() {
-    if (this.cardNo === 1) {
+    if (this.router.currentInstruction.fragment === 'location') {
       return !this.reportcard.location.markerLocation;
     } else {
-      return this.cardNo >= this.totalCards - 3;
+      return this.cardNo >= this.totalCards - 3; //Disable next button on review card (exclude staple card routes: terms, thanks, error)
     }
   }
   get prevDisabled() {
-    return this.cardNo === 1 || this.cardNo === 7;
+    return this.cardNo === 1;
   }
 }

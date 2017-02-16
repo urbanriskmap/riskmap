@@ -1,12 +1,12 @@
 {
   "page_title": "Laporan Banjir",
   "card_titles": {
-    "1": "Pilih lokasi banjir",
-    "2": "Laporkan Tinggi Genangan",
-    "3": "Unggah Foto",
-    "4": "Tambahkan Deskripsi",
-    "5": "Tinjau & Laporkan",
-    "6": "Syarat dan ketentuan"
+    "location": "Pilih lokasi banjir",
+    "depth": "Laporkan Tinggi Genangan",
+    "photo": "Unggah Foto",
+    "description": "Tambahkan Deskripsi",
+    "review": "Tinjau & Laporkan",
+    "terms": "Syarat dan ketentuan"
   },
   "notification": {
     "header": {
