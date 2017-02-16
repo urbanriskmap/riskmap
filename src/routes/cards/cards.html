@@ -14,7 +14,7 @@
         </label>
       </div>
       <div id="tabRow">
-        <button repeat.for="i of (totalCards - 3)" id="'tabButton' + i" class="tabButtons" disabled.bind="!(i < count)"></button>
+        <button repeat.for="i of (totalCards - 3)" class="tabButtons" disabled.bind="!(i < count)"></button>
       </div>
     </div>
     <div id="cardContent">

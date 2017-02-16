@@ -92,7 +92,7 @@ export class Cards {
       });
     }
 
-    self.totalCards = self.router.routes.length - 1; //exclude routes:'', '*path' (card-landing)
+    self.totalCards = self.router.routes.length - 1; //exclude routes: '*foo' (card-landing)
     $('#' + self.reportcard.selLanguage).addClass("active");
     $(document).ready(() => {
       $('.tabButtons').width((100 / (self.totalCards - 3)) + '%'); //fit 'n' tab buttons on-the-fly, n = (total - staple) cards
@@ -109,8 +109,7 @@ export class Cards {
          var msg = JSON.parse(response.response);
          if (msg.result.received === true) {
            // card already exists
-           // self.router.routes[self.totalCards] to always be error card route
-          self.router.routes[self.totalCards].settings.errorText = self.locale.card_error_messages.already_received;
+          self.reportcard.errors.text = self.locale.card_error_messages.already_received;
           self.router.navigate('error', {replace: true});
         } else {
           // populate network property of reportcard, accessed in thanks card
@@ -122,17 +121,18 @@ export class Cards {
       .catch(response => {
         if (response.statusCode === 404) {
           // error this card does not exist
-          self.router.routes[self.totalCards].settings.errorCode = response.statusCode;
-          self.router.routes[self.totalCards].settings.errorText = self.locale.card_error_messages.unknown_link;
+          self.reportcard.errors.code = response.statusCode;
+          self.reportcard.errors.text = self.locale.card_error_messages.unknown_link;
           self.router.navigate('error', {replace: true});
         } else {
           // unhandled error
-          self.router.routes[self.totalCards].settings.errorCode = response.statusCode;
-          self.router.routes[self.totalCards].settings.errorText = self.locale.card_error_messages.unknown_error + " (" + response.statusText + ")";
+          self.reportcard.errors.code = response.statusCode;
+          self.reportcard.errors.text = self.locale.card_error_messages.unknown_error + " (" + response.statusText + ")";
           self.router.navigate('error', {replace: true});
         }
       });
     } else {
+      // proceed to first card
       self.router.navigate(self.router.routes[1].route, {replace: true});
     }
 
@@ -170,8 +170,8 @@ export class Cards {
       })
       .catch(response => {
         console.log(response);
-        self.router.routes[self.totalCards].settings.errorCode = response.statusCode;
-        self.router.routes[self.totalCards].settings.errorText = response.statusText;
+        self.reportcard.errors.code = response.statusCode;
+        self.reportcard.errors.text = response.statusText;
         self.router.navigate('error');
         // resolve(null);
       });

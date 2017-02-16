@@ -30,6 +30,7 @@ export class ReportCard {
     self.photo = {file: null, rotation: 0};
     self.description = {value: null};
     self.network = null;
+    self.errors = {code: null, text: null};
     self.locale = {};
     self.changeLanguage(this.selLanguage);
   }
