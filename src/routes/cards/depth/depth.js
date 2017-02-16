@@ -25,6 +25,7 @@ export class Depth {
       var refHeightPx = $('#bgImage').height();
       var fillHeight;
       if (self.reportcard.depth) {
+        console.log(self.reportcard.depth);
         if (self.reportcard.depth > heightLimit) {
           self.reportcard.depth = heightLimit;
         } else if (self.reportcard.depth < 0) {
@@ -38,6 +39,8 @@ export class Depth {
       $('#sliderZone').css({
         'bottom': fillHeight + 'px'
       });
+      console.log('fh');
+      console.log(fillHeight);
       self.reportcard.depth = (fillHeight * imgHeightCm) / refHeightPx;
       self.displayDepth = Math.round(self.reportcard.depth);
 
