@@ -1,34 +1,22 @@
 <template>
   <require from="./report-info.css"></require>
   <div  id="photoPreview">
-    <image id="image" if.bind="imageurl" src.bind="imageurl" >
-    <div id="image" if.bind="!imageurl">
-      <i style="font-size:100px; color:#808080; margin:auto"id="image" class="icon-picture"></i>
+    <img class="image" id="hasPhoto" if.bind="imageurl" src.bind="imageurl">
+    <div class="image" id="noPhoto" if.bind="!imageurl">
+      <i class="icon-flood"></i>
     </div>
   </div>
 
   <div id="textPreview">
-    <p if.bind="title" class="textTitle">${title}</p>
-    <p if.bind="height" class="textTitle">Water depth: ${height}cm</p>
-
     <div id="bodyWrapper">
-      <p id="textBody">${text}</p>
+      <p if.bind="title" class="textTitle">${title}</p>
+      <p if.bind="height" class="textTitle">${locale.report_info.water_depth}:&nbsp;${height}cm</p>
+      <p id="timeStamp">${timestamp}</p><p id="textBody">${text}</p>
     </div>
 
     <div id="socialIcons">
-      <a href.bind="twitterText">
-        <i class="icon-twitter">
-        </i>
-      </a>
-
-      <a href.bind="whatsappText">
-        <i class="icon-whatsapp">
-        </i>
-      </a>
-
-      <a href.bind="facebookText">
-        <i class="icon-facebook">
-        </i>
+      <a repeat.for="button of shareButtons" href.bind="button.intent">
+        <i class.bind="'icon-' + button.name"></i>
       </a>
     </div>
   </div>

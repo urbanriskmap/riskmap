@@ -1,13 +1,13 @@
 import {inject} from 'aurelia-framework';
 import $ from 'jquery';
-import {Reportcard} from 'Reportcard';
+import {ReportCard} from 'resources/report-card';
 
 //start-non-standard
-@inject(Reportcard)
+@inject(ReportCard)
 //end-non-standard
 export class Depth {
-  constructor(Reportcard) {
-    this.reportcard = Reportcard;
+  constructor(ReportCard) {
+    this.reportcard = ReportCard;
     this.sliderActive = false;
     //Check for mobile or desktop device
     if (/Mobi/.test(navigator.userAgent)) {
@@ -19,30 +19,30 @@ export class Depth {
 
   attached() {
     $(document).ready(() => { //TODO: test if required
-      var self = this;
-      var imgHeightCm = 220;
-      var heightLimit = 195;
-      var refHeightPx = $('#bgImage').height();
-      var fillHeight;
+      var self = this,
+          imgHeightCm = 220,
+          maxHtLimitCm = 195,
+          minHtLimitCm = 1,
+          refHeightPx = $('#bgImage').height(),
+          fillHeightPx,
+          reportHeightCm;
       if (self.reportcard.depth) {
-        console.log(self.reportcard.depth);
-        if (self.reportcard.depth > heightLimit) {
-          self.reportcard.depth = heightLimit;
-        } else if (self.reportcard.depth < 0) {
-          self.reportcard.depth = 0;
+        //reset value within limits
+        if (self.reportcard.depth > maxHtLimitCm) {
+          reportHeightCm = maxHtLimitCm;
+        } else if (self.reportcard.depth < minHtLimitCm) {
+          reportHeightCm = minHtLimitCm;
         }
         $('#floodZone').css({
           'height': (self.reportcard.depth * refHeightPx / imgHeightCm) + 'px'
         });
       }
-      fillHeight = $('#floodZone').height();
+      fillHeightPx = $('#floodZone').height();
       $('#sliderZone').css({
-        'bottom': fillHeight + 'px'
+        'bottom': fillHeightPx + 'px'
       });
-      console.log('fh');
-      console.log(fillHeight);
-      self.reportcard.depth = (fillHeight * imgHeightCm) / refHeightPx;
-      self.displayDepth = Math.round(self.reportcard.depth);
+      reportHeightCm = (fillHeightPx * imgHeightCm) / refHeightPx;
+      self.reportcard.depth = Math.round(reportHeightCm);
 
       //Touch start
       $('#sliderZone').on('touchstart mousedown', function (e) {
@@ -67,15 +67,33 @@ export class Depth {
           } else {
             dragPos = e.clientY;
           }
-          self.reportcard.depth = ((fillHeight + startPos - dragPos) * imgHeightCm) / refHeightPx;
-          if (self.sliderActive && (self.reportcard.depth > 0 && self.reportcard.depth <= heightLimit)) {
-            self.displayDepth = Math.round(self.reportcard.depth);
-            $('#floodZone').css({
-              'height': (fillHeight + startPos - dragPos) + 'px'
-            });
-            $('#sliderZone').css({
-              'bottom': (fillHeight + startPos - dragPos) + 'px'
-            });
+          reportHeightCm = ((fillHeightPx + startPos - dragPos) * imgHeightCm) / refHeightPx;
+          if (self.sliderActive) {
+            if (reportHeightCm > minHtLimitCm && reportHeightCm < maxHtLimitCm) {
+              $('#floodZone').css({
+                'height': (fillHeightPx + startPos - dragPos) + 'px'
+              });
+              $('#sliderZone').css({
+                'bottom': (fillHeightPx + startPos - dragPos) + 'px'
+              });
+              self.reportcard.depth = Math.round(reportHeightCm);
+            } else if (reportHeightCm >= maxHtLimitCm) {
+              $('#floodZone').css({
+                'height': ((refHeightPx * maxHtLimitCm) / imgHeightCm) + 'px'
+              });
+              $('#sliderZone').css({
+                'bottom': ((refHeightPx * maxHtLimitCm) / imgHeightCm) + 'px'
+              });
+              self.reportcard.depth = maxHtLimitCm;
+            } else if (reportHeightCm <= minHtLimitCm) {
+              $('#floodZone').css({
+                'height': minHtLimitCm + 'px'
+              });
+              $('#sliderZone').css({
+                'bottom': minHtLimitCm + 'px'
+              });
+              self.reportcard.depth = minHtLimitCm;
+            }
           }
         });
       });
@@ -88,7 +106,7 @@ export class Depth {
             'box-shadow': '0px 0px 12px 8px rgba(49, 170, 222, 0.4)'
           });
           $('.knobHelper').fadeIn(200);
-          fillHeight = $('#floodZone').height();
+          fillHeightPx = $('#floodZone').height();
         }
       });
     });

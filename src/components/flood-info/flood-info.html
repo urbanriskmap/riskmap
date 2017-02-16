@@ -1,0 +1,19 @@
+<template>
+  <require from="./flood-info.css"></require>
+  <div id="flood-title">
+    <p>
+      ${locale.flood_info.title}
+      <br>
+      <b>${areaname}, ${districtname}</b>
+    </p>
+  </div>
+  <div id="flood-state">
+    <p id="severity">${locale.flood_info.state_codes[state].severity}</p>
+    <p>
+      ${locale.flood_info.level_hint}: ${state}
+      <br>
+      ${locale.flood_info.state_codes[state].description}
+    </p>
+    <p id="updated">${locale.flood_info.time_hint}: ${updated}</p>
+  </div>
+</template>

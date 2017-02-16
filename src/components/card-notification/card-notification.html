@@ -1,0 +1,18 @@
+<template>
+  <require from="./card-notification.css"></require>
+  <div id="notifyWrapper">
+    <div id="symbol">
+      <i class="icon-attention-circled" if.bind="type === 'warning'"></i>
+      <i class="icon-error-alt" if.bind="type === 'error'"></i>
+    </div>
+    <div id="msg">
+      <h3 if.bind="!bespoke">${locale.notification.header[header]}</h3>
+      <h3 if.bind="bespoke">${header}</h3>
+      <p if.bind="!bespoke" innerhtml.bind="locale.notification.message[message]"></p>
+      <p if.bind="bespoke">${message}</p>
+    </div>
+    <div id="closeNotification" click.delegate="callClose()">
+      <i class="icon-cancel-circled-outline"></i>
+    </div>
+  </div>
+</template>

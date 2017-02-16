@@ -1,0 +1,132 @@
+@import "../../styleSheets/themeGuide.less";
+
+#pageWrapper {
+  position: absolute;
+  .fullspan-mixin;
+
+  & #screen {
+    position: absolute;
+    .fullspan-mixin;
+    background-color: rgba(128, 128, 128, 0.25);
+    z-index: 1025;
+    & #cityPopup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      .translate-mixin(-50%, -50%);
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      box-shadow: @spread-shadow;
+      z-index: 1030;
+      background: @translucent-white;
+      & p {
+        .bodymedium-mixin(14px);
+        margin: 0 0 6px 0;
+      }
+      & label {
+        .linklight-mixin(14px);
+        text-transform: capitalize;
+        text-decoration: none;
+      }
+    }
+  }
+
+  & #map {
+    position: absolute;
+    .fullspan-mixin;
+    & .leaflet-top {
+      top: @bar-heights;
+    }
+    & .leaflet-control-zoom {
+      & a {
+        background-color: @snow-white;
+      }
+      &-in, &-out {
+        width: 30px;
+        height: 28px;
+      }
+    }
+    & .leaflet-bottom {
+      bottom: 10px;
+      left: 10px;
+    }
+  }
+
+  & #topBar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: @bar-heights;
+    background-color: @translucent-white;
+    z-index: 1020;
+    border-bottom: 1px solid @light-gray;
+    & #logo_top {
+      position: absolute;
+      left: 12px;
+      bottom: 2px;
+      width: 125px;
+      & #pbLogo {
+        width: 100%;
+      }
+    }
+    & div.menuBtn {
+      display: none;
+      position: absolute;
+      background: transparent;
+      top: 8px;
+      right: 10px;
+      line-height: 30px;
+      & i {
+        .linklight-mixin(30px);
+      }
+    }
+    & div.active {
+      display: block;
+    }
+  }
+
+  & #logo_bottom {
+    position: absolute;
+    left: 10px;
+    bottom: @bar-heights / 10;
+    width: 180px;
+    padding: 0px;
+    margin: 0px;
+    z-index: 999;
+    & #mitLogo {
+      width: 100%;
+    }
+  }
+
+  & #infoPane {
+    .mappane-mixin(200px);
+    background-color: @snow-white;
+    & .closeBtn {
+      position: absolute;
+      background: transparent;
+      margin: 0px;
+      padding: 0px;
+      top: 6px;
+      right: 6px;
+      text-align: right;
+      z-index: 1015;
+      .linkmedium-mixin(18px);
+    }
+    & .infoWrapper {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding: 12px 12px 0px 12px;
+      z-index: 1002;
+    }
+  }
+
+  & #sidePane {
+    .mappane-mixin(320px);
+    overflow: scroll;
+    background-color: @snow-white;
+  }
+}

@@ -1,12 +1,12 @@
 import {inject} from 'aurelia-framework';
-import {Reportcard} from 'Reportcard';
+import {ReportCard} from 'resources/report-card';
 
 //start-non-standard
-@inject(Reportcard)
+@inject(ReportCard)
 //end-non-standard
 export class Description {
-  constructor(Reportcard) {
-    this.reportcard = Reportcard;
+  constructor(ReportCard) {
+    this.reportcard = ReportCard;
     if (/Mobi/.test(navigator.userAgent)) {
       this.isMobile = true;
     } else {
@@ -20,7 +20,7 @@ export class Description {
 
   onBlur() {
     if (this.isMobile) {
-      this.keypadEnabled = false;
+      this.focussed = false;
       $('#textarea').css({
         'height': 192 + 'px'
       });
@@ -29,10 +29,15 @@ export class Description {
 
   onFocus() {
     if (this.isMobile) {
-      this.keypadEnabled = true;
+      this.focussed = true;
       $('#textarea').css({
         'height': 80 + 'px'
       });
     }
+  }
+
+  setFocus() {
+    $('#textarea').focus();
+    this.onFocus();
   }
 }

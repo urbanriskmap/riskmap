@@ -1,7 +1,11 @@
 <template>
   <require from="./depth.css"></require>
+  <require from="../../../components/depth-bg/depth-bg"></require>
+
   <div id="depthWrapper">
-    <img id="bgImage" src="assets/graphics/heightReference.svg">
+    <svg id="bgImage">
+      <depth-bg></depth-bg>
+    </svg>
     <div id="floodZone">
     </div>
     <div id="sliderZone">
@@ -13,8 +17,7 @@
       <div id="hBottom" class="knobHelper">
         <i class="icon-down-open"></i>
       </div>
-      <div id="depthText">
-        ${displayDepth}&nbsp;cm
+      <div id="depthText" textcontent.bind="reportcard.depth + '&nbsp;cm'">
       </div>
     </div>
   </div>

@@ -141,6 +141,17 @@
             "env": "dev"
           },
           {
+            "name": "aurelia-testing",
+            "path": "../node_modules/aurelia-testing/dist/amd",
+            "main": "aurelia-testing",
+            "env": "local"
+          },
+          {
+            "name": "chart",
+            "path": "../node_modules/chart.js/dist",
+            "main": "Chart.bundle"
+          },
+          {
             "name": "leaflet",
             "path": "../node_modules/leaflet/dist",
             "main": "leaflet",

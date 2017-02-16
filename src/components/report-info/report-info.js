@@ -1,27 +1,49 @@
 import {bindable, customElement} from 'aurelia-framework';
 import env from '../../environment';
 
-var messageText = "Laporan banjir pada petabencana.id";
-
 //start-non-standard
 @customElement('report-info')
 //end-non-standard
 export class ReportInfo {
   //@bindable attributes do not work with camelCase...
   //start-non-standard
+  @bindable locale;
   @bindable imageurl;
   @bindable height;
   @bindable title;
   @bindable text;
   @bindable pkey;
   @bindable city;
+  @bindable timestamp;
   //end-non-standard
 
+  get msgText() {
+    return this.locale.report_info.share_msg;
+  }
+
+  get reportUrl() {
+    return env.app + "map/" + this.city + "/" + this.pkey;
+  }
+
   attached() {
-    if (this.pkey) {
-      this.twitterText = "https://twitter.com/intent/tweet?text=" + messageText + "%20"+ env.app + this.city + "/" + this.pkey;
-      this.whatsappText = "whatsapp://send?text=" + messageText + "%20" + env.app + this.city + "/" + this.pkey;
-      this.facebookText = "http://www.facebook.com/sharer/sharer.php?u=" + env.app + this.city + "/" + this.pkey;
-    }
+    var self = this;
+    self.shareButtons = [ // Name string should match fontello icons name
+      {
+        name: "twitter",
+        intent: "https://twitter.com/intent/tweet?text=" + self.msgText + "%20" + self.reportUrl
+      },
+      {
+        name: "telegram",
+        intent: "https://telegram.me/share/url?url={" + self.reportUrl + "}&text={" + self.msgText + "}"
+      },
+      {
+        name: "whatsapp",
+        intent: "whatsapp://send?text=" + self.msgText + "%20" + self.reportUrl
+      },
+      {
+        name: "facebook",
+        intent: "http://www.facebook.com/sharer/sharer.php?u=" + self.reportUrl
+      }
+    ];
   }
 }

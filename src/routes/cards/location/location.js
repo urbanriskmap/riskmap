@@ -1,15 +1,17 @@
-import * as config from '../config'; // Cards config
+import {Config} from 'resources/config'; // Cards config
 import * as L from 'leaflet';
 import {inject} from 'aurelia-framework';
-import {Reportcard} from 'Reportcard';
+import {ReportCard} from 'resources/report-card';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 //start-non-standard
-@inject(Reportcard)
+@inject(EventAggregator, ReportCard, Config)
 //end-non-standard
 export class Location {
-  constructor(Reportcard) {
-    this.reportcard = Reportcard;
-    this.config = config;
+  constructor(EventAggregator, ReportCard, Config) {
+    this.ea = EventAggregator;
+    this.reportcard = ReportCard;
+    this.tileLayer = Config.cards.tile_layer;
   }
 
   drawGpsMarkers(center, accuracy, map) {
@@ -34,13 +36,15 @@ export class Location {
       var self = this;
 
       //Add leaflet map
-      var cardMap = L.map('mapWrapper', {
-        attributionControl: false
+      self.map = L.map('mapWrapper', {
+        attributionControl: false,
+        center: [13.017163, 80.185031],
+        zoom: 15
       });
-      L.tileLayer(self.config.tile_layer, {
+      L.tileLayer(self.tileLayer, {
         detectRetina: true,
         ext: 'png'
-      }).addTo(cardMap);
+      }).addTo(self.map);
 
       //Add custom leaflet control, to navigate back to browser located user location
       L.Control.GeoLocate = L.Control.extend({
@@ -49,14 +53,14 @@ export class Location {
           container.innerHTML = '<i class="icon-geolocate"></i>';
           container.style.fontSize = '21px';
           container.style.textAlign = 'center';
-          container.style.lineHeight = '28px';
+          container.style.lineHeight = '30px';
           container.style.color = 'black';
           container.style.backgroundColor = 'white';
           container.style.width = '30px';
           container.style.height = '30px';
           container.onclick = function() {
             if (self.reportcard.location.gpsLocation) {
-              cardMap.flyTo(self.reportcard.location.gpsLocation, 16);
+              self.map.flyTo(self.reportcard.location.gpsLocation, 16);
             }
           };
           return container;
@@ -68,36 +72,36 @@ export class Location {
 
       //If previous inputs available, setView to user selected location
       if (self.reportcard.location.markerLocation) {
-        cardMap.setView(self.reportcard.location.markerLocation, 16);
+        self.map.setView(self.reportcard.location.markerLocation, 15);
         //If previous geolocation inputs available, add circle markers at gps location
         if (self.reportcard.location.gpsLocation) {
-          L.control.geoLocate({position: 'bottomright'}).addTo(cardMap);
-          self.drawGpsMarkers(self.reportcard.location.gpsLocation, self.reportcard.location.accuracy, cardMap);
+          L.control.geoLocate({position: 'bottomright'}).addTo(self.map);
+          self.drawGpsMarkers(self.reportcard.location.gpsLocation, self.reportcard.location.accuracy, self.map);
         }
-      } else {
-
-        //If previous inputs unavailable, i.e. at session start; try geolocation
-        cardMap.locate({
-          setView: false
+      } else if (!!navigator.geolocation) {
+        //If previous inputs unavailable, i.e. at session start; try geolocation if supported by browser
+        self.map.locate({
+          setView: true
         });
-        cardMap.on('locationfound', function(e) {
-          cardMap.setView(e.latlng, 16);
-          L.control.geoLocate({position: 'bottomright'}).addTo(cardMap);
-          self.drawGpsMarkers(e.latlng, e.accuracy, cardMap);
+        self.map.on('locationfound', (e) => {
+          L.control.geoLocate({position: 'bottomright'}).addTo(self.map);
+          self.drawGpsMarkers(e.latlng, e.accuracy, self.map);
           self.reportcard.location = {markerLocation: e.latlng, gpsLocation: e.latlng, accuracy: e.accuracy};
         });
-
         //If geolocation unavailable, go to default city center;
-        cardMap.on('locationerror', function () {
-          cardMap.setView([13.017163, 80.185031], 16);
-          self.reportcard.location.markerLocation = cardMap.getCenter();
+        self.map.on('locationerror', () => {
+          self.reportcard.location.markerLocation = self.map.getCenter();
+          self.ea.publish('geolocate', 'error');
         });
+      } else {
+        //Go to default city center if geolocation not supported by browser
+        self.reportcard.location.markerLocation = self.map.getCenter();
       }
 
       //Get map center (corresponding to overlaid marker image) if user pans map
-      cardMap.on('moveend', function () {
-        if (cardMap) {
-          self.reportcard.location.markerLocation = cardMap.getCenter();
+      self.map.on('moveend', () => {
+        if (self.map) {
+          self.reportcard.location.markerLocation = self.map.getCenter();
         }
       });
     });

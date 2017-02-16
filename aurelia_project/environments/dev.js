@@ -5,5 +5,6 @@ export default {
   data_server: 'http://localhost:8001/',
   app: 'http://localhost:8001',
   default_language: 'en',
-  supported_languages: ['en', 'id']
+  supported_languages: ['en', 'id'],
+  enable_test_cardid: true 
 };

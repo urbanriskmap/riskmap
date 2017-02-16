@@ -1,0 +1,46 @@
+@import "../../styleSheets/themeGuide.less";
+
+#notifyWrapper {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  padding: 18px 0 0 0;
+  display: none;
+  background-color: fade(@dark-gray, 80%);
+  z-index: 1500;
+  & #symbol {
+    position: relative;
+    width: 18%;
+    float: left;
+    text-align: right;
+    font-size: 48px;
+    color: @banjir-blue;
+  }
+  & #msg {
+    position: relative;
+    width: 76%;
+    float: right;
+    text-align: left;
+    & h3 {
+      width: 90%;
+      margin: 11px 0;
+      padding: 0;
+      .bodymedium-mixin(21px);
+      color: @banjir-blue;
+    }
+    & p {
+      width: 90%;
+      margin: 0;
+      padding: 0 0 18px 0;
+      .bodylight-mixin(14px);
+      color: @snow-white;
+    }
+  }
+  & #closeNotification {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    .linklight-mixin(18px);
+    color: fade(@snow-white, 80%);
+  }
+}

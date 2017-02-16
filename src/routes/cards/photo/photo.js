@@ -1,16 +1,18 @@
 import {inject} from 'aurelia-framework';
 import $ from 'jquery';
-import {Reportcard} from 'Reportcard';
+import {ReportCard} from 'resources/report-card';
+import {EventAggregator} from 'aurelia-event-aggregator';
 var wrapper;
 var cntxt;
 
 //start-non-standard
-@inject(Reportcard)
+@inject(EventAggregator, ReportCard)
 //end-non-standard
 export class Photo {
-  constructor(Reportcard) {
-    this.reportcard = Reportcard;
-    this.locale = Reportcard.locale;
+  constructor(ea, ReportCard) {
+    this.ea = ea;
+    this.reportcard = ReportCard;
+    this.locale = this.reportcard.locale;
     if (this.reportcard.photo.file) {
       this.haveImg = true;
     }
@@ -35,6 +37,7 @@ export class Photo {
       cntxt = wrapper.getContext('2d');
       $('#previewWrapper').addClass('enabled');
     } else {
+      this.ea.publish('upload', 'error');
       this.enableUpload = false;
     }
     if (this.haveImg) {
@@ -85,7 +88,7 @@ export class Photo {
       if (this.reportcard.photo.file[0].size < 4404019) {
         this.drawImage(0);
       } else {
-        this.notify = true;
+        this.ea.publish('size', 'error');
         this.reportcard.photo.file = null;
       }
     }

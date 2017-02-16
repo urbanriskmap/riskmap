@@ -1,16 +1,20 @@
-import {Reportcard} from 'Reportcard';
+import {ReportCard} from 'resources/report-card';
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
 //start-non-standard
-@inject(Reportcard, EventAggregator)
+@inject(ReportCard, EventAggregator)
 //end-non-standard
 export class Review {
-  constructor(rc, ea) {
-    this.reportcard = rc;
+  constructor(ReportCard, ea) {
+    this.reportcard = ReportCard;
     this.ea = ea;
+    var description = "";
+    if (this.reportcard.description.value) {
+      description = this.reportcard.description.value;
+    }
     this.report = {
-      text: this.reportcard.description.value,
+      text: description,
       water_depth: Math.round(this.reportcard.depth),
       created_at: new Date().toISOString(),
       image_url: '',

@@ -1,7 +1,11 @@
 // Import environment variables
-import env from './environment';
+import env from '../environment';
+import {noView} from 'aurelia-framework';
 
-export class Reportcard {
+//start-non-standard
+@noView
+//end-non-standard
+export class ReportCard {
   static metadata() {
     return Metadata.singleton(true);
   } //true indicates to register in the root container
@@ -21,10 +25,12 @@ export class Reportcard {
     //initial language, TODO: set using detected browser language
     self.selLanguage = env.default_language;
     self.languages = env.supported_languages;
-    self.location = {markerLocation: null, gpsLocation: null, accuracy: null};
+    self.location = {markerLocation: null, gpsLocation: null, accuracy: null, supported: false};
     self.depth = null;
     self.photo = {file: null, rotation: 0};
     self.description = {value: null};
+    self.network = null;
+    self.errors = {code: null, text: null};
     self.locale = {};
     self.changeLanguage(this.selLanguage);
   }

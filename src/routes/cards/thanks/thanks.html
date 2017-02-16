@@ -2,20 +2,21 @@
   <require from="./thanks.css"></require>
 
   <div id="petalogo" class="cardInner">
-    <img src="assets/graphics/Peta_logo.svg">
+    <img src="assets/graphics/Peta_logo.png">
   </div>
+  <div id="thankslogo">
+    <i class="icon-add-report"></i>
+  </div>
+
 
   <div id="thanksText">
-    <p id="thanksBold">Thank you!</p>
+    <p id="thanksBold">${locale.card_hints.thanks}</p>
     <br>
-    <p>Your Report has been submitted,
-    Please check twitter for confirmation</p>
+    <p>${locale.card_hints.confirmation} ${network_name}</p>
       <br>
-      <p> Redirecting to PetaBencana.id</p>
+      <p>${locale.card_hints.redirect}</p>
   </div>
 
-  <div id="URLlogo" class="cardInner">
-    <img src="assets/graphics/URL_logo.svg">
-  </div>
+
 
 </template>

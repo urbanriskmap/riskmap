@@ -1,15 +1,10 @@
 <template>
   <require from="./photo.css"></require>
   <div id="photoWrapper">
-    <div id="previewWrapper" click.delegate="sendClick()" if.bind="enableUpload">
+    <div id="previewWrapper" click.trigger="sendClick()">
       <i class="icon-camera"></i>
       <canvas ref="preview" id="canvas">
       </canvas>
-      <p if.bind="notify">${locale.card_hints.photo_too_large}</p>
-    </div>
-    <div id="previewWrapper" if.bind="!enableUpload">
-      <i class="icon-camera-1"></i>
-      <p>Photo upload is not supported by your browser;<br> press 'NEXT' to continue</p>
     </div>
     <div id="modBtnWrapper">
       <button id="changeButton" class="modBtn" click.delegate="sendClick()" disabled.bind="!enableUpload"><i class="icon-camera-1"></i></button>
@@ -18,5 +13,5 @@
     </div>
   </div>
 
-  <input id="ghostButton" style="display: none" type="file" accept="image/*;capture=camera" files.bind="reportcard.photo.file" change.delegate="sizeCheck()">
+  <input id="ghostButton" style="display: none" type="file" accept="image/*" files.bind="reportcard.photo.file" change.delegate="sizeCheck()">
 </template>

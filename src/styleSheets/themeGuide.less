@@ -2,9 +2,9 @@
 
 //__COLOR VARIABLES__
 //Card layouts & background fills
-@dark-gray:       #2f2f2f; //darken(@steel-gray, 20%);
-@steel-gray:      #424242; //can make this base gray - ease of corrections
-@light-gray:      #808080; //lighten(@steel-gray, 20%);
+@dark-gray:       #2f2f2f;
+@steel-gray:      #424242;
+@light-gray:      #808080;
 @snow-white:      #ffffff;
 @translucent-white: rgba(255, 255, 255, .85);
 @translucent-black: rgba(0, 0, 0, .8);
@@ -12,12 +12,14 @@
 //Card highlights
 @banjir-blue:     #31aade;
 @dark-blue:       #1f4963;
+@blue-hover: saturate(@banjir-blue, 100%);
 
 //Icons & graphs
 @flash-green:     #99cc33;
 @flash-yellow:    #ede838;
-@flash-orange:    #eaaf1c; //real flash-orange
+@flash-orange:    #eaaf1c;
 @flash-red:       #ef4f21;
+@bencana-red:     #c1272d; //
 
 //Text
 @title-color:     #ffffff;
@@ -60,14 +62,12 @@
   font-family: "Roboto-Medium", "Roboto", Open Sans;
   font-size: @var;
   color: @steel-gray;
-  cursor: pointer;
 }
 
 .bodybold-mixin(@var) {
   font-family: "Roboto-Bold", "Roboto", Open Sans;
   font-size: @var;
   color: @steel-gray;
-  cursor: pointer;
 }
 
 .linklight-mixin(@var) {
@@ -77,7 +77,7 @@
   cursor: pointer;
   @media (min-width: 420px) {
     &:hover {
-      color: @banjir-blue;
+      color: @blue-hover;
     }
   }
   &:active {
@@ -92,7 +92,7 @@
   cursor: pointer;
   @media (min-width: 420px) {
     &:hover {
-      color: @banjir-blue;
+      color: @blue-hover;
     }
   }
   &:active {
@@ -133,17 +133,7 @@
 }
 
 //Map page variables
-@bar-heights: 60px;
-
-.mapbars-mixin(@var) {
-  position: absolute;
-  left: 0px;
-  width: 100%;
-  height: @bar-heights / @var;
-  background-color: @translucent-white;
-  z-index: 1010;
-  box-shadow: @spread-shadow;
-}
+@bar-heights: 45px;
 
 .mappane-mixin(@ht) {
   display: none;
@@ -161,7 +151,7 @@
   bottom: 0px;
   padding: 0px;
   margin: 0px;
-  z-index: 1010;
+  z-index: 1000;
   background-color: @translucent-white;
   box-shadow: @spread-shadow;
 }

@@ -1,0 +1,35 @@
+@import "../../styleSheets/themeGuide.less";
+
+#flood-title {
+  position: relative;
+  width: 92%;
+  & p {
+    margin: 0;
+    padding: 10px;
+    .bodymedium-mixin(14px);
+    color: @banjir-blue;
+    text-align: center;
+    & b {
+      color: @dark-gray;
+    }
+  }
+}
+
+#flood-state {
+  position: relative;
+  width: 92%;
+  & p {
+    margin: 0;
+    padding: 5px;
+    .bodymedium-mixin(14px);
+    color: @dark-gray;
+    text-align: center;
+  }
+  & #severity {
+    color: @banjir-blue;
+    text-transform: uppercase;
+  }
+  & #updated {
+    .bodylight-mixin(12px);
+  }
+}

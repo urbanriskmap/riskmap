@@ -14,7 +14,8 @@
     </div>
     <div id="reviewSubmit">
       <div id="termsConditions" if.bind="!swiped">
-        <p if.bind="!report.text && !reportcard.photo.file">${locale.card_hints.more_details_required}</p>
+        <p if.bind="!reportcard.location.supported"><i class="icon-attention-circled"></i>&nbsp;${locale.card_hints.location_check}</p>
+        <p if.bind="!report.text && !reportcard.photo.file"><i class="icon-cancel-circled"></i>${locale.card_hints.more_details_required}</p>
         <p if.bind="report.text || reportcard.photo.file">${locale.card_hints.agreement_text}<br><a click.delegate="readTerms()"><u>${locale.card_hints.agreement_title}</u></a></p>
       </div>
       <div id="submitSlider" if.bind="!swiped">
