@@ -63,7 +63,7 @@
       "steps": [
         "Tweet #banjir to @petabencana.",
         "Open the link and follow the instructions to input flood location, upload photo, and description.",
-        "You can see your report on the map via the link provided. Check PetaBencana.id for up-to-date flood information."
+        "You can see your report on the map via the link provided. Check Riskmap.in for up-to-date flood information."
       ]
     },
     "telegram": {
@@ -71,23 +71,23 @@
       "steps": [
         "Text /banjir to @BencanaBot.",
         "Open the link and follow the instructions to input flood location, upload photo, and description.",
-        "You can see your report on the map via the link provided. Check PetaBencana.id for up-to-date flood information."
+        "You can see your report on the map via the link provided. Check Riskmap.in for up-to-date flood information."
       ]
     },
     "otherapps": {
       "title": "Report with local applications",
       "steps": [
         "You can report flood from Qlue, PasangMata, and Z-Alert.",
-        "Your report is now on the map. Check PetaBencana.id for up-to-date flood information."
+        "Your report is now on the map. Check Riskmap.in for up-to-date flood information."
       ],
       "links": "<br><ul><li>Qlue:&nbsp;<a href='https://play.google.com/store/apps/details?id=org.qluein.android'><i class='icon-android'></i></a>&nbsp;&#124;&nbsp;<a href='https://itunes.apple.com/us/app/qlue-jakarta-smart-city/id987432944?ls=1&mt=8'><i class='icon-apple'></i></a></li><li><a href='http://pasangmata.detik.com/'>PasangMata</a></li><li><a href='https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need'>Z-Alert</a></li></ul>"
     }
   },
   "info_content": {
-    "intro": "PetaBencana.id harnesses the power of social media to gather, sort, and display information about flooding in real time.",
-    "p1": "PetaBencana.id is a project initiated by the Urban Risk Lab at MIT as a free, transparent platform for emergency response and disaster management in megacities in South and Southeast Asia.",
+    "intro": "Riskmap.in harnesses the power of social media to gather, sort, and display information about flooding in real time.",
+    "p1": "Riskmap.in is a project initiated by the Urban Risk Lab at MIT as a free, transparent platform for emergency response and disaster management in megacities in South and Southeast Asia.",
     "p2": "The platform adopts a “people are the best sensors” paradigm, where confirmed reports are collected directly from the users at street level in a manner that removes expensive and time-consuming data processing. This framework creates accurate, real-time data which is immediately made available for users and first responders.",
-    "p3": "PetaBencana.id gathers, sorts, and visualizes data using specially developed CogniCity Open Source Software - an enterprise-level platform for emergency response and disaster management - to transforms the noise of social and digital media into critical information for residents, communities, and government agencies.",
+    "p3": "Riskmap.in gathers, sorts, and visualizes data using specially developed CogniCity Open Source Software - an enterprise-level platform for emergency response and disaster management - to transforms the noise of social and digital media into critical information for residents, communities, and government agencies.",
     "partners": {
       "implementing": "Implementing partner",
       "project": "Project partners",
@@ -102,7 +102,7 @@
     "already_received": "Report already received",
     "unknown_link": "Report link does not exist",
     "unknown_error": "Unhandled report link verification error",
-    "link": "Go to PetaBencana.id"
+    "link": "Go to Riskmap.in"
   },
   "card_hints":{
     "description": "Enter description here...",
@@ -113,7 +113,7 @@
     "location_check": "Unsupported location, report will not appear on map",
     "swipe": "Swipe to submit",
     "thanks": "Thank you for your report",
-    "redirect": "Redirecting to PetaBencana.id",
+    "redirect": "Redirecting to Riskmap.in",
     "next": "NEXT",
     "previous": "PREV",
     "confirmation": "We will send you a confirmation message via"

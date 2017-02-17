@@ -1,7 +1,7 @@
 export class App {
 
   configureRouter(config, router) {
-    config.title = 'FloodMap.in';
+    config.title = 'Riskmap.in';
     config.options.pushState = true;
     config.options.root = '/';
     config.map([
