@@ -18,7 +18,7 @@ export class SidePane {
     this.tabList = ["report", "map", "info"]; //elements match names of fontello icons
     this.tab = "report";
     this.languages = ["en", "id"];
-    this.selLanguage = "id";
+    this.selLanguage = "en";
     this.locale = {};
     this.videos = [
       {
