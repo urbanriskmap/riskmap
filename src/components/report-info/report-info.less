@@ -24,15 +24,17 @@
   }
 }
 
+
+
 #textPreview {
   position: relative;
   width: 55%;
   height: 90%;
   float: right;
   overflow: none;
-  & #bodyWrapper {
+    & #bodyWrapper {
     width: 85%;
-    height: 80%;
+    height: 75%;
     border-bottom: 1px solid @banjir-blue;
     overflow: auto;
     & .textTitle {
@@ -44,12 +46,29 @@
     & #textBody {
       .bodyregular-mixin(14px);
       word-wrap: break-word;
+      border-top: 1px solid @banjir-blue;
+      padding: 0;
+      margin: 0;
     }
     & #timeStamp {
       .bodylight-mixin(12px);
       word-wrap: break-word;
       color: @light-gray;
+      width: 50%;
+      height: 20%;
+      margin:0;
+      padding:0;
     }
+  }
+  & #sourcelogo{
+    position: relative;
+    color: @light-gray;
+    width: 40%;
+    height: 20%;
+    float: right;
+    overflow: none;
+    border: solid 1px blue;
+    margin: 0 10px 0 0;
   }
   & #socialIcons {
     position: absolute;

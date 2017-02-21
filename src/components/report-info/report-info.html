@@ -7,8 +7,14 @@
     </div>
   </div>
 
+
+
   <div id="textPreview">
     <div id="bodyWrapper">
+      <div id="sourcelogo">
+        <!-- TODO: include the logo script here -->
+        <p>${source}</p>
+        </div>
       <p if.bind="title" class="textTitle">${title}</p>
       <p if.bind="height" class="textTitle">${locale.report_info.water_depth}:&nbsp;${height}cm</p>
       <p id="timeStamp">${timestamp}</p><p id="textBody">${text}</p>

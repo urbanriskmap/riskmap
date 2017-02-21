@@ -15,6 +15,7 @@ export class ReportInfo {
   @bindable pkey;
   @bindable city;
   @bindable timestamp;
+  @bindable source;
   //end-non-standard
 
   get msgText() {
