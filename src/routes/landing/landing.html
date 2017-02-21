@@ -44,7 +44,7 @@
       </gauge-info>
       <flood-info class="infoWrapper" if.bind="mapModel.layers.popupContent.state" locale.bind="webMenu.locale" areaname.bind="mapModel.layers.popupContent.area_name" districtname.bind="mapModel.layers.popupContent.parent_name" state.bind="mapModel.layers.popupContent.state" updated.bind="mapModel.layers.formatTime(mapModel.layers.popupContent.last_updated)">
       </flood-info>
-      <report-info class="infoWrapper" if.bind="mapModel.layers.popupContent.pkey" locale.two-way="webMenu.locale" pkey.bind="mapModel.layers.popupContent.pkey" city.bind="mapModel.utility.parseCityName(mapModel.layers.popupContent.tags.instance_region_code, mapModel.cities)" imageurl.bind="mapModel.layers.popupContent.image_url" height.bind="mapModel.layers.popupContent.report_data.flood_depth" title.bind="mapModel.layers.popupContent.title" text.bind="mapModel.layers.popupContent.text" timestamp.bind="mapModel.layers.popupContent.timestamp">
+      <report-info class="infoWrapper" if.bind="mapModel.layers.popupContent.pkey" locale.two-way="webMenu.locale" pkey.bind="mapModel.layers.popupContent.pkey" city.bind="mapModel.utility.parseCityName(mapModel.layers.popupContent.tags.instance_region_code, mapModel.cities)" imageurl.bind="mapModel.layers.popupContent.image_url" height.bind="mapModel.layers.popupContent.report_data.flood_depth" title.bind="mapModel.layers.popupContent.title" text.bind="mapModel.layers.popupContent.text" timestamp.bind="mapModel.layers.popupContent.timestamp" source.bind="mapModel.layers.popupContent.source">
       </report-info>
     </div>
 

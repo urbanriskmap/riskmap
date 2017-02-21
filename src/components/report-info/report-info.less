@@ -29,27 +29,47 @@
   width: 55%;
   height: 90%;
   float: right;
-  overflow: none;
-  & #bodyWrapper {
+  overflow:hidden;
+    & #bodyWrapper {
     width: 85%;
-    height: 80%;
+    height: 75%;
     border-bottom: 1px solid @banjir-blue;
-    overflow: auto;
+    overflow-y: scroll;
+
     & .textTitle {
       .bodybold-mixin(14px);
       padding: 0;
-      margin: 0 0 2px 0;
+      margin: 0 6px 6px 0;
       color: @banjir-blue;
+    }
+    & #timeStamp, #source {
+      .bodylight-mixin(12px);
+      color: @light-gray;
+      width: 60%;
+      line-height: 18px;
+      margin: 0;
+      padding: 0;
+      & #sourceImg {
+        margin: 0;
+        padding: 0;
+      }
     }
     & #textBody {
       .bodyregular-mixin(14px);
       word-wrap: break-word;
+      padding: 0;
+      margin-top: 6px;
     }
-    & #timeStamp {
-      .bodylight-mixin(12px);
-      word-wrap: break-word;
-      color: @light-gray;
-    }
+  }
+  & #sourcelogo{
+    position: relative;
+    color: @light-gray;
+    width: 40%;
+    height: 20%;
+    float: right;
+    overflow: none;
+    border: solid 1px blue;
+    margin: 0 10px 0 0;
   }
   & #socialIcons {
     position: absolute;
