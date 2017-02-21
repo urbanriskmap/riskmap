@@ -29,22 +29,23 @@
   width: 55%;
   height: 90%;
   float: right;
-  overflow: none;
+  overflow:hidden;
     & #bodyWrapper {
     width: 85%;
     height: 75%;
     border-bottom: 1px solid @banjir-blue;
-    overflow: auto;
+    overflow-y: scroll;
+
     & .textTitle {
       .bodybold-mixin(14px);
       padding: 0;
-      margin: 0 0 2px 0;
+      margin: 0 6px 6px 0;
       color: @banjir-blue;
     }
     & #timeStamp, #source {
       .bodylight-mixin(12px);
       color: @light-gray;
-      width: 50%;
+      width: 60%;
       line-height: 18px;
       margin: 0;
       padding: 0;
