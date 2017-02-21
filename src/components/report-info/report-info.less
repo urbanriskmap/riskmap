@@ -24,8 +24,6 @@
   }
 }
 
-
-
 #textPreview {
   position: relative;
   width: 55%;
@@ -43,21 +41,22 @@
       margin: 0 0 2px 0;
       color: @banjir-blue;
     }
+    & #timeStamp, #source {
+      .bodylight-mixin(12px);
+      color: @light-gray;
+      width: 50%;
+      line-height: 18px;
+      margin: 0;
+      padding: 0;
+      & #sourceImg {
+        border: 1px solid red;
+      }
+    }
     & #textBody {
       .bodyregular-mixin(14px);
       word-wrap: break-word;
-      border-top: 1px solid @banjir-blue;
       padding: 0;
       margin: 0;
-    }
-    & #timeStamp {
-      .bodylight-mixin(12px);
-      word-wrap: break-word;
-      color: @light-gray;
-      width: 50%;
-      height: 20%;
-      margin:0;
-      padding:0;
     }
   }
   & #sourcelogo{
