@@ -21,17 +21,17 @@ export class Config {
       {
         "chennai": {
           "region": "chn",
-          "bounds": {
-            "sw":[ 13.017163, 80.185031],
-            "ne":[ 13.151873, 80.309767]
+          "bounds": { //arbit bounding box drawn in QGIS. So the edges aren't orthogonal
+            "sw":[ 12.6884, 79.9248],
+            "ne":[ 13.3766, 80.5413]
           }
         }
       },
       "default_region": {
         "region": "chn",
         "bounds": {
-          "sw":[ 13.017163, 80.185031],
-          "ne":[ 13.151873, 80.309767]
+          "sw":[ 12.6884, 79.9248],
+          "ne":[ 13.3766, 80.5413]
         }
       },
       "data_server" : env.data_server,
