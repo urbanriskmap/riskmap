@@ -340,7 +340,7 @@ export class MapLayers {
       }
     });
     // add layer to map
-    return self.appendData('reports/?city=' + city_region, self.reports, map);
+    return self.appendData('reports/?city=' + city_region +'&timeperiod=604800', self.reports, map);
   }
 
   addFloodExtents(city_name, city_region, map, togglePane) {
