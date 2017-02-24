@@ -17,7 +17,7 @@ export class SidePane {
   constructor() {
     this.tabList = ["report", "map", "info"]; //elements match names of fontello icons
     this.tab = "report";
-    this.languages = ["en", "id"];
+    this.languages = ["en", "tm", "id"];
     this.selLanguage = "en";
     this.locale = {};
     this.videos = [
