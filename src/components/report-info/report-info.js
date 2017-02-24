@@ -20,7 +20,7 @@ export class ReportInfo {
 
   constructor() {
     this.links = {
-      qlue: 'http://qlue.co.id/',
+      qlue: 'https://play.google.com/store/apps/details?id=org.qluein.android&hl=en',
       detik: 'http://pasangmata.detik.com/',
       //start-non-standard
       grasp: 'javascript:void(0)'
