@@ -15,7 +15,18 @@ export class ReportInfo {
   @bindable pkey;
   @bindable city;
   @bindable timestamp;
+  @bindable source;
   //end-non-standard
+
+  constructor() {
+    this.links = {
+      qlue: 'https://play.google.com/store/apps/details?id=org.qluein.android&hl=en',
+      detik: 'http://pasangmata.detik.com/',
+      //start-non-standard
+      grasp: 'javascript:void(0)'
+      //end-non-standard
+    };
+  }
 
   get msgText() {
     return this.locale.report_info.share_msg;

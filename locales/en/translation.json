@@ -31,7 +31,8 @@
   },
   "report_info": {
     "share_msg": "Check%20flood%20reports%20on%20petabencana%2Eid",
-    "water_depth": "Water depth"
+    "water_depth": "Water depth",
+    "source": "Source"
   },
   "flood_info": {
     "title": "Flood affected area",
