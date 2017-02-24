@@ -61,7 +61,7 @@
     "twitter": {
       "title": "Report with Twitter",
       "steps": [
-        "Tweet #banjir to @petabencana.",
+        "Tweet #flood to @riskmap.",
         "Open the link and follow the instructions to input flood location, upload photo, and description.",
         "You can see your report on the map via the link provided. Check Riskmap.in for up-to-date flood information."
       ]
@@ -69,7 +69,7 @@
     "telegram": {
       "title": "Report with Telegram",
       "steps": [
-        "Text /banjir to @BencanaBot.",
+        "Text /Flood to @Riskmap.",
         "Open the link and follow the instructions to input flood location, upload photo, and description.",
         "You can see your report on the map via the link provided. Check Riskmap.in for up-to-date flood information."
       ]

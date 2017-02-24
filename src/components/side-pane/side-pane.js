@@ -24,22 +24,22 @@ export class SidePane {
       {
         platform: "twitter", //Match string to locale/*/translation.json > report_content.*
         source: {
-          "id": "https://www.youtube.com/embed/Gb_BAAiRw2U?autoplay=0&origin=https://petabencana.id&rel=0",
-          "en": "https://www.youtube.com/embed/EfJRa9sF89Y?autoplay=0&origin=https://petabencana.id&rel=0"
+          "id": "https://vimeo.com/179334464", /*https://www.youtube.com/embed/Gb_BAAiRw2U?autoplay=0&origin=https://petabencana.id&rel=0*/
+          "en": "https://vimeo.com/179334464"
         }
       },
       {
         platform: "telegram",
         source: {
-          "id": "https://www.youtube.com/embed/Gb_BAAiRw2U?autoplay=0&origin=https://petabencana.id&rel=0",
-          "en": "https://www.youtube.com/embed/EfJRa9sF89Y?autoplay=0&origin=https://petabencana.id&rel=0"
+          "id": "https://vimeo.com/179334464",
+          "en": "https://vimeo.com/179334464"
         }
       },
       {
         platform: "otherapps",
         source: {
-          "id": "https://www.youtube.com/embed/Gb_BAAiRw2U?autoplay=0&origin=https://petabencana.id&rel=0",
-          "en": "https://www.youtube.com/embed/EfJRa9sF89Y?autoplay=0&origin=https://petabencana.id&rel=0"
+          "id": "https://vimeo.com/179334464",
+          "en": "https://vimeo.com/179334464"
         }
       }
     ];
