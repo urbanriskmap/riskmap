@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-   - "4.4.5"
+   - "6.9.2"
 sudo: false
 
 branches:
@@ -18,9 +18,9 @@ notifications:
 
 addons:
   browserstack:
-    username: abrahamquintero1 
+    username: abrahamquintero1
     access_key:
-      secure: "tf4N4MjqK/0yyI+FOTuCq+douo1m9UEW8VRn8/n8tYr/RGDkOkmGfaalrdrayv9v/LO6FmHb3vWwYKD3cfZEqe574Mcywk03mCGt+Pghq2tMFW8jpTUO7DB9KhFteCmHz39vEnL5/vY4FVVwyEEUQ7t5ycU6L/DP2kCmy7JdqC/XdvvDQu4UB39pAbDabY3/FsNexXKjQ2JZRuL7kHxBAX8qOkidoppZezxvK1DGNWiVGSXZ2Grnu8RSPcEo9OIo+TMLcT9l4p2nO1JC6+iNn73u5ZuNLFB2brf0wbP1nIL2h2ptwnWmADAWGlXUB0/vZU1iawN2M0aaR1s7kbCSs/DIcgWvnZ3Uz+mCufc0JyytKydGH8AdGr2eCU/HBUhju8tjimeXN/KsAwUeHufLqfEQo5jdrOToGx/Jm8GjSFMxE7OpwLl7Qdv93EK8hlGMXuKI+ofTjtRsBP4Bco1vEMiuvPiaY8sLIE6b+6gC8UiNdJpzf4Ul/+vgrvQGsysg7/B/EjTBXtHNDjv9AVKWujnlk/fjknwpSW+QclABan6NvlPzdZSbjDnHnHiSiEsMcrw2YO9OKd/izomuCS9R5LxeIk8noXhoQ/UGMNffVnhI40hYbYmzNsHtpKkVKdv3mhZzSpdq0YpLwHVepctKZH5kBq5paeoGBcNYdkW99iA=" 
+      secure: "tf4N4MjqK/0yyI+FOTuCq+douo1m9UEW8VRn8/n8tYr/RGDkOkmGfaalrdrayv9v/LO6FmHb3vWwYKD3cfZEqe574Mcywk03mCGt+Pghq2tMFW8jpTUO7DB9KhFteCmHz39vEnL5/vY4FVVwyEEUQ7t5ycU6L/DP2kCmy7JdqC/XdvvDQu4UB39pAbDabY3/FsNexXKjQ2JZRuL7kHxBAX8qOkidoppZezxvK1DGNWiVGSXZ2Grnu8RSPcEo9OIo+TMLcT9l4p2nO1JC6+iNn73u5ZuNLFB2brf0wbP1nIL2h2ptwnWmADAWGlXUB0/vZU1iawN2M0aaR1s7kbCSs/DIcgWvnZ3Uz+mCufc0JyytKydGH8AdGr2eCU/HBUhju8tjimeXN/KsAwUeHufLqfEQo5jdrOToGx/Jm8GjSFMxE7OpwLl7Qdv93EK8hlGMXuKI+ofTjtRsBP4Bco1vEMiuvPiaY8sLIE6b+6gC8UiNdJpzf4Ul/+vgrvQGsysg7/B/EjTBXtHNDjv9AVKWujnlk/fjknwpSW+QclABan6NvlPzdZSbjDnHnHiSiEsMcrw2YO9OKd/izomuCS9R5LxeIk8noXhoQ/UGMNffVnhI40hYbYmzNsHtpKkVKdv3mhZzSpdq0YpLwHVepctKZH5kBq5paeoGBcNYdkW99iA="
 
 before_install:
   - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
