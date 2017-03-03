@@ -4,7 +4,9 @@ Front-end code &nbsp;
 <br>
 [Project description](https://github.com/urbanriskmap/petabencana-docs/blob/master/README.md)
 <br>
+<br>
 This platform is built using the Aurelia framework, which has a few prerequisites. To get started, follow the machine & application setup steps. 
+
 ____
 
 ### Machine setup
@@ -18,7 +20,34 @@ ____
 ### Application setup
 * Install the project dependencies 
     * `npm install`
-    
+
+___
+
+### Project Structure
+- configuration file 
+- aurelia env files - custom stuff 
+- translation files 
+- fontelo and assets 
+The project structure is as follows:
+
+- **assets**: static assets such as images, vector graphics and icons
+- **auerlia_project**: Aurelia generated folder containing config and framework specific libraries
+- **locales**: translation files for supported locales (en and id currently)
+- **scripts**: generated scripts from the build process
+- **src**: the main application code
+- **test**: the tests to run (`npm test`)
+
+___
+
+### Routing
+* *App router is configured in /src/app.js*
+    * '/' & '/map' *map landing page*
+    * '/map/:city' *query parameter (city): flyTo supported city* 
+    * '/map/:city/:report' *query parameter (city & report): flyTo queried report id in a supported city* 
+    * '/cards/:id' *query parameter (one time card id): link to access report cards, (use test123 as card id in dev & local environments*
+
+___
+
 ### Configuration
 * Environments
     * *to run in local, update the following values in /aurelia_project/environments/local.js* 
@@ -35,52 +64,31 @@ ____
     * *to add new cities, update the `instance regions` in /src/resources/config.js > Config.map*
     * Default supported cities are Jakarta, Surabaya, Bandung (Refer [here](https://docs.petabencana.id/routes/cities.html) for updates)
     * For every new instance region (city) added, set a three letter `region` code. And set the `bounds` to have southwest and northeast bounds of the city in `sw` and `ne` respectively.
-    * The value set in `default_region` sets the initial map view in localhost:9000/map
+    * The value set in `default_region` sets the initial map view in http://localhost:9000/map
     * *Set `map.center` in /src/routes/cards/location/location.js to the center of the new instance region you have added in map config files*
-    
+
+___    
+
 ### To build
 * Start the development server
-    * `npm start` This will start a dev server on localhost:9000
-
-### Project Structure
-- configuration file 
-- aurelia env files - custom stuff 
-- translation files 
-- fontelo and assets 
-The project structure is as follows:
-
-- **assets**: static assets such as images, vector graphics and icons
-- **auerlia_project**: Aurelia generated folder containing config and framework specific libraries
-- **locales**: translation files for supported locales (en and id currently)
-- **scripts**: generated scripts from the build process
-- **src**: the main application code
-- **test**: the tests to run (`npm test`)
-
-To generate a production build run `npm run build` - this will generate new scripts in scripts/ and also auto increment the reference numbers in index.html.  Upload the following to the deployment destination (e.g. S3 bucket) protecting the structure:
-
+    * `npm start` This will start a dev server on http://localhost:9000
+* To generate a production build
+    * Run `npm run build`
+    * This will generate new scripts in scripts/ and also auto increment the reference numbers in index.html. Upload the following to the deployment destination (e.g. S3 bucket) protecting the structure:
 ```
 assets/*
-locales/*
 scripts/*
 index.html
 favicon.ico
 ```
 
-To test the build locally a static server can be used e.g. https://github.com/scottcorgan/pushstate-server
-
-
-### Routing
-- query parameters, 
-- cards/testing123 
-- localhost:9000/map
-- localhost:9000/cards/test_OTL
-
+___
 
 ### Card Decks
 - currently our cards are fixed as 6 cards that capture flooding information. 
 
+___
 
-----
 ### Testing
 Testing environment supported by [BrowserStack](https://www.browserstack.com/)
 
