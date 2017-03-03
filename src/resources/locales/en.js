@@ -1,0 +1,133 @@
+export class LocaleEn {
+  constructor() {
+    this.translation_strings = {
+      "page_title": "Flood reports",
+      "card_titles": {
+        "1": "Select flood location",
+        "2": "Report water depth",
+        "3": "Upload a photo",
+        "4": "Tell us more",
+        "5": "Review & submit",
+        "6": "Terms & Conditions"
+      },
+      "notification": {
+        "header": {
+          "location_1": "GPS location error",
+          "location_2": "Unsupported city",
+          "photo_1": "Size limit exceeded",
+          "photo_2": "Unsupported browser"
+        },
+        "message": {
+          "location_1": "Drag map to pick a location",
+          "location_2": "Supported cities: Jakarta, Surabaya & Bandung.<br>Reports marked outside these cities will not show on the map.",
+          "photo_1": "Selected photo exceeds size limit of 4.2mb",
+          "photo_2": "Photo upload is not supported by your browser"
+        }
+      },
+      "web_menu": {
+        "tab_names": {
+          "map": "map",
+          "report": "report",
+          "info": "info"
+        }
+      },
+      "report_info": {
+        "share_msg": "Check%20flood%20reports%20on%20petabencana%2Eid",
+        "water_depth": "Water depth",
+        "source": "Source"
+      },
+      "flood_info": {
+        "title": "Flood affected area",
+        "level_hint": "Alert level",
+        "time_hint": "Last updated",
+        "state_codes": {
+          "1": {
+            "severity": "Unknown",
+            "description": "An unknown level of flooding, use caution"
+          },
+          "2": {
+            "severity": "Minor",
+            "description": "Flooding between 10 to 70 cm"
+          },
+          "3": {
+            "severity": "Moderate",
+            "description": "Flooding between 71 to 150 cm"
+          },
+          "4": {
+            "severity": "Severe",
+            "description": "Flooding over 150 cm"
+          }
+        }
+      },
+      "map_helper": "Select city :",
+      "report_content": {
+        "twitter": {
+          "title": "Report with Twitter",
+          "steps": [
+            "Tweet #banjir to @petabencana.",
+            "Open the link and follow the instructions to input flood location, upload photo, and description.",
+            "You can see your report on the map via the link provided. Check PetaBencana.id for up-to-date flood information."
+          ]
+        },
+        "telegram": {
+          "title": "Report with Telegram",
+          "steps": [
+            "Text /banjir to @BencanaBot.",
+            "Open the link and follow the instructions to input flood location, upload photo, and description.",
+            "You can see your report on the map via the link provided. Check PetaBencana.id for up-to-date flood information."
+          ]
+        },
+        "otherapps": {
+          "title": "Report with local applications",
+          "steps": [
+            "You can report flood from Qlue, PasangMata, and Z-Alert.",
+            "Your report is now on the map. Check PetaBencana.id for up-to-date flood information."
+          ],
+          "links": "<br><ul><li>Qlue:&nbsp;<a href='https://play.google.com/store/apps/details?id=org.qluein.android'><i class='icon-android'></i></a>&nbsp;&#124;&nbsp;<a href='https://itunes.apple.com/us/app/qlue-jakarta-smart-city/id987432944?ls=1&mt=8'><i class='icon-apple'></i></a></li><li><a href='http://pasangmata.detik.com/'>PasangMata</a></li><li><a href='https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need'>Z-Alert</a></li></ul>"
+        }
+      },
+      "info_content": {
+        "intro": "PetaBencana.id harnesses the power of social media to gather, sort, and display information about flooding in real time.",
+        "p1": "PetaBencana.id is a project initiated by the Urban Risk Lab at MIT as a free, transparent platform for emergency response and disaster management in megacities in South and Southeast Asia.",
+        "p2": "The platform adopts a “people are the best sensors” paradigm, where confirmed reports are collected directly from the users at street level in a manner that removes expensive and time-consuming data processing. This framework creates accurate, real-time data which is immediately made available for users and first responders.",
+        "p3": "PetaBencana.id gathers, sorts, and visualizes data using specially developed CogniCity Open Source Software - an enterprise-level platform for emergency response and disaster management - to transforms the noise of social and digital media into critical information for residents, communities, and government agencies.",
+        "partners": {
+          "implementing": "Implementing partner",
+          "project": "Project partners",
+          "data": "Data partners"
+        },
+        "mapCredits": "Basemap tiles",
+        "privacy": "Privacy:",
+        "disclaimer": "We do not store any information about users. Information derived from location-enabled mobile devices is mapped in real-time; this information is available through an open API for additional applications.",
+        "USAID": "This website was made possible with the support of the American People through the U.S. Agency for International Development. This is not an official USAID or U.S. Government website. The contents of this website are the sole responsibility of the authors and do not necessarily reflect the views of USAID of the U.S. Government."
+      },
+      "card_error_messages":{
+        "already_received": "Report already received",
+        "unknown_link": "Report link does not exist",
+        "unknown_error": "Unhandled report link verification error",
+        "link": "Go to PetaBencana.id"
+      },
+      "card_hints":{
+        "description": "Enter description here...",
+        "water_depth": "Water Depth",
+        "agreement_text": "By submitting this report you are agreeing to the",
+        "agreement_title": "PetaBencana.id Contributors Agreement",
+        "more_details_required": "Description or Photo required to submit report",
+        "location_check": "Unsupported location, report will not appear on map",
+        "swipe": "Swipe to submit",
+        "thanks": "Thank you for your report",
+        "redirect": "Redirecting to PetaBencana.id",
+        "next": "NEXT",
+        "previous": "PREV",
+        "confirmation": "We will send you a confirmation message via"
+      },
+      "legend":{
+        "title": "Legend",
+        "flood_gauges": "Flood Gauges",
+        "flood_depth": "Flood Depth (cm)"
+      },
+      "termsContents":
+         "<h3 style='text-align:left'>PetaBencana.id Contributor Agreement</h3><p>This document details the agreement (the 'Agreement') between you the user ('You') and the PetaBencana.id project ('PetaBencana.id') for contribution of the location of flooding (a 'Flood Report') and included information ('Content').</p><p>This document pertains to Flood Reports made via a PetaBencana.id Flood Report Card (a 'Report Card'). Report Cards are issued by the PetaBencana.id Automated Program 'Bot' as a one-time-link and sent to You by social messaging. Note that this document does not include contributions collected by PetaBencana.id from third-party data providers.</p><h4>1. About PetaBencana.id</h4><p>1.1 PetaBencana.id collects Flood Reports from users and Indonesian government agencies to map flooding. The aim of PetaBencana.id is to provide and share the best information on the locations of flooding in real-time to help residents and decision makers better respond to floods. Flood Reports submitted by You through PetaBencana.id are added to the publicly available map at <a href='https://petabencana.id/map'>https://petabencana.id/map</a>.</p><p>1.2 PetaBencana.id is a project of the Urban Risk Lab at the Massachusetts Institute of Technology operated in collaboration with the Pacific Disaster Centre and Badan Nasional Penanggulangan Bencana. PetaBencana.id is supported by USAID.</p><p>1.3 PetaBencana.id is Open Source Software and is provided without warranty. For more details see the <a href='https://github.com/urbanriskmap/urbanriskmap-meta/blob/master/petabencana.id/LICENSING.md'>project license documentation</a>.</p><h4>2. Opt-In</h4>Submission of Flood Reports to PetaBencana.id is provided as an opt-in service. PetaBencana.id does not collect any data from You unless you request a one-time-link from the PetaBencana.id Bot using a social messaging platform.</p><h4>3. Data Collected</h4><p>3.1 PetaBencana.id respects Your privacy and only collects data required to map reports of flooding and the minimum information required to communicate with You via social messaging.</p><p>3.2 Your Flood Report and its Contents will be licnesed by PetaBencana.id under a <a href='https://creativecommons.org/licenses/by/4.0/'>creative commons license</a>. Your Flood Report will be made publicly available at <a href='https://petabencana.id'>https://petabencana.id</a></p><p>3.3 Flood reports collected by PetaBencana.id include the following data;</p><ul><li>Your location at the time of report</li><li>Flood depth</li><li>Photo of flooding (optional)</li><li>Description of flooding</li><li>Time of flood report</li><li>Social messaging account username or user number</li><li>Language of message</li></ul><h4>4. Rights Granted</h4><p>4.1 PetaBencana.id does not claim ownership of the Content submitted in Your Flood Report. However, with respect to the Content within Your Flood Report, You hereby grant the PetaBencana.id project a worldwide, royalty-free, non-exclusive, perpetual, irrevocable license to include this data in the PetaBencana.id project and sub-license Your Flood Report and its Content under the license stated in Section 3.2 for public distribution.</p><p>4.2 Where appropriate PetaBencana.id agrees to attribute You the copyright owner by using the mechanism 'Copyright PetaBencana.id and Contributors'.</p><p>4.3 PetaBencana.id may at any time and for any reason remove Your report from the PetaBencana.id project.</p><h4>5. Limitation of Liability</h4><p>5.1 To the extent permitted by applicable law, You provide the Contents of Your Floor Report 'as is' without warranty of any kind, either express or implied, including without limitation any warranties or conditions of merchantability, fitness for a particular purpose, or otherwise.</p><p>5.2 Subject to any liability that may not be excluded or limited by law, neither Your nor PetaBencana.id shall be liable for any special, indirect, incidental, consequential, punitive, or exemplary damages under this Agreement, however caused and under any theory of liability. This exclusion applies even if either party has been advised on the possibility of such damages.</p><h4>6. Miscellaneous</h4><p>6.1 This Agreement will be governed by and construed in accordance with the federal law of the United States. In the event of invalidity of any provision of this Agreement, the parties agree that such invalidity shall not affect the validity of the remaining portions of this Agreement. This is the entire agreement between You and PetaBencana.id which supersedes any prior agreement, whether written, oral or other, relating to the subject matter of this agreement.</p><p>6.2 This document is modelled on the OpenStreetMap Foundation <a href='http://wiki.osmfoundation.org/wiki/Licence/Contributor_Terms'>License Contributor Terms</a>.</p>"
+    };
+  }
+}

@@ -1,7 +1,7 @@
 export class App {
 
   configureRouter(config, router) {
-    config.title = 'Petabencana.id';
+    config.title = 'PetaBencana.id';
     config.options.pushState = true;
     config.options.root = '/';
     config.map([
