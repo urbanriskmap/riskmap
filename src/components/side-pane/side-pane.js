@@ -59,7 +59,7 @@ export class SidePane {
 
   //on the fly language change
   changeLanguage(lang) {
-    $.getJSON("../../../locales/" + lang + "/translation.json", (data) => {
+    $.getJSON("locales/" + lang + "/translation.json", (data) => {
       $.each(data, (key, val) => {
         this.locale[key] = val;
       });

@@ -13,7 +13,8 @@ export class ReportCard {
   // Support language changing
   // TODO - error handling for
   changeLanguage(lang) {
-    $.getJSON("../../../locales/" + lang + "/translation.json", (data) => {
+    this.selLanguage = lang; 
+    $.getJSON("locales/" + lang + "/translation.json", (data) => {
       $.each(data, (key, val) => {
         this.locale[key] = val;
       });

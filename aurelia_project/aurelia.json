@@ -49,6 +49,7 @@
   "paths": {
     "root": "src",
     "resources": "src/resources",
+    "locales": "locales/",
     "elements": "src/resources/elements",
     "attributes": "src/resources/attributes",
     "valueConverters": "src/resources/value-converters",
