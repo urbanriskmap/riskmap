@@ -32,6 +32,6 @@ describe('the app', () => {
   });
 
   it('correct title', () => {
-    expect(sut.router.title).toEqual('Petabencana.id');
+    expect(sut.router.title).toEqual('PetaBencana.id');
   });
 });
