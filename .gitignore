@@ -5,6 +5,7 @@ npm-debug.log
 
 scripts/
 dist/
+coverage/
 src/environment.js
 
 #for vim:
