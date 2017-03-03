@@ -56,6 +56,12 @@ To test the build locally a static server can be used e.g. https://github.com/sc
 ### Testing
 Testing environment supported by [BrowserStack](https://www.browserstack.com/)
 Do ('npm test') to build the project and run the tests. 
+
+If you want to run BrowserStack, you need to provide environment variables with your 
+username and password. Put `export BROWSERSTACK_USERNAME=yourUsername` and `export BROWSERSTACK_KEY=yourAccessKey` into 
+your ~/.bashrc or ~/.bash_profile in order for karma to pick up the browserstack credentials. 
+You also need the browserstack local [testing binary](https://www.browserstack.com/local-testing)
+
 Mockapi to be used in the future. 
 
 ## Contribution Guidelines
