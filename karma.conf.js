@@ -59,8 +59,10 @@ module.exports = function(config) {
       }
     },
 
-    browsers: [ 'Chrome','bs_firefox_mac', 'bs_iphone5'],
-    //browsers: [ 'Chrome'],
+    browsers: ['bs_firefox_mac', 'bs_iphone5'],
 
   });
+  if (!process.env.TRAVIS) {
+    config.browsers.push('Chrome');
+  }
 };
