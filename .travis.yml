@@ -6,6 +6,7 @@ sudo: false
 branches:
   only:
     - master
+    - dev
 
 notifications:
   webhooks:
@@ -21,4 +22,3 @@ before_install:
 install:
   - npm install
   - npm install aurelia-cli -g
-
