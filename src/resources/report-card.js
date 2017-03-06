@@ -1,9 +1,12 @@
 // Import environment variables
-import env from '../environment';
-import {noView} from 'aurelia-framework';
+import env from 'environment';
+import {noView, inject} from 'aurelia-framework';
+import {LocaleEn} from 'resources/locales/en';
+import {LocaleId} from 'resources/locales/id';
 
 //start-non-standard
 @noView
+@inject(LocaleEn, LocaleId)
 //end-non-standard
 export class ReportCard {
   static metadata() {
@@ -13,16 +16,12 @@ export class ReportCard {
   // Support language changing
   // TODO - error handling for
   changeLanguage(lang) {
-    $.getJSON("../../../locales/" + lang + "/translation.json", (data) => {
-      $.each(data, (key, val) => {
-        this.locale[key] = val;
-      });
-    });
+    this.locale = this.lang_obj[lang].translation_strings;
   }
 
-  constructor() {
+  constructor(LocaleEn, LocaleId) {
     var self = this;
-    //initial language, TODO: set using detected browser language
+    self.lang_obj = {en: LocaleEn, id: LocaleId};
     self.selLanguage = env.default_language;
     self.languages = env.supported_languages;
     self.location = {markerLocation: null, gpsLocation: null, accuracy: null, supported: false};

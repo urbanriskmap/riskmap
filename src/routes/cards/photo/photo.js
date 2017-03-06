@@ -12,7 +12,6 @@ export class Photo {
   constructor(ea, ReportCard) {
     this.ea = ea;
     this.reportcard = ReportCard;
-    this.locale = this.reportcard.locale;
     if (this.reportcard.photo.file) {
       this.haveImg = true;
     }

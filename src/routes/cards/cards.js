@@ -14,7 +14,6 @@ export class Cards {
     this.data_src = Config.cards.data_server;
     this.test_card = Config.cards.enable_test_cardid;
     this.reportcard = ReportCard;
-    this.locale = this.reportcard.locale;
     this.region_bounds = {};
     for (let city in Config.map.instance_regions) {
       this.region_bounds[city] = Config.map.instance_regions[city].bounds;
@@ -22,7 +21,7 @@ export class Cards {
   }
 
   configureRouter(config, router) {
-    config.title = this.locale.page_title;
+    config.title = this.reportcard.locale.page_title;
     config.map([
       {route: '',                               moduleId: './card-landing/card-landing', settings: {cardNo: 0}}, //requires cardNo for count getter to set cardNo as 0, on-the-fly resizing dependent on cardTitle & cardNavigation div's displayed, in turn dependent on 'count'
       {route: 'location',     name: 'location', moduleId: './location/location',         settings: {cardNo: 1}},
@@ -89,7 +88,7 @@ export class Cards {
          var msg = JSON.parse(response.response);
          // card already exists
          if (msg.result.received === true) {
-          self.router.routes[8].settings.errorText = self.locale.card_error_messages.already_received;
+          self.router.routes[8].settings.errorText = self.reportcard.locale.card_error_messages.already_received;
           self.router.navigate('error', {replace: true});
         } else {
           self.reportcard.network = msg.result.network;
@@ -101,12 +100,12 @@ export class Cards {
         if (response.statusCode === 404) {
           // error this card does not exist
           self.router.routes[8].settings.errorCode = response.statusCode;
-          self.router.routes[8].settings.errorText = self.locale.card_error_messages.unknown_link;
+          self.router.routes[8].settings.errorText = self.reportcard.locale.card_error_messages.unknown_link;
           self.router.navigate('error', {replace: true});
         } else {
           // unhandled error
           self.router.routes[8].settings.errorCode = response.statusCode;
-          self.router.routes[8].settings.errorText = self.locale.card_error_messages.unknown_error + " (" + response.statusText + ")";
+          self.router.routes[8].settings.errorText = self.reportcard.locale.card_error_messages.unknown_error + " (" + response.statusText + ")";
           self.router.navigate('error', {replace: true});
         }
       });
