@@ -200,7 +200,13 @@
             ${locale.info_content.privacy}<br>
             <i>${locale.info_content.disclaimer}</i>
           </p>
-          <p>${locale.info_content.mapCredits} © <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a></p>
+          <p id="mapbox">
+            ${locale.info_content.mapCredits} ©
+            <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a     href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>.
+            ${locale.info_content.mapImproveLink} <a href="https://www.mapbox.com/map-feedback/" target="_blank">Mapbox</a>.
+          </p>
+          <p id="browserstack"  innerhtml.bind="locale.info_content.browserStack">
+          </p>
           <p id="usaid">
             ${locale.info_content.USAID}
           </p>

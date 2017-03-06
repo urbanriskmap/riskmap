@@ -97,6 +97,8 @@ export class LocaleEn {
           "data": "Data partners"
         },
         "mapCredits": "Basemap tiles",
+        "mapImproveLink": "Improve the basemap at",
+        "browserStack": "Testing supported by <a href='https://www.browserstack.com' target='_blank'>BrowserStack</a>.",
         "privacy": "Privacy:",
         "disclaimer": "We do not store any information about users. Information derived from location-enabled mobile devices is mapped in real-time; this information is available through an open API for additional applications.",
         "USAID": "This website was made possible with the support of the American People through the U.S. Agency for International Development. This is not an official USAID or U.S. Government website. The contents of this website are the sole responsibility of the authors and do not necessarily reflect the views of USAID of the U.S. Government."
