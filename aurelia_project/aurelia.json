@@ -144,6 +144,12 @@
             "name": "aurelia-testing",
             "path": "../node_modules/aurelia-testing/dist/amd",
             "main": "aurelia-testing",
+            "env": "prod"
+          }
+          {
+            "name": "aurelia-testing",
+            "path": "../node_modules/aurelia-testing/dist/amd",
+            "main": "aurelia-testing",
             "env": "local"
           },
           {
