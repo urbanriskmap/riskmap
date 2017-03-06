@@ -7,6 +7,6 @@ import {inject} from 'aurelia-framework';
 //end-non-standard
 export class Terms {
   constructor(ReportCard) {
-    this.locale = ReportCard.locale;
+    this.reportcard = ReportCard;
   }
 }
