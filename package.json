@@ -18,6 +18,7 @@
     "aurelia-bootstrapper": "^1.0.0",
     "aurelia-fetch-client": "^1.0.1",
     "aurelia-http-client": "^1.0.3",
+    "aurelia-protractor-plugin": "^1.0.1",
     "bluebird": "^3.4.1",
     "chart.js": "^2.4.0",
     "jquery": "^3.1.1",
