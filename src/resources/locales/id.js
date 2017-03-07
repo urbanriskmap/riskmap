@@ -37,25 +37,25 @@ export class LocaleId {
         "source": "Sumber"
       },
       "flood_info": {
-        "title": "Flood affected area",
-        "level_hint": "Alert level",
-        "time_hint": "Last updated",
+        "title": "Area terdampak banjir",
+        "level_hint": "Status ketinggian banjir",
+        "time_hint": "Diperbarui pada",
         "state_codes": {
           "1": {
-            "severity": "Unknown",
-            "description": "An unknown level of flooding, use caution"
+            "severity": "Tidak diketahui",
+            "description": "Ketinggian banjir tidak diketahui, harap berhati-hati"
           },
           "2": {
-            "severity": "Minor",
-            "description": "Flooding between 10 to 70 cm"
+            "severity": "Rendah",
+            "description": "Banjir antara 10 sampai 70 cm"
           },
           "3": {
-            "severity": "Moderate",
-            "description": "Flooding between 71 to 150 cm"
+            "severity": "Sedang",
+            "description": "Banjir antara 71 sampai 150 cm"
           },
           "4": {
-            "severity": "Severe",
-            "description": "Flooding over 150 cm"
+            "severity": "Parah",
+            "description": "Banjir di atas 150 cm"
           }
         }
       },
