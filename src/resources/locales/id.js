@@ -97,6 +97,8 @@ export class LocaleId {
           "data": "Mitra Penyedia Data"
         },
         "mapCredits": "Peta Dasar",
+        "mapImproveLink": "Meningkatkan peta dasar di",
+        "browserStack": "Ujicoba didukung oleh <a href='https://www.browserstack.com' target='_blank'>BrowserStack</a>.",
         "privacy": "Privasi:",
         "disclaimer": "Kami tidak menyimpan informasi tentang pengguna. Semua informasi yang berasal dari perangkat seluler bergeolokasi dipetakan secara real time; informasi ini dapat dilihat lewat API terbuka untuk aplikasi lain.",
         "USAID": "Situs web ini dapat terselenggara dengan dukungan dari warga Amerika melalui USAID (U.S. Agency for International Development). Situs ini bukan merupakan situs resmi USAID atau Pemerintah Amerika Serikat. Konten situs ini seluruhnya merupakan tanggung jawab dari para pencipta dan belum tentu merefleksikan pandangan dari USAID dan Pemerintah Amerika Serikat."
