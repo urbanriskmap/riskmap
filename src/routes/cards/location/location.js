@@ -38,7 +38,7 @@ export class Location {
       //Add leaflet map
       self.map = L.map('mapWrapper', {
         attributionControl: false,
-        center: [-6.1754, 106.8271],
+        center: [13.017163, 80.185031],
         zoom: 15
       });
       L.tileLayer(self.tileLayer, {

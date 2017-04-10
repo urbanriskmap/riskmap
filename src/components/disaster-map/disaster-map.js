@@ -13,6 +13,9 @@ export class DisasterMap {
   @bindable querycity;
   @bindable reportid;
   @bindable resetTab;
+  @bindable querylanguage;
+  @bindable querytab;
+
   //end-non-standard
 
   constructor(MapLayers, MapUtility) {
@@ -31,6 +34,7 @@ export class DisasterMap {
       $(ref).fadeOut(200);
       if (ref === '#infoPane') {
         if (clear_selection) {
+          console.log('within if');
           if (self.layers.selected_report) {
             self.reportid = null;
             history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
@@ -44,6 +48,14 @@ export class DisasterMap {
           if (self.layers.selected_gauge) {
             self.layers.selected_gauge.target.setIcon(self.layers.mapIcons.gauge_normal(self.layers.gaugeIconUrl(self.layers.selected_gauge.target.feature.properties.observations[self.layers.selected_gauge.target.feature.properties.observations.length-1].f3)));
             self.layers.selected_gauge = null;
+          }
+          if ((self.querylanguage || self.querytab) && !self.reportid ) {
+            if (self.utility.isCitySupported(self.querycity)) {
+              self.selected_city = self.querycity; //selected_city given a value from params only when viewReports / changeCity run
+              history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
+            } else {
+              history.pushState({city: null, report_id: null}, "city", "map");
+            }
           }
           self.layers.popupContent = null;
         }
@@ -118,21 +130,22 @@ export class DisasterMap {
           }
         });
       } else if (!self.reportid) {
-        if (self.utility.parseCityObj(city_name).region === 'java') {
+        if (self.utility.isCitySupported(city_name)) {
+          self.selected_city = city_name;
+          if (push_state) {
+            history.pushState({city: city_name, report_id: null}, 'city', "map/" + city_name);
+          }
+        } else {
           self.utility.noReportNotification(null, null);
           self.selected_city = null;
           if (push_state) {
             history.pushState({city: null, report_id: null}, 'city', "map");
           }
-        } else {
-          self.selected_city = city_name;
-          if (push_state) {
-            history.pushState({city: city_name, report_id: null}, 'city', "map/" + city_name);
-          }
         }
       }
     }).catch(() => {
       //Case 3: .addReports not resolved for specified city
+      console.log('i\'m getting executed');
       self.utility.noReportNotification(city_name, null);
       self.reportid = null;
     });
@@ -144,7 +157,7 @@ export class DisasterMap {
     // Initialize leaflet map
     self.map = L.map('mapContainer', {
       attributionControl: false, //include in side pane
-      center: [-7, 110],
+      center: [13.017163, 80.185031],
       zoom: 8,
       minZoom: 8
     });

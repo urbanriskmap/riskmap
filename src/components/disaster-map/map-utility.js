@@ -26,6 +26,10 @@ export class MapUtility {
     this.config = Config.map;
   }
 
+  isCitySupported(querycity) {
+    return querycity in this.config.instance_regions;
+  }
+
   parseCityName(region_code, cities) {
     var self = this;
     for (var i = 0; i < cities.length; i+=1) {
@@ -44,13 +48,15 @@ export class MapUtility {
       // null, undefined
       $('#screen').show();
       return self.config.default_region;
-    } else if (city_name in self.config.instance_regions) {
+    } else if (self.isCitySupported(city_name)) {
       // supported city
       $('#screen').hide();
       return self.config.instance_regions[city_name];
     } else {
       // invalid city
       $('#screen').show();
+      self.noReportNotification(null, null);
+      history.pushState({city: null, report_id: null}, 'city', "map");
       return self.config.default_region;
     }
   }
@@ -80,11 +86,12 @@ export class MapUtility {
   }
 
   noReportNotification(city_name, report_id) {
+    console.log(city_name);
     if (report_id && city_name) {
       $.notify("Report id: " + report_id + " not found in " + city_name, {style:"mapInfo", className:"info"});
     } else if (city_name) {
       $.notify("No reports found for " + city_name, {style:"mapInfo", className:"info"});
-    } else if (!city_name) {
+    } else {
       $.notify('Unsupported city', {style:"mapInfo", className:"error"});
     }
   }

@@ -65,9 +65,10 @@ export class MapLayers {
 
   // Format timestamps to local time
   formatTime(timestamp_ISO8601) {
+    let timeZoneDifference = -5;
     let utc = new Date(timestamp_ISO8601).getTime();
-    let ict = utc + 3600 * 7 * 1000; // Add 7 hours for UTC+7
-    let timestring = new Date(ict).toISOString();
+    let localTime = utc + (3600 * timeZoneDifference) * 1000; // Add 7 hours for UTC-5
+    let timestring = new Date(localTime).toISOString();
     timestring = timestring.split('T'); // Split time and ate
     let t1 = timestring[1].slice(0,5); // Extract HH:MM
     let d1 = timestring[0].split('-'); // Extract DD-MM-YY
@@ -104,7 +105,7 @@ export class MapLayers {
     self.activeReports[feature.properties.pkey] = layer;
     layer.on({
       click: (e) => {
-        map.panTo(layer._latlng);
+        map.flyTo(layer._latlng, 15);
         if (self.selected_extent) {
           self.selected_extent.target.setStyle(self.mapPolygons.normal);
           self.selected_extent = null;
@@ -339,7 +340,7 @@ export class MapLayers {
       }
     });
     // add layer to map
-    return self.appendData('reports/?city=' + city_region, self.reports, map);
+    return self.appendData('reports/?city=' + city_region +'&timeperiod=604800', self.reports, map);
   }
 
   addFloodExtents(city_name, city_region, map, togglePane) {
