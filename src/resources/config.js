@@ -17,21 +17,34 @@ export class Config {
     };
 
     this.map = {
-      "instance_regions":
-      {
-        "chennai": {
-          "region": "chn",
-          "bounds": { //arbit bounding box drawn in QGIS. So the edges aren't orthogonal
-            "sw":[ 12.6884, 79.9248],
-            "ne":[ 13.3766, 80.5413]
-           }
-         }
-       },
+      "instance_regions": {
+        "jakarta": {
+          "region": "jbd",
+          "bounds": {
+            "sw":[-6.733, 106.480],
+            "ne":[-5.880, 107.175]
+          }
+        },
+        "surabaya": {
+          "region": "sby",
+          "bounds": {
+            "sw":[-7.5499, 112.3975],
+            "ne":[-7.0143, 113.0318]
+          }
+        },
+        "bandung": {
+          "region": "bdg",
+          "bounds": {
+            "sw":[-7.165, 107.369],
+            "ne":[-6.668, 107.931]
+          }
+        }
+      },
       "default_region": {
-        "region": "gcc", //greater chennai - equivalent to region map bounds for starting screen
+        "region": "java",
         "bounds": {
-          "sw":[ 12.6884, 79.9248],
-          "ne":[ 13.3766, 80.5413]
+          "sw":[-10.293, 104.677],
+          "ne":[-3.974, 115.290]
         }
       },
       "data_server" : env.data_server,

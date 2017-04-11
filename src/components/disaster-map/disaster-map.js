@@ -157,7 +157,7 @@ export class DisasterMap {
     // Initialize leaflet map
     self.map = L.map('mapContainer', {
       attributionControl: false, //include in side pane
-      center: [13.017163, 80.185031],
+      center: [-7, 110],
       zoom: 8,
       minZoom: 8
     });
