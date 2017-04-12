@@ -18,7 +18,7 @@
       </li>
     </ul>
   </div>
-
+<!--Map section-->
   <div id="paneContent">
     <div id="content-map" if.bind="tab === 'map'" class="contentWrapper">
       <p>${locale.map_helper}</p>
@@ -68,7 +68,7 @@
         </tr>
         </table>
     </div>
-
+<!--Report section-->
     <div id="content-report" if.bind="tab === 'report'" class="contentWrapper">
       <table id="reportTable">
         <tr repeat.for="video of videos" class="vidRows">
@@ -106,12 +106,12 @@
             </tr>
           </table>
         </div>
-
+<!--info section-->
         <div id="content-info" if.bind="tab === 'info'" class="contentWrapper">
           <table id="headLogos">
             <tr>
               <td align="left">
-                <a href="https://www.usaid.gov/">
+                <a href="http://tatacenter.mit.edu">
                   <img id="usaidLogo" src="assets/graphics/TataCenter_logo_web.png">
                 </a>
               </td>
@@ -133,7 +133,7 @@
             </tr>
             <tr>
               <td colspan="4" align="center">
-                <a href="http://www.bnpb.go.id/">
+                <a href="http://www.chennaicorporation.gov.in/index.htm">
                   <img class="bnpbLogo" src="assets/graphics/ChennaiCMC_logo.jpg">
                 </a>
               </td>
@@ -143,7 +143,8 @@
                 <p>${locale.info_content.partners.project}</p>
               </td>
             </tr>
-            <tr class="logos">
+            <!-- Project Partners-->
+            <!-- <tr class="logos">
               <td colspan="2" align="center">
                 <a href="http://www.pdc.org/">
                   <img class="partnerLogo" src="assets/graphics/pcd_logo.png">
@@ -160,22 +161,12 @@
                 <p>${locale.info_content.partners.data}</p>
               </td>
             </tr>
+            -->
+            <!-- Data Partners-->
             <tr class="logos">
-              <td colspan="2" align="center">
-                <a href="http://www.qlue.co.id/">
-                  <img class="partnerLogo" src="assets/graphics/qlue_logo.png">
-                </a>
-              </td>
-              <td colspan="2" align="center">
-                <a href="http://pasangmata.detik.com/">
-                  <img class="partnerLogo" src="assets/graphics/pasang_logo.png">
-                </a>
-              </td>
-            </tr>
-              <tr class="logos">
                 <td colspan="2" align="center">
-                  <a href="https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need">
-                    <img class="partnerLogo" src="assets/graphics/zAlert_logo.png">
+                  <a href="https://www.mapbox.com">
+                    <img class="partnerLogo" src="assets/graphics/mapbox-logo.png">
                   </a>
                 </td>
               <td colspan="2" align="center">
@@ -194,9 +185,9 @@
             <i>${locale.info_content.disclaimer}</i>
           </p>
           <p>${locale.info_content.mapCredits} © <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a></p>
-          <p id="usaid">
+          <!-- <p id="usaid">
             ${locale.info_content.USAID}
-          </p>
+          </p> -->
           <div id="pbLogo">
             <img src="assets/graphics/Riskmap_logo_noSub.svg">
           </div>
