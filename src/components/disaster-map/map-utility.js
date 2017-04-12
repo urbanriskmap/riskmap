@@ -26,14 +26,16 @@ export class MapUtility {
     this.config = Config.map;
   }
 
+  // return boolean only
   isCitySupported(querycity) {
     return querycity in this.config.instance_regions;
   }
 
+  // return all supported cities as an array
   parseCityName(region_code, cities) {
     var self = this;
     for (var i = 0; i < cities.length; i+=1) {
-      if (self.parseCityObj(cities[i]).region === region_code) {
+      if (self.parseCityObj(cities[i], false).region === region_code) {
         return cities[i];
       } else {
         return null;
@@ -42,7 +44,7 @@ export class MapUtility {
   }
 
   // parse a city name (string) to return its instance region properties (object)
-  parseCityObj(city_name) {
+  parseCityObj(city_name, notify) {
     var self = this;
     if (!city_name) {
       // null, undefined
@@ -52,11 +54,12 @@ export class MapUtility {
       // supported city
       $('#screen').hide();
       return self.config.instance_regions[city_name];
-    } else {
+    } else if (!self.isCitySupported(city_name)) {
       // invalid city
-      $('#screen').show();
-      self.noReportNotification(null, null);
-      history.pushState({city: null, report_id: null}, 'city', "map");
+      if (notify) {
+        $('#screen').show();
+        history.pushState({city: null, report_id: null}, 'city', "map");
+      }
       return self.config.default_region;
     }
   }
@@ -64,7 +67,7 @@ export class MapUtility {
   // Change city from within map without reloading window
   changeCity(city_name, report_id, map, layers, togglePane) {
     var self = this,
-        cityObj = self.parseCityObj(city_name);
+        cityObj = self.parseCityObj(city_name, true);
     // Remove previous layers
     layers.removeFloodExtents(map);
     layers.removeFloodGauges(map);
@@ -75,9 +78,9 @@ export class MapUtility {
     });
     // Add new layers
     if (cityObj.region !== 'java') {
-      layers.addFloodExtents(city_name, self.parseCityObj(city_name).region, map, togglePane);
-      layers.addFloodGauges(city_name, self.parseCityObj(city_name).region, map, togglePane);
-      return layers.addReports(city_name, self.parseCityObj(city_name).region, map, togglePane);
+      layers.addFloodExtents(city_name, self.parseCityObj(city_name, false).region, map, togglePane);
+      layers.addFloodGauges(city_name, self.parseCityObj(city_name, false).region, map, togglePane);
+      return layers.addReports(city_name, self.parseCityObj(city_name, false).region, map, togglePane);
     } else {
       return new Promise((resolve, reject) => {
         resolve();
@@ -86,7 +89,6 @@ export class MapUtility {
   }
 
   noReportNotification(city_name, report_id) {
-    console.log(city_name);
     if (report_id && city_name) {
       $.notify("Report id: " + report_id + " not found in " + city_name, {style:"mapInfo", className:"info"});
     } else if (city_name) {

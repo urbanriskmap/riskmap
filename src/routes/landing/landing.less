@@ -8,7 +8,7 @@
     position: absolute;
     .fullspan-mixin;
     background-color: rgba(128, 128, 128, 0.25);
-    z-index: 1025;
+    z-index: 1020;
     & #cityPopup {
       position: fixed;
       top: 50%;
@@ -61,7 +61,7 @@
     width: 100%;
     height: @bar-heights;
     background-color: @translucent-white;
-    z-index: 1020;
+    z-index: 1030;
     border-bottom: 1px solid @light-gray;
     & #logo_top {
       position: absolute;
@@ -88,19 +88,6 @@
     }
   }
 
-  & #logo_bottom {
-    position: absolute;
-    left: 10px;
-    bottom: @bar-heights / 10;
-    width: 180px;
-    padding: 0px;
-    margin: 0px;
-    z-index: 999;
-    & #mitLogo {
-      width: 100%;
-    }
-  }
-
   & #infoPane {
     .mappane-mixin(200px);
     background-color: @snow-white;
@@ -112,7 +99,7 @@
       top: 6px;
       right: 6px;
       text-align: right;
-      z-index: 1015;
+      z-index: 1025;
       .linkmedium-mixin(18px);
     }
     & .infoWrapper {
@@ -120,7 +107,7 @@
       width: 100%;
       height: 100%;
       padding: 12px 12px 0px 12px;
-      z-index: 1002;
+      z-index: 1020;
     }
   }
 
@@ -128,5 +115,6 @@
     .mappane-mixin(320px);
     overflow: scroll;
     background-color: @snow-white;
+    z-index: 1025;
   }
 }

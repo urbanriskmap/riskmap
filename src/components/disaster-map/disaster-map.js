@@ -34,7 +34,6 @@ export class DisasterMap {
       $(ref).fadeOut(200);
       if (ref === '#infoPane') {
         if (clear_selection) {
-          console.log('within if');
           if (self.layers.selected_report) {
             self.reportid = null;
             history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
@@ -87,7 +86,7 @@ export class DisasterMap {
     .then(() => {
       if (self.reportid && self.layers.activeReports.hasOwnProperty(self.reportid)) {
         //Case 1: Active report id in current city
-        if (self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code === self.utility.parseCityObj(city_name).region) {
+        if (self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code === self.utility.parseCityObj(city_name, false).region) {
           self.layers.activeReports[self.reportid].fire('click');
           self.selected_city = city_name;
           if (push_state) {
@@ -99,7 +98,7 @@ export class DisasterMap {
         self.layers.addSingleReport(self.reportid)
         .then(report => {
           var reportRegion = self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code;
-          if (reportRegion === self.utility.parseCityObj(city_name).region) {
+          if (reportRegion === self.utility.parseCityObj(city_name, false).region) {
             //Case 2A: in current city?
             report.fire('click');
             self.selected_city = city_name;
@@ -145,7 +144,6 @@ export class DisasterMap {
       }
     }).catch(() => {
       //Case 3: .addReports not resolved for specified city
-      console.log('i\'m getting executed');
       self.utility.noReportNotification(city_name, null);
       self.reportid = null;
     });

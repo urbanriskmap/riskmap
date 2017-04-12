@@ -9,7 +9,6 @@ export class Landing {
     this.report_id = params.report;
     this.url_lang = (env.supported_languages.indexOf(params.lang) > -1) ? params.lang : env.default_language;
     this.tab_to_open = (params.tab === "info" || params.tab === "map" || params.tab === "report") ? params.tab : null;
-    console.log('landing params: ' + JSON.stringify(params));
   }
 
   resizeSidePane() {
