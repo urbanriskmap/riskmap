@@ -13,6 +13,9 @@ export class DisasterMap {
   @bindable querycity;
   @bindable reportid;
   @bindable resetTab;
+  @bindable querylanguage;
+  @bindable querytab;
+
   //end-non-standard
 
   constructor(MapLayers, MapUtility) {
@@ -45,6 +48,14 @@ export class DisasterMap {
             self.layers.selected_gauge.target.setIcon(self.layers.mapIcons.gauge_normal(self.layers.gaugeIconUrl(self.layers.selected_gauge.target.feature.properties.observations[self.layers.selected_gauge.target.feature.properties.observations.length-1].f3)));
             self.layers.selected_gauge = null;
           }
+          if ((self.querylanguage || self.querytab) && !self.reportid ) {
+            if (self.utility.isCitySupported(self.querycity)) {
+              self.selected_city = self.querycity; //selected_city given a value from params only when viewReports / changeCity run
+              history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
+            } else {
+              history.pushState({city: null, report_id: null}, "city", "map");
+            }
+          }
           self.layers.popupContent = null;
         }
       } else if (ref === '#sidePane') {
@@ -75,7 +86,7 @@ export class DisasterMap {
     .then(() => {
       if (self.reportid && self.layers.activeReports.hasOwnProperty(self.reportid)) {
         //Case 1: Active report id in current city
-        if (self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code === self.utility.parseCityObj(city_name).region) {
+        if (self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code === self.utility.parseCityObj(city_name, false).region) {
           self.layers.activeReports[self.reportid].fire('click');
           self.selected_city = city_name;
           if (push_state) {
@@ -87,7 +98,7 @@ export class DisasterMap {
         self.layers.addSingleReport(self.reportid)
         .then(report => {
           var reportRegion = self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code;
-          if (reportRegion === self.utility.parseCityObj(city_name).region) {
+          if (reportRegion === self.utility.parseCityObj(city_name, false).region) {
             //Case 2A: in current city?
             report.fire('click');
             self.selected_city = city_name;
@@ -118,16 +129,16 @@ export class DisasterMap {
           }
         });
       } else if (!self.reportid) {
-        if (self.utility.parseCityObj(city_name).region === 'java') {
+        if (self.utility.isCitySupported(city_name)) {
+          self.selected_city = city_name;
+          if (push_state) {
+            history.pushState({city: city_name, report_id: null}, 'city', "map/" + city_name);
+          }
+        } else {
           self.utility.noReportNotification(null, null);
           self.selected_city = null;
           if (push_state) {
             history.pushState({city: null, report_id: null}, 'city', "map");
-          }
-        } else {
-          self.selected_city = city_name;
-          if (push_state) {
-            history.pushState({city: city_name, report_id: null}, 'city', "map/" + city_name);
           }
         }
       }

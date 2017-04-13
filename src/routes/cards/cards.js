@@ -39,6 +39,11 @@ export class Cards {
 
   activate(params) {
     this.id = params.id;
+    console.log('params: ' + JSON.stringify(params));
+    this.lang = params.lang;
+    if(this.lang) {
+      this.reportcard.changeLanguage(this.lang);
+    }
   }
 
   //switch on-the-fly

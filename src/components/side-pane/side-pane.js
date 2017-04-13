@@ -16,12 +16,13 @@ export class SidePane {
   @bindable changeCity;
   @bindable closePane;
   @bindable reportId;
+  @bindable querylanguage;
+  @bindable querytab;
   //end-non-standard
 
   constructor(LocaleEn, LocaleId) {
     this.lang_obj = {en: LocaleEn, id: LocaleId};
     this.languages = env.supported_languages;
-    this.selLanguage = env.default_language;
     this.locale = {};
     this.tabList = ["report", "map", "info"]; //elements match names of fontello icons
     this.tab = "report";
@@ -68,9 +69,15 @@ export class SidePane {
   }
 
   attached() {
+    this.selLanguage = this.querylanguage;
     this.changeLanguage(this.selLanguage);
     $('#' + this.selLanguage).addClass("active");
-    $('#button-' + this.tab).addClass("active");
+    if(this.tab !== this.querytab) {
+      this.tab = this.querytab;
+      this.switchTab(this.tab);
+    } else {
+      $('#button-' + this.tab).addClass("active");
+    }
   }
 
   switchTab(tab) {
