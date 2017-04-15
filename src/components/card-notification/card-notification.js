@@ -15,6 +15,11 @@ export class CardNotification {
   //end-non-standard
 
   callClose() {
-    this.closeNotification();
+    if ($('#notifyWrapper').hasClass('active')) {
+      console.log("active"); 
+      //$('#notifyWrapper').finish();
+      $('#notifyWrapper').dequeue();
+      $('#notifyWrapper').slideUp(300);
+    }
   }
 }
