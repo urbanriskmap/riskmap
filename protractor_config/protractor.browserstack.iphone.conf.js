@@ -1,11 +1,23 @@
 // An example configuration file.
 exports.config = {
-  directConnect: true,
+  //directConnect: true,
+
+  'seleniumAddress': 'http://hub-cloud.browserstack.com/wd/hub',
+
+  'capabilities': {
+    'browserstack.user': process.env.BROWSERSTACK_USERNAME,
+    'browserstack.key': process.env.BROWSERSTACK_KEY,
+    'browserName': 'iPhone',
+    'platform': 'MAC',
+    'device': 'iPhone 6S',
+    'browserstack.debug': 'true',
+    'browserstack.local': 'true',
+  },
 
   // Capabilities to be passed to the webdriver instance.
-  capabilities: {
-    'browserName': 'chrome'
-  },
+  //capabilities: {
+  //  'browserName': 'chrome'
+  //},
 
   // optional: add seleniumServerJar with proper version number
   // seleniumServerJar: './node_modules/gulp-protractor/node_modules/protractor/selenium/selenium-server-standalone-2.53.1.jar',
