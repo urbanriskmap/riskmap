@@ -19,7 +19,6 @@ export class Cards {
       this.region_bounds[city] = Config.map.instance_regions[city].bounds;
     }
   }
-
   configureRouter(config, router) {
     config.title = this.reportcard.locale.page_title;
     config.map([

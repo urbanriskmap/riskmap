@@ -100,4 +100,11 @@ export class SidePane {
     $('.up:not(#up_' + video + ')').hide();
     $('.down:not(#down_' + video + ')').show();
   }
+
+  // When the user clicks on div, open the popup
+    policyPopup() {
+    var popup = document.getElementById("PopupWrapper");
+    popup.classList.toggle("show");
+  }
+
 }

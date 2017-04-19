@@ -1,4 +1,57 @@
 @import "../../resources/style_sheets/theme_guide.less";
+/* Popup container - can be anything you want */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    .bodyregular-mixin(14px);
+    width: 90%;
+    margin: 15px auto;
+}
+.PopupWrapper{
+  position: absolute;
+  .fullspan-mixin;
+  background-color: rgba(128, 128, 128, 0.25);
+  z-index: 1030;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 80%;
+    overflow: scroll;
+    .translate-mixin(-50%, -50%);
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: @spread-shadow;
+    background: @translucent-white;
+    z-index: 1030;
+}
+
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
 
 #tabsBar {
   position: relative;
