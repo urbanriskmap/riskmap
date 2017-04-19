@@ -22,6 +22,10 @@
 .icon-error-alt:before { content: '\e814'; } /* '' */
 .icon-add-report:before { content: '\e815'; } /* '' */
 .icon-otherapps:before { content: '\e816'; } /* '' */
+.icon-desilting:before { content: '\e817'; } /* '' */
+.icon-drain:before { content: '\e818'; } /* '' */
+.icon-canalrepair:before { content: '\e819'; } /* '' */
+.icon-treeclearing:before { content: '\e81a'; } /* '' */
 .icon-spin4:before { content: '\e834'; } /* '' */
 .icon-menu:before { content: '\f0c9'; } /* '' */
 .icon-angle-double-right:before { content: '\f101'; } /* '' */

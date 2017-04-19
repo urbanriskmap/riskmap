@@ -1,7 +1,8 @@
 {
   "page_title": "Flood reports",
   "card_titles": {
-    "location": "Select flood location",
+    "prep": "Report",
+    "location": "Select location",
     "depth": "Report water depth",
     "photo": "Upload a photo",
     "description": "Tell us more",

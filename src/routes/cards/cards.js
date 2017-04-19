@@ -38,7 +38,7 @@ export class Cards {
   activate(params) {
     var self = this;
     self.id = params.id;
-    if (params.disaster === 'flood' || params.disaster === 'hurricane') {
+    if (params.disaster === 'flood' || params.disaster === 'hurricane' || params.disaster === 'prep') {
       $.getJSON("./src/routes/card-decks/" + params.disaster + ".json", data => {
         for (let obj of data) {
           self.router.addRoute(obj);
