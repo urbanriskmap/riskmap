@@ -26,7 +26,8 @@ export class ReportCard {
     self.selLanguage = env.default_language;
     self.languages = env.supported_languages;
     self.location = {markerLocation: null, gpsLocation: null, accuracy: null, supported: false};
-    self.depth = null;
+    self.depth = null; //TODO: make this object similar to DB structure, i.e. tags: {flood_depth: 50, report_type: 'treeclearing'.... etc}
+    self.reportType = null;
     self.photo = {file: null, rotation: 0};
     self.description = {value: null};
     self.network = null;

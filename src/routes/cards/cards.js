@@ -210,6 +210,10 @@ export class Cards {
     self.ea.subscribe('size', error => {
       self.showNotification(error, 'photo_1', 'photo_1', false);
     });
+
+    /*self.ea.subscribe('reportType', btnName => {
+      self.reportcard.depth = btnName; //TODO: change to reportcard.tags.report_type = btnName;
+    });*/
   }
 
   showNotification(type, header, message, bespoke) {
