@@ -70,7 +70,7 @@
     "notifyjs-browser": "^0.4.2",
     "through2": "^2.0.1",
     "topojson-client": "^2.1.0",
-    "uglify-js": "^2.6.3",
+    "uglify-js": "~2.7.5",
     "vinyl-fs": "^2.4.3"
   }
 }

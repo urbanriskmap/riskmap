@@ -1,3 +1,41 @@
+@import "../../../resources/style_sheets/theme_guide.less";
+
+#tabsBar {
+  position: relative;
+  width: 100%;
+  height: @bar-heights;
+  border: none;
+  border-bottom: 1px solid @banjir-blue;
+  & div.paneTabs {
+    float: left;
+    width: 50%;
+    & div.tabs {
+      width: 100%;
+      cursor: pointer;
+      line-height: 40px;
+      & p {
+        width: 100%;
+        .bodylight-mixin(14px);
+        line-height: 14px;
+      }
+      &.active {
+        color: @banjir-blue;
+        border-bottom: 4px solid @banjir-blue;
+        & p {
+          .bodymedium-mixin(14px);
+          color: @banjir-blue;
+        }
+      }
+      &:hover {
+        color: @blue-hover;
+        & p {
+        }
+      }
+    }
+  }
+}
+
+
 #TandCWrapper {
   position: relative;
   width: 80%;
@@ -6,7 +44,7 @@
   padding: 9px;
   overflow: scroll;
   color: #fff;
-  text-align: justify;
+  text-align: left;
   font-size: 12px;
   font-family: 'Roboto-Normal', 'Helvetica Neue', sans-serif;
   border:none;
@@ -15,7 +53,17 @@
   transform: translateY(5%);
 }
 
-#TandCWrapper .headers {
-  text-align: left;
-  font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;
+#TandCWrapper {
+  & a:link{
+  .linklight-mixin(12px);
+  color: @banjir-blue;
+  }
+  & p{
+      .header {
+      text-transform: uppercase;
+      text-decoration:underline;
+      text-align: center;
+      font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;
+    }
+  }
 }

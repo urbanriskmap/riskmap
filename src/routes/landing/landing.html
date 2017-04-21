@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <disaster-map id="map" view-model.ref="mapModel" querycity.bind="queried_city" reportid.two-way="report_id" reset-tab.call="webMenu.switchTab($event)">
+    <disaster-map id="map" view-model.ref="mapModel" querytab.two-way="tab_to_open" querylanguage.two-way="url_lang" querycity.bind="queried_city" reportid.two-way="report_id" reset-tab.call="webMenu.switchTab($event)">
     </disaster-map>
 
     <div id="topBar">
@@ -49,7 +49,7 @@
     </div>
 
     <div id="sidePane">
-      <side-pane cities.bind="mapModel.cities" selected.two-way="mapModel.selected_city" change-city.call="mapModel.viewReports($event, $event)" close-pane.call="mapModel.togglePane('#sidePane', 'hide', false)" reportId.two-way="report_id" view-model.ref="webMenu">
+      <side-pane querytab.two-way="tab_to_open" querylanguage.two-way="url_lang" cities.bind="mapModel.cities" selected.two-way="mapModel.selected_city" change-city.call="mapModel.viewReports($event, $event)" close-pane.call="mapModel.togglePane('#sidePane', 'hide', false)" reportId.two-way="report_id" view-model.ref="webMenu">
       </side-pane>
     </div>
   </div>
