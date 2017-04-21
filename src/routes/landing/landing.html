@@ -2,22 +2,15 @@
   <require from="./landing.css"></require>
   <require from="leaflet/leaflet.css"></require>
   <require from="../../components/disaster-map/disaster-map"></require>
+  <require from="../../components/screen-popup/screen-popup"></require>
   <require from="../../components/report-info/report-info"></require>
   <require from="../../components/gauge-info/gauge-info"></require>
   <require from="../../components/flood-info/flood-info"></require>
   <require from="../../components/side-pane/side-pane"></require>
 
   <div id="pageWrapper">
-    <div id="screen">
-      <div id="cityPopup">
-        <p>${webMenu.locale.map_helper}</p>
-        <label repeat.for="city of mapModel.cities">
-          <input type="radio" model.bind="city" selected.two-way="mapModel.selected_city" change.delegate="mapModel.viewReports(city, true)">
-          ${city}
-          <br>
-        </label>
-      </div>
-    </div>
+    <screen-popup view-model.ref="screenPopup" helper.bind="webMenu.locale.map_helper" cities.bind="mapModel.cities" selcity.two-way="mapModel.selected_city" switch-city.call="mapModel.viewReports($event, $event)" seltab.bind="webMenu.terms_tab" termscontents.bind="webMenu.locale.termsContents">
+    </screen-popup>
 
     <disaster-map id="map" view-model.ref="mapModel" querycity.bind="queried_city" reportid.two-way="report_id" reset-tab.call="webMenu.switchTab($event)">
     </disaster-map>
@@ -36,9 +29,6 @@
       </div>
     </div>
 
-
-
-
     <div id="infoPane">
       <div class="closeBtn" click.delegate="mapModel.togglePane('#infoPane', 'hide', true)">
         <i class="icon-cancel-circled-outline" aria-hidden="true"></i>
@@ -52,7 +42,7 @@
     </div>
 
     <div id="sidePane">
-      <side-pane cities.bind="mapModel.cities" selected.two-way="mapModel.selected_city" change-city.call="mapModel.viewReports($event, $event)" close-pane.call="mapModel.togglePane('#sidePane', 'hide', false)" reportId.two-way="report_id" view-model.ref="webMenu">
+      <side-pane view-model.ref="webMenu" cities.bind="mapModel.cities" selected.two-way="mapModel.selected_city" change-city.call="mapModel.viewReports($event, $event)" close-pane.call="mapModel.togglePane('#sidePane', 'hide', false)" reportId.two-way="report_id" switch-terms.call="screenPopup.switchTab($event)">
       </side-pane>
     </div>
   </div>

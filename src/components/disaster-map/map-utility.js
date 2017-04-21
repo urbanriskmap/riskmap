@@ -43,14 +43,17 @@ export class MapUtility {
     if (!city_name) {
       // null, undefined
       $('#screen').show();
+      $('#cityPopup').show();
       return self.config.default_region;
     } else if (city_name in self.config.instance_regions) {
       // supported city
       $('#screen').hide();
+      $('#cityPopup').hide();
       return self.config.instance_regions[city_name];
     } else {
       // invalid city
       $('#screen').show();
+      $('#cityPopup').show();
       return self.config.default_region;
     }
   }

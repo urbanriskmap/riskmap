@@ -1,0 +1,105 @@
+@import "../../resources/style_sheets/theme_guide.less";
+
+& #screen {
+  position: absolute;
+  .fullspan-mixin;
+  background-color: rgba(128, 128, 128, 0.25);
+  z-index: 1025;
+  & #cityPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    .translate-mixin(-50%, -50%);
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: @spread-shadow;
+    z-index: 1030;
+    background: @translucent-white;
+    & p {
+      .bodymedium-mixin(14px);
+      margin: 0 0 6px 0;
+    }
+    & label {
+      .linklight-mixin(14px);
+      text-transform: capitalize;
+      text-decoration: none;
+    }
+  }
+  & #termsPopup {
+    position: fixed;
+    top: 54%;
+    left: 50%;
+    width: 85%;
+    max-width: 600px;
+    .translate-mixin(-50%, -50%);
+    height: 75%;
+    box-shadow: @spread-shadow;
+    z-index: 1030;
+    background: @translucent-white;
+    & #tabRow {
+      position: absolute;
+      top: -40px;
+      width: 100%;
+      height: 40px;
+      background-color: @translucent-white;
+      border-bottom: 1px solid @banjir-blue;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      & .termsTabs {
+        width: 50%;
+        height: 100%;
+        float: left;
+        .bodylight-mixin(14px);
+        text-align: center;
+        line-height: 40px;
+        cursor: pointer;
+        &:hover {
+          color: @blue-hover;
+        }
+        &.active {
+          .bodymedium-mixin(14px);
+          color: @banjir-blue;
+          border-bottom: 4px solid @banjir-blue;
+        }
+      }
+    }
+    & #tabContent {
+      width: 100%;
+      height: 100%;
+      overflow: scroll;
+      & .termsContents {
+        padding: 24px;
+        .bodylight-mixin(12px);
+        & a {
+        .linklight-mixin(12px);
+        color: @banjir-blue;
+        }
+        & p {
+            .header {
+            text-transform: uppercase;
+            .bodymedium-mixin(14px);
+          }
+        }
+      }
+    }
+    & #closeRow {
+      position: absolute;
+      width: 100%;
+      height: 24px;
+      bottom: -24px;
+      background-color: @translucent-white;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      border-top: 1px solid @banjir-blue;
+      box-shadow: @spread-shadow;
+      text-align: right;
+      & p {
+        line-height: 24px;
+        .linklight-mixin(12px);
+        margin: 0px;
+      }
+    }
+  }
+}

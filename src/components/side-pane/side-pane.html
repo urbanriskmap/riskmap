@@ -197,14 +197,7 @@
           <p innerhtml.bind="locale.info_content.p2"></p>
           <p innerhtml.bind="locale.info_content.p3"></p>
 
-          <p id="disclaimer">
-            ${locale.info_content.privacy}<br>
-            <i>${locale.info_content.disclaimer}</i>
-          </p>
-          <!-- Popup Trial-->
-          <div class="popup" click.delegate="policyPopup()"> Privacy Policy popup
-            <span class="popuptext" id="PopupWrapper" innerhtml.bind="locale.termsContents.privacy_policy.tab_content"></span>
-          </div>
+          <p id="termslink" click.delegate="openTermsPopup('u_a')">User agreement &amp; Privacy policy</p>
 
           <p id="mapbox">
             ${locale.info_content.mapCredits} ©

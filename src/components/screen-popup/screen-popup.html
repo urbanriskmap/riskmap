@@ -1,0 +1,29 @@
+<template>
+  <require from="./screen-popup.css"></require>
+
+  <div id="screen">
+    <div id="cityPopup">
+      <p>${helper}</p>
+      <label repeat.for="city of cities">
+        <input type="radio" model.bind="city" selected.two-way="selcity" change.delegate="switchCity(city, true)">
+        ${city}
+        <br>
+      </label>
+    </div>
+
+    <div id="termsPopup">
+      <div id="tabRow">
+        <div repeat.for="switch of termscontents" class="termsTabs" id.bind="'tab-' + switch.tab_key" click.delegate="switchTab(switch.tab_key)">
+          ${switch.tab_name}
+        </div>
+      </div>
+      <div id="tabContent">
+        <div repeat.for="content of termscontents" class="termsContents" if.bind="content.tab_key === seltab" innerhtml.bind="content.tab_content">
+        </div>
+      </div>
+      <div id="closeRow">
+        <p click.delegate="closePopup()">Close&nbsp;&nbsp;&nbsp;&nbsp;</p>
+      </div>
+    </div>
+  </div>
+</template>

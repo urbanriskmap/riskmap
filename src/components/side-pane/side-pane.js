@@ -16,6 +16,7 @@ export class SidePane {
   @bindable changeCity;
   @bindable closePane;
   @bindable reportId;
+  @bindable switchTerms;
   //end-non-standard
 
   constructor(LocaleEn, LocaleId) {
@@ -102,9 +103,10 @@ export class SidePane {
   }
 
   // When the user clicks on div, open the popup
-    policyPopup() {
-    var popup = document.getElementById("PopupWrapper");
-    popup.classList.toggle("show");
+  openTermsPopup(type) {
+    this.closePane();
+    $('#screen').show();
+    $('#termsPopup').show();
+    this.switchTerms(type);
   }
-
 }
