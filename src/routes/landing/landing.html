@@ -12,7 +12,7 @@
       <div id="cityPopup">
         <p>${webMenu.locale.map_helper}</p>
         <label repeat.for="city of mapModel.cities">
-          <input type="radio" model.bind="city" selected.two-way="mapModel.selected_city" change.delegate="mapModel.viewReports(city, true)">
+		<input type="radio" model.bind="city" id=${city} selected.two-way="mapModel.selected_city" change.delegate="mapModel.viewReports(city, true)">
           ${city}
           <br>
         </label>
