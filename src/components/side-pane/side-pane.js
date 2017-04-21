@@ -1,8 +1,12 @@
-import {bindable, customElement} from 'aurelia-framework';
+import {bindable, customElement, inject} from 'aurelia-framework';
 import $ from 'jquery';
+import env from 'environment';
+import {LocaleEn} from 'resources/locales/en';
+import {LocaleId} from 'resources/locales/id';
 
 //start-non-standard
 @customElement('side-pane')
+@inject(LocaleEn, LocaleId)
 //end-non-standard
 export class SidePane {
   //@bindable attributes do not work with camelCase...
@@ -14,12 +18,13 @@ export class SidePane {
   @bindable reportId;
   //end-non-standard
 
-  constructor() {
+  constructor(LocaleEn, LocaleId) {
+    this.lang_obj = {en: LocaleEn, id: LocaleId};
+    this.languages = env.supported_languages;
+    this.selLanguage = env.default_language;
+    this.locale = {};
     this.tabList = ["report", "map", "info"]; //elements match names of fontello icons
     this.tab = "report";
-    this.languages = ["en", "tm", "id"];
-    this.selLanguage = "en";
-    this.locale = {};
     this.videos = [
       {
         platform: "twitter", //Match string to locale/*/translation.json > report_content.*
@@ -59,11 +64,7 @@ export class SidePane {
 
   //on the fly language change
   changeLanguage(lang) {
-    $.getJSON("../../../locales/" + lang + "/translation.json", (data) => {
-      $.each(data, (key, val) => {
-        this.locale[key] = val;
-      });
-    });
+    this.locale = this.lang_obj[lang].translation_strings;
   }
 
   attached() {
