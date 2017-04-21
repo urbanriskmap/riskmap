@@ -19,9 +19,17 @@ export class LocaleEn {
         },
         "message": {
           "location_1": "Drag map to pick a location",
-          "location_2": "Supported cities: Jakarta, Surabaya & Bandung.<br>Reports marked outside these cities will not show on the map.",
+          "location_2": "Unsupported Location:<br>Reports marked outside Chennai will not show on the map.",
           "photo_1": "Selected photo exceeds size limit of 4.2mb",
           "photo_2": "Photo upload is not supported by your browser"
+        }
+      },
+      "prep_menu": {
+        "btn_names": {
+          "drain": "Blocked Drains",
+          "desilting": "Desilting",
+          "canalrepair": "Canal Repairs",
+          "treeclearing": "Fallen Tree"
         }
       },
       "web_menu": {
