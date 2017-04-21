@@ -35,32 +35,23 @@
   }
 }
 
-
-#TandCWrapper {
+#termsWrapper {
   position: relative;
   width: 80%;
   height: 80%;
   margin: auto;
   padding: 9px;
   overflow: scroll;
-  color: #fff;
+  border-bottom: 1px solid #31aade;
+  .bodylight-mixin(12px);
+  color: @snow-white;
   text-align: left;
-  font-size: 12px;
-  font-family: 'Roboto-Normal', 'Helvetica Neue', sans-serif;
-  border:none;
-  border-bottom: 2px solid #31aade;
-  top: 3%;
-  transform: translateY(5%);
-  & a:link{
+  & a {
   .linklight-mixin(12px);
-  color: @banjir-blue;
+  color: lighten(@banjir-blue, 15%);
   }
-  & p {
-      .header {
-      text-transform: uppercase;
-      text-decoration:underline;
-      text-align: center;
-      font-family: 'Roboto-Medium', 'Helvetica Neue', sans-serif;
-    }
+  & .header {
+    .bodymedium-mixin(14px);
+    color: @snow-white;
   }
 }
