@@ -37,25 +37,25 @@ export class LocaleId {
         "source": "Sumber"
       },
       "flood_info": {
-        "title": "Flood affected area",
-        "level_hint": "Alert level",
-        "time_hint": "Last updated",
+        "title": "Area terdampak banjir",
+        "level_hint": "Status ketinggian banjir",
+        "time_hint": "Diperbarui pada",
         "state_codes": {
           "1": {
-            "severity": "Unknown",
-            "description": "An unknown level of flooding, use caution"
+            "severity": "Tidak diketahui",
+            "description": "Ketinggian banjir tidak diketahui, harap berhati-hati"
           },
           "2": {
-            "severity": "Minor",
-            "description": "Flooding between 10 to 70 cm"
+            "severity": "Rendah",
+            "description": "Banjir antara 10 sampai 70 cm"
           },
           "3": {
-            "severity": "Moderate",
-            "description": "Flooding between 71 to 150 cm"
+            "severity": "Sedang",
+            "description": "Banjir antara 71 sampai 150 cm"
           },
           "4": {
-            "severity": "Severe",
-            "description": "Flooding over 150 cm"
+            "severity": "Parah",
+            "description": "Banjir di atas 150 cm"
           }
         }
       },
@@ -97,6 +97,8 @@ export class LocaleId {
           "data": "Mitra Penyedia Data"
         },
         "mapCredits": "Peta Dasar",
+        "mapImproveLink": "Meningkatkan peta dasar di",
+        "browserStack": "Ujicoba didukung oleh <a href='https://www.browserstack.com' target='_blank'>BrowserStack</a>.",
         "privacy": "Privasi:",
         "disclaimer": "Kami tidak menyimpan informasi tentang pengguna. Semua informasi yang berasal dari perangkat seluler bergeolokasi dipetakan secara real time; informasi ini dapat dilihat lewat API terbuka untuk aplikasi lain.",
         "USAID": "Situs web ini dapat terselenggara dengan dukungan dari warga Amerika melalui USAID (U.S. Agency for International Development). Situs ini bukan merupakan situs resmi USAID atau Pemerintah Amerika Serikat. Konten situs ini seluruhnya merupakan tanggung jawab dari para pencipta dan belum tentu merefleksikan pandangan dari USAID dan Pemerintah Amerika Serikat."

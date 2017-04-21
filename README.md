@@ -24,19 +24,28 @@ ____
 ___
 
 ### Project Structure
-- configuration file 
-- aurelia env files - custom stuff 
-- translation files 
-- fontelo and assets 
 The project structure is as follows:
+- **assets**: Static assets such as fonts, images, vector graphics, and icons
+- **aurelia_project**: Aurelia generated folder containing config (Check Configuration section for more details) and framework specific libraries 
+- **scripts**: Generated scripts from the build process
+- **src**: The main application code with the following files and subfolders
+  * **components**: Contains custom-elements to be used in routes (Read more about Aurelia Custom Elements [here](http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/cheat-sheet/9))
+  * **resources**: Contains globally available resource files
+    * **locales**: translation files for supported locales (en and id currently)
+    * **style_sheets**: contains the parent .less files that get imported in the .less files accompanying all HTML templates
+    * **config.js**: Check Configuration section for more details
+    * **reportCard.js**: singleton class shared across all cards
+  * **routes**: Read more about how Aurelia Routing works [here](http://aurelia.io/hub.html#/doc/article/aurelia/router/latest/router-configuration/1)
+    * **cards**: Contains card decks for GRASP interface (View and view model for each card. Read Card decks section for more information.)
+    * **landing**: Contains template route for maps
+- **test**: The tests to run (Check Testing section for more details)
 
-- **assets**: static assets such as images, vector graphics and icons
-- **auerlia_project**: Aurelia generated folder containing config and framework specific libraries
-- **locales**: translation files for supported locales (en and id currently)
-- **scripts**: generated scripts from the build process
-- **src**: the main application code
-- **test**: the tests to run (`npm test`)
+___
 
+### Card Decks
+- Currently contains single fixed card deck for disaster type - Flood.
+- The deck has location, flood depth, description, photo, and review cards along with error, terms of service, and thank you cards.
+- Addition of a new card involves updates in cards.js router mapping
 ___
 
 ### Routing
@@ -81,12 +90,6 @@ scripts/*
 index.html
 favicon.ico
 ```
-
-___
-
-### Card Decks
-- currently our cards are fixed as 6 cards that capture flooding information. 
-
 ___
 
 ### Testing

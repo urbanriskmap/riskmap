@@ -1,5 +1,5 @@
-import {ReportCard} from 'resources/report-card';
 import {inject} from 'aurelia-framework';
+import {ReportCard} from 'resources/report-card';
 
 //start-non-standard
 @inject(ReportCard)
@@ -7,17 +7,10 @@ import {inject} from 'aurelia-framework';
 export class Error {
   constructor(ReportCard) {
     this.reportcard = ReportCard;
-    this.errorCode = this.reportcard.errors.code;
-    this.errorText = this.reportcard.errors.text;
-    this.locale = this.reportcard.locale;
   }
 
-  attached() {
-    /*
-    // Redirect to /map
-    window.setTimeout(function () {
-      window.location.replace('/map');
-    }, 3000);
-    */
+  activate(params, routerConfig) {
+    this.errorCode = routerConfig.settings.errorCode;
+    this.errorText = routerConfig.settings.errorText;
   }
 }
