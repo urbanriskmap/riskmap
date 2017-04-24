@@ -49,16 +49,18 @@ export class MapUtility {
     if (!city_name) {
       // null, undefined
       $('#screen').show();
+      $('#cityPopup').show();
       return self.config.default_region;
     } else if (self.isCitySupported(city_name)) {
       // supported city
       $('#screen').hide();
+      $('#cityPopup').hide();
       return self.config.instance_regions[city_name];
     } else if (!self.isCitySupported(city_name)) {
       // invalid city
       if (notify) {
         $('#screen').show();
-        history.pushState({city: null, report_id: null}, 'city', "map");
+        $('#cityPopup').show();
       }
       return self.config.default_region;
     }

@@ -11,11 +11,10 @@ import {MapUtility} from './map-utility';
 export class DisasterMap {
   //start-non-standard
   @bindable querycity;
-  @bindable reportid;
-  @bindable resetTab;
   @bindable querylanguage;
   @bindable querytab;
-
+  @bindable reportid;
+  @bindable resetTab;
   //end-non-standard
 
   constructor(MapLayers, MapUtility) {
@@ -48,14 +47,6 @@ export class DisasterMap {
             self.layers.selected_gauge.target.setIcon(self.layers.mapIcons.gauge_normal(self.layers.gaugeIconUrl(self.layers.selected_gauge.target.feature.properties.observations[self.layers.selected_gauge.target.feature.properties.observations.length-1].f3)));
             self.layers.selected_gauge = null;
           }
-          if ((self.querylanguage || self.querytab) && !self.reportid ) {
-            if (self.utility.isCitySupported(self.querycity)) {
-              self.selected_city = self.querycity; //selected_city given a value from params only when viewReports / changeCity run
-              history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
-            } else {
-              history.pushState({city: null, report_id: null}, "city", "map");
-            }
-          }
           self.layers.popupContent = null;
         }
       } else if (ref === '#sidePane') {
@@ -71,9 +62,23 @@ export class DisasterMap {
           $('#chart-pane').empty();
         }
       } else if (ref === '#sidePane') {
-        self.resetTab('report');
+        // swap menu button icon (cancel | addReport)
         $('.menuBtn').toggleClass("active");
+        // set tab to queried tab || default 'report'
+        var tab_to_open = (self.querytab) ? self.querytab : 'report';
+        self.querytab = null; //set to null after url fetch
+        self.resetTab(tab_to_open);
+        // hide infoPane if open
         self.togglePane('#infoPane', 'hide', true);
+        // update browser url
+        if ((self.querylanguage || self.querytab) && !self.reportid) {
+          if (self.utility.isCitySupported(self.querycity)) {
+            self.selected_city = self.querycity; //selected_city given a value from params only when viewReports / changeCity run
+            history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
+          } else {
+            history.pushState({city: null, report_id: null}, "city", "map");
+          }
+        }
       }
       $(ref).fadeIn(200);
     }

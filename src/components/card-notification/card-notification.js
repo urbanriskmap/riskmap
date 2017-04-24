@@ -16,7 +16,6 @@ export class CardNotification {
 
   callClose() {
     if ($('#notifyWrapper').hasClass('active')) {
-      console.log("active"); 
       //$('#notifyWrapper').finish();
       $('#notifyWrapper').dequeue();
       $('#notifyWrapper').slideUp(300);

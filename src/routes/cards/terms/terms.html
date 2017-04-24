@@ -2,17 +2,15 @@
   <require from="./terms.css"></require>
 
   <div id="tabsBar">
-    <div class="paneTabs" repeat.for="content of contents">
-      <div class="tabs" id.bind="'tab-' + content" click.delegate="switchTab(content)">
-        <p textcontent.bind="reportcard.locale.termsContents[content].tab_name"></p>
+    <div class="paneTabs" repeat.for="termsObj of reportcard.locale.termsContents">
+      <div class="tabs" id.bind="'tab-' + termsObj.tab_key" click.delegate="switchTab(termsObj.tab_key)">
+        <p textcontent.bind="termsObj.tab_name"></p>
       </div>
     </div>
   </div>
 
-  <div id="TandCWrapper">
-    <div id="uAWrapper" if.bind="tab === 'user_agreement'" innerhtml.bind="reportcard.locale.termsContents.user_agreement.tab_content">
-    </div>
-    <div id="pPWrapper" if.bind="tab === 'privacy_policy'" innerhtml.bind="reportcard.locale.termsContents.privacy_policy.tab_content">
+  <div id="termsWrapper">
+    <div repeat.for="termsObj of reportcard.locale.termsContents" class="termsContentWrapper" if.bind="tab === termsObj.tab_key" innerhtml.bind="termsObj.tab_content">
     </div>
   </div>
 </template>

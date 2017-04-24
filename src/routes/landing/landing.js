@@ -3,12 +3,10 @@ import env from '../../environment';
 
 export class Landing {
   activate(params, routerConfig) {
-    if (params.city) {
-      this.queried_city = params.city;
-    }
+    this.queried_city = params.city;
     this.report_id = params.report;
-    this.url_lang = (env.supported_languages.indexOf(params.lang) > -1) ? params.lang : env.default_language;
-    this.tab_to_open = (params.tab === "info" || params.tab === "map" || params.tab === "report") ? params.tab : null;
+    this.queried_lang = (env.supported_languages.indexOf(params.lang) > -1) ? params.lang : null;
+    this.queried_tab = (params.tab === 'info' || params.tab === 'map' || params.tab === 'report') ? params.tab : null;
   }
 
   resizeSidePane() {
@@ -18,7 +16,8 @@ export class Landing {
   }
 
   attached() {
-    if (this.tab_to_open && !this.report_id) {
+    // If query tab specified in url, open side pane
+    if (this.queried_tab && !this.report_id) {
         this.mapModel.togglePane('#sidePane', 'show', true);
     }
     // Modify side pane height on the fly

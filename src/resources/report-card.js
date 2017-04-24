@@ -23,7 +23,6 @@ export class ReportCard {
     var self = this;
     self.lang_obj = {en: LocaleEn, id: LocaleId};
     self.selLanguage = env.default_language;
-    console.log('selected lang' + self.selLanguage);
     self.languages = env.supported_languages;
     self.location = {markerLocation: null, gpsLocation: null, accuracy: null, supported: false};
     self.depth = null;

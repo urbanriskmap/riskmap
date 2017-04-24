@@ -20,10 +20,10 @@
   </div>
 
   <div id="paneContent">
-    <div id="content-map" if.bind="tab === 'map'" class="contentWrapper">
+    <div id="content-map" if.bind="seltab === 'map'" class="contentWrapper">
       <p>${locale.map_helper}</p>
       <label repeat.for="city of cities">
-        <input type="radio" model.bind="city" checked.bind="selected" change.delegate="switchCity(city)">
+        <input type="radio" model.bind="city" checked.bind="selcity" change.delegate="switchCity(city)">
         ${city}
       </label>
 
@@ -69,7 +69,7 @@
         </table>
     </div>
 
-    <div id="content-report" if.bind="tab === 'report'" class="contentWrapper">
+    <div id="content-report" if.bind="seltab === 'report'" class="contentWrapper">
       <table id="reportTable">
         <tr repeat.for="video of videos" class="vidRows">
           <td>
@@ -107,7 +107,7 @@
           </table>
         </div>
 
-        <div id="content-info" if.bind="tab === 'info'" class="contentWrapper">
+        <div id="content-info" if.bind="seltab === 'info'" class="contentWrapper">
           <table id="headLogos">
             <tr>
               <td align="left">
@@ -196,16 +196,15 @@
           <p innerhtml.bind="locale.info_content.p1"></p>
           <p innerhtml.bind="locale.info_content.p2"></p>
           <p innerhtml.bind="locale.info_content.p3"></p>
-          <p id="disclaimer">
-            ${locale.info_content.privacy}<br>
-            <i>${locale.info_content.disclaimer}</i>
-          </p>
+
+          <p id="termslink" click.delegate="openTermsPopup('u_a')" innerhtml.bind="locale.info_content.termsPopup"></p>
+
           <p id="mapbox">
             ${locale.info_content.mapCredits} ©
             <a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a> © <a     href="http://www.openstreetmap.org/about"   target="_blank">OpenStreetMap</a>.
             ${locale.info_content.mapImproveLink} <a href="https://www.mapbox.com/map-feedback/" target="_blank">Mapbox</a>.
           </p>
-          <p id="browserstack"  innerhtml.bind="locale.info_content.browserStack">
+          <p id="browserstack" innerhtml.bind="locale.info_content.browserStack">
           </p>
           <p id="usaid">
             ${locale.info_content.USAID}

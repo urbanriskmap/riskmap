@@ -19,7 +19,6 @@ export class Cards {
       this.region_bounds[city] = Config.map.instance_regions[city].bounds;
     }
   }
-
   configureRouter(config, router) {
     config.title = this.reportcard.locale.page_title;
     config.map([
@@ -39,7 +38,6 @@ export class Cards {
 
   activate(params) {
     this.id = params.id;
-    console.log('params: ' + JSON.stringify(params));
     this.lang = params.lang;
     if(this.lang) {
       this.reportcard.changeLanguage(this.lang);
@@ -131,8 +129,6 @@ export class Cards {
       .then(response => {
         // now/also, send the image.
         if (self.photoToUpload) {
-          console.log(self.photoToUpload);
-
           let client = new HttpClient()
           .configure(x => {
             x.withBaseUrl(self.data_src); //REPLACE with aws s3 response url?
@@ -151,7 +147,7 @@ export class Cards {
         }
       })
       .catch(response => {
-        console.log(response);
+        console.log(response); //Retain, DO NOT DELETE
         self.router.routes[8].settings.errorCode = response.statusCode;
         self.router.routes[8].settings.errorText = response.statusText;
         self.router.navigate('error');
