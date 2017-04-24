@@ -4,6 +4,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
 import {Config} from 'resources/config'; // Cards config
 import {ReportCard} from 'resources/report-card';
+import env from '../../environment';
 
 //start-non-standard
 @inject(EventAggregator, ReportCard, Config)
@@ -38,10 +39,7 @@ export class Cards {
 
   activate(params) {
     this.id = params.id;
-    this.lang = params.lang;
-    if(this.lang) {
-      this.reportcard.changeLanguage(this.lang);
-    }
+    this.lang = (env.supported_languages.indexOf(params.lang) > -1) ? params.lang : env.default_language;
   }
 
   //switch on-the-fly
@@ -62,7 +60,7 @@ export class Cards {
   }
 
   attached() {
-    $('#depthBG').attr('fill', '#ff0000');
+    //$('#depthBG').attr('fill', '#ff0000');
     var nua = navigator.userAgent.toLowerCase();
     //______________is Mobile______________________an iPhone_________________browser not safari (in-app)___________app is twitter________________app is facebook______________not facebook messenger_________
     if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1 && (nua.indexOf('twitter') > -1 || (nua.indexOf('fban') > -1 && nua.indexOf('messenger') === -1))) {
@@ -77,7 +75,7 @@ export class Cards {
     }
 
     this.totalCards = this.router.routes.length - 1; //exclude (route:'', redirect:'location')
-    $('#' + this.reportcard.selLanguage).addClass("active");
+    this.switchLang(this.lang); //set language based on url param OR default 
 
     var self = this;
     let client = new HttpClient();
