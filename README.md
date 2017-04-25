@@ -99,10 +99,12 @@ Do ('npm test') to build the project and run the tests.
 
 If you want to run BrowserStack, you need to provide environment variables with your 
 username and password. Put `export BROWSERSTACK_USERNAME=yourUsername` and `export BROWSERSTACK_KEY=yourAccessKey` into 
-your ~/.bashrc or ~/.bash_profile in order for karma to pick up the browserstack credentials. 
+your ~/.bashrc or ~/.bash_profile in order for karma to pick up the browserstack credentials. Now run `source ~/bash_profile` and 
+npm test in order to build the bundle and run karama unit tests against it. 
 
-You also need the browserstack local [testing binary](https://www.browserstack.com/local-testing). Install it with your key: 
-`./BrowserStackLocal --key yourAccessKey`
+##e2e testing: 
+
+End to end testing is implemented using protractor, webdriver, and browserstack. First install protractor: `npm install -g protractor` then download the webdriver binaries: `webdriver-manager update`. In order to run the tests, the front end must be being served. Run au run in a separate terminal, and then run `protractor protractor.conf.js` which will start the tests. Protractor can be a little finicky, so you should let it run without interacting with other browser windows. 
 
 Mockapi to be used in the future. 
 

@@ -21,6 +21,7 @@ export class ReportCard {
 
   constructor(LocaleEn, LocaleId) {
     var self = this;
+    self.disasterType = null;
     self.lang_obj = {en: LocaleEn, id: LocaleId};
     self.selLanguage = env.default_language;
     self.languages = env.supported_languages;

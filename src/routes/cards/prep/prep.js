@@ -27,6 +27,5 @@ export class Prep {
     $('#button-' + btnName).removeClass("inactive");
     $('#button-' + btnName).addClass("active");
     this.reportcard.reportType = btnName;
-    console.log(btnName);
   }
 }

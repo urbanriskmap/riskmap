@@ -23,7 +23,7 @@ module.exports = function(config) {
       [project.unitTestRunner.source]: [project.transpiler.id]
     },
     'babelPreprocessor': { options: project.transpiler.options },
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage', 'BrowserStack'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -60,6 +60,12 @@ module.exports = function(config) {
     },
 
     browsers: ['bs_firefox_mac', 'bs_iphone5'],
+ 
+    //optionally, configure the reporter
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    }, 
 
   });
   if (!process.env.TRAVIS) {

@@ -5,9 +5,8 @@ export class App {
     config.options.pushState = true;
     config.options.root = '/';
     config.map([
-      {route: ['', 'map', 'map/:city', 'map/:city/'],   name: 'map',  moduleId: 'routes/landing/landing'},
-      {route: 'map/:city/:report',                                    moduleId: 'routes/landing/landing'},
-      {route: 'cards/:disaster/:id',                                  moduleId: 'routes/cards/cards'}
+      {route: ['', 'map'],   name: 'map',  moduleId: 'routes/landing/landing'},
+      {route: 'cards',                     moduleId: 'routes/cards/cards'}
     ]);
     config.mapUnknownRoutes({moduleId: 'routes/landing/landing'});
     this.router = router;

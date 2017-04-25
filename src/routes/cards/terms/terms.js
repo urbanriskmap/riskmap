@@ -8,5 +8,16 @@ import {inject} from 'aurelia-framework';
 export class Terms {
   constructor(ReportCard) {
     this.reportcard = ReportCard;
+    this.tab = 'u_a';
+  }
+
+  switchTab(tabName) {
+    $('.tabs').removeClass('active');
+    $('#tab-' + tabName).addClass('active');
+    this.tab = tabName;
+  }
+
+  attached() {
+    this.switchTab('u_a');
   }
 }

@@ -4,6 +4,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
 import {Config} from 'resources/config'; // Cards config
 import {ReportCard} from 'resources/report-card';
+import env from '../../environment';
 
 //start-non-standard
 @inject(EventAggregator, ReportCard, Config)
@@ -11,23 +12,23 @@ import {ReportCard} from 'resources/report-card';
 export class Cards {
   constructor(ea, ReportCard, Config) {
     this.ea = ea;
-    this.data_src = Config.cards.data_server;
-    this.test_card = Config.cards.enable_test_cardid;
     this.reportcard = ReportCard;
     this.locale = this.reportcard.locale;
+    this.data_src = Config.cards.data_server;
+    this.test_card = Config.cards.enable_test_cardid;
     this.region_bounds = {};
     for (let city in Config.map.instance_regions) {
       this.region_bounds[city] = Config.map.instance_regions[city].bounds;
     }
   }
-
   configureRouter(config, router) {
     var self = this;
     config.title = this.locale.page_title;
-    //TODO: fix issue with card numbers, this.router.routes array numbers
-    // when route: '' is added (IMPORTANT, '*foo' required mostly for dev,
+    //IMPORTANT: '*foo' required mostly for dev,
     // but also if user hits refresh & url is appended with route name)
-    // Alternatively: retain only '*foo' & append /report in url??
+    // In server modules: use this as reply link ROOT/cards/report?disaster=prep&id=one-time-link
+    // In dev environment; (enable_test_cardid === true) use ROOT/cards/foo (defaults to flood cards)
+    // OR ROOT/cards/foo?disaster=prep&lang=tm&id=one-time-link (otl if known, connected to pgadmin)
     config.map([
       {route: '*foo', moduleId: './card-landing/card-landing'}
     ]);
@@ -37,25 +38,29 @@ export class Cards {
 
   activate(params) {
     var self = this;
-    self.id = params.id;
-    if (params.disaster === 'flood' || params.disaster === 'hurricane' || params.disaster === 'prep') {
-      $.getJSON("./src/routes/card-decks/" + params.disaster + ".json", data => {
+    if (self.test_card && !params.id) {
+      self.id = 'test123';
+    } else if (params.id) {
+      self.id = params.id;
+    }
+    self.lang = (env.supported_languages.indexOf(params.lang) > -1) ? params.lang : env.default_language;
+    self.reportcard.disasterType = (params.disaster === 'flood' || params.disaster === 'hurricane' || params.disaster === 'prep') ? params.disaster : 'flood';
+    $.getJSON("./src/routes/card-decks/" + self.reportcard.disasterType + ".json", data => {
+      for (let obj of data) {
+        self.router.addRoute(obj);
+      }
+    }).then(() => {
+      $.getJSON("./src/routes/card-decks/staple.json", data => {
         for (let obj of data) {
           self.router.addRoute(obj);
         }
       }).then(() => {
-        $.getJSON("./src/routes/card-decks/staple.json", data => {
-          for (let obj of data) {
-            self.router.addRoute(obj);
-          }
-        }).then(() => {
-          for (let route in self.router.routes) {
-            self.router.routes[route].settings = {cardNo: parseInt(route)};
-          }
-          self.router.refreshNavigation();
-        });
+        for (let route in self.router.routes) {
+          self.router.routes[route].settings = {cardNo: parseInt(route)};
+        }
+        self.router.refreshNavigation();
       });
-    }
+    });
   }
 
   //switch on-the-fly
@@ -77,8 +82,6 @@ export class Cards {
 
   attached() {
     var self = this;
-
-    $('#depthBG').attr('fill', '#ff0000');
     var nua = navigator.userAgent.toLowerCase();
     //______________is Mobile______________________an iPhone_________________browser not safari (in-app)___________app is twitter________________app is facebook______________not facebook messenger_________
     if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1 && (nua.indexOf('twitter') > -1 || (nua.indexOf('fban') > -1 && nua.indexOf('messenger') === -1))) {
@@ -92,11 +95,12 @@ export class Cards {
       });
     }
 
-    self.totalCards = self.router.routes.length - 1; //exclude routes: '*foo' (card-landing)
-    $('#' + self.reportcard.selLanguage).addClass("active");
     $(document).ready(() => {
       $('.tabButtons').width((100 / (self.totalCards - 3)) + '%'); //fit 'n' tab buttons on-the-fly, n = (total - staple) cards
     });
+
+    this.totalCards = this.router.routes.length - 1; //exclude (route:'', redirect:'location')
+    this.switchLang(this.lang); //set language based on url param OR default
 
     let client = new HttpClient();
 
@@ -149,8 +153,6 @@ export class Cards {
       .then(response => {
         // now/also, send the image.
         if (self.photoToUpload) {
-          console.log(self.photoToUpload);
-
           let client = new HttpClient()
           .configure(x => {
             x.withBaseUrl(self.data_src); //REPLACE with aws s3 response url?
@@ -163,7 +165,6 @@ export class Cards {
             console.log(response);
             var msg = JSON.parse(response.response);
             var signedURL = msg.signedRequest;
-            console.log('signedURL');
             console.log(signedURL);
             //Post image to the Signed URL
             $.ajax({
@@ -193,7 +194,7 @@ export class Cards {
         }
       })
       .catch(response => {
-        console.log(response);
+        console.log(response); //Retain, DO NOT DELETE
         self.reportcard.errors.code = response.statusCode;
         self.reportcard.errors.text = response.statusText;
         self.router.navigate('error');
@@ -201,6 +202,9 @@ export class Cards {
       });
     });
 
+    self.ea.subscribe('reportType', btnName => {
+      self.reportcard.reportType = btnName;
+    });
     self.ea.subscribe('geolocate', error => {
       self.showNotification(error, 'location_1', 'location_1', false);
     });
@@ -210,10 +214,6 @@ export class Cards {
     self.ea.subscribe('size', error => {
       self.showNotification(error, 'photo_1', 'photo_1', false);
     });
-
-    /*self.ea.subscribe('reportType', btnName => {
-      self.reportcard.depth = btnName; //TODO: change to reportcard.tags.report_type = btnName;
-    });*/
   }
 
   showNotification(type, header, message, bespoke) {
@@ -296,6 +296,8 @@ export class Cards {
   get nextDisabled() {
     if (this.router.currentInstruction.fragment === 'location') {
       return !this.reportcard.location.markerLocation;
+    } else if (this.router.currentInstruction.fragment === 'prep') {
+      return !this.reportcard.reportType;
     } else {
       return this.cardNo >= this.totalCards - 3; //Disable next button on review card (exclude staple card routes: terms, thanks, error)
     }
