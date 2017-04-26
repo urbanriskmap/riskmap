@@ -21,7 +21,6 @@ export class Review {
       case (this.reportcard.disasterType === 'flood'):
         card_data = {report_type: 'flood', flood_depth: Math.round(this.reportcard.depth)};
     }
-    console.log(card_data);
     this.report = {
       disaster_type: this.reportcard.disasterType,
       card_data: card_data,

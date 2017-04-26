@@ -38,11 +38,7 @@ export class Cards {
 
   activate(params) {
     var self = this;
-    if (self.test_card && !params.id) {
-      self.id = 'test123';
-    } else if (params.id) {
-      self.id = params.id;
-    }
+    self.id = params.id;
     self.lang = (env.supported_languages.indexOf(params.lang) > -1) ? params.lang : env.default_language;
     self.reportcard.disasterType = (params.disaster === 'flood' || params.disaster === 'hurricane' || params.disaster === 'prep') ? params.disaster : 'flood';
     $.getJSON("./src/routes/card-decks/" + self.reportcard.disasterType + ".json", data => {
