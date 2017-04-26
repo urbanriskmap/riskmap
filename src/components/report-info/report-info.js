@@ -10,6 +10,7 @@ export class ReportInfo {
   @bindable locale;
   @bindable imageurl;
   @bindable height;
+  @bindable reportevent;
   @bindable title;
   @bindable text;
   @bindable pkey;

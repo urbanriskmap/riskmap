@@ -26,6 +26,18 @@ export class MapLayers {
         iconSize: [30, 30],
         iconAnchor: [15, 15]
       }),
+
+      //TODO: On clicking gauge, extent, prep_report icons need to revert to an unselected icons
+      //but report_type for that icon will be unknown... store report_type of last selected report icon
+
+      report_prep_normal: (type) => L.divIcon({
+        iconSize: [30, 30],
+        html: '<i style="color: blue;" class="icon-' + type + '"></i>'
+      }),
+      report_prep_selected: (type) => L.divIcon({
+        iconSize: [30, 30],
+        html: '<i style="color: red;" class="icon-' + type + '"></i>'
+      }),
       gauge_normal: (url) => L.icon({
         iconUrl: url,
         iconSize: [30, 30],
@@ -106,6 +118,9 @@ export class MapLayers {
     layer.on({
       click: (e) => {
         map.flyTo(layer._latlng, 15);
+        var disasterType = feature.properties.disaster_type;
+        var reportIconNormal = (disasterType === 'prep') ? this.report_prep_normal(feature.properties.report_data.report_type) : this.report_normal;
+        var reportIconSelected = (disasterType === 'prep') ? this.report_prep_selected(feature.properties.report_data.report_type) : this.report_selected;
         if (self.selected_extent) {
           self.selected_extent.target.setStyle(self.mapPolygons.normal);
           self.selected_extent = null;
@@ -116,7 +131,7 @@ export class MapLayers {
         }
         if (!self.selected_report) {
           // Case 1 : no previous selection, click on report icon
-          e.target.setIcon(self.mapIcons.report_selected);
+          e.target.setIcon(self.mapIcons.reportIconSelected);
           self.popupContent = {};
           for (let prop in feature.properties) {
             self.popupContent[prop] = feature.properties[prop];
@@ -127,14 +142,14 @@ export class MapLayers {
           self.selected_report = e;
         } else if (e.target === self.selected_report.target) {
           // Case 2 : clicked report icon same as selected report
-          e.target.setIcon(self.mapIcons.report_normal);
+          e.target.setIcon(self.mapIcons.reportIconNormal);
           history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
           togglePane('#infoPane', 'hide', false);
           self.selected_report = null;
         } else if (e.target !== self.selected_report.target) {
           // Case 3 : clicked new report icon, while previous selection needs to be reset
-          self.selected_report.target.setIcon(self.mapIcons.report_normal);
-          e.target.setIcon(self.mapIcons.report_selected);
+          self.selected_report.target.setIcon(self.mapIcons.reportIconNormal);
+          e.target.setIcon(self.mapIcons.reportIconSelected);
           self.popupContent = {};
           for (let prop in feature.properties) {
             self.popupContent[prop] = feature.properties[prop];

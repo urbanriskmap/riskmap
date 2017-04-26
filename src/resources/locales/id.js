@@ -24,6 +24,14 @@ export class LocaleId {
           "photo_2": "Foto yang dipilih tidak didukung oleh browser"
         }
       },
+      "prep_menu": {
+        "btn_names": {
+          "drain": "Blocked Drains",
+          "desilting": "Desilting",
+          "canalrepair": "Canal Repairs",
+          "treeclearing": "Fallen Tree"
+        }
+      },
       "web_menu": {
         "tab_names": {
           "map": "peta",
