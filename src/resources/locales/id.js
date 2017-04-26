@@ -110,7 +110,7 @@ export class LocaleId {
       },
       "card_hints":{
         "description": "Masukkan deskripsi di sini ...",
-        "water_depth": "Tinggi genangan",
+        "flood_depth": "Tinggi genangan",
         "agreement_text": "Dengan mengirimkan laporan ini Anda setuju dengan",
         "agreement_title": "Kesepakatan Kontribusi PetaBencana.id",
         "more_details_required": "Deskripsi atau Foto diperlukan untuk melapor",

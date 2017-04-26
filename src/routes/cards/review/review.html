@@ -8,7 +8,8 @@
         <i class="icon-flood"></i>
       </div>
       <div id="summaryTextWrapper">
-        <p id="floodH">${reportcard.locale.card_hints.water_depth}: ${report.water_depth} cm</p>
+        <p class="reviewCaption" if.bind="report.card_data.flood_depth">${reportcard.locale.card_hints.flood_depth}: ${report.card_data.flood_depth} cm</p>
+        <p class="reviewCaption" if.bind="!report.card_data.flood_depth">Report type: ${report.card_data.report_type}</p>
         <p id="comment" if.bind="report.text">${report.text}</p>
       </div>
     </div>

@@ -118,7 +118,7 @@ export class LocaleEn {
       },
       "card_hints": {
         "description": "Enter description here...",
-        "water_depth": "Water Depth",
+        "flood_depth": "Water Depth",
         "agreement_text": "By submitting this report you are agreeing to the",
         "agreement_title": "PetaBencana.id Contributors Agreement",
         "more_details_required": "Description or Photo required to submit report",

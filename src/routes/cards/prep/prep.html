@@ -4,7 +4,7 @@
   <div id="PrepReportWrapper">
     <div repeat.for="btnName of btnList" id.bind="'button-' + btnName" class="prepLabels" click.delegate="switchbtn(btnName)">
       <i class.bind="'icon-' + btnName"></i>
-      <p>${locale.prep_menu.btn_names[btnName]}</p>
+      <p>${reportcard.locale.prep_menu.btn_names[btnName]}</p>
     </div>
   </div>
 </template>
