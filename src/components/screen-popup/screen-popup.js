@@ -22,6 +22,8 @@ export class ScreenPopup {
 
   closePopup() {
     $('#termsPopup').hide();
-    $('#screen').hide();
+    if (selcity) {
+      $('#screen').hide();
+    }
   }
 }
