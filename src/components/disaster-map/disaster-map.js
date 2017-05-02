@@ -36,8 +36,7 @@ export class DisasterMap {
           if (self.layers.selected_report) {
             self.reportid = null;
             history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
-            self.layers.selected_report.target.setIcon(self.layers.mapIcons.report_normal);
-            self.layers.selected_report = null;
+            self.layers.revertIconToNormal(self.layers.selReportType);
           }
           if (self.layers.selected_extent) {
             self.layers.selected_extent.target.setStyle(self.layers.mapPolygons.normal);
