@@ -1,6 +1,6 @@
 ### Naming
 * JSON file name = disaster type parameter in url
-* eg. include earthquake.json in routes/card-decks for petabencana.id/cards/earthquake/one-time-link
+* eg. include earthquake.json in routes/card-decks for riskmap.in/cards/earthquake/one-time-link
 
 ### JSON Format & corresponding folder structure
 * Include "route" and "moduleId" parameters in json file

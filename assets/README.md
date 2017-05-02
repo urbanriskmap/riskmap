@@ -9,7 +9,7 @@ assets/icons/*
 
 assets/images/*
 - Raster image content for website pages.
-- Background images, photos for petabencana.id/about & petabencana.id/watch pages.
+- Background images, photos for riskmap.in/about & riskmap.in/watch pages.
 
 
 **Leaflet custom control icons**

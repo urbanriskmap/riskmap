@@ -6,7 +6,7 @@ describe('Landing page', function() {
   });
   
   it('expect title to be correct', () => {
-    expect(browser.getTitle()).toBe('PetaBencana.id'); 
+    expect(browser.getTitle()).toBe('Riskmap.in'); 
   });
 
   it('expect city choosing popup', () => {

@@ -28,24 +28,31 @@ export class SidePane {
     this.tabList = ["report", "map", "info"]; //elements match names of fontello icons
     this.videos = [
       {
+        platform: "flood",
+        source: {
+          "id": "https://www.youtube.com/embed/NDeuouDBrcU",
+          "en": "https://www.youtube.com/embed/NDeuouDBrcU"
+        }
+      },
+      {
         platform: "twitter", //Match string to locale/*/translation.json > report_content.*
         source: {
-          "id": "https://vimeo.com/179334464", /*https://www.youtube.com/embed/Gb_BAAiRw2U?autoplay=0&origin=https://petabencana.id&rel=0*/
-          "en": "https://vimeo.com/179334464"
+          "id": "https://www.youtube.com/embed/GZJjKxIizBE",
+          "en": "https://www.youtube.com/embed/GZJjKxIizBE"
         }
       },
       {
         platform: "telegram",
         source: {
-          "id": "https://vimeo.com/179334464",
-          "en": "https://vimeo.com/179334464"
+          "id": "https://www.youtube.com/embed/Sp1JbFd9KhM",
+          "en": "https://www.youtube.com/embed/Sp1JbFd9KhM"
         }
       },
       {
-        platform: "otherapps",
+        platform: "facebook",
         source: {
-          "id": "https://vimeo.com/179334464",
-          "en": "https://vimeo.com/179334464"
+          "id": "https://www.youtube.com/embed/unz-qCNUJzU",
+          "en": "https://www.youtube.com/embed/unz-qCNUJzU"
         }
       }
     ];

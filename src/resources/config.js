@@ -1,4 +1,4 @@
-// PetaBencana.id configuration file, for CogniCity data
+// Riskmap.in configuration file, for CogniCity data
 // https://github.com/urbanriskmap/urbanriskmap-meta/wiki/Bounding-Boxes-for-Target-Cities
 
 // Import environment variables from Aurelia build
