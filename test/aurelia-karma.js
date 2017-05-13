@@ -1,6 +1,6 @@
 (function(global) {
   var karma = global.__karma__;
-  var requirejs = global.requirejs
+  var requirejs = global.requirejs;
   var locationPathname = global.location.pathname;
   var root = 'src';
   karma.config.args.forEach(function(value, index) {
@@ -14,43 +14,43 @@
   }
 
   function normalizePath(path) {
-    var normalized = []
+    var normalized = [];
     var parts = path
       .split('?')[0] // cut off GET params, used by noext requirejs plugin
-      .split('/')
+      .split('/');
 
     for (var i = 0; i < parts.length; i++) {
       if (parts[i] === '.') {
-        continue
+        continue;
       }
 
       if (parts[i] === '..' && normalized.length && normalized[normalized.length - 1] !== '..') {
-        normalized.pop()
-        continue
+        normalized.pop();
+        continue;
       }
 
-      normalized.push(parts[i])
+      normalized.push(parts[i]);
     }
 
-    return normalized.join('/')
+    return normalized.join('/');
   }
 
   function patchRequireJS(files, originalLoadFn, locationPathname) {
-    var IS_DEBUG = /debug\.html$/.test(locationPathname)
+    var IS_DEBUG = /debug\.html$/.test(locationPathname);
 
     requirejs.load = function (context, moduleName, url) {
-      url = normalizePath(url)
+      url = normalizePath(url);
 
       if (files.hasOwnProperty(url) && !IS_DEBUG) {
-        url = url + '?' + files[url]
+        url = url + '?' + files[url];
       }
 
       if (url.indexOf('/base') !== 0) {
         url = '/base/' + url;
       }
 
-      return originalLoadFn.call(this, context, moduleName, url)
-    }
+      return originalLoadFn.call(this, context, moduleName, url);
+    };
 
     var originalDefine = global.define;
     global.define = function(name, deps, m) {
@@ -59,7 +59,7 @@
       }
 
       return originalDefine(name, deps, m);
-    }
+    };
   }
 
   function requireTests() {
