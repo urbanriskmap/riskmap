@@ -30,15 +30,15 @@ export class SidePane {
       {
         platform: "flood",
         source: {
-          "id": "https://www.youtube.com/embed/NDeuouDBrcU",
-          "en": "https://www.youtube.com/embed/NDeuouDBrcU"
+          "id": "https://www.youtube.com/embed/8aFRL4CaUIs",
+          "en": "https://www.youtube.com/embed/8aFRL4CaUIs"
         }
       },
       {
         platform: "twitter", //Match string to locale/*/translation.json > report_content.*
         source: {
-          "id": "https://www.youtube.com/embed/GZJjKxIizBE",
-          "en": "https://www.youtube.com/embed/GZJjKxIizBE"
+          "id": "https://www.youtube.com/embed/OB5dLtFxVWY",
+          "en": "https://www.youtube.com/embed/OB5dLtFxVWY"
         }
       },
       {
