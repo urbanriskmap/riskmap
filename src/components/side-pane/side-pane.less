@@ -167,7 +167,7 @@
         width: 90%;
         margin: auto;
         table-layout: fixed;
-        border-bottom: 1px solid @banjir-blue;
+        border-top: 1px solid @banjir-blue;
         padding-bottom: 10px;
 
         & tr.label {
@@ -189,9 +189,11 @@
       }
       & #pbLogo {
         width: 90%;
-        margin: 8px auto;
+        margin: 20px auto;
         text-align: center;
+        border-top: 1px solid @banjir-blue;
         & img {
+          margin: 10px auto;
           width: 180px;
         }
       }
@@ -210,6 +212,7 @@
             & tr {
               & td {
                 border-bottom: 1px solid @banjir-blue;
+                padding-bottom: 5px;
                 &.labelRow {
                   cursor: pointer;
                   border: none;
@@ -224,6 +227,7 @@
                     margin: 0;
                     padding: 0;
                     &.labelText {
+                      .bodymedium-mixin(14px);
                       float: left;
                     }
                     &.arrows {
