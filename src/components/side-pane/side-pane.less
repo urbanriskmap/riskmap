@@ -120,7 +120,7 @@
         margin: auto;
         table-layout: fixed;
         & #urlLogo {
-          width: 80%;
+          width: 60%;
           margin: auto;
         }
       }
@@ -136,12 +136,18 @@
           color: @banjir-blue;
         }
         &#termslink {
-          margin-top: 0px;
-          margin-bottom: 0px;
+          margin-top: 10px;
+          margin-bottom: 10px;
           text-align: center;
           .linkmedium-mixin(14px);
           text-transform: capitalize;
           text-decoration: underline;
+        }
+        &#mapbox{
+          .bodylight-mixin(12px);
+          & a {
+            .linklight-mixin(12px);
+          }
         }
         &#intro {
           .bodyregular-mixin(20px);
@@ -165,8 +171,9 @@
         width: 90%;
         margin: auto;
         table-layout: fixed;
+        border-bottom: 1px solid @banjir-blue;
         border-top: 1px solid @banjir-blue;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
 
         & tr.label {
           height: 18px;

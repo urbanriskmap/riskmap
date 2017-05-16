@@ -127,6 +127,9 @@
           </table>
 
           <p id="intro">${locale.info_content.intro}</p>
+          <p innerhtml.bind="locale.info_content.p1"></p>
+          <p innerhtml.bind="locale.info_content.p2"></p>
+          <p innerhtml.bind="locale.info_content.p3"></p>
 
           <table id="partners">
             <tr class="label">
@@ -192,26 +195,23 @@
             </tr>
           </table>
 
-          <p innerhtml.bind="locale.info_content.p1"></p>
-          <p innerhtml.bind="locale.info_content.p2"></p>
-          <p innerhtml.bind="locale.info_content.p3"></p>
-
 
           <p id="termslink" click.delegate="openTermsPopup('u_a')" innerhtml.bind="locale.info_content.termsPopup"></p>
-<!--
+
           <p id="mapbox">
             ${locale.info_content.mapCredits} ©
             <a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a> © <a     href="http://www.openstreetmap.org/about"   target="_blank">OpenStreetMap</a>.
             ${locale.info_content.mapImproveLink} <a href="https://www.mapbox.com/map-feedback/" target="_blank">Mapbox</a>.
           </p>
+<!--
           <p id="browserstack" innerhtml.bind="locale.info_content.browserStack">
           </p>
           <p id="usaid">
             ${locale.info_content.USAID}
-          </p> -->
+          </p>
           <div id="pbLogo">
             <img src="assets/graphics/Riskmap_logo_noSub.svg">
-          </div>
+          </div>-->
         </div>
       </div>
     </template>

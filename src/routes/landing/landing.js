@@ -18,7 +18,9 @@ export class Landing {
   attached() {
     // If query tab specified in url, open side pane
     if (this.queried_tab && !this.report_id) {
+      if (!(/Mobi/.test(navigator.userAgent))) {
         this.mapModel.togglePane('#sidePane', 'show', true);
+      }
     }
     // Modify side pane height on the fly
     this.resizeSidePane();
