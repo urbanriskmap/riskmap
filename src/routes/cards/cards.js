@@ -41,12 +41,12 @@ export class Cards {
     self.id = params.id;
     self.lang = (env.supported_languages.indexOf(params.lang) > -1) ? params.lang : env.default_language;
     self.reportcard.disasterType = (params.disaster === 'flood' || params.disaster === 'hurricane' || params.disaster === 'prep') ? params.disaster : 'flood';
-    $.getJSON("./src/routes/card-decks/" + self.reportcard.disasterType + ".json", data => {
+    $.getJSON("assets/card-decks/" + self.reportcard.disasterType + ".json", data => {
       for (let obj of data) {
         self.router.addRoute(obj);
       }
     }).then(() => {
-      $.getJSON("./src/routes/card-decks/staple.json", data => {
+      $.getJSON("assets/card-decks/staple.json", data => {
         for (let obj of data) {
           self.router.addRoute(obj);
         }
