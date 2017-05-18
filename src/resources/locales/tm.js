@@ -100,46 +100,46 @@ export class LocaleEn {
         }
       },
       "info_content": {
-        "intro": "Riskmap.in harnesses the power of social media to gather, sort, and display information about flooding in real time.",
-        "p1": "Riskmap.in is a project initiated by the Urban Risk Lab at MIT as a free, transparent platform for emergency response and disaster management in megacities in South and Southeast Asia.",
-        "p2": "The platform adopts a “people are the best sensors” paradigm, where confirmed reports are collected directly from the users at street level in a manner that removes expensive and time-consuming data processing. This framework creates accurate, real-time data which is immediately made available for users and first responders.",
-        "p3": "Riskmap.in gathers, sorts, and visualizes data using specially developed CogniCity Open Source Software - an enterprise-level platform for emergency response and disaster management - to transforms the noise of social and digital media into critical information for residents, communities, and government agencies.",
+        "intro": "Riskmap.in சமூக ஊடகங்களின் தொழில்நுட்ப சக்தியை பயன்படுத்தி வெள்ளம் பற்றிய நிகழ்நேர தகவல்களை சேகரித்து, வரிசைப்படுத்தி, அனைவருக்கும் கிடைக்கும்படி காண்பிக்கின்றது.",
+        "p1": "Riskmap.in என்பது தென்னக மற்றும் தென்கிழக்கு ஆசியாவில் உள்ள பெருநகரங்களில் அவசரநிலை மற்றும் பேரழிவு மேலாண்மைக்கான ஒரு இலவச, வெளிப்படையான வலைத்தளமாக MIT Urban Risk Lab-இனால் தொடங்கப்பட்ட திட்டம் ஆகும்.",
+        "p2": "இந்த வலைத்தளம் “மக்கள் சிறந்த சென்சார்கள்” என்கிற தத்துவத்தை பிரதானமாக எடுத்துக்கொள்கிறது. விலையுயர்ந்த மற்றும் நேரத்தைச் சாப்பிடும் தரவு செயலாக்கத்தை அகற்றும் விதத்தில் நேரடியாக மக்களிடமிருந்து வெள்ள அறிக்கைகள் சேகரிக்கப்படுகின்றன. இந்த வலைத்தளம், நகர மக்கள் மற்றும் நிவாரண தொழிலாளர்களுக்கு உடனடியாக கிடைக்கக்கூடிய துல்லியமான, நிகழ்நேர தரவை உருவாக்குகிறது.",
+        "p3": "Riskmap.in வலைத்தளம் CogniCity என்கிற அவசரநிலை மற்றும் பேரழிவு முகாமைத்துவத்திற்கான தொழிற்துறை Open Source Software-ஐ பயன்படுத்தி சமூக மற்றும் டிஜிட்டல் மீடியாவில் கிடைக்கும் தரவை நகர மக்கள், நிவாரண தொழிலாளிகள் மற்றும் அரசாங்க முகவர்களுக்கான முக்கியமான தகவல்களாக மாற்றியமைக்கின்றது.",
         "partners": {
-          "implementing": "Implementing partner",
-          "project": "Project partners",
-          "data": "Data partners",
-          "support": "Research Support"
+          "implementing": "செயல்பாட்டு துணையர்கள்",
+          "project": "திட்டத்திற்கு ஆதரவளித்தோர்",
+          "data": "தகவல் துணையளித்தோர்",
+          "support": "ஆராய்ச்சிக்கு ஆதரவளித்தோர்"
           },
-        "termsPopup": "User agreement &amp; Privacy policy",
-        "mapCredits": "Basemap tiles",
-        "mapImproveLink": "Improve the basemap at",
-        "browserStack": "Testing supported by <a href='https://www.browserstack.com' target='_blank'>BrowserStack</a>.",
-        "USAID": "This website was made possible with the support of the American People through the U.S. Agency for International Development. This is not an official USAID or U.S. Government website. The contents of this website are the sole responsibility of the authors and do not necessarily reflect the views of USAID of the U.S. Government."
+        "termsPopup": "பயனர் ஒப்பந்தம் &amp; தனியுரிமை கொள்கைகள்",
+        "mapCredits": "அடிப்படை வரைபடம்",
+        "mapImproveLink": "அடிப்படை வரைபடத்தை மேம்படுத்த",
+        "browserStack": "மென்பொருள் சோதனை செயல்படுத்த உதவியது <a href='https://www.browserstack.com' target='_blank'>BrowserStack</a>.",
+        "USAID": "இந்த வலைத்தளம் அமெரிக்க மக்கள் ஆதரவுடன் யு.எஸ். ஏஜென்சி இன் இன்டர்நேஷனல் டெவலப்மென்ட் மூலம் சாத்தியமானது. இது உத்தியோகபூர்வ USAID அல்லது அமெரிக்க அரசாங்க வலைத்தளம் அல்ல. இந்த வலைத்தளத்தின் உள்ளடக்கங்கள் ஆசிரியர்களின் முழு பொறுப்பாகும் மற்றும் யு.எஸ். அரசாங்கத்தின் USAID இன் கருத்துக்களை பிரதிபலிக்காது."
       },
       "card_error_messages": {
-        "already_received": "Report already received",
-        "unknown_link": "Report link does not exist",
-        "unknown_error": "Unhandled report link verification error",
-        "link": "Go to Riskmap.in"
+        "already_received": "இந்த அறிக்கை ஏற்கனவே சமர்ப்பிக்கப்பட்டது",
+        "unknown_link": "இந்த அறிக்கை இணைப்பு உபயோகத்தில் இல்லை",
+        "unknown_error": "கையாளப்படாத அறிக்கை இணைப்பு சரிபார்ப்பு பிழை",
+        "link": "Riskmap.in-இற்கு செல்லவும்"
       },
       "card_hints": {
-        "description": "Enter description here...",
-        "flood_depth": "Water Depth",
-        "agreement_text": "By submitting this report you are agreeing to the",
-        "agreement_title": "Riskmap.in Contributors Agreement",
-        "more_details_required": "Description or Photo required to submit report",
-        "location_check": "Unsupported location, report will not appear on map",
-        "swipe": "Swipe to submit",
-        "thanks": "Thank you for your report",
-        "redirect": "Redirecting to Riskmap.in",
-        "next": "NEXT",
-        "previous": "PREV",
-        "confirmation": "We will send you a confirmation message via"
+        "description": "இங்கு சிறுவிளக்கம் அளிக்கவும்...",
+        "flood_depth": "வெள்ள உயரம்",
+        "agreement_text": "இந்த அறிக்கையை சமர்ப்பிப்பதன் மூலம் நீங்கள் பின்வரும் ஒப்பந்தத்திற்கு உடன்படுகிறீர்கள்",
+        "agreement_title": "Riskmap.in பங்களிப்பாளர்கள் ஒப்பந்தம்",
+        "more_details_required": "அறிக்கை சமர்ப்பிக்க, சிறுவிளக்கம் அல்லது புகைப்படம் தேவை",
+        "location_check": "ஆதரிக்கப்படாத இடம், அறிக்கை வரைபடத்தில் தோன்றாது",
+        "swipe": "அறிக்கையை சமர்ப்பிக்க ஸ்வைப் செய்யவும்",
+        "thanks": "தங்கள் அறிக்கைக்கு நன்றி",
+        "redirect": "தாங்கள் தற்பொழுது Riskmap.in வலைதளத்திற்கு கொண்டு செல்லப்படுகிறீர்கள்",
+        "next": "அடுத்த செல்",
+        "previous": "முன்பு செல்",
+        "confirmation": "பின்வரும் ஊடகம் மூலம் தங்கள் அறிக்கை சமர்ப்பிப்பை உறுதிப்படுத்த செய்தி அனுப்புவோம்"
       },
       "legend": {
-        "title": "Legend",
-        "flood_gauges": "Flood Gauges",
-        "flood_depth": "Flood Depth (cm)"
+        "title": "வரைபடத் திருப்பம்",
+        "flood_gauges": "வெள்ளப்பெருக்கங்கள்",
+        "flood_depth": "வெள்ள உயரம் (செ.மீ)"
       },
       "termsContents": [
         {
