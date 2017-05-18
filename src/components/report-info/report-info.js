@@ -46,7 +46,7 @@ export class ReportInfo {
       },
       {
         name: "telegram",
-        intent: "https://telegram.me/share/url?url={" + self.reportUrl + "}&text={" + self.msgText + "}"
+        intent: "https://telegram.me/share/url?url=" + self.reportUrl + " &text= " + self.msgText 
       },
       {
         name: "whatsapp",
