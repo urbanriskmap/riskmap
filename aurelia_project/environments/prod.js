@@ -5,6 +5,6 @@ export default {
   data_server: 'https://data.riskmap.in/',
   app: 'https://riskmap.in/',
   default_language: 'en',
-  supported_languages: ['en', 'id'],
+  supported_languages: ['en', 'tm'],
   enable_test_cardid: false
 };
