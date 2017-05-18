@@ -1,6 +1,6 @@
 export default {
-  debug: true,
-  testing: true,
+  debug: false,
+  testing: false,
   tile_layer: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}',
   data_server: 'https://data-dev.riskmap.in/',
   app: 'https://dev.riskmap.in/',
