@@ -6,7 +6,7 @@
       <div id="alert" if.bind="test_card" click.trigger="logUserAgent()">
         <p><i class="icon-attention-circled"></i></p>
       </div>
-      <p id="titleText">${reportcard.locale.card_titles[count]}</p>
+      <p id="titleText">${reportcard.locale.card_titles[router.routes[count].route]}</p>
       <div id="langSwitch">
         <label repeat.for="language of reportcard.languages" id.bind="language" class="langLabels">
           <input type="radio" model.bind="language" checked.bind="reportcard.selLanguage" change.delegate="switchLang(language)">

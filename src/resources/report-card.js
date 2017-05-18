@@ -2,11 +2,11 @@
 import env from 'environment';
 import {noView, inject} from 'aurelia-framework';
 import {LocaleEn} from 'resources/locales/en';
-import {LocaleId} from 'resources/locales/id';
+import {LocaleTm} from 'resources/locales/tm';
 
 //start-non-standard
 @noView
-@inject(LocaleEn, LocaleId)
+@inject(LocaleEn, LocaleTm)
 //end-non-standard
 export class ReportCard {
   static metadata() {
@@ -19,10 +19,10 @@ export class ReportCard {
     this.locale = this.lang_obj[lang].translation_strings;
   }
 
-  constructor(LocaleEn, LocaleId) {
+  constructor(LocaleEn, LocaleTm) {
     var self = this;
     self.disasterType = null;
-    self.lang_obj = {en: LocaleEn, id: LocaleId};
+    self.lang_obj = {en: LocaleEn, tm: LocaleTm};
     self.selLanguage = env.default_language;
     self.languages = env.supported_languages;
     self.location = {markerLocation: null, gpsLocation: null, accuracy: null, supported: false};

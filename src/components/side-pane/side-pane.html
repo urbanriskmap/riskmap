@@ -10,7 +10,7 @@
       </li>
       <li class="langTab">
         <div repeat.for="language of languages">
-          <label id.bind="language" class="langLabels" if.bind = "language!=='id'">
+          <label id.bind="language" class="langLabels">
             <input type="radio" model.bind="language" checked.bind="selLanguage" change.delegate="switchLang(language)">
             ${language}
           </label>
@@ -200,10 +200,10 @@
 
           <p id="mapbox">
             ${locale.info_content.mapCredits} ©
-            <a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a> © <a     href="http://www.openstreetmap.org/about"   target="_blank">OpenStreetMap</a>.
+            <a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a> © <a href="http://www.openstreetmap.org/about" target="_blank">OpenStreetMap</a>.
             ${locale.info_content.mapImproveLink} <a href="https://www.mapbox.com/map-feedback/" target="_blank">Mapbox</a>.
           </p>
-<!--
+          <!--
           <p id="browserstack" innerhtml.bind="locale.info_content.browserStack">
           </p>
           <p id="usaid">
