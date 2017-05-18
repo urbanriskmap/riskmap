@@ -7,7 +7,7 @@
     "output": "scripts",
     "index": "index.html"
   },
-  "mockapi": "true",
+  "mockapi": "false",
   "transpiler": {
     "id": "babel",
     "displayName": "Babel",
