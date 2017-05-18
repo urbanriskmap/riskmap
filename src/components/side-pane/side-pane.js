@@ -2,11 +2,11 @@ import {bindable, customElement, inject} from 'aurelia-framework';
 import $ from 'jquery';
 import env from 'environment';
 import {LocaleEn} from 'resources/locales/en';
-import {LocaleId} from 'resources/locales/id';
+import {LocaleTm} from 'resources/locales/tm';
 
 //start-non-standard
 @customElement('side-pane')
-@inject(LocaleEn, LocaleId)
+@inject(LocaleEn, LocaleTm)
 //end-non-standard
 export class SidePane {
   //@bindable attributes do not work with camelCase...
@@ -20,8 +20,8 @@ export class SidePane {
   @bindable switchTerms;
   //end-non-standard
 
-  constructor(LocaleEn, LocaleId) {
-    this.lang_obj = {en: LocaleEn, id: LocaleId};
+  constructor(LocaleEn, LocaleTm) {
+    this.lang_obj = {en: LocaleEn, tm: LocaleTm};
     this.languages = env.supported_languages;
     this.locale = {};
     this.seltab = "map"; //default tab to open

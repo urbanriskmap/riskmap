@@ -21,14 +21,17 @@ export class Cards {
       this.region_bounds[city] = Config.map.instance_regions[city].bounds;
     }
   }
+
   configureRouter(config, router) {
     var self = this;
     config.title = this.locale.page_title;
     //IMPORTANT: '*foo' required mostly for dev,
     // but also if user hits refresh & url is appended with route name)
-    // In server modules: use this as reply link ROOT/cards/report?disaster=prep&id=one-time-link
-    // In dev environment; (enable_test_cardid === true) use ROOT/cards/foo (defaults to flood cards)
-    // OR ROOT/cards/foo?disaster=prep&lang=tm&id=one-time-link (otl if known, connected to pgadmin)
+    // recommended: use '*foo' = report
+    //
+    // In server modules: use this as reply link ROOT/cards/:disaster/:one-time-link/report
+    // In dev environment; (enable_test_cardid === true) use ROOT/cards/*foo (defaults to flood cards)
+    // OR ROOT/cards/:disaster/:one-time-link/*foo (otl if known, connected to pgadmin)
     config.map([
       {route: '*foo', moduleId: './card-landing/card-landing'}
     ]);

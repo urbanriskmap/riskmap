@@ -3,12 +3,13 @@ export class LocaleEn {
     this.translation_strings = {
       "page_title": "Flood reports",
       "card_titles": {
-        "1": "Select flood location",
-        "2": "Report water depth",
-        "3": "Upload a photo",
-        "4": "Tell us more",
-        "5": "Review & submit",
-        "6": "Terms & Conditions"
+        "prep": "Monsoon preparation",
+        "location": "Select flood location",
+        "depth": "Report water depth",
+        "photo": "Upload a photo",
+        "description": "Tell us more",
+        "review": "Review & submit",
+        "terms": "Terms & Conditions"
       },
       "notification": {
         "header": {

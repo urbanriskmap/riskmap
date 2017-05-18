@@ -1,4 +1,4 @@
-export class LocaleEn {
+export class LocaleTm {
   constructor() {
     this.translation_strings = {
       "page_title": "வெள்ள அறிக்கைகள்",
