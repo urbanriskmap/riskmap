@@ -92,6 +92,7 @@ export class Cards {
       $(window).resize(() => {
         self.resizeCardHt(0);
       });
+      self.resizeRan = "Resize function executed!";
     }
 
     $(document).ready(() => {
@@ -243,7 +244,9 @@ export class Cards {
 
   logUserAgent() {
     var nua = navigator.userAgent.toLowerCase();
-    this.showNotification('warning', 'User agent', nua, true);
+    //this.showNotification('warning', 'User agent', nua, true);
+    var devString = 'Wrapper height: ' + $('#cardWrapper').height() + 'px | ' + 'Content height: ' + $('#cardWrapper').height() + 'px | ' + 'Content ideal ht.: ' + ($('#cardWrapper').height() - 100) + 'px | ' + this.resizeRan;
+    this.showNotification('warning', 'User agent', devString, true);
   }
 
   get count() { //TODO navigation does not work unless getter is called from the DOM or elsewhere in js;
