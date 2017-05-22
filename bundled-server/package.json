@@ -1,0 +1,14 @@
+{
+  "name": "bundled-server",
+  "version": "1.0.0",
+  "description": "a simple node server to serve bundled aurelia app ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "abrahamq, urbanrisklab",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}

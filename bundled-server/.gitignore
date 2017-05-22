@@ -1,0 +1,21 @@
+node_modules/
+.idea
+.DS_STORE
+npm-debug.log
+
+scripts/
+dist/
+coverage/
+src/environment.js
+
+#for vim:
+*.swp
+*.swo
+
+#for the bundled-server (so we don't duplicate files) 
+assets/ 
+images/
+favicon.ico
+index.html
+
+
