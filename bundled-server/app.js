@@ -10,6 +10,6 @@ app.use(express.static('.'));
 app.all('*', catchall); 
 
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!'); 
+app.listen(9000, function () {
+    console.log('Aurelia bundles being served from localhost:9000'); 
 });
