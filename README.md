@@ -55,6 +55,11 @@ ___
     * '/map/:city/:report' *query parameter (city & report): flyTo queried report id in a supported city* 
     * '/cards/:id' *query parameter (one time card id): link to access report cards, (use test123 as card id in dev & local environments*
 
+* *Additional query parameters*
+    * ?lang : Use for setting language to one of the supported languages (en || id).
+    * ?tab : Use for opening the side pane set to one of the following tabs (report || map || info)
+    * eg. https://dev.petabencana.id/map?lang=en&tab=info
+
 ___
 
 ### Configuration
