@@ -72,7 +72,6 @@ export class SidePane {
     this.selLanguage = (this.querylanguage ? this.querylanguage : env.default_language);
     this.changeLanguage(this.selLanguage);
     $('#' + this.selLanguage).addClass("active");
-    //$('#button-' + this.seltab).addClass("active");
   }
 
   switchTab(tab) {

@@ -72,8 +72,10 @@ export class DisasterMap {
         self.togglePane('#infoPane', 'hide', true);
         // update browser url
         if ((self.querylanguage || self.querytab) && !self.reportid) {
-          if (self.utility.isCitySupported(self.querycity)) {
+          if (!self.selected_city && self.utility.isCitySupported(self.querycity)) {
             self.selected_city = self.querycity; //selected_city given a value from params only when viewReports / changeCity run
+            history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
+          } else if (self.selected_city) {
             history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
           } else {
             history.pushState({city: null, report_id: null}, "city", "map");
