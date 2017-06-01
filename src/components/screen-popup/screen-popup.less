@@ -52,11 +52,19 @@
         width: 50%;
         height: 100%;
         float: left;
-        .bodylight-mixin(14px);
         text-align: center;
-        line-height: 40px;
+        .bodylight-mixin(14px);
         cursor: pointer;
+        & p {
+          position: absolute;
+          width: 50%;
+          top: 50%;
+          margin: 0;
+          line-height: 15px;
+          .translate-mixin(0, -50%);
+        }
         &:hover {
+          .bodylight-mixin(14px);
           color: @blue-hover;
         }
         &.active {

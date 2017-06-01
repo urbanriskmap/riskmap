@@ -14,7 +14,7 @@
     <div id="termsPopup">
       <div id="tabRow">
         <div repeat.for="switch of termscontents" class="termsTabs" id.bind="'tab-' + switch.tab_key" click.delegate="switchTab(switch.tab_key)">
-          ${switch.tab_name}
+          <p>${switch.tab_name}</p>
         </div>
       </div>
       <div id="tabContent">

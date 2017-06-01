@@ -64,26 +64,32 @@ export class SidePane {
   }
 
   //on the fly language change
-  changeLanguage(lang) {
-    this.locale = this.lang_obj[lang].translation_strings;
+  changeLanguage() {
+    this.locale = this.lang_obj[this.selLanguage].translation_strings;
   }
 
   attached() {
     this.selLanguage = (this.querylanguage ? this.querylanguage : env.default_language);
-    this.changeLanguage(this.selLanguage);
-    $('#' + this.selLanguage).addClass("active");
+    this.changeLanguage();
+    $('#label_' + this.selLanguage).addClass("active");
   }
 
   switchTab(tab) {
+    this.seltab = tab;
     $('.tabLinks').removeClass("active");
     $('#button-' + tab).addClass("active");
-    this.seltab = tab;
   }
 
+  //Cannot use default binding (checked.bind="selLanguage") as
+  //radio button is hidden, and never gets checked.
+  //Using click.delegate instead of change.delegate &
+  //set selLanguage in the click function | Works in card.js,
+  //perhaps because here input list is nested within a ul > li ?
   switchLang(lang) {
-    this.changeLanguage(lang);
+    this.selLanguage = lang;
+    this.changeLanguage();
     $('.langLabels').removeClass("active");
-    $('#' + lang).addClass("active");
+    $('#label_' + lang).addClass("active");
   }
 
   switchCity(city) {

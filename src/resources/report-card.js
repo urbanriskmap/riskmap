@@ -14,9 +14,8 @@ export class ReportCard {
   } //true indicates to register in the root container
 
   // Support language changing
-  // TODO - error handling for
-  changeLanguage(lang) {
-    this.locale = this.lang_obj[lang].translation_strings;
+  changeLanguage() {
+    this.locale = this.lang_obj[this.selLanguage].translation_strings;
   }
 
   constructor(LocaleEn, LocaleId) {
@@ -30,6 +29,6 @@ export class ReportCard {
     self.description = {value: null};
     self.network = null;
     self.locale = {};
-    self.changeLanguage(this.selLanguage);
+    self.changeLanguage(self.selLanguage);
   }
 }

@@ -9,12 +9,10 @@
         </div>
       </li>
       <li class="langTab">
-        <div repeat.for="language of languages">
-          <label id.bind="language" class="langLabels">
-            <input type="radio" model.bind="language" checked.bind="selLanguage" change.delegate="switchLang(language)">
-            ${language}
-          </label>
-        </div>
+        <label repeat.for="language of languages" id.bind="'label_' + language" class="langLabels">
+          <input type="radio" model.bind="language" click.delegate="switchLang(language)">
+          ${language}
+        </label>
       </li>
     </ul>
   </div>

@@ -22,7 +22,7 @@ export class ScreenPopup {
 
   closePopup() {
     $('#termsPopup').hide();
-    if (selcity) {
+    if (this.selcity) {
       $('#screen').hide();
     }
   }

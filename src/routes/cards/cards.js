@@ -44,7 +44,7 @@ export class Cards {
 
   //switch on-the-fly
   switchLang(lang) {
-    this.reportcard.changeLanguage(lang);
+    this.reportcard.changeLanguage();
     $('.langLabels').removeClass("active");
     $('#' + lang).addClass("active");
   }
@@ -75,7 +75,7 @@ export class Cards {
     }
 
     this.totalCards = this.router.routes.length - 1; //exclude (route:'', redirect:'location')
-    this.switchLang(this.lang); //set language based on url param OR default 
+    this.switchLang(this.lang); //set language based on url param OR default
 
     var self = this;
     let client = new HttpClient();
