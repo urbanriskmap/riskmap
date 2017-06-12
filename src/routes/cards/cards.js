@@ -145,7 +145,9 @@ export class Cards {
         }
       })
       .catch(response => {
-        console.log(response); //Retain, DO NOT DELETE
+        //There was an error submitting the card.
+        console.error('Could not submit card!"); 
+        console.error(response);
         self.router.routes[8].settings.errorCode = response.statusCode;
         self.router.routes[8].settings.errorText = response.statusText;
         self.router.navigate('error');
