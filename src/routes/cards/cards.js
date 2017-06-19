@@ -146,7 +146,7 @@ export class Cards {
       })
       .catch(response => {
         //There was an error submitting the card.
-        console.error('Could not submit card!"); 
+        console.error('Could not submit card!'); 
         console.error(response);
         self.router.routes[8].settings.errorCode = response.statusCode;
         self.router.routes[8].settings.errorText = response.statusText;
