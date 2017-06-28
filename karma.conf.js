@@ -42,8 +42,6 @@ module.exports = function(config) {
       dir : 'coverage/'
     }, 
 
-  });
-  if (!process.env.TRAVIS) {
     config.browsers.push('Chrome');
-  }
+  });
 };
