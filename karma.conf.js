@@ -42,6 +42,6 @@ module.exports = function(config) {
       dir : 'coverage/'
     }, 
 
-    config.browsers.push('Chrome');
+    browsers: ['Chrome'] 
   });
 };
