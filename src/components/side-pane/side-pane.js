@@ -12,19 +12,20 @@ export class SidePane {
   //@bindable attributes do not work with camelCase...
   //start-non-standard
   @bindable cities;
-  @bindable selected;
+  @bindable selcity;
   @bindable changeCity;
   @bindable closePane;
   @bindable reportId;
+  @bindable querylanguage;
+  @bindable switchTerms;
   //end-non-standard
 
   constructor(LocaleEn, LocaleId) {
     this.lang_obj = {en: LocaleEn, id: LocaleId};
     this.languages = env.supported_languages;
-    this.selLanguage = env.default_language;
     this.locale = {};
+    this.seltab = "map"; //default tab to open
     this.tabList = ["report", "map", "info"]; //elements match names of fontello icons
-    this.tab = "report";
     this.videos = [
       {
         platform: "twitter", //Match string to locale/*/translation.json > report_content.*
@@ -63,26 +64,32 @@ export class SidePane {
   }
 
   //on the fly language change
-  changeLanguage(lang) {
-    this.locale = this.lang_obj[lang].translation_strings;
+  changeLanguage() {
+    this.locale = this.lang_obj[this.selLanguage].translation_strings;
   }
 
   attached() {
-    this.changeLanguage(this.selLanguage);
-    $('#' + this.selLanguage).addClass("active");
-    $('#button-' + this.tab).addClass("active");
+    this.selLanguage = (this.querylanguage ? this.querylanguage : env.default_language);
+    this.changeLanguage();
+    $('#label_' + this.selLanguage).addClass("active");
   }
 
   switchTab(tab) {
+    this.seltab = tab;
     $('.tabLinks').removeClass("active");
     $('#button-' + tab).addClass("active");
-    this.tab = tab;
   }
 
+  //Cannot use default binding (checked.bind="selLanguage") as
+  //radio button is hidden, and never gets checked.
+  //Using click.delegate instead of change.delegate &
+  //set selLanguage in the click function | Works in card.js,
+  //perhaps because here input list is nested within a ul > li ?
   switchLang(lang) {
-    this.changeLanguage(lang);
+    this.selLanguage = lang;
+    this.changeLanguage();
     $('.langLabels').removeClass("active");
-    $('#' + lang).addClass("active");
+    $('#label_' + lang).addClass("active");
   }
 
   switchCity(city) {
@@ -99,5 +106,13 @@ export class SidePane {
     $('#down_' + video + ', #up_' + video).toggle();
     $('.up:not(#up_' + video + ')').hide();
     $('.down:not(#down_' + video + ')').show();
+  }
+
+  // When the user clicks on div, open the popup
+  openTermsPopup(type) {
+    this.closePane();
+    $('#screen').show();
+    $('#termsPopup').show();
+    this.switchTerms(type);
   }
 }

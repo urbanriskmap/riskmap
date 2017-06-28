@@ -253,7 +253,6 @@ export class MapLayers {
     var self = this;
     layer.on({
       click: (e) => {
-        console.log(e.target);
         map.panTo(layer._latlng);
         $('#chart-pane').empty();
         if (self.selected_report) {

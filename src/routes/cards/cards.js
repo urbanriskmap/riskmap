@@ -4,6 +4,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
 import {Config} from 'resources/config'; // Cards config
 import {ReportCard} from 'resources/report-card';
+import env from '../../environment';
 
 //start-non-standard
 @inject(EventAggregator, ReportCard, Config)
@@ -19,7 +20,6 @@ export class Cards {
       this.region_bounds[city] = Config.map.instance_regions[city].bounds;
     }
   }
-
   configureRouter(config, router) {
     config.title = this.reportcard.locale.page_title;
     config.map([
@@ -39,11 +39,12 @@ export class Cards {
 
   activate(params) {
     this.id = params.id;
+    this.lang = (env.supported_languages.indexOf(params.lang) > -1) ? params.lang : env.default_language;
   }
 
   //switch on-the-fly
   switchLang(lang) {
-    this.reportcard.changeLanguage(lang);
+    this.reportcard.changeLanguage();
     $('.langLabels').removeClass("active");
     $('#' + lang).addClass("active");
   }
@@ -59,7 +60,7 @@ export class Cards {
   }
 
   attached() {
-    $('#depthBG').attr('fill', '#ff0000');
+    //$('#depthBG').attr('fill', '#ff0000');
     var nua = navigator.userAgent.toLowerCase();
     //______________is Mobile______________________an iPhone_________________browser not safari (in-app)___________app is twitter________________app is facebook______________not facebook messenger_________
     if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1 && (nua.indexOf('twitter') > -1 || (nua.indexOf('fban') > -1 && nua.indexOf('messenger') === -1))) {
@@ -74,7 +75,7 @@ export class Cards {
     }
 
     this.totalCards = this.router.routes.length - 1; //exclude (route:'', redirect:'location')
-    $('#' + this.reportcard.selLanguage).addClass("active");
+    this.switchLang(this.lang); //set language based on url param OR default
 
     var self = this;
     let client = new HttpClient();
@@ -126,8 +127,6 @@ export class Cards {
       .then(response => {
         // now/also, send the image.
         if (self.photoToUpload) {
-          console.log(self.photoToUpload);
-
           let client = new HttpClient()
           .configure(x => {
             x.withBaseUrl(self.data_src); //REPLACE with aws s3 response url?
@@ -146,7 +145,9 @@ export class Cards {
         }
       })
       .catch(response => {
-        console.log(response);
+        //There was an error submitting the card.
+        console.error('Could not submit card!'); 
+        console.error(response);
         self.router.routes[8].settings.errorCode = response.statusCode;
         self.router.routes[8].settings.errorText = response.statusText;
         self.router.navigate('error');

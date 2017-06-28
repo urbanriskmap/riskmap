@@ -23,7 +23,7 @@ module.exports = function(config) {
       [project.unitTestRunner.source]: [project.transpiler.id]
     },
     'babelPreprocessor': { options: project.transpiler.options },
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage', 'BrowserStack'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -36,33 +36,12 @@ module.exports = function(config) {
       args: ['aurelia-root', project.paths.root]
     },
 
-    // global config of your BrowserStack account
-    browserStack: {
-      username: process.env.BROWSERSTACK_USERNAME,
-      accessKey: process.env.BROWSERSTACK_KEY 
-    },
+    //optionally, configure the reporter
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    }, 
 
-    // define browsers
-    customLaunchers: {
-      bs_firefox_mac: {
-        base: 'BrowserStack',
-        browser: 'firefox',
-        browser_version: '21.0',
-        os: 'OS X',
-        os_version: 'Mountain Lion'
-      },
-      bs_iphone5: {
-        base: 'BrowserStack',
-        device: 'iPhone 5',
-        os: 'ios',
-        os_version: '6.0'
-      }
-    },
-
-    browsers: ['bs_firefox_mac', 'bs_iphone5'],
-
+    browsers: ['Chrome'] 
   });
-  if (!process.env.TRAVIS) {
-    config.browsers.push('Chrome');
-  }
 };
