@@ -20,7 +20,8 @@ notifications:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - travis_wait $TIMEOUT npm start 
+  - npm start &
+  - sleep $TIMEOUT
 
 before_install:
   - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
