@@ -30,6 +30,3 @@ install:
   - npm install
   - npm install aurelia-cli -g
   - npm install casperjs -g
-  - npm install phantomjs -g
-  - webdriver-manager update
-
