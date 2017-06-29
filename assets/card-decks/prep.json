@@ -1,0 +1,22 @@
+[
+  {
+    "route": "prep",
+    "moduleId": "./prep/prep"
+  },
+  {
+    "route": "location",
+    "moduleId": "./location/location"
+  },
+  {
+    "route": "photo",
+    "moduleId": "./photo/photo"
+  },
+  {
+    "route": "description",
+    "moduleId": "./description/description"
+  },
+  {
+    "route": "review",
+    "moduleId": "./review/review"
+  }
+]

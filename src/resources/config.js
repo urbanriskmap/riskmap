@@ -1,3 +1,9 @@
+/* TODO Abe: set as config param  */
+/* Keep 2 separate config files - identified by flag name,
+   eg. config_pb.js & config_rm.js (petabencana & riskmap)
+   Either content is copied by build process into a config.js, or some other way...
+*/
+
 // PetaBencana.id configuration file, for CogniCity data
 // https://github.com/urbanriskmap/urbanriskmap-meta/wiki/Bounding-Boxes-for-Target-Cities
 

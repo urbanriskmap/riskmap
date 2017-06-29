@@ -26,6 +26,7 @@ export class SidePane {
     this.locale = {};
     this.seltab = "map"; //default tab to open
     this.tabList = ["report", "map", "info"]; //elements match names of fontello icons
+    this.vidWrapperOpened = false;
     this.videos = [
       {
         platform: "twitter", //Match string to locale/*/translation.json > report_content.*
@@ -78,6 +79,12 @@ export class SidePane {
     this.seltab = tab;
     $('.tabLinks').removeClass("active");
     $('#button-' + tab).addClass("active");
+    if (tab === 'report' && !this.vidWrapperOpened) {
+      $('#vid_' + this.videos[0].platform).ready(() => {
+        this.showVideo(this.videos[0].platform);
+        this.vidWrapperOpened = true; //prevents report pane videos to toggle after user closes then reopens side pane
+      });
+    }
   }
 
   //Cannot use default binding (checked.bind="selLanguage") as

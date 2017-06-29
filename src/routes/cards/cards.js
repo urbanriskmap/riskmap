@@ -12,35 +12,55 @@ import env from '../../environment';
 export class Cards {
   constructor(ea, ReportCard, Config) {
     this.ea = ea;
+    this.reportcard = ReportCard;
+    this.locale = this.reportcard.locale;
     this.data_src = Config.cards.data_server;
     this.test_card = Config.cards.enable_test_cardid;
-    this.reportcard = ReportCard;
     this.region_bounds = {};
     for (let city in Config.map.instance_regions) {
       this.region_bounds[city] = Config.map.instance_regions[city].bounds;
     }
   }
+
   configureRouter(config, router) {
-    config.title = this.reportcard.locale.page_title;
+    var self = this;
+    config.title = this.locale.page_title;
+    //IMPORTANT: '*foo' required mostly for dev,
+    // but also if user hits refresh & url is appended with route name)
+    // recommended: use '*foo' = report
+    //
+    // In server modules: use this as reply link ROOT/cards/:disaster/:one-time-link/report
+    // In dev environment; (enable_test_cardid === true) use ROOT/cards/*foo (defaults to flood cards)
+    // OR ROOT/cards/:disaster/:one-time-link/*foo (otl if known, connected to pgadmin)
     config.map([
-      {route: '',                               moduleId: './card-landing/card-landing', settings: {cardNo: 0}}, //requires cardNo for count getter to set cardNo as 0, on-the-fly resizing dependent on cardTitle & cardNavigation div's displayed, in turn dependent on 'count'
-      {route: 'location',     name: 'location', moduleId: './location/location',         settings: {cardNo: 1}},
-      {route: 'depth',                          moduleId: './depth/depth',               settings: {cardNo: 2}},
-      {route: 'photo',                          moduleId: './photo/photo',               settings: {cardNo: 3}},
-      {route: 'description',                    moduleId: './description/description',   settings: {cardNo: 4}},
-      {route: 'review',                         moduleId: './review/review',             settings: {cardNo: 5}},
-      {route: 'terms',                          moduleId: './terms/terms',               settings: {cardNo: 6}},
-      {route: 'thanks',                         moduleId: './thanks/thanks',             settings: {cardNo: 7}},
-      {route: 'error',        name: 'error',    moduleId: './error/error',               settings: {cardNo: 8}},
+      {route: '*foo', moduleId: './card-landing/card-landing'}
     ]);
-    config.mapUnknownRoutes({redirect: '/map'});
-    this.router = router;
+    config.mapUnknownRoutes({route: '/map'});
+    self.router = router;
   }
 
   activate(params) {
-    this.id = params.id;
-    this.lang = (env.supported_languages.indexOf(params.lang) > -1) ? params.lang : env.default_language;
-  }
+  var self = this;
+  self.id = params.id;
+  self.lang = (env.supported_languages.indexOf(params.lang) > -1) ? params.lang : env.default_language;
+  self.reportcard.disasterType = (params.disaster === 'flood' || params.disaster === 'prep') ? params.disaster : 'flood';
+  $.getJSON("assets/card-decks/" + self.reportcard.disasterType + ".json", data => {
+    for (let obj of data) {
+      self.router.addRoute(obj);
+    }
+  }).then(() => {
+    $.getJSON("assets/card-decks/staple.json", data => {
+      for (let obj of data) {
+        self.router.addRoute(obj);
+      }
+    }).then(() => {
+      for (let route in self.router.routes) {
+        self.router.routes[route].settings = {cardNo: parseInt(route)};
+      }
+      self.router.refreshNavigation();
+    });
+  });
+}
 
   //switch on-the-fly
   switchLang(lang) {
@@ -60,58 +80,63 @@ export class Cards {
   }
 
   attached() {
-    //$('#depthBG').attr('fill', '#ff0000');
+    var self = this;
     var nua = navigator.userAgent.toLowerCase();
     //______________is Mobile______________________an iPhone_________________browser not safari (in-app)___________app is twitter________________app is facebook______________not facebook messenger_________
     if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1 && (nua.indexOf('twitter') > -1 || (nua.indexOf('fban') > -1 && nua.indexOf('messenger') === -1))) {
-      this.resizeCardHt(1);
+      self.resizeCardHt(1);
     } else {
       //Execute resize on initial page load
-      this.resizeCardHt(0);
+      self.resizeCardHt(0);
       //Add resize listener to browser window
       $(window).resize(() => {
-        this.resizeCardHt(0);
+        self.resizeCardHt(0);
       });
     }
 
-    this.totalCards = this.router.routes.length - 1; //exclude (route:'', redirect:'location')
-    this.switchLang(this.lang); //set language based on url param OR default
+    $(document).ready(() => {
+      $('.tabButtons').width((100 / (self.totalCards - 3)) + '%'); //fit 'n' tab buttons on-the-fly, n = (total - staple) cards
+    });
 
-    var self = this;
+    self.totalCards = self.router.routes.length - 1; //exclude (route:'', redirect:'location')
+    self.switchLang(self.lang); //set language based on url param OR default
+
     let client = new HttpClient();
 
     // Escape test in dev & local environment for 'test123'
     //_______is Prod____________otl:test123_______
-    if (!this.test_card || this.id !== 'test123') {
+    if (!self.test_card || self.id !== 'test123') {
       //Navigate to location card OR error card, then resize card height to fill screen
-      client.get(this.data_src + 'cards/' + this.id)
+      client.get(self.data_src + 'cards/' + self.id)
       .then(response => {
          var msg = JSON.parse(response.response);
-         // card already exists
          if (msg.result.received === true) {
-          self.router.routes[8].settings.errorText = self.reportcard.locale.card_error_messages.already_received;
+           // card already exists
+          self.reportcard.errors.text = self.locale.card_error_messages.already_received;
           self.router.navigate('error', {replace: true});
         } else {
+          // populate network property of reportcard, accessed in thanks card
           self.reportcard.network = msg.result.network;
-          self.router.routes[7].settings.errorCode = response.statusCode;
-          self.router.navigate('location', {replace: true});
+          // proceed to first card
+          self.router.navigate(self.router.routes[1].route, {replace: true});
         }
       })
       .catch(response => {
         if (response.statusCode === 404) {
           // error this card does not exist
-          self.router.routes[8].settings.errorCode = response.statusCode;
-          self.router.routes[8].settings.errorText = self.reportcard.locale.card_error_messages.unknown_link;
+          self.reportcard.errors.code = response.statusCode;
+          self.reportcard.errors.text = self.locale.card_error_messages.unknown_link;
           self.router.navigate('error', {replace: true});
         } else {
           // unhandled error
-          self.router.routes[8].settings.errorCode = response.statusCode;
-          self.router.routes[8].settings.errorText = self.reportcard.locale.card_error_messages.unknown_error + " (" + response.statusText + ")";
+          self.reportcard.errors.code = response.statusCode;
+          self.reportcard.errors.text = self.locale.card_error_messages.unknown_error + " (" + response.statusText + ")";
           self.router.navigate('error', {replace: true});
         }
       });
     } else {
-      self.router.navigate('location', {replace: true});
+      // proceed to first card
+      self.router.navigate(self.router.routes[1].route, {replace: true});
     }
 
     self.ea.subscribe('readTerms', msg => {
@@ -132,12 +157,35 @@ export class Cards {
             x.withBaseUrl(self.data_src); //REPLACE with aws s3 response url?
             x.withHeader('Content-Type', self.photoToUpload.type);
           });
-          client.post('cards/' + self.id + '/images', self.photoToUpload)
+
+          //To get AWS Signed URL
+          client.get(self.data_src + 'cards/' + this.id + '/images')
           .then(response => {
-            // Proceed to thanks page if report submit resolved & image uploaded;
-            self.router.navigate('thanks');
+            console.log(response);
+            var msg = JSON.parse(response.response);
+            var signedURL = msg.signedRequest;
+            console.log(signedURL);
+            //Post image to the Signed URL
+            $.ajax({
+              url: signedURL,
+              type: 'PUT',
+              data: self.photoToUpload,
+              contentType: false,
+              processData: false,
+              cache: false,
+              error: function (data) {
+                console.log("Error uploading image to AWS");
+              },
+              success: function () {
+                console.log("Uploaded image to AWS successfully!");
+                // Proceed to thanks page if report submit resolved & image uploaded;
+                self.router.navigate('thanks');
+              }
+            });
+
           })
           .catch(response => {
+            //TODO: Need to be updated based on Abe's server code
           });
         } else {
           // Proceed to thanks page if report submit resolved
@@ -145,16 +193,17 @@ export class Cards {
         }
       })
       .catch(response => {
-        //There was an error submitting the card.
-        console.error('Could not submit card!'); 
-        console.error(response);
-        self.router.routes[8].settings.errorCode = response.statusCode;
-        self.router.routes[8].settings.errorText = response.statusText;
+        console.log(response); //Retain, DO NOT DELETE
+        self.reportcard.errors.code = response.statusCode;
+        self.reportcard.errors.text = response.statusText;
         self.router.navigate('error');
         // resolve(null);
       });
     });
 
+    self.ea.subscribe('reportType', btnName => {
+      self.reportcard.reportType = btnName;
+    });
     self.ea.subscribe('geolocate', error => {
       self.showNotification(error, 'location_1', 'location_1', false);
     });
@@ -163,6 +212,9 @@ export class Cards {
     });
     self.ea.subscribe('size', error => {
       self.showNotification(error, 'photo_1', 'photo_1', false);
+    });
+    self.ea.subscribe('depthSlider', msg => {
+      self.sliderDragged = true;
     });
   }
 
@@ -219,22 +271,24 @@ export class Cards {
   }
 
   nextCard() {
-    if (this.cardNo === 1) {
-      if (this.isLocationSupported() || this.location_check) {
-        this.count = 1; //count setter to increment cardNo by 1
-        this.router.navigate(this.router.routes[this.cardNo].route);
-        this.closeNotification();
+    var self = this;
+    if (self.router.currentInstruction.fragment === 'location') {
+      if (self.isLocationSupported() || self.location_check) {
+        self.count = 1; //count setter to increment cardNo by 1
+        self.router.navigate(self.router.routes[self.cardNo].route);
+        self.closeNotification();
       }
-      if (!this.location_check && !this.isLocationSupported()) {
-        this.showNotification('warning', 'location_2', 'location_2', false);
-        this.location_check = true; // execute once
+      if (!self.location_check && !self.isLocationSupported()) {
+        self.showNotification('warning', 'location_2', 'location_2', false);
+        self.location_check = true; // execute once
       }
-    } else if (this.cardNo !== 1 && this.cardNo < this.totalCards) {
-      this.count = 1; //count setter to increment cardNo by 1
-      this.router.navigate(this.router.routes[this.cardNo].route);
-      this.closeNotification();
+    } else if (self.router.currentInstruction.fragment !== 'location' && self.cardNo < self.totalCards) {
+      self.count = 1; //count setter to increment cardNo by 1
+      self.router.navigate(self.router.routes[self.cardNo].route);
+      self.closeNotification();
     }
   }
+
   prevCard() {
     if (this.cardNo > 1) {
       this.count = -1;
@@ -243,13 +297,18 @@ export class Cards {
   }
 
   get nextDisabled() {
-    if (this.cardNo === 1) {
+    if (this.router.currentInstruction.fragment === 'location') {
       return !this.reportcard.location.markerLocation;
+    } else if (this.router.currentInstruction.fragment === 'prep') {
+      return !this.reportcard.reportType;
+    } else if (this.router.currentInstruction.fragment === 'depth') {
+      return !this.sliderDragged; //Disable next button on depth card until user drags slider
     } else {
-      return this.cardNo >= this.totalCards - 3;
+      return this.cardNo >= this.totalCards - 3; //Disable next button on review card (exclude staple card routes: terms, thanks, error)
     }
   }
+
   get prevDisabled() {
-    return this.cardNo === 1 || this.cardNo === 7;
+    return this.cardNo === 1;
   }
 }

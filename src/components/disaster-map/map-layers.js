@@ -15,16 +15,16 @@ export class MapLayers {
   constructor(Config) {
     this.activeReports = {}; // List of available reports (filtered by city, time: last 1 hour)
     this.config = Config.map;
+    this.selReportType = null;
     this.mapIcons = {
-      report_normal: L.icon({
-        iconUrl: 'assets/icons/floodIcon.svg',
+      report_normal: (type) => L.divIcon({
         iconSize: [30, 30],
-        iconAnchor: [15, 15]
+        html: '<i class="icon-map-bg bg-circle ' + type + '"><i class="icon-' + type + ' report-icon"></i>'
+        //html: '<i class="icon-map-' + type + ' report-icon ' + type + '"></i>'
       }),
-      report_selected: L.icon({
-        iconUrl: 'assets/icons/floodSelectedIcon.svg',
+      report_selected: (type) => L.divIcon({
         iconSize: [30, 30],
-        iconAnchor: [15, 15]
+        html: '<i class="icon-map-bg bg-circle ' + type + ' selected"><i class="icon-' + type + ' report-icon"></i>'
       }),
       gauge_normal: (url) => L.icon({
         iconUrl: url,
@@ -65,9 +65,10 @@ export class MapLayers {
 
   // Format timestamps to local time
   formatTime(timestamp_ISO8601) {
+    let timeZoneDifference = -5;
     let utc = new Date(timestamp_ISO8601).getTime();
-    let ict = utc + 3600 * 7 * 1000; // Add 7 hours for UTC+7
-    let timestring = new Date(ict).toISOString();
+    let localTime = utc + (3600 * timeZoneDifference) * 1000; // Add 7 hours for UTC-5
+    let timestring = new Date(localTime).toISOString();
     timestring = timestring.split('T'); // Split time and ate
     let t1 = timestring[1].slice(0,5); // Extract HH:MM
     let d1 = timestring[0].split('-'); // Extract DD-MM-YY
@@ -99,12 +100,20 @@ export class MapLayers {
     });
   }
 
+  revertIconToNormal(type) {
+    var icon = (type === 'flood' || type === null) ? this.mapIcons.report_normal('flood') : this.mapIcons.report_normal(this.selReportType);
+    this.selected_report.target.setIcon(icon);
+    this.selected_report = null;
+  }
+
   reportInteraction(feature, layer, city_name, map, togglePane) {
     var self = this;
     self.activeReports[feature.properties.pkey] = layer;
     layer.on({
       click: (e) => {
-        map.panTo(layer._latlng);
+        map.flyTo(layer._latlng, 15);
+        var reportIconNormal = (feature.properties.disaster_type === 'prep') ? self.mapIcons.report_normal(feature.properties.report_data.report_type) : self.mapIcons.report_normal('flood');
+        var reportIconSelected = (feature.properties.disaster_type === 'prep') ? self.mapIcons.report_selected(feature.properties.report_data.report_type) : self.mapIcons.report_selected('flood');
         if (self.selected_extent) {
           self.selected_extent.target.setStyle(self.mapPolygons.normal);
           self.selected_extent = null;
@@ -115,7 +124,7 @@ export class MapLayers {
         }
         if (!self.selected_report) {
           // Case 1 : no previous selection, click on report icon
-          e.target.setIcon(self.mapIcons.report_selected);
+          e.target.setIcon(reportIconSelected);
           self.popupContent = {};
           for (let prop in feature.properties) {
             self.popupContent[prop] = feature.properties[prop];
@@ -126,14 +135,14 @@ export class MapLayers {
           self.selected_report = e;
         } else if (e.target === self.selected_report.target) {
           // Case 2 : clicked report icon same as selected report
-          e.target.setIcon(self.mapIcons.report_normal);
+          e.target.setIcon(reportIconNormal);
           history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
           togglePane('#infoPane', 'hide', false);
           self.selected_report = null;
         } else if (e.target !== self.selected_report.target) {
           // Case 3 : clicked new report icon, while previous selection needs to be reset
-          self.selected_report.target.setIcon(self.mapIcons.report_normal);
-          e.target.setIcon(self.mapIcons.report_selected);
+          self.revertIconToNormal(self.selReportType);
+          e.target.setIcon(reportIconSelected);
           self.popupContent = {};
           for (let prop in feature.properties) {
             self.popupContent[prop] = feature.properties[prop];
@@ -143,6 +152,8 @@ export class MapLayers {
           togglePane('#infoPane', 'show', true);
           self.selected_report = e;
         }
+        //Set selReportType value from feature properties
+        self.selReportType = (feature.properties.report_data.report_type) ? feature.properties.report_data.report_type : null;
       }
     });
   }
@@ -154,8 +165,7 @@ export class MapLayers {
         map.panTo(layer.getCenter());
         // Check for selected report, restore icon to normal, clear variable, update browser URL
         if (self.selected_report) {
-          self.selected_report.target.setIcon(self.mapIcons.report_normal);
-          self.selected_report = null;
+          self.revertIconToNormal(self.selReportType);
           history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
         }
         if (self.selected_gauge) {
@@ -256,8 +266,7 @@ export class MapLayers {
         map.panTo(layer._latlng);
         $('#chart-pane').empty();
         if (self.selected_report) {
-          self.selected_report.target.setIcon(self.mapIcons.report_normal);
-          self.selected_report = null;
+          self.revertIconToNormal(self.selReportType);
           history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
         }
         if (self.selected_extent) {
@@ -331,14 +340,15 @@ export class MapLayers {
         self.reportInteraction(feature, layer, city_name, map, togglePane);
       },
       pointToLayer: (feature, latlng) => {
+        var reportIconNormal = (feature.properties.disaster_type === 'prep') ? self.mapIcons.report_normal(feature.properties.report_data.report_type) : self.mapIcons.report_normal('flood');
         return L.marker(latlng, {
-          icon: self.mapIcons.report_normal,
+          icon: reportIconNormal,
           pane: 'reports'
         });
       }
     });
     // add layer to map
-    return self.appendData('reports/?city=' + city_region, self.reports, map);
+    return self.appendData('reports/?city=' + city_region +'&timeperiod=604800', self.reports, map);
   }
 
   addFloodExtents(city_name, city_region, map, togglePane) {

@@ -1,0 +1,22 @@
+[
+  {
+    "route": "location",
+    "moduleId": "./location/location"
+  },
+  {
+    "route": "depth",
+    "moduleId": "./depth/depth"
+  },
+  {
+    "route": "photo",
+    "moduleId": "./photo/photo"
+  },
+  {
+    "route": "description",
+    "moduleId": "./description/description"
+  },
+  {
+    "route": "review",
+    "moduleId": "./review/review"
+  }
+]
