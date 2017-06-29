@@ -7,6 +7,7 @@ branches:
   only:
     - master
     - dev
+    - e2eCasper
 
 notifications:
   webhooks:
@@ -26,3 +27,4 @@ before_install:
 install:
   - npm install
   - npm install aurelia-cli -g
+  - npm install casperjs -g
