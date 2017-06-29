@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "au run --env dev --watch",
-    "test": "au build && au test",
+    "test": "au build",
     "build": "rm -rf scripts/* && au build --env prod",
     "build-dev": "rm -rf scripts/* && au build --env dev"
   },
