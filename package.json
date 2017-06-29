@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "au run --env dev --watch",
-    "test": "au build",
+    "test": "npm run-script e2e",
     "e2e": "casperjs test test/e2eCasper/*",
     "build": "rm -rf scripts/* && au build --env prod",
     "build-dev": "rm -rf scripts/* && au build --env dev"
