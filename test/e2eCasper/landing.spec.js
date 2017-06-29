@@ -2,6 +2,7 @@ var baseURL = 'http://localhost:9000';
 
 casper.test.begin('Landing page', function(test) {
   casper.start(baseURL, function() {
+    this.echo(this.page.content);
     test.assertTitle('PetaBencana.id');
   });
 
@@ -23,7 +24,6 @@ casper.test.begin('Landing page', function(test) {
   casper.then(function() {
     casper.waitForSelector('.icon-add-report', function() {
       this.click('.icon-add-report');
-
     });
   });
 
