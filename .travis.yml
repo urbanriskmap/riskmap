@@ -3,9 +3,6 @@ node_js:
    - "6.10.0"
 sudo: false
 
-addons:
-  chrome: stable
-
 branches:
   only:
     - master
