@@ -80,21 +80,21 @@ export class Cards {
 
   attached() {
     var self = this;
-    var nua = navigator.userAgent.toLowerCase();
-    //______________is Mobile______________________an iPhone_________________browser not safari (in-app)___________app is twitter________________app is facebook______________not facebook messenger_________
-    if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1 && (nua.indexOf('twitter') > -1 || (nua.indexOf('fban') > -1 && nua.indexOf('messenger') === -1))) {
-      self.resizeCardHt(1);
-    } else {
-      //Execute resize on initial page load
-      self.resizeCardHt(0);
-      //Add resize listener to browser window
-      $(window).resize(() => {
-        self.resizeCardHt(0);
-      });
-    }
 
     $(document).ready(() => {
       $('.tabButtons').width((100 / (self.totalCards - 3)) + '%'); //fit 'n' tab buttons on-the-fly, n = (total - staple) cards
+      var nua = navigator.userAgent.toLowerCase();
+      //______________is Mobile______________________an iPhone_________________browser not safari (in-app)___________app is twitter________________app is facebook______________not facebook messenger_________
+      if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1 && (nua.indexOf('twitter') > -1 || (nua.indexOf('fban') > -1 && nua.indexOf('messenger') === -1))) {
+        self.resizeCardHt(1);
+      } else {
+        //Execute resize on initial page load
+        self.resizeCardHt(0);
+        //Add resize listener to browser window
+        $(window).resize(() => {
+          self.resizeCardHt(0);
+        });
+      }
     });
 
     self.totalCards = self.router.routes.length - 1; //exclude (route:'', redirect:'location')
