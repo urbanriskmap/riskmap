@@ -19,8 +19,6 @@ notifications:
     on_start: always     # options: [always|never|change] default: always
 
 before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
   - npm start &
   - sleep $TIMEOUT
 
