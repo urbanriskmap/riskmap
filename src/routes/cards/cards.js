@@ -23,7 +23,6 @@ export class Cards {
   }
 
   configureRouter(config, router) {
-    var self = this;
     config.title = this.locale.page_title;
     //IMPORTANT: '*foo' required mostly for dev,
     // but also if user hits refresh & url is appended with route name)
@@ -36,31 +35,31 @@ export class Cards {
       {route: '*foo', moduleId: './card-landing/card-landing'}
     ]);
     config.mapUnknownRoutes({route: '/map'});
-    self.router = router;
+    this.router = router;
   }
 
   activate(params) {
-  var self = this;
-  self.id = params.id;
-  self.lang = (self.config.supported_languages.indexOf(params.lang) > -1) ? params.lang : self.config.default_language;
-  self.reportcard.disasterType = (params.disaster === 'flood' || params.disaster === 'prep') ? params.disaster : 'flood';
-  $.getJSON("assets/card-decks/" + self.reportcard.disasterType + ".json", data => {
-    for (let obj of data) {
-      self.router.addRoute(obj);
-    }
-  }).then(() => {
-    $.getJSON("assets/card-decks/staple.json", data => {
+    var self = this;
+    self.id = params.id;
+    self.lang = (self.config.supported_languages.indexOf(params.lang) > -1) ? params.lang : self.config.default_language;
+    self.reportcard.disasterType = (params.disaster === 'flood' || params.disaster === 'prep') ? params.disaster : 'flood';
+    $.getJSON("assets/card-decks/" + self.reportcard.disasterType + ".json", data => {
       for (let obj of data) {
         self.router.addRoute(obj);
       }
     }).then(() => {
-      for (let route in self.router.routes) {
-        self.router.routes[route].settings = {cardNo: parseInt(route)};
-      }
-      self.router.refreshNavigation();
+      $.getJSON("assets/card-decks/staple.json", data => {
+        for (let obj of data) {
+          self.router.addRoute(obj);
+        }
+      }).then(() => {
+        for (let route in self.router.routes) {
+          self.router.routes[route].settings = {cardNo: parseInt(route)};
+        }
+        self.router.refreshNavigation();
+      });
     });
-  });
-}
+  }
 
   //switch on-the-fly
   switchLang(lang) {

@@ -23,7 +23,7 @@ export class ReportCard {
     self.selLanguage = Config.default_language;
     self.languages = Config.supported_languages;
     self.lang_obj = {en: LocaleEn};
-    self.lang_obj[self.languages[1]] = LocaleId;
+    self.lang_obj[self.languages[1]] = LocaleLocal;
     self.locale = {};
     self.changeLanguage(self.selLanguage);
 
