@@ -1,11 +1,19 @@
 import $ from 'jquery';
-import env from '../../environment';
+import {Config} from '../../resources/config';
+import {inject} from 'aurelia-framework';
 
+//start-non-standard
+@inject(Config)
+//end-non-standard
 export class Landing {
+  constructor(Config) {
+    this.config = Config;
+  }
+
   activate(params, routerConfig) {
     this.queried_city = params.city;
     this.report_id = params.report;
-    this.queried_lang = (env.supported_languages.indexOf(params.lang) > -1) ? params.lang : null;
+    this.queried_lang = (this.config.supported_languages.indexOf(params.lang) > -1) ? params.lang : null;
     this.queried_tab = (params.tab === 'info' || params.tab === 'map' || params.tab === 'report') ? params.tab : null;
   }
 

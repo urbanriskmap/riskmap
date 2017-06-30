@@ -4,7 +4,6 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {HttpClient} from 'aurelia-http-client';
 import {Config} from 'resources/config'; // Cards config
 import {ReportCard} from 'resources/report-card';
-import env from '../../environment';
 
 //start-non-standard
 @inject(EventAggregator, ReportCard, Config)
@@ -13,6 +12,7 @@ export class Cards {
   constructor(ea, ReportCard, Config) {
     this.ea = ea;
     this.reportcard = ReportCard;
+    this.config = Config;
     this.locale = this.reportcard.locale;
     this.data_src = Config.cards.data_server;
     this.test_card = Config.cards.enable_test_cardid;
@@ -42,7 +42,7 @@ export class Cards {
   activate(params) {
   var self = this;
   self.id = params.id;
-  self.lang = (env.supported_languages.indexOf(params.lang) > -1) ? params.lang : env.default_language;
+  self.lang = (self.config.supported_languages.indexOf(params.lang) > -1) ? params.lang : self.config.default_language;
   self.reportcard.disasterType = (params.disaster === 'flood' || params.disaster === 'prep') ? params.disaster : 'flood';
   $.getJSON("assets/card-decks/" + self.reportcard.disasterType + ".json", data => {
     for (let obj of data) {

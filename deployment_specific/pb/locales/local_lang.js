@@ -1,4 +1,4 @@
-export class LocaleId {
+export class LocaleLocal {
   constructor() {
     this.translation_strings = {
       "page_title": "Laporan Banjir",

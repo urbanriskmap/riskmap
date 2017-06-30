@@ -161,7 +161,7 @@ export class DisasterMap {
     // Initialize leaflet map
     self.map = L.map('mapContainer', {
       attributionControl: false, //include in side pane
-      center: [-7, 110], /* TODO Abe: set as config param  */
+      center: self.utility.config.region_center,
       zoom: 8,
       minZoom: 8
     });

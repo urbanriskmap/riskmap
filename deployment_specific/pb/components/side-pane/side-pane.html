@@ -1,0 +1,215 @@
+<template>
+  <require from="./side-pane.css"></require>
+  <div id="tabsBar">
+    <ul class="tabs">
+      <li class="paneTabs" repeat.for="tabName of tabList">
+        <div class="tabLinks" id.bind="'button-' + tabName" click.delegate="switchTab(tabName)">
+          <i class.bind="'icon-' + tabName"></i>
+          <p textcontent.bind="locale.web_menu.tab_names[tabName]"></p>
+        </div>
+      </li>
+      <li class="langTab">
+        <label repeat.for="language of languages" id.bind="'label_' + language" class="langLabels">
+          <input type="radio" model.bind="language" click.delegate="switchLang(language)">
+          ${language}
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <div id="paneContent">
+    <div id="content-map" if.bind="seltab === 'map'" class="contentWrapper">
+      <p>${locale.map_helper}</p>
+      <label repeat.for="city of cities">
+        <input type="radio" model.bind="city" checked.bind="selcity" change.delegate="switchCity(city)">
+        ${city}
+      </label>
+
+      <table  width="300px">
+        <tr>
+          <td>
+          <p id="legend">${locale.legend.title}</p>
+          <td>
+        </tr>
+        <tr>
+          <td vertical-align="bottom">
+            <p>${locale.legend.flood_gauges}</p>
+          </td>
+          <td vertical-align="bottom">
+            <p>${locale.legend.flood_depth}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table >
+              <tr repeat.for="level of gauge_levels">
+                <td>
+                  <img src.bind="level.icon" height="30">
+                </td>
+                <td>
+                  <p class="normal">${level.text[selLanguage]}</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <table>
+              <tr repeat.for="height of flood_depth">
+                <td style.bind="'padding:0;font-size:30px;color: ' + height.color">&#9632;
+                </td>
+                <td>
+                  <p class="normal">${height.text[selLanguage]}</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        </table>
+    </div>
+
+    <div id="content-report" if.bind="seltab === 'report'" class="contentWrapper">
+      <table id="reportTable">
+        <tr repeat.for="video of videos" class="vidRows">
+          <td>
+            <table class="vidTable">
+              <tr click.delegate="showVideo(video.platform)">
+                <td class="labelRow" id.bind="'label_' + video.platform">
+                  <p class="labelText">
+                    <i class.bind="'icon-' + video.platform"></i>&nbsp;${locale.report_content[video.platform].title}
+                  </p>
+                  <p class="arrows down" id.bind="'down_' + video.platform">
+                    <i class="icon-down-open"></i>
+                  </p>
+                  <p class="arrows up" id.bind="'up_' + video.platform">
+                    <i class="icon-up-open"></i>
+                  </p>
+                </td>
+              </tr>
+              <tr class="wrapRow">
+                <td>
+                  <div class="videoWrapper" id.bind="'vid_' + video.platform" ref.bind="'vid_' + video.platform">
+                    <iframe width="300" height="225" allowfullscreen="allowfullscreen" frameborder="0" src.bind="video.source[selLanguage]"></iframe>
+                    <br>
+                    <ul>
+                      <li repeat.for="step of locale.report_content[video.platform].steps">
+                        <p>${step}</p>
+                      </li>
+                      <p if.bind="video.platform==='otherapps'" innerhtml.bind="locale.report_content.otherapps.links"></p>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="content-info" if.bind="seltab === 'info'" class="contentWrapper">
+          <table id="headLogos">
+            <tr>
+              <td align="left">
+                <a href="https://www.usaid.gov/">
+                  <img id="usaidLogo" src="assets/graphics/USAID-logo.png">
+                </a>
+              </td>
+              <td align="right">
+                <a href="http://urbanrisklab.org/">
+                  <img id="urlLogo" src="assets/graphics/URL_logo.svg">
+                </a>
+              </td>
+            </tr>
+          </table>
+
+          <p id="intro">${locale.info_content.intro}</p>
+
+          <table id="partners">
+            <tr class="label">
+              <td colspan="4" cellpadding="0" align="left">
+                <p>${locale.info_content.partners.implementing}</p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" align="center">
+                <a href="http://www.bnpb.go.id/">
+                  <img class="bnpbLogo" src="assets/graphics/bnpb_logo.png">
+                </a>
+              </td>
+            </tr>
+            <tr class="label">
+              <td colspan="4" cellpadding="0" align="left">
+                <p>${locale.info_content.partners.project}</p>
+              </td>
+            </tr>
+            <tr class="logos">
+              <td colspan="2" align="center">
+                <a href="http://www.pdc.org/">
+                  <img class="partnerLogo" src="assets/graphics/pcd_logo.png">
+                </a>
+              </td>
+              <td colspan="2" align="center">
+                <a href="https://hotosm.org/">
+                  <img class="partnerLogo" src="assets/graphics/Hot_logo.png">
+                </a>
+              </td>
+            </tr>
+            <tr class="label">
+              <td colspan="4" cellpadding="0" align="left">
+                <p>${locale.info_content.partners.data}</p>
+              </td>
+            </tr>
+            <tr class="logos">
+              <td colspan="2" align="center">
+                <a href="http://www.qlue.co.id/">
+                  <img class="partnerLogo" src="assets/graphics/qlue_logo.png">
+                </a>
+              </td>
+              <td colspan="2" align="center">
+                <a href="http://pasangmata.detik.com/">
+                  <img class="partnerLogo" src="assets/graphics/pasang_logo.png">
+                </a>
+              </td>
+            </tr>
+              <tr class="logos">
+                <td colspan="2" align="center">
+                  <a href="https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need">
+                    <img class="partnerLogo" src="assets/graphics/zAlert_logo.png">
+                  </a>
+                </td>
+              <td colspan="2" align="center">
+                <a href="https://twitter.com">
+                  <img class="partnerLogo" src="assets/graphics/twitter-logo.png">
+                </a>
+              </td>
+            </tr>
+            <tr class="logos">
+              <td colspan="4" align="center">
+                <a href="https://www.mapbox.com/">
+                  <img class="partnerLogo" src="assets/graphics/mapbox-logo.png">
+                </a>
+              </td>
+          </tr>
+          </table>
+
+          <p innerhtml.bind="locale.info_content.p1"></p>
+          <p innerhtml.bind="locale.info_content.p2"></p>
+          <p innerhtml.bind="locale.info_content.p3"></p>
+
+          <p id="termslink" click.delegate="openTermsPopup('u_a')" innerhtml.bind="locale.info_content.termsPopup"></p>
+
+          <p id="mapbox">
+            ${locale.info_content.mapCredits} ©
+            <a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a> © <a     href="http://www.openstreetmap.org/about"   target="_blank">OpenStreetMap</a>.
+            ${locale.info_content.mapImproveLink} <a href="https://www.mapbox.com/map-feedback/" target="_blank">Mapbox</a>.
+          </p>
+          <p id="browserstack" innerhtml.bind="locale.info_content.browserStack">
+          </p>
+          <p id="usaid">
+            ${locale.info_content.USAID}
+          </p>
+          <div id="pbLogo">
+            <img src="assets/graphics/Peta_logo.svg">
+          </div>
+        </div>
+      </div>
+    </template>
