@@ -2,7 +2,6 @@ var baseURL = 'http://localhost:9000';
 
 casper.test.begin('Landing page', function(test) {
   casper.start(baseURL, function() {
-    this.echo(this.page.content);
     test.assertTitle('PetaBencana.id');
   });
 
