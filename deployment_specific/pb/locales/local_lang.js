@@ -1,14 +1,15 @@
-export class LocaleId {
+export class LocaleLocal {
   constructor() {
     this.translation_strings = {
       "page_title": "Laporan Banjir",
       "card_titles": {
-        "1": "Pilih lokasi banjir",
-        "2": "Laporkan Tinggi Genangan",
-        "3": "Unggah Foto",
-        "4": "Tambahkan Deskripsi",
-        "5": "Tinjau & Laporkan",
-        "6": "Syarat dan ketentuan"
+        "prep": "Monsoon preparation",
+        "location": "Pilih lokasi banjir",
+        "depth": "Laporkan Tinggi Genangan",
+        "photo": "Unggah Foto",
+        "description": "Tambahkan Deskripsi",
+        "review": "Tinjau & Laporkan",
+        "terms": "Syarat dan ketentuan"
       },
       "notification": {
         "header": {
@@ -19,9 +20,17 @@ export class LocaleId {
         },
         "message": {
           "location_1": "Drag peta untuk memilih lokasi",
-          "location_2": "Cakupan wilayah: Jakarta, Surabaya, Bandung. Laporan dari luar area ini tidak dapat ditampilkan pada peta.",
+          "location_2": "Unsupported location.<br>Reports marked here will not show on the map.",
           "photo_1": "Foto yang dipilih melebihi kapasitas 4.2mb",
           "photo_2": "Foto yang dipilih tidak didukung oleh browser"
+        }
+      },
+      "prep_menu": {
+        "btn_names": {
+          "drain": "Blocked Drains",
+          "desilting": "Desilting",
+          "canalrepair": "Canal Repairs",
+          "treeclearing": "Fallen Tree"
         }
       },
       "web_menu": {
@@ -61,6 +70,11 @@ export class LocaleId {
       },
       "map_helper": "Pilih kota:",
       "report_content": {
+        "flood": {
+          "title": "Project overview",
+          "steps": [
+          ]
+        },
         "twitter": {
           "title": "Laporan lewat Twitter",
           "steps": [
@@ -75,6 +89,14 @@ export class LocaleId {
             "Kirim /banjir ke @BencanaBot.",
             "Buka linknya, dan ikuti panduan untuk menginput lokasi, foto, dan deskripsi.",
             "Anda dapat melihat laporan Anda di peta lewat link balasan. Cek PetaBencana.id untuk info banjir terkini."
+          ]
+        },
+        "facebook": {
+          "title": "Report with Facebook messenger",
+          "steps": [
+            "Search for Risk Map Bot on Facebook messenger",
+            "Click on get started button and follow the instructions to input flood location, upload photo, and description.",
+            "You can see your report on the map via the link provided. Check Riskmap.in for up-to-date flood information."
           ]
         },
         "otherapps": {
@@ -110,7 +132,7 @@ export class LocaleId {
       },
       "card_hints":{
         "description": "Masukkan deskripsi di sini ...",
-        "water_depth": "Tinggi genangan",
+        "flood_depth": "Tinggi genangan",
         "agreement_text": "Dengan mengirimkan laporan ini Anda setuju dengan",
         "agreement_title": "Kesepakatan Kontribusi PetaBencana.id",
         "more_details_required": "Deskripsi atau Foto diperlukan untuk melapor",

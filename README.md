@@ -5,7 +5,7 @@ Front-end code &nbsp;
 [Project description](https://github.com/urbanriskmap/petabencana-docs/blob/master/README.md)
 <br>
 <br>
-This platform is built using the Aurelia framework, which has a few prerequisites. To get started, follow the machine & application setup steps. 
+This platform is built using the Aurelia framework, which has a few prerequisites. To get started, follow the machine & application setup steps.
 
 ____
 
@@ -14,11 +14,11 @@ ____
     * You can [download it here](https://nodejs.org/en/).
 * Install NPM 3.x
     * Even though you may have the latest NodeJS, that doesn't mean you have the latest version of NPM. You can check your version with `npm -v`. If you need to update, run `npm install npm -g`.
-* Install Aurelia CLI 
+* Install Aurelia CLI
     * `npm install aurelia-cli -g`
 
 ### Application setup
-* Install the project dependencies 
+* Install the project dependencies
     * `npm install`
 
 ___
@@ -26,7 +26,7 @@ ___
 ### Project Structure
 The project structure is as follows:
 - **assets**: Static assets such as fonts, images, vector graphics, and icons
-- **aurelia_project**: Aurelia generated folder containing config (Check Configuration section for more details) and framework specific libraries 
+- **aurelia_project**: Aurelia generated folder containing config (Check Configuration section for more details) and framework specific libraries
 - **scripts**: Generated scripts from the build process
 - **src**: The main application code with the following files and subfolders
   * **components**: Contains custom-elements to be used in routes (Read more about Aurelia Custom Elements [here](http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/cheat-sheet/9))
@@ -43,17 +43,15 @@ The project structure is as follows:
 ___
 
 ### Card Decks
-- Currently contains single fixed card deck for disaster type - Flood.
-- The deck has location, flood depth, description, photo, and review cards along with error, terms of service, and thank you cards.
-- Addition of a new card involves updates in cards.js router mapping
+- Refer assets/card-decks/README.md
 ___
 
 ### Routing
 * *App router is configured in /src/app.js*
     * '/' & '/map' *map landing page*
-    * '/map/:city' *query parameter (city): flyTo supported city* 
-    * '/map/:city/:report' *query parameter (city & report): flyTo queried report id in a supported city* 
-    * '/cards/:id' *query parameter (one time card id): link to access report cards, (use test123 as card id in dev & local environments*
+    * '/map/:city' *query parameter (city): flyTo supported city*
+    * '/map/:city/:report' *query parameter (city & report): flyTo queried report id in a supported city*
+    * '/cards/:disaster/:id' *query parameter (disaster type & one time card id): Disaster type specifies which card-deck to load, card id is the link to access report cards, (use test123 as card id in dev & local environments*
 
 * *Additional query parameters*
     * ?lang : Use for setting language to one of the supported languages (en || id).
@@ -64,12 +62,12 @@ ___
 
 ### Configuration
 * Environments
-    * *to run in local, update the following values in /aurelia_project/environments/local.js* 
+    * *to run in local, update the following values in /aurelia_project/environments/local.js*
     * `debug` : (true/false) enable aurelia router logs in browser console
     * `testing` : (true/false) enable aurelia-testing plugin
     * `tile_layer` : set map tile source url (allows using multiple tileLayers for development, staging, production, etc)
     * `data_server` : set url of cognicity server (Default value is http://localhost:8001/ if using [cognicity-server] (https://github.com/urbanriskmap/cognicity-server-v3))
-    * `app` : set it to map landing page url (Default value is http://localhost:9000/ if using this platform) 
+    * `app` : set it to map landing page url (Default value is http://localhost:9000/ if using this platform)
     * `default_language`: set it to one of the languages in `supported_languages` (Default is 'en')
     * `supported_languages`: set it to an array of languages you support (Default is ['en', 'id']. In case you add more languages, update  the array and add corresponding locale information in /src/resources/locales/TWO_LETTER_LANGUAGE_CODE.js)
     * `enable_test_cardid`: set to false to disable cardid=test123 in prod environments (Default is true for local and dev environments)
@@ -102,20 +100,20 @@ Testing environment supported by [BrowserStack](https://www.browserstack.com/)
 
 Do ('npm test') to build the project and run the tests.
 
-If you want to run BrowserStack, you need to provide environment variables with your 
-username and password. Put `export BROWSERSTACK_USERNAME=yourUsername` and `export BROWSERSTACK_KEY=yourAccessKey` into 
-your ~/.bashrc or ~/.bash_profile in order for karma to pick up the browserstack credentials. Now run `source ~/bash_profile` and 
-npm test in order to build the bundle and run karama unit tests against it. 
+If you want to run BrowserStack, you need to provide environment variables with your
+username and password. Put `export BROWSERSTACK_USERNAME=yourUsername` and `export BROWSERSTACK_KEY=yourAccessKey` into
+your ~/.bashrc or ~/.bash_profile in order for karma to pick up the browserstack credentials. Now run `source ~/bash_profile` and
+npm test in order to build the bundle and run karama unit tests against it.
 
-##e2e testing: 
+##e2e testing:
 
-End to end testing is implemented using protractor, webdriver, and browserstack. First install protractor: `npm install -g protractor` then download the webdriver binaries: `webdriver-manager update`. In order to run the tests, the front end must be being served. Run au run in a separate terminal, and then run `protractor protractor.conf.js` which will start the tests. Protractor can be a little finicky, so you should let it run without interacting with other browser windows. 
+End to end testing is implemented using protractor, webdriver, and browserstack. First install protractor: `npm install -g protractor` then download the webdriver binaries: `webdriver-manager update`. In order to run the tests, the front end must be being served. Run au run in a separate terminal, and then run `protractor protractor.conf.js` which will start the tests. Protractor can be a little finicky, so you should let it run without interacting with other browser windows.
 
-Mockapi to be used in the future. 
+Mockapi to be used in the future.
 
 ## Contribution Guidelines
 
-- Issues are tracked on [github](https://github.com/urbanriskmap/petabencana.id/issues). 
+- Issues are tracked on [github](https://github.com/urbanriskmap/petabencana.id/issues).
 
 ### Release
 

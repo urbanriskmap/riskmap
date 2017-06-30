@@ -6,7 +6,7 @@
       <div id="alert" if.bind="test_card" click.trigger="logUserAgent()">
         <p><i class="icon-attention-circled"></i></p>
       </div>
-      <p id="titleText">${reportcard.locale.card_titles[count]}</p>
+      <p id="titleText">${reportcard.locale.card_titles[router.routes[count].route]}</p>
       <div id="langSwitch">
         <label repeat.for="language of reportcard.languages" id.bind="language" class="langLabels">
           <input type="radio" model.bind="language" checked.bind="reportcard.selLanguage" change.delegate="switchLang(language)">
@@ -19,7 +19,8 @@
     </div>
     <div id="cardContent">
       <router-view></router-view>
-      <card-notification locale.bind="reportcard.locale" type.bind="notify_type" header.bind="notify_header" message.bind="notify_message" bespoke.bind="notify_custom"></card-notification>     </div>
+      <card-notification locale.bind="reportcard.locale" type.bind="notify_type" header.bind="notify_header" message.bind="notify_message" bespoke.bind="notify_custom"></card-notification>
+    </div>
     <div id="cardNavigation" if.bind="(count < 7)">
       <button id="prv" click.trigger="prevCard()" disabled.bind="prevDisabled" class="navBtn"><i class="icon-left-open"></i>${reportcard.locale.card_hints.previous}</button>
       <button id="nxt" click.trigger="nextCard()" disabled.bind="nextDisabled" class="navBtn">${reportcard.locale.card_hints.next}<i class="icon-right-open"></i></button>

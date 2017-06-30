@@ -1,0 +1,14 @@
+[
+  {
+    "route": "terms",
+    "moduleId": "./terms/terms"
+  },
+  {
+    "route": "thanks",
+    "moduleId": "./thanks/thanks"
+  },
+  {
+    "route": "error",
+    "moduleId": "./error/error"
+  }
+]

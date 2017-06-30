@@ -13,9 +13,18 @@ export class Review {
     if (this.reportcard.description.value) {
       description = this.reportcard.description.value;
     }
+    var card_data;
+    switch (true) {
+      case (this.reportcard.disasterType === 'prep'):
+        card_data = {report_type: this.reportcard.reportType};
+        break;
+      case (this.reportcard.disasterType === 'flood'):
+        card_data = {report_type: 'flood', flood_depth: Math.round(this.reportcard.depth)};
+    }
     this.report = {
+      disaster_type: this.reportcard.disasterType,
+      card_data: card_data,
       text: description,
-      water_depth: Math.round(this.reportcard.depth),
       created_at: new Date().toISOString(),
       image_url: '',
       location: this.reportcard.location.markerLocation,
@@ -31,7 +40,7 @@ export class Review {
   }
 
   get checkRequiredInputs() { //TODO: Add checks for file / data types
-    if (this.report.location && this.report.water_depth && (this.imageObject || this.report.text)) {
+    if (this.report.location && (this.report.card_data.flood_depth || this.report.card_data.report_type) && (this.imageObject || this.report.text)) {
       return true;
     } else {
       return false;

@@ -1,0 +1,49 @@
+@import "../../../resources/style_sheets/theme_guide.less";
+
+#PrepReportWrapper {
+  .fixed-content-wrapper; //full width, height relative to #cardContent
+  & .prepLabels {
+    color: @snow-white;
+    position: relative;
+    padding: 3px 0 0 0;
+    margin: auto;
+    margin-bottom: 10px;
+    width: 70%;
+    height: 60px;
+    border: 1px solid @snow-white;
+    border-radius: 6px;
+    background-color: transparent;
+    & input {
+      display: none;
+    }
+    & p {
+      font-size: 14px;
+      font-family: "Roboto-Light", "Roboto", Open Sans;
+      line-height: 14px;
+      padding-left: 100px;
+      margin-top: 20px;
+      text-align: left;
+    }
+    & i {
+      position: absolute;
+      top: 50%;
+      left: 20%;
+      padding: 0px;
+      .translate-mixin(-50%, -50%);
+      font-size: 60px;
+      z-index: 2;
+    }
+    &.active {
+      color: @banjir-blue;
+      border: 2px solid @banjir-blue;
+      }
+    &.inactive {
+      color: @translucent-white;
+      text-shadow: none;
+      border: 1px solid @translucent-white;
+      & p {
+        text-shadow: none;
+      }
+    }
+  }
+}

@@ -6,6 +6,11 @@
       "name": "env",
       "description": "Sets the build environment.",
       "type": "string"
+    },
+    {
+      "name": "dep",
+      "description": "Sets the deployment specific configuration.",
+      "type": "string"
     }
   ]
 }

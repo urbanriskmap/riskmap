@@ -1,12 +1,14 @@
 import {inject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import $ from 'jquery';
 import {ReportCard} from 'resources/report-card';
 
 //start-non-standard
-@inject(ReportCard)
+@inject(EventAggregator, ReportCard)
 //end-non-standard
 export class Depth {
-  constructor(ReportCard) {
+  constructor(ea, ReportCard) {
+    this.ea = ea;
     this.reportcard = ReportCard;
     this.sliderActive = false;
     //Check for mobile or desktop device
@@ -69,6 +71,7 @@ export class Depth {
           }
           reportHeightCm = ((fillHeightPx + startPos - dragPos) * imgHeightCm) / refHeightPx;
           if (self.sliderActive) {
+            self.ea.publish('depthSlider', 'dragStart');
             if (reportHeightCm > minHtLimitCm && reportHeightCm < maxHtLimitCm) {
               $('#floodZone').css({
                 'height': (fillHeightPx + startPos - dragPos) + 'px'

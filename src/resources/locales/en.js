@@ -3,12 +3,13 @@ export class LocaleEn {
     this.translation_strings = {
       "page_title": "Flood reports",
       "card_titles": {
-        "1": "Select flood location",
-        "2": "Report water depth",
-        "3": "Upload a photo",
-        "4": "Tell us more",
-        "5": "Review & submit",
-        "6": "Terms & Conditions"
+        "prep": "Monsoon preparation",
+        "location": "Select flood location",
+        "depth": "Report water depth",
+        "photo": "Upload a photo",
+        "description": "Tell us more",
+        "review": "Review & submit",
+        "terms": "Terms & Conditions"
       },
       "notification": {
         "header": {
@@ -19,9 +20,17 @@ export class LocaleEn {
         },
         "message": {
           "location_1": "Drag map to pick a location",
-          "location_2": "Supported cities: Jakarta, Surabaya & Bandung.<br>Reports marked outside these cities will not show on the map.",
+          "location_2": "Unsupported location.<br>Reports marked here will not show on the map.",
           "photo_1": "Selected photo exceeds size limit of 4.2mb",
           "photo_2": "Photo upload is not supported by your browser"
+        }
+      },
+      "prep_menu": {
+        "btn_names": {
+          "drain": "Blocked Drains",
+          "desilting": "Desilting",
+          "canalrepair": "Canal Repairs",
+          "treeclearing": "Fallen Tree"
         }
       },
       "web_menu": {
@@ -61,6 +70,11 @@ export class LocaleEn {
       },
       "map_helper": "Select city :",
       "report_content": {
+        "flood": {
+          "title": "Project overview",
+          "steps": [
+          ]
+        },
         "twitter": {
           "title": "Report with Twitter",
           "steps": [
@@ -75,6 +89,14 @@ export class LocaleEn {
             "Text /banjir to @BencanaBot.",
             "Open the link and follow the instructions to input flood location, upload photo, and description.",
             "You can see your report on the map via the link provided. Check PetaBencana.id for up-to-date flood information."
+          ]
+        },
+        "facebook": {
+          "title": "Report with Facebook messenger",
+          "steps": [
+            "Search for Risk Map Bot on Facebook messenger",
+            "Click on get started button and follow the instructions to input flood location, upload photo, and description.",
+            "You can see your report on the map via the link provided. Check Riskmap.in for up-to-date flood information."
           ]
         },
         "otherapps": {
@@ -110,7 +132,7 @@ export class LocaleEn {
       },
       "card_hints": {
         "description": "Enter description here...",
-        "water_depth": "Water Depth",
+        "flood_depth": "Water Depth",
         "agreement_text": "By submitting this report you are agreeing to the",
         "agreement_title": "PetaBencana.id Contributors Agreement",
         "more_details_required": "Description or Photo required to submit report",

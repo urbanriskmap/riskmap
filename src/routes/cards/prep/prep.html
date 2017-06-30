@@ -1,0 +1,10 @@
+<template>
+  <require from="./prep.css"></require>
+
+  <div id="PrepReportWrapper">
+    <div repeat.for="btnName of btnList" id.bind="'button-' + btnName" class="prepLabels" click.trigger="switchbtn(btnName)">
+      <i class.bind="'icon-' + btnName"></i>
+      <p>${reportcard.locale.prep_menu.btn_names[btnName]}</p>
+    </div>
+  </div>
+</template>
