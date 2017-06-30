@@ -3,13 +3,11 @@ node_js:
    - "6.10.0"
 sudo: false
 
-addons:
-  chrome: stable
-
 branches:
   only:
     - master
     - dev
+    - e2eCasper
 
 notifications:
   webhooks:
@@ -19,9 +17,14 @@ notifications:
     on_failure: always  # options: [always|never|change] default: always
     on_start: always     # options: [always|never|change] default: always
 
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
 before_install:
   - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
 
 install:
   - npm install
   - npm install aurelia-cli -g
+  - npm install casperjs -g
