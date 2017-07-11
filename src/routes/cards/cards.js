@@ -43,6 +43,7 @@ export class Cards {
     self.id = params.id;
     self.lang = (self.config.supported_languages.indexOf(params.lang) > -1) ? params.lang : self.config.default_language;
     self.reportcard.disasterType = (params.disaster === 'flood' || params.disaster === 'prep') ? params.disaster : 'flood';
+
     $.getJSON("assets/card-decks/" + self.reportcard.disasterType + ".json", data => {
       for (let obj of data) {
         self.router.addRoute(obj);
@@ -68,34 +69,8 @@ export class Cards {
     $('#' + lang).addClass("active");
   }
 
-  resizeCardHt(factor) {
-    var glitchHeight = 106;
-    $('#cardContent').css({
-      'height': $('#cardWrapper').height() - ($('#cardTitle').height() + $('#cardNavigation').height() + (factor * glitchHeight)) + 'px'
-    });
-    $('#cardNavigation').css({
-      'bottom': (factor * glitchHeight) + 'px'
-    });
-  }
-
   attached() {
     var self = this;
-
-    $(document).ready(() => {
-      $('.tabButtons').width((100 / (self.totalCards - 3)) + '%'); //fit 'n' tab buttons on-the-fly, n = (total - staple) cards
-      var nua = navigator.userAgent.toLowerCase();
-      //______________is Mobile______________________an iPhone_________________browser not safari (in-app)___________app is twitter________________app is facebook______________not facebook messenger_________
-      if ((/Mobi/.test(navigator.userAgent)) && nua.indexOf('iphone') > -1 && nua.indexOf('safari') === -1 && (nua.indexOf('twitter') > -1 || (nua.indexOf('fban') > -1 && nua.indexOf('messenger') === -1))) {
-        self.resizeCardHt(1);
-      } else {
-        //Execute resize on initial page load
-        self.resizeCardHt(0);
-        //Add resize listener to browser window
-        $(window).resize(() => {
-          self.resizeCardHt(0);
-        });
-      }
-    });
 
     self.totalCards = self.router.routes.length - 1; //exclude (route:'', redirect:'location')
     self.switchLang(self.lang); //set language based on url param OR default
@@ -113,11 +88,13 @@ export class Cards {
            // card already exists
           self.reportcard.errors.text = self.locale.card_error_messages.already_received;
           self.router.navigate('error', {replace: true});
+          //self.checkBrowserThenResize();
         } else {
           // populate network property of reportcard, accessed in thanks card
           self.reportcard.network = msg.result.network;
           // proceed to first card
           self.router.navigate(self.router.routes[1].route, {replace: true});
+          //self.checkBrowserThenResize();
         }
       })
       .catch(response => {
@@ -126,16 +103,19 @@ export class Cards {
           self.reportcard.errors.code = response.statusCode;
           self.reportcard.errors.text = self.locale.card_error_messages.unknown_link;
           self.router.navigate('error', {replace: true});
+          //self.checkBrowserThenResize();
         } else {
           // unhandled error
           self.reportcard.errors.code = response.statusCode;
           self.reportcard.errors.text = self.locale.card_error_messages.unknown_error + " (" + response.statusText + ")";
           self.router.navigate('error', {replace: true});
+          //self.checkBrowserThenResize();
         }
       });
     } else {
       // proceed to first card
       self.router.navigate(self.router.routes[1].route, {replace: true});
+      //self.checkBrowserThenResize();
     }
 
     self.ea.subscribe('readTerms', msg => {

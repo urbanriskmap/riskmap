@@ -13,7 +13,6 @@ export class Location {
     this.reportcard = ReportCard;
     this.config = Config;
     this.tileLayer = Config.cards.tile_layer;
-    console.log(this.config);
   }
 
   drawGpsMarkers(center, accuracy, map) {
