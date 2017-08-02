@@ -18,7 +18,7 @@
         </div>
       </div>
       <div id="tabContent">
-        <div repeat.for="content of termscontents" class="termsContents" if.bind="content.tab_key === seltab" innerhtml.bind="content.tab_content">
+        <div repeat.for="content of termscontents" class="termsContents" if.bind="content.tab_key == seltab" innerhtml.bind="content.tab_content">
         </div>
       </div>
       <div id="closeRow">
