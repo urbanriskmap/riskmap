@@ -31,7 +31,7 @@ function configureDeployment() {
 function fetchComponents() {
   let dep = CLIOptions.getFlagValue('dep', 'dep') ? CLIOptions.getFlagValue('dep', 'dep') : 'pb';
 
-  return gulp.src([`deployment_specific/${dep}/components/**/*`])
+  return gulp.src([`deployment_specific/${dep}/ds_components/**/*`])
     .pipe(changedInPlace({firstPass: true}))
     .pipe(gulp.dest('src/components/'));
 }
@@ -39,7 +39,7 @@ function fetchComponents() {
 function fetchAssets() {
   let dep = CLIOptions.getFlagValue('dep', 'dep') ? CLIOptions.getFlagValue('dep', 'dep') : 'pb';
 
-  return gulp.src([`deployment_specific/${dep}/assets/**/*`])
+  return gulp.src([`deployment_specific/${dep}/ds_assets/**/*`])
     .pipe(changedInPlace({firstPass: true}))
     .pipe(gulp.dest('assets/'));
 }
@@ -47,7 +47,7 @@ function fetchAssets() {
 function fetchLocales() {
   let dep = CLIOptions.getFlagValue('dep', 'dep') ? CLIOptions.getFlagValue('dep', 'dep') : 'pb';
 
-  return gulp.src([`deployment_specific/${dep}/locales/**/*`])
+  return gulp.src([`deployment_specific/${dep}/ds_locales/**/*`])
     .pipe(changedInPlace({firstPass: true}))
     .pipe(gulp.dest('src/resources/locales/'));
 }
