@@ -161,7 +161,10 @@ export class MapLayers {
           self.selected_report = e;
         }
         //Set selReportType value from feature properties
-        self.selReportType = (feature.properties.report_data.report_type) ? feature.properties.report_data.report_type : null;
+        self.selReportType = 'flood';
+        if (feature.properties.report_data) {
+          self.selReportType = feature.properties.report_data.report_type;
+        }
       }
     });
   }
