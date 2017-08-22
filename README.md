@@ -56,6 +56,7 @@ ___
 * *Additional query parameters*
     * ?lang : Use for setting language to one of the supported languages (en || id).
     * ?tab : Use for opening the side pane set to one of the following tabs (report || map || info)
+    * ?terms : Use for directly opening the privacy policy or user agreement popup (u_a || p_p)
     * eg. https://dev.petabencana.id/map?lang=en&tab=info
 
 ___
