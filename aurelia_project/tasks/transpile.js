@@ -27,15 +27,6 @@ function configureDeployment() {
     .pipe(gulp.dest(project.paths.root));
 }
 
-// Use deployment specific UI components
-function fetchComponents() {
-  let dep = CLIOptions.getFlagValue('dep', 'dep') ? CLIOptions.getFlagValue('dep', 'dep') : 'pb';
-
-  return gulp.src([`deployment_specific/${dep}/ds_components/**/*`])
-    .pipe(changedInPlace({firstPass: true}))
-    .pipe(gulp.dest('src/components/'));
-}
-
 function fetchAssets() {
   let dep = CLIOptions.getFlagValue('dep', 'dep') ? CLIOptions.getFlagValue('dep', 'dep') : 'pb';
 
@@ -64,7 +55,6 @@ function buildJavaScript() {
 export default gulp.series(
   configureEnvironment,
   configureDeployment,
-  fetchComponents,
   fetchAssets,
   fetchLocales,
   buildJavaScript
