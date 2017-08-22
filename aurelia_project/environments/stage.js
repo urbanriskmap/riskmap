@@ -1,5 +1,5 @@
 export default {
-  debug: true,
+  debug: false,
   testing: false,
   report_timeperiod: 604800,
   //deployment specific env params
