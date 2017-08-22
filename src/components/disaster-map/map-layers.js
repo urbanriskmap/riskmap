@@ -66,18 +66,22 @@ export class MapLayers {
   /**
     * Format UTC timestamps to local time for display in local time zone
     * @function {String} UTC timestamp in ISO8601 format
-    * @return {String} timestamp formatted HH:MM DD-MM-YYYY in local time zone
+    * @returns {String} timestamp formatted HH:MM DD-MM-YYYY in local time zone
     */
   formatTime(timestamp) {
-    let timeZoneDifference = 7; // UTC offset (e.g. +7 or -5)
-    let utc = new Date(timestamp).getTime(); // create date object
-    let localTime = utc + (3600 * timeZoneDifference) * 1000; // local time
+    //let timeZoneDifference = 7; // UTC offset (e.g. +7 or -5)
+    // create date object
+    let utc = new Date(timestamp).getTime();
+    // convert to local time (millisecond) based on browser timezone
+    let localTime = utc + (-60 * new Date().getTimezoneOffset()) * 1000;
+    // Make string
     let timestring = new Date(localTime).toISOString(); // ISO string
-    timestring = timestring.split('T'); // Split time and ate
+    // Format string for output
+    timestring = timestring.split('T');
     let t1 = timestring[1].slice(0,5); // Extract HH:MM
     let d1 = timestring[0].split('-'); // Extract DD-MM-YY
     let d2 = d1[2]+'-'+d1[1]+'-'+d1[0]; // Reformat
-    return (t1 + ' ' + d2); // Return
+    return (t1 + ' ' + d2);
   }
 
   // Get topojson data from server, return geojson
