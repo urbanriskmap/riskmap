@@ -10,7 +10,8 @@
     "start": "au run --env dev --watch --dep $DEP",
     "test": "au build",
     "build": "rm -rf scripts/* && au build --env prod --dep $DEP",
-    "build-dev": "rm -rf scripts/* && au build --env stage --dep $DEP"
+    "build-stage": "rm -rf scripts/* && au build --env stage --dep $DEP",
+    "build-dev": "rm -rf scripts/* && au build --env dev --dep $DEP"
   },
   "license": "GPL-3.0",
   "dependencies": {

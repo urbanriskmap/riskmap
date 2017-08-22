@@ -1,6 +1,6 @@
 export default {
   debug: true,
-  testing: false,
+  testing: true,
   report_timeperiod: 604800,
   //deployment specific env params
   petabencana: {
