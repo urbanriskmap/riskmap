@@ -2,7 +2,7 @@ export default {
   debug: true,
   testing: false,
   enable_test_cardid: true,
-
+  report_timeperiod: 604800,
   //deployment specific env params
   petabencana: {
     supported_languages: ['en', 'id'],
