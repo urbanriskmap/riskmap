@@ -1,7 +1,6 @@
 export default {
   debug: false,
   testing: false,
-  enable_test_cardid: false,
   report_timeperiod: 3600,
   //deployment specific env params
   petabencana: {

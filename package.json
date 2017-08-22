@@ -7,10 +7,10 @@
     "url": "git+https://github.com/urbanriskmap/petabencana.id"
   },
   "scripts": {
-    "start": "au run --env dev --watch",
+    "start": "au run --env dev --watch --dep $DEP",
     "test": "au build",
-    "build": "rm -rf scripts/* && au build --env prod",
-    "build-dev": "rm -rf scripts/* && au build --env dev"
+    "build": "rm -rf scripts/* && au build --env prod --dep $DEP",
+    "build-dev": "rm -rf scripts/* && au build --env stage --dep $DEP"
   },
   "license": "GPL-3.0",
   "dependencies": {
