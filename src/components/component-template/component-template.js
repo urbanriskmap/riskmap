@@ -1,14 +1,14 @@
 import {bindable, customElement} from 'aurelia-framework';
 
-//start-non-standard
+//start-aurelia-decorators
 @customElement('component-template')
-//end-non-standard
+//end-aurelia-decorators
 export class ComponentTemplate {
   //@bindable attributes should have no case, eg. reportcard
   //@bindable functions should be in camelCase, then in html template usage, use camel-case.call
-  //start-non-standard
+  //start-aurelia-decorators
   @bindable locale;
-  //end-non-standard
+  //end-aurelia-decorators
 
   get x() {
     return this.y;

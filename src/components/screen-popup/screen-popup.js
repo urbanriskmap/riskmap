@@ -1,17 +1,17 @@
 import {bindable, customElement} from 'aurelia-framework';
 
-//start-non-standard
+//start-aurelia-decorators
 @customElement('screen-popup')
-//end-non-standard
+//end-aurelia-decorators
 export class ScreenPopup {
-  //start-non-standard
+  //start-aurelia-decorators
   @bindable helper;
   @bindable cities;
   @bindable selcity;
   @bindable switchCity;
   @bindable termscontents;
   @bindable initializetab;
-  //end-non-standard
+  //end-aurelia-decorators
 
   constructor() {
     this.seltab = 'u_a';

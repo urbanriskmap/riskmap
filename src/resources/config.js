@@ -2,9 +2,9 @@ import env from '../environment';
 import dep from '../deployment';
 import {noView} from 'aurelia-framework';
 
-//start-non-standard
+//start-aurelia-decorators
 @noView
-//end-non-standard
+//end-aurelia-decorators
 export class Config {
   constructor() {
     this.map = dep.map;

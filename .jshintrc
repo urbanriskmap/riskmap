@@ -1,6 +1,6 @@
 {
   "ignoreDelimiters": [
-    { "start": "start-non-standard", "end": "end-non-standard" }
+    { "start": "start-aurelia-decorators", "end": "end-aurelia-decorators" }
   ],
   "esversion":6
 }

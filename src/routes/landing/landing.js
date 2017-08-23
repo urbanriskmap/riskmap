@@ -2,9 +2,9 @@ import $ from 'jquery';
 import {Config} from '../../resources/config';
 import {inject} from 'aurelia-framework';
 
-//start-non-standard
+//start-aurelia-decorators
 @inject(Config)
-//end-non-standard
+//end-aurelia-decorators
 export class Landing {
   constructor(Config) {
     this.config = Config;

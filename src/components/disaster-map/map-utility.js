@@ -17,10 +17,10 @@ $.notify.addStyle('mapInfo', {
   }
 });
 
-//start-non-standard
+//start-aurelia-decorators
 @noView
 @inject(Config)
-//end-non-standard
+//end-aurelia-decorators
 export class MapUtility {
   constructor(Config) {
     this.config = Config.map;

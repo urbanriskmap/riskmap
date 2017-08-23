@@ -7,10 +7,10 @@ import {Config} from 'resources/config';
 import {HttpClient} from 'aurelia-http-client';
 import * as topojson from 'topojson-client';
 
-//start-non-standard
+//start-aurelia-decorators
 @noView
 @inject(Config)
-//end-non-standard
+//end-aurelia-decorators
 export class MapLayers {
   constructor(Config) {
     this.activeReports = {}; // List of available reports (filtered by city, time: last 1 hour)

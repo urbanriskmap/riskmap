@@ -4,18 +4,18 @@ import $ from 'jquery';
 import {MapLayers} from './map-layers';
 import {MapUtility} from './map-utility';
 
-//start-non-standard
+//start-aurelia-decorators
 @customElement('disaster-map')
 @inject(MapLayers, MapUtility)
-//end-non-standard
+//end-aurelia-decorators
 export class DisasterMap {
-  //start-non-standard
+  //start-aurelia-decorators
   @bindable querycity;
   @bindable querylanguage;
   @bindable querytab;
   @bindable reportid;
   @bindable resetTab;
-  //end-non-standard
+  //end-aurelia-decorators
 
   constructor(MapLayers, MapUtility) {
     this.layers = MapLayers;

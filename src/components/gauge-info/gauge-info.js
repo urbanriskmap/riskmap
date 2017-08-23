@@ -1,10 +1,10 @@
 import {bindable, customElement} from 'aurelia-framework';
 
-//start-non-standard
+//start-aurelia-decorators
 @customElement('gauge-info')
-//end-non-standard
+//end-aurelia-decorators
 export class GaugeInfo {
-  //start-non-standard
+  //start-aurelia-decorators
   @bindable name;
-  //end-non-standard
+  //end-aurelia-decorators
 }
