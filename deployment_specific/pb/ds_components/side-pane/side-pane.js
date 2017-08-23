@@ -17,7 +17,6 @@ export class SidePane {
   @bindable closePane;
   @bindable reportId;
   @bindable querylanguage;
-  @bindable switchTerms;
   //end-non-standard
 
   constructor(LocaleEn, LocaleLocal, Config) {
@@ -119,10 +118,9 @@ export class SidePane {
   }
 
   // When the user clicks on div, open the popup
-  openTermsPopup(type) {
+  openTermsPopup() {
     this.closePane();
     $('#screen').show();
     $('#termsPopup').show();
-    this.switchTerms(type);
   }
 }
