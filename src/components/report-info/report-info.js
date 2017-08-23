@@ -21,7 +21,7 @@ export class ReportInfo {
   //end-non-standard
 
   constructor(Config) {
-    this.app = Config.app;
+    this.app = Config.map.app;
     this.links = {
       qlue: 'https://play.google.com/store/apps/details?id=org.qluein.android&hl=en',
       detik: 'http://pasangmata.detik.com/',
@@ -52,7 +52,7 @@ export class ReportInfo {
       },
       {
         name: "whatsapp",
-        intent: "whatsapp://send?text=" + self.msgText + "%20" + self.reportUrl
+        intent: "https://api.whatsapp.com/send?text=" + self.msgText + "%20" + self.reportUrl
       },
       {
         name: "facebook",
