@@ -7,6 +7,9 @@ Front-end code &nbsp;
 <br>
 This platform is built using the Aurelia framework, which has a few prerequisites. To get started, follow the machine & application setup steps.
 
+DOI for current stable release [v1.0.0](https://github.com/urbanriskmap/petabencana.id/releases/tag/v1.0.0)
+
+[![DOI](https://zenodo.org/badge/70249665.svg)](https://zenodo.org/badge/latestdoi/70249665)
 ____
 
 ### Machine setup
