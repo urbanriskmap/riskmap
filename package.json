@@ -1,7 +1,7 @@
 {
   "name": "petabencana.id",
   "description": "Petabencana.id crowd source flood map - client application.",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/urbanriskmap/petabencana.id"
