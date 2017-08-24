@@ -9,7 +9,7 @@
   <require from="../../components/side-pane/side-pane"></require>
 
   <div id="pageWrapper">
-    <screen-popup view-model.ref="screenPopup" helper.bind="webMenu.locale.map_helper" cities.bind="mapModel.cities" selcity.two-way="mapModel.selected_city" switch-city.call="mapModel.viewReports($event, $event)" seltab.bind="webMenu.terms_tab" termscontents.bind="webMenu.locale.termsContents">
+    <screen-popup view-model.ref="screenPopup" helper.bind="webMenu.locale.map_helper" cities.bind="mapModel.cities" selcity.two-way="mapModel.selected_city" switch-city.call="mapModel.viewReports($event, $event)" termscontents.bind="webMenu.locale.termsContents" initializetab.bind="queried_terms">
     </screen-popup>
 
     <disaster-map id="map" view-model.ref="mapModel" querytab.bind="queried_tab" querylanguage.two-way="queried_lang" querycity.bind="queried_city" reportid.two-way="report_id" reset-tab.call="webMenu.switchTab($event)">
@@ -18,7 +18,7 @@
     <div id="topBar">
       <div id="logo_top">
         <a href="map">
-          <img id="pbLogo" src="assets/graphics/Peta_logo_noSub.svg" width="180">
+          <img id="pbLogo" src="assets/graphics/app_logo.svg" width="180">
         </a>
       </div>
       <div class="menuBtn active" click.delegate="mapModel.togglePane('#sidePane', 'show', true)">
@@ -42,7 +42,7 @@
     </div>
 
     <div id="sidePane">
-      <side-pane view-model.ref="webMenu" querylanguage.two-way="queried_lang" cities.bind="mapModel.cities" selcity.two-way="mapModel.selected_city" change-city.call="mapModel.viewReports($event, $event)" close-pane.call="mapModel.togglePane('#sidePane', 'hide', false)" reportId.two-way="report_id" switch-terms.call="screenPopup.switchTab($event)">
+      <side-pane view-model.ref="webMenu" querylanguage.two-way="queried_lang" cities.bind="mapModel.cities" selcity.two-way="mapModel.selected_city" change-city.call="mapModel.viewReports($event, $event)" close-pane.call="mapModel.togglePane('#sidePane', 'hide', false)" reportId.two-way="report_id" open-terms.call="screenPopup.openPopup($event)" queriedterms="queried_terms">
       </side-pane>
     </div>
   </div>

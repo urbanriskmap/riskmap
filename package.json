@@ -7,10 +7,11 @@
     "url": "git+https://github.com/urbanriskmap/petabencana.id"
   },
   "scripts": {
-    "start": "au run --env dev --watch",
-    "test": "au build && au test",
-    "build": "rm -rf scripts/* && au build --env prod",
-    "build-dev": "rm -rf scripts/* && au build --env dev"
+    "start": "au run --env dev --watch --dep $DEP",
+    "test": "au build",
+    "build": "rm -rf scripts/* && au build --env prod --dep $DEP",
+    "build-stage": "rm -rf scripts/* && au build --env stage --dep $DEP",
+    "build-dev": "rm -rf scripts/* && au build --env dev --dep $DEP"
   },
   "license": "GPL-3.0",
   "dependencies": {
@@ -64,6 +65,7 @@
     "karma-browserstack-launcher": "^1.2.0",
     "karma-chrome-launcher": "^2.1.1",
     "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.1",
     "karma-jasmine": "^1.1.0",
     "minimatch": "^3.0.4",
     "notifyjs-browser": "^0.4.2",

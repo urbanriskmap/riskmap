@@ -1,3 +1,7 @@
+**Card decks**
+Store card deck jsons in assets, for them to be accessed off of the server.
+Having them in src/resources fails.
+
 **Folder structure and file types:**
 assets/graphics/*
 - Place vector graphics here, used as backgrounds to enhance UX.

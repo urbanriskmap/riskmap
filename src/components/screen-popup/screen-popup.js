@@ -9,15 +9,18 @@ export class ScreenPopup {
   @bindable cities;
   @bindable selcity;
   @bindable switchCity;
-  @bindable seltab;
   @bindable termscontents;
+  @bindable initializetab;
   //end-non-standard
 
+  constructor() {
+    this.seltab = 'u_a';
+  }
+
   switchTab(name) {
-    var x = (name ? name : 'u_a');
+    this.seltab = name;
     $('.termsTabs').removeClass("active");
-    $('#tab-' + x).addClass("active");
-    this.seltab = x;
+    $('#tab-' + name).addClass("active");
   }
 
   closePopup() {
@@ -25,5 +28,19 @@ export class ScreenPopup {
     if (this.selcity) {
       $('#screen').hide();
     }
+  }
+
+  openPopup(name) {
+    this.seltab = name;
+    $('#screen').show();
+    $('#termsPopup').show();
+  }
+
+  attached() {
+    $('.termsTabs').ready(() => { //selection for termsTabs switches
+      if (this.initializetab) {
+        this.switchTab(this.initializetab);
+      }
+    });
   }
 }

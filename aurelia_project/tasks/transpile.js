@@ -17,6 +17,32 @@ function configureEnvironment() {
     .pipe(gulp.dest(project.paths.root));
 }
 
+// Use deployment specific config file
+function configureDeployment() {
+  let dep = CLIOptions.getFlagValue('dep', 'dep') ? CLIOptions.getFlagValue('dep', 'dep') : 'pb';
+
+  return gulp.src(`aurelia_project/deployments/${dep}.js`)
+    .pipe(changedInPlace({firstPass: true}))
+    .pipe(rename('deployment.js'))
+    .pipe(gulp.dest(project.paths.root));
+}
+
+function fetchAssets() {
+  let dep = CLIOptions.getFlagValue('dep', 'dep') ? CLIOptions.getFlagValue('dep', 'dep') : 'pb';
+
+  return gulp.src([`deployment_specific/${dep}/ds_assets/**/*`])
+    .pipe(changedInPlace({firstPass: true}))
+    .pipe(gulp.dest('assets/'));
+}
+
+function fetchLocales() {
+  let dep = CLIOptions.getFlagValue('dep', 'dep') ? CLIOptions.getFlagValue('dep', 'dep') : 'pb';
+
+  return gulp.src([`deployment_specific/${dep}/ds_locales/**/*`])
+    .pipe(changedInPlace({firstPass: true}))
+    .pipe(gulp.dest('src/resources/locales/'));
+}
+
 function buildJavaScript() {
   return gulp.src(project.transpiler.source)
     .pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
@@ -28,5 +54,8 @@ function buildJavaScript() {
 
 export default gulp.series(
   configureEnvironment,
+  configureDeployment,
+  fetchAssets,
+  fetchLocales,
   buildJavaScript
 );

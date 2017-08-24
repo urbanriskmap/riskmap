@@ -48,11 +48,7 @@
   },
   "paths": {
     "root": "src",
-    "resources": "src/resources",
-    "elements": "src/resources/elements",
-    "attributes": "src/resources/attributes",
-    "valueConverters": "src/resources/value-converters",
-    "bindingBehaviors": "src/resources/binding-behaviors"
+    "resources": "resources"
   },
   "testFramework": {
     "id": "jasmine",
@@ -139,12 +135,6 @@
             "path": "../node_modules/aurelia-testing/dist/amd",
             "main": "aurelia-testing",
             "env": "dev"
-          },
-          {
-            "name": "aurelia-testing",
-            "path": "../node_modules/aurelia-testing/dist/amd",
-            "main": "aurelia-testing",
-            "env": "local"
           },
           {
             "name": "chart",

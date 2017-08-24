@@ -1,4 +1,5 @@
 import gulp from 'gulp';
+import fetchComponents from './fetch-components';
 import transpile from './transpile';
 import processMarkup from './process-markup';
 import processLESS from './process-less';
@@ -9,6 +10,7 @@ import project from '../aurelia.json';
 
 export default gulp.series(
   readProjectConfiguration,
+  fetchComponents,
   gulp.parallel(
     transpile,
     processMarkup,

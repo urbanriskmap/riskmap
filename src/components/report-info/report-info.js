@@ -1,8 +1,9 @@
-import {bindable, customElement} from 'aurelia-framework';
-import env from '../../environment';
+import {inject, bindable, customElement} from 'aurelia-framework';
+import {Config} from '../../resources/config';
 
 //start-non-standard
 @customElement('report-info')
+@inject(Config)
 //end-non-standard
 export class ReportInfo {
   //@bindable attributes do not work with camelCase...
@@ -10,6 +11,7 @@ export class ReportInfo {
   @bindable locale;
   @bindable imageurl;
   @bindable height;
+  @bindable reportevent;
   @bindable title;
   @bindable text;
   @bindable pkey;
@@ -18,7 +20,8 @@ export class ReportInfo {
   @bindable source;
   //end-non-standard
 
-  constructor() {
+  constructor(Config) {
+    this.app = Config.map.app;
     this.links = {
       qlue: 'https://play.google.com/store/apps/details?id=org.qluein.android&hl=en',
       detik: 'http://pasangmata.detik.com/',
@@ -33,7 +36,7 @@ export class ReportInfo {
   }
 
   get reportUrl() {
-    return env.app + "map/" + this.city + "/" + this.pkey;
+    return this.app + "map/" + this.city + "/" + this.pkey;
   }
 
   attached() {
@@ -45,11 +48,11 @@ export class ReportInfo {
       },
       {
         name: "telegram",
-        intent: "https://telegram.me/share/url?url={" + self.reportUrl + "}&text={" + self.msgText + "}"
+        intent: "https://telegram.me/share/url?url=" + self.reportUrl + " &text= " + self.msgText
       },
       {
         name: "whatsapp",
-        intent: "whatsapp://send?text=" + self.msgText + "%20" + self.reportUrl
+        intent: "https://api.whatsapp.com/send?text=" + self.msgText + "%20" + self.reportUrl
       },
       {
         name: "facebook",

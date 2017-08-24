@@ -3,10 +3,15 @@ node_modules/
 .DS_STORE
 npm-debug.log
 
+assets/graphics/
+assets/icons/
 scripts/
 dist/
 coverage/
 src/environment.js
+src/deployment.js
+src/components/side-pane/
+src/resources/locales/local_lang.js
 
 #for vim:
 *.swp

@@ -10,7 +10,6 @@ This platform is built using the Aurelia framework, which has a few prerequisite
 DOI for current stable release [v1.0.0](https://github.com/urbanriskmap/petabencana.id/releases/tag/v1.0.0)
 
 [![DOI](https://zenodo.org/badge/70249665.svg)](https://zenodo.org/badge/latestdoi/70249665)
-
 ____
 
 ### Machine setup
@@ -47,9 +46,7 @@ The project structure is as follows:
 ___
 
 ### Card Decks
-- Currently contains single fixed card deck for disaster type - Flood.
-- The deck has location, flood depth, description, photo, and review cards along with error, terms of service, and thank you cards.
-- Addition of a new card involves updates in cards.js router mapping
+- Refer assets/card-decks/README.md
 ___
 
 ### Routing
@@ -57,11 +54,12 @@ ___
     * '/' & '/map' *map landing page*
     * '/map/:city' *query parameter (city): flyTo supported city*
     * '/map/:city/:report' *query parameter (city & report): flyTo queried report id in a supported city*
-    * '/cards/:id' *query parameter (one time card id): link to access report cards, (use test123 as card id in dev & local environments*
+    * '/cards/:disaster/:id' *query parameter (disaster type & one time card id): Disaster type specifies which card-deck to load, card id is the link to access report cards, (use test123 as card id in dev & local environments*
 
 * *Additional query parameters*
     * ?lang : Use for setting language to one of the supported languages (en || id).
     * ?tab : Use for opening the side pane set to one of the following tabs (report || map || info)
+    * ?terms : Use for directly opening the privacy policy or user agreement popup (u_a || p_p)
     * eg. https://dev.petabencana.id/map?lang=en&tab=info
 
 ___
