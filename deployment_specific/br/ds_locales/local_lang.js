@@ -3,10 +3,10 @@ export class LocaleLocal {
     this.translation_strings = {
       "prep_menu": {
         "btn_names": {
-          "drain": "Blocked Drains",
-          "desilting": "Desilting",
-          "canalrepair": "Canal Repairs",
-          "treeclearing": "Fallen Tree"
+          "drain": "Drenajes bloqueados",
+          "desilting": "Quitar el cieno",
+          "canalrepair": "Reparaciones del canal",
+          "treeclearing": "Árbol caído"
         }
       },
       "web_menu": {
