@@ -21,6 +21,7 @@ export class ReportInfo {
   //end-aurelia-decorators
 
   constructor(Config) {
+    this.config = Config;
     this.app = Config.map.app;
     this.links = {
       qlue: 'https://play.google.com/store/apps/details?id=org.qluein.android&hl=en',

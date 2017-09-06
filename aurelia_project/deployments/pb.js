@@ -1,5 +1,6 @@
 export default {
   name: 'petabencana',
+  height_units: 'cm',
   map: {
     "instance_regions": {
       "jakarta": {

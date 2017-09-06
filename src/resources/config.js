@@ -16,5 +16,6 @@ export class Config {
     this.title = env[dep.name].title;
     this.supported_languages = env[dep.name].supported_languages;
     this.default_language = env[dep.name].default_language;
+    this.height_units = dep.height_units;
   }
 }

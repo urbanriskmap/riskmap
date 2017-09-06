@@ -1,5 +1,6 @@
 export default {
   name: 'riskmap_us',
+  height_units: 'in',
   map: {
     "instance_regions": {
       "broward": {

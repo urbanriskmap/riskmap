@@ -1,5 +1,6 @@
 export default {
   name: 'riskmap_in',
+  height_units: 'cm',
   map: {
     "instance_regions": {
       "chennai": {
