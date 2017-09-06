@@ -74,20 +74,12 @@ export class LocaleEn {
             "Click on get started button and follow the instructions to input flood location, upload photo, and description.",
             "You can see your report on the map via the link provided. Check Riskmap.in for up-to-date flood information."
           ]
-        },
-        "otherapps": {
-          "title": "Report with local applications",
-          "steps": [
-            "You can report flood from Qlue, PasangMata, and Z-Alert.",
-            "Your report is now on the map. Check RiskMap.us for up-to-date flood information."
-          ],
-          "links": "<br><ul><li>Qlue:&nbsp;<a href='https://play.google.com/store/apps/details?id=org.qluein.android'><i class='icon-android'></i></a>&nbsp;&#124;&nbsp;<a href='https://itunes.apple.com/us/app/qlue-jakarta-smart-city/id987432944?ls=1&mt=8'><i class='icon-apple'></i></a></li><li><a href='http://pasangmata.detik.com/'>PasangMata</a></li><li><a href='https://www.zurich.co.id/id-id/kampanye-kami/zurich-alert-the-alert-you-really-need'>Z-Alert</a></li></ul>"
         }
       },
       "info_content": {
         "intro": "RiskMap.us harnesses the power of social media to gather, sort, and display information about flooding in real time.",
-        "p1": "RiskMap.us is a project initiated by the Urban Risk Lab at MIT as a free, transparent platform for emergency response and disaster management in megacities in South and Southeast Asia.",
-        "p2": "The platform adopts a “people are the best sensors” paradigm, where confirmed reports are collected directly from the users at street level in a manner that removes expensive and time-consuming data processing. This framework creates accurate, real-time data which is immediately made available for users and first responders.",
+        "p1": "RiskMap.us is a project initiated by the Urban Risk Lab at MIT as a free, transparent platform for emergency response and disaster management in megacities across the world.",
+        "p2": "The platform adopts a &quot;people are the best sensors&quot; paradigm, where confirmed reports are collected directly from the users at street level in a manner that removes expensive and time-consuming data processing. This framework creates accurate, real-time data which is immediately made available for users and first responders.",
         "p3": "RiskMap.us gathers, sorts, and visualizes data using specially developed CogniCity Open Source Software - an enterprise-level platform for emergency response and disaster management - to transforms the noise of social and digital media into critical information for residents, communities, and government agencies.",
         "partners": {
           "implementing": "Implementing partner",
