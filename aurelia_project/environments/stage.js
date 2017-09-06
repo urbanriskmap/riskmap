@@ -8,8 +8,8 @@ export default {
     supported_languages: ['en', 'es'],
     default_language: 'en',
     tile_layer: 'https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidXJiYW5yaXNrbWFwIiwiYSI6ImNqMnFraWVzYzAyd24ycXRqMmpvbmhyZ2QifQ.xc_v7umok760t2q6NZK1RA',
-    data_server: 'https://data-dev.riskmap.us/',
-    app: 'https://broward-dev.riskmap.us/'
+    data_server: 'https://data.riskmap.us/',
+    app: 'https://riskmap.us/'
   },
   petabencana: {
     title: 'Petabencana.id',
