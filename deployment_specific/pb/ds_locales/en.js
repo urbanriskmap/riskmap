@@ -1,30 +1,6 @@
 export class LocaleEn {
   constructor() {
     this.translation_strings = {
-      "page_title": "Flood reports",
-      "card_titles": {
-        "prep": "Monsoon preparation",
-        "location": "Select flood location",
-        "depth": "Report water depth",
-        "photo": "Upload a photo",
-        "description": "Tell us more",
-        "review": "Review & submit",
-        "terms": "Terms & Conditions"
-      },
-      "notification": {
-        "header": {
-          "location_1": "GPS location error",
-          "location_2": "Unsupported city",
-          "photo_1": "Size limit exceeded",
-          "photo_2": "Unsupported browser"
-        },
-        "message": {
-          "location_1": "Drag map to pick a location",
-          "location_2": "Unsupported location.<br>Reports marked here will not show on the map.",
-          "photo_1": "Selected photo exceeds size limit of 4.2mb",
-          "photo_2": "Photo upload is not supported by your browser"
-        }
-      },
       "prep_menu": {
         "btn_names": {
           "drain": "Blocked Drains",
@@ -123,26 +99,6 @@ export class LocaleEn {
         "mapImproveLink": "Improve the basemap at",
         "browserStack": "Testing supported by <a href='https://www.browserstack.com' target='_blank'>BrowserStack</a>.",
         "USAID": "This website was made possible with the support of the American People through the U.S. Agency for International Development. This is not an official USAID or U.S. Government website. The contents of this website are the sole responsibility of the authors and do not necessarily reflect the views of USAID of the U.S. Government."
-      },
-      "card_error_messages": {
-        "already_received": "Report already received",
-        "unknown_link": "Report link does not exist",
-        "unknown_error": "Unhandled report link verification error",
-        "link": "Go to PetaBencana.id"
-      },
-      "card_hints": {
-        "description": "Enter description here...",
-        "flood_depth": "Water Depth",
-        "agreement_text": "By submitting this report you are agreeing to the",
-        "agreement_title": "PetaBencana.id Contributors Agreement",
-        "more_details_required": "Description or Photo required to submit report",
-        "location_check": "Unsupported location, report will not appear on map",
-        "swipe": "Swipe to submit",
-        "thanks": "Thank you for your report",
-        "redirect": "Redirecting to PetaBencana.id",
-        "next": "NEXT",
-        "previous": "PREV",
-        "confirmation": "We will send you a confirmation message via"
       },
       "legend": {
         "title": "Legend",

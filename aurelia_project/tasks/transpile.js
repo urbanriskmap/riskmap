@@ -27,6 +27,16 @@ function configureDeployment() {
     .pipe(gulp.dest(project.paths.root));
 }
 
+//deployment specific index.html so that
+//opengraph preview works as expected.
+function fetchIndex() {
+  let dep = CLIOptions.getFlagValue('dep', 'dep');
+
+  return gulp.src([`deployment_specific/${dep}/index.html`])
+    .pipe(changedInPlace({firstPass: true}))
+    .pipe(gulp.dest('.'));
+}
+
 function fetchAssets() {
   let dep = CLIOptions.getFlagValue('dep', 'dep');
 
@@ -55,6 +65,7 @@ function buildJavaScript() {
 export default gulp.series(
   configureEnvironment,
   configureDeployment,
+  fetchIndex,
   fetchAssets,
   fetchLocales,
   buildJavaScript
