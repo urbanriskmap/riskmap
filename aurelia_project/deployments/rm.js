@@ -1,5 +1,5 @@
 export default {
-  name: 'riskmap',
+  name: 'riskmap_in',
   map: {
     "instance_regions": {
       "chennai": {

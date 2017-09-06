@@ -13,6 +13,7 @@ export class Config {
     this.map.app = env[dep.name].app;
     this.map.report_timeperiod = env.report_timeperiod;
 
+    this.title = env[dep.name].title;
     this.supported_languages = env[dep.name].supported_languages;
     this.default_language = env[dep.name].default_language;
   }

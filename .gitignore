@@ -12,6 +12,7 @@ src/environment.js
 src/deployment.js
 src/components/side-pane/
 src/resources/locales/local_lang.js
+/index.html
 
 #for vim:
 *.swp
