@@ -18,7 +18,7 @@ export class LocaleLocal {
       },
       "report_info": {
         "share_msg": "Revise%20los%20informes%20de%20inundaciones%20en%20riskmap%2Eus",
-        "water_depth": "Profundidad del agua",
+        "water_depth": "Profundidad de agua",
         "source": "Origen"
       },
       "flood_info": {
@@ -27,20 +27,20 @@ export class LocaleLocal {
         "time_hint": "Última actualización",
         "state_codes": {
           "1": {
-            "severity": "Unknown",
-            "description": "An unknown level of flooding, use caution"
+            "severity": "No conocido",
+            "description": "Un nivel de inundación no conocido"
           },
           "2": {
             "severity": "Minor",
-            "description": "Flooding between 10 to 70 cm"
+            "description": "Inundacion de 10 a 70 cm"
           },
           "3": {
             "severity": "Moderate",
-            "description": "Flooding between 71 to 150 cm"
+            "description": "Inundacion de 71 a 150 cm"
           },
           "4": {
             "severity": "Severe",
-            "description": "Flooding over 150 cm"
+            "description": "Inundacion de mas de 150 cm"
           }
         }
       },
@@ -55,31 +55,32 @@ export class LocaleLocal {
           "title": "Informar con Twitter",
           "steps": [
             "Tweet #banjir to @riskmap.",
-            "Open the link and follow the instructions to input flood location, upload photo, and description.",
-            "You can see your report on the map via the link provided. Check RiskMap.us for up-to-date flood information."
+            "Abra el URL y siga las instrucciones para entrar el informe.",
+            "Usted puede ver su informe usando el URL. Mire RiskMap.us para mas informaccion."
           ]
         },
         "telegram": {
           "title": "Informar con Telegram",
           "steps": [
-            "Text /banjir to @BencanaBot.",
-            "Open the link and follow the instructions to input flood location, upload photo, and description.",
-            "You can see your report on the map via the link provided. Check RiskMap.us for up-to-date flood information."
+            //TODO
+            "Text /inundacion to @RiskMapUsBot.",
+            "Abra el URL y siga las instrucciones para entrar el informe.",
+            "Usted puede ver su informe usando el URL. Mire RiskMap.us para mas informaccion."
           ]
         },
         "facebook": {
           "title": "Informar con Facebook messenger",
           "steps": [
-            "Search for Risk Map Bot on Facebook messenger",
-            "Click on get started button and follow the instructions to input flood location, upload photo, and description.",
-            "You can see your report on the map via the link provided. Check Riskmap.in for up-to-date flood information."
+            "Busque el Risk Map Bot en Facebook Messenger",
+            "Haga click en 'get started' y siga las instrucciones",
+            "Usted puede ver su informe usando el URL. Mire RiskMap.us para mas informaccion."
           ]
         }
       },
       "info_content": {
         "intro": "RiskMap.us aprovecha el poder de las redes sociales para recopilar, clasificar y mostrar información sobre las inundaciones en tiempo real.",
-        "p1": "RiskMap.us es un proyecto iniciado por el Laboratorio de Riesgo Urbano en el MIT como una plataforma libre y transparente para la respuesta a emergencias y la gestión de desastres en megaciudades en todo el mundo.",
-        "p2": "La plataforma adopta un paradigma de &quot;personas son los mejores sensores&quot;, donde los informes confirmados son recopilados directamente de los usuarios a nivel de la calle de una manera que elimina el procesamiento de datos costoso y que consume mucho tiempo. Este marco crea datos precisos y en tiempo real que se ponen inmediatamente a disposición de los usuarios y de los primeros respondedores.",
+        "p1": "RiskMap.us es un proyecto iniciado por el Laboratorio de Riesgo Urbano en el MIT como una plataforma libre y transparente para la respuesta a emergencias en megaciudades en todo el mundo.",
+        "p2": "La plataforma adopta un paradigma de &quot;personas son los mejores sensores&quot;, donde los informes confirmados son recopilados directamente de los usuarios a nivel de la calle de una manera que elimina el procesamiento de datos costoso y que consume mucho tiempo. Este marco crea datos precisos y en tiempo real que se ponen inmediatamente a disposición de los usuarios y de las authoridades de emergencia.",
         "p3": "RiskMap.us recopila, clasifica y visualiza datos usando el software de código abierto de CogniCity especialmente desarrollado - una plataforma a nivel de empresa para respuesta de emergencia y manejo de desastres - para transformar el ruido de los medios sociales y digitales en información crítica para residentes, comunidades y agencias gubernamentales.",
         "partners": {
           "implementing": "Socio implementador",
