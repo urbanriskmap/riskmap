@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "fontello",
   "css_prefix_text": "icon-",
   "css_use_suffix": false,
   "hinting": true,
@@ -82,12 +82,6 @@
       "uid": "79beb8c7fcd56e1985b70e9a120cbcbf",
       "css": "map",
       "code": 62073,
-      "src": "fontawesome"
-    },
-    {
-      "uid": "559647a6f430b3aeadbecd67194451dd",
-      "css": "menu",
-      "code": 61641,
       "src": "fontawesome"
     },
     {
@@ -403,6 +397,12 @@
       "search": [
         "flood_icon"
       ]
+    },
+    {
+      "uid": "2cfb3f2b46b34a1790aec0aa846297b6",
+      "css": "menu",
+      "code": 59425,
+      "src": "entypo"
     }
   ]
 }
