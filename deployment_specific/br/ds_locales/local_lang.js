@@ -44,7 +44,7 @@ export class LocaleLocal {
           }
         }
       },
-      "map_helper": "Seleccione región :",
+      "map_helper": "Seleccione condado :",
       "report_content": {
         "flood": {
           "title": "Descripción del proyecto",

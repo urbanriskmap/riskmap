@@ -44,7 +44,7 @@ export class LocaleEn {
           }
         }
       },
-      "map_helper": "Select city :",
+      "map_helper": "Select county :",
       "report_content": {
         "flood": {
           "title": "Project overview",
