@@ -44,7 +44,7 @@ export class LocaleEn {
           }
         }
       },
-      "map_helper": "Select city :",
+      "map_helper": "Select county :",
       "report_content": {
         "flood": {
           "title": "Project overview",
@@ -74,7 +74,7 @@ export class LocaleEn {
         "facebook": {
           "title": "Report with Facebook messenger",
           "steps": [
-            "Search for Risk Map Bot on Facebook messenger",
+            "Search for RiskMapUS on Facebook messenger",
             "Click on get started button and follow the instructions to input flood location, flood depth, upload photo, and description.",
             "You can see your report on the map via the link provided. Check Riskmap.us for up-to-date flood information."
           ]
@@ -84,7 +84,7 @@ export class LocaleEn {
         "intro": "RiskMap.us harnesses the power of social media to gather, sort, and display information about flooding in real time.",
         "p1": "RiskMap.us is a project initiated by the Urban Risk Lab at MIT as a free, transparent platform for public reporting and disaster management in cities around the world.",
         "p2": "The platform asks the public to report through their preferred social media interface. It then gathers, sorts, and visualizes the data using CogniCity Open Source Software - an enterprise-level platform for emergency response and disaster management.",
-        "p3": "This framework creates a real-time map which is immediately made available for residents, communities, and government agencies, reducing risk togather",
+        "p3": "This framework creates a real-time map which is immediately made available for residents, communities, and government agencies, reducing risk together",
         "p4": "NOTE: For emergency situation that requires immediate assistance from the police, fire department or ambulance, please call 911",
 
         "partners": {
