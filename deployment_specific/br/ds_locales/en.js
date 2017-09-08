@@ -66,7 +66,7 @@ export class LocaleEn {
           "steps": [
             "Search and add 'RiskmapUS' to your telegram.",
             "Text '/flood' to @RiskmapUS.",
-            "Open the link and follow the instructions to input flood location, upload photo, and description.",
+            "Open the link and follow the instructions to input flood location, flood depth, upload photo, and description.",
             "On successful submission of the report, @riskmapUS_bot will send you a reply with a link to your report.",
             "Check RiskMap.us for up-to-date flood information."
           ]
@@ -75,7 +75,7 @@ export class LocaleEn {
           "title": "Report with Facebook messenger",
           "steps": [
             "Search for Risk Map Bot on Facebook messenger",
-            "Click on get started button and follow the instructions to input flood location, upload photo, and description.",
+            "Click on get started button and follow the instructions to input flood location, flood depth, upload photo, and description.",
             "You can see your report on the map via the link provided. Check Riskmap.us for up-to-date flood information."
           ]
         }
