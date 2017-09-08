@@ -33,43 +33,43 @@ export class SidePane {
       {
         platform: "flood",
         source: {
-          "en": "https://www.youtube.com/embed/8aFRL4CaUIs",
-          "tm": "https://www.youtube.com/embed/8aFRL4CaUIs"
+          "en": "https://www.youtube.com/embed/k1wXvJvq6F4",
+          "es": "https://www.youtube.com/embed/k1wXvJvq6F4"
         }
       },
       {
         platform: "twitter", //Match string to locale/*/translation.json > report_content.*
         source: {
-          "en": "https://www.youtube.com/embed/OB5dLtFxVWY",
-          "tm": "https://www.youtube.com/embed/OB5dLtFxVWY"
+          "en": "",
+          "es": ""
         }
       },
       {
         platform: "telegram",
         source: {
-          "en": "https://www.youtube.com/embed/Sp1JbFd9KhM",
-          "tm": "https://www.youtube.com/embed/Sp1JbFd9KhM"
+          "en": "",
+          "es": ""
         }
       },
       {
         platform: "facebook",
         source: {
-          "en": "https://www.youtube.com/embed/unz-qCNUJzU",
-          "tm": "https://www.youtube.com/embed/unz-qCNUJzU"
+          "en": "",
+          "es": ""
         }
       }
     ];
     this.gauge_levels = [
-      {text: {"en": "Alert Level 1", "tm": "எச்சரிக்கை நிலை 1"}, icon: 'assets/icons/floodgauge_1.svg'},
-      {text: {"en": "Alert Level 2", "tm": "எச்சரிக்கை நிலை 2"}, icon: 'assets/icons/floodgauge_2.svg'},
-      {text: {"en": "Alert Level 3", "tm": "எச்சரிக்கை நிலை 3"}, icon: 'assets/icons/floodgauge_3.svg'},
-      {text: {"en": "Alert Level 4", "tm": "எச்சரிக்கை நிலை 4"}, icon: 'assets/icons/floodgauge_4.svg'}
+      {text: {"en": "Alert Level 1", "es": "Nivel de alerta 1"}, icon: 'assets/icons/floodgauge_1.svg'},
+      {text: {"en": "Alert Level 2", "es": "Nivel de alerta 2"}, icon: 'assets/icons/floodgauge_2.svg'},
+      {text: {"en": "Alert Level 3", "es": "Nivel de alerta 3"}, icon: 'assets/icons/floodgauge_3.svg'},
+      {text: {"en": "Alert Level 4", "es": "Nivel de alerta 4"}, icon: 'assets/icons/floodgauge_4.svg'}
     ];
     this.flood_depth = [
-      {text: {"en": "> 150", "tm": "> 150"}, color: '#CC2A41'},
-      {text: {"en": "71 - 150", "tm": "71 - 150"}, color: '#FF8300'},
-      {text: {"en": "10 - 70", "tm": "10 - 70"}, color: '#FFFF00'},
-      {text: {"en": "Use Caution", "tm": "Hati-hati"}, color: '#A0A9F7'}
+      {text: {"en": "> 150", "es": "> 150"}, color: '#CC2A41'},
+      {text: {"en": "71 - 150", "es": "71 - 150"}, color: '#FF8300'},
+      {text: {"en": "10 - 70", "es": "10 - 70"}, color: '#FFFF00'},
+      {text: {"en": "Use Caution", "es": "Con precaución"}, color: '#A0A9F7'}
     ];
   }
 
