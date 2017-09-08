@@ -44,7 +44,7 @@ export class LocaleEn {
           }
         }
       },
-      "map_helper": "Select city :",
+      "map_helper": "Select county :",
       "report_content": {
         "flood": {
           "title": "Project overview",
@@ -74,7 +74,7 @@ export class LocaleEn {
         "facebook": {
           "title": "Report with Facebook messenger",
           "steps": [
-            "Search for Risk Map Bot on Facebook messenger",
+            "Search for RiskMapUS on Facebook messenger",
             "Click on get started button and follow the instructions to input flood location, flood depth, upload photo, and description.",
             "You can see your report on the map via the link provided. Check Riskmap.us for up-to-date flood information."
           ]
