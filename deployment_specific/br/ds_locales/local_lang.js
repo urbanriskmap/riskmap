@@ -32,15 +32,15 @@ export class LocaleLocal {
           },
           "2": {
             "severity": "Minor",
-            "description": "Inundacion de 10 a 70 cm"
+            "description": "Inundación de 10 a 70 cm"
           },
           "3": {
             "severity": "Moderate",
-            "description": "Inundacion de 71 a 150 cm"
+            "description": "Inundación de 71 a 150 cm"
           },
           "4": {
             "severity": "Severe",
-            "description": "Inundacion de mas de 150 cm"
+            "description": "Inundación de mas de 150 cm"
           }
         }
       },
@@ -54,21 +54,21 @@ export class LocaleLocal {
         "twitter": {
           "title": "Informar con Twitter",
           "steps": [
-            //TODO
-            "Send a Direct Message to @riskmapUS_bot.",
-            "@riskmapUS_bot will send you a one-time link to submit report",
-            "Open the link and follow the instructions to input flood location, upload photo, and description.",
-            "On successful submission of the report, @riskmapUS_bot will send you a reply with a link to your report",
-            "Check RiskMap.us for up-to-date flood information."
+            "Mande un mensaje directo (DM) a @riskmapUS_bot.",
+            "@riskmapUS_bot te mandara un URL donde puedes entrar un informe",
+            "Abre ese URL y sigue las direcciones para entrar tu informe",
+            "Cuando tu informe ha entrado al mapa, @riskmapUS_bot te mandara un nuevo mensaje con un URL para tu informe",
+            "Porfavor chequea RiskMap.us para ver mas información."
           ]
         },
         "telegram": {
           "title": "Informar con Telegram",
           "steps": [
-            //TODO
-            "Text /inundacion to @RiskMapUsBot.",
-            "Abra el URL y siga las instrucciones para entrar el informe.",
-            "Usted puede ver su informe usando el URL. Mire RiskMap.us para mas informaccion."
+            "Mande un mensaje directo (DM) a @RiskMapUS.",
+            "@RiskMapUS te mandara un URL donde puedes entrar un informe",
+            "Abre ese URL y sigue las direcciones para llenar tu informe",
+            "Cuando tu informe ha entrado al mapa, @riskmapUS_bot te mandara un nuevo mensaje con un URL para tu informe",
+            "Porfavor chequea RiskMap.us para ver mas información."
           ]
         },
         "facebook": {
@@ -76,21 +76,22 @@ export class LocaleLocal {
           "steps": [
             "Busque el Risk Map Bot en Facebook Messenger",
             "Haga click en 'get started' y siga las instrucciones",
-            "Usted puede ver su informe usando el URL. Mire RiskMap.us para mas informaccion."
+            "Usted puede ver su informe usando el URL. Mire RiskMap.us para mas información."
           ]
         }
       },
       "info_content": {
         "intro": "RiskMap.us aprovecha el poder de las redes sociales para recopilar, clasificar y mostrar información sobre las inundaciones en tiempo real.",
         "p1": "RiskMap.us es un proyecto iniciado por el Laboratorio de Riesgo Urbano en el MIT como una plataforma libre y transparente para la respuesta a emergencias en megaciudades en todo el mundo.",
-        "p2": "La plataforma adopta un paradigma de &quot;personas son los mejores sensores&quot;, donde los informes confirmados son recopilados directamente de los usuarios a nivel de la calle de una manera que elimina el procesamiento de datos costoso y que consume mucho tiempo. Este marco crea datos precisos y en tiempo real que se ponen inmediatamente a disposición de los usuarios y de las authoridades de emergencia.",
+        "p2": "La plataforma adopta un paradigma de &quot;personas son los mejores sensores&quot;, donde los informes confirmados son recopilados directamente de los usuarios a nivel de la calle de una manera que elimina el procesamiento de datos costoso y que consume mucho tiempo. Este marco crea datos precisos y en tiempo real que se ponen inmediatamente a disposición de los usuarios y de las autoridades de emergencia.",
         "p3": "RiskMap.us recopila, clasifica y visualiza datos usando el software de código abierto de CogniCity especialmente desarrollado - una plataforma a nivel de empresa para respuesta de emergencia y manejo de desastres - para transformar el ruido de los medios sociales y digitales en información crítica para residentes, comunidades y agencias gubernamentales.",
+        "p4": "ATENCIÓN: Para cualquier situación que requiere asistencia inmediata de la policía, los bomberos, o una ambulancia, por favor llamar a 912.",
         "partners": {
-          "implementing": "Socio implementador",
+          "implementing": "Socio de implementación",
           "project": "Socios del proyecto",
           "data": "Socios de datos"
         },
-        "termsPopup": "Acuerdo de usuario y Política de privacidad",
+        "termsPopup": "Acuerdo de usuario y Póliza de privacidad",
         "mapCredits": "Azulejos del mapa",
         "mapImproveLink": "Mejorar el mapa en",
         "browserStack": "Pruebas soportadas por <a href='https://www.browserstack.com' target='_blank'>BrowserStack</a>.",
