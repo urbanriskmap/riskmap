@@ -40,22 +40,22 @@ export class SidePane {
       {
         platform: "twitter", //Match string to locale/*/translation.json > report_content.*
         source: {
-          "en": "",
-          "es": ""
+          "en": null,
+          "es": null
         }
       },
       {
         platform: "telegram",
         source: {
-          "en": "",
-          "es": ""
+          "en": null,
+          "es": null
         }
       },
       {
         platform: "facebook",
         source: {
-          "en": "",
-          "es": ""
+          "en": null,
+          "es": null
         }
       }
     ];

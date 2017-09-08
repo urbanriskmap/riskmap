@@ -54,9 +54,12 @@ export class LocaleLocal {
         "twitter": {
           "title": "Informar con Twitter",
           "steps": [
-            "Tweet #banjir to @riskmap.",
-            "Abra el URL y siga las instrucciones para entrar el informe.",
-            "Usted puede ver su informe usando el URL. Mire RiskMap.us para mas informaccion."
+            //TODO
+            "Send a Direct Message to @riskmapUS_bot.",
+            "@riskmapUS_bot will send you a one-time link to submit report",
+            "Open the link and follow the instructions to input flood location, upload photo, and description.",
+            "On successful submission of the report, @riskmapUS_bot will send you a reply with a link to your report",
+            "Check RiskMap.us for up-to-date flood information."
           ]
         },
         "telegram": {
