@@ -37,6 +37,14 @@ function fetchIndex() {
     .pipe(gulp.dest('.'));
 }
 
+function fetchIcon() {
+  let dep = CLIOptions.getFlagValue('dep', 'dep');
+
+  return gulp.src([`deployment_specific/${dep}/favicon.ico`])
+    .pipe(changedInPlace({firstPass: true}))
+    .pipe(gulp.dest('.'));
+}
+
 function fetchAssets() {
   let dep = CLIOptions.getFlagValue('dep', 'dep');
 
@@ -66,6 +74,7 @@ export default gulp.series(
   configureEnvironment,
   configureDeployment,
   fetchIndex,
+  fetchIcon,
   fetchAssets,
   fetchLocales,
   buildJavaScript
