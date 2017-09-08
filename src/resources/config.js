@@ -7,6 +7,7 @@ import {noView} from 'aurelia-framework';
 //end-aurelia-decorators
 export class Config {
   constructor() {
+    this.dep_name = dep.name;
     this.map = dep.map;
     this.map.data_server = env[dep.name].data_server;
     this.map.tile_layer = env[dep.name].tile_layer;

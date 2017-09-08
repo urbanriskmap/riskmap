@@ -26,7 +26,7 @@ export class Landing {
 
   attached() {
     // If query tab specified in url, open side pane
-    if (this.queried_tab && !this.report_id) {
+    if (this.queried_tab && !this.report_id || (this.config.dep_name === 'riskmap_us')) {
       // Open side pane only if in a desktop browser,
       // as in a phone, side pane takes full width and map isn't visible
       if (!(/Mobi/.test(navigator.userAgent))) {
@@ -36,6 +36,7 @@ export class Landing {
       $('#screen').show();
       $('#termsPopup').show();
     }
+
     // Modify side pane height on the fly
     this.resizeSidePane();
     $(window).resize(() => {

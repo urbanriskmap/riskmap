@@ -1,7 +1,7 @@
 export default {
   debug: false,
   testing: false,
-  report_timeperiod: 604800,
+  report_timeperiod: 14400,
   //deployment specific env params
   riskmap_us: {
     title: 'RiskMap.us',
