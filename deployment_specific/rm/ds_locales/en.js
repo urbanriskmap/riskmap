@@ -1,7 +1,7 @@
 export class LocaleEn {
   constructor() {
     this.translation_strings = {
-      "add_report": "Report Flood",
+      "add_report": "Report Flooding",
       "add_report_platforms": [
         {name: "facebook", link: "http://m.me/riskmapbot"}, //TODO Change for Deploymeny
         {name: "twitter", link: "https://twitter.com/intent/tweet?text=%2fflood&via=riskmapbot"}, //TODO Change for Deploymeny
