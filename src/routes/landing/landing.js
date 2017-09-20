@@ -18,6 +18,10 @@ export class Landing {
     this.queried_terms = (params.terms === 'u_a' || params.terms === 'p_p') ? params.terms : null;
   }
 
+  reportTab() {
+      $('#reportLink').toggle( "slide" );
+  }
+
   resizeSidePane() {
     $('#sidePane').css({
       'height': ($(window).height() - $('#topBar').height()) + 'px'

@@ -161,6 +161,7 @@ export class DisasterMap {
     // Initialize leaflet map
     self.map = L.map('mapContainer', {
       attributionControl: false, //include in side pane
+      zoomControl: false,
       center: self.utility.config.region_center,
       zoom: 8,
       minZoom: 8
@@ -171,6 +172,11 @@ export class DisasterMap {
       detectRetina: true,
       subdomains: 'abc',
       ext: 'png'
+    }).addTo(self.map);
+
+    // Add zoom control
+    L.control.zoom({
+         position:'bottomright'
     }).addTo(self.map);
 
     // Add scale control
@@ -190,7 +196,7 @@ export class DisasterMap {
       return new L.Control.GeoLocate(opts);
     };
     L.control.geoLocate({
-      position: 'topleft'
+      position: 'bottomright'
     }).addTo(self.map);
 
     // Find user location & store in background
