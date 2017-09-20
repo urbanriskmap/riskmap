@@ -3,9 +3,9 @@ export class LocaleEn {
     this.translation_strings = {
       "add_report": "Report Flood",
       "add_report_platforms": [
-        {name: "facebook", link: "http://m.me/riskmapUS"},
-        {name: "twitter", link: "https://twitter.com/messages/compose?recipient_id=905602080252977152&welcome_message_id=905919155492331523&text=/flood"},
-        {name: "telegram", link: "https://telegram.me/riskmapus_bot"}
+        {name: "facebook", link: "http://m.me/riskmapbot"}, //TODO Change for Deploymeny
+        {name: "twitter", link: "https://twitter.com/intent/tweet?text=%2fflood&via=riskmapbot"}, //TODO Change for Deploymeny
+        {name: "telegram", link: "https://telegram.me/riskmapbot"}
       ],
       "prep_menu": {
         "btn_names": {
