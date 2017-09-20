@@ -8,9 +8,6 @@ import {inject} from 'aurelia-framework';
 export class Landing {
   constructor(Config) {
     this.config = Config;
-
-
-
   }
 
   activate(params, routerConfig) {

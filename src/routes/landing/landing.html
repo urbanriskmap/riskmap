@@ -7,11 +7,10 @@
   <require from="../../components/gauge-info/gauge-info"></require>
   <require from="../../components/flood-info/flood-info"></require>
   <require from="../../components/side-pane/side-pane"></require>
-  <require from="../../components/report-button/report-button"></require>
 
   <div id="pageWrapper">
 
-    <div id="report-Button" click.delegate="reportTab()">
+    <div id="reportButton" click.delegate="reportTab()">
       <p><i id="buttonText" class="icon-add-report"></i><br>${webMenu.locale.add_report}</p>
     </div>
     <div id="reportLink" onclick="reportTab()">
