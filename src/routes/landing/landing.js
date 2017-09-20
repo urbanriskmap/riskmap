@@ -8,6 +8,9 @@ import {inject} from 'aurelia-framework';
 export class Landing {
   constructor(Config) {
     this.config = Config;
+
+
+
   }
 
   activate(params, routerConfig) {
@@ -16,6 +19,10 @@ export class Landing {
     this.queried_lang = (this.config.supported_languages.indexOf(params.lang) > -1) ? params.lang : null;
     this.queried_tab = (params.tab === 'info' || params.tab === 'map' || params.tab === 'report') ? params.tab : null;
     this.queried_terms = (params.terms === 'u_a' || params.terms === 'p_p') ? params.terms : null;
+  }
+
+  reportTab() {
+      $('#reportLink').toggle( "slide" );
   }
 
   resizeSidePane() {

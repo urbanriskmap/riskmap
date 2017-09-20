@@ -4,6 +4,66 @@
   position: absolute;
   .fullspan-mixin;
 
+  & #report-Button {
+    width: 70px;
+    height: 70px;
+    position: fixed;
+    border: none;
+    top: 55px;
+    left: 12px;
+    z-index: 1025;
+    border-radius: 5px;
+    background-color: @snow-white;
+    box-shadow: @drop-shadow;
+    & i {
+      .linkmedium-mixin(24px);
+      color: @banjir-blue;
+      text-align: center;
+      width: 58px;
+      height: 40px;
+      top: 5px;
+      }
+    & p {
+      .bodybold-mixin(10px);
+      text-align: center;
+      color: @blue-hover;
+
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    &:active {
+      transform: translateX(1px)translateY(2px);
+    }
+  }
+
+  & #reportLink {
+    width: 200px;
+    height: 70px;
+    display:none;
+    position: fixed;
+    border: none;
+    top: 55px;
+    left: 90px;
+    z-index: 1025;
+    border-radius: 5px;
+    background-color: @snow-white;
+    box-shadow: @drop-shadow;
+    & i {
+      .linkmedium-mixin(32px);
+      padding-left: 10px;
+      padding-top: 10px;
+      position: fixed;
+    }
+    &:hover {
+      color: @blue-hover;
+    }
+    & table {
+      width: 100%;
+    }
+  }
+
+
   & #map {
     position: absolute;
     .fullspan-mixin;
@@ -24,6 +84,8 @@
       left: 10px;
     }
   }
+
+
 
   & #topBar {
     position: absolute;
@@ -89,4 +151,5 @@
     background-color: @snow-white;
     z-index: 1025;
   }
+
 }
