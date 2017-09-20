@@ -4,7 +4,7 @@ export class LocaleLocal {
       "add_report": "Report Flood",
       "add_report_platforms": [
         {name: "facebook", link: "http://m.me/riskmapbot"}, //TODO Change for Deploymeny
-        {name: "twitter", link: "https://twitter.com/intent/tweet?text=%2fflood&via=riskmapbot"}, //TODO Change for Deploymeny
+        {name: "twitter", link: "https://twitter.com/intent/tweet?text=flood&via=riskmapindia"}, //TODO Change for Deploymeny
         {name: "telegram", link: "https://telegram.me/riskmapbot"}
       ],
       "prep_menu": {
