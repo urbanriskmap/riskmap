@@ -8,11 +8,18 @@
           <p textcontent.bind="locale.web_menu.tab_names[tabName]"></p>
         </div>
       </li>
-      <li class="langTab">
+
+      <li class="langTab" if.bind="languages.length < 3">
         <label repeat.for="language of languages" id.bind="'label_' + language" class="langLabels">
           <input type="radio" model.bind="language" click.delegate="switchLang(language)">
           ${language}
         </label>
+      </li>
+
+      <li class="langTab" if.bind="languages.length >= 3">
+        <select value.bind="selLanguage" change.delegate="switchLang(selLanguage)">
+          <option repeat.for="language of languages" value.bind="language">${language}</option>
+        </select>
       </li>
     </ul>
   </div>

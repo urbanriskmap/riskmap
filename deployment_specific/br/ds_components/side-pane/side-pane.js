@@ -1,12 +1,11 @@
 import {bindable, customElement, inject} from 'aurelia-framework';
 import $ from 'jquery';
 import {Config} from 'resources/config';
-import {LocaleEn} from 'resources/locales/en';
 import {LocaleLocal} from 'resources/locales/local_lang';
 
 //start-aurelia-decorators
 @customElement('side-pane')
-@inject(LocaleEn, LocaleLocal, Config)
+@inject(LocaleLocal, Config)
 //end-aurelia-decorators
 export class SidePane {
   //@bindable attributes do not work with camelCase...
@@ -19,10 +18,16 @@ export class SidePane {
   @bindable querylanguage;
   //end-aurelia-decorators
 
-  constructor(LocaleEn, LocaleLocal, Config) {
+  constructor(LocaleLocal, Config) {
     this.languages = Config.supported_languages;
-    this.lang_obj = {en: LocaleEn};
-    this.lang_obj[this.languages[1]] = LocaleLocal;
+    this.lang_obj = {};
+    for (let lang of this.languages) {
+      console.log(lang);
+      console.log(LocaleLocal.languages.hasOwnProperty(lang));
+      if (LocaleLocal.languages.hasOwnProperty(lang)) {
+        this.lang_obj[lang] = LocaleLocal.languages[lang];
+      }
+    }
     this.config = Config;
     this.locale = {};
 
@@ -75,7 +80,7 @@ export class SidePane {
 
   //on the fly language change
   changeLanguage() {
-    this.locale = this.lang_obj[this.selLanguage].translation_strings;
+    this.locale = this.lang_obj[this.selLanguage];
   }
 
   attached() {
@@ -96,13 +101,7 @@ export class SidePane {
     }
   }
 
-  //Cannot use default binding (checked.bind="selLanguage") as
-  //radio button is hidden, and never gets checked.
-  //Using click.delegate instead of change.delegate &
-  //set selLanguage in the click function | Works in card.js,
-  //perhaps because here input list is nested within a ul > li ?
   switchLang(lang) {
-    this.selLanguage = lang;
     this.changeLanguage();
     $('.langLabels').removeClass("active");
     $('#label_' + lang).addClass("active");
