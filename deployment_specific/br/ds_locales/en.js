@@ -78,6 +78,8 @@ export class LocaleEn {
           ]
         },
         "facebook": {
+          "name": "facebook",
+          "link": "http://m.me/riskmapUS",
           "title": "Report with Facebook messenger",
           "steps": [
             "Search for RiskMapUS on Facebook messenger",

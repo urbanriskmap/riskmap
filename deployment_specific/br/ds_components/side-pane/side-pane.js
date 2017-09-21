@@ -42,21 +42,24 @@ export class SidePane {
         source: {
           "en": null,
           "es": null
-        }
+        },
+        link: "https://twitter.com/messages/compose?recipient_id=905602080252977152&welcome_message_id=905919155492331523&text=/flood"
       },
       {
         platform: "telegram",
         source: {
           "en": null,
           "es": null
-        }
+        },
+        link: "https://telegram.me/riskmapus_bot"
       },
       {
         platform: "facebook",
         source: {
           "en": null,
           "es": null
-        }
+        },
+        link: "http://m.me/riskmapUS",
       }
     ];
     this.gauge_levels = [

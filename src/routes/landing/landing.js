@@ -18,6 +18,7 @@ export class Landing {
     this.queried_terms = (params.terms === 'u_a' || params.terms === 'p_p') ? params.terms : null;
   }
 
+  //report button on the map
   reportTab() {
       $('#reportLink').toggle( "slide" );
   }

@@ -163,8 +163,8 @@ export class DisasterMap {
       attributionControl: false, //include in side pane
       zoomControl: false,
       center: self.utility.config.region_center,
-      zoom: 8,
-      minZoom: 8
+      zoom: 12,
+      minZoom: 10
     });
 
     // Add base tile layers
