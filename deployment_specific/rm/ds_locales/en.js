@@ -98,7 +98,8 @@ export class LocaleEn {
         "partners": {
           "implementing": "Implementing partner",
           "project": "Project partners",
-          "data": "Data partners"
+          "data": "Data partners",
+          "support": "Supported by"
         },
         "termsPopup": "User agreement &amp; Privacy policy",
         "mapCredits": "Basemap tiles",
