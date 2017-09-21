@@ -17,7 +17,7 @@
       </li>
 
       <li class="langTab" if.bind="languages.length >= 3">
-        <select value.bind="selLanguage" change.delegate="switchLang(selLanguage)">
+        <select id="langDropdown" value.bind="selLanguage" change.delegate="switchLang(selLanguage)">
           <option repeat.for="language of languages" value.bind="language">${language}</option>
         </select>
       </li>
