@@ -22,9 +22,7 @@ export class SidePane {
     this.languages = Config.supported_languages;
     this.lang_obj = {};
     for (let lang of this.languages) {
-      console.log(lang);
-      console.log(LocaleLocal.languages.hasOwnProperty(lang));
-      if (LocaleLocal.languages.hasOwnProperty(lang)) {
+        if (LocaleLocal.languages.hasOwnProperty(lang)) {
         this.lang_obj[lang] = LocaleLocal.languages[lang];
       }
     }

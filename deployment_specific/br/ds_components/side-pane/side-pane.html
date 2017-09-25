@@ -10,6 +10,7 @@
       </li>
 
       <li class="langTab" if.bind="languages.length < 3">
+        <p> Language </p>
         <label repeat.for="language of languages" id.bind="'label_' + language" class="langLabels">
           <input type="radio" model.bind="language" click.delegate="switchLang(language)">
           ${language}
