@@ -19,6 +19,8 @@ export default {
       }
     },
     "region_center": [13.017163, 80.185031],
-    "start_city_center": [13.017163, 80.185031]
+    "start_city_center": [13.017163, 80.185031],
+    "starting_zoom":10,
+    "minimum_zoom":10
   }
 };
