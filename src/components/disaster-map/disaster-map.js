@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 import $ from 'jquery';
 import {MapLayers} from './map-layers';
 import {MapUtility} from './map-utility';
+import browardOverlay from 'text!resources/overlays/browardOverlay.json';
 
 //start-aurelia-decorators
 @customElement('disaster-map')
@@ -209,6 +210,20 @@ export class DisasterMap {
     self.map.on('locationerror', () => {
       self.utility.clientLocation = null;
     });
+
+    //Broward Mask TODO only for Broward
+    //Parse geojson text file
+    var broward_overlay = JSON.parse(browardOverlay);
+    //Create style config
+    var broward_overlay_style = {
+      "fillColor": "#000000",
+      "weight": 0,
+      "fillOpacity": 0.5
+    };
+
+    L.geoJSON(broward_overlay, {
+      style: broward_overlay_style
+    }).addTo(self.map);
 
     // Check against queried city param
     if (self.querycity) {

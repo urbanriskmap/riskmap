@@ -25,6 +25,10 @@
     "fileExtension": ".html",
     "source": "src/**/*.html"
   },
+  "textProcessor": {
+    "displayName": "Text",
+    "source": "src/**/*.json"
+  },
   "lessProcessor": {
     "id": "less",
     "displayName": "Less",
@@ -74,7 +78,7 @@
             ".html",
             ".css"
           ],
-          "stub": true
+          "stub": false
         }
       ]
     },
