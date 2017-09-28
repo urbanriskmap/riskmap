@@ -60,7 +60,7 @@ export class LocaleEn {
         "twitter": {
           "title": "Report with Twitter",
           "steps": [
-            "Tweet #banjir to @riskmap.",
+            "Tweet #flood to @riskmapindia.",
             "Open the link and follow the instructions to input flood location, upload photo, and description.",
             "You can see your report on the map via the link provided. Check RiskMap.in for up-to-date flood information."
           ]
@@ -68,7 +68,7 @@ export class LocaleEn {
         "telegram": {
           "title": "Report with Telegram",
           "steps": [
-            "Text /banjir to @BencanaBot.",
+            "Text /flood to @RiskMapBot.",
             "Open the link and follow the instructions to input flood location, upload photo, and description.",
             "You can see your report on the map via the link provided. Check RiskMap.in for up-to-date flood information."
           ]
@@ -76,7 +76,7 @@ export class LocaleEn {
         "facebook": {
           "title": "Report with Facebook messenger",
           "steps": [
-            "Search for Risk Map Bot on Facebook messenger",
+            "Search for Riskmap.in on Facebook messenger",
             "Click on get started button and follow the instructions to input flood location, upload photo, and description.",
             "You can see your report on the map via the link provided. Check Riskmap.in for up-to-date flood information."
           ]
