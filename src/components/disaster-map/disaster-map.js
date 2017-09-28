@@ -212,18 +212,20 @@ export class DisasterMap {
     });
 
     //Broward Mask TODO only for Broward
+    if (self.utility.config.dep_name === 'br') {
     //Parse geojson text file
-    var broward_overlay = JSON.parse(browardOverlay);
+      var broward_overlay = JSON.parse(browardOverlay);
     //Create style config
-    var broward_overlay_style = {
-      "fillColor": "#000000",
-      "weight": 0,
-      "fillOpacity": 0.5
-    };
+      var broward_overlay_style = {
+        "fillColor": "#000000",
+        "weight": 0,
+        "fillOpacity": 0.5
+      };
 
-    L.geoJSON(broward_overlay, {
-      style: broward_overlay_style
-    }).addTo(self.map);
+      L.geoJSON(broward_overlay, {
+        style: broward_overlay_style
+      }).addTo(self.map);
+    }
 
     // Check against queried city param
     if (self.querycity) {
