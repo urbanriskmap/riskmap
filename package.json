@@ -1,10 +1,10 @@
 {
-  "name": "petabencana.id",
-  "description": "Petabencana.id crowd source flood map - client application.",
+  "name": "riskmap",
+  "description": "RiskMap client application.",
   "version": "1.0.2",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/urbanriskmap/petabencana.id"
+    "url": "git+https://github.com/urbanriskmap/riskmap"
   },
   "scripts": {
     "start": "au run --env dev --watch --dep $DEP",
