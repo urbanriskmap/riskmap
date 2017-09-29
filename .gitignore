@@ -11,7 +11,9 @@ coverage/
 src/environment.js
 src/deployment.js
 src/components/side-pane/
-src/resources/locales/local_lang.js
+src/resources/locales/
+/index.html
+/favicon.ico
 
 #for vim:
 *.swp

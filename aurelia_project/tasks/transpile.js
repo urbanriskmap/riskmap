@@ -19,7 +19,7 @@ function configureEnvironment() {
 
 // Use deployment specific config file
 function configureDeployment() {
-  let dep = CLIOptions.getFlagValue('dep', 'dep') ? CLIOptions.getFlagValue('dep', 'dep') : 'pb';
+  let dep = CLIOptions.getFlagValue('dep', 'dep');
 
   return gulp.src(`aurelia_project/deployments/${dep}.js`)
     .pipe(changedInPlace({firstPass: true}))
@@ -27,8 +27,26 @@ function configureDeployment() {
     .pipe(gulp.dest(project.paths.root));
 }
 
+//deployment specific index.html so that
+//opengraph preview works as expected.
+function fetchIndex() {
+  let dep = CLIOptions.getFlagValue('dep', 'dep');
+
+  return gulp.src([`deployment_specific/${dep}/index.html`])
+    .pipe(changedInPlace({firstPass: true}))
+    .pipe(gulp.dest('.'));
+}
+
+function fetchIcon() {
+  let dep = CLIOptions.getFlagValue('dep', 'dep');
+
+  return gulp.src([`deployment_specific/${dep}/favicon.ico`])
+    .pipe(changedInPlace({firstPass: true}))
+    .pipe(gulp.dest('.'));
+}
+
 function fetchAssets() {
-  let dep = CLIOptions.getFlagValue('dep', 'dep') ? CLIOptions.getFlagValue('dep', 'dep') : 'pb';
+  let dep = CLIOptions.getFlagValue('dep', 'dep');
 
   return gulp.src([`deployment_specific/${dep}/ds_assets/**/*`])
     .pipe(changedInPlace({firstPass: true}))
@@ -36,7 +54,7 @@ function fetchAssets() {
 }
 
 function fetchLocales() {
-  let dep = CLIOptions.getFlagValue('dep', 'dep') ? CLIOptions.getFlagValue('dep', 'dep') : 'pb';
+  let dep = CLIOptions.getFlagValue('dep', 'dep');
 
   return gulp.src([`deployment_specific/${dep}/ds_locales/**/*`])
     .pipe(changedInPlace({firstPass: true}))
@@ -55,6 +73,8 @@ function buildJavaScript() {
 export default gulp.series(
   configureEnvironment,
   configureDeployment,
+  fetchIndex,
+  fetchIcon,
   fetchAssets,
   fetchLocales,
   buildJavaScript

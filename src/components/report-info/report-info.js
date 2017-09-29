@@ -1,13 +1,13 @@
 import {inject, bindable, customElement} from 'aurelia-framework';
 import {Config} from '../../resources/config';
 
-//start-non-standard
+//start-aurelia-decorators
 @customElement('report-info')
 @inject(Config)
-//end-non-standard
+//end-aurelia-decorators
 export class ReportInfo {
   //@bindable attributes do not work with camelCase...
-  //start-non-standard
+  //start-aurelia-decorators
   @bindable locale;
   @bindable imageurl;
   @bindable height;
@@ -18,16 +18,17 @@ export class ReportInfo {
   @bindable city;
   @bindable timestamp;
   @bindable source;
-  //end-non-standard
+  //end-aurelia-decorators
 
   constructor(Config) {
+    this.config = Config;
     this.app = Config.map.app;
     this.links = {
       qlue: 'https://play.google.com/store/apps/details?id=org.qluein.android&hl=en',
       detik: 'http://pasangmata.detik.com/',
-      //start-non-standard
+      //start-aurelia-decorators
       grasp: 'javascript:void(0)'
-      //end-non-standard
+      //end-aurelia-decorators
     };
   }
 

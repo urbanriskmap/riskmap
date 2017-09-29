@@ -4,21 +4,20 @@ import {Config} from 'resources/config';
 import {LocaleEn} from 'resources/locales/en';
 import {LocaleLocal} from 'resources/locales/local_lang';
 
-//start-non-standard
+//start-aurelia-decorators
 @customElement('side-pane')
 @inject(LocaleEn, LocaleLocal, Config)
-//end-non-standard
+//end-aurelia-decorators
 export class SidePane {
   //@bindable attributes do not work with camelCase...
-  //start-non-standard
+  //start-aurelia-decorators
   @bindable cities;
   @bindable selcity;
   @bindable changeCity;
   @bindable closePane;
   @bindable reportId;
   @bindable querylanguage;
-  @bindable switchTerms;
-  //end-non-standard
+  //end-aurelia-decorators
 
   constructor(LocaleEn, LocaleLocal, Config) {
     this.languages = Config.supported_languages;
@@ -126,10 +125,9 @@ export class SidePane {
   }
 
   // When the user clicks on div, open the popup
-  openTermsPopup(type) {
+  openTermsPopup() {
     this.closePane();
     $('#screen').show();
     $('#termsPopup').show();
-    this.switchTerms(type);
   }
 }

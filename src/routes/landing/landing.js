@@ -2,9 +2,9 @@ import $ from 'jquery';
 import {Config} from '../../resources/config';
 import {inject} from 'aurelia-framework';
 
-//start-non-standard
+//start-aurelia-decorators
 @inject(Config)
-//end-non-standard
+//end-aurelia-decorators
 export class Landing {
   constructor(Config) {
     this.config = Config;
@@ -18,6 +18,11 @@ export class Landing {
     this.queried_terms = (params.terms === 'u_a' || params.terms === 'p_p') ? params.terms : null;
   }
 
+  //report button on the map
+  reportTab() {
+      $('#reportLink').toggle( "slide" );
+  }
+
   resizeSidePane() {
     $('#sidePane').css({
       'height': ($(window).height() - $('#topBar').height()) + 'px'
@@ -26,7 +31,7 @@ export class Landing {
 
   attached() {
     // If query tab specified in url, open side pane
-    if (this.queried_tab && !this.report_id) {
+    if (this.queried_tab && !this.report_id || (this.config.dep_name === 'riskmap_us')) {
       // Open side pane only if in a desktop browser,
       // as in a phone, side pane takes full width and map isn't visible
       if (!(/Mobi/.test(navigator.userAgent))) {
@@ -36,6 +41,7 @@ export class Landing {
       $('#screen').show();
       $('#termsPopup').show();
     }
+
     // Modify side pane height on the fly
     this.resizeSidePane();
     $(window).resize(() => {

@@ -3,7 +3,7 @@ import changedInPlace from 'gulp-changed-in-place';
 import {CLIOptions} from 'aurelia-cli';
 
 export default function fetchComponents() {
-  let dep = CLIOptions.getFlagValue('dep', 'dep') ? CLIOptions.getFlagValue('dep', 'dep') : 'pb';
+  let dep = CLIOptions.getFlagValue('dep', 'dep');
 
   return gulp.src([`deployment_specific/${dep}/ds_components/**/*`])
     .pipe(changedInPlace({firstPass: true}))

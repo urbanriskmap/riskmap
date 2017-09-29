@@ -1,14 +1,14 @@
 import {bindable, customElement} from 'aurelia-framework';
 
-//start-non-standard
+//start-aurelia-decorators
 @customElement('flood-info')
-//end-non-standard
+//end-aurelia-decorators
 export class FloodInfo {
-  //start-non-standard
+  //start-aurelia-decorators
   @bindable locale;
   @bindable areaname;
   @bindable districtname;
   @bindable state;
   @bindable updated;
-  //end-non-standard
+  //end-aurelia-decorators
 }

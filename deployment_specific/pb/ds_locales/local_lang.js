@@ -1,30 +1,12 @@
 export class LocaleLocal {
   constructor() {
     this.translation_strings = {
-      "page_title": "Laporan Banjir",
-      "card_titles": {
-        "prep": "Monsoon preparation",
-        "location": "Pilih lokasi banjir",
-        "depth": "Laporkan Tinggi Genangan",
-        "photo": "Unggah Foto",
-        "description": "Tambahkan Deskripsi",
-        "review": "Tinjau & Laporkan",
-        "terms": "Syarat dan ketentuan"
-      },
-      "notification": {
-        "header": {
-          "location_1": "Lokasi GPS bermasalah",
-          "location_2": "Kota belum terjangkau",
-          "photo_1": "Ukuran terlalu besar",
-          "photo_2": "Browser tidak mendukung"
-        },
-        "message": {
-          "location_1": "Drag peta untuk memilih lokasi",
-          "location_2": "Unsupported location.<br>Reports marked here will not show on the map.",
-          "photo_1": "Foto yang dipilih melebihi kapasitas 4.2mb",
-          "photo_2": "Foto yang dipilih tidak didukung oleh browser"
-        }
-      },
+      "add_report": "Report Flood",
+      "add_report_platforms": [
+        {name: "facebook", link: "http://m.me/petabencana.id"}, //TODO change at the time of deployment
+        {name: "twitter", link: "https://twitter.com/messages/compose?recipient_id=905602080252977152&welcome_message_id=905919155492331523&text=/flood"}, //TODO change at the time of deployment
+        {name: "telegram", link: "https://telegram.me/BencanaBot"}
+      ],
       "prep_menu": {
         "btn_names": {
           "drain": "Blocked Drains",
@@ -123,26 +105,6 @@ export class LocaleLocal {
         "mapImproveLink": "Meningkatkan peta dasar di",
         "browserStack": "Ujicoba didukung oleh <a href='https://www.browserstack.com' target='_blank'>BrowserStack</a>.",
         "USAID": "Situs web ini dapat terselenggara dengan dukungan dari warga Amerika melalui USAID (U.S. Agency for International Development). Situs ini bukan merupakan situs resmi USAID atau Pemerintah Amerika Serikat. Konten situs ini seluruhnya merupakan tanggung jawab dari para pencipta dan belum tentu merefleksikan pandangan dari USAID dan Pemerintah Amerika Serikat."
-      },
-      "card_error_messages":{
-        "already_received": "Laporan sudah diterima",
-        "unknown_link": "Laporkan link tidak ada",
-        "unknown_error": "Laporan tertangani kesalahan verifikasi Link",
-        "link": "Pergi ke PetaBencana.id"
-      },
-      "card_hints":{
-        "description": "Masukkan deskripsi di sini ...",
-        "flood_depth": "Tinggi genangan",
-        "agreement_text": "Dengan mengirimkan laporan ini Anda setuju dengan",
-        "agreement_title": "Kesepakatan Kontribusi PetaBencana.id",
-        "more_details_required": "Deskripsi atau Foto diperlukan untuk melapor",
-        "location_check": "Lokasi tidak terbaca, laporan tidak dapat ditampilkan di peta",
-        "swipe": "Geser",
-        "thanks": "Terima kasih atas laporan Anda",
-        "redirect": "Mengalihkan ke PetaBencana.id",
-        "next": "LANJUTKAN",
-        "previous": "KEMBALI",
-        "confirmation": "Kami akan mengirimkan pesan konfirmasi melalui"
       },
       "legend":{
         "title": "Legenda",

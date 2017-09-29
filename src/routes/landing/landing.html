@@ -9,6 +9,22 @@
   <require from="../../components/side-pane/side-pane"></require>
 
   <div id="pageWrapper">
+
+    <div id="reportButton" click.delegate="reportTab()">
+      <p><i id="buttonText" class="icon-add-report"></i><br>${webMenu.locale.add_report}</p>
+    </div>
+    <div id="reportLink" onclick="reportTab()">
+      <table>
+        <tr>
+          <td repeat.for="platform of webMenu.locale.add_report_platforms">
+            <a href.bind="platform.link">
+              <i class.bind="'icon-' + platform.name"></i>
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
     <screen-popup view-model.ref="screenPopup" helper.bind="webMenu.locale.map_helper" cities.bind="mapModel.cities" selcity.two-way="mapModel.selected_city" switch-city.call="mapModel.viewReports($event, $event)" termscontents.bind="webMenu.locale.termsContents" initializetab.bind="queried_terms">
     </screen-popup>
 
@@ -22,7 +38,7 @@
         </a>
       </div>
       <div class="menuBtn active" click.delegate="mapModel.togglePane('#sidePane', 'show', true)">
-        <i class="icon-add-report"></i>
+        <i class="icon-menu"></i>
       </div>
       <div class="menuBtn" id="closeSidePane" click.delegate="mapModel.togglePane('#sidePane', 'hide', false)">
         <i class="icon-cancel-circled-outline"></i>
@@ -45,5 +61,6 @@
       <side-pane view-model.ref="webMenu" querylanguage.two-way="queried_lang" cities.bind="mapModel.cities" selcity.two-way="mapModel.selected_city" change-city.call="mapModel.viewReports($event, $event)" close-pane.call="mapModel.togglePane('#sidePane', 'hide', false)" reportId.two-way="report_id" open-terms.call="screenPopup.openPopup($event)" queriedterms="queried_terms">
       </side-pane>
     </div>
+
   </div>
 </template>

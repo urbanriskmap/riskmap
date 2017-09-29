@@ -1,5 +1,6 @@
 export default {
-  name: 'riskmap',
+  name: 'riskmap_in',
+  height_units: 'cm',
   map: {
     "instance_regions": {
       "chennai": {
@@ -18,6 +19,8 @@ export default {
       }
     },
     "region_center": [13.017163, 80.185031],
-    "start_city_center": [13.017163, 80.185031]
+    "start_city_center": [13.017163, 80.185031],
+    "starting_zoom":10,
+    "minimum_zoom":10
   }
 };
