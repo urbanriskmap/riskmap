@@ -39,7 +39,7 @@
   }
 
   & #reportLink {
-    width: 200px;
+    width: auto;
     height: 70px;
     display:none;
     position: fixed;
@@ -60,7 +60,11 @@
       color: @blue-hover;
     }
     & table {
-      width: 100%;
+      & tr {
+        & td {
+          width: 65px;
+        }
+      }
     }
   }
 
