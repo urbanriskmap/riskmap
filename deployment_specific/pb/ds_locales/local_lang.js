@@ -1,10 +1,10 @@
 export class LocaleLocal {
   constructor() {
     this.translation_strings = {
-      "add_report": "Report Flood",
+      "add_report": "Laporan banjir",
       "add_report_platforms": [
         //TODO: {name: "facebook", link: "http://m.me/petabencana.id"},
-        {name: "twitter", link: "https://twitter.com/intent/tweet?text=Laporan+banjir&via=petabencana"}, 
+        {name: "twitter", link: "https://twitter.com/intent/tweet?text=Laporan+banjir&via=petabencana"},
         {name: "telegram", link: "https://telegram.me/BencanaBot"}
       ],
       "prep_menu": {
