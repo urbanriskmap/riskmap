@@ -12,3 +12,5 @@ CHANGELOG
 
 ### v1.0.2
 - Added RiskMap.us deployment
+
+### v1.0.3
