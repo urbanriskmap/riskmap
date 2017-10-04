@@ -1,12 +1,11 @@
 import {bindable, customElement, inject} from 'aurelia-framework';
 import $ from 'jquery';
 import {Config} from 'resources/config';
-import {LocaleEn} from 'resources/locales/en';
 import {LocaleLocal} from 'resources/locales/local_lang';
 
 //start-aurelia-decorators
 @customElement('side-pane')
-@inject(LocaleEn, LocaleLocal, Config)
+@inject(LocaleLocal, Config)
 //end-aurelia-decorators
 export class SidePane {
   //@bindable attributes do not work with camelCase...
@@ -19,11 +18,16 @@ export class SidePane {
   @bindable querylanguage;
   //end-aurelia-decorators
 
-  constructor(LocaleEn, LocaleLocal, Config) {
-    this.languages = Config.supported_languages;
-    this.lang_obj = {en: LocaleEn};
-    this.lang_obj[this.languages[1]] = LocaleLocal;
+  constructor(LocaleLocal, Config) {
     this.config = Config;
+    this.languages = this.config.supported_languages;
+
+    this.lang_obj = {};
+    for (let lang of this.languages) {
+      if (LocaleLocal.languages.hasOwnProperty(lang.key)) {
+        this.lang_obj[lang.key] = LocaleLocal.languages[lang.key];
+      }
+    }
     this.locale = {};
 
     this.seltab = "map"; //default tab to open
@@ -75,13 +79,25 @@ export class SidePane {
 
   //on the fly language change
   changeLanguage() {
-    this.locale = this.lang_obj[this.selLanguage].translation_strings;
+    this.locale = this.lang_obj[this.selLanguage.key];
+  }
+
+  //get language object from key
+  getLangObj(key) {
+    let selLang;
+    for (let lang of this.languages) {
+      if (key === lang.key) {
+        selLang = lang;
+      } else {
+        selLang = this.config.default_language;
+      }
+    }
+    return selLang;
   }
 
   attached() {
-    this.selLanguage = (this.querylanguage ? this.querylanguage : this.config.default_language);
+    this.selLanguage = (this.querylanguage ? this.getLangObj(this.querylanguage) : this.config.default_language);
     this.changeLanguage();
-    $('#label_' + this.selLanguage).addClass("active");
   }
 
   switchTab(tab) {
@@ -94,18 +110,6 @@ export class SidePane {
         this.vidWrapperOpened = true; //prevents report pane videos to toggle after user closes then reopens side pane
       });
     }
-  }
-
-  //Cannot use default binding (checked.bind="selLanguage") as
-  //radio button is hidden, and never gets checked.
-  //Using click.delegate instead of change.delegate &
-  //set selLanguage in the click function | Works in card.js,
-  //perhaps because here input list is nested within a ul > li ?
-  switchLang(lang) {
-    this.selLanguage = lang;
-    this.changeLanguage();
-    $('.langLabels').removeClass("active");
-    $('#label_' + lang).addClass("active");
   }
 
   switchCity(city) {

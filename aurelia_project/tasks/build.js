@@ -2,7 +2,6 @@ import gulp from 'gulp';
 import fetchComponents from './fetch-components';
 import transpile from './transpile';
 import processMarkup from './process-markup';
-import processText from './process-text';
 import processLESS from './process-less';
 import processCSS from './process-css';
 import {build} from 'aurelia-cli';
@@ -15,7 +14,6 @@ export default gulp.series(
   gulp.parallel(
     transpile,
     processMarkup,
-    processText,
     processLESS,
     processCSS
   ),

@@ -87,13 +87,15 @@ export class SidePane {
 
   //get language object from key
   getLangObj(key) {
+    let selLang;
     for (let lang of this.languages) {
       if (key === lang.key) {
-        return lang;
+        selLang = lang;
       } else {
-        return this.config.default_language;
+        selLang = this.config.default_language;
       }
     }
+    return selLang;
   }
 
   attached() {

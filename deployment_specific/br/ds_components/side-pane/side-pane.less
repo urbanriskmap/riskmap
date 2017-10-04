@@ -53,22 +53,20 @@
       &.langTab {
         position: absolute;
         right: 0;
-        width: 24%;
         margin-top: 6px;
         padding-right: 18px;
-        text-align: right;
-
         & #langDropdown {
-          .bodylight-mixin(16px);
-          border: @banjir-blue;
+          width: 50px;
+          -webkit-appearance: button;
+          border: 1px solid @banjir-blue;
+          background: @snow-white;
+          outline: none;
+          .bodylight-mixin(12px);
           line-height: 28px;
           cursor: pointer;
-          background: @snow-white;
-          -webkit-appearance: button;
+          text-align-last: center;
           &:hover {
             color: @banjir-blue;
-            cursor: pointer;
-
           }
         }
       }
