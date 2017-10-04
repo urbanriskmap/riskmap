@@ -19,14 +19,15 @@ export class SidePane {
   //end-aurelia-decorators
 
   constructor(LocaleLocal, Config) {
-    this.languages = Config.supported_languages;
+    this.config = Config;
+    this.languages = this.config.supported_languages;
+
     this.lang_obj = {};
     for (let lang of this.languages) {
-        if (LocaleLocal.languages.hasOwnProperty(lang)) {
-        this.lang_obj[lang] = LocaleLocal.languages[lang];
+      if (LocaleLocal.languages.hasOwnProperty(lang.key)) {
+        this.lang_obj[lang.key] = LocaleLocal.languages[lang.key];
       }
     }
-    this.config = Config;
     this.locale = {};
 
     this.seltab = "map"; //default tab to open
@@ -81,13 +82,23 @@ export class SidePane {
 
   //on the fly language change
   changeLanguage() {
-    this.locale = this.lang_obj[this.selLanguage];
+    this.locale = this.lang_obj[this.selLanguage.key];
+  }
+
+  //get language object from key
+  getLangObj(key) {
+    for (let lang of this.languages) {
+      if (key === lang.key) {
+        return lang;
+      } else {
+        return this.config.default_language;
+      }
+    }
   }
 
   attached() {
-    this.selLanguage = (this.querylanguage ? this.querylanguage : this.config.default_language);
+    this.selLanguage = (this.querylanguage ? this.getLangObj(this.querylanguage) : this.config.default_language);
     this.changeLanguage();
-    $('#label_' + this.selLanguage).addClass("active");
   }
 
   switchTab(tab) {
@@ -100,12 +111,6 @@ export class SidePane {
         this.vidWrapperOpened = true; //prevents report pane videos to toggle after user closes then reopens side pane
       });
     }
-  }
-
-  switchLang(lang) {
-    this.changeLanguage();
-    $('.langLabels').removeClass("active");
-    $('#label_' + lang).addClass("active");
   }
 
   switchCity(city) {

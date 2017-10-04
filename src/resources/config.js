@@ -16,7 +16,12 @@ export class Config {
 
     this.title = env[dep.name].title;
     this.supported_languages = env[dep.name].supported_languages;
-    this.default_language = env[dep.name].default_language;
+    //Save default language as object 
+    for (let lang of this.supported_languages) {
+      if (lang.key === env[dep.name].default_language) {
+        this.default_language = lang;
+      }
+    }
     this.height_units = dep.height_units;
     this.deep_links = env[dep.name].deep_links;
   }

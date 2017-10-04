@@ -4,6 +4,7 @@ export default {
   report_timeperiod: 3600,
   //deployment specific env params
   riskmap_us: {
+    title: 'RiskMap.us',
     supported_languages: ['en', 'es'],
     default_language: 'en',
     tile_layer: 'https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidXJiYW5yaXNrbWFwIiwiYSI6ImNqMnFraWVzYzAyd24ycXRqMmpvbmhyZ2QifQ.xc_v7umok760t2q6NZK1RA',

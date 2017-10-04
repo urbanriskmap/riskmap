@@ -5,7 +5,10 @@ export default {
   //deployment specific env params
   riskmap_us: {
     title: 'RiskMap.us',
-    supported_languages: ['en', 'es', 'id'],
+    supported_languages: [
+      {key: 'en', name: 'English'},
+      {key: 'es', name: 'Espaniol'}
+    ],
     default_language: 'en',
     tile_layer: 'https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidXJiYW5yaXNrbWFwIiwiYSI6ImNqMnFraWVzYzAyd24ycXRqMmpvbmhyZ2QifQ.xc_v7umok760t2q6NZK1RA',
     data_server: 'https://data-dev.riskmap.us/',
@@ -14,7 +17,7 @@ export default {
       {name: "facebook", link:"http://m.me/CognicityDev_us"},
       //TODO after the twitter dev bot is registered
       {name: "twitter", link:""}/*,
-      //Disable telegram button for US deployment 
+      //Disable telegram button for US deployment
       {name: "telegram", link: "https://telegram.me/CognicityUS_bot"}*/
     ]
   },
