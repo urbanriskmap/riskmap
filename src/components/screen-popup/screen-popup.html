@@ -5,7 +5,7 @@
     <div id="cityPopup">
       <p>${helper}</p>
       <label repeat.for="city of cities">
-        <input type="radio" model.bind="city" id.bind="'cityname-' + city" selected.two-way="selcity" change.delegate="switchCity(city, true)">
+        <input type="radio" model.bind="city" id.bind="'cityname-' + city" selected.bind="selcity" change.delegate="switchCity(city, true)">
         ${city}
         <br>
       </label>

@@ -1,5 +1,5 @@
-### PetaBencana.id
-Front-end code &nbsp;
+### RiskMap
+Client application for cognicity map &nbsp;
 [![Build Status](https://travis-ci.org/urbanriskmap/petabencana.id.svg?branch=master)](https://travis-ci.org/urbanriskmap/petabencana.id)
 <br>
 [Project description](https://github.com/urbanriskmap/petabencana-docs/blob/master/README.md)
@@ -11,6 +11,11 @@ DOI for current stable release [v1.0.1](https://github.com/urbanriskmap/petabenc
 
 [![DOI](https://zenodo.org/badge/70249665.svg)](https://zenodo.org/badge/latestdoi/70249665)
 ____
+
+### Supported deployments
+* riskmap.us
+* petabencana.id
+* riskmap.in
 
 ### Machine setup
 * Install NodeJS >= 4.x

@@ -25,10 +25,10 @@
       </table>
     </div>
 
-    <screen-popup view-model.ref="screenPopup" helper.bind="webMenu.locale.map_helper" cities.bind="mapModel.cities" selcity.two-way="mapModel.selected_city" switch-city.call="mapModel.viewReports($event, $event)" termscontents.bind="webMenu.locale.termsContents" initializetab.bind="queried_terms">
+    <screen-popup view-model.ref="screenPopup" helper.bind="webMenu.locale.map_helper" cities.bind="mapModel.cities" selcity.bind="mapModel.selected_city" switch-city.call="mapModel.viewReports($event, $event)" termscontents.bind="webMenu.locale.termsContents" initializetab.bind="queried_terms">
     </screen-popup>
 
-    <disaster-map id="map" view-model.ref="mapModel" querytab.bind="queried_tab" querylanguage.two-way="queried_lang" querycity.bind="queried_city" reportid.two-way="report_id" reset-tab.call="webMenu.switchTab($event)">
+    <disaster-map id="map" view-model.ref="mapModel" querytab.bind="queried_tab" querylanguage.bind="queried_lang" querycity.bind="queried_city" reportid.bind="report_id" reset-tab.call="webMenu.switchTab($event)">
     </disaster-map>
 
     <div id="topBar">
