@@ -9,6 +9,20 @@ export default {
           'sw': [12.6884, 79.9248],
           'ne': [13.3766, 80.5413]
         }
+      },
+      'mumbai': {
+        'region': 'mum',
+        'bounds': { //arbit bounding box drawn in QGIS. So the edges aren't orthogonal
+          'sw': [18.8600, 72.7036],
+          'ne': [19.2975, 73.0953]
+        }
+      },
+      'bangalore': {
+        'region': 'blr',
+        'bounds': { //arbit bounding box drawn in QGIS. So the edges aren't orthogonal
+          'sw': [12.7626, 77.3649],
+          'ne': [13.2001, 77.8663]
+        }
       }
     },
     'default_region': {
