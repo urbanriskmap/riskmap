@@ -21,7 +21,6 @@ export class SidePane {
   constructor(LocaleLocal, Config) {
     this.config = Config;
     this.languages = this.config.supported_languages;
-
     this.lang_obj = {};
     for (let lang of this.languages) {
       if (LocaleLocal.languages.hasOwnProperty(lang.key)) {

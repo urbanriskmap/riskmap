@@ -83,12 +83,16 @@ ___
 
 * Map Configuration
     * *to add new cities, update the `instance regions` in /src/resources/config.js > Config.map*
+    * change and add appropriate locales in deployment specific folders.
+    * Change and add appropriate links in sidepane.js
+    * change and add city specific details in landing.js
     * Default supported cities are Jakarta, Surabaya, Bandung (Refer [here](https://docs.petabencana.id/routes/cities.html) for updates)
     * For every new instance region (city) added, set a three letter `region` code. And set the `bounds` to have southwest and northeast bounds of the city in `sw` and `ne` respectively.
     * The value set in `default_region` sets the initial map view in http://localhost:9000/map
     * *Set `map.center` in /src/routes/cards/location/location.js to the center of the new instance region you have added in map config files*
 
 ___    
+
 
 ### To build
 * Start the development server

@@ -444,18 +444,17 @@ export class LocaleLocal {
           'intro': 'RiskMap.in हे संकेतस्थळ  सोशल मीडियाचा वापर करून आपल्या शहरातील आपत्कालीन परिस्थीतीची तत्कालीन माहिती सर्व नागरिकांना उपलब्ध करून देते. ',
           'p1': 'वेगाने पसरणाऱ्या शहरीकरणाच्या आपत्कालीन व्यवस्थापनासाठी, पूर्णतः पारदर्शक व मुक्त-पारिभाषिक (ओपन सौर्स) असलेली ही प्रणाली, मॅसाच्युसेट्स इन्स्टिटयूट ऑफ टेक्नॉलॉजी येथील, अर्बन रिस्क लॅब द्वारे विकसित करण्यात आली आहे.',
           'p2': 'ही प्रणाली, लोकांच्या भोवतालिक ज्ञानाचा वापर करून आपत्कालीन परिस्थितीची प्रामाणित निरीक्षणे गोळा करते. प्रचलित अशा - किचकट व खर्चिक माहिती संकलन पद्धतींना फाटा देत - ही प्रणाली आपल्या सहनिवासीयांनी नोंदवलेली आपत्कालीन निरीक्षणे अत्यंत सोप्या पद्धतीने आपणास उपलब्ध करून देते. तात्काळ उपलब्ध झालेली ही अचूक भौगोलिक माहिती, सर्वसामान्य जनता व आपत्कालीन प्रतिक्रिया दलांसाठी भविष्यात अत्यंत महत्वपूर्ण भूमिका बजावेल. ',
-          'p3': 'CogniCity OSS ह्या मुक्त-पारिभाषिक आपत्कालीन व्यवस्थापनासाठी बनवलेल्या माहिती-व्यवस्थेचा वापर करून, Riskmap.in ही प्रणाली,  रहिवासी व सरकारी यंत्रणांना, विविध समाजमाध्यमांच्या गोंगाटातून आपत्कालीन माहिती वेचून उपलब्ध करून देण्याचे महत्वपूर्ण काम बजावते.',
+          'p3': 'Riskmap.in ही प्रणाली CogniCity OSS ह्या मुक्त-पारिभाषिक आपत्कालीन व्यवस्थापनासाठी बनवलेल्या माहिती-व्यवस्थेचा वापर करून - विविध समाजमाध्यमांच्या गोंगाटातून - रहिवासी व सरकारी यंत्रणांना आपत्कालीन माहिती वेचून उपलब्ध करून देण्याचे महत्वपूर्ण काम बजावते.',
           'partners': {
             'implementing': 'Implementing partner',
             'project': 'Project partners',
             'data': 'Data partners',
             'support': 'Supported by'
           },
-          'termsPopup': 'User agreement &amp; Privacy policy',
+          'termsPopup': 'सहभागाच्या अटी व वैयत्तिक गोपनीयता धोरण',
           'mapCredits': 'Basemap tiles',
           'mapImproveLink': 'Improve the basemap at',
-          'browserStack': 'Testing supported by <a href="https://www.browserstack.com" target="_blank">BrowserStack</a>.',
-          'USAID': 'This website was made possible with the support of the American People through the U.S. Agency for International Development. This is not an official USAID or U.S. Government website. The contents of this website are the sole responsibility of the authors and do not necessarily reflect the views of USAID of the U.S. Government.'
+          'browserStack': 'Testing supported by <a href="https://www.browserstack.com" target="_blank">BrowserStack</a>.'
         },
         'legend': {
           'title': 'संदर्भ सूची',
