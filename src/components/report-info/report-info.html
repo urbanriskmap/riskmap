@@ -17,10 +17,25 @@
       <p id="textBody">${text}</p>
     </div>
 
-    <div id="socialIcons">
-      <a repeat.for="button of shareButtons" href.bind="button.intent">
-        <i class.bind="'icon-' + button.name"></i>
+    <div id="voteIcons">
+      <a class="button" repeat.for="button of voteButtons" id.bind="'vote_button_' + button.name" click.delegate="feedbackInteraction(button)">
+        <i class.bind="'icon-' + button.name" title.bind="button.tooltip"></i>
       </a>
+      <!-- <a class="share" repeat.for="button of shareButton">
+      <i class.bind="'icon-' + button.name" title.bind="button.tooltip" click.delegate="shareTab()" ></i>
+      </a> -->
     </div>
+  </div>
+
+  <div id="socialIcons">
+    <a repeat.for="button of socialButtons" href.bind="button.intent" >
+      <i class.bind="'icon-' + button.name" ></i>
+    </a>
+  </div>
+
+  <div id="flagReport">
+    <p>reason you want to flag the report<p>
+    <input id="flag_text" type="text" placeholder=" more info." value="">
+    <button>submit</button>
   </div>
 </template>

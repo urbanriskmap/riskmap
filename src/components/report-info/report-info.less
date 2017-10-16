@@ -26,9 +26,10 @@
 
 #textPreview {
   position: relative;
-  width: 55%;
+  width: 45%;
   height: 90%;
-  float: right;
+  padding-left: 10px;
+  float: left;
   overflow:hidden;
     & #bodyWrapper {
     width: 85%;
@@ -71,15 +72,52 @@
     border: solid 1px blue;
     margin: 0 10px 0 0;
   }
-  & #socialIcons {
+  & #voteIcons {
     position: absolute;
     height: 18%;
     bottom: 0px;
     & a {
       position: relative;
-      .linklight-mixin(20px);
+      .linklight-mixin(18px);
       text-decoration: none;
-      padding: 0 12px 0 0;
+      padding: 0 6px 0 0;
+      cursor: pointer;
     }
+    & .active {
+      color: @banjir-blue;
+    }
+  }
+}
+
+#socialIcons {
+  display: none;
+  position: absolute;
+  width: 35%;
+  height: 60%;
+  margin-left: 40%;
+  float: right;
+  z-index: 2500;
+  background-color: @translucent-white;
+  & a {
+    margin-left: 20px;
+    border: none;
+    .linklight-mixin(32px);
+    text-decoration: none;
+    line-height: 2em;
+    list-style: none;
+  }
+}
+
+#flagReport {
+  display: none;
+  position: absolute;
+  width: 35%;
+  height: 60%;
+  margin-left: 40%;
+  float: right;
+  z-index: 2500;
+  background-color: @translucent-white;
+  & #flag_text{
+    height: 30px;
   }
 }
