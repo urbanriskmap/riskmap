@@ -34,32 +34,17 @@
     }
 
     feedbackInteraction(button) {
+      $('.interactionFlyer').hide();
+      $('.voteButton').removeClass('active');
+      $('#vote_button_' + button.name).addClass('active');
       switch (button.name) {
-        case 'share':
-        if($('#vote_button_' + button.name).hasClass('active'))
-        {
-          $('#vote_button_' + button.name).removeClass('active');
-          $('#socialIcons').fadeToggle();
-        }
-        else {
-          {
-            $('#vote_button_' + button.name).addClass('active');
-            $('#socialIcons').fadeToggle();
-          }
-        }
+      case 'share':
+        $('#socialIcons').fadeToggle();
         break;
-        case 'flag':
-        if($('#vote_button_' + button.name).hasClass('active'))
-        {
-          $('#vote_button_' + button.name).removeClass('active');
-          $('#flagReport').fadeToggle();
-        }
-        else {
-          {
-            $('#vote_button_' + button.name).addClass('active');
-            $('#flagReport').fadeToggle();}
-          }
-        default:
+      case 'flag':
+        $('#flagReport').fadeToggle();
+        break;
+      default:
         return null;
       }
     }

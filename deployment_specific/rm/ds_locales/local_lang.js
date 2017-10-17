@@ -21,7 +21,9 @@ export class LocaleLocal {
         'report_info': {
           'share_msg': 'Check%20flood%20reports%20on%20riskmap%2Ein',
           'water_depth': 'Water depth',
-          'source': 'Source'
+          'source': 'Source',
+          'flagReport': 'flag this report as inappropriate',
+          'share': 'Share this report'
         },
         'flood_info': {
           'title': 'Flood affected area',
@@ -141,7 +143,9 @@ export class LocaleLocal {
         'report_info': {
           'share_msg': 'Riskmap%2Ein-இல்%20வெள்ள%20அறிக்கைகளை%20காண்க',
           'water_depth': 'வெள்ள உயரம்',
-          'source': 'ஆதாரம்'
+          'source': 'ஆதாரம்',
+          'flagReport': 'Flag this report as inappropriate',
+          'share': 'Share this report' //TODO translate
         },
         'flood_info': {
           'title': 'வெள்ளம் பாதிக்கப்பட்ட பகுதி',
@@ -254,7 +258,9 @@ export class LocaleLocal {
         'report_info': {
           'share_msg': 'Check%20flood%20reports%20on%20riskmap%2Ein',
           'water_depth': 'Water depth',
-          'source': 'Source'
+          'source': 'Source',
+          'flagReport': 'Provide more information to flag this report as inappropriate',
+          'share': 'Share this report'
         },
         'flood_info': {
           'title': 'Flood affected area',
@@ -375,7 +381,9 @@ export class LocaleLocal {
         'report_info': {
           'share_msg': 'Check%20flood%20reports%20on%20riskmap%2Ein',
           'water_depth': 'पाण्याची खोली',
-          'source': 'निरीक्षण द्वारा'
+          'source': 'निरीक्षण द्वारा',
+          'flagReport': 'अयोग्य निरीक्षण रद्द करण्यासाठी माहिती द्या.',
+          'share': 'निरीक्षण शेअर करा'
         },
         'flood_info': {
           'title': 'पूरग्रस्त परिसर',

@@ -20,7 +20,7 @@ export class Landing {
 
   //report button on the map
   reportTab() {
-      $('#reportLink').toggle( "slide" );
+      $('#reportLink').fadeToggle();;
   }
 
   resizeSidePane() {
