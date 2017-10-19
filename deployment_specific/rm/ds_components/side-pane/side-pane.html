@@ -20,18 +20,32 @@
   <!--Map section-->
   <div id="paneContent">
     <div id="content-map" if.bind="seltab === 'map'" class="contentWrapper">
-      <p>${locale.map_helper}</p>
+      <p id="legend">${locale.map_helper}</p>
       <label repeat.for="city of cities">
         <input type="radio" model.bind="city" checked.bind="selcity" change.delegate="switchCity(city)">
-        ${city}
+        ${locale.instance_regions[city]}
       </label>
 
+      <p id="legend">${locale.legend.report_icon}</p>
       <table width="300px">
-        <tr>
+        <tr repeat.for="type of report_type">
+            <td vertical-align="top" horizontal-align="center" >
+                <i style.bind="'padding:0;font-size:24px;color: ' + type.icon_color" class.bind="'icon-map-' + type.icon"></i>
+            </td>
+            <td>
+                <p class="normal">${type.text[selLanguage.key]}</p>
+            </td>
+        </tr>
+      </table>
+
+      <p id="legend">${locale.legend.title}</p>
+      <table width="300px">
+        <!-- <tr>
           <td>
             <p id="legend">${locale.legend.title}</p>
           </td>
-        </tr>
+        </tr> -->
+
         <tr>
           <td vertical-align="bottom">
             <p>${locale.legend.flood_gauges}</p>

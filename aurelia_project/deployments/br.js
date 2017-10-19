@@ -1,6 +1,10 @@
 export default {
   name: 'riskmap_us',
   height_units: 'in',
+  supported_languages: [
+    {key: 'en', name: 'English'},
+    {key: 'es', name: 'Espaniol'}
+  ],
   map: {
     'instance_regions': {
       'broward': {

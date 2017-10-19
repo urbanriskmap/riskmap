@@ -26,7 +26,7 @@
       </a> -->
     </div>
   </div>
-  
+
   <div id="socialIcons" class="interactionFlyer">
     <p>${locale.report_info.share}</p>
     <a repeat.for="button of socialButtons" href.bind="button.intent" >
@@ -35,7 +35,8 @@
   </div>
 
   <div id="flagReport" class="interactionFlyer">
-    <p>${locale.report_info.flagReport}</p> <input id="flag_text" type="text" placeholder="" value="">
-    <button type="submit" form="nameform" value="Submit">Submit</button>
+    <p>${locale.report_info.flagReport_Title}</p>
+    <textarea type="text" name="body" id="flag_text" placeholder="${locale.report_info.flagReport_text}" required> </textarea>
+    <input id="submitButton" type="submit" form="nameform" value="Send" click.delegate="submitFlag()">
   </div>
 </template>

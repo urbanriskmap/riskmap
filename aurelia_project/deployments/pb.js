@@ -1,6 +1,10 @@
 export default {
   name: 'petabencana',
   height_units: 'cm',
+  supported_languages: [
+    {key: 'en', name: 'English'},
+    {key: 'id', name: 'Bahasa'}
+  ],
   map: {
     'instance_regions': {
       'jakarta': {

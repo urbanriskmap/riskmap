@@ -1,6 +1,12 @@
 export default {
   name: 'riskmap_in',
   height_units: 'cm',
+  supported_languages: [
+    {key: 'en', name: 'English'},
+    {key: 'tm', name: 'Tamil'},
+    {key: 'ka', name: 'Kannada'},
+    {key: 'mh', name: 'Marathi'}
+  ],
   map: {
     'instance_regions': {
       'chennai': {
