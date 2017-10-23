@@ -1,11 +1,11 @@
 import {bindable, customElement, inject} from 'aurelia-framework';
 import $ from 'jquery';
 import {Config} from 'resources/config';
-import {LocaleLocal} from 'resources/locales/local_lang';
+import {Locales} from 'resources/locales/locales';
 
 //start-aurelia-decorators
 @customElement('side-pane')
-@inject(LocaleLocal, Config)
+@inject(Locales, Config)
 //end-aurelia-decorators
 export class SidePane {
   //@bindable attributes do not work with camelCase...
@@ -18,14 +18,14 @@ export class SidePane {
   @bindable querylanguage;
   //end-aurelia-decorators
 
-  constructor(LocaleLocal, Config) {
+  constructor(Locales, Config) {
     this.config = Config;
     this.languages = this.config.supported_languages;
 
     this.lang_obj = {};
     for (let lang of this.languages) {
-      if (LocaleLocal.languages.hasOwnProperty(lang.key)) {
-        this.lang_obj[lang.key] = LocaleLocal.languages[lang.key];
+      if (Locales.languages.hasOwnProperty(lang.key)) {
+        this.lang_obj[lang.key] = Locales.languages[lang.key];
       }
     }
     this.locale = {};
