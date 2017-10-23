@@ -115,14 +115,17 @@
     margin: 5px;
     text-align: center;
   }
-  & #flag_text{
-    height: 50px;
-    border: solid 1px @light-gray;
-    border-radius: 5px;
-    resize: none;
-  }
   & #submitButton {
     margin: 5px;
+    margin-top: 15px;
+    box-shadow: @drop-shadow;
+    .linkmedium-mixin(12px);
+    color: @snow-white;
+    background: @banjir-blue;
+    padding: 10px;
+    border-radius: 3px;
+    border: none;
+    .translate-mixin(2px, 2px);
   }
   &
   ::-webkit-input-placeholder { /* Chrome/Opera/Safari */

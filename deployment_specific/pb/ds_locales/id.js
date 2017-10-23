@@ -117,4 +117,4 @@ const id = {
     }
   ]
 };
-module.exports = pb;
+module.exports = id;

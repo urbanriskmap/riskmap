@@ -3,9 +3,9 @@ export default {
   height_units: 'cm',
   supported_languages: [
     {key: 'en', name: 'English'},
-    {key: 'tm', name: 'Tamil'},
-    {key: 'ka', name: 'Kannada'},
-    {key: 'mh', name: 'Marathi'}
+    {key: 'ta', name: 'Tamil'},
+    {key: 'kn', name: 'Kannada'},
+    {key: 'mr', name: 'Marathi'}
   ],
   map: {
     'instance_regions': {

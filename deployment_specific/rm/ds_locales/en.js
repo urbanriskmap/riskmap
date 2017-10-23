@@ -25,7 +25,8 @@ const en = {
     'water_depth': 'Water depth',
     'source': 'Source',
     'flagReport_Title': 'flag this report as inappropriate',
-    'flagReport_text': 'Provide information',
+    'flagReport_button': 'tell us more',
+    'flagReport_email': 'riskmapindia@gmail.com',
     'share': 'Share this report'
   },
   'flood_info': {

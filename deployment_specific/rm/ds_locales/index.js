@@ -1,11 +1,11 @@
 const en = require('./en');
-const tm = require('./tm');
-const mh = require('./mh');
-const ka = require('./ka');
+const ta = require('./ta');
+const mr = require('./mr');
+const kn = require('./kn');
 
 module.exports = {
   en: en,
-  tm: tm,
-  mh: mh,
-  ka: ka
+  ta: ta,
+  mr: mr,
+  kn: kn
 };

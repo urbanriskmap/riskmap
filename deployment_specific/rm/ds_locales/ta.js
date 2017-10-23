@@ -1,4 +1,4 @@
-const tm = {
+const ta = {
   'instance_regions': {
     'chennai': 'சென்னை',
     'mumbai': 'மும்பை',
@@ -25,7 +25,8 @@ const tm = {
     'water_depth': 'வெள்ள உயரம்',
     'source': 'ஆதாரம்',
     'flagReport_Title': 'Flag this report as inappropriate',
-    'flagReport_text': 'Provide more information',
+    'flagReport_button': 'tell us more',
+    'flagReport_email': 'riskmapindia@gmail.com',
     'share': 'Share this report' //TODO translate
   },
   'flood_info': {
@@ -119,4 +120,4 @@ const tm = {
   ]
 };
 
-module.exports = tm;
+module.exports = ta;

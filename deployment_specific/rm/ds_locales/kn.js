@@ -1,89 +1,90 @@
-const mh = {
+const kn = {
   'instance_regions': {
-    'chennai': 'चेन्नई',
-    'mumbai': 'मुंबई',
-    'bangalore': 'बंगलोर'
+    'chennai': 'Chennai',
+    'mumbai': 'Mumbai',
+    'bangalore': 'Bangalore'
   },
-  'add_report': 'पुराची नोंद करा',
+  'add_report': 'Report Flooding',
   'prep_menu': {
     'btn_names': {
-      'drain': 'तुंबलेले ड्रेन',
-      'desilting': 'गाळाचा निचरा',
-      'canalrepair': 'कालव्याची दुरुस्ती',
-      'treeclearing': 'पडलेले झाड'
+      'drain': 'Blocked Drains',
+      'desilting': 'Desilting',
+      'canalrepair': 'Canal Repairs',
+      'treeclearing': 'Fallen Tree'
     }
   },
   'web_menu': {
     'tab_names': {
-      'map': 'नकाशा',
-      'report': 'नोंदी व निरीक्षणे',
-      'info': 'माहिती'
+      'map': 'map',
+      'report': 'report',
+      'info': 'info'
     }
   },
   'report_info': {
     'share_msg': 'Check%20flood%20reports%20on%20riskmap%2Ein',
-    'water_depth': 'पाण्याची खोली',
-    'source': 'निरीक्षण द्वारा',
-    'flagReport_Title': 'आक्षेपार्ह निरीक्षणाची तक्रार करा',
-    'flagReport_text': 'अधिक माहिती द्या',
-    'share': 'निरीक्षण शेअर करा'
+    'water_depth': 'Water depth',
+    'source': 'Source',
+    'flagReport_Title': 'flag this report as inappropriate',
+    'flagReport_button': 'tell us more',
+    'flagReport_email': 'riskmapindia@gmail.com',
+    'share': 'Share this report'
   },
   'flood_info': {
-    'title': 'पूरग्रस्त परिसर',
-    'level_hint': 'इशाऱ्याची पातळी',
+    'title': 'Flood affected area',
+    'level_hint': 'Alert level',
     'time_hint': 'Last updated',
     'state_codes': {
       '1': {
-        'severity': 'अज्ञात',
-        'description': 'माहिती उपलब्ध नाही, सावधानीं बाळगा'
+        'severity': 'Unknown',
+        'description': 'An unknown level of flooding, use caution'
       },
       '2': {
-        'severity': 'किरकोळ',
-        'description': 'पुराची पातळी १० ते ७० से. मी. '
+        'severity': 'Minor',
+        'description': 'Flooding between 10 to 70 cm'
       },
       '3': {
-        'severity': 'मध्यम',
-        'description': 'पुराची पातळी ७१ ते १५० से. मी.'
+        'severity': 'Moderate',
+        'description': 'Flooding between 71 to 150 cm'
       },
       '4': {
-        'severity': 'तीव्र',
-        'description': 'पुराची पातळी १५० से. मी. च्या वर'
+        'severity': 'Severe',
+        'description': 'Flooding over 150 cm'
       }
     }
   },
-  'map_helper': 'शहर  निवडा :',
+  'map_helper': 'Select city :',
   'report_content': {
     'flood': {
-      'title': 'प्रकल्पाची माहिती',
+      'title': 'Project overview',
       'steps': [
       ]
     },
     'twitter': {
-      'title': 'ट्विटर द्वारे पुराची माहिती द्या.',
+      'title': 'Report with Twitter',
       'steps': [
-        '@riskmapindia ह्या अकाऊंटला #flood ट्विट करा.',
-        'आपल्याला आलेली लिंक उघडून पुराच्या निरीक्षणाची जागा, पाण्याची पातळी, फोटो व माहिती द्या.',
-        'उत्तरादाखल आलेल्या लिंक द्वारा तुम्ही तुमची नोंद नकाशावर पाहू शकाल, पुराची अद्ययावत माहिती मिळवण्यासाठी Riskmap.in या वेबसाईटला भेट द्या'
+        'Tweet #flood to @riskmapindia.',
+        'Open the link and follow the instructions to input flood location, upload photo, and description.',
+        'You can see your report on the map via the link provided. Check RiskMap.in for up-to-date flood information.'
       ]
     },
     'telegram': {
-      'title': 'टेलिग्राम द्वारे पुराची माहिती द्या.',
+      'title': 'Report with Telegram',
       'steps': [
-        '@RiskMapBot हे अकाउंट शोधून त्यास ‘/flood’ हा संदेश पाठवा.',
-        'आपल्याला आलेली लिंक उघडून पुराच्या निरीक्षणाची जागा, पाण्याची पातळी, फोटो व माहिती द्या.',
-        'उत्तरादाखल आलेल्या लिंक द्वारा तुम्ही तुमची नोंद नकाशावर पाहू शकाल, पुराची अद्ययावत माहिती मिळवण्यासाठी Riskmap.in या वेबसाईटला भेट द्या'
+        'Text /flood to @RiskMapBot.',
+        'Open the link and follow the instructions to input flood location, upload photo, and description.',
+        'You can see your report on the map via the link provided. Check RiskMap.in for up-to-date flood information.'
       ]
     },
     'facebook': {
-      'title': 'फेसबुक मेसेंजरद्वारे द्वारे पुराची माहिती द्या.',
+      'title': 'Report with Facebook messenger',
       'steps': [
-        'फेसबुक मेसेंजरवर Riskmap.in हे अकाउंट शोधून त्यास ‘/flood’ हा संदेश पाठवा.',
-        'आपल्याला आलेली लिंक उघडून पुराच्या निरीक्षणाची जागा, पाण्याची पातळी, फोटो व माहिती द्या.',
-        'उत्तरादाखल आलेल्या लिंक द्वारा तुम्ही तुमची नोंद नकाशावर पाहू शकाल, पुराची अद्ययावत माहिती मिळवण्यासाठी Riskmap.in या वेबसाईटला भेट द्या'
+        'Search for Riskmap.in on Facebook messenger',
+        'Click on get started button and follow the instructions to input flood location, upload photo, and description.',
+        'You can see your report on the map via the link provided. Check Riskmap.in for up-to-date flood information.'
       ]
     },
     'otherapps': {
-      'title': 'अन्य ऍप्पद्वारे आपले निरीक्षण नोंदवा',
+      'title': 'Report with local applications',
       'steps': [
         'You can report flood from Qlue, PasangMata, and Z-Alert.',
         'Your report is now on the map. Check RiskMap.in for up-to-date flood information.'
@@ -92,25 +93,26 @@ const mh = {
     }
   },
   'info_content': {
-    'intro': 'RiskMap.in हे संकेतस्थळ  सोशल मीडियाचा वापर करून आपल्या शहरातील आपत्कालीन परिस्थितीची तत्कालीन माहिती सर्व नागरिकांना उपलब्ध करून देते. ',
-    'p1': 'वेगाने विकसित होणाऱ्या शहरांच्या आपत्कालीन व्यवस्थापनासाठी, पूर्णतः पारदर्शक व मुक्त-पारिभाषिक (ओपन सौर्स) असलेली ही प्रणाली, मॅसाच्युसेट्स इन्स्टिटयूट ऑफ टेक्नॉलॉजी येथील, अर्बन रिस्क लॅब द्वारे विकसित करण्यात आली आहे.',
-    'p2': 'ही प्रणाली, लोकांच्या भोवतालिक ज्ञानाचा वापर करून आपत्कालीन परिस्थितीची प्रामाणित निरीक्षणे गोळा करते. प्रचलित अशा - किचकट व खर्चिक माहिती संकलन पद्धतींना फाटा देत - ही प्रणाली आपल्या सहनिवासीयांनी नोंदवलेली आपत्कालीन निरीक्षणे अत्यंत सोप्या पद्धतीने आपणास उपलब्ध करून देते. तात्काळ उपलब्ध झालेली ही अचूक भौगोलिक माहिती, सर्वसामान्य जनता व आपत्कालीन प्रतिक्रिया दलांसाठी भविष्यात अत्यंत महत्वपूर्ण भूमिका बजावेल. ',
-    'p3': 'Riskmap.in ही प्रणाली CogniCity OSS ह्या मुक्त-पारिभाषिक आपत्कालीन व्यवस्थापनासाठी बनवलेल्या माहिती-व्यवस्थेचा वापर करून - विविध समाजमाध्यमांच्या गोंगाटातून - रहिवासी व सरकारी यंत्रणांना आपत्कालीन माहिती वेचून उपलब्ध करून देण्याचे महत्वपूर्ण काम बजावते.',
+    'intro': 'RiskMap.in harnesses the power of social media to gather, sort, and display information about flooding in real time.',
+    'p1': 'RiskMap.in is a project initiated by the Urban Risk Lab at MIT as a free, transparent platform for emergency response and disaster management in megacities in South and Southeast Asia.',
+    'p2': 'The platform adopts a “people are the best sensors” paradigm, where confirmed reports are collected directly from the users at street level in a manner that removes expensive and time-consuming data processing. This framework creates accurate, real-time data which is immediately made available for users and first responders.',
+    'p3': 'RiskMap.in gathers, sorts, and visualizes data using specially developed CogniCity Open Source Software - an enterprise-level platform for emergency response and disaster management - to transforms the noise of social and digital media into critical information for residents, communities, and government agencies.',
     'partners': {
       'implementing': 'Implementing partner',
       'project': 'Project partners',
-      'data': 'डेटा सौजन्य',
-      'support': 'संशोधन साहाय्य'
+      'data': 'Data partners',
+      'support': 'Supported by'
     },
-    'termsPopup': 'सहभागाच्या अटी व वैयत्तिक गोपनीयता धोरण',
+    'termsPopup': 'User agreement &amp; Privacy policy',
     'mapCredits': 'Basemap tiles',
     'mapImproveLink': 'Improve the basemap at',
-    'browserStack': 'Testing supported by <a href="https://www.browserstack.com" target="_blank">BrowserStack</a>.'
+    'browserStack': 'Testing supported by <a href="https://www.browserstack.com" target="_blank">BrowserStack</a>.',
+    'USAID': 'This website was made possible with the support of the American People through the U.S. Agency for International Development. This is not an official USAID or U.S. Government website. The contents of this website are the sole responsibility of the authors and do not necessarily reflect the views of USAID of the U.S. Government.'
   },
   'legend': {
-    'title': 'संदर्भ सूची',
-    'flood_gauges': 'नदी/कालव्याची पातळी',
-    'flood_depth': 'पाण्याची खोल (से. मी.)'
+    'title': 'Legend',
+    'flood_gauges': 'Flood Gauges',
+    'flood_depth': 'Flood Depth (cm)'
   },
   'termsContents': [
     {
@@ -126,4 +128,4 @@ const mh = {
   ]
 };
 
-module.exports = mh;
+module.exports = kn;
