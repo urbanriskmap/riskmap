@@ -91,6 +91,7 @@ export class LocaleLocal {
           "p1": "RiskMap.in is a project initiated by the Urban Risk Lab at MIT as a free, transparent platform for emergency response and disaster management in megacities in South and Southeast Asia.",
           "p2": "The platform adopts a “people are the best sensors” paradigm, where confirmed reports are collected directly from the users at street level in a manner that removes expensive and time-consuming data processing. This framework creates accurate, real-time data which is immediately made available for users and first responders.",
           "p3": "RiskMap.in gathers, sorts, and visualizes data using specially developed CogniCity Open Source Software - an enterprise-level platform for emergency response and disaster management - to transforms the noise of social and digital media into critical information for residents, communities, and government agencies.",
+          "p4":"NOTE: For any emergency situation that requires immediate assistance please call Police - 100, Fire - 101, or Ambulance - 108. To register civic complaints call Greater Chennai Corporation on 1913",
           "partners": {
             "implementing": "Implementing partner",
             "project": "Project partners",
@@ -203,6 +204,7 @@ export class LocaleLocal {
           "p1": "Riskmap.in என்பது தென்னக மற்றும் தென்கிழக்கு ஆசியாவில் உள்ள பெருநகரங்களில் அவசரநிலை மற்றும் பேரழிவு மேலாண்மைக்கான ஒரு இலவச, வெளிப்படையான வலைத்தளமாக MIT Urban Risk Lab-இனால் தொடங்கப்பட்ட திட்டம் ஆகும்.",
           "p2": "இந்த வலைத்தளம் “மக்கள் சிறந்த சென்சார்கள்” என்கிற தத்துவத்தை பிரதானமாக எடுத்துக்கொள்கிறது. விலையுயர்ந்த மற்றும் நேரத்தைச் சாப்பிடும் தரவு செயலாக்கத்தை அகற்றும் விதத்தில் நேரடியாக மக்களிடமிருந்து வெள்ள அறிக்கைகள் சேகரிக்கப்படுகின்றன. இந்த வலைத்தளம், நகர மக்கள் மற்றும் நிவாரண தொழிலாளர்களுக்கு உடனடியாக கிடைக்கக்கூடிய துல்லியமான, நிகழ்நேர தரவை உருவாக்குகிறது.",
           "p3": "Riskmap.in வலைத்தளம் CogniCity என்கிற அவசரநிலை மற்றும் பேரழிவு முகாமைத்துவத்திற்கான தொழிற்துறை Open Source Software-ஐ பயன்படுத்தி சமூக மற்றும் டிஜிட்டல் மீடியாவில் கிடைக்கும் தரவை நகர மக்கள், நிவாரண தொழிலாளிகள் மற்றும் அரசாங்க முகவர்களுக்கான முக்கியமான தகவல்களாக மாற்றியமைக்கின்றது.",
+          "p4":"குறிப்பு: உடனடியாக உதவி தேவைப்படும் நெருக்கடி சூழ்நிலைக்கு நீங்கள் தொடர்பு கொள்ள வேண்டிய எண்கள்:  போலீஸ் - 100, தீயணைப்பு துறை - 101, அல்லது ஆம்புலன்ஸ் - 108. மற்ற புகார்களுக்கு பெருநகர சென்னை மாநகராட்சி குறையீட்டு எண் 1913-ஐ அழைக்கவும்.",
           "partners": {
             "implementing": "செயல்பாட்டு துணையர்கள்",
             "project": "திட்டத்திற்கு ஆதரவளித்தோர்",
