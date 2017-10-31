@@ -8,11 +8,11 @@
           <p textcontent.bind="locale.web_menu.tab_names[tabName]"></p>
         </div>
       </li>
+
       <li class="langTab">
-        <label repeat.for="language of languages" id.bind="'label_' + language" class="langLabels">
-          <input type="radio" model.bind="language" click.delegate="switchLang(language)">
-          ${language}
-        </label>
+        <select id="langDropdown" value.bind="selLanguage" change.delegate="changeLanguage()">
+          <option repeat.for="language of languages" model.bind="language">${language.name}</option>
+        </select>
       </li>
     </ul>
   </div>
@@ -48,7 +48,7 @@
                   <img src.bind="level.icon" height="30">
                 </td>
                 <td>
-                  <p class="normal">${level.text[selLanguage]}</p>
+                  <p class="normal">${level.text[selLanguage.key]}</p>
                 </td>
               </tr>
             </table>
@@ -59,7 +59,7 @@
                 <td style.bind="'padding:0;font-size:30px;color: ' + height.color">&#9632;
                 </td>
                 <td>
-                  <p class="normal">${height.text[selLanguage]}</p>
+                  <p class="normal">${height.text[selLanguage.key]}</p>
                 </td>
               </tr>
             </table>
@@ -90,7 +90,7 @@
               <tr class="wrapRow">
                 <td>
                   <div class="videoWrapper" id.bind="'vid_' + video.platform" ref.bind="'vid_' + video.platform">
-                    <iframe width="300" height="225" allowfullscreen="allowfullscreen" frameborder="0" src.bind="video.source[selLanguage]"></iframe>
+                    <iframe width="300" height="225" allowfullscreen="allowfullscreen" frameborder="0" src.bind="video.source[selLanguage.key]"></iframe>
                     <br>
                     <ul>
                       <li repeat.for="step of locale.report_content[video.platform].steps">
@@ -143,6 +143,20 @@
           </td>
         </tr> -->
 
+        <!-- Funding Partners-->
+        <tr class="label">
+          <td colspan="4" cellpadding="0" align="left">
+            <p>${locale.info_content.partners.support}</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" align="center">
+            <a href="http://tatacenter.mit.edu">
+              <img class="tataLogo" src="assets/graphics/tatacenter.png">
+            </a>
+          </td>
+        </tr>
+
         <!-- Data Partners-->
         <tr class="label">
           <td colspan="4" cellpadding="0" align="left">
@@ -161,18 +175,22 @@
             </a>
           </td>
         </tr>
-        <tr class="label">
+
+
+        <!-- proejct Partners-->
+         <tr class="label">
           <td colspan="4" cellpadding="0" align="left">
-            <p>${locale.info_content.partners.support}</p>
+            <p>${locale.info_content.partners.project}</p>
           </td>
         </tr>
         <tr>
           <td colspan="4" align="center">
-            <a href="http://tatacenter.mit.edu">
-              <img class="tataLogo" src="assets/graphics/tatacenter.png">
+            <a href="https://www.cag.org.in/our-work/city-governance">
+              <img class="partnerLogo" src="assets/graphics/CAG-logo.png">
             </a>
           </td>
         </tr>
+
       </table>
 
 

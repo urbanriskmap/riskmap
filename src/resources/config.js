@@ -7,8 +7,8 @@ import {noView} from 'aurelia-framework';
 //end-aurelia-decorators
 export class Config {
   constructor() {
-    this.dep_name = dep.name;
     this.map = dep.map;
+    this.map.dep_name = dep.name;
     this.map.data_server = env[dep.name].data_server;
     this.map.tile_layer = env[dep.name].tile_layer;
     this.map.app = env[dep.name].app;
@@ -16,7 +16,13 @@ export class Config {
 
     this.title = env[dep.name].title;
     this.supported_languages = env[dep.name].supported_languages;
-    this.default_language = env[dep.name].default_language;
+    //Save default language as object
+    for (let lang of this.supported_languages) {
+      if (lang.key === env[dep.name].default_language) {
+        this.default_language = lang;
+      }
+    }
     this.height_units = dep.height_units;
+    this.deep_links = env[dep.name].deep_links;
   }
 }

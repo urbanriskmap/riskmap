@@ -27,15 +27,15 @@ export class DisasterMap {
     this.selected_city = null;
   }
 
-  togglePane(ref, action, clear_selection) {
-    var self = this;
+  togglePane(ref, action, clearSelection) {
+    let self = this;
     if (action === 'hide') {
       $(ref).fadeOut(200);
       if (ref === '#infoPane') {
-        if (clear_selection) {
+        if (clearSelection) {
           if (self.layers.selected_report) {
             self.reportid = null;
-            history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
+            history.pushState({city: self.selected_city, report_id: null}, 'city', 'map/' + self.selected_city);
             self.layers.revertIconToNormal(self.layers.selReportType);
           }
           if (self.layers.selected_extent) {
@@ -43,41 +43,41 @@ export class DisasterMap {
             self.layers.selected_extent = null;
           }
           if (self.layers.selected_gauge) {
-            self.layers.selected_gauge.target.setIcon(self.layers.mapIcons.gauge_normal(self.layers.gaugeIconUrl(self.layers.selected_gauge.target.feature.properties.observations[self.layers.selected_gauge.target.feature.properties.observations.length-1].f3)));
+            self.layers.selected_gauge.target.setIcon(self.layers.mapIcons.gauge_normal(self.layers.gaugeIconUrl(self.layers.selected_gauge.target.feature.properties.observations[self.layers.selected_gauge.target.feature.properties.observations.length - 1].f3)));
             self.layers.selected_gauge = null;
           }
           self.layers.popupContent = null;
         }
       } else if (ref === '#sidePane') {
-        $('.menuBtn').toggleClass("active");
+        $('.menuBtn').toggleClass('active');
       }
     } else if (action === 'show') {
       if (ref === '#infoPane') {
-        if ($('#closeSidePane').hasClass("active")) {
-          $('.menuBtn').toggleClass("active");
+        if ($('#closeSidePane').hasClass('active')) {
+          $('.menuBtn').toggleClass('active');
           $('#sidePane').fadeOut(200);
         }
-        if (clear_selection && $('#modalChart').get(0)) {
+        if (clearSelection && $('#modalChart').get(0)) {
           $('#chart-pane').empty();
         }
       } else if (ref === '#sidePane') {
         // swap menu button icon (cancel | addReport)
-        $('.menuBtn').toggleClass("active");
+        $('.menuBtn').toggleClass('active');
         // set tab to queried tab || default 'report'
-        var tab_to_open = (self.querytab) ? self.querytab : 'report';
+        let tabToOpen = (self.querytab) ? self.querytab : 'report';
         self.querytab = null; //set to null after url fetch
-        self.resetTab(tab_to_open);
+        self.resetTab(tabToOpen);
         // hide infoPane if open
         self.togglePane('#infoPane', 'hide', true);
         // update browser url
         if ((self.querylanguage || self.querytab) && !self.reportid) {
           if (!self.selected_city && self.utility.isCitySupported(self.querycity)) {
             self.selected_city = self.querycity; //selected_city given a value from params only when viewReports / changeCity run
-            history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
+            history.pushState({city: self.selected_city, report_id: null}, 'city', 'map/' + self.selected_city);
           } else if (self.selected_city) {
-            history.pushState({city: self.selected_city, report_id: null}, "city", "map/" + self.selected_city);
+            history.pushState({city: self.selected_city, report_id: null}, 'city', 'map/' + self.selected_city);
           } else {
-            history.pushState({city: null, report_id: null}, "city", "map");
+            history.pushState({city: null, report_id: null}, 'city', 'map');
           }
         }
       }
@@ -86,77 +86,77 @@ export class DisasterMap {
   }
 
   // Load all reports for a given city, or zoom to single queried report id
-  viewReports(city_name, push_state) {
-    var self = this;
-    self.utility.changeCity(city_name, self.reportid, self.map, self.layers, self.togglePane)
+  viewReports(cityName, pushState) {
+    let self = this;
+    self.utility.changeCity(cityName, self.reportid, self.map, self.layers, self.togglePane)
     .then(() => {
       if (self.reportid && self.layers.activeReports.hasOwnProperty(self.reportid)) {
         //Case 1: Active report id in current city
-        if (self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code === self.utility.parseCityObj(city_name, false).region) {
+        if (self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code === self.utility.parseCityObj(cityName, false).region) {
           self.layers.activeReports[self.reportid].fire('click');
-          self.selected_city = city_name;
-          if (push_state) {
-            history.pushState({city: city_name, report_id: self.reportid}, 'city', "map/" + city_name + "/" + self.reportid);
+          self.selected_city = cityName;
+          if (pushState) {
+            history.pushState({city: cityName, report_id: self.reportid}, 'city', 'map/' + cityName + '/' + self.reportid);
           }
         }
       } else if (self.reportid && !self.layers.activeReports.hasOwnProperty(self.reportid)) {
         //Case 2: No active report, check availability on server
         self.layers.addSingleReport(self.reportid)
         .then(report => {
-          var reportRegion = self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code;
-          if (reportRegion === self.utility.parseCityObj(city_name, false).region) {
+          let reportRegion = self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code;
+          if (reportRegion === self.utility.parseCityObj(cityName, false).region) {
             //Case 2A: in current city?
             report.fire('click');
-            self.selected_city = city_name;
-            if (push_state) {
-              history.pushState({city: city_name, report_id: self.reportid}, 'city', "map/" + city_name + "/" + self.reportid);
+            self.selected_city = cityName;
+            if (pushState) {
+              history.pushState({city: cityName, report_id: self.reportid}, 'city', 'map/' + cityName + '/' + self.reportid);
             }
           } else {
             //Case 2B: fly to city with report id
-            var queryReportCity = self.utility.parseCityName(reportRegion, self.cities);
+            let queryReportCity = self.utility.parseCityName(reportRegion, self.cities);
             self.utility.changeCity(queryReportCity, self.reportid, self.map, self.layers, self.togglePane)
             .then(() => {
               self.layers.addSingleReport(self.reportid)
               .then(queriedReport => {
                 queriedReport.fire('click');
                 self.selected_city = queryReportCity;
-                if (push_state) {
-                  history.pushState({city: queryReportCity, report_id: self.reportid}, 'city', "map/" + queryReportCity + "/" + self.reportid);
+                if (pushState) {
+                  history.pushState({city: queryReportCity, report_id: self.reportid}, 'city', 'map/' + queryReportCity + '/' + self.reportid);
                 }
               });
             });
           }
         }).catch(() => {
-          self.utility.noReportNotification(city_name, self.reportid);
-          self.selected_city = city_name;
+          self.utility.noReportNotification(cityName, self.reportid);
+          self.selected_city = cityName;
           self.reportid = null;
-          if (push_state) {
-            history.pushState({city: city_name, report_id: null}, 'city', "map/" + city_name);
+          if (pushState) {
+            history.pushState({city: cityName, report_id: null}, 'city', 'map/' + cityName);
           }
         });
       } else if (!self.reportid) {
-        if (self.utility.isCitySupported(city_name)) {
-          self.selected_city = city_name;
-          if (push_state) {
-            history.pushState({city: city_name, report_id: null}, 'city', "map/" + city_name);
+        if (self.utility.isCitySupported(cityName)) {
+          self.selected_city = cityName;
+          if (pushState) {
+            history.pushState({city: cityName, report_id: null}, 'city', 'map/' + cityName);
           }
         } else {
           self.utility.noReportNotification(null, null);
           self.selected_city = null;
-          if (push_state) {
-            history.pushState({city: null, report_id: null}, 'city', "map");
+          if (pushState) {
+            history.pushState({city: null, report_id: null}, 'city', 'map');
           }
         }
       }
     }).catch(() => {
       //Case 3: .addReports not resolved for specified city
-      self.utility.noReportNotification(city_name, null);
+      self.utility.noReportNotification(cityName, null);
       self.reportid = null;
     });
   }
 
   attached() {
-    var self = this;
+    let self = this;
 
     // Initialize leaflet map
     self.map = L.map('mapContainer', {
@@ -176,7 +176,7 @@ export class DisasterMap {
 
     // Add zoom control
     L.control.zoom({
-         position:'bottomright'
+      position: 'bottomright'
     }).addTo(self.map);
 
     // Add scale control
@@ -209,6 +209,22 @@ export class DisasterMap {
     self.map.on('locationerror', () => {
       self.utility.clientLocation = null;
     });
+
+    //Broward Mask TODO only for Broward
+    if (self.utility.config.dep_name === 'riskmap_us') {
+      //Create style config
+      let regionOverlayStyle = {
+        fillColor: '#000000',
+        weight: 0,
+        fillOpacity: 0.25
+      };
+      //Parse geojson text file
+      $.getJSON('assets/overlays/region_overlay.json', data => {
+        L.geoJSON(data, {
+          style: regionOverlayStyle
+        }).addTo(self.map);
+      });
+    }
 
     // Check against queried city param
     if (self.querycity) {

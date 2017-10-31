@@ -16,7 +16,7 @@
     <div id="reportLink" onclick="reportTab()">
       <table>
         <tr>
-          <td repeat.for="platform of webMenu.locale.add_report_platforms">
+          <td repeat.for="platform of config.deep_links">
             <a href.bind="platform.link">
               <i class.bind="'icon-' + platform.name"></i>
             </a>
