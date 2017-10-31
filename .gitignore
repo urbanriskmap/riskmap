@@ -5,6 +5,7 @@ npm-debug.log
 
 assets/graphics/
 assets/icons/
+assets/overlays/
 scripts/
 dist/
 coverage/

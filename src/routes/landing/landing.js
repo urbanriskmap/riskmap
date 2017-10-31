@@ -20,7 +20,7 @@ export class Landing {
 
   //report button on the map
   reportTab() {
-      $('#reportLink').toggle( "slide" );
+    $('#reportLink').toggle('slide');
   }
 
   resizeSidePane() {
@@ -31,12 +31,8 @@ export class Landing {
 
   attached() {
     // If query tab specified in url, open side pane
-    if (this.queried_tab && !this.report_id || (this.config.dep_name === 'riskmap_us')) {
-      // Open side pane only if in a desktop browser,
-      // as in a phone, side pane takes full width and map isn't visible
-      if (!(/Mobi/.test(navigator.userAgent))) {
-        this.mapModel.togglePane('#sidePane', 'show', true);
-      }
+    if (this.queried_tab && !this.report_id && !(/Mobi/.test(navigator.userAgent))) {
+      this.mapModel.togglePane('#sidePane', 'show', true);
     } else if (this.queried_terms) {
       $('#screen').show();
       $('#termsPopup').show();

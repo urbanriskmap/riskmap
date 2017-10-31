@@ -66,6 +66,7 @@ let watch = function() {
   gulp.watch(project.markupProcessor.source, refresh).on('change', onChange);
   gulp.watch(project.lessProcessor.source, refresh).on('change', onChange);
   gulp.watch(project.cssProcessor.source, refresh).on('change', onChange);
+  gulp.watch("deployment_specific/**/*.*", refresh).on('change', onChange);
 };
 
 let run;
