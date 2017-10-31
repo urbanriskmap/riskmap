@@ -123,7 +123,7 @@ export class LocaleLocal {
         ]
       },
       tm: {
-        "add_report": "அறிக்கை வெள்ளம்",
+        "add_report": "அறிக்கை சேர்க்க",
         "prep_menu": {
           "btn_names": {
             "drain": "வடிகால் அடைப்பு",
