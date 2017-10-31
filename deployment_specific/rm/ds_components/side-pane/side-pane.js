@@ -69,7 +69,7 @@ export class SidePane {
       {text: {"en": "> 150", "tm": "> 150"}, color: '#CC2A41'},
       {text: {"en": "71 - 150", "tm": "71 - 150"}, color: '#FF8300'},
       {text: {"en": "10 - 70", "tm": "10 - 70"}, color: '#FFFF00'},
-      {text: {"en": "Use Caution", "tm": "Hati-hati"}, color: '#A0A9F7'}
+      {text: {"en": "Use Caution", "tm": "எச்சரிக்கையுடன் பயன்படுத்துங்கள்"}, color: '#A0A9F7'}
     ];
   }
 
