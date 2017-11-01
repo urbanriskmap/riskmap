@@ -12,7 +12,8 @@ export class Config {
     this.map.data_server = env[dep.name].data_server;
     this.map.tile_layer = env[dep.name].tile_layer;
     this.map.app = env[dep.name].app;
-    this.map.report_timeperiod = env.report_timeperiod;
+    this.map.report_timeperiod = env[dep.name].report_timeperiod;
+    // this.map.report_timeperiod = env[dep.name].report_timeperiod;
 
     this.title = env[dep.name].title;
     this.supported_languages = env[dep.name].supported_languages;

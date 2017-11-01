@@ -1,10 +1,12 @@
 export default {
   debug: true,
   testing: true,
-  report_timeperiod: 43200,
+
   //deployment specific env params
+
   riskmap_us: {
     title: 'RiskMap.us',
+    report_timeperiod: 43200,
     supported_languages: [
       {key: 'en', name: 'English'},
       {key: 'es', name: 'Espaniol'}
@@ -23,6 +25,7 @@ export default {
   },
   petabencana: {
     title: 'Petabencana.id',
+    report_timeperiod: 43200,
     supported_languages: [
       {key: 'en', name: 'English'},
       {key: 'id', name: 'Bahasa'}
@@ -39,6 +42,7 @@ export default {
   },
   riskmap_in: {
     title: 'RiskMap.in',
+    report_timeperiod: 43200,
     supported_languages: [
       {key: 'en', name: 'English'},
       {key: 'tm', name: 'Tamil'}
