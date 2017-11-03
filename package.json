@@ -8,7 +8,6 @@
   },
   "scripts": {
     "start": "au run --env dev --watch --dep $DEP",
-    "start-prod": "au run --env prod --watch --dep $DEP",
     "test": "au build --env dev --dep pb",
     "build": "rm -rf scripts/* && au build --env prod --dep $DEP",
     "build-stage": "rm -rf scripts/* && au build --env stage --dep $DEP",
