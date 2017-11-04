@@ -31,12 +31,12 @@ export class MapUtility {
     return querycity in this.config.instance_regions;
   }
 
-  // return all supported cities as an array
+  // return city name from code
   parseCityName(region_code, cities) {
     var self = this;
-    for (var i = 0; i < cities.length; i+=1) {
-      if (self.parseCityObj(cities[i], false).region === region_code) {
-        return cities[i];
+    for (let city of cities) {
+      if (self.parseCityObj(city, false).region === region_code) {
+        return city;
       } else {
         return null;
       }
@@ -88,6 +88,12 @@ export class MapUtility {
         resolve();
       });
     }
+  }
+
+  statsNotification({reports, timeperiod}) {
+    let msg = 'Received ' + reports +
+      ' reports in past ' + (timeperiod / 3600) + ' hours';
+    $.notify(msg, {style:"mapInfo", className:"info"});
   }
 
   noReportNotification(city_name, report_id) {
