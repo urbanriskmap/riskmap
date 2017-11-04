@@ -84,6 +84,25 @@ export class MapLayers {
     return (t1 + ' ' + d2);
   }
 
+  getStats(regionCode) {
+    let self = this;
+    let client = new HttpClient();
+    const url = self.config.data_server +
+    'stats/reportsSummary?city=' + regionCode +
+    '&timeperiod=' + self.config.report_timeperiod;
+    return new Promise((resolve, reject) => {
+      client.get(url)
+      .then(summary => {
+        let reports = JSON.parse(summary.response)['total number of reports'];
+        resolve({
+          reports: reports,
+          timeperiod: self.config.report_timeperiod,
+        });
+      })
+      .catch(err => reject(err));
+    });
+  }
+
   // Get topojson data from server, return geojson
   getData(end_point) {
     var self = this,
