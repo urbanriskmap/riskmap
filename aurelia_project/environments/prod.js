@@ -41,7 +41,7 @@ export default {
   },
   riskmap_in: {
     title: 'RiskMap.in',
-    report_timeperiod: 21600, //6 hrs
+    report_timeperiod: 43200, //12 hrs
     supported_languages: [
       {key: 'en', name: 'English'},
       {key: 'tm', name: 'Tamil'}
