@@ -63,6 +63,13 @@ export class SidePane {
         }
       }
     ];
+    this.report_type = [
+      {text: {"en": "Flood report", "tm": "எச்சரிக்கை நிலை 1"}, icon: 'flood', icon_color: '#31aade'},
+      {text: {"en": "Blocked Drains", "tm": "வடிகால் அடைப்ப"}, icon: 'drain', icon_color: '#782a07'},
+      {text: {"en": "Desilting", "tm": "தூர் எடுப்பு"}, icon: 'desilting', icon_color: '#d14d11'},
+      {text: {"en": "Canal Repairs", "tm": "கால்வாய் பழுது"}, icon: 'canalrepair', icon_color: '#ba870d'},
+      {text: {"en": "Fallen Tree", "tm": "உடைந்த மரம்"}, icon: 'treeclearing', icon_color: '#006b3b'}
+    ];
     this.gauge_levels = [
       {text: {"en": "Alert Level 1", "tm": "எச்சரிக்கை நிலை 1"}, icon: 'assets/icons/floodgauge_1.svg'},
       {text: {"en": "Alert Level 2", "tm": "எச்சரிக்கை நிலை 2"}, icon: 'assets/icons/floodgauge_2.svg'},

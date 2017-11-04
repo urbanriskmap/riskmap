@@ -17,32 +17,39 @@
     </ul>
   </div>
 
-  <!--Map section-->
-  <div id="paneContent">
-    <div id="content-map" if.bind="seltab === 'map'" class="contentWrapper">
-      <p>${locale.map_helper}</p>
-      <label repeat.for="city of cities">
-        <input type="radio" model.bind="city" checked.bind="selcity" change.delegate="switchCity(city)">
-        ${city}
-      </label>
+ <!-- Map Section -->
+ <div id="paneContent">
+   <div id="content-map" if.bind="seltab === 'map'" class="contentWrapper">
+     <p>${locale.map_helper}</p>
+     <label repeat.for="city of cities">
+       <input type="radio" model.bind="city" checked.bind="selcity" change.delegate="switchCity(city)">
+       ${city}
+     </label>
+
+      <p>${locale.legend.title}</p>
+      <table id="legend" width="300px">
+        <tr repeat.for="type of report_type">
+            <td vertical-align="top" horizontal-align="center" >
+                <i style.bind="'padding:0;font-size:24px;color: ' + type.icon_color" class.bind="'icon-map-' + type.icon"></i>
+            </td>
+            <td>
+                <p class="normal">${type.text[selLanguage.key]}</p>
+            </td>
+        </tr>
+      </table>
 
       <table width="300px">
         <tr>
-          <td>
-            <p id="legend">${locale.legend.title}</p>
-          </td>
-        </tr>
-        <tr>
-          <td vertical-align="bottom">
+          <td vertical-align="bottom" colspan="50%">
             <p>${locale.legend.flood_gauges}</p>
           </td>
-          <td vertical-align="bottom">
+          <td vertical-align="bottom" colspan="50%">
             <p>${locale.legend.flood_depth}</p>
           </td>
         </tr>
         <tr>
-          <td>
-            <table>
+          <td colspan="50%">
+            <table id="legend">
               <tr repeat.for="level of gauge_levels">
                 <td>
                   <img src.bind="level.icon" height="30">
@@ -53,8 +60,8 @@
               </tr>
             </table>
           </td>
-          <td>
-            <table>
+          <td colspan="50%">
+            <table id="legend">
               <tr repeat.for="height of flood_depth">
                 <td style.bind="'padding:0;font-size:30px;color: ' + height.color">&#9632;
                 </td>
@@ -67,7 +74,6 @@
         </tr>
       </table>
     </div>
-
     <!--Report section-->
     <div id="content-report" if.bind="seltab === 'report'" class="contentWrapper">
       <table id="reportTable">
