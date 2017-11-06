@@ -1,4 +1,4 @@
-import {inject, bindable, customElement} from 'aurelia-framework';
+import {inject, bindable, customElement, computedFrom} from 'aurelia-framework';
 import {Config} from '../../resources/config';
 
 //start-aurelia-decorators
@@ -40,6 +40,9 @@ export class ReportInfo {
     return this.app + "map/" + this.city + "/" + this.pkey;
   }
 
+  //start-aurelia-decorators
+  @computedFrom('height')
+  //end-aurelia-decorators
   get hasHeight() {
     return this.height;
   }
