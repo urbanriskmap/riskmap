@@ -18,8 +18,8 @@
       <!-- Tried binding variables in textcontent, same behaviour -->
       <!-- <p if.bind="height" class="textTitle" textcontent.bind="locale.report_info.water_depth + ': ' + height + ' ' + config.height_units" /> -->
       <!-- Tried binding height the same way as text, doesn't work -->
-      <!-- <p if.bind="height" class="textTitle">${height}</p> -->
-      <p if.bind="height" class="textTitle">${locale.report_info.water_depth}: ${height} ${config.height_units}</p>
+      <p class="textTitle">${height}</p>
+      <!-- <p if.bind="height" class="textTitle">${locale.report_info.water_depth}: ${height} ${config.height_units}</p> -->
 
       <p if.bind="reportevent" class="textTitle">${locale.prep_menu.btn_names[reportevent]}</p>
       <p id="source">${locale.report_info.source}&nbsp;
