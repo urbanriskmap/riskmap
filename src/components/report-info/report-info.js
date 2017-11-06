@@ -86,4 +86,14 @@ export class ReportInfo {
       }
     ];
   }
+
+  // Databinding engine working as expected,
+  // View not picking up bound parameters, after info pane closed.
+  bind() {
+    console.log('Bind: ' + this.height);
+  }
+
+  unbind() {
+    console.log(this.height);
+  }
 }
