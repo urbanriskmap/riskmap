@@ -9,15 +9,15 @@ export class ReportInfo {
   //@bindable attributes do not work with camelCase...
   //start-aurelia-decorators
   @bindable locale;
-  @bindable imageurl;
-  @bindable height;
-  @bindable reportevent;
-  @bindable title;
-  @bindable text;
-  @bindable pkey;
   @bindable city;
-  @bindable timestamp;
+  @bindable height;
+  @bindable imageurl;
+  @bindable pkey;
+  @bindable reportevent;
   @bindable source;
+  @bindable text;
+  @bindable title;
+  @bindable timestamp;
   //end-aurelia-decorators
 
   constructor(Config) {
@@ -39,6 +39,31 @@ export class ReportInfo {
   get reportUrl() {
     return this.app + "map/" + this.city + "/" + this.pkey;
   }
+
+  // Tried using recurring getters
+  // get height() {
+  //   return this.popupcontent.report_data.flood_depth;
+  // }
+  //
+  // get imageurl() {
+  //   return this.popupcontent.image_url;
+  // }
+  //
+  // get title() {
+  //   return this.popupcontent.title;
+  // }
+  //
+  // get reportevent() {
+  //   return this.popupcontent.report_data.report_type;
+  // }
+  //
+  // get source() {
+  //   return this.popupcontent.source;
+  // }
+  //
+  // get timestamp() {
+  //   return this.popupcontent.timestamp;
+  // }
 
   attached() {
     var self = this;

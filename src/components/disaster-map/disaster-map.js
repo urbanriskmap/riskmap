@@ -46,7 +46,7 @@ export class DisasterMap {
             self.layers.selected_gauge.target.setIcon(self.layers.mapIcons.gauge_normal(self.layers.gaugeIconUrl(self.layers.selected_gauge.target.feature.properties.observations[self.layers.selected_gauge.target.feature.properties.observations.length - 1].f3)));
             self.layers.selected_gauge = null;
           }
-          self.layers.popupContent = null;
+          self.layers.popupContent = {};
         }
       } else if (ref === '#sidePane') {
         $('.menuBtn').toggleClass('active');
