@@ -40,6 +40,10 @@ export class ReportInfo {
     return this.app + "map/" + this.city + "/" + this.pkey;
   }
 
+  get hasHeight() {
+    return this.height;
+  }
+
   // Tried using recurring getters
   // get height() {
   //   return this.popupcontent.report_data.flood_depth;
