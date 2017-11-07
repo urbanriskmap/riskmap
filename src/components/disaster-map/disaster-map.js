@@ -64,7 +64,7 @@ export class DisasterMap {
         // swap menu button icon (cancel | addReport)
         $('.menuBtn').toggleClass('active');
         // set tab to queried tab || default 'report'
-        let tabToOpen = (self.querytab) ? self.querytab : 'report';
+        let tabToOpen = (self.querytab) ? self.querytab : 'info';
         self.querytab = null; //set to null after url fetch
         self.resetTab(tabToOpen);
         // hide infoPane if open
