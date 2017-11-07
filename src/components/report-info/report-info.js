@@ -87,6 +87,13 @@ export class ReportInfo {
     return this.popupcontent.timestamp;
   }
 
+  //start-aurelia-decorators
+  @computedFrom('popupcontent')
+  //end-aurelia-decorators
+  get text() {
+    return this.popupcontent.text;
+  }
+
   attached() {
     var self = this;
     self.shareButtons = [ // Name string should match fontello icons name
