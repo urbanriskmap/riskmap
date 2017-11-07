@@ -30,8 +30,8 @@ export class Landing {
   }
 
   attached() {
-    // If query tab specified in url, open side pane
-    if (this.queried_tab && !this.report_id && !(/Mobi/.test(navigator.userAgent))) {
+    // If desktop, open side pane to 'info' tab
+    if (!(/Mobi/.test(navigator.userAgent)) && !this.report_id) {
       this.mapModel.togglePane('#sidePane', 'show', true);
     } else if (this.queried_terms) {
       $('#screen').show();

@@ -1,18 +1,26 @@
 <template>
   <require from="./report-info.css"></require>
   <div  id="photoPreview">
-    <img class="image" id="hasPhoto" if.bind="imageurl" src.bind="imageurl">
-    <div class="image" id="noPhoto" if.bind="!imageurl">
+    <div class="image" id="hasPhoto" show.bind="imageurl">
+      <a target="_blank" href.bind="fullsizeimg">
+        <img src.bind="imageurl">
+      </a>
+    </div>
+    <div class="image" id="noPhoto" show.bind="!imageurl">
       <i class="icon-flood-img"></i>
     </div>
   </div>
 
   <div id="textPreview">
     <div id="bodyWrapper">
-      <p if.bind="title" class="textTitle">${title}</p>
-      <p if.bind="height" class="textTitle">${locale.report_info.water_depth}:&nbsp;${height} ${config.height_units}</p>
-      <p if.bind="reportevent" class="textTitle">${locale.prep_menu.btn_names[reportevent]}</p>
-      <p id="source">${locale.report_info.source}&nbsp;<a target="_blank" href.bind="links[source]"><img id="sourceImg" src.bind="'assets/icons/img_' + source + '.svg'" width="18" height="18"></img></a></p>
+      <p show.bind="title" class="textTitle">${title}</p>
+      <p show.bind="height" class="textTitle">${locale.report_info.water_depth}: ${height} ${config.height_units}</p>
+      <p show.bind="reportevent" class="textTitle">${locale.prep_menu.btn_names[reportevent]}</p>
+      <p id="source">${locale.report_info.source}&nbsp;
+        <a target="_blank" href.bind="links[source]">
+          <img id="sourceImg" src.bind="'assets/icons/img_' + source + '.svg'" width="18" height="18"></img>
+        </a>
+      </p>
       <p id="timeStamp">${timestamp}</p>
       <p id="textBody">${text}</p>
     </div>
