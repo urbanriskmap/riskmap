@@ -53,6 +53,13 @@ export class ReportInfo {
   //start-aurelia-decorators
   @computedFrom('popupcontent')
   //end-aurelia-decorators
+  get fullsizeimg() {
+    return this.popupcontent.image_url.replace(/(\/[-a-zA-Z0-9]*)(?=\.jpg)/, '/large' + '$1');
+  }
+
+  //start-aurelia-decorators
+  @computedFrom('popupcontent')
+  //end-aurelia-decorators
   get title() {
     return this.popupcontent.title;
   }
