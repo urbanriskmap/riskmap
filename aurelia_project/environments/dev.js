@@ -52,7 +52,7 @@ export default {
     data_server: 'https://data-dev.riskmap.in/',
     app: 'https://dev.riskmap.in/',
     deep_links: [
-      {name: 'facebook', link: 'http://m.me/CognicityDev_India'},
+      {name: 'facebook', link: 'http://m.me/CognicityDevIndia'},
       {name: 'twitter', link: 'https://twitter.com/intent/tweet?text=Report+flood&via=CognicityDev_IN'},
       {name: 'telegram', link: 'https://telegram.me/CognicityIN_bot'}
     ]
