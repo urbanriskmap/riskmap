@@ -40,7 +40,11 @@ export class ReportInfo {
   @computedFrom('popupcontent')
   //end-aurelia-decorators
   get height() {
-    return this.popupcontent.report_data.flood_depth;
+    if (this.popupcontent.report_data.flood_depth) {
+      return this.popupcontent.report_data.flood_depth;
+    } else {
+      return null;
+    }
   }
 
   //start-aurelia-decorators
@@ -56,6 +60,8 @@ export class ReportInfo {
   get fullsizeimg() {
     if (this.popupcontent.image_url) {
       return this.popupcontent.image_url.replace(/(\/[-a-zA-Z0-9]*)(?=\.jpg)/, '/large' + '$1');
+    } else {
+      return null;
     }
   }
 
