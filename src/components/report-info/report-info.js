@@ -40,7 +40,7 @@ export class ReportInfo {
   @computedFrom('popupcontent')
   //end-aurelia-decorators
   get height() {
-    if (this.popupcontent.report_data.flood_depth) {
+    if (this.popupcontent.report_data) {
       return this.popupcontent.report_data.flood_depth;
     } else {
       return null;
