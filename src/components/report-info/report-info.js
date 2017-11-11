@@ -76,7 +76,11 @@ export class ReportInfo {
   @computedFrom('popupcontent')
   //end-aurelia-decorators
   get reportevent() {
-    return this.popupcontent.report_data.report_type;
+    if (this.popupcontent.report_data) {
+      return this.popupcontent.report_data.report_type;
+    } else {
+      return null;
+    }
   }
 
   //start-aurelia-decorators
