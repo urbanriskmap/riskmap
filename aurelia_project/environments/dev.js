@@ -35,7 +35,7 @@ export default {
     data_server: 'https://data-dev.petabencana.id/',
     app: 'https://dev.petabencana.id/',
     deep_links: [
-      {name: 'facebook', link: 'http://m.me/CognicityDev_id'},
+      {name: 'facebook', link: 'http://m.me/CognicityDev.id'},
       {name: 'twitter', link: 'https://twitter.com/intent/tweet?text=Report+flood&via=petabencana'}, //TODO : fill after twitter DM bot is created for Petabencana.
       {name: 'telegram', link: 'https://telegram.me/CognicityDevBot'}
     ]
