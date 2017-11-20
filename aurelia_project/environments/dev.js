@@ -16,7 +16,7 @@ export default {
     data_server: 'https://data-dev.riskmap.us/',
     app: 'https://broward-dev.riskmap.us/',
     deep_links: [
-      {name: 'facebook', link: 'http://m.me/CognicityDev_us'},
+      {name: 'facebook', link: 'http://m.me/1747847428843379'}, //FB page id is used as no username is allowd at this point.
       //TODO after the twitter dev bot is registered
       {name: 'twitter', link: 'https://twitter.com/messages/compose?recipient_id=905602080252977152&welcome_message_id=905919155492331523&text=/flood'}/*,
       //Disable telegram button for US deployment
@@ -36,7 +36,7 @@ export default {
     app: 'https://dev.petabencana.id/',
     deep_links: [
       {name: 'facebook', link: 'http://m.me/CognicityDev.id'},
-      {name: 'twitter', link: 'https://twitter.com/intent/tweet?text=Report+flood&via=petabencana'}, //TODO : fill after twitter DM bot is created for Petabencana.
+      {name: 'twitter', link: 'https://twitter.com/intent/tweet?text=Laporkan+banjir&via=petabencana'}, //TODO : fill after twitter DM bot is created for Petabencana.
       {name: 'telegram', link: 'https://telegram.me/CognicityDevBot'}
     ]
   },

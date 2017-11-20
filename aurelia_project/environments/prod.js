@@ -35,7 +35,7 @@ export default {
     app: 'https://petabencana.id/',
     deep_links: [
       {name: 'facebook', link: 'https://www.facebook.com/petabencana.id/'},
-      {name: 'twitter', link: 'https://twitter.com/intent/tweet?text=Report+flood&via=petabencana'},
+      {name: 'twitter', link: 'https://twitter.com/intent/tweet?text=Laporkan+banjir&via=petabencana'},
       {name: 'telegram', link: 'https://telegram.me/BencanaBot'}
     ]
   },
