@@ -23,6 +23,13 @@ export default {
           'sw': [-7.165, 107.369],
           'ne': [-6.668, 107.931]
         }
+      },
+      'Semarang': {
+        'region': 'srg',
+        'bounds': {
+          'sw': [-7.33525, 110.057],
+          'ne': [-6.72701, 110.715]
+        }
       }
     },
     'default_region': {
