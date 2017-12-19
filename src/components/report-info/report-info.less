@@ -32,11 +32,12 @@
 
 #textPreview {
   position: relative;
-  width: 55%;
+  width: 45%;
   height: 90%;
-  float: right;
+  padding-left: 10px;
+  float: left;
   overflow:hidden;
-    & #bodyWrapper {
+  & #bodyWrapper {
     width: 85%;
     height: 75%;
     border-bottom: 1px solid @banjir-blue;
@@ -77,15 +78,63 @@
     border: solid 1px blue;
     margin: 0 10px 0 0;
   }
-  & #socialIcons {
+  & #voteIcons {
     position: absolute;
     height: 18%;
     bottom: 0px;
     & a {
       position: relative;
-      .linklight-mixin(20px);
+      .linklight-mixin(18px);
       text-decoration: none;
-      padding: 0 12px 0 0;
+      padding: 0 6px 0 0;
+      cursor: pointer;
+      &.active {
+        color: @banjir-blue;
+      }
     }
+  }
+}
+
+.interactionFlyer {
+  display: none;
+  padding: 5px;
+  position: absolute;
+  border: solid @light-gray 1px;
+  border-radius: 5px;
+  width: 35%;
+  height: 60%;
+  margin-left: 40%;
+  float: right;
+  z-index: 2500;
+  text-align: center;
+  background-color: @snow-white;
+  & a {
+    padding: 5px;
+    border: none;
+    .linklight-mixin(32px);
+    text-decoration: none;
+    line-height:42px;;
+    list-style: none;
+  }
+  & p {
+    .bodymedium-mixin(12px);
+    margin: 5px;
+    text-align: center;
+  }
+  & #submitButton {
+    margin: 5px;
+    margin-top: 15px;
+    box-shadow: @drop-shadow;
+    .linkmedium-mixin(12px);
+    color: @snow-white;
+    background: @banjir-blue;
+    padding: 10px;
+    border-radius: 3px;
+    border: none;
+    .translate-mixin(2px, 2px);
+  }
+  &
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    text-align: center;
   }
 }

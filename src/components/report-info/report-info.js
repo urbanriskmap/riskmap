@@ -25,6 +25,29 @@ export class ReportInfo {
     };
   }
 
+  feedbackInteraction(button) {
+    $('.interactionFlyer').hide();
+    $('.voteButton').removeClass('active');
+    $('#vote_button_' + button.name).addClass('active');
+    switch (button.name) {
+    case 'share':
+      $('#socialIcons').fadeToggle();
+      break;
+    case 'flag':
+      $('#flagReport').fadeToggle();
+      break;
+    default:
+      return null;
+    }
+  }
+
+  submitFlag()
+  {
+    let flagText = document.getElementById('flag_text').value;
+    console.log(flagText);
+  }
+
+
   get msgText() {
     return this.locale.report_info.share_msg;
   }
@@ -106,7 +129,8 @@ export class ReportInfo {
 
   attached() {
     var self = this;
-    self.shareButtons = [ // Name string should match fontello icons name
+
+    self.socialButtons = [ // Name string should match fontello icons name
       {
         name: "twitter",
         intent: "https://twitter.com/intent/tweet?text=" + self.msgText + "%20" + self.reportUrl
@@ -122,6 +146,25 @@ export class ReportInfo {
       {
         name: "facebook",
         intent: "http://www.facebook.com/sharer/sharer.php?u=" + self.reportUrl
+      }
+    ];
+
+    self.voteButtons = [
+      {
+        'name': 'upvote',
+        'tooltip': 'Upvote this report'
+      },
+      {
+        'name': 'downvote',
+        'tooltip': 'Downvote this report'
+      },
+      {
+        'name': 'share',
+        'tooltip': 'Share this report'
+      },
+      {
+        'name': 'flag',
+        'tooltip': 'Flag this report as inappropriate'
       }
     ];
   }
