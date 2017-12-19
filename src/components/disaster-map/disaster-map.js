@@ -46,7 +46,7 @@ export class DisasterMap {
             self.layers.selected_gauge.target.setIcon(self.layers.mapIcons.gauge_normal(self.layers.gaugeIconUrl(self.layers.selected_gauge.target.feature.properties.observations[self.layers.selected_gauge.target.feature.properties.observations.length - 1].f3)));
             self.layers.selected_gauge = null;
           }
-          self.layers.popupContent = null;
+          self.layers.popupContent = {};
         }
       } else if (ref === '#sidePane') {
         $('.menuBtn').toggleClass('active');
@@ -64,7 +64,7 @@ export class DisasterMap {
         // swap menu button icon (cancel | addReport)
         $('.menuBtn').toggleClass('active');
         // set tab to queried tab || default 'report'
-        let tabToOpen = (self.querytab) ? self.querytab : 'report';
+        let tabToOpen = (self.querytab) ? self.querytab : 'info';
         self.querytab = null; //set to null after url fetch
         self.resetTab(tabToOpen);
         // hide infoPane if open
@@ -88,8 +88,16 @@ export class DisasterMap {
   // Load all reports for a given city, or zoom to single queried report id
   viewReports(cityName, pushState) {
     let self = this;
+
     self.utility.changeCity(cityName, self.reportid, self.map, self.layers, self.togglePane)
     .then(() => {
+      // Show timeperiod notification
+      self.layers.getStats(self.utility.parseCityObj(cityName, false).region)
+      .then(stats => {
+        self.utility.statsNotification(stats);
+      })
+      .catch();
+
       if (self.reportid && self.layers.activeReports.hasOwnProperty(self.reportid)) {
         //Case 1: Active report id in current city
         if (self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code === self.utility.parseCityObj(cityName, false).region) {
@@ -135,6 +143,7 @@ export class DisasterMap {
           }
         });
       } else if (!self.reportid) {
+        // No report id in query
         if (self.utility.isCitySupported(cityName)) {
           self.selected_city = cityName;
           if (pushState) {
@@ -210,7 +219,7 @@ export class DisasterMap {
       self.utility.clientLocation = null;
     });
 
-    //Broward Mask TODO only for Broward
+    // Broward Mask TODO only for Broward
     if (self.utility.config.dep_name === 'riskmap_us') {
       //Create style config
       let regionOverlayStyle = {

@@ -47,16 +47,16 @@
         </tr> -->
 
         <tr>
-          <td vertical-align="bottom">
+          <td vertical-align="bottom" colspan="50%">
             <p>${locale.legend.flood_gauges}</p>
           </td>
-          <td vertical-align="bottom">
+          <td vertical-align="bottom" colspan="50%">
             <p>${locale.legend.flood_depth}</p>
           </td>
         </tr>
         <tr>
-          <td>
-            <table>
+          <td colspan="50%">
+            <table id="legend">
               <tr repeat.for="level of gauge_levels">
                 <td>
                   <img src.bind="level.icon" height="30">
@@ -67,8 +67,8 @@
               </tr>
             </table>
           </td>
-          <td>
-            <table>
+          <td colspan="50%">
+            <table id="legend">
               <tr repeat.for="height of flood_depth">
                 <td style.bind="'padding:0;font-size:30px;color: ' + height.color">&#9632;
                 </td>
@@ -81,7 +81,6 @@
         </tr>
       </table>
     </div>
-
     <!--Report section-->
     <div id="content-report" if.bind="seltab === 'report'" class="contentWrapper">
       <table id="reportTable">
@@ -125,11 +124,6 @@
     <div id="content-info" if.bind="seltab === 'info'" class="contentWrapper">
       <table id="headLogos">
         <tr>
-          <!-- <td align="left">
-            <a href="http://tatacenter.mit.edu">
-              <img id="usaidLogo" src="assets/graphics/TataCenter_logo_web.svg">
-            </a>
-          </td> -->
           <td align="center">
             <a href="http://urbanrisklab.org/">
               <img id="urlLogo" src="assets/graphics/URL_logo.svg">
@@ -142,6 +136,7 @@
       <p innerhtml.bind="locale.info_content.p1"></p>
       <p innerhtml.bind="locale.info_content.p2"></p>
       <p innerhtml.bind="locale.info_content.p3"></p>
+      <p id="note" innerhtml.bind="locale.info_content.p4"></p>
 
       <table id="partners">
         <!-- <tr class="label">
@@ -156,6 +151,20 @@
             </a>
           </td>
         </tr> -->
+
+        <!-- Funding Partners-->
+        <tr class="label">
+          <td colspan="4" cellpadding="0" align="left">
+            <p>${locale.info_content.partners.support}</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" align="center">
+            <a href="http://tatacenter.mit.edu">
+              <img class="tataLogo" src="assets/graphics/TatacenterNewLogo.png">
+            </a>
+          </td>
+        </tr>
 
         <!-- Data Partners-->
         <tr class="label">
@@ -175,18 +184,22 @@
             </a>
           </td>
         </tr>
-        <tr class="label">
+
+
+        <!-- proejct Partners-->
+         <tr class="label">
           <td colspan="4" cellpadding="0" align="left">
-            <p>${locale.info_content.partners.support}</p>
+            <p>${locale.info_content.partners.project}</p>
           </td>
         </tr>
         <tr>
           <td colspan="4" align="center">
-            <a href="http://tatacenter.mit.edu">
-              <img class="tataLogo" src="assets/graphics/tatacenter.png">
+            <a href="https://www.cag.org.in/our-work/city-governance">
+              <img class="partnerLogo" src="assets/graphics/CAG-logo.png">
             </a>
           </td>
         </tr>
+
       </table>
 
 

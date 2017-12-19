@@ -10,16 +10,22 @@
     position: absolute;
     top: 50%;
     &#hasPhoto {
-      left: 50%;
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
+      & img {
+        position: absolute;
+        left: 50%;
+        max-width: 100%;
+        max-height: 100%;
+        .translate-mixin(-50%, -50%);
+      }
     }
     &#noPhoto {
       left: 40%;
       font-size: 80px;
       color: white;
+      .translate-mixin(-50%, -50%);
     }
-    .translate-mixin(-50%, -50%);
     z-index: 2;
   }
 }

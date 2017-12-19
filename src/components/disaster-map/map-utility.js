@@ -31,12 +31,12 @@ export class MapUtility {
     return querycity in this.config.instance_regions;
   }
 
-  // return all supported cities as an array
+  // return city name from code
   parseCityName(region_code, cities) {
     var self = this;
-    for (var i = 0; i < cities.length; i+=1) {
-      if (self.parseCityObj(cities[i], false).region === region_code) {
-        return cities[i];
+    for (let city of cities) {
+      if (self.parseCityObj(city, false).region === region_code) {
+        return city;
       } else {
         return null;
       }
@@ -90,13 +90,19 @@ export class MapUtility {
     }
   }
 
+  statsNotification({reports, timeperiod}) {
+    let msg = 'Received ' + reports +
+      ' reports in past ' + (timeperiod / 3600) + ' hours';
+    $.notify(msg, {style:"mapInfo", className:"info", position:"top center"});
+  }
+
   noReportNotification(city_name, report_id) {
     if (report_id && city_name) {
-      $.notify("Report id: " + report_id + " not found in " + city_name, {style:"mapInfo", className:"info"});
+      $.notify("Report id: " + report_id + " not found in " + city_name, {style:"mapInfo", className:"info", position:"top center"});
     } else if (city_name) {
-      $.notify("No reports found for " + city_name, {style:"mapInfo", className:"info"});
+      $.notify("No reports found for " + city_name, {style:"mapInfo", className:"info", position:"top center"});
     } else {
-      $.notify('Unsupported city', {style:"mapInfo", className:"error"});
+      $.notify('Unsupported city', {style:"mapInfo", className:"error", position:"top center"});
     }
   }
 
@@ -148,11 +154,11 @@ export class MapUtility {
         });
       } else {
         //case 2: location found, but not in supported city
-        $.notify("Location out of bounds", {style:"mapInfo", className:"info"});
+        $.notify("Location out of bounds", {style:"mapInfo", className:"info", position:"top center"});
       }
     } else {
       //case 3: location not found
-      $.notify("GPS location not found", {style:"mapInfo", className:"error"});
+      $.notify("GPS location not found", {style:"mapInfo", className:"error", position:"top center"});
     }
   }
 

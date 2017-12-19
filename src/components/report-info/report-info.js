@@ -1,5 +1,4 @@
-import $ from 'jquery';
-import {inject, bindable, customElement} from 'aurelia-framework';
+import {inject, bindable, customElement, computedFrom} from 'aurelia-framework';
 import {Config} from '../../resources/config';
 
 //start-aurelia-decorators
@@ -10,15 +9,8 @@ export class ReportInfo {
   //@bindable attributes do not work with camelCase...
   //start-aurelia-decorators
   @bindable locale;
-  @bindable imageurl;
-  @bindable height;
-  @bindable reportevent;
-  @bindable title;
-  @bindable text;
-  @bindable pkey;
   @bindable city;
-  @bindable timestamp;
-  @bindable source;
+  @bindable popupcontent;
   //end-aurelia-decorators
 
   constructor(Config) {
@@ -60,8 +52,79 @@ export class ReportInfo {
     return this.locale.report_info.share_msg;
   }
 
+  //start-aurelia-decorators
+  @computedFrom('popupcontent')
+  //end-aurelia-decorators
   get reportUrl() {
-    return this.app + "map/" + this.city + "/" + this.pkey;
+    return this.app + "map/" + this.city + "/" + this.popupcontent.pkey;
+  }
+
+  //start-aurelia-decorators
+  @computedFrom('popupcontent')
+  //end-aurelia-decorators
+  get height() {
+    if (this.popupcontent.report_data) {
+      return this.popupcontent.report_data.flood_depth;
+    } else {
+      return null;
+    }
+  }
+
+  //start-aurelia-decorators
+  @computedFrom('popupcontent')
+  //end-aurelia-decorators
+  get imageurl() {
+    return this.popupcontent.image_url;
+  }
+
+  //start-aurelia-decorators
+  @computedFrom('popupcontent')
+  //end-aurelia-decorators
+  get fullsizeimg() {
+    if (this.popupcontent.image_url) {
+      return this.popupcontent.image_url.replace(/(\/[-a-zA-Z0-9]*)(?=\.jpg)/, '/large' + '$1');
+    } else {
+      return null;
+    }
+  }
+
+  //start-aurelia-decorators
+  @computedFrom('popupcontent')
+  //end-aurelia-decorators
+  get title() {
+    return this.popupcontent.title;
+  }
+
+  //start-aurelia-decorators
+  @computedFrom('popupcontent')
+  //end-aurelia-decorators
+  get reportevent() {
+    if (this.popupcontent.report_data) {
+      return this.popupcontent.report_data.report_type;
+    } else {
+      return null;
+    }
+  }
+
+  //start-aurelia-decorators
+  @computedFrom('popupcontent')
+  //end-aurelia-decorators
+  get source() {
+    return this.popupcontent.source;
+  }
+
+  //start-aurelia-decorators
+  @computedFrom('popupcontent')
+  //end-aurelia-decorators
+  get timestamp() {
+    return this.popupcontent.timestamp;
+  }
+
+  //start-aurelia-decorators
+  @computedFrom('popupcontent')
+  //end-aurelia-decorators
+  get text() {
+    return this.popupcontent.text;
   }
 
   attached() {
