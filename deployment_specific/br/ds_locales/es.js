@@ -87,7 +87,7 @@ const es = {
     'p1': 'RiskMap.us es un proyecto iniciado por el Laboratorio de Riesgo Urbano en el MIT como una plataforma libre y transparente para la respuesta a emergencias en megaciudades en todo el mundo.',
     'p2': 'La plataforma adopta un paradigma de &quot;personas son los mejores sensores&quot;, donde los informes confirmados son recopilados directamente de los usuarios a nivel de la calle de una manera que elimina el procesamiento de datos costoso y que consume mucho tiempo. Este marco crea datos precisos y en tiempo real que se ponen inmediatamente a disposición de los usuarios y de las autoridades de emergencia.',
     'p3': 'RiskMap.us recopila, clasifica y visualiza datos usando el software de código abierto de CogniCity especialmente desarrollado - una plataforma a nivel de empresa para respuesta de emergencia y manejo de desastres - para transformar el ruido de los medios sociales y digitales en información crítica para residentes, comunidades y agencias gubernamentales.',
-    'p4': 'ATENCIÓN: Para cualquier situación que requiere asistencia inmediata de la policía, los bomberos, o una ambulancia, por favor llamar a 912.',
+    'p4': 'ATENCIÓN: Para cualquier situación que requiere asistencia inmediata de la policía, los bomberos, o una ambulancia, por favor llamar a 911.',
     'partners': {
       'implementing': 'Socio de implementación',
       'project': 'Socios del proyecto',

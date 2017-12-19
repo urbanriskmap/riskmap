@@ -21,7 +21,7 @@ const id = {
     'source': 'Sumber',
     'flagReport_Title': 'flag this report as inappropriate', // TODO translation
     'flagReport_button': 'tell us more',
-    'flagReport_email': 'petabencana@gmail.com',
+    'flagReport_email': 'info@petabencana.id',
     'share': 'Share this report'
   },
   'flood_info': {

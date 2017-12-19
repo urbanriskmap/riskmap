@@ -5,7 +5,7 @@ const kn = require('./kn');
 
 module.exports = {
   en: en,
-  ta: ta,
   mr: mr,
-  kn: kn
+  kn: kn,
+  ta: ta
 };
