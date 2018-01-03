@@ -56,7 +56,7 @@
       <flood-info class="infoWrapper" if.bind="mapModel.layers.popupContent.state" locale.bind="webMenu.locale" areaname.bind="mapModel.layers.popupContent.area_name" districtname.bind="mapModel.layers.popupContent.parent_name" state.bind="mapModel.layers.popupContent.state" updated.bind="mapModel.layers.formatTime(mapModel.layers.popupContent.last_updated)">
       </flood-info>
 
-      <report-info class="infoWrapper" if.bind="mapModel.layers.popupContent.pkey" locale.bind="webMenu.locale" popupcontent.bind="mapModel.layers.popupContent" city.bind="mapModel.utility.parseCityName(mapModel.layers.popupContent.tags.instance_region_code, mapModel.cities)">
+      <report-info class="infoWrapper" if.bind="mapModel.layers.popupContent.pkey" id.bind="report_id" locale.bind="webMenu.locale" popupcontent.bind="mapModel.layers.popupContent" city.bind="mapModel.utility.parseCityName(mapModel.layers.popupContent.tags.instance_region_code, mapModel.cities)">
       </report-info>
     </div>
 

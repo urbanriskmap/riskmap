@@ -11,6 +11,7 @@ export class ReportInfo {
   @bindable locale;
   @bindable city;
   @bindable popupcontent;
+  @bindable id;
   //end-aurelia-decorators
 
   constructor(Config) {
