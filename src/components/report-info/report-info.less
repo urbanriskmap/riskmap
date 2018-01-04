@@ -80,11 +80,12 @@
   }
   & #voteIcons {
     position: absolute;
-    height: 18%;
     bottom: 0px;
+    & i {
+      font-size: 18px;
+    }
     & a {
       position: relative;
-      .linklight-mixin(18px);
       text-decoration: none;
       padding: 0 6px 0 0;
       cursor: pointer;
@@ -92,24 +93,20 @@
         color: @banjir-blue;
       }
     }
-  }
-  & #count{
-    border: solid 1px red;
-    width: 30px;
-    .linklight-mixin(12px);
+    & button {
+      border: none;
+    }
+    & button:disabled {
+     color: @banjir-blue
+    }
   }
 }
 
 .interactionFlyer {
-  display: none;
-  padding: 5px;
-  position: absolute;
-  border: solid @light-gray 1px;
-  border-radius: 5px;
-  width: 35%;
-  height: 60%;
-  margin-left: 40%;
-  float: right;
+  position: relative;
+  top: -18px;
+  height: 100px;
+  padding: 20px;
   z-index: 2500;
   text-align: center;
   background-color: @snow-white;
@@ -120,6 +117,9 @@
     text-decoration: none;
     line-height:42px;;
     list-style: none;
+    & i {
+      font-size: 16px;
+    }
   }
   & p {
     .bodymedium-mixin(12px);

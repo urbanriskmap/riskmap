@@ -26,23 +26,40 @@
     </div>
 
     <div id="voteIcons">
-      <a repeat.for="button of voteButtons" class="voteButton" id.bind="'vote_button_' + button.name" click.delegate="feedbackInteraction(button)">
-        <i class.bind="'icon-' + button.name" title.bind="button.tooltip"></i>
-      </a>
-      <div id="count">0</div>
+      <table>
+        <tr>
+          <td>
+            <button class="voteButtons" click.delegate="voteHandler(-1)" disabled.bind="downvoteDisabled">
+              <i class.bind="'icon-downvote'" title.bind="voteButtons[1].tooltip"></i>
+            </button>
+          </td>
+
+          <td>
+            <button class="voteButtons" click.delegate="voteHandler(1)" disabled.bind="upvoteDisabled">
+              <i class.bind="'icon-upvote'" title.bind="voteButtons[0].tooltip"></i>
+            </button>
+          </td>
+
+          <td repeat.for="button of shareButtons">
+            <a  class="shareButtons" id.bind="'shareButtons' + button.name" click.delegate="feedbackInteraction(button)">
+              <i class.bind="'icon-' + button.name" title.bind="button.tooltip"></i>
+            </a>
+          </td>
+        </tr>
       </div>
+
+
+    <div id="socialIcons" class="interactionFlyer">
+      <p>${locale.report_info.share}</p>
+      <a repeat.for="button of socialButtons" href.bind="button.intent" >
+        <i class.bind="'icon-' + button.name" ></i>
+      </a>
     </div>
-  </div>
 
-  <div id="socialIcons" class="interactionFlyer">
-    <p>${locale.report_info.share}</p>
-    <a repeat.for="button of socialButtons" href.bind="button.intent" >
-      <i class.bind="'icon-' + button.name" ></i>
-    </a>
-  </div>
+    <div id="flagReport" class="interactionFlyer">
+      <p>${locale.report_info.flagReport_Title}</p>
+      <a href.bind="'mailto:' + locale.report_info.flagReport_email + '?subject=Please%20review%20this%20report%20&#40;Report id ' + id + '&#41;'"><button id="submitButton">${locale.report_info.flagReport_button}</button></a>
+    </div>
 
-  <div id="flagReport" class="interactionFlyer">
-    <p>${locale.report_info.flagReport_Title}</p>
-     <a href.bind="'mailto:' + locale.report_info.flagReport_email + '?subject=Please%20review%20this%20report%20&#40;Report id ' + id + '&#41;'"><button id="submitButton">${locale.report_info.flagReport_button}</button></a>
-  </div>
-</template>
+    </div>
+  </template>
