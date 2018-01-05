@@ -29,12 +29,13 @@ export class ReportInfo {
   }
 
   feedbackInteraction(button) {
-    $('.interactionFlyer').hide();
+    // $('.interactionFlyer').hide();
     $('.voteButton').removeClass('active');
     $('#vote_button_' + button.name).addClass('active');
     switch (button.name) {
       case 'share':
       $('#socialIcons').fadeToggle();
+
       break;
       case 'flag':
       $('#flagReport').fadeToggle();
@@ -43,6 +44,8 @@ export class ReportInfo {
       return null;
     }
   }
+
+
 
   submitFlag()
   {

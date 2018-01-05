@@ -83,18 +83,26 @@
     bottom: 0px;
     & i {
       font-size: 18px;
+      & .active {
+        color: @banjir-blue;
+        box-shadow: @drop-shadow;
+      }
     }
     & a {
       position: relative;
       text-decoration: none;
       padding: 0 6px 0 0;
       cursor: pointer;
-      &.active {
-        color: @banjir-blue;
-      }
+    }
+    & a:active {
+      color: @banjir-blue;
     }
     & button {
       border: none;
+      cursor: pointer;
+      & .active {
+        color: @banjir-blue;
+      }
     }
     & button:disabled {
      color: @banjir-blue
@@ -104,6 +112,7 @@
 
 .interactionFlyer {
   position: relative;
+  display: none;
   top: -18px;
   height: 100px;
   padding: 20px;
@@ -115,12 +124,17 @@
     border: none;
     .linklight-mixin(32px);
     text-decoration: none;
-    line-height:42px;;
-    list-style: none;
+      cursor: pointer;
+    & .active {
+      color: @banjir-blue;
+      box-shadow: @drop-shadow;
+    }
     & i {
       font-size: 16px;
     }
+
   }
+
   & p {
     .bodymedium-mixin(12px);
     margin: 5px;
