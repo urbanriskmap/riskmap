@@ -42,7 +42,6 @@
     height: 75%;
     border-bottom: 1px solid @banjir-blue;
     overflow-y: scroll;
-
     & .textTitle {
       .bodybold-mixin(14px);
       padding: 0;
@@ -100,24 +99,29 @@
       border: none;
       background-color: @snow-white;
       cursor: pointer;
-      & .active {
-        color: @banjir-blue;
-      }
     }
     & button:disabled {
      color: @banjir-blue
     }
+    button:focus {
+      outline:0;
+    }
   }
 }
 
+.shareButtons.highlight {
+    color: @banjir-blue;
+}
+
 .interactionFlyer {
-  position: relative;
+  position: absolute;
   display: none;
-  top: -18px;
+  top: 0px;
   height: 100px;
   padding: 20px;
   z-index: 2500;
   text-align: center;
+  border: solid 1px @banjir-blue;
   background-color: @snow-white;
   & a {
     padding: 5px;
@@ -132,13 +136,13 @@
     & i {
       font-size: 16px;
     }
-
   }
   & p {
     .bodymedium-mixin(12px);
     margin: 5px;
     text-align: center;
   }
+  & #shareIcons
   & #submitButton {
     margin: 5px;
     margin-top: 15px;

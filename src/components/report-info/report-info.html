@@ -41,18 +41,19 @@
           </td>
 
           <td repeat.for="button of shareButtons">
-            <a  class="shareButtons" id.bind="'shareButtons' + button.name" click.delegate="feedbackInteraction(button)">
+            <button  class="shareButtons" id.bind="'shareButtons' + button.name" click.delegate="feedbackInteraction(button)">
               <i class.bind="'icon-' + button.name" title.bind="button.tooltip"></i>
-            </a>
+            </button>
           </td>
         </tr>
+      </table>
       </div>
 
 
     <div id="socialIcons" class="interactionFlyer">
       <p>${locale.report_info.share}</p>
       <a repeat.for="button of socialButtons" href.bind="button.intent" >
-        <i class.bind="'icon-' + button.name" ></i>
+        <i id="socialIcons" class.bind="'icon-' + button.name" ></i>
       </a>
     </div>
 

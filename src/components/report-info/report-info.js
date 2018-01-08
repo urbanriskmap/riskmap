@@ -34,11 +34,14 @@ export class ReportInfo {
     $('#vote_button_' + button.name).addClass('active');
     switch (button.name) {
       case 'share':
-      $('#socialIcons').fadeToggle();
-
+      // $('#flagReport').hide();
+      $('#socialIcons').toggle();
+            $('#shareButtons' + button.name).toggleClass('highlight');
       break;
       case 'flag':
-      $('#flagReport').fadeToggle();
+      // $('#socialIcons').hide();
+      $('#flagReport').toggle();
+      $('#shareButtons' + button.name).toggleClass('highlight');
       break;
       default:
       return null;
