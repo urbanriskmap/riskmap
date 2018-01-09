@@ -1,4 +1,4 @@
-import {inject, bindable, customElement, computedFrom} from 'aurelia-framework';
+import {inject, bindable, customElement, computedFrom, observable} from 'aurelia-framework';
 import {Config} from '../../resources/config';
 import {PointsService} from './points-service';
 
@@ -26,34 +26,50 @@ export class ReportInfo {
       grasp: 'javascript:void(0)'
       //end-aurelia-decorators
     };
+
+    this.shareButtons = [
+      {
+        'name': 'share',
+        'tooltip': 'Share this report'
+      },
+      {
+        'name': 'flag',
+        'tooltip': 'Flag this report as inappropriate'
+      }
+    ];
+
+    this.voteButtons = [
+      {
+        'name': 'upvote',
+        'tooltip': 'Upvote this report',
+        'enabled': true
+      },
+      {
+        'name': 'downvote',
+        'tooltip': 'Downvote this report',
+        'enabled': true
+      }
+    ];
   }
 
   feedbackInteraction(button) {
-    // $('.interactionFlyer').hide();
-    $('.voteButton').removeClass('active');
-    $('#vote_button_' + button.name).addClass('active');
-    switch (button.name) {
-      case 'share':
-      // $('#flagReport').hide();
-      $('#socialIcons').toggle();
-            $('#shareButtons' + button.name).toggleClass('highlight');
-      break;
-      case 'flag':
-      // $('#socialIcons').hide();
-      $('#flagReport').toggle();
-      $('#shareButtons' + button.name).toggleClass('highlight');
-      break;
-      default:
-      return null;
+    if ($('#shareButtons' + button.name).hasClass('highlight')) {
+      // if clicked button active
+      // remove highlight class from all .shareButtons
+      $('.shareButtons').removeClass('highlight');
+      // hide all .interactionFlyer
+      $('.interactionFlyer').hide();
+    } else {
+      // if selected button inactive
+      // remove highlight class from all .shareButtons
+      $('.shareButtons').removeClass('highlight');
+      // add highlight class to clicked button
+      $('#shareButtons' + button.name).addClass('highlight');
+      // hide all .interactionFlyer
+      $('.interactionFlyer').hide();
+      // show selected interactionFlyer
+      $('#' + button.name + 'Flyer').show();
     }
-  }
-
-
-
-  submitFlag()
-  {
-    let flagText = document.getElementById('flag_text').value;
-    console.log(flagText);
   }
 
   get msgText() {
@@ -99,7 +115,6 @@ export class ReportInfo {
       return 0;
     }
   }
-
 
   //start-aurelia-decorators
   @computedFrom('popupcontent')
@@ -180,29 +195,8 @@ export class ReportInfo {
       }
     ];
 
-    self.shareButtons = [
-      {
-        'name': 'share',
-        'tooltip': 'Share this report'
-      },
-      {
-        'name': 'flag',
-        'tooltip': 'Flag this report as inappropriate'
-      }
-    ];
+    self.popupcontent.voteChanged = true;
 
-    self.voteButtons = [
-      {
-        'name': 'upvote',
-        'tooltip': 'Upvote this report',
-        'enabled': true
-      },
-      {
-        'name': 'downvote',
-        'tooltip': 'Downvote this report',
-        'enabled': true
-      }
-    ];
   }
 
   //start-aurelia-decorators
@@ -211,12 +205,12 @@ export class ReportInfo {
   get upvoteDisabled() {
     if (localStorage.getItem('id_' + this.reportId)) {
       if (localStorage.getItem('id_' + this.reportId) === 'up') {
-        return 'disabled';
+        return true;
       } else {
-        return null;
+        return false;
       }
     } else {
-      return null;
+      return false;
     }
   }
 
@@ -224,19 +218,24 @@ export class ReportInfo {
   @computedFrom('popupcontent.voteChanged')
   //end-aurelia-decorators
   get downvoteDisabled() {
+
     if (localStorage.getItem('id_' + this.reportId)) {
       if (localStorage.getItem('id_' + this.reportId) === 'down') {
-        return 'disabled';
+        return true;
       } else {
-        return null;
+        return false;
       }
     } else {
-      return null;
+      return false;
     }
   }
 
   voteHandler(vote) {
     const self = this;
+
+    // Trigger getter to update disabled status
+    self.popupcontent.voteChanged = true;
+
     self.service.updatePoints(self.reportId, vote)
     .then(points => {
       if (vote > 0) {
@@ -270,11 +269,7 @@ export class ReportInfo {
           // Case 3: never voted for this report id
           localStorage.setItem('id_' + self.reportId, 'down');
         }
-
-        // Trigger getter to update disabled status
-        self.popupcontent.voteChanged = true;
       }
-      console.log(localStorage);
     });
 
     // Set voteChanged back to false to enable trigger on next button click

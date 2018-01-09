@@ -405,18 +405,6 @@
       "src": "entypo"
     },
     {
-      "uid": "7ad4d2306ebda8452e5e3eff3cd8241c",
-      "css": "upvote",
-      "code": 59428,
-      "src": "entypo"
-    },
-    {
-      "uid": "429fba993b729174468a9493613ad1ba",
-      "css": "downvote",
-      "code": 59429,
-      "src": "entypo"
-    },
-    {
       "uid": "4i0s2bklai5fywieqm4dqqngfz9ptfab",
       "css": "flag",
       "code": 59427,
@@ -427,6 +415,18 @@
       "css": "share",
       "code": 61920,
       "src": "fontawesome"
+    },
+    {
+      "uid": "0464d6f35a7fe587434173f42ddace88",
+      "css": "upvote",
+      "code": 59430,
+      "src": "elusive"
+    },
+    {
+      "uid": "3849753858193b4d6e07afa834aff979",
+      "css": "downvote",
+      "code": 59431,
+      "src": "elusive"
     }
   ]
 }

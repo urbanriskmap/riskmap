@@ -29,19 +29,23 @@
       <table>
         <tr>
           <td>
-            <button class="voteButtons" click.delegate="voteHandler(-1)" disabled.bind="downvoteDisabled">
+            <!-- Downvote -->
+            <!-- Use trigger when button needs to be disabled -->
+            <button class="voteButtons" disabled.bind="downvoteDisabled" click.trigger="voteHandler(-1)">
               <i class.bind="'icon-downvote'" title.bind="voteButtons[1].tooltip"></i>
             </button>
           </td>
 
           <td>
-            <button class="voteButtons" click.delegate="voteHandler(1)" disabled.bind="upvoteDisabled">
+            <!-- Upvote -->
+            <!-- Use trigger when button needs to be disabled -->
+            <button class="voteButtons" disabled.bind="upvoteDisabled" click.trigger="voteHandler(1)">
               <i class.bind="'icon-upvote'" title.bind="voteButtons[0].tooltip"></i>
             </button>
           </td>
 
           <td repeat.for="button of shareButtons">
-            <button  class="shareButtons" id.bind="'shareButtons' + button.name" click.delegate="feedbackInteraction(button)">
+            <button class="shareButtons" id.bind="'shareButtons' + button.name" click.delegate="feedbackInteraction(button)">
               <i class.bind="'icon-' + button.name" title.bind="button.tooltip"></i>
             </button>
           </td>
@@ -50,14 +54,14 @@
       </div>
 
 
-    <div id="socialIcons" class="interactionFlyer">
+    <div id="shareFlyer" class="interactionFlyer">
       <p>${locale.report_info.share}</p>
       <a repeat.for="button of socialButtons" href.bind="button.intent" >
-        <i id="shareIcons" class.bind="'icon-' + button.name" ></i>
+        <i  id="socialButtons" class.bind="'icon-' + button.name" ></i>
       </a>
     </div>
 
-    <div id="flagReport" class="interactionFlyer">
+    <div id="flagFlyer" class="interactionFlyer">
       <p>${locale.report_info.flagReport_Title}</p>
       <a href.bind="'mailto:' + locale.report_info.flagReport_email + '?subject=Please%20review%20this%20report%20&#40;Report%20id%20&#58;%20' + id + '&#41;'"><button id="submitButton">${locale.report_info.flagReport_button}</button></a>
     </div>

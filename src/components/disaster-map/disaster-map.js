@@ -95,8 +95,7 @@ export class DisasterMap {
       self.layers.getStats(self.utility.parseCityObj(cityName, false).region)
       .then(stats => {
         self.utility.statsNotification(stats);
-      })
-      .catch();
+      });
 
       if (self.reportid && self.layers.activeReports.hasOwnProperty(self.reportid)) {
         //Case 1: Active report id in current city
