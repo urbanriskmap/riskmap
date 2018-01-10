@@ -5,6 +5,7 @@ const en = {
     'bangalore': 'Bangalore'
   },
   'add_report': 'Report Flooding',
+  'reports_stats': 'Received {reportsplaceholder} reports in past {hoursplaceholder} hours',
   'prep_menu': {
     'btn_names': {
       'drain': 'Blocked Drains',

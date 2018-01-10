@@ -1,5 +1,6 @@
 const es = {
   'add_report': 'informe de inundación',
+  'reports_stats': 'Received {reportsplaceholder} reports in past {hoursplaceholder} hours',
   'prep_menu': {
     'btn_names': {
       'drain': 'Drenajes bloqueados',

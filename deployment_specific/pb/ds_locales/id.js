@@ -1,5 +1,6 @@
 const id = {
   'add_report': 'Laporan banjir',
+  'reports_stats': 'Terdapat {reportsplaceholder} laporan dalam {hoursplaceholder} jam terakhir',
   'prep_menu': {
     'btn_names': {
       'drain': 'Blocked Drains',

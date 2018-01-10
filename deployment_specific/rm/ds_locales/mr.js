@@ -5,6 +5,7 @@ const mr = {
     'bangalore': 'बंगलोर'
   },
   'add_report': 'पुराची नोंद करा',
+  'reports_stats': 'मागील {hoursplaceholder} तासांमध्ये मिळालेली निरीक्षणे : {reportsplaceholder}',
   'prep_menu': {
     'btn_names': {
       'drain': 'तुंबलेले ड्रेन',

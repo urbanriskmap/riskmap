@@ -5,6 +5,7 @@ const ta = {
     'bangalore': 'பெங்களூர்'
   },
   'add_report': 'அறிக்கை வெள்ளம்',
+  'reports_stats': 'கடந்த {reportsplaceholder} மணி நேரத்தில் {hoursplaceholder} அறிக்கைகள் கிடைத்தன',
   'prep_menu': {
     'btn_names': {
       'drain': 'வடிகால் அடைப்பு',
