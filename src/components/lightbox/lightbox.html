@@ -1,0 +1,12 @@
+<template>
+  <require from="./lightbox.css"></require>
+
+  <div id="lightboxWrapper" class="modal">
+    <i class="icon-cancel-circled-outline closeButton" click.delegate="closeLightbox()"></i>
+    <div class="modal-content">
+      <div class="reportImages">
+        <img class="image" src.bind="fullsizeimg" style="width:100%">
+      </div>
+    </div>
+  </div>
+</template>
