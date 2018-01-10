@@ -20,10 +20,10 @@ const id = {
     'share_msg': 'Laporan%20banjir%20pada%20petabencana%2Eid',
     'water_depth': 'Tinggi',
     'source': 'Sumber',
-    'flagReport_Title': 'flag this report as inappropriate', // TODO translation
-    'flagReport_button': 'tell us more',
+    'flagReport_Title': 'Tandai laporan ini sebagai laporan tidak benar',
+    'flagReport_button': 'Beritahu kami lebih lanjut',
     'flagReport_email': 'info@petabencana.id',
-    'share': 'Share this report'
+    'share': 'Bagikan laporan ini'
   },
   'flood_info': {
     'title': 'Area terdampak banjir',
