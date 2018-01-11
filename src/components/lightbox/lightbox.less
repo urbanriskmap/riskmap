@@ -1,0 +1,28 @@
+@import "../../resources/style_sheets/theme_guide.less";
+
+
+#lightboxWrapper {
+  position: absolute;
+  .fullspan-mixin;
+  background-color: rgba(0, 0, 0, 0.90);
+  z-index: 1500;
+}
+.modal-content {
+  display: block;
+  margin: auto;
+  width: 80%;
+  padding: 10px;
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.closeButton {
+  float: right;
+  padding: 10px;
+  .bodymedium-mixin(24px);
+  color: @snow-white;
+  z-index: 1501;
+  cursor: pointer;
+}

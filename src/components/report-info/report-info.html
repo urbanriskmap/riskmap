@@ -2,9 +2,7 @@
   <require from="./report-info.css"></require>
   <div  id="photoPreview">
     <div class="image" id="hasPhoto" show.bind="imageurl">
-      <a target="_blank" href.bind="fullsizeimg">
-        <img src.bind="imageurl">
-      </a>
+      <img src.bind="imageurl" click.delegate="openLightbox(fullsizeimg)">
     </div>
     <div class="image" id="noPhoto" show.bind="!imageurl">
       <i class="icon-flood-img"></i>

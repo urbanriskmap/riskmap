@@ -1,5 +1,5 @@
 const id = {
-  'add_report': 'Laporan banjir',
+  'add_report': 'Laporkan banjir',
   'reports_stats': 'Terdapat {reportsplaceholder} laporan dalam {hoursplaceholder} jam terakhir',
   'prep_menu': {
     'btn_names': {
@@ -20,8 +20,8 @@ const id = {
     'share_msg': 'Laporan%20banjir%20pada%20petabencana%2Eid',
     'water_depth': 'Tinggi',
     'source': 'Sumber',
-    'flagReport_Title': 'Tandai laporan ini sebagai laporan tidak benar',
-    'flagReport_button': 'Beritahu kami lebih lanjut',
+    'flagReport_Title': 'Tandai ini sebagai laporan tidak benar',
+    'flagReport_button': 'Beritahu kami',
     'flagReport_email': 'info@petabencana.id',
     'share': 'Bagikan laporan ini'
   },

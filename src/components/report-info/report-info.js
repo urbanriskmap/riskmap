@@ -13,6 +13,7 @@ export class ReportInfo {
   @bindable city;
   @bindable popupcontent;
   @bindable id;
+  @bindable openLightbox;
   //end-aurelia-decorators
 
   constructor(Config, PointsService) {

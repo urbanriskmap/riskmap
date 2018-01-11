@@ -44,4 +44,8 @@ export class Landing {
       this.resizeSidePane();
     });
   }
+
+  toggleLightbox(imageurl) {
+    this.imageurl = imageurl;
+  }
 }
