@@ -124,7 +124,7 @@ export class LocaleLocal {
 
       // BAHASA
       id: {
-        "add_report": "Laporan banjir",
+        "add_report": "Laporkan banjir",
         "prep_menu": {
           "btn_names": {
             "drain": "Blocked Drains",
