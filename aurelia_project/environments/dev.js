@@ -10,6 +10,7 @@ export default {
     default_language: 'en',
     tile_layer: 'https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidXJiYW5yaXNrbWFwIiwiYSI6ImNqMnFraWVzYzAyd24ycXRqMmpvbmhyZ2QifQ.xc_v7umok760t2q6NZK1RA',
     data_server: 'https://data-dev.riskmap.us/',
+    sensors_server: 'https://ckf6kf5dvd.execute-api.us-west-2.amazonaws.com/dev/sensors/',
     app: 'https://broward-dev.riskmap.us/',
     deep_links: [
       {name: 'facebook', link: 'http://m.me/1747847428843379'}, //FB page id is used as no username is allowd at this point.

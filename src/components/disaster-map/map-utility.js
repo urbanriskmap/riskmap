@@ -82,11 +82,8 @@ export class MapUtility {
     if (cityObj.region !== 'java') {
       layers.addFloodExtents(city_name, self.parseCityObj(city_name, false).region, map, togglePane);
       layers.addFloodGauges(city_name, self.parseCityObj(city_name, false).region, map, togglePane);
+      layers.addSensors(city_name, self.parseCityObj(city_name, false).region, map, togglePane);
       return layers.addReports(city_name, self.parseCityObj(city_name, false).region, map, togglePane);
-    } else {
-      return new Promise((resolve, reject) => {
-        resolve();
-      });
     }
   }
 

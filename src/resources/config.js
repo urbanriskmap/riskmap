@@ -10,6 +10,7 @@ export class Config {
     this.map = dep.map;
     this.map.dep_name = dep.name;
     this.map.data_server = env[dep.name].data_server;
+    this.map.sensors_server = env[dep.name].sensors_server;
     this.map.tile_layer = env[dep.name].tile_layer;
     this.map.app = env[dep.name].app;
     this.map.report_timeperiod = env[dep.name].report_timeperiod;

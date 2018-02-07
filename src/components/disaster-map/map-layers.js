@@ -35,7 +35,17 @@ export class MapLayers {
         iconUrl: 'assets/icons/floodgauge_selected.svg',
         iconSize: [30, 30],
         iconAnchor: [15, 15]
-      })
+      }),
+      sensor_normal: L.icon({
+        iconUrl: 'assets/icons/floodgauge_1.svg',
+        iconSize: [30, 30],
+        iconAnchor: [15, 15]
+      }),
+      sensor_selected: L.icon({
+        iconUrl: 'assets/icons/floodgauge_selected.svg',
+        iconSize: [30, 30],
+        iconAnchor: [15, 15]
+      }),
     };
     this.mapPolygons = {
       normal: {
@@ -78,9 +88,9 @@ export class MapLayers {
     let timestring = new Date(localTime).toISOString(); // ISO string
     // Format string for output
     timestring = timestring.split('T');
-    let t1 = timestring[1].slice(0,5); // Extract HH:MM
+    let t1 = timestring[1].slice(0, 5); // Extract HH:MM
     let d1 = timestring[0].split('-'); // Extract DD-MM-YY
-    let d2 = d1[2]+'-'+d1[1]+'-'+d1[0]; // Reformat
+    let d2 = d1[2] + '-' + d1[1] + '-' + d1[0]; // Reformat
     return (t1 + ' ' + d2);
   }
 
@@ -104,16 +114,16 @@ export class MapLayers {
   }
 
   // Get topojson data from server, return geojson
-  getData(end_point) {
-    var self = this,
-        url = self.config.data_server + end_point;
+  getData(endPoint) {
+    const self = this;
+    const url = self.config.data_server + endPoint;
     let client = new HttpClient();
     return new Promise((resolve, reject) => {
       client.get(url)
       .then(data => {
-        var topology = JSON.parse(data.response);
+        const topology = JSON.parse(data.response);
         if (topology.statusCode === 200) {
-          var result = topology.result;
+          const result = topology.result;
           if (result && result.objects) {
             resolve(topojson.feature(result, result.objects.output));
           } else {
@@ -378,7 +388,7 @@ export class MapLayers {
       }
     });
     // add layer to map
-    return self.appendData('reports/?city=' + city_region +'&timeperiod='+self.config.report_timeperiod, self.reports, map);
+    return self.appendData('reports/?city=' + city_region + '&timeperiod=' + self.config.report_timeperiod, self.reports, map);
   }
 
   addFloodExtents(city_name, city_region, map, togglePane) {
@@ -435,5 +445,71 @@ export class MapLayers {
       map.removeLayer(self.gaugeLayer);
       self.gaugeLayer = null;
     }
+  }
+
+  getSensors() {
+    const self = this;
+    const url = self.config.sensors_server;
+    let client = new HttpClient();
+    return new Promise((resolve, reject) => {
+      client.get(url)
+      .then(data => {
+        const topoData = JSON.parse(data.response);
+        if (topoData.statusCode === 200) {
+          const result = topoData.body;
+          if (result) {
+            resolve(result);
+          } else {
+            resolve(null);
+          }
+        } else {
+          resolve(null);
+        }
+      })
+      .catch(err => reject(err));
+    });
+
+    // const self = this;
+    // return new Promise((resolve, reject) => {
+    //   self.getData('sensors')
+    //   .then(data => {
+    //     if (!data) {
+    //       console.log('Could not load map layer');
+    //       resolve();
+    //     } else {
+    //       resolve(data);
+    //     }
+    //   }).catch(() => reject(null));
+    // });
+  }
+
+  getSensorData() {
+
+  }
+
+  addSensors(cityName, cityRegion, map, togglePane) {
+    const self = this;
+    map.createPane('sensors');
+    map.getPane('sensors').style.zIndex = 650;
+    if (cityRegion === 'brw') {
+      self.getSensors()
+      .then(data => {
+        console.log(data);
+        // Create sensors layer and add to map
+      }).catch(error => console.log(error));
+
+      // self.sensorLayer = L.geoJSON(null, {
+      //   pointToLayer: (feature, latlng) => {
+      //     return L.marker(latlng, {
+      //       icon: self.mapIcons.sensor_normal,
+      //       pane: 'sensors'
+      //     });
+      //   },
+      //   onEachFeature: (feature, layer) => {
+      //     self.sensorInteraction(feature, layer, cityName, map, togglePane);
+      //   }
+      // });
+    }
+    // return self.appendData('sensors?');
   }
 }
