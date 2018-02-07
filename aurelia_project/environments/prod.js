@@ -26,7 +26,7 @@ export default {
     data_server: 'https://data.petabencana.id/',
     app: 'https://petabencana.id/',
     deep_links: [
-      {name: 'facebook', link: 'http://m.me/petabencana.id/'},
+      {name: 'facebook', link: 'http://m.me/petabencana.id'},
       {name: 'twitter', link: 'https://twitter.com/intent/tweet?text=Laporkan+banjir&via=petabencana'},
       {name: 'telegram', link: 'https://telegram.me/BencanaBot'}
     ]
