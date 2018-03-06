@@ -15,6 +15,6 @@ export default function processLocales() {
   let str = 'export class Locales {constructor() {this.languages = ' + JSON.stringify(languages) + ';}}';
 
   return gulp.src('src/resources/locales/*', {read: false})
-  .pipe(file('locales.js', str))
-  .pipe(gulp.dest('src/resources/locales'));
+    .pipe(file('locales.js', str))
+    .pipe(gulp.dest('src/resources/locales'));
 }

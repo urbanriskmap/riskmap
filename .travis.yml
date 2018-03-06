@@ -7,7 +7,6 @@ branches:
   only:
     - master
     - dev
-    - e2eCasper
 
 notifications:
   webhooks:
