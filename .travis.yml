@@ -8,6 +8,7 @@ branches:
     - master
     - dev
     - e2eCasper
+    - node_update
 
 notifications:
   webhooks:
