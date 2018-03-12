@@ -1,15 +1,11 @@
+[![Build Status](https://travis-ci.org/urbanriskmap/petabencana.id.svg?branch=master)](https://travis-ci.org/urbanriskmap/riskmap)
+[![DOI](https://zenodo.org/badge/70249665.svg)](https://zenodo.org/badge/latestdoi/70249665)
+
 ### RiskMap
-Client application for cognicity map &nbsp;
-[![Build Status](https://travis-ci.org/urbanriskmap/petabencana.id.svg?branch=master)](https://travis-ci.org/urbanriskmap/petabencana.id)
-<br>
-[Project description](https://github.com/urbanriskmap/petabencana-docs/blob/master/README.md)
+Client map  application for CogniCity. Read more project information [here](https://github.com/urbanriskmap/petabencana-docs/blob/master/README.md).
 <br>
 <br>
 This platform is built using the Aurelia framework, which has a few prerequisites. To get started, follow the machine & application setup steps.
-
-DOI for current stable release [v1.0.1](https://github.com/urbanriskmap/petabencana.id/releases/tag/v1.0.1)
-
-[![DOI](https://zenodo.org/badge/70249665.svg)](https://zenodo.org/badge/latestdoi/70249665)
 ____
 
 ### Supported deployments
