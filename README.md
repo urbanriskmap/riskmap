@@ -1,3 +1,7 @@
+## DEPRECATED
+
+This repository contains client-side code for risk map instances 2016-2018. Development is now in the new [riskmap-ng](https://github.com/urbanriskmap/riskmap-ng) project. All instances should switch to this new codebase. 
+
 ### RiskMap
 Client application for cognicity map &nbsp;
 [![Build Status](https://travis-ci.org/urbanriskmap/petabencana.id.svg?branch=master)](https://travis-ci.org/urbanriskmap/petabencana.id)
