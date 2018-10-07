@@ -24,7 +24,7 @@ phases:
       # - command
   post_build:
     commands:
-      - aws s3 sync . $TARGET_S3_BUCKET
+      - aws s3 sync . $TARGET_S3_BUCKET --sse
 artifacts:
   files:
     - '**/*'
