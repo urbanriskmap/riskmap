@@ -24,11 +24,10 @@ phases:
       # - command
   post_build:
     commands:
-      - aws s3 sync build $TARGET_S3_BUCKET
+      - aws s3 sync . $TARGET_S3_BUCKET
 artifacts:
   files:
     - '**/*'
-  base-directory: build
 cache:
   paths:
     - '/root/.npm/**/*'
