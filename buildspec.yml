@@ -1,0 +1,35 @@
+version: 0.2
+
+#env:
+  #variables:
+     # key: "value"
+     # key: "value"
+  #parameter-store:
+     # key: "value"
+     # key: "value"
+
+phases:
+  install:
+    commands:
+      npm install
+      # - command
+  #pre_build:
+    #commands:
+      # - command
+      # - command
+  build:
+    commands:
+      - npm run test
+      - npm run build
+      - rm -r node_modules
+      # - command
+  post_build:
+    commands:
+      - aws s3 sync . $TARGET_S3_BUCKET --sse
+artifacts:
+  files:
+    - '**/*'
+cache:
+  paths:
+    - '/root/.npm/**/*'
+    - 'node_modules/**/*'
