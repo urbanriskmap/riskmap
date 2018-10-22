@@ -48,7 +48,7 @@
     "browser-sync": "^2.26.0",
     "canned": "0.3.10",
     "connect-history-api-fallback": "1.5.0",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "^4.0.0",
     "gulp-babel": "7.0.1",
     "gulp-changed-in-place": "2.2.0",
     "gulp-cli": "2.0.1",
