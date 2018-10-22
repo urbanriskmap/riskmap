@@ -20,7 +20,7 @@ phases:
   build:
     commands:
       - npm run test
-      - npm run build
+      - npm run $ENV
       - rm -r node_modules
       # - command
   post_build:
