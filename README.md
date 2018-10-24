@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/urbanriskmap/petabencana.id.svg?branch=master)](https://travis-ci.org/urbanriskmap/riskmap)
-[![DOI](https://zenodo.org/badge/70249665.svg)](https://zenodo.org/badge/latestdoi/70249665)
+## DEPRECATED
+
+This repository contains client-side code for risk map instances 2016-2018. Development is now in the new [riskmap-ng](https://github.com/urbanriskmap/riskmap-ng) project. All instances should switch to this new codebase.
 
 ### RiskMap
 Client map  application for CogniCity. Read more project information [here](https://github.com/urbanriskmap/petabencana-docs/blob/master/README.md).
