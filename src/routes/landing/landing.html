@@ -4,6 +4,7 @@
   <require from="../../components/disaster-map/disaster-map"></require>
   <require from="../../components/screen-popup/screen-popup"></require>
   <require from="../../components/report-info/report-info"></require>
+  <require from="../../components/lightbox/lightbox"></require>
   <require from="../../components/gauge-info/gauge-info"></require>
   <require from="../../components/flood-info/flood-info"></require>
   <require from="../../components/side-pane/side-pane"></require>
@@ -25,10 +26,27 @@
       </table>
     </div>
 
-    <screen-popup view-model.ref="screenPopup" helper.bind="webMenu.locale.map_helper" cities.bind="mapModel.cities" selcity.bind="mapModel.selected_city" switch-city.call="mapModel.viewReports($event, $event)" termscontents.bind="webMenu.locale.termsContents" initializetab.bind="queried_terms">
+    <screen-popup
+      view-model.ref="screenPopup"
+      helper.bind="webMenu.locale.map_helper" cities.bind="mapModel.cities" selcity.bind="mapModel.selected_city" switch-city.call="mapModel.viewReports($event, $event)" termscontents.bind="webMenu.locale.termsContents" initializetab.bind="queried_terms">
     </screen-popup>
 
-    <disaster-map id="map" view-model.ref="mapModel" querytab.bind="queried_tab" querylanguage.bind="queried_lang" querycity.bind="queried_city" reportid.bind="report_id" reset-tab.call="webMenu.switchTab($event)">
+    <lightbox
+      id="lightbox_pane"
+      if.bind="imageurl"
+      close-lightbox.call="toggleLightbox()"
+      fullsizeimg.bind="imageurl">
+    </lightbox>
+
+    <disaster-map
+      id="map"
+      locale.bind="webMenu.locale"
+      view-model.ref="mapModel"
+      querytab.bind="queried_tab"
+      querylanguage.bind="queried_lang"
+      querycity.bind="queried_city"
+      reportid.bind="report_id"
+      reset-tab.call="webMenu.switchTab($event)">
     </disaster-map>
 
     <div id="topBar">
@@ -56,7 +74,13 @@
       <flood-info class="infoWrapper" if.bind="mapModel.layers.popupContent.state" locale.bind="webMenu.locale" areaname.bind="mapModel.layers.popupContent.area_name" districtname.bind="mapModel.layers.popupContent.parent_name" state.bind="mapModel.layers.popupContent.state" updated.bind="mapModel.layers.formatTime(mapModel.layers.popupContent.last_updated)">
       </flood-info>
 
-      <report-info class="infoWrapper" if.bind="mapModel.layers.popupContent.pkey" locale.bind="webMenu.locale" popupcontent.bind="mapModel.layers.popupContent" city.bind="mapModel.utility.parseCityName(mapModel.layers.popupContent.tags.instance_region_code, mapModel.cities)">
+      <report-info
+        class="infoWrapper"
+        if.bind="mapModel.layers.popupContent.pkey"
+        id.bind="report_id" locale.bind="webMenu.locale"
+        popupcontent.bind="mapModel.layers.popupContent"
+        city.bind="mapModel.utility.parseCityName(mapModel.layers.popupContent.tags.instance_region_code, mapModel.cities)"
+        open-lightbox.call="toggleLightbox($event)">
       </report-info>
     </div>
 

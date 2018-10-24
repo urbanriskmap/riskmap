@@ -1,19 +1,12 @@
 ## DEPRECATED
 
-This repository contains client-side code for risk map instances 2016-2018. Development is now in the new [riskmap-ng](https://github.com/urbanriskmap/riskmap-ng) project. All instances should switch to this new codebase. 
+This repository contains client-side code for risk map instances 2016-2018. Development is now in the new [riskmap-ng](https://github.com/urbanriskmap/riskmap-ng) project. All instances should switch to this new codebase.
 
 ### RiskMap
-Client application for cognicity map &nbsp;
-[![Build Status](https://travis-ci.org/urbanriskmap/petabencana.id.svg?branch=master)](https://travis-ci.org/urbanriskmap/petabencana.id)
-<br>
-[Project description](https://github.com/urbanriskmap/petabencana-docs/blob/master/README.md)
+Client map  application for CogniCity. Read more project information [here](https://github.com/urbanriskmap/petabencana-docs/blob/master/README.md).
 <br>
 <br>
 This platform is built using the Aurelia framework, which has a few prerequisites. To get started, follow the machine & application setup steps.
-
-DOI for current stable release [v1.0.1](https://github.com/urbanriskmap/petabencana.id/releases/tag/v1.0.1)
-
-[![DOI](https://zenodo.org/badge/70249665.svg)](https://zenodo.org/badge/latestdoi/70249665)
 ____
 
 ### Supported deployments
@@ -87,12 +80,16 @@ ___
 
 * Map Configuration
     * *to add new cities, update the `instance regions` in /src/resources/config.js > Config.map*
+    * change and add appropriate locales in deployment specific folders.
+    * Change and add appropriate links in sidepane.js
+    * change and add city specific details in landing.js
     * Default supported cities are Jakarta, Surabaya, Bandung (Refer [here](https://docs.petabencana.id/routes/cities.html) for updates)
     * For every new instance region (city) added, set a three letter `region` code. And set the `bounds` to have southwest and northeast bounds of the city in `sw` and `ne` respectively.
     * The value set in `default_region` sets the initial map view in http://localhost:9000/map
     * *Set `map.center` in /src/routes/cards/location/location.js to the center of the new instance region you have added in map config files*
 
 ___    
+
 
 ### To build
 * Start the development server

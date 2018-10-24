@@ -17,26 +17,28 @@
     </ul>
   </div>
 
- <!-- Map Section -->
- <div id="paneContent">
-   <div id="content-map" if.bind="seltab === 'map'" class="contentWrapper">
-     <p>${locale.map_helper}</p>
-     <label repeat.for="city of cities">
-       <input type="radio" model.bind="city" checked.bind="selcity" change.delegate="switchCity(city)">
-       ${city}
-     </label>
+  <!--Map section-->
+  <div id="paneContent">
+    <div id="content-map" if.bind="seltab === 'map'" class="contentWrapper">
+      <p id="legend">${locale.map_helper}</p>
+      <label repeat.for="city of cities">
+        <input type="radio" model.bind="city" checked.bind="selcity" change.delegate="switchCity(city)">
+        ${locale.instance_regions[city]}
+      </label>
 
-      <p>${locale.legend.title}</p>
-      <table id="legend" width="300px">
+      <p id="legend">${locale.legend.report_icon}</p>
+      <table width="300px">
         <tr repeat.for="type of report_type">
-            <td vertical-align="top" horizontal-align="center" >
-                <i style.bind="'padding:0;font-size:24px;color: ' + type.icon_color" class.bind="'icon-map-' + type.icon"></i>
-            </td>
-            <td>
-                <p class="normal">${type.text[selLanguage.key]}</p>
-            </td>
+          <td vertical-align="top" horizontal-align="center" >
+            <i style.bind="'padding:0;font-size:24px;color: ' + type.icon_color" class.bind="'icon-map-' + type.icon"></i>
+          </td>
+          <td>
+            <p class="normal">${type.text[selLanguage.key]}</p>
+          </td>
         </tr>
       </table>
+
+      <p id="legend">${locale.legend.title}</p>
 
       <table width="300px">
         <tr>
@@ -49,7 +51,7 @@
         </tr>
         <tr>
           <td colspan="50%">
-            <table id="legend">
+            <table>
               <tr repeat.for="level of gauge_levels">
                 <td>
                   <img src.bind="level.icon" height="30">
@@ -61,7 +63,7 @@
             </table>
           </td>
           <td colspan="50%">
-            <table id="legend">
+            <table>
               <tr repeat.for="height of flood_depth">
                 <td style.bind="'padding:0;font-size:30px;color: ' + height.color">&#9632;
                 </td>
@@ -73,6 +75,7 @@
           </td>
         </tr>
       </table>
+
     </div>
     <!--Report section-->
     <div id="content-report" if.bind="seltab === 'report'" class="contentWrapper">
@@ -133,85 +136,85 @@
 
       <table id="partners">
         <!-- <tr class="label">
-          <td colspan="4" cellpadding="0" align="left">
-            <p>${locale.info_content.partners.implementing}</p>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="4" align="center">
-            <a href="http://www.chennaicorporation.gov.in/index.htm">
-              <img class="gcmcLogo" src="assets/graphics/ChennaiCMC_logo.jpg">
-            </a>
-          </td>
-        </tr> -->
+        <td colspan="4" cellpadding="0" align="left">
+        <p>${locale.info_content.partners.implementing}</p>
+      </td>
+    </tr>
+    <tr>
+    <td colspan="4" align="center">
+    <a href="http://www.chennaicorporation.gov.in/index.htm">
+    <img class="gcmcLogo" src="assets/graphics/ChennaiCMC_logo.jpg">
+  </a>
+</td>
+</tr> -->
 
-        <!-- Funding Partners-->
-        <tr class="label">
-          <td colspan="4" cellpadding="0" align="left">
-            <p>${locale.info_content.partners.support}</p>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="4" align="center">
-            <a href="http://tatacenter.mit.edu">
-              <img class="tataLogo" src="assets/graphics/TatacenterNewLogo.png">
-            </a>
-          </td>
-        </tr>
+<!-- Funding Partners-->
+<tr class="label">
+  <td colspan="4" cellpadding="0" align="left">
+    <p>${locale.info_content.partners.support}</p>
+  </td>
+</tr>
+<tr>
+  <td colspan="4" align="center">
+    <a href="http://tatacenter.mit.edu">
+      <img class="tataLogo" src="assets/graphics/TatacenterNewLogo.png">
+    </a>
+  </td>
+</tr>
 
-        <!-- Data Partners-->
-        <tr class="label">
-          <td colspan="4" cellpadding="0" align="left">
-            <p>${locale.info_content.partners.data}</p>
-          </td>
-        </tr>
-        <tr class="logos">
-            <td colspan="2" align="center">
-              <a href="https://www.mapbox.com">
-                <img class="partnerLogo" src="assets/graphics/mapbox_logo.png">
-              </a>
-            </td>
-          <td colspan="2" align="center">
-            <a href="https://twitter.com">
-              <img class="partnerLogo" src="assets/graphics/twitter-logo.png">
-            </a>
-          </td>
-        </tr>
-
-
-        <!-- proejct Partners-->
-         <tr class="label">
-          <td colspan="4" cellpadding="0" align="left">
-            <p>${locale.info_content.partners.project}</p>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="4" align="center">
-            <a href="https://www.cag.org.in/our-work/city-governance">
-              <img class="partnerLogo" src="assets/graphics/CAG-logo.png">
-            </a>
-          </td>
-        </tr>
-
-      </table>
+<!-- Data Partners-->
+<tr class="label">
+  <td colspan="4" cellpadding="0" align="left">
+    <p>${locale.info_content.partners.data}</p>
+  </td>
+</tr>
+<tr class="logos">
+  <td colspan="2" align="center">
+    <a href="https://www.mapbox.com">
+      <img class="partnerLogo" src="assets/graphics/mapbox_logo.png">
+    </a>
+  </td>
+  <td colspan="2" align="center">
+    <a href="https://twitter.com">
+      <img class="partnerLogo" src="assets/graphics/twitter-logo.png">
+    </a>
+  </td>
+</tr>
 
 
-      <p id="termslink" click.delegate="openTermsPopup()" innerhtml.bind="locale.info_content.termsPopup"></p>
+<!-- proejct Partners-->
+<tr class="label">
+  <td colspan="4" cellpadding="0" align="left">
+    <p>${locale.info_content.partners.project}</p>
+  </td>
+</tr>
+<tr>
+  <td colspan="4" align="center">
+    <a href="https://www.cag.org.in/our-work/city-governance">
+      <img class="partnerLogo" src="assets/graphics/CAG-logo.png">
+    </a>
+  </td>
+</tr>
 
-      <p id="mapbox">
-        ${locale.info_content.mapCredits} ©
-        <a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a> © <a href="http://www.openstreetmap.org/about" target="_blank">OpenStreetMap</a>.
-        ${locale.info_content.mapImproveLink} <a href="https://www.mapbox.com/map-feedback/" target="_blank">Mapbox</a>.
-      </p>
-      <!--
-      <p id="browserstack" innerhtml.bind="locale.info_content.browserStack">
-      </p>
-      <p id="usaid">
-        ${locale.info_content.USAID}
-      </p>
-      <div id="pbLogo">
-        <img src="assets/graphics/Riskmap_logo_noSub.svg">
-      </div>-->
-    </div>
-  </div>
+</table>
+
+
+<p id="termslink" click.delegate="openTermsPopup()" innerhtml.bind="locale.info_content.termsPopup"></p>
+
+<p id="mapbox">
+  ${locale.info_content.mapCredits} ©
+  <a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a> © <a href="http://www.openstreetmap.org/about" target="_blank">OpenStreetMap</a>.
+  ${locale.info_content.mapImproveLink} <a href="https://www.mapbox.com/map-feedback/" target="_blank">Mapbox</a>.
+</p>
+<!--
+<p id="browserstack" innerhtml.bind="locale.info_content.browserStack">
+</p>
+<p id="usaid">
+${locale.info_content.USAID}
+</p>
+<div id="pbLogo">
+<img src="assets/graphics/Riskmap_logo_noSub.svg">
+</div>-->
+</div>
+</div>
 </template>

@@ -90,9 +90,8 @@ export class MapUtility {
     }
   }
 
-  statsNotification({reports, timeperiod}) {
-    let msg = 'Received ' + reports +
-      ' reports in past ' + (timeperiod / 3600) + ' hours';
+//reports received in timeperiod popup
+  statsNotification(msg) {
     $.notify(msg, {style:"mapInfo", className:"info", position:"top center"});
   }
 

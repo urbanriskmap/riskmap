@@ -10,6 +10,7 @@ import {MapUtility} from './map-utility';
 //end-aurelia-decorators
 export class DisasterMap {
   //start-aurelia-decorators
+  @bindable locale;
   @bindable querycity;
   @bindable querylanguage;
   @bindable querytab;
@@ -94,9 +95,9 @@ export class DisasterMap {
       // Show timeperiod notification
       self.layers.getStats(self.utility.parseCityObj(cityName, false).region)
       .then(stats => {
-        self.utility.statsNotification(stats);
-      })
-      .catch();
+        let msg = this.locale.reports_stats.replace('{reportsplaceholder}', stats.reports).replace('{hoursplaceholder}', stats.timeperiod / 3600);
+        self.utility.statsNotification(msg);
+      });
 
       if (self.reportid && self.layers.activeReports.hasOwnProperty(self.reportid)) {
         //Case 1: Active report id in current city

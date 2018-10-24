@@ -15,7 +15,7 @@ export class Config {
     this.map.report_timeperiod = env[dep.name].report_timeperiod;
 
     this.title = env[dep.name].title;
-    this.supported_languages = env[dep.name].supported_languages;
+    this.supported_languages = dep.supported_languages;
     //Save default language as object
     for (let lang of this.supported_languages) {
       if (lang.key === env[dep.name].default_language) {

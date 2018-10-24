@@ -2,9 +2,7 @@
   <require from="./report-info.css"></require>
   <div  id="photoPreview">
     <div class="image" id="hasPhoto" show.bind="imageurl">
-      <a target="_blank" href.bind="fullsizeimg">
-        <img src.bind="imageurl">
-      </a>
+      <img src.bind="imageurl" click.delegate="openLightbox(fullsizeimg)">
     </div>
     <div class="image" id="noPhoto" show.bind="!imageurl">
       <i class="icon-flood-img"></i>
@@ -25,10 +23,46 @@
       <p id="textBody">${text}</p>
     </div>
 
-    <div id="socialIcons">
-      <a repeat.for="button of shareButtons" href.bind="button.intent">
-        <i class.bind="'icon-' + button.name"></i>
+    <div id="voteIcons">
+      <table>
+        <tr>
+          <td>
+            <!-- Downvote -->
+            <!-- Use trigger when button needs to be disabled -->
+            <button class="voteButtons" disabled.bind="downvoteDisabled" click.trigger="voteHandler(-1)">
+              <i class.bind="'icon-downvote'" title.bind="voteButtons[1].tooltip"></i>
+            </button>
+          </td>
+
+          <td>
+            <!-- Upvote -->
+            <!-- Use trigger when button needs to be disabled -->
+            <button class="voteButtons" disabled.bind="upvoteDisabled" click.trigger="voteHandler(1)">
+              <i class.bind="'icon-upvote'" title.bind="voteButtons[0].tooltip"></i>
+            </button>
+          </td>
+
+          <td repeat.for="button of shareButtons">
+            <button class="shareButtons" id.bind="'shareButtons' + button.name" click.delegate="feedbackInteraction(button)">
+              <i class.bind="'icon-' + button.name" title.bind="button.tooltip"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+      </div>
+
+
+    <div id="shareFlyer" class="interactionFlyer">
+      <p>${locale.report_info.share}</p>
+      <a repeat.for="button of socialButtons" href.bind="button.intent" >
+        <i  id="socialButtons" class.bind="'icon-' + button.name" ></i>
       </a>
     </div>
-  </div>
-</template>
+
+    <div id="flagFlyer" class="interactionFlyer">
+      <p>${locale.report_info.flagReport_Title}</p>
+      <a href.bind="'mailto:' + locale.report_info.flagReport_email + '?subject=Please%20review%20this%20report%20&#40;Report%20id%20&#58;%20' + id + '&#41;'"><button id="submitButton">${locale.report_info.flagReport_button}</button></a>
+    </div>
+
+    </div>
+  </template>

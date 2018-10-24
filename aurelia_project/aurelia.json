@@ -17,19 +17,34 @@
         "transform-es2015-modules-amd"
       ]
     },
-    "source": "src/**/*.js"
+    "source": "src/**/*.js",
+    "sourceWatch": [
+      "src/**/*.js",
+      "!src/components/side-pane/*.js",
+      "!src/resources/locales/*.js",
+      "!src/deployment.js",
+      "!src/environment.js"
+    ]
   },
   "markupProcessor": {
     "id": "none",
     "displayName": "None",
     "fileExtension": ".html",
-    "source": "src/**/*.html"
+    "source": "src/**/*.html",
+    "sourceWatch": [
+      "src/**/*.html",
+      "!src/components/side-pane/*.html"
+    ]
   },
   "lessProcessor": {
     "id": "less",
     "displayName": "Less",
     "fileExtension": ".less",
-    "source": "src/**/*.less"
+    "source": "src/**/*.less",
+    "sourceWatch": [
+      "src/**/*.less",
+      "!src/components/side-pane/*.less"
+    ]
   },
   "cssProcessor": {
     "id": "none",

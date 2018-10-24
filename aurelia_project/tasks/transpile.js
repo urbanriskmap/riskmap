@@ -53,14 +53,6 @@ function fetchAssets() {
     .pipe(gulp.dest('assets/'));
 }
 
-function fetchLocales() {
-  let dep = CLIOptions.getFlagValue('dep', 'dep');
-
-  return gulp.src([`deployment_specific/${dep}/ds_locales/**/*`])
-    .pipe(changedInPlace({firstPass: true}))
-    .pipe(gulp.dest('src/resources/locales/'));
-}
-
 function buildJavaScript() {
   return gulp.src(project.transpiler.source)
     .pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
@@ -76,6 +68,5 @@ export default gulp.series(
   fetchIndex,
   fetchIcon,
   fetchAssets,
-  fetchLocales,
   buildJavaScript
 );
