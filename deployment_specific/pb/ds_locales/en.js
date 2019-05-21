@@ -91,7 +91,7 @@ const en = {
   'info_content': {
     'intro': 'PetaBencana.id harnesses the power of social media to gather, sort, and display information about flooding in real time',
     'infoLink': '<a href="https://info.petabencana.id/" target="_blank">To know more, visit Petabencana Foundation</a>',
-    'p1': 'PetaBencana.id is a project initiated by the Urban Risk Lab at MIT as a free, transparent platform for emergency response and disaster management in megacities in South and Southeast Asia.',
+    'p1': 'PetaBencana.id is a platform run by the Yayasan Peta Bencana as a free, transparent platform for emergency response and disaster management in megacities in South and Southeast Asia.',
     'p2': 'The platform adopts a “people are the best sensors” paradigm, where confirmed reports are collected directly from the users at street level in a manner that removes expensive and time-consuming data processing. This framework creates accurate, real-time data which is immediately made available for users and first responders.',
     'p3': 'PetaBencana.id gathers, sorts, and visualizes data using specially developed CogniCity Open Source Software - an enterprise-level platform for emergency response and disaster management - to transforms the noise of social and digital media into critical information for residents, communities, and government agencies.',
     'partners': {
