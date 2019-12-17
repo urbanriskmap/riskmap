@@ -1,4 +1,4 @@
-## DEPRECATED
+## :no_entry_sign: DEPRECATED
 
 This repository contains client-side code for risk map instances 2016-2018. Development is now in the new [riskmap-ng](https://github.com/urbanriskmap/riskmap-ng) project. All instances should switch to this new codebase.
 
