@@ -1,10 +1,10 @@
 //Utility functions for manipulating leaflet map layers
 
-import {inject, noView} from 'aurelia-framework';
+import { inject, noView } from 'aurelia-framework';
 import * as L from 'leaflet';
 import Chart from 'chart';
-import {Config} from 'resources/config';
-import {HttpClient} from 'aurelia-http-client';
+import { Config } from 'resources/config';
+import { HttpClient } from 'aurelia-http-client';
 import * as topojson from 'topojson-client';
 
 //start-aurelia-decorators
@@ -51,15 +51,15 @@ export class MapLayers {
 
   // Get icon for flood gauge
   gaugeIconUrl(level) {
-    switch(level) {
+    switch (level) {
       case 1:
-      return 'assets/icons/floodgauge_1.svg';
+        return 'assets/icons/floodgauge_1.svg';
       case 2:
-      return 'assets/icons/floodgauge_2.svg';
+        return 'assets/icons/floodgauge_2.svg';
       case 3:
-      return 'assets/icons/floodgauge_3.svg';
+        return 'assets/icons/floodgauge_3.svg';
       default:
-      return 'assets/icons/floodgauge_4.svg';
+        return 'assets/icons/floodgauge_4.svg';
     }
   }
 
@@ -78,9 +78,9 @@ export class MapLayers {
     let timestring = new Date(localTime).toISOString(); // ISO string
     // Format string for output
     timestring = timestring.split('T');
-    let t1 = timestring[1].slice(0,5); // Extract HH:MM
+    let t1 = timestring[1].slice(0, 5); // Extract HH:MM
     let d1 = timestring[0].split('-'); // Extract DD-MM-YY
-    let d2 = d1[2]+'-'+d1[1]+'-'+d1[0]; // Reformat
+    let d2 = d1[2] + '-' + d1[1] + '-' + d1[0]; // Reformat
     return (t1 + ' ' + d2);
   }
 
@@ -88,42 +88,42 @@ export class MapLayers {
     let self = this;
     let client = new HttpClient();
     const url = self.config.data_server +
-    'stats/reportsSummary?city=' + regionCode +
-    '&timeperiod=' + self.config.report_timeperiod;
+      'stats/reportsSummary?city=' + regionCode +
+      '&timeperiod=' + self.config.report_timeperiod;
     return new Promise((resolve, reject) => {
       client.get(url)
-      .then(summary => {
-        let reports = JSON.parse(summary.response)['total number of reports'];
-        resolve({
-          reports: reports,
-          timeperiod: self.config.report_timeperiod,
-        });
-      })
-      .catch(err => reject(err));
+        .then(summary => {
+          let reports = JSON.parse(summary.response)['total number of reports'];
+          resolve({
+            reports: reports,
+            timeperiod: self.config.report_timeperiod,
+          });
+        })
+        .catch(err => reject(err));
     });
   }
 
   // Get topojson data from server, return geojson
   getData(end_point) {
     var self = this,
-        url = self.config.data_server + end_point;
+      url = self.config.data_server + end_point;
     let client = new HttpClient();
     return new Promise((resolve, reject) => {
       client.get(url)
-      .then(data => {
-        var topology = JSON.parse(data.response);
-        if (topology.statusCode === 200) {
-          var result = topology.result;
-          if (result && result.objects) {
-            resolve(topojson.feature(result, result.objects.output));
+        .then(data => {
+          var topology = JSON.parse(data.response);
+          if (topology.statusCode === 200) {
+            var result = topology.result;
+            if (result && result.objects) {
+              resolve(topojson.feature(result, result.objects.output));
+            } else {
+              resolve(null);
+            }
           } else {
             resolve(null);
           }
-        } else {
-          resolve(null);
-        }
-      })
-      .catch(err => reject(err));
+        })
+        .catch(err => reject(err));
     });
   }
 
@@ -146,7 +146,7 @@ export class MapLayers {
           self.selected_extent = null;
         }
         if (self.selected_gauge) {
-          self.selected_gauge.target.setIcon(self.mapIcons.gauge_normal(self.gaugeIconUrl(self.selected_gauge.target.feature.properties.observations[self.selected_gauge.target.feature.properties.observations.length-1].f3)));
+          self.selected_gauge.target.setIcon(self.mapIcons.gauge_normal(self.gaugeIconUrl(self.selected_gauge.target.feature.properties.observations[self.selected_gauge.target.feature.properties.observations.length - 1].f3)));
           self.selected_gauge = null;
         }
         if (!self.selected_report) {
@@ -157,13 +157,13 @@ export class MapLayers {
             self.popupContent[prop] = feature.properties[prop];
           }
           self.popupContent.timestamp = self.formatTime(feature.properties.created_at);
-          history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
+          history.pushState({ city: city_name, report_id: feature.properties.pkey }, "city", "map/" + city_name + "/" + feature.properties.pkey);
           togglePane('#infoPane', 'show', true);
           self.selected_report = e;
         } else if (e.target === self.selected_report.target) {
           // Case 2 : clicked report icon same as selected report
           e.target.setIcon(reportIconNormal);
-          history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
+          history.pushState({ city: city_name, report_id: null }, "city", "map/" + city_name);
           togglePane('#infoPane', 'hide', false);
           self.selected_report = null;
         } else if (e.target !== self.selected_report.target) {
@@ -175,7 +175,7 @@ export class MapLayers {
             self.popupContent[prop] = feature.properties[prop];
           }
           self.popupContent.timestamp = self.formatTime(feature.properties.created_at);
-          history.pushState({city: city_name, report_id: feature.properties.pkey}, "city", "map/" + city_name + "/" + feature.properties.pkey);
+          history.pushState({ city: city_name, report_id: feature.properties.pkey }, "city", "map/" + city_name + "/" + feature.properties.pkey);
           togglePane('#infoPane', 'show', true);
           self.selected_report = e;
         }
@@ -196,10 +196,10 @@ export class MapLayers {
         // Check for selected report, restore icon to normal, clear variable, update browser URL
         if (self.selected_report) {
           self.revertIconToNormal(self.selReportType);
-          history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
+          history.pushState({ city: city_name, report_id: null }, "city", "map/" + city_name);
         }
         if (self.selected_gauge) {
-          self.selected_gauge.target.setIcon(self.mapIcons.gauge_normal(self.gaugeIconUrl(self.selected_gauge.target.feature.properties.observations[self.selected_gauge.target.feature.properties.observations.length-1].f3)));
+          self.selected_gauge.target.setIcon(self.mapIcons.gauge_normal(self.gaugeIconUrl(self.selected_gauge.target.feature.properties.observations[self.selected_gauge.target.feature.properties.observations.length - 1].f3)));
           self.selected_gauge = null;
         }
         if (!self.selected_extent) {
@@ -240,8 +240,8 @@ export class MapLayers {
     $('#chart-pane').html('<canvas id="modalChart"></canvas>');
     var ctx = $('#modalChart').get(0).getContext('2d');
     var data = {
-      labels : [],
-      datasets : [{
+      labels: [],
+      datasets: [{
         label: "Tinggi Muka Air / Water Depth (cm)",
         backgroundColor: "rgba(151,187,205,0.2)",
         borderColor: "rgba(151,187,205,1)",
@@ -251,7 +251,7 @@ export class MapLayers {
         data: []
       }]
     };
-    for (var i = 0; i < feature.properties.observations.length; i+=1) {
+    for (var i = 0; i < feature.properties.observations.length; i += 1) {
       data.labels.push(feature.properties.observations[i].f1);
       data.datasets[0].data.push(feature.properties.observations[i].f2);
     }
@@ -260,7 +260,7 @@ export class MapLayers {
       data: data,
       options: {
         bezierCurve: true,
-        legend: {display: true},
+        legend: { display: true },
         scaleLabel: "<%= ' ' + value%>",
         scales: {
           xAxes: [{
@@ -297,7 +297,7 @@ export class MapLayers {
         $('#chart-pane').empty();
         if (self.selected_report) {
           self.revertIconToNormal(self.selReportType);
-          history.pushState({city: city_name, report_id: null}, "city", "map/" + city_name);
+          history.pushState({ city: city_name, report_id: null }, "city", "map/" + city_name);
         }
         if (self.selected_extent) {
           self.selected_extent.target.setStyle(self.mapPolygons.normal);
@@ -311,11 +311,11 @@ export class MapLayers {
           togglePane('#infoPane', 'show', false);
           self.selected_gauge = e;
         } else if (e.target === self.selected_gauge.target) {
-          e.target.setIcon(self.mapIcons.gauge_normal(self.gaugeIconUrl(e.target.feature.properties.observations[e.target.feature.properties.observations.length-1].f3)));
+          e.target.setIcon(self.mapIcons.gauge_normal(self.gaugeIconUrl(e.target.feature.properties.observations[e.target.feature.properties.observations.length - 1].f3)));
           togglePane('#infoPane', 'hide', false);
           self.selected_gauge = null;
         } else if (e.target !== self.selected_gauge.target) {
-          self.selected_gauge.target.setIcon(self.mapIcons.gauge_normal(self.gaugeIconUrl(self.selected_gauge.target.feature.properties.observations[self.selected_gauge.target.feature.properties.observations.length-1].f3)));
+          self.selected_gauge.target.setIcon(self.mapIcons.gauge_normal(self.gaugeIconUrl(self.selected_gauge.target.feature.properties.observations[self.selected_gauge.target.feature.properties.observations.length - 1].f3)));
           e.target.setIcon(self.mapIcons.gauge_selected);
           self.popupContent = {};
           self.popupContent.gauge_name = feature.properties.gaugenameid;
@@ -331,16 +331,16 @@ export class MapLayers {
     var self = this;
     return new Promise((resolve, reject) => {
       self.getData(end_point)
-      .then(data => {
-        if (!data) {
-          console.log('Could not load map layer');
-          resolve(data);
-        } else {
-          localObj.addData(data);
-          localObj.addTo(map);
-          resolve(data);
-        }
-      }).catch(() => reject(null));
+        .then(data => {
+          if (!data) {
+            console.log('Could not load map layer');
+            resolve(data);
+          } else {
+            localObj.addData(data);
+            localObj.addTo(map);
+            resolve(data);
+          }
+        }).catch(() => reject(null));
     });
   }
 
@@ -348,10 +348,10 @@ export class MapLayers {
     var self = this;
     return new Promise((resolve, reject) => {
       self.getData('reports/' + report_id)
-      .then(data => {
-        self.reports.addData(data);
-        resolve(self.activeReports[data.features[0].properties.pkey]);
-      }).catch(() => reject(null));
+        .then(data => {
+          self.reports.addData(data);
+          resolve(self.activeReports[data.features[0].properties.pkey]);
+        }).catch(() => reject(null));
     });
   }
 
@@ -378,7 +378,7 @@ export class MapLayers {
       }
     });
     // add layer to map
-    return self.appendData('reports/?city=' + city_region +'&timeperiod='+self.config.report_timeperiod, self.reports, map);
+    return self.appendData('reports/?city=' + city_region + '&timeperiod=' + self.config.report_timeperiod, self.reports, map);
   }
 
   addFloodExtents(city_name, city_region, map, togglePane) {
@@ -386,11 +386,11 @@ export class MapLayers {
     self.flood_extents = L.geoJSON(null, {
       style: (feature, layer) => {
         switch (feature.properties.state) {
-          case 4: return {cursor:"pointer", fillColor:"#CC2A41", weight:0, color:"#000000", opacity:0, fillOpacity: 0.7};
-          case 3: return {cursor:"pointer", fillColor:"#FF8300", weight:0, color:"#000000", opacity:0, fillOpacity: 0.7};
-          case 2: return {cursor:"pointer", fillColor:"#FFFF00", weight:0, color:"#000000", opacity:0, fillOpacity: 0.7};
-          case 1: return {cursor:"pointer", fillColor:"#A0A9F7", weight:0, color:"#000000", opacity:0, fillOpacity: 0.7};
-          default: return {weight:0, opacity: 0, fillOpacity:0};
+          case 4: return { cursor: "pointer", fillColor: "#CC2A41", weight: 0, color: "#000000", opacity: 0, fillOpacity: 0.7 };
+          case 3: return { cursor: "pointer", fillColor: "#FF8300", weight: 0, color: "#000000", opacity: 0, fillOpacity: 0.7 };
+          case 2: return { cursor: "pointer", fillColor: "#FFFF00", weight: 0, color: "#000000", opacity: 0, fillOpacity: 0.7 };
+          case 1: return { cursor: "pointer", fillColor: "#A0A9F7", weight: 0, color: "#000000", opacity: 0, fillOpacity: 0.7 };
+          default: return { weight: 0, opacity: 0, fillOpacity: 0 };
         }
       },
       onEachFeature: (feature, layer) => {
@@ -402,7 +402,7 @@ export class MapLayers {
 
   removeFloodExtents(map) {
     var self = this;
-    if (self.flood_extents){
+    if (self.flood_extents) {
       map.removeLayer(self.flood_extents);
       self.flood_extents = null;
     }
@@ -417,7 +417,7 @@ export class MapLayers {
       self.gaugeLayer = L.geoJSON(null, {
         pointToLayer: (feature, latlng) => {
           return L.marker(latlng, {
-            icon: self.mapIcons.gauge_normal(self.gaugeIconUrl(feature.properties.observations[feature.properties.observations.length-1].f3)),
+            icon: self.mapIcons.gauge_normal(self.gaugeIconUrl(feature.properties.observations[feature.properties.observations.length - 1].f3)),
             pane: 'gauges'
           });
         },
