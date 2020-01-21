@@ -9,10 +9,10 @@ $.notify.addStyle('mapInfo', {
   html: '<div id=notification><span data-notify-text/></div>',
   classes: {
     info: {
-      'background-color': 'rgba(0, 0, 0, 0.5)',
+      'background-color': 'rgba(0, 0, 0, 0.5)'
     },
     error: {
-      'background-color': 'rgba(255, 0, 0, 0.4)',
+      'background-color': 'rgba(255, 0, 0, 0.4)'
     }
   }
 });

@@ -52,14 +52,14 @@ export class MapLayers {
   // Get icon for flood gauge
   gaugeIconUrl(level) {
     switch (level) {
-      case 1:
-        return 'assets/icons/floodgauge_1.svg';
-      case 2:
-        return 'assets/icons/floodgauge_2.svg';
-      case 3:
-        return 'assets/icons/floodgauge_3.svg';
-      default:
-        return 'assets/icons/floodgauge_4.svg';
+    case 1:
+      return 'assets/icons/floodgauge_1.svg';
+    case 2:
+      return 'assets/icons/floodgauge_2.svg';
+    case 3:
+      return 'assets/icons/floodgauge_3.svg';
+    default:
+      return 'assets/icons/floodgauge_4.svg';
     }
   }
 
@@ -96,7 +96,7 @@ export class MapLayers {
           let reports = JSON.parse(summary.response)['total number of reports'];
           resolve({
             reports: reports,
-            timeperiod: self.config.report_timeperiod,
+            timeperiod: self.config.report_timeperiod
           });
         })
         .catch(err => reject(err));
@@ -104,16 +104,16 @@ export class MapLayers {
   }
 
   // Get topojson data from server, return geojson
-  getData(end_point) {
-    var self = this,
-      url = self.config.data_server + end_point;
+  getData(endPoint) {
+    let self = this;
+    let url = self.config.data_server + endPoint;
     let client = new HttpClient();
     return new Promise((resolve, reject) => {
       client.get(url)
         .then(data => {
-          var topology = JSON.parse(data.response);
+          let topology = JSON.parse(data.response);
           if (topology.statusCode === 200) {
-            var result = topology.result;
+            let result = topology.result;
             if (result && result.objects) {
               resolve(topojson.feature(result, result.objects.output));
             } else {
@@ -128,19 +128,19 @@ export class MapLayers {
   }
 
   revertIconToNormal(type) {
-    var icon = (type === 'flood' || type === null) ? this.mapIcons.report_normal('flood') : this.mapIcons.report_normal(this.selReportType);
+    let icon = (type === 'flood' || type === null) ? this.mapIcons.report_normal('flood') : this.mapIcons.report_normal(this.selReportType);
     this.selected_report.target.setIcon(icon);
     this.selected_report = null;
   }
 
   reportInteraction(feature, layer, city_name, map, togglePane) {
-    var self = this;
+    let self = this;
     self.activeReports[feature.properties.pkey] = layer;
     layer.on({
       click: (e) => {
         map.flyTo(layer._latlng, 15);
-        var reportIconNormal = (feature.properties.disaster_type === 'prep') ? self.mapIcons.report_normal(feature.properties.report_data.report_type) : self.mapIcons.report_normal('flood');
-        var reportIconSelected = (feature.properties.disaster_type === 'prep') ? self.mapIcons.report_selected(feature.properties.report_data.report_type) : self.mapIcons.report_selected('flood');
+        let reportIconNormal = (feature.properties.disaster_type === 'prep') ? self.mapIcons.report_normal(feature.properties.report_data.report_type) : self.mapIcons.report_normal('flood');
+        let reportIconSelected = (feature.properties.disaster_type === 'prep') ? self.mapIcons.report_selected(feature.properties.report_data.report_type) : self.mapIcons.report_selected('flood');
         if (self.selected_extent) {
           self.selected_extent.target.setStyle(self.mapPolygons.normal);
           self.selected_extent = null;
@@ -157,13 +157,13 @@ export class MapLayers {
             self.popupContent[prop] = feature.properties[prop];
           }
           self.popupContent.timestamp = self.formatTime(feature.properties.created_at);
-          history.pushState({ city: city_name, report_id: feature.properties.pkey }, "city", "map/" + city_name + "/" + feature.properties.pkey);
+          history.pushState({ city: city_name, report_id: feature.properties.pkey }, 'city', 'map/' + city_name + '/' + feature.properties.pkey);
           togglePane('#infoPane', 'show', true);
           self.selected_report = e;
         } else if (e.target === self.selected_report.target) {
           // Case 2 : clicked report icon same as selected report
           e.target.setIcon(reportIconNormal);
-          history.pushState({ city: city_name, report_id: null }, "city", "map/" + city_name);
+          history.pushState({ city: city_name, report_id: null }, 'city', 'map/' + city_name);
           togglePane('#infoPane', 'hide', false);
           self.selected_report = null;
         } else if (e.target !== self.selected_report.target) {
@@ -175,7 +175,7 @@ export class MapLayers {
             self.popupContent[prop] = feature.properties[prop];
           }
           self.popupContent.timestamp = self.formatTime(feature.properties.created_at);
-          history.pushState({ city: city_name, report_id: feature.properties.pkey }, "city", "map/" + city_name + "/" + feature.properties.pkey);
+          history.pushState({ city: city_name, report_id: feature.properties.pkey }, 'city', 'map/' + city_name + '/' + feature.properties.pkey);
           togglePane('#infoPane', 'show', true);
           self.selected_report = e;
         }
@@ -189,14 +189,14 @@ export class MapLayers {
   }
 
   floodExtentInteraction(feature, layer, city_name, map, togglePane) {
-    var self = this;
+    let self = this;
     layer.on({
       click: (e) => {
         map.panTo(layer.getCenter());
         // Check for selected report, restore icon to normal, clear variable, update browser URL
         if (self.selected_report) {
           self.revertIconToNormal(self.selReportType);
-          history.pushState({ city: city_name, report_id: null }, "city", "map/" + city_name);
+          history.pushState({ city: city_name, report_id: null }, 'city', 'map/' + city_name);
         }
         if (self.selected_gauge) {
           self.selected_gauge.target.setIcon(self.mapIcons.gauge_normal(self.gaugeIconUrl(self.selected_gauge.target.feature.properties.observations[self.selected_gauge.target.feature.properties.observations.length - 1].f3)));
@@ -238,24 +238,24 @@ export class MapLayers {
 
   drawGaugeChart(feature) {
     $('#chart-pane').html('<canvas id="modalChart"></canvas>');
-    var ctx = $('#modalChart').get(0).getContext('2d');
-    var data = {
+    let ctx = $('#modalChart').get(0).getContext('2d');
+    let data = {
       labels: [],
       datasets: [{
-        label: "Tinggi Muka Air / Water Depth (cm)",
-        backgroundColor: "rgba(151,187,205,0.2)",
-        borderColor: "rgba(151,187,205,1)",
-        pointBackgroundColor: "rgba(151,187,205,1)",
-        pointBorderColor: "#fff",
+        label: 'Tinggi Muka Air / Water Depth (cm)',
+        backgroundColor: 'rgba(151,187,205,0.2)',
+        borderColor: 'rgba(151,187,205,1)',
+        pointBackgroundColor: 'rgba(151,187,205,1)',
+        pointBorderColor: '#fff',
         pointRadius: 4,
         data: []
       }]
     };
-    for (var i = 0; i < feature.properties.observations.length; i += 1) {
+    for (let i = 0; i < feature.properties.observations.length; i += 1) {
       data.labels.push(feature.properties.observations[i].f1);
       data.datasets[0].data.push(feature.properties.observations[i].f2);
     }
-    var gaugeChart = new Chart(ctx, {
+    let gaugeChart = new Chart(ctx, {
       type: 'line',
       data: data,
       options: {
@@ -290,14 +290,14 @@ export class MapLayers {
   }
 
   gaugeInteraction(feature, layer, city_name, map, togglePane) {
-    var self = this;
+    let self = this;
     layer.on({
       click: (e) => {
         map.panTo(layer._latlng);
         $('#chart-pane').empty();
         if (self.selected_report) {
           self.revertIconToNormal(self.selReportType);
-          history.pushState({ city: city_name, report_id: null }, "city", "map/" + city_name);
+          history.pushState({ city: city_name, report_id: null }, 'city', 'map/' + city_name);
         }
         if (self.selected_extent) {
           self.selected_extent.target.setStyle(self.mapPolygons.normal);
@@ -345,7 +345,7 @@ export class MapLayers {
   }
 
   addSingleReport(report_id) {
-    var self = this;
+    let self = this;
     return new Promise((resolve, reject) => {
       self.getData('reports/' + report_id)
         .then(data => {
@@ -355,8 +355,8 @@ export class MapLayers {
     });
   }
 
-  addReports(city_name, city_region, map, togglePane) {
-    var self = this;
+  addReports(city_name, cityRegion, map, togglePane) {
+    let self = this;
     map.createPane('reports');
     map.getPane('reports').style.zIndex = 700;
     // clear previous reports
@@ -370,7 +370,7 @@ export class MapLayers {
         self.reportInteraction(feature, layer, city_name, map, togglePane);
       },
       pointToLayer: (feature, latlng) => {
-        var reportIconNormal = (feature.properties.disaster_type === 'prep') ? self.mapIcons.report_normal(feature.properties.report_data.report_type) : self.mapIcons.report_normal('flood');
+        let reportIconNormal = (feature.properties.disaster_type === 'prep') ? self.mapIcons.report_normal(feature.properties.report_data.report_type) : self.mapIcons.report_normal('flood');
         return L.marker(latlng, {
           icon: reportIconNormal,
           pane: 'reports'
@@ -382,15 +382,15 @@ export class MapLayers {
   }
 
   addFloodExtents(city_name, city_region, map, togglePane) {
-    var self = this;
+    let self = this;
     self.flood_extents = L.geoJSON(null, {
       style: (feature, layer) => {
         switch (feature.properties.state) {
-          case 4: return { cursor: "pointer", fillColor: "#CC2A41", weight: 0, color: "#000000", opacity: 0, fillOpacity: 0.7 };
-          case 3: return { cursor: "pointer", fillColor: "#FF8300", weight: 0, color: "#000000", opacity: 0, fillOpacity: 0.7 };
-          case 2: return { cursor: "pointer", fillColor: "#FFFF00", weight: 0, color: "#000000", opacity: 0, fillOpacity: 0.7 };
-          case 1: return { cursor: "pointer", fillColor: "#A0A9F7", weight: 0, color: "#000000", opacity: 0, fillOpacity: 0.7 };
-          default: return { weight: 0, opacity: 0, fillOpacity: 0 };
+        case 4: return { cursor: 'pointer', fillColor: '#CC2A41', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
+        case 3: return { cursor: 'pointer', fillColor: '#FF8300', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
+        case 2: return { cursor: 'pointer', fillColor: '#FFFF00', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
+        case 1: return { cursor: 'pointer', fillColor: '#A0A9F7', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
+        default: return { weight: 0, opacity: 0, fillOpacity: 0 };
         }
       },
       onEachFeature: (feature, layer) => {
@@ -401,7 +401,7 @@ export class MapLayers {
   }
 
   removeFloodExtents(map) {
-    var self = this;
+    let self = this;
     if (self.flood_extents) {
       map.removeLayer(self.flood_extents);
       self.flood_extents = null;
@@ -409,7 +409,7 @@ export class MapLayers {
   }
 
   addFloodGauges(city_name, city_region, map, togglePane) {
-    var self = this;
+    let self = this;
     map.createPane('gauges');
     map.getPane('gauges').style.zIndex = 650;
     if (city_region === 'jbd') {
@@ -430,7 +430,7 @@ export class MapLayers {
   }
 
   removeFloodGauges(map) {
-    var self = this;
+    let self = this;
     if (self.gaugeLayer) {
       map.removeLayer(self.gaugeLayer);
       self.gaugeLayer = null;
