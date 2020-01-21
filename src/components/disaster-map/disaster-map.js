@@ -1,8 +1,8 @@
-import {inject, bindable, customElement} from 'aurelia-framework';
+import { inject, bindable, customElement } from 'aurelia-framework';
 import * as L from 'leaflet';
 import $ from 'jquery';
-import {MapLayers} from './map-layers';
-import {MapUtility} from './map-utility';
+import { MapLayers } from './map-layers';
+import { MapUtility } from './map-utility';
 
 //start-aurelia-decorators
 @customElement('disaster-map')
@@ -36,7 +36,7 @@ export class DisasterMap {
         if (clearSelection) {
           if (self.layers.selected_report) {
             self.reportid = null;
-            history.pushState({city: self.selected_city, report_id: null}, 'city', 'map/' + self.selected_city);
+            history.pushState({ city: self.selected_city, report_id: null }, 'city', 'map/' + self.selected_city);
             self.layers.revertIconToNormal(self.layers.selReportType);
           }
           if (self.layers.selected_extent) {
@@ -74,11 +74,11 @@ export class DisasterMap {
         if ((self.querylanguage || self.querytab) && !self.reportid) {
           if (!self.selected_city && self.utility.isCitySupported(self.querycity)) {
             self.selected_city = self.querycity; //selected_city given a value from params only when viewReports / changeCity run
-            history.pushState({city: self.selected_city, report_id: null}, 'city', 'map/' + self.selected_city);
+            history.pushState({ city: self.selected_city, report_id: null }, 'city', 'map/' + self.selected_city);
           } else if (self.selected_city) {
-            history.pushState({city: self.selected_city, report_id: null}, 'city', 'map/' + self.selected_city);
+            history.pushState({ city: self.selected_city, report_id: null }, 'city', 'map/' + self.selected_city);
           } else {
-            history.pushState({city: null, report_id: null}, 'city', 'map');
+            history.pushState({ city: null, report_id: null }, 'city', 'map');
           }
         }
       }
@@ -91,78 +91,78 @@ export class DisasterMap {
     let self = this;
 
     self.utility.changeCity(cityName, self.reportid, self.map, self.layers, self.togglePane)
-    .then(() => {
-      // Show timeperiod notification
-      self.layers.getStats(self.utility.parseCityObj(cityName, false).region)
-      .then(stats => {
-        let msg = this.locale.reports_stats.replace('{reportsplaceholder}', stats.reports).replace('{hoursplaceholder}', stats.timeperiod / 3600);
-        self.utility.statsNotification(msg);
-      });
+      .then(() => {
+        // Show timeperiod notification
+        self.layers.getStats(self.utility.parseCityObj(cityName, false).region)
+          .then(stats => {
+            let msg = this.locale.reports_stats.replace('{reportsplaceholder}', stats.reports).replace('{hoursplaceholder}', stats.timeperiod / 3600);
+            self.utility.statsNotification(msg);
+          });
 
-      if (self.reportid && self.layers.activeReports.hasOwnProperty(self.reportid)) {
-        //Case 1: Active report id in current city
-        if (self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code === self.utility.parseCityObj(cityName, false).region) {
-          self.layers.activeReports[self.reportid].fire('click');
-          self.selected_city = cityName;
-          if (pushState) {
-            history.pushState({city: cityName, report_id: self.reportid}, 'city', 'map/' + cityName + '/' + self.reportid);
-          }
-        }
-      } else if (self.reportid && !self.layers.activeReports.hasOwnProperty(self.reportid)) {
-        //Case 2: No active report, check availability on server
-        self.layers.addSingleReport(self.reportid)
-        .then(report => {
-          let reportRegion = self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code;
-          if (reportRegion === self.utility.parseCityObj(cityName, false).region) {
-            //Case 2A: in current city?
-            report.fire('click');
+        if (self.reportid && self.layers.activeReports.hasOwnProperty(self.reportid)) {
+          //Case 1: Active report id in current city
+          if (self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code === self.utility.parseCityObj(cityName, false).region) {
+            self.layers.activeReports[self.reportid].fire('click');
             self.selected_city = cityName;
             if (pushState) {
-              history.pushState({city: cityName, report_id: self.reportid}, 'city', 'map/' + cityName + '/' + self.reportid);
+              history.pushState({ city: cityName, report_id: self.reportid }, 'city', 'map/' + cityName + '/' + self.reportid);
+            }
+          }
+        } else if (self.reportid && !self.layers.activeReports.hasOwnProperty(self.reportid)) {
+          //Case 2: No active report, check availability on server
+          self.layers.addSingleReport(self.reportid)
+            .then(report => {
+              let reportRegion = self.layers.activeReports[self.reportid].feature.properties.tags.instance_region_code;
+              if (reportRegion === self.utility.parseCityObj(cityName, false).region) {
+                //Case 2A: in current city?
+                report.fire('click');
+                self.selected_city = cityName;
+                if (pushState) {
+                  history.pushState({ city: cityName, report_id: self.reportid }, 'city', 'map/' + cityName + '/' + self.reportid);
+                }
+              } else {
+                //Case 2B: fly to city with report id
+                let queryReportCity = self.utility.parseCityName(reportRegion, self.cities);
+                self.utility.changeCity(queryReportCity, self.reportid, self.map, self.layers, self.togglePane)
+                  .then(() => {
+                    self.layers.addSingleReport(self.reportid)
+                      .then(queriedReport => {
+                        queriedReport.fire('click');
+                        self.selected_city = queryReportCity;
+                        if (pushState) {
+                          history.pushState({ city: queryReportCity, report_id: self.reportid }, 'city', 'map/' + queryReportCity + '/' + self.reportid);
+                        }
+                      });
+                  });
+              }
+            }).catch(() => {
+              self.utility.noReportNotification(cityName, self.reportid);
+              self.selected_city = cityName;
+              self.reportid = null;
+              if (pushState) {
+                history.pushState({ city: cityName, report_id: null }, 'city', 'map/' + cityName);
+              }
+            });
+        } else if (!self.reportid) {
+          // No report id in query
+          if (self.utility.isCitySupported(cityName)) {
+            self.selected_city = cityName;
+            if (pushState) {
+              history.pushState({ city: cityName, report_id: null }, 'city', 'map/' + cityName);
             }
           } else {
-            //Case 2B: fly to city with report id
-            let queryReportCity = self.utility.parseCityName(reportRegion, self.cities);
-            self.utility.changeCity(queryReportCity, self.reportid, self.map, self.layers, self.togglePane)
-            .then(() => {
-              self.layers.addSingleReport(self.reportid)
-              .then(queriedReport => {
-                queriedReport.fire('click');
-                self.selected_city = queryReportCity;
-                if (pushState) {
-                  history.pushState({city: queryReportCity, report_id: self.reportid}, 'city', 'map/' + queryReportCity + '/' + self.reportid);
-                }
-              });
-            });
-          }
-        }).catch(() => {
-          self.utility.noReportNotification(cityName, self.reportid);
-          self.selected_city = cityName;
-          self.reportid = null;
-          if (pushState) {
-            history.pushState({city: cityName, report_id: null}, 'city', 'map/' + cityName);
-          }
-        });
-      } else if (!self.reportid) {
-        // No report id in query
-        if (self.utility.isCitySupported(cityName)) {
-          self.selected_city = cityName;
-          if (pushState) {
-            history.pushState({city: cityName, report_id: null}, 'city', 'map/' + cityName);
-          }
-        } else {
-          self.utility.noReportNotification(null, null);
-          self.selected_city = null;
-          if (pushState) {
-            history.pushState({city: null, report_id: null}, 'city', 'map');
+            self.utility.noReportNotification(null, null);
+            self.selected_city = null;
+            if (pushState) {
+              history.pushState({ city: null, report_id: null }, 'city', 'map');
+            }
           }
         }
-      }
-    }).catch(() => {
-      //Case 3: .addReports not resolved for specified city
-      self.utility.noReportNotification(cityName, null);
-      self.reportid = null;
-    });
+      }).catch(() => {
+        //Case 3: .addReports not resolved for specified city
+        self.utility.noReportNotification(cityName, null);
+        self.reportid = null;
+      });
   }
 
   attached() {
