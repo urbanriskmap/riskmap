@@ -52,14 +52,14 @@ export class MapLayers {
   // Get icon for flood gauge
   gaugeIconUrl(level) {
     switch (level) {
-    case 1:
-      return 'assets/icons/floodgauge_1.svg';
-    case 2:
-      return 'assets/icons/floodgauge_2.svg';
-    case 3:
-      return 'assets/icons/floodgauge_3.svg';
-    default:
-      return 'assets/icons/floodgauge_4.svg';
+      case 1:
+        return 'assets/icons/floodgauge_1.svg';
+      case 2:
+        return 'assets/icons/floodgauge_2.svg';
+      case 3:
+        return 'assets/icons/floodgauge_3.svg';
+      default:
+        return 'assets/icons/floodgauge_4.svg';
     }
   }
 
@@ -386,11 +386,11 @@ export class MapLayers {
     self.flood_extents = L.geoJSON(null, {
       style: (feature, layer) => {
         switch (feature.properties.state) {
-        case 4: return { cursor: 'pointer', fillColor: '#CC2A41', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
-        case 3: return { cursor: 'pointer', fillColor: '#FF8300', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
-        case 2: return { cursor: 'pointer', fillColor: '#FFFF00', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
-        case 1: return { cursor: 'pointer', fillColor: '#A0A9F7', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
-        default: return { weight: 0, opacity: 0, fillOpacity: 0 };
+          case 4: return { cursor: 'pointer', fillColor: '#CC2A41', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
+          case 3: return { cursor: 'pointer', fillColor: '#FF8300', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
+          case 2: return { cursor: 'pointer', fillColor: '#FFFF00', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
+          case 1: return { cursor: 'pointer', fillColor: '#A0A9F7', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
+          default: return { weight: 0, opacity: 0, fillOpacity: 0 };
         }
       },
       onEachFeature: (feature, layer) => {
