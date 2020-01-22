@@ -3,23 +3,39 @@
 
   <div id="screen">
     <div id="cityPopup">
-      <p>${helper}</p>
-      <label repeat.for="city of cities">
-        <input type="radio" model.bind="city" id.bind="'cityname-' + city" selected.bind="selcity" change.delegate="switchCity(city, true)">
-        ${city}
-        <br>
-      </label>
+      <input
+        type="text"
+        class="live-search-box"
+        placeholder="Search City"
+        model.bind="city"
+        value.bind="query & throttle"
+      />
+      <i class="fa fa-search position" aria-hidden="true"></i>
+      <div class="searchDropDown">
+        <ul if.bind="searchText.length > 0" repeat.for="city of searchResult">
+          <li click.delegate="switchCity(city)">${city}</li>
+        </ul>
+      </div>
     </div>
 
     <div id="termsPopup">
       <div id="tabRow">
-        <div repeat.for="switch of termscontents" class="termsTabs" id.bind="'tab-' + switch.tab_key" click.delegate="switchTab(switch.tab_key)">
+        <div
+          repeat.for="switch of termscontents"
+          class="termsTabs"
+          id.bind="'tab-' + switch.tab_key"
+          click.delegate="switchTab(switch.tab_key)"
+        >
           <p>${switch.tab_name}</p>
         </div>
       </div>
       <div id="tabContent">
-        <div repeat.for="content of termscontents" class="termsContents" if.bind="content.tab_key == seltab" innerhtml.bind="content.tab_content">
-        </div>
+        <div
+          repeat.for="content of termscontents"
+          class="termsContents"
+          if.bind="content.tab_key == seltab"
+          innerhtml.bind="content.tab_content"
+        ></div>
       </div>
       <div id="closeRow">
         <p click.delegate="closePopup()">Close&nbsp;&nbsp;&nbsp;&nbsp;</p>

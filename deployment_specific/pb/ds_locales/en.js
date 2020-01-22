@@ -13,7 +13,8 @@ const en = {
     'tab_names': {
       'map': 'map',
       'report': 'report',
-      'info': 'info'
+      'legend': 'legend',
+      'about':'about'
     }
   },
   'report_info': {

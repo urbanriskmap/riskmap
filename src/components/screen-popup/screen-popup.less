@@ -82,11 +82,11 @@
         padding: 24px;
         .bodylight-mixin(12px);
         & a {
-        .linklight-mixin(12px);
-        color: @banjir-blue;
+          .linklight-mixin(12px);
+          color: @banjir-blue;
         }
         & p {
-            .header {
+          .header {
             text-transform: uppercase;
             .bodymedium-mixin(14px);
           }
@@ -111,4 +111,29 @@
       }
     }
   }
+}
+.position {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+}
+
+.searchDropDown {
+  background: white;
+  list-style: none;
+  text-align: left;
+}
+
+ul li {
+  list-style: none;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+input.live-search-box.au-target {
+  width: 100%;
+  height: 24px;
+  border: 1px solid;
+  border-radius: 3px;
+  font-size: 15px;
 }

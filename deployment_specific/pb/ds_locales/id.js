@@ -13,7 +13,9 @@ const id = {
     'tab_names': {
       'map': 'peta',
       'report': 'laporkan',
-      'info': 'info'
+      'info': 'info',
+      'legend':'legenda',
+      'about':'tentang'
     }
   },
   'report_info': {
