@@ -24,6 +24,7 @@
     "chart.js": "2.7.2",
     "jquery": "^3.4.1",
     "leaflet": "1.0.3",
+    "leaflet.markercluster": "^1.4.1",
     "less": "^3.8.1",
     "nprogress": "0.2.0",
     "requirejs": "2.3.3",

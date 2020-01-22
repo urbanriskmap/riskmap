@@ -135,6 +135,7 @@
           "aurelia-templating",
           "aurelia-templating-binding",
           "text",
+          
           {
             "name": "aurelia-templating-resources",
             "path": "../node_modules/aurelia-templating-resources/dist/amd",
@@ -162,6 +163,15 @@
             "main": "leaflet",
             "resources": [
               "leaflet.css"
+            ]
+          },
+          {
+            "name": "leaflet.markercluster",
+            "path": "../node_modules/leaflet.markercluster/dist",
+            "main": "leaflet.markercluster-src",
+            "resources": [
+              "MarkerCluster.css",
+              "MarkerCluster.Default.css"
             ]
           },
           {
