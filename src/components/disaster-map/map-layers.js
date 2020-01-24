@@ -2,6 +2,8 @@
 
 import { inject, noView } from 'aurelia-framework';
 import * as L from 'leaflet';
+// eslint-disable-next-line no-unused-vars
+import markerClusterGroup from 'leaflet.markercluster';
 import Chart from 'chart';
 import { Config } from 'resources/config';
 import { HttpClient } from 'aurelia-http-client';
@@ -364,21 +366,40 @@ export class MapLayers {
       map.removeLayer(self.reports);
       self.reports = null;
     }
-    // create new layer object
-    self.reports = L.geoJSON(null, {
-      onEachFeature: (feature, layer) => {
-        self.reportInteraction(feature, layer, city_name, map, togglePane);
-      },
-      pointToLayer: (feature, latlng) => {
-        let reportIconNormal = (feature.properties.disaster_type === 'prep') ? self.mapIcons.report_normal(feature.properties.report_data.report_type) : self.mapIcons.report_normal('flood');
-        return L.marker(latlng, {
-          icon: reportIconNormal,
-          pane: 'reports'
-        });
-      }
-    });
+    let endPoint = 'reports/?city=' + cityRegion + '&timeperiod=' + self.config.report_timeperiod;
     // add layer to map
-    return self.appendData('reports/?city=' + city_region + '&timeperiod=' + self.config.report_timeperiod, self.reports, map);
+    // return self.appendData('reports/?city=' + cityRegion + '&timeperiod=' + self.config.report_timeperiod, self.reports, map);
+    return this.addResportsClustered(self, endPoint, cityName, map, togglePane);
+  }
+
+  addResportsClustered(self, endPoint, cityName, map, togglePane) {
+    return new Promise((resolve, reject) => {
+      self.getData(endPoint)
+        .then(data => {
+          if (!data) {
+            // console.log('Could not load map layer');
+            resolve(data);
+          } else {
+            // create new layer object
+            self.reports = L.geoJSON(data, {
+              onEachFeature: (feature, layer) => {
+                self.reportInteraction(feature, layer, cityName, map, togglePane);
+              },
+              pointToLayer: (feature, latlng) => {
+                let reportIconNormal = (feature.properties.disaster_type === 'prep') ? self.mapIcons.report_normal(feature.properties.report_data.report_type) : self.mapIcons.report_normal('flood');
+                return L.marker(latlng, {
+                  icon: reportIconNormal,
+                  pane: 'reports'
+                });
+              }
+            });
+            let markers = L.markerClusterGroup();
+            markers.addLayer(self.reports);
+            markers.addTo(map);
+            resolve(data);
+          }
+        }).catch(() => reject(null));
+    });
   }
 
   addFloodExtents(cityName, cityRegion, map, togglePane) {
