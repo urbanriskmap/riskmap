@@ -170,8 +170,8 @@ export class MapUtility {
     container.style.textAlign = 'center';
     container.style.lineHeight = '30px';
     container.style.backgroundColor = 'white';
-    container.style.width = '30px';
-    container.style.height = '30px';
+    // container.style.width = '0px';
+    // container.style.height = '0px';
     container.style.cursor = 'pointer';
     container.onclick = () => {
       self.viewClientLocation(map, layers, togglePane);

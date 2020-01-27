@@ -50,11 +50,26 @@
     </disaster-map>
 
     <div id="topBar">
-      <div id="logo_top">
-        <a href="map">
-          <img id="pbLogo" src="assets/graphics/app_logo.svg" width="180">
-        </a>
+      
+      <div class="d-flex justify-content-end">
+         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 p-2 m-0">
+            <input
+            type="text"
+            class="live-search-box"
+            placeholder="Search City"
+            model.bind="city"
+            value.bind="query & throttle"
+          />
+          <div class="row p-0 m-0">
+              <div class="col-6 searchDropDown p-0 m-0 ">
+                <ul class="locationDesign p-2 m-0" if.bind="searchText.length > 0" repeat.for="city of searchResult" >
+                    <li click.delegate="reportTab(city)">${city}</li>
+                  </ul>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="menuBtn active" click.delegate="mapModel.togglePane('#sidePane', 'show', true)">
         <i class="icon-menu"></i>
       </div>
@@ -88,6 +103,6 @@
       <side-pane view-model.ref="webMenu" querylanguage.two-way="queried_lang" cities.bind="mapModel.cities" selcity.two-way="mapModel.selected_city" change-city.call="mapModel.viewReports($event, $event)" close-pane.call="mapModel.togglePane('#sidePane', 'hide', false)" reportId.two-way="report_id" open-terms.call="screenPopup.openPopup($event)" queriedterms="queried_terms">
       </side-pane>
     </div>
-
+    
   </div>
 </template>

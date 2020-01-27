@@ -1,11 +1,26 @@
 import $ from 'jquery';
 import {Config} from '../../resources/config';
-import {inject} from 'aurelia-framework';
+import { bindable, customElement, demoIntercept } from "aurelia-framework";
+import { inject, observable } from "aurelia-framework";
 
 //start-aurelia-decorators
+@customElement("landing")
+
 @inject(Config)
 //end-aurelia-decorators
+
 export class Landing {
+  //start-aurelia-decorators
+  @bindable
+  helper;
+  @bindable cities;
+  @bindable selcity;
+  @bindable switchCity;
+  @bindable termscontents;
+  @bindable initializetab;
+  @bindable changeCity;
+  //end-aurelia-decorators
+  @observable query;
   constructor(Config) {
     this.config = Config;
   }
@@ -18,8 +33,22 @@ export class Landing {
     this.queried_terms = (params.terms === 'u_a' || params.terms === 'p_p') ? params.terms : null;
   }
 
+  queryChanged(newval, oldval) {
+    this.searchText = newval;
+    const map = Object.keys(this.config.map.instance_regions);
+    let newObj = map.filter(value => {
+      return value.indexOf(newval) != -1 ? value : null;
+    });
+    this.searchResult = newObj;
+  }
+
+  switchCity(city) {
+    this.changeCity(city, true);
+    this.closePane();
+  }
+
   //report button on the map
-  reportTab() {
+  reportTab(event) {
     $('#reportLink').toggle('slide');
   }
 
@@ -31,12 +60,12 @@ export class Landing {
 
   attached() {
     // If desktop, open side pane to 'info' tab
-    if (!(/Mobi/.test(navigator.userAgent)) && !this.report_id) {
-      this.mapModel.togglePane('#sidePane', 'show', true);
-    } else if (this.queried_terms) {
-      $('#screen').show();
-      $('#termsPopup').show();
-    }
+    // if (!(/Mobi/.test(navigator.userAgent)) && !this.report_id) {
+    //   this.mapModel.togglePane('#sidePane', 'hide', false);
+    // } else if (this.queried_terms) {
+    //   $('#screen').show();
+    //   $('#termsPopup').show();
+    // }
 
     // Modify side pane height on the fly
     this.resizeSidePane();
