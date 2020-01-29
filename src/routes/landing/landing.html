@@ -14,7 +14,7 @@
     <div id="reportButton" click.delegate="reportTab()">
       <p><i id="buttonText" class="icon-add-report"></i><br>${webMenu.locale.add_report}</p>
     </div>
-    <div id="reportLink" onclick="reportTab()">
+    <div id="reportLink">
       <table>
         <tr>
           <td repeat.for="platform of config.deep_links">
@@ -51,7 +51,7 @@
 
     <div id="topBar">
       
-      <div class="d-flex justify-content-end">
+      <!-- <div class="d-flex justify-content-end">
          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 p-2 m-0">
             <input
             type="text"
@@ -63,12 +63,12 @@
           <div class="row p-0 m-0">
               <div class="col-6 searchDropDown p-0 m-0 ">
                 <ul class="locationDesign p-2 m-0" if.bind="searchText.length > 0" repeat.for="city of searchResult" >
-                    <li click.delegate="reportTab(city)">${city}</li>
+                    <li click.delegate="mapModel.switchCity(city)">${city}</li>
                   </ul>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="menuBtn active" click.delegate="mapModel.togglePane('#sidePane', 'show', true)">
         <i class="icon-menu"></i>

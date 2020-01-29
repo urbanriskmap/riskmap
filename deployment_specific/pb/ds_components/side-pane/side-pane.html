@@ -10,19 +10,22 @@
   </div>
 
   <div id="paneContent">
-    <div class="paneTabs" repeat.for="menuName of menuList">
+    <div class="row paneTabs" repeat.for="menuName of menuList">
       <div
-        class="accordion" id.bind="'label_' + menuName"
+        class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 p-2 m-0 accordion" id.bind="'label_' + menuName"
         textcontent.bind="locale.web_menu.tab_names[menuName]"
         click.delegate="switchTab(menuName)"
       >
       
     </div>
-    <p class="arrows down" id.bind="'down_' + menuName">
+    <div class="col-6 col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 p-0 m-0 text-right">
+      <p class="arrows down" id.bind="'down_' + menuName">
         <i class="icon-down-open"></i>
-      </p>
+    </p>
       <p class="arrows up" id.bind="'up_' + menuName">
         <i class="icon-up-open"></i></p>
+    </div>
+
 
       <div class="panel"
       id.bind="'vid_' + menuName"
@@ -50,7 +53,7 @@
 
         <div class="paneTabs" repeat.for="gauge of gauge_levels">
           <div class="accordion" id.bind="'label_' + gauge" textcontent.bind="gauge" click.delegate="switchTab(gauge)">
-            <p class="arrows down" id.bind="'down_' + gauge">
+            <p class="arrows down" id.bind="'down_' + gauge" >
               <i class="icon-down-open"></i>
             </p>
             <p class="arrows up" id.bind="'up_' + gauge">

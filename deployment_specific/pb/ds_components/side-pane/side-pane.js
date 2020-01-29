@@ -30,7 +30,8 @@ export class SidePane {
     }
     this.locale = {};
 
-    this.seltab = "menu"; //default tab to open
+    this.seltab = "about"; //default tab to open
+    this.switchTab(this.seltab);
     this.menuList = ["map", "report", "legend", "about"];
 
     this.vidWrapperOpened = false;
@@ -142,6 +143,7 @@ export class SidePane {
   }
 
   switchTab(tab) {
+    console.log(tab)
     this.seltab = tab;
     $(".panel:not(#vid_" + tab + ")").slideUp("fast");
     $("#vid_" + tab).slideToggle("fast");

@@ -19,7 +19,7 @@ export class ScreenPopup {
   //end-aurelia-decorators
   @observable query;
   constructor(Config) {
-    this.seltab = "u_a";
+    this.seltab = "about";
     this.config = Config.map;
   }
 
@@ -48,15 +48,15 @@ export class ScreenPopup {
 
   switchCity(city) {
     this.changeCity(city, true);
-    this.closePane();
+    // this.closePane();
   }
 
-  closePopup() {
-    $("#termsPopup").hide();
-    if (this.selcity) {
-      $("#screen").hide();
-    }
-  }
+  // closePopup() {
+  //   $("#termsPopup").hide();
+  //   if (this.selcity) {
+  //     $("#screen").hide();
+  //   }
+  // }
 
   openPopup(name) {
     this.seltab = name;

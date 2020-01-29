@@ -22,24 +22,29 @@ export class Landing {
   //end-aurelia-decorators
   @observable query;
   constructor(Config) {
-    this.config = Config;
+    this.config = Config.map;
+    this.configData = Config
   }
 
   activate(params, routerConfig) {
     this.queried_city = params.city;
     this.report_id = params.report;
-    this.queried_lang = (this.config.supported_languages.indexOf(params.lang) > -1) ? params.lang : null;
+    this.queried_lang = (this.configData.supported_languages.indexOf(params.lang) > -1) ? params.lang : null;
     this.queried_tab = (params.tab === 'info' || params.tab === 'map' || params.tab === 'report') ? params.tab : null;
     this.queried_terms = (params.terms === 'u_a' || params.terms === 'p_p') ? params.terms : null;
   }
 
   queryChanged(newval, oldval) {
     this.searchText = newval;
-    const map = Object.keys(this.config.map.instance_regions);
+    const map = Object.keys(this.config.instance_regions);
     let newObj = map.filter(value => {
       return value.indexOf(newval) != -1 ? value : null;
     });
     this.searchResult = newObj;
+  }
+
+  isCitySupported(querycity) {
+    return querycity in this.config.instance_regions;
   }
 
   switchCity(city) {
@@ -49,7 +54,7 @@ export class Landing {
 
   //report button on the map
   reportTab(event) {
-    $('#reportLink').toggle('slide');
+    $('#reportLink').show();
   }
 
   resizeSidePane() {

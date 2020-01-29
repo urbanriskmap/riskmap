@@ -1,7 +1,7 @@
 <template>
   <require from="./screen-popup.css"></require>
-
-  <!-- <div id="screen">
+ 
+  <div id="screen">
     <div id="cityPopup">
       <input
         type="text"
@@ -10,9 +10,9 @@
         model.bind="city"
         value.bind="query & throttle"
       />
-      <i class="fa fa-search position" aria-hidden="true"></i>
+      <!-- <i class="fa fa-search position" aria-hidden="true"></i> -->
         <div class="row p-0 m-0">
-          <div class="col-6 searchDropDown p-0 m-0 ">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 searchDropDown p-0 m-0 ">
               <ul if.bind="searchText.length > 0" repeat.for="city of searchResult">
                   <li click.delegate="switchCity(city)">${city}</li>
                 </ul>
@@ -43,5 +43,5 @@
         <p click.delegate="closePopup()">Close&nbsp;&nbsp;&nbsp;&nbsp;</p>
       </div>
     </div>
-  </div> -->
+  </div>
 </template>

@@ -50,17 +50,19 @@ export class MapUtility {
       // null, undefined
       $('#screen').show();
       $('#cityPopup').show();
+      $('#report').show();
       return self.config.default_region;
     } else if (self.isCitySupported(city_name)) {
       // supported city
-      $('#screen').hide();
-      $('#cityPopup').hide();
+      // $('#screen').hide();
+      // $('#cityPopup').hide();
       return self.config.instance_regions[city_name];
     } else if (!self.isCitySupported(city_name)) {
       // invalid city
       if (notify) {
         $('#screen').show();
         $('#cityPopup').show();
+        $('#report').show();
       }
       return self.config.default_region;
     }
@@ -170,8 +172,8 @@ export class MapUtility {
     container.style.textAlign = 'center';
     container.style.lineHeight = '30px';
     container.style.backgroundColor = 'white';
-    // container.style.width = '0px';
-    // container.style.height = '0px';
+    container.style.width = '30px';
+    container.style.height = '30px';
     container.style.cursor = 'pointer';
     container.onclick = () => {
       self.viewClientLocation(map, layers, togglePane);
