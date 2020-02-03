@@ -52,6 +52,53 @@
   }
 }
 
+.cluster-count{
+  position: absolute;
+  padding: 2px;
+  background-color:@steel-gray;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  color:@snow-white;
+  font-size: x-small;
+  &::before {
+    border: 0;
+  }  
+}
+
+.bg-cluster {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 30px;
+  line-height: 30px;
+  text-shadow: 1px 1px 0px white,
+              -1px 1px 0px white,
+               1px -1px 0px white,
+              -1px -1px 0px white;
+  &.low {
+    color: @flash-yellow;
+  }
+  &.normal {
+    color: @silt-orange;
+  }
+  &.medium {
+    color: @banjir-blue;
+  }
+  &.high {
+    color: @drain-brown;
+  }
+}
+
+.report-cluster {
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  font-size: 25px;
+  line-height: 30px;
+  color: @steel-gray;
+  text-shadow: none;
+}
+
 .report-icon {
   position: absolute;
   top: 0px;

@@ -37,6 +37,10 @@ export class MapLayers {
         iconUrl: 'assets/icons/floodgauge_selected.svg',
         iconSize: [30, 30],
         iconAnchor: [15, 15]
+      }),
+      flood_cluster: (level) => L.divIcon({
+        iconSize: [30, 30],
+        html: '<i class="icon-map-bg bg-cluster cluster ' + level + '"><i class="icon-cluster report-cluster">'
       })
     };
     this.mapPolygons = {
@@ -393,7 +397,7 @@ export class MapLayers {
                 });
               }
             });
-            let markers = L.markerClusterGroup();
+            let markers = L.markerClusterGroup({iconCreateFunction: this.iconCreateFunction()});
             markers.addLayer(self.reports);
             markers.addTo(map);
             resolve(data);
@@ -402,16 +406,54 @@ export class MapLayers {
     });
   }
 
+  iconCreateFunction() {
+    let self = this;
+    return (cluster) => {
+      let tooltip = L.tooltip({
+        className: 'cluster-count',
+        permanent: true,
+        direction: 'right',
+        offset: [7, 7],
+        interactive: true
+      }).setContent(cluster.getChildCount().toString());
+      cluster.bindTooltip(tooltip);
+      // cluster.getAllChildMarkers()[0].feature.properties.report_data['flood_depth']
+      let children = cluster.getAllChildMarkers();
+      let avgDepth = self.getAverageFloodDepth(children);
+      if (avgDepth < 30) {
+        return self.mapIcons.flood_cluster('low');
+      } else if (avgDepth < 70) {
+        return self.mapIcons.flood_cluster('normal');
+      } else if (avgDepth < 150) {
+        return self.mapIcons.flood_cluster('medium');
+      } else if (avgDepth >= 150) {
+        return self.mapIcons.flood_cluster('high');
+      }
+    };
+  }
+
+  getAverageFloodDepth(report_markers) {
+    let depth = 0;
+    report_markers.forEach(function(report, index) {
+      const reportData = report.feature.properties.report_data || {'flood_depth': 0};
+      depth += reportData['flood_depth'] || 0;
+    })
+    // for (let report in report_markers) {
+    //   depth += report.feature.properties.report_data['flood_depth'];
+    // }
+    return depth/report_markers.length; 
+  }
+
   addFloodExtents(cityName, cityRegion, map, togglePane) {
     let self = this;
     self.flood_extents = L.geoJSON(null, {
       style: (feature, layer) => {
         switch (feature.properties.state) {
-        case 4: return { cursor: 'pointer', fillColor: '#CC2A41', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
-        case 3: return { cursor: 'pointer', fillColor: '#FF8300', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
-        case 2: return { cursor: 'pointer', fillColor: '#FFFF00', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
-        case 1: return { cursor: 'pointer', fillColor: '#A0A9F7', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
-        default: return { weight: 0, opacity: 0, fillOpacity: 0 };
+          case 4: return { cursor: 'pointer', fillColor: '#CC2A41', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
+          case 3: return { cursor: 'pointer', fillColor: '#FF8300', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
+          case 2: return { cursor: 'pointer', fillColor: '#FFFF00', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
+          case 1: return { cursor: 'pointer', fillColor: '#A0A9F7', weight: 0, color: '#000000', opacity: 0, fillOpacity: 0.7 };
+          default: return { weight: 0, opacity: 0, fillOpacity: 0 };
         }
       },
       onEachFeature: (feature, layer) => {
