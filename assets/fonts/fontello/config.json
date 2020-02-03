@@ -427,6 +427,12 @@
       "css": "downvote",
       "code": 59431,
       "src": "elusive"
+    },
+    {
+      "uid": "c76b7947c957c9b78b11741173c8349b",
+      "css": "cluster",
+      "code": 59428,
+      "src": "fontawesome"
     }
   ]
 }

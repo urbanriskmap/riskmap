@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg">
-<metadata>Copyright (C) 2018 by original authors @ fontello.com</metadata>
+<metadata>Copyright (C) 2020 by original authors @ fontello.com</metadata>
 <defs>
 <font id="fontello" horiz-adv-x="1000" >
 <font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
@@ -77,6 +77,8 @@
 <glyph glyph-name="flood" unicode="&#xe822;" d="M500-38c-162 0-292 131-292 293 0 150 242 460 270 498 10 10 15 10 22 10 10 0 18-5 23-10 27-38 270-343 270-498 0-157-130-293-293-293z m0 126c-15 0-32 15-32 32 0 15 15 33 32 33 55 0 103 47 103 102 0 15 15 33 32 33 18 0 33-15 33-33 0-92-75-167-168-167z" horiz-adv-x="1000" />
 
 <glyph glyph-name="flag" unicode="&#xe823;" d="M640 693q25 25 57 11t32-47l0-418q0-21-15-36-80-80-193-80t-193 80q-47 46-110 50t-114-36l0-238q0-21-15-37t-36-15-37 15-16 37l0 678q0 21 15 36 80 80 193 80t193-80q50-50 120-50t119 50z" horiz-adv-x="729" />
+
+<glyph glyph-name="cluster" unicode="&#xe824;" d="M571 83v106q0 8-5 13t-12 5h-108q-7 0-12-5t-5-13v-106q0-8 5-13t12-6h108q7 0 12 6t5 13z m-1 208l10 257q0 6-5 10-7 6-14 6h-122q-6 0-14-6-5-4-5-12l9-255q0-5 6-9t13-3h103q8 0 14 3t5 9z m-7 522l428-786q20-35-1-70-9-17-26-26t-35-10h-858q-18 0-35 10t-26 26q-21 35-1 70l429 786q9 17 26 27t36 10 36-10 27-27z" horiz-adv-x="1000" />
 
 <glyph glyph-name="upvote" unicode="&#xe826;" d="M0-63l0 552q0 16 10 25t25 11l147 0q33 0 35-36l0-552q0-14-10-24t-25-12l-147 0q-13 0-23 10t-12 26z m277 27l0 500q0 22 14 35t37 16l113 0 114 252q13 31 41 31 37 2 93-61 18-25 25-55t6-48-9-64-10-55l248 0q26 0 38-17t11-44l-70-429q-12-42-53-74t-88-38l-459 0q-21 0-35 14t-16 37z" horiz-adv-x="998" />
 
