@@ -38,16 +38,28 @@ export class ScreenPopup {
   }
 
   queryChanged(newval, oldval) {
-    this.searchText = newval;
+    this.searchText = newval.toLowerCase();
+    var regexS = "[\\?&]"+newval+"=([^&#]*)";
+    var regex = new RegExp( regexS ); 
+    var results = regex.exec( window.location.href ); 
+    console.log(this.searchText)
+    if(this.searchText.length > 0){
+      $('#dropdown_city').show();
+    }else{
+      $('#dropdown_city').hide();
+    }
     const map = Object.keys(this.config.instance_regions);
     let newObj = map.filter(value => {
-      return value.indexOf(newval) != -1 ? value : null;
+      return new RegExp(value, 'i').test(value) ? value : null;
     });
     this.searchResult = newObj;
   }
 
   switchCity(city) {
+    console.log(city)
     this.changeCity(city, true);
+      $("#screen").css("display", "none");;
+
     // this.closePane();
   }
 

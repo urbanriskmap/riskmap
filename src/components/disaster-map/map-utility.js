@@ -2,6 +2,7 @@
 
 import { inject, noView } from 'aurelia-framework';
 import * as L from 'leaflet';
+import 'leaflet.markercluster';
 import { Config } from 'resources/config';
 import { notify } from 'notifyjs-browser'; //Jquery plugin
 
@@ -48,17 +49,24 @@ export class MapUtility {
     let self = this;
     if (!cityName) {
       // null, undefined
+      console.log('1',cityName);
+
       $('#screen').show();
       $('#cityPopup').show();
       $('#report').show();
       return self.config.default_region;
     } else if (self.isCitySupported(cityName)) {
+      console.log('2',cityName);
+
       // supported city
-      // $('#screen').hide();
-      // $('#cityPopup').hide();
+      $('#screen').css('z-index','auto');
+      $('#dropdown_city').hide();
+      $('#search_city_input').val('');
       return self.config.instance_regions[cityName];
     } else if (!self.isCitySupported(cityName)) {
       // invalid city
+      console.log('3',cityName);
+
       if (notify) {
         $('#screen').show();
         $('#cityPopup').show();
