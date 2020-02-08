@@ -54,7 +54,7 @@ export class Landing {
 
   //report button on the map
   reportTab(event) {
-    $('#reportLink').show();
+    $('#reportLink').toggle('slide');
   }
 
   resizeSidePane() {

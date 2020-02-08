@@ -19,7 +19,7 @@
     <div id="reportLink">
       <table>
         <tr>
-          <td repeat.for="platform of config.deep_links">
+          <td repeat.for="platform of configData.deep_links">
             <a href.bind="platform.link">
               <i class.bind="'icon-' + platform.name"></i>
             </a>
