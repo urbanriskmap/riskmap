@@ -38,6 +38,9 @@ export class ScreenPopup {
   }
 
   queryChanged(newval, oldval) {
+    $('#dropdown_city').on('click', function() {
+      $(this).toggleClass('clicked');
+  });
     this.searchText = newval.toLowerCase();
     var regexS = "[\\?&]"+newval+"=([^&#]*)";
     var regex = new RegExp( regexS ); 
@@ -50,7 +53,7 @@ export class ScreenPopup {
     }
     const map = Object.keys(this.config.instance_regions);
     let newObj = map.filter(value => {
-      return new RegExp(value, 'i').test(value) ? value : null;
+      return value.toLowerCase();
     });
     this.searchResult = newObj;
   }

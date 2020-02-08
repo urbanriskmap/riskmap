@@ -12,9 +12,8 @@
             />
             <!-- <i class="fa fa-search position" aria-hidden="true"></i> -->
               <div id="dropdown_city" class="row p-2 m-0">
-                <div if.bind = 'searchText.length > 0' class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 searchDropDown p-2" style="
-                height: 500px;
-            ">
+                <div if.bind = 'searchText.length > 0' class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 searchDropDown p-2 mt-4" style="
+                height: 500px;">
                     <ul if.bind="searchText.length > 0" repeat.for="city of searchResult">
                         <li click.delegate="switchCity(city, true)">${city}</li>
                       </ul>
