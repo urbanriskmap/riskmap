@@ -193,17 +193,18 @@ export class DisasterMap {
       ext: 'png'
     }).addTo(self.map);
 
-    // Add zoom control
-    L.control.zoom({
-      position: 'bottomright'
-    }).addTo(self.map);
-
     // Add scale control
     L.control.scale({
       position: 'bottomleft',
       metric: true,
       imperial: false
     }).addTo(self.map);
+
+    // Add zoom control
+    L.control.zoom({
+      position: 'bottomleft'
+    }).addTo(self.map);
+
 
     // Add custom leaflet control for geolocation
     L.Control.GeoLocate = L.Control.extend({
@@ -215,7 +216,7 @@ export class DisasterMap {
       return new L.Control.GeoLocate(opts);
     };
     L.control.geoLocate({
-      position: 'bottomright'
+      position: 'bottomleft'
     }).addTo(self.map);
 
     // Find user location & store in background
