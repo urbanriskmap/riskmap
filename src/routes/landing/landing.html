@@ -17,12 +17,18 @@
       <p><i id="buttonText" class="icon-add-report"></i><br>${webMenu.locale.add_report}</p>
     </div>
     <div id="reportLink">
-      <table>
-        <tr>
+      <table class="table table-borderless">
+        <tr class="row">
           <td repeat.for="platform of configData.deep_links">
+            <span>${$index + 1}</span>  
             <a href.bind="platform.link">
               <i class.bind="'icon-' + platform.name"></i>
             </a>
+          </td>
+        </tr>
+        <tr class="row">
+          <td colspan="4">
+            <input type="button" class="btn btn-primary" value="${webMenu.locale.add_report}" click.delegate="reportDisaster('flood')"/> 
           </td>
         </tr>
       </table>

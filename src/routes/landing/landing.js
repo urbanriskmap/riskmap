@@ -2,11 +2,12 @@ import $ from 'jquery';
 import {Config} from '../../resources/config';
 import { bindable, customElement, demoIntercept } from "aurelia-framework";
 import { inject, observable } from "aurelia-framework";
+import { HttpClient } from 'aurelia-http-client';
 
 //start-aurelia-decorators
 @customElement("landing")
 
-@inject(Config)
+@inject(Config, HttpClient)
 //end-aurelia-decorators
 
 export class Landing {
@@ -81,5 +82,39 @@ export class Landing {
 
   toggleLightbox(imageurl) {
     this.imageurl = imageurl;
+  }
+
+  initiateReport(type) {
+    return new Promise((resolve, reject) => {
+      if (type) {
+        const client = new HttpClient();
+        const url = this.config.data_server +
+        'cards/';
+        const body = {
+          username: 'web_guest',
+          language: 'id',
+          network: 'website'
+        };
+
+        client.post(url, body)
+          .then(result => {
+            if (result.statusCode && result.statusCode === 200) {
+              resolve(JSON.parse(result.response).cardId);
+            } else {
+              reject(result);
+            }
+          })
+          .catch(error => reject(error));
+      } else {
+        reject('Error with report id');
+      }
+    });
+  }
+
+  reportDisaster(type) {
+    let self = this;
+    self.initiateReport(type).then(cardId => {
+      window.location = self.config.cards_server + type + '/' + cardId;
+    });
   }
 }
