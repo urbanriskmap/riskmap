@@ -76,10 +76,12 @@ export class MapUtility {
     layers.removeFloodExtents(map);
     layers.removeFloodGauges(map);
     // Fly to new city bounds
-    map.flyToBounds([cityObj.bounds.sw, cityObj.bounds.ne])
-      .once('moveend zoomend', (e) => {
-        map.setMaxBounds([cityObj.bounds.sw, cityObj.bounds.ne]);
+    // map.flyToBounds([cityObj.bounds.sw, cityObj.bounds.ne])
+    map.flyTo(cityObj.center, 12)
+    .once('moveend zoomend', (e) => {
+      map.setMaxBounds([cityObj.bounds.sw, cityObj.bounds.ne]);
       });
+    // L.rectangle([cityObj.bounds.sw, cityObj.bounds.ne], {color: '#ff7800', weight: 1}).addTo(map);
     // Add new layers
     if (cityObj.region !== 'java') {
       layers.addFloodExtents(cityName, self.parseCityObj(cityName, false).region, map, togglePane);
