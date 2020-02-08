@@ -78,7 +78,7 @@
   width: 100%;
   background: #fff;
   & div.contentWrapper {
-    padding: 30px 12px 0 12px;
+    // padding: 30px 12px 0 12px;
 
     &#content-map {
       overflow: hidden;
@@ -336,5 +336,23 @@ input#search_city_input:focus {
   position: absolute;
   right: 7px;
 }
+
+@media screen 
+  and (min-device-width: 786px) 
+  and (max-device-width: 1200px) {
+    div#sidePane {
+      margin-right: 8px !important;
+      width: 252px !important;
+  }
+  }
+
+  @media screen 
+  and (min-device-width: 1270px) 
+  and (max-device-width: 1280px) {
+    div#sidePane {
+      margin-right: 8px !important;
+      width: 234px !important;
+  }
+  }
 
 

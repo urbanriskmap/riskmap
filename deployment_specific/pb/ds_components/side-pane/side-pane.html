@@ -51,20 +51,54 @@
           class="contentWrapper"
         >
 
-        <div class="paneTabs" repeat.for="gauge of gauge_levels">
-          <div class="accordion" id.bind="'label_' + gauge" textcontent.bind="gauge" click.delegate="switchTab(gauge)">
-            <p class="arrows down" id.bind="'down_' + gauge" >
-              <i class="icon-down-open"></i>
-            </p>
-            <p class="arrows up" id.bind="'up_' + gauge">
-              <i class="icon-up-open"></i></p>
-          </div>
-        
-        
-          <div class="panel" id.bind="'vid_' + gauge" ref.bind="'vid_' + gauge">
-            
-          </div>
-        </div>
+          <table width="300px">
+            <tr repeat.for="type of report_type">
+              <td vertical-align="top" horizontal-align="center" >
+                <i style.bind="'padding:0;font-size:24px;color: ' + type.icon_color" class.bind="'icon-map-' + type.icon"></i>
+              </td>
+              <td>
+                <p class="normal">${type.text[selLanguage.key]}</p>
+              </td>
+            </tr>
+          </table>
+    
+          <p id="legend">${locale.legend.title}</p>
+    
+          <table width="300px">
+            <tr>
+              <td vertical-align="bottom" colspan="50%">
+                <p>${locale.legend.flood_gauges}</p>
+              </td>
+              <td vertical-align="bottom" colspan="50%">
+                <p style="word-wrap: break-word;width: 150px;">${locale.legend.flood_depth}</p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="50%">
+                <table>
+                  <tr repeat.for="level of gauge_levels">
+                    <td>
+                      <img src.bind="level.icon" height="30">
+                    </td>
+                    <td>
+                      <p class="normal">${level.text[selLanguage.key]}</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+              <td colspan="50%">
+                <table>
+                  <tr repeat.for="height of flood_depth">
+                    <td style.bind="'padding:0;font-size:30px;color: ' + height.color">&#9632;
+                    </td>
+                    <td>
+                      <p class="normal">${height.text[selLanguage.key]}</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
         </div>
         <!-- REPORT -->
 
