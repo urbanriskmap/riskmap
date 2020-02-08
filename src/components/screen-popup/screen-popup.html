@@ -14,7 +14,7 @@
         <div class="row p-0 m-0">
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 searchDropDown p-0 m-0 ">
               <ul if.bind="searchText.length > 0" repeat.for="city of searchResult">
-                  <li click.delegate="switchCity(city)">${city}</li>
+                  <li click.delegate="switchRegion(city)">${city}</li>
                 </ul>
         </div>
       </div>

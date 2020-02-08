@@ -86,6 +86,13 @@ export class DisasterMap {
     }
   }
 
+  // Load all reports of a searched sub region
+  viewRegionReports(regionName, pushState) {
+    let self = this;
+    let city = self.utility.parseRegion(regionName);
+    self.viewReports(city, pushState);
+  }
+
   // Load all reports for a given city, or zoom to single queried report id
   viewReports(cityName, pushState) {
     let self = this;

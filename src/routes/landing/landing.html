@@ -30,7 +30,7 @@
 
     <screen-popup
       view-model.ref="screenPopup"
-      helper.bind="webMenu.locale.map_helper" cities.bind="mapModel.cities" selcity.bind="mapModel.selected_city" switch-city.call="mapModel.viewReports($event, $event)" termscontents.bind="webMenu.locale.termsContents" initializetab.bind="queried_terms">
+      helper.bind="webMenu.locale.map_helper" cities.bind="mapModel.cities" selcity.bind="mapModel.selected_city" switch-region.call="mapModel.viewRegionReports($event, $event)" termscontents.bind="webMenu.locale.termsContents" initializetab.bind="queried_terms">
     </screen-popup>
 
     <lightbox
@@ -54,7 +54,7 @@
     <div id="topBar">
       
       <!-- <div class="d-flex justify-content-end">
-         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 p-2 m-0">
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 p-2 m-0">
             <input
             type="text"
             class="live-search-box"

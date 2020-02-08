@@ -30,6 +30,9 @@ export class MapUtility {
   isCitySupported(querycity) {
     return querycity in this.config.instance_regions;
   }
+  isRegionSupported(queryRegion) {
+    return queryRegion in this.config.sub_regions;
+  }
 
   // return city name from code
   parseCityName(regionCode, cities) {
@@ -66,6 +69,30 @@ export class MapUtility {
       }
       return self.config.default_region;
     }
+  }
+
+  // parse region name to return target city
+
+  parseRegion(regionName) {
+    let self = this;
+    let defaultRegion = 'java';
+
+    if (!regionName) {
+      return defaultRegion;
+    } else if (self.isRegionSupported(regionName)) {
+      return self.config.sub_regions[regionName];
+    } 
+    // invalid region
+    return defaultRegion;
+  }
+
+  // Change to target province when searched with sub region
+
+  changeRegion(regionName) {
+    let self = this;
+    let city = self.parseRegion(regionName);
+    self.changeCity(city, true);
+
   }
 
   // Change city from within map without reloading window
