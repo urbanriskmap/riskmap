@@ -21,7 +21,17 @@ export class ScreenPopup {
   constructor(Config) {
     this.seltab = "about";
     this.config = Config.map;
+    $(document).click(function(){
+      $("#dropdown_city").hide('slow'); 
+     });
+     
+     $("#screen").click(function(e){
+       e.stopPropagation(); 
+     });
   }
+
+
+  
 
   languages = [
     /* languages */
@@ -42,9 +52,6 @@ export class ScreenPopup {
       $(this).toggleClass('clicked');
   });
     this.searchText = newval.toLowerCase();
-    var regexS = "[\\?&]"+newval+"=([^&#]*)";
-    var regex = new RegExp( regexS ); 
-    var results = regex.exec( window.location.href ); 
     console.log(this.searchText)
     if(this.searchText.length > 0){
       $('#dropdown_city').show();
@@ -53,9 +60,13 @@ export class ScreenPopup {
     }
     const map = Object.keys(this.config.instance_regions);
     let newObj = map.filter(value => {
-      return value.toLowerCase();
+      return value.indexOf(newval) != -1 ? value : null;
     });
     this.searchResult = newObj;
+    if(this.searchResult <= 0){
+      $('#dropdown_city').hide();
+    }
+    console.log(this.searchResult);
   }
 
   switchCity(city) {
