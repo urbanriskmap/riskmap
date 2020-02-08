@@ -32,9 +32,9 @@ export class SidePane {
 
     this.seltab = "about"; //default tab to open
     this.switchTab(this.seltab);
-    this.menuList = ["map", "report", "legend", "about"];
+    this.menuList = ["report", "legend", "about"];
 
-    this.vidWrapperOpened = false;
+    this.vidWrapperOpened = true;
     this.videos = [
       {
         platform: "twitter", //Match string to locale/*/translation.json > report_content.*

@@ -30,6 +30,7 @@ export class DisasterMap {
 
   togglePane(ref, action, clearSelection) {
     let self = this;
+    $('#dropdown_city').hide();
     if (action === 'hide') {
       $(ref).fadeOut(200);
       if (ref === '#infoPane') {

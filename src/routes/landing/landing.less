@@ -157,7 +157,7 @@
 
 div#sidePane {
   margin-right: 8px !important;
-  width: 312px !important;
+  width: 289px !important;
 }
 
 input.live-search-box.au-target {
@@ -176,4 +176,18 @@ input.live-search-box.au-target {
 
 .locationDesign:hover {
   background-color: #ccc;
+}
+
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+    #pageWrapper #topBar div.menuBtn {
+      // display: none;
+      position: absolute;
+      background: transparent;
+      top: 18px;
+      right: 14px;
+      line-height: 30px;
+  }
 }

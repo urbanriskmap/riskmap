@@ -1,47 +1,52 @@
 <template>
   <require from="./screen-popup.css"></require>
- 
-  <div id="screen">
-    <div id="cityPopup">
-      <input
-        type="text"
-        class="live-search-box"
-        placeholder="Search City"
-        model.bind="city"
-        value.bind="query & throttle"
-      />
-      <!-- <i class="fa fa-search position" aria-hidden="true"></i> -->
-        <div class="row p-0 m-0">
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 searchDropDown p-0 m-0 ">
-              <ul if.bind="searchText.length > 0" repeat.for="city of searchResult">
-                  <li click.delegate="switchRegion(city)">${city}</li>
-                </ul>
-        </div>
-      </div>
-    </div>
 
-    <div id="termsPopup">
-      <div id="tabRow">
-        <div
-          repeat.for="switch of termscontents"
-          class="termsTabs"
-          id.bind="'tab-' + switch.tab_key"
-          click.delegate="switchTab(switch.tab_key)"
-        >
-          <p>${switch.tab_name}</p>
+      <div id="screen">
+          <!-- <div class="row p-2 m-0"> -->
+          <div id="cityPopup" class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+            <input id="search_city_input"
+              type="text"
+              class="live-search-box"
+              placeholder="Search City"
+              model.bind="city"
+              value.bind="query & throttle"
+            />
+            <!-- <i class="fa fa-search position" aria-hidden="true"></i> -->
+              <div id="dropdown_city" class="row p-2 m-0">
+                <div if.bind = 'searchText.length > 0' class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 searchDropDown p-2 mt-4" style="
+                height: 500px;">
+                    <ul if.bind="searchText.length > 0" repeat.for="city of searchResult">
+                        <li click.delegate="switchRegion(city, true)">${city}</li>
+                      </ul>
+              </div>
+            </div>
+      
+          <div id="termsPopup">
+            <div id="tabRow">
+              <div
+                repeat.for="switch of termscontents"
+                class="termsTabs"
+                id.bind="'tab-' + switch.tab_key"
+                click.delegate="switchTab(switch.tab_key)"
+              >
+                <p>${switch.tab_name}</p>
+              </div>
+            </div>
+            <div id="tabContent">
+              <div
+                repeat.for="content of termscontents"
+                class="termsContents"
+                if.bind="content.tab_key == seltab"
+                innerhtml.bind="content.tab_content"
+              ></div>
+            </div>
+            <div id="closeRow">
+              <p click.delegate="closePopup()">Close&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div id="tabContent">
-        <div
-          repeat.for="content of termscontents"
-          class="termsContents"
-          if.bind="content.tab_key == seltab"
-          innerhtml.bind="content.tab_content"
-        ></div>
-      </div>
-      <div id="closeRow">
-        <p click.delegate="closePopup()">Close&nbsp;&nbsp;&nbsp;&nbsp;</p>
-      </div>
-    </div>
-  </div>
+       <!-- </div> -->
+   </div>
+  
+  
 </template>

@@ -21,7 +21,17 @@ export class ScreenPopup {
   constructor(Config) {
     this.seltab = "about";
     this.config = Config.map;
+    $(document).click(function(){
+      $("#dropdown_city").hide('slow'); 
+     });
+     
+     $("#screen").click(function(e){
+       e.stopPropagation(); 
+     });
   }
+
+
+  
 
   languages = [
     /* languages */
@@ -38,13 +48,43 @@ export class ScreenPopup {
   }
 
   queryChanged(newval, oldval) {
-    this.searchText = newval;
+
+    $('#dropdown_city').on('click', function() {
+      $(this).toggleClass('clicked');
+  });
+    this.searchText = newval.toLowerCase();
+    console.log(this.searchText)
+    if(this.searchText.length > 0){
+      $('#dropdown_city').show();
+    }else{
+      $('#dropdown_city').hide();
+    }
     const map = Object.keys(this.config.sub_regions);
     let newObj = map.filter(value => {
       return value.indexOf(newval) != -1 ? value : null;
     });
     this.searchResult = newObj;
+    if(this.searchResult <= 0){
+      $('#dropdown_city').hide();
+    }
+    console.log(this.searchResult);
   }
+
+
+  switchCity(city) {
+    console.log(city)
+    this.changeCity(city, true);
+      $("#screen").css("display", "none");;
+
+    // this.closePane();
+  }
+
+  // closePopup() {
+  //   $("#termsPopup").hide();
+  //   if (this.selcity) {
+  //     $("#screen").hide();
+  //   }
+  // }
 
   openPopup(name) {
     this.seltab = name;

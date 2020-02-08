@@ -3,8 +3,8 @@
 & #screen {
   position: absolute;
   .fullspan-mixin;
-  background-color: rgba(128, 128, 128, 0.25);
-  // z-index: 1025;
+  background-color: rgba(37, 35, 35, 0.25);
+  z-index: 1025;
   & #cityPopup {
     position: fixed;
     // top: 50%;
@@ -123,6 +123,7 @@
   list-style: none;
   text-align: left;
   opacity: 0.7;
+  overflow: scroll;
 }
 
 ul li {
@@ -148,7 +149,7 @@ i.icon-menu {
 }
 #screen #cityPopup {
   position: fixed;
-  /* top: 50%; */
+  top: 1.5%;
   right: 0;
   width: 50%;
   -ms-transform: translate(-50%, -50%);
@@ -168,13 +169,16 @@ i.icon-menu {
 }
 
 input.live-search-box.au-target {
-  width: 100%;
+  width: 55%;
   height: 31px;
   border: 0px solid;
   border-radius: 3px;
   font-size: 15px;
   padding: 10px;
   box-shadow: 0px 5px #c7bdbd;
+  position: absolute;
+  top: 11px;
+  right: 7px;
 }
 
 #report{
