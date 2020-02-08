@@ -181,8 +181,8 @@ export default {
     'default_region': {
       'region': 'java',
       'bounds': {
-        'sw': [-11.0076711, 95.0107985], // [ymin , xmin]
-        'ne': [6.076744, 141.0200345] // [ymax, xmax]
+        'sw': [-11.5076711, 92.0107985], // [ymin , xmin]
+        'ne': [8.076744, 144.0200345] // [ymax, xmax]
       },
       'center': [4.22568208825, 96.9100985353]
     },
@@ -710,7 +710,7 @@ export default {
     },
     'region_center': [-2.465463549999999, 118.01541650000001],
     'start_city_center': [-6.1754, 106.8271],
-    'starting_zoom': 6,
+    'starting_zoom': 5.75,
     'minimum_zoom': 5
   }
 };

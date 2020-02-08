@@ -11,7 +11,7 @@
     border: none;
     top: -123px;
     left: 12px;
-    z-index: 1025;
+    z-index: 1035;
     border-radius: 5px;
     // background-color: @snow-white;
     // box-shadow: @drop-shadow;
@@ -40,21 +40,23 @@
 
   & #reportLink {
     width: auto;
-    height: 70px;
+    height: auto;
     display:none;
     position: fixed;
     border: none;
     top: 55px;
     left: 90px;
-    // z-index: 1025;
+    z-index: 1035;
     border-radius: 5px;
     background-color: @snow-white;
     box-shadow: @drop-shadow;
     & i {
       .linkmedium-mixin(32px);
-      padding-left: 10px;
-      padding-top: 10px;
-      position: fixed;
+      // padding-left: 10px;
+      // padding-top: 10px;
+      // position: fixed;
+      margin-right: 10px;
+      margin-left: 10px;
     }
     &:hover {
       color: @blue-hover;

@@ -1,9 +1,9 @@
-import { bindable, customElement, demoIntercept } from "aurelia-framework";
-import { inject, observable } from "aurelia-framework";
-import { Config } from "resources/config";
+import { bindable, customElement, demoIntercept } from 'aurelia-framework';
+import { inject, observable } from 'aurelia-framework';
+import { Config } from 'resources/config';
 
 //start-aurelia-decorators
-@customElement("screen-popup")
+@customElement('screen-popup')
 @inject(Config)
 
 //end-aurelia-decorators
@@ -19,28 +19,21 @@ export class ScreenPopup {
   //end-aurelia-decorators
   @observable query;
   constructor(Config) {
-    this.seltab = "about";
+    this.seltab = 'about';
     this.config = Config.map;
-    $(document).click(function(){
-      $("#dropdown_city").hide('slow'); 
-     });
-     
-     $("#screen").click(function(e){
-       e.stopPropagation(); 
-     });
+    $(document).click( function() {
+      $('#dropdown_city').hide('slow');
+    });
+
+    $('#screen').click( function(e) {
+      e.stopPropagation();
+    });
   }
-
-
-  
-
-  languages = [
-    /* languages */
-  ];
 
   switchTab(name) {
     this.seltab = name;
-    $(".termsTabs").removeClass("active");
-    $("#tab-" + name).addClass("active");
+    $('.termsTabs').removeClass('active');
+    $('#tab-' + name).addClass('active');
   }
 
   isCitySupported(querycity) {
@@ -48,35 +41,31 @@ export class ScreenPopup {
   }
 
   queryChanged(newval, oldval) {
-
     $('#dropdown_city').on('click', function() {
       $(this).toggleClass('clicked');
-  });
+    });
     this.searchText = newval.toLowerCase();
-    console.log(this.searchText)
-    if(this.searchText.length > 0){
+    if (this.searchText.length > 0) {
       $('#dropdown_city').show();
-    }else{
+    } else {
       $('#dropdown_city').hide();
     }
     console.log(this.config)
     const map = Object.keys(this.config.sub_regions);
     console.log(map)
     let newObj = map.filter(value => {
-      return value.indexOf(newval.toLowerCase()) != -1 ? value : null;
+      return value.indexOf(newval.toLowerCase()) !== -1 ? value : null;
     });
     this.searchResult = newObj;
-    if(this.searchResult <= 0){
+    if (this.searchResult <= 0) {
       $('#dropdown_city').hide();
     }
-    console.log(this.searchResult);
   }
 
 
   switchCity(city) {
-    console.log(city)
     this.changeCity(city, true);
-      $("#screen").css("display", "none");;
+    $('#screen').css('display', 'none');
 
   }
 
@@ -89,12 +78,12 @@ export class ScreenPopup {
 
   openPopup(name) {
     this.seltab = name;
-    $("#screen").show();
-    $("#termsPopup").show();
+    $('#screen').show();
+    $('#termsPopup').show();
   }
 
   attached() {
-    $(".termsTabs").ready(() => {
+    $('.termsTabs').ready(() => {
       //selection for termsTabs switches
       if (this.initializetab) {
         this.switchTab(this.initializetab);
