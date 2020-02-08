@@ -40,7 +40,7 @@ export class MapLayers {
       }),
       flood_cluster: (level) => L.divIcon({
         iconSize: [30, 30],
-        html: '<i class="icon-map-bg bg-cluster cluster ' + level + '"><i class="icon-cluster report-cluster">'
+        html: '<i class="icon-map-bg bg-cluster cluster ' + level + '"><i class="icon-map-flood report-cluster">'
       })
     };
     this.mapPolygons = {
