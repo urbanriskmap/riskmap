@@ -61,7 +61,7 @@ export class ScreenPopup {
     }
     const map = Object.keys(this.config.sub_regions);
     let newObj = map.filter(value => {
-      return value.indexOf(newval) != -1 ? value : null;
+      return value.indexOf(newval.toLowerCase()) != -1 ? value : null;
     });
     this.searchResult = newObj;
     if(this.searchResult <= 0){
