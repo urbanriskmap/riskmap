@@ -23,7 +23,14 @@ export class Landing {
   @observable query;
   constructor(Config) {
     this.config = Config.map;
-    this.configData = Config
+    this.configData = Config;
+
+     $(function () {
+    $('body').tooltip({
+      selector: '[data-toggle="tooltip"]',
+      container: 'body'
+  });
+});
   }
 
   activate(params, routerConfig) {
@@ -54,6 +61,7 @@ export class Landing {
 
   //report button on the map
   reportTab(event) {
+   
     $('#reportLink').show();
   }
 

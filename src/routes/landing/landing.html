@@ -13,7 +13,7 @@
 
   <div id="pageWrapper">
 
-    <div id="reportButton" click.delegate="reportTab()">
+    <!-- <div id="reportButton" click.delegate="reportTab()">
       <p><i id="buttonText" class="icon-add-report"></i><br>${webMenu.locale.add_report}</p>
     </div>
     <div id="reportLink">
@@ -26,7 +26,23 @@
           </td>
         </tr>
       </table>
-    </div>
+    </div> -->
+
+    <nav id="reportButton" class="float-action-button">
+  <div href="#" class="buttons" title="Google+" data-toggle="tooltip" data-placement="left">
+          <!-- <i class="fa fa-google-plus"></i> -->
+          <!-- <img src="/assets/icons/Add_Report_Icon_Blue.png"> -->
+        </div>
+  <div href="#" class="buttons" title="Twitter" data-toggle="tooltip" data-placement="left">
+          <i class="fa fa-twitter"></i>
+        </div>
+  <div href="#" class="buttons" title="Facebook" data-toggle="tooltip" data-placement="left">
+          <i class="fa fa-facebook"></i>
+        </div>
+  <div  href="#" class="buttons main-button" title="Share" data-toggle="tooltip" data-placement="left">
+         <img style="width:60px" src="/assets/icons/Add_Report_Icon_Blue.png">
+        </div>
+</nav>
 
     <screen-popup
       view-model.ref="screenPopup"

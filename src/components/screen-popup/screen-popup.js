@@ -59,7 +59,9 @@ export class ScreenPopup {
     }else{
       $('#dropdown_city').hide();
     }
+    console.log(this.config)
     const map = Object.keys(this.config.sub_regions);
+    console.log(map)
     let newObj = map.filter(value => {
       return value.indexOf(newval.toLowerCase()) != -1 ? value : null;
     });
@@ -76,7 +78,6 @@ export class ScreenPopup {
     this.changeCity(city, true);
       $("#screen").css("display", "none");;
 
-    // this.closePane();
   }
 
   // closePopup() {
