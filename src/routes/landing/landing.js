@@ -25,13 +25,6 @@ export class Landing {
   constructor(Config) {
     this.config = Config.map;
     this.configData = Config;
-
-     $(function () {
-    $('body').tooltip({
-      selector: '[data-toggle="tooltip"]',
-      container: 'body'
-  });
-});
   }
 
   activate(params, routerConfig) {
@@ -123,5 +116,21 @@ export class Landing {
     self.initiateReport(type).then(cardId => {
       window.location = self.config.cards_server + type + '/' + cardId;
     });
+  }
+
+  select_report(type_report){
+    console.log(type_report);
+    if(type_report === 'fire'){
+      // $('#mtl').click(function(){
+        $('#fire').attr('src', '/assets/icons/Add_Report_Icon_Fire_Hover.png');
+        // });
+    } else if(type_report === 'haze'){
+      $('#haze').attr('src', '/assets/icons/Add_Report_Icon_Haze_Hover.png');
+    } else if(type_report === 'earthquake'){
+      $('#earthquake').attr('src', '/assets/icons/Add_Report_Icon_Earthquake_Hover.png');
+    }
+    else if(type_report === 'volcano'){
+      $('#volcano').attr('src', '/assets/icons/Add_Report_Icon_Volcano_Hover.png');
+    }
   }
 }

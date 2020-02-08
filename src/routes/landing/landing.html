@@ -37,40 +37,45 @@
     <nav id="reportButton" class="float-action-button">
   <div href="#" class="buttons" title="Report" data-toggle="tooltip" data-placement="left" click.delegate="reportTab()">
     <img style="width:60px" src="/assets/icons/Add_Report_ Icon_Flood.png">
-    <div id="reportLink">
+    <div class="row" id="reportLink">
+        <!-- <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3" >
+          1
+        </div>
+        <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3" >
+          2
+        </div>
+        <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3" >
+          3
+        </div>
+        <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3" >
+          4
+        </div> -->
       <table class="table table-borderless">
-        <tr class="row">
-          <td repeat.for="platform of configData.deep_links">
-            <span>${$index + 1}</span>  
-            <a href.bind="platform.link">
-              <i class.bind="'icon-' + platform.name"></i>
-            </a>
-          </td>
-        </tr>
-        <tr class="row">
-          <td colspan="4">
-            <input type="button" class="btn btn-primary" value="${webMenu.locale.add_report}" click.delegate="reportDisaster('flood')"/> 
-          </td>
+        <tr class="row report">
+          <img style="width: 250px;height: 200px;" src="/assets/icons/Report_Flood_Description.png">
+          <div class="reportBtn">
+          <img style="width: 225px;" src="/assets/icons/Report_Flood_Button.png" click.delegate="reportDisaster('flood')">
+          </div>
         </tr>
       </table>
     </div>
         </div>
-  <div href="#" class="buttons" title="Fire" data-toggle="tooltip" data-placement="left">
-    <img style="width:60px" src="/assets/icons/Add_Report_Icon_Fire.png">
+  <div  class="buttons" title="Fire" data-toggle="tooltip" data-placement="left" click.delegate="select_report('fire')">
+    <img id="fire" style="width:60px" src="/assets/icons/Add_Report_Icon_Fire.png">
         </div>
-  <div href="#" class="buttons" title="Haze" data-toggle="tooltip" data-placement="left">
-    <img style="width:60px" src="/assets/icons/Add_Report_Icon_Haze.png">
+  <div  class="buttons" title="Haze" data-toggle="tooltip" data-placement="left" click.delegate="select_report('haze')">
+    <img id="haze" style="width:60px" src="/assets/icons/Add_Report_Icon_Haze.png">
         </div>
-  <div href="#" class="buttons" title="Earthquake" data-toggle="tooltip" data-placement="left">
-    <img style="width:60px" src="/assets/icons/Add_Report_Icon_Earthquake.png">
+  <div  class="buttons" title="Earthquake" data-toggle="tooltip" data-placement="left" click.delegate="select_report('earthquake')">
+    <img id="earthquake" style="width:60px" src="/assets/icons/Add_Report_Icon_Earthquake.png">
   </div>
-  <div href="#" class="buttons" title="Facebook" data-toggle="tooltip" data-placement="left">
-    <img style="width:60px" src="/assets/icons/Add_Report_Icon_Haze.png">
+  <div  class="buttons" title="Facebook" data-toggle="tooltip" data-placement="left" click.delegate="select_report('icon')">
+    <img id="icon" style="width:60px" src="/assets/icons/Add_Report_Icon_Haze.png">
   </div>
-  <div href="#" class="buttons" title="Volcano" data-toggle="tooltip" data-placement="left">
-    <img style="width:60px" src="/assets/icons/Add_Report_Icon_Volcano.png">
+  <div  class="buttons" title="Volcano" data-toggle="tooltip" data-placement="left" click.delegate="select_report('volcano')">
+    <img id="volcano" style="width:60px" src="/assets/icons/Add_Report_Icon_Volcano.png">
   </div>
-  <div  href="#" class="buttons main-button" title="Add Report" data-toggle="tooltip" data-placement="left">
+  <div   class="buttons main-button" title="Add Report" data-toggle="tooltip" data-placement="left">
          <img style="width:80px" src="/assets/icons/Add_Report_Icon_Blue.png">
         </div>
 </nav>
