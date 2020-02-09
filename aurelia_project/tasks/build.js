@@ -3,6 +3,7 @@ import fetchComponents from './fetch-components';
 import processLocales from './process-locales';
 import transpile from './transpile';
 import processMarkup from './process-markup';
+import processServerKey from './process-server-key';
 import processLESS from './process-less';
 import processCSS from './process-css';
 import {build} from 'aurelia-cli';
@@ -12,6 +13,7 @@ export default gulp.series(
   readProjectConfiguration,
   fetchComponents,
   processLocales,
+  processServerKey,
   gulp.parallel(
     transpile,
     processMarkup,

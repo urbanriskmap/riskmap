@@ -24,7 +24,7 @@ export default {
     default_language: 'id',
     tile_layer: 'https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidXJiYW5yaXNrbWFwIiwiYSI6ImNpdmVhbTFraDAwNHIyeWw1ZDB6Y2hhbTYifQ.tpgt1PB5lkJ-wITS02c96Q',
     data_server: 'https://data.petabencana.id/',
-    data_server_key: '',
+    data_server_key: '{data_server_key}',
     cards_server: 'https://cards.petabencana.id/',
     app: 'https://petabencana.id/',
     deep_links: [
