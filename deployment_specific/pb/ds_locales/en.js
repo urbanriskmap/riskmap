@@ -24,9 +24,9 @@ const en = {
   'web_menu': {
     'tab_names': {
       'map': 'map',
-      'report': 'report',
-      'legend': 'legend',
-      'about':'about'
+      'report': 'Report',
+      'legend': 'Legend',
+      'about': 'About'
     }
   },
   'report_info': {

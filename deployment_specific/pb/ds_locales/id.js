@@ -16,10 +16,10 @@ const id = {
   'web_menu': {
     'tab_names': {
       'map': 'peta',
-      'report': 'laporkan',
-      'info': 'info',
-      'legend':'legenda',
-      'about':'tentang'
+      'report': 'Laporkan',
+      'info': 'Info',
+      'legend': 'Legenda',
+      'about': 'Tentang'
     }
   },
   'report_info': {
