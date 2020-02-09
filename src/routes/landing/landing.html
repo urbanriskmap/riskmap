@@ -126,7 +126,13 @@
 
     <screen-popup
       view-model.ref="screenPopup"
-      helper.bind="webMenu.locale.map_helper" cities.bind="mapModel.cities" selcity.bind="mapModel.selected_city" switch-region.call="mapModel.viewRegionReports($event, $event)" termscontents.bind="webMenu.locale.termsContents" initializetab.bind="queried_terms">
+      helper.bind="webMenu.locale.map_helper"
+      cities.bind="mapModel.cities" 
+      selcity.bind="mapModel.selected_city" 
+      switch-region.call="mapModel.viewRegionReports($event, $event)" 
+      termscontents.bind="webMenu.locale.termsContents" 
+      locale.bind="webMenu.locale"
+      initializetab.bind="queried_terms">
     </screen-popup>
 
     <lightbox

@@ -12,6 +12,7 @@ export class ScreenPopup {
   @bindable
   helper;
   @bindable cities;
+  @bindable locale;
   @bindable selcity;
   @bindable switchRegion;
   @bindable termscontents;

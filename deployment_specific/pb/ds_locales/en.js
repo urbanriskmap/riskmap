@@ -10,6 +10,7 @@ const en = {
     }
   },
   'add_report': 'Report Flood',
+  'search_ph': 'Select place to continue',
   'reports_stats': 'Received {reportsplaceholder} reports in past {hoursplaceholder} hours',
   'prep_menu': {
     'btn_names': {
