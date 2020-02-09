@@ -29,6 +29,10 @@ export class ScreenPopup {
     $('#screen').click( function(e) {
       e.stopPropagation();
     });
+    // this.queryChanged('', '');
+    $('#dropdown_city').show();
+    this.searchResult = Object.keys(this.config.sub_regions);
+
   }
 
   switchTab(name) {
@@ -46,21 +50,19 @@ export class ScreenPopup {
       $(this).toggleClass('clicked');
     });
     this.searchText = newval.toLowerCase();
-    if (this.searchText.length > 0) {
-      $('#dropdown_city').show();
-    } else {
-      $('#dropdown_city').hide();
-    }
-    console.log(this.config)
+    // if (this.searchResult > 0) {
+    //   $('#dropdown_city').show();
+    // } else {
+    //   $('#dropdown_city').hide();
+    // }
     const map = Object.keys(this.config.sub_regions);
-    console.log(map)
     let newObj = map.filter(value => {
       return value.indexOf(newval.toLowerCase()) !== -1 ? value : null;
     });
     this.searchResult = newObj;
     if (this.searchResult <= 0) {
       $('#dropdown_city').hide();
-    }
+    } else $('#dropdown_city').show();
   }
 
 
