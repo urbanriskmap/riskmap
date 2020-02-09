@@ -30,8 +30,8 @@ export class ScreenPopup {
       e.stopPropagation();
     });
     // this.queryChanged('', '');
-    $('#dropdown_city').show();
-    this.searchResult = Object.keys(this.config.sub_regions);
+    // $('#dropdown_city').show();
+    // this.searchResult = Object.keys(this.config.sub_regions);
 
   }
 
