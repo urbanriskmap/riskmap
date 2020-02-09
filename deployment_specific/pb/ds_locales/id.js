@@ -1,6 +1,8 @@
 const id = {
   'add_report': 'Laporkan banjir',
   'search_ph': 'Pilih Wilayah',
+  'comming_soon': 'Coming Soon',
+  'coming_soon_2020': 'Coming Soon MARCH 2020!',
   'reports_stats': 'Terdapat {reportsplaceholder} laporan dalam {hoursplaceholder} jam terakhir',
   'prep_menu': {
     'btn_names': {

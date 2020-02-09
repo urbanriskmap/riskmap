@@ -1,5 +1,6 @@
 const en = {
   'comming_soon': 'Coming Soon',
+  'coming_soon_2020': 'Coming Soon MARCH 2020!',
   'reports_stats': 'Received {reportsplaceholder} reports in past {hoursplaceholder} hours',
   'prep_menu': {
     'btn_names': {
