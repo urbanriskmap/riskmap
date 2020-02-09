@@ -71,9 +71,8 @@ export class Landing {
 
   attached() {
     // If desktop, open side pane to 'info' tab
-    // if (!(/Mobi/.test(navigator.userAgent)) && !this.report_id) {
-    //   this.mapModel.togglePane('#sidePane', 'hide', false);
-    // } else if (this.queried_terms) {
+    
+    // else if (this.queried_terms) {
     //   $('#screen').show();
     //   $('#termsPopup').show();
     // }
@@ -83,6 +82,9 @@ export class Landing {
     $(window).resize(() => {
       this.resizeSidePane();
     });
+    if (!(/Mobi/.test(navigator.userAgent)) && !this.report_id) {
+      this.mapModel.togglePane('#sidePane', 'show', false);
+    }
   }
 
   toggleLightbox(imageurl) {

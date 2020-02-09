@@ -66,11 +66,13 @@ export class DisasterMap {
         // swap menu button icon (cancel | addReport)
         $('.menuBtn').toggleClass('active');
         // set tab to queried tab || default 'report'
-        let tabToOpen = (self.querytab) ? self.querytab : 'info';
+        let tabToOpen = (self.querytab) ? self.querytab : 'about';
         self.querytab = null; //set to null after url fetch
         self.resetTab(tabToOpen);
         // hide infoPane if open
-        self.togglePane('#infoPane', 'hide', true);
+        // self.togglePane('#infoPane', 'hide', true);
+        // show aboutPane
+        // self.togglePane('#content-info', 'show', true);
         // update browser url
         if ((self.querylanguage || self.querytab) && !self.reportid) {
           if (!self.selected_city && self.utility.isCitySupported(self.querycity)) {
