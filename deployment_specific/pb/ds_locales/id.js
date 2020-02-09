@@ -1,6 +1,6 @@
 const id = {
   'add_report': 'Laporkan banjir',
-  'search_ph': 'Pilih Wilayah Untuk Melanjutkan',
+  'search_ph': 'Pilih Wilayah',
   'reports_stats': 'Terdapat {reportsplaceholder} laporan dalam {hoursplaceholder} jam terakhir',
   'prep_menu': {
     'btn_names': {
