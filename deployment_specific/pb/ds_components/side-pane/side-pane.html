@@ -142,30 +142,30 @@
         </div>
         <!-- INFO -->
         <div id="content-info" if.bind="seltab === 'about'" class="contentWrapper">
-        
-          <p id="intro">${locale.info_content.intro}</p>
-          <p id="info" innerhtml.bind="locale.info_content.infoLink"></p>
-
-          <table id="partners">
-            <tr class="label">
-              <td colspan="4" cellpadding="0" align="left">
-                <p>${locale.info_content.partners.funding}</p>
-              </td>
-            </tr>
+          <table id="headLogos">
             <tr>
-              <td colspan="4" align="center">
+              <td align="left">
                 <a href="https://www.usaid.gov/">
-                  <img class="usaidLogo" src="assets/graphics/USAID-logo.png">
+                  <img id="usaidLogo" src="assets/graphics/USAID-logo.png">
+                </a>
+              </td>
+              <td align="right">
+                <a href="http://urbanrisklab.org/">
+                  <img id="yayasanLogo" src="assets/graphics/yayasan_logo.svg">
                 </a>
               </td>
             </tr>
+          </table>
+          <p id="intro">${locale.info_content.intro}</p>
+          <p id="description" innerhtml.bind="locale.info_content.p1"></p>
+          <table id="partners">
             <tr class="label">
               <td colspan="4" cellpadding="0" align="left">
                 <p>${locale.info_content.partners.implementing}</p>
               </td>
             </tr>
             <tr>
-              <td colspan="4" align="center">
+              <td colspan="1" align="center">
                 <a href="http://www.bnpb.go.id/">
                   <img class="bnpbLogo" src="assets/graphics/bnpb_logo.png">
                 </a>
@@ -195,8 +195,8 @@
             </tr>
             <tr class="logos">
               <td colspan="2" align="center">
-                <a href="http://www.qlue.co.id/">
-                  <img class="partnerLogo" src="assets/graphics/qlue_logo.png">
+                <a href="https://twitter.com">
+                  <img class="partnerLogo" src="assets/graphics/twitter_logo.png">
                 </a>
               </td>
               <td colspan="2" align="center">
@@ -212,14 +212,15 @@
                 </a>
               </td>
               <td colspan="2" align="center">
-                <a href="https://twitter.com">
-                  <img class="partnerLogo" src="assets/graphics/twitter-logo.png">
+                <a href="http://www.qlue.co.id/">
+                  <img class="partnerLogo" src="assets/graphics/qlue_logo.png">
                 </a>
               </td>
+              
             </tr>
           </table>
     
-          <p innerhtml.bind="locale.info_content.p1"></p>
+          
           <p innerhtml.bind="locale.info_content.p2"></p>
           <p innerhtml.bind="locale.info_content.p3"></p>
     

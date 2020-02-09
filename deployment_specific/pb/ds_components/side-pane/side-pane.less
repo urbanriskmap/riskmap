@@ -31,7 +31,7 @@
             .bodylight-mixin(14px);
             color: @banjir-blue;
             line-height: 14px;
-            text-transform: capitalize;
+            // text-transform: capitalize;
           }
           &.active {
             color: @banjir-blue;
@@ -88,12 +88,12 @@
       }
       & label {
         .linklight-mixin(14px);
-        text-transform: capitalize;
+        // text-transform: capitalize;
         padding-right: 10px;
       }
       & .normal {
         .bodylight-mixin(14px);
-        text-transform: capitalize;
+        // text-transform: capitalize;
         padding-right: 10px;
         margin: 0;
       }
@@ -107,14 +107,18 @@
       overflow: hidden;
       & #headLogos {
         width: 90%;
-        margin: auto;
+        margin: 30px auto;
+
         table-layout: fixed;
         & #usaidLogo {
           width: 75%;
         }
-        & #urlLogo {
+        & #yayasanLogo {
           width: 100%;
         }
+      }
+      & #logos {
+        margin: 10px auto;
       }
       & p {
         .bodyregular-mixin(14px);
@@ -132,14 +136,21 @@
           margin-bottom: 0px;
           text-align: center;
           .linkmedium-mixin(14px);
-          text-transform: capitalize;
+          // text-transform: capitalize;
           text-decoration: underline;
         }
         &#intro {
-          .bodyregular-mixin(20px);
-          text-align: center;
+          .bodyregular-mixin(14px);
+          text-align: left;
           margin: 12px auto;
           width: 90%;
+        }
+        &#description {
+          .bodyregular-mixin(12px);
+          text-align: left;
+          margin: 12px auto;
+          width: 90%;
+          line-height: 1.4;
         }
         &#info {
           text-align: center;
@@ -164,7 +175,8 @@
         border-bottom: 1px solid @banjir-blue;
         border-top: 1px solid @banjir-blue;
         padding-bottom: 10px;
-
+        border-spacing: 7px;
+        border-collapse: separate;
         & tr.label {
           height: 18px;
           & p {
@@ -284,7 +296,7 @@
   text-decoration: none;
   font-size: 20px;
   color: #818181;
-  text-transform: uppercase;
+  text-transform: capitalize;
   border-bottom: 1px solid;
   width: 100%;
 }
