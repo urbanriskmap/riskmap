@@ -15,7 +15,7 @@ phases:
       # - command
   pre_build:
     commands:
-      - /bin/sed -i "s/data_server_key:.*/data_server_key: '$DATA_SERVER_KEY'/g"  aurelia_project/environments/$ENVIRONMENT.js
+      - sed -i "s|data_server_key:.*|data_server_key: ' $DATA_SERVER_KEY '|g"  aurelia_project/environments/$( echo $ENVIRONMENT ).js
   build:
     commands:
       - npm run test
