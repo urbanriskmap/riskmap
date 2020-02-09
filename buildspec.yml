@@ -13,8 +13,8 @@ phases:
     commands:
       npm install
       # - command
-  #pre_build:
-    #commands:
+  # pre_build:
+  #   commands:
       # - command
       # - command
   build:

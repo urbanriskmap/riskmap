@@ -2,7 +2,7 @@ import $ from 'jquery';
 import {Config} from '../../resources/config';
 import { bindable, customElement, demoIntercept } from "aurelia-framework";
 import { inject, observable } from "aurelia-framework";
-import { HttpClient } from 'aurelia-http-client';
+import { HttpClient, Headers } from 'aurelia-http-client';
 
 //start-aurelia-decorators
 @customElement("landing")
@@ -87,7 +87,10 @@ export class Landing {
   initiateReport(type) {
     return new Promise((resolve, reject) => {
       if (type) {
-        const client = new HttpClient();
+        const client = new HttpClient()
+          .configure(x => {
+            x.withHeader('x-api-key', this.config.data_server_key);
+          });
         const url = this.config.data_server +
         'cards/';
         const body = {

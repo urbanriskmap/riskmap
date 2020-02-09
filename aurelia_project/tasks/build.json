@@ -11,6 +11,11 @@
       "name": "dep",
       "description": "Sets the deployment specific configuration.",
       "type": "string"
+    },
+    {
+      "name": "data_server_key",
+      "description": "Sets the data server key.",
+      "type": "string"
     }
   ]
 }

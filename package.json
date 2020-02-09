@@ -7,11 +7,11 @@
     "url": "git+https://github.com/urbanriskmap/riskmap"
   },
   "scripts": {
-    "start": "au run --env dev --watch --dep $DEP",
-    "test": "au build --env dev --dep pb",
-    "build": "rm -rf scripts/* && au build --env prod --dep $DEP",
-    "build-stage": "rm -rf scripts/* && au build --env stage --dep $DEP",
-    "build-dev": "rm -rf scripts/* && au build --env dev --dep $DEP"
+    "start": "au run --env dev --watch --dep $DEP --data_server_key $DATA_SERVER_KEY",
+    "test": "au build --env dev --dep pb --data_server_key $DATA_SERVER_KEY",
+    "build": "rm -rf scripts/* && au build --env prod --dep $DEP --data_server_key $DATA_SERVER_KEY",
+    "build-stage": "rm -rf scripts/* && au build --env stage --dep $DEP --data_server_key $DATA_SERVER_KEY",
+    "build-dev": "rm -rf scripts/* && au build --env dev --dep $DEP --data_server_key $DATA_SERVER_KEY"
   },
   "license": "GPL-3.0",
   "dependencies": {
@@ -60,6 +60,7 @@
     "gulp-notify": "3.2.0",
     "gulp-plumber": "1.2.0",
     "gulp-rename": "1.2.2",
+    "gulp-replace": "^1.0.0",
     "gulp-sourcemaps": "2.6.4",
     "jasmine-core": "3.1.0",
     "karma": "4.0.1",
