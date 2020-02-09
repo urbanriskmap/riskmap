@@ -2,8 +2,8 @@ export default {
   name: 'petabencana',
   height_units: 'cm',
   supported_languages: [
-    { key: 'en', name: 'English' },
-    { key: 'id', name: 'Bahasa' }
+    { key: 'en', name: 'English', code: 'EN' },
+    { key: 'id', name: 'Bahasa', code: 'BI' }
   ],
   map: {
     'instance_regions': {

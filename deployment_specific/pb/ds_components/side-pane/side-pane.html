@@ -3,7 +3,7 @@
   <div id="tabsBar">
     <ul  class="tabs" repeat.for="language of languages">
       <li style="list-style: none;">
-        <p class="languageClass" textcontent.bind="language.name" value.bind="selLanguage"
+        <p class="languageClass" textcontent.bind="language.code" value.bind="selLanguage"
           click.delegate="changeLanguage(language.key)"></p>
       </li>
     </ul>
