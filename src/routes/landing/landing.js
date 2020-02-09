@@ -127,28 +127,38 @@ export class Landing {
   }
 
   select_report(typeReport) {
+    let toggleSrc = function(element, baseIcon, extention = '.png') {
+      $(element).attr('src', function(index, attr) {
+        return attr == baseIcon+extention ? baseIcon+'_Hover' + extention : baseIcon + extention;
+      });
+    };
+
     if (typeReport === 'fire') {
-      $('#fire').attr('src', '/assets/icons/Add_Report_Icon_Fire_Hover.png');
+      toggleSrc('#fire', '/assets/icons/Add_Report_Icon_Fire');
       $('#fireLink').toggle('slide');
     }
 
     if (typeReport === 'haze') {
-      $('#haze').attr('src', '/assets/icons/Add_Report_Icon_Haze_Hover.png');
+      // $('#haze').attr('src', '/assets/icons/Add_Report_Icon_Haze_Hover.png');
+      toggleSrc('#haze', '/assets/icons/Add_Report_Icon_Haze');
       $('#hazeLink').toggle('slide');
     }
 
     if (typeReport === 'earthquake') {
-      $('#earthquake').attr('src', '/assets/icons/Add_Report_Icon_Earthquake_Hover.png');
+      // $('#earthquake').attr('src', '/assets/icons/Add_Report_Icon_Earthquake_Hover.png');
+      toggleSrc('#earthquake', '/assets/icons/Add_Report_Icon_Earthquake');
       $('#earthquakeLink').toggle('slide');
     }
 
     if (typeReport === 'earthquakeAccess') {
-      $('#earthquakeAccess').attr('src', '/assets/icons/Earthquake_2_Select.svg');
+      // $('#earthquakeAccess').attr('src', '/assets/icons/Earthquake_2_Select.svg');
+      toggleSrc('#earthquakeAccess', '/assets/icons/Earthquake_2', '.svg');
       $('#earthquakeAccessLink').toggle('slide');
     }
 
     if (typeReport === 'volcano') {
-      $('#volcano').attr('src', '/assets/icons/Add_Report_Icon_Volcano_Hover.png');
+      // $('#volcano').attr('src', '/assets/icons/Add_Report_Icon_Volcano_Hover.png');
+      toggleSrc('#volcano', '/assets/icons/Add_Report_Icon_Volcano');
       $('#volcanoLink').toggle('slide');
     }
   }
