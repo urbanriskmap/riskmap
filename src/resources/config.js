@@ -10,6 +10,7 @@ export class Config {
     this.map = dep.map;
     this.map.dep_name = dep.name;
     this.map.data_server = env[dep.name].data_server;
+    this.map.data_server_key = env[dep.name].data_server_key;
     this.map.cards_server = env[dep.name].cards_server;
     this.map.tile_layer = env[dep.name].tile_layer;
     this.map.app = env[dep.name].app;

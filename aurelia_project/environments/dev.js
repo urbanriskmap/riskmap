@@ -32,7 +32,8 @@ export default {
       {name: 'twitter', link: 'https://twitter.com/intent/tweet?text=Laporkan+banjir&via=petabencana'}, //TODO : fill after twitter DM bot is created for Petabencana.
       {name: 'telegram', link: 'https://telegram.me/CognicityDevBot'},
       {name: 'telegram', link: 'https://telegram.me/CognicityDevBot'}
-    ]
+    ],
+    data_server_key: ''
   },
   riskmap_in: {
     title: 'RiskMap.in',
