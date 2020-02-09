@@ -186,7 +186,7 @@ export class MapUtility {
     if (self.clientLocation) {
       if (self.clientCityIsValid) {
         //case 1: location found, location in a supported city
-        self.changeCity(self.clientCity, null, map, layers, true, togglePane);
+        self.changeCity(self.clientCity, null, map, layers, togglePane);
         map.flyTo(self.clientLocation.latlng, 15);
         if (self.gpsMarker) {
           self.gpsMarker.removeFrom(map);
