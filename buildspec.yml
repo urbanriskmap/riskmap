@@ -13,9 +13,10 @@ phases:
     commands:
       npm install
       # - command
-  pre_build:
-    commands:
-      - sed -i "s/data_server_key:.*/data_server_key: '$( echo $DATA_SERVER_KEY )'/g" aurelia_project/environments/$( echo $ENVIRONMENT ).js
+  # pre_build:
+  #   commands:
+      # - command
+      # - command
   build:
     commands:
       - npm run test
