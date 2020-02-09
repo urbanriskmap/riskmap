@@ -65,6 +65,11 @@ export class ScreenPopup {
     } else $('#dropdown_city').show();
   }
 
+  resizeSidePane() {
+    $('.searchDropDown').css({
+      'height': ($(window).height() - $('#dropdown_city').height()) + 'px'
+    });
+  }
 
   switchCity(city) {
     this.changeCity(city, true);
