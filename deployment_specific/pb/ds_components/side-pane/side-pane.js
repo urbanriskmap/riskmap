@@ -32,7 +32,7 @@ export class SidePane {
 
     this.menuList = ['report', 'legend', 'about'];
     // this.seltab = 'about'; //default tab to open
-    // this.switchTab(this.seltab);
+    this.switchTab(this.seltab);
 
     this.vidWrapperOpened = true;
     this.videos = [

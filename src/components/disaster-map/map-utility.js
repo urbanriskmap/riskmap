@@ -151,13 +151,11 @@ export class MapUtility {
       if (e.latitude > regions[city].bounds.sw[0] && e.longitude > regions[city].bounds.sw[1] && e.latitude < regions[city].bounds.ne[0] && e.longitude < regions[city].bounds.ne[1]) {
         self.clientCity = city;
         clientCities.push(regions[city].region);
-        console.log(clientCities.length);
         self.clientCityIsValid = true;
         // break;
       }
       if (clientCities.length > 1) {
         self.locService.filterPointInCities(e, clientCities).then( city => {
-          console.log(city);
           self.clientCity = city;
         });
       }
