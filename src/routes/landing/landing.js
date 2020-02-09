@@ -123,14 +123,22 @@ export class Landing {
     if(type_report === 'fire'){
       // $('#mtl').click(function(){
         $('#fire').attr('src', '/assets/icons/Add_Report_Icon_Fire_Hover.png');
+        $('#fireLink').toggle('slide');
+
         // });
     } else if(type_report === 'haze'){
       $('#haze').attr('src', '/assets/icons/Add_Report_Icon_Haze_Hover.png');
+      $('#hazeLink').toggle('slide');
+
     } else if(type_report === 'earthquake'){
       $('#earthquake').attr('src', '/assets/icons/Add_Report_Icon_Earthquake_Hover.png');
-    }
-    else if(type_report === 'volcano'){
+      $('#earthquakeLink').toggle('slide');
+    } else if(type_report === 'earthquakeAccess'){
+      $('#earthquakeAccess').attr('src', '/assets/icons/Earthquake_2_Select.svg');
+      $('#earthquakeAccessLink').toggle('slide');
+    } else if(type_report === 'volcano'){
       $('#volcano').attr('src', '/assets/icons/Add_Report_Icon_Volcano_Hover.png');
+      $('#volcanoLink').toggle('slide');
     }
   }
 }

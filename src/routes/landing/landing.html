@@ -38,23 +38,12 @@
   <div href="#" class="buttons" title="Report" data-toggle="tooltip" data-placement="left" click.delegate="reportTab()">
     <img style="width:60px" src="/assets/icons/Add_Report_ Icon_Flood.png">
     <div class="row" id="reportLink">
-        <!-- <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3" >
-          1
-        </div>
-        <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3" >
-          2
-        </div>
-        <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3" >
-          3
-        </div>
-        <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3" >
-          4
-        </div> -->
       <table class="table table-borderless">
         <tr class="row report">
           <img style="width: 250px;height: 200px;" src="/assets/icons/Report_Flood_Description.png">
           <div class="reportBtn">
-          <img style="width: 225px;" src="/assets/icons/Report_Flood_Button.png" click.delegate="reportDisaster('flood')">
+            <input  type="button" class="btn btn-primary" value="${webMenu.locale.add_report}" click.delegate="reportDisaster('flood')" style="
+            width: 90%;background-color: #29abe1;">
           </div>
         </tr>
       </table>
@@ -62,18 +51,73 @@
         </div>
   <div  class="buttons" title="Fire" data-toggle="tooltip" data-placement="left" click.delegate="select_report('fire')">
     <img id="fire" style="width:60px" src="/assets/icons/Add_Report_Icon_Fire.png">
+    <div class="row" id="fireLink">
+      <table class="table table-borderless">
+        <tr class="row report">
+          <p class="commingSoon">COMING SOON MARCH 2020!</p>
+          <div class="reportFireBtn">
+            <input type="button" class="btn btn-primary" value="${webMenu.locale.comming_soon}" click.delegate="reportDisaster('flood')" style="
+            width: 90%;background-color:gray;"/>
+          </div>
+        </tr>
+      </table>
+    </div>
         </div>
   <div  class="buttons" title="Haze" data-toggle="tooltip" data-placement="left" click.delegate="select_report('haze')">
     <img id="haze" style="width:60px" src="/assets/icons/Add_Report_Icon_Haze.png">
+    <div class="row" id="hazeLink">
+      <table class="table table-borderless">
+        <tr class="row report">
+          <p class="commingSoon">COMING SOON MARCH 2020!</p>
+          <div class="reportHazeBtn">
+            <input type="button" class="btn btn-primary" value="${webMenu.locale.comming_soon}" click.delegate="reportDisaster('flood')" style="
+            width: 90%;background-color:gray;"/>
+          </div>
+        </tr>
+      </table>
+    </div>
         </div>
   <div  class="buttons" title="Earthquake" data-toggle="tooltip" data-placement="left" click.delegate="select_report('earthquake')">
     <img id="earthquake" style="width:60px" src="/assets/icons/Add_Report_Icon_Earthquake.png">
+    <div class="row" id="earthquakeLink">
+      <table class="table table-borderless">
+        <tr class="row report">
+          <p class="commingSoon">COMING SOON MARCH 2020!</p>
+          <div class="reportEarthquakeBtn">
+            <input type="button" class="btn btn-primary" value="${webMenu.locale.comming_soon}" click.delegate="reportDisaster('flood')" style="
+            width: 90%;background-color:gray;"/>
+          </div>
+        </tr>
+      </table>
+    </div>
   </div>
-  <div  class="buttons" title="Facebook" data-toggle="tooltip" data-placement="left" click.delegate="select_report('icon')">
-    <img id="icon" style="width:60px" src="/assets/icons/Add_Report_Icon_Haze.png">
+  <div  class="buttons" title="Facebook" data-toggle="tooltip" data-placement="left" click.delegate="select_report('earthquakeAccess')">
+    <img id="earthquakeAccess" id="icon" style="width:60px" src="/assets/icons/Earthquake_2.svg">
+    <div class="row" id="earthquakeAccessLink">
+      <table class="table table-borderless">
+        <tr class="row report">
+          <p class="commingSoon">COMING SOON MARCH 2020!</p>
+          <div class="reportEarthquakeAccessBtn">
+            <input type="button" class="btn btn-primary" value="${webMenu.locale.comming_soon}" click.delegate="reportDisaster('flood')" style="
+            width: 90%;background-color:gray;"/>
+          </div>
+        </tr>
+      </table>
+    </div>
   </div>
   <div  class="buttons" title="Volcano" data-toggle="tooltip" data-placement="left" click.delegate="select_report('volcano')">
     <img id="volcano" style="width:60px" src="/assets/icons/Add_Report_Icon_Volcano.png">
+    <div class="row" id="volcanoLink">
+      <table class="table table-borderless">
+        <tr class="row report">
+          <p class="commingSoon">COMING SOON MARCH 2020!</p>
+          <div class="volcanoBtn">
+            <input type="button" class="btn btn-primary" value="${webMenu.locale.comming_soon}" click.delegate="reportDisaster('flood')" style="
+            width: 90%;background-color:gray;"/>
+          </div>
+        </tr>
+      </table>
+    </div>
   </div>
   <div   class="buttons main-button" title="Add Report" data-toggle="tooltip" data-placement="left">
          <img style="width:80px" src="/assets/icons/Add_Report_Icon_Blue.png">

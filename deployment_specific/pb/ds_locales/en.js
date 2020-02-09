@@ -1,5 +1,15 @@
 const en = {
-  'add_report': 'Report Flooding',
+  'comming_soon': 'Coming Soon',
+  'reports_stats': 'Received {reportsplaceholder} reports in past {hoursplaceholder} hours',
+  'prep_menu': {
+    'btn_names': {
+      'drain': 'Blocked Drains',
+      'desilting': 'Desilting',
+      'canalrepair': 'Canal Repairs',
+      'treeclearing': 'Fallen Tree'
+    }
+  },
+  'add_report': 'Report Flood',
   'reports_stats': 'Received {reportsplaceholder} reports in past {hoursplaceholder} hours',
   'prep_menu': {
     'btn_names': {
