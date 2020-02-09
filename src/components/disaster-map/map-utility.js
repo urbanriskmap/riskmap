@@ -4,6 +4,7 @@ import { inject, noView } from 'aurelia-framework';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 import { Config } from 'resources/config';
+import { LocationService } from './location-service';
 import { notify } from 'notifyjs-browser'; //Jquery plugin
 
 $.notify.addStyle('mapInfo', {
@@ -20,11 +21,12 @@ $.notify.addStyle('mapInfo', {
 
 //start-aurelia-decorators
 @noView
-@inject(Config)
+@inject(Config, LocationService)
 //end-aurelia-decorators
 export class MapUtility {
-  constructor(Config) {
+  constructor(Config, LocationService) {
     this.config = Config.map;
+    this.locService = LocationService;
   }
 
   // return boolean only
@@ -143,12 +145,21 @@ export class MapUtility {
     let self = this;
     let regions = self.config.instance_regions;
     self.clientLocation = e;
+    let clientCities = [];
     for (let city in regions) {
       self.clientCityIsValid = false;
       if (e.latitude > regions[city].bounds.sw[0] && e.longitude > regions[city].bounds.sw[1] && e.latitude < regions[city].bounds.ne[0] && e.longitude < regions[city].bounds.ne[1]) {
         self.clientCity = city;
+        clientCities.push(regions[city].region);
+        console.log(clientCities.length);
         self.clientCityIsValid = true;
-        break;
+        // break;
+      }
+      if (clientCities.length > 1) {
+        self.locService.filterPointInCities(e, clientCities).then( city => {
+          console.log(city);
+          self.clientCity = city;
+        });
       }
     }
   }
@@ -173,6 +184,7 @@ export class MapUtility {
 
   viewClientLocation(map, layers, togglePane) {
     let self = this;
+    console.log(self.clientLocation);
     if (self.clientLocation) {
       if (self.clientCityIsValid) {
         //case 1: location found, location in a supported city
