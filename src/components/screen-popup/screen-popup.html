@@ -15,8 +15,8 @@
               <div id="dropdown_city" class="row p-2 m-0">
                 <div if.bind = 'searchText.length > 0' class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 searchDropDown p-2 mt-4" style="
                 height: 500px;">
-                    <ul class=" p-0"  if.bind="searchText.length > 0" >
-                        <li><b>Select Region To Continue</b></li>
+                    <ul class=" p-0" if.bind="searchText.length > 0" >
+                        <li><b>${locale.search_ph}</b></li>
                         <li class ="dropUl p-2" repeat.for="city of searchResult" click.delegate="switchRegion(city, true)">${city}</li>
                       </ul>
               </div>

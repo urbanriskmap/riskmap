@@ -60,6 +60,7 @@ export class Landing {
 
   openClose(event){
     console.log(event)
+    $('#reportData').show()
   }
 
   resizeSidePane() {

@@ -12,19 +12,19 @@
   <div id="paneContent">
     <div class="row paneTabs" repeat.for="menuName of menuList">
       <div
-        class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 p-2 m-0 accordion" id.bind="'label_' + menuName"
+        class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-2 m-0 accordion" id.bind="'label_' + menuName"
         textcontent.bind="locale.web_menu.tab_names[menuName]"
         click.delegate="switchTab(menuName)"
       >
       
     </div>
-    <div class="col-6 col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 p-0 m-0 text-right">
+    <!-- <div class="col-6 col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 p-0 m-0 text-right">
       <p class="arrows down" id.bind="'down_' + menuName">
         <i class="icon-down-open"></i>
     </p>
       <p class="arrows up" id.bind="'up_' + menuName">
         <i class="icon-up-open"></i></p>
-    </div>
+    </div> -->
 
 
       <div class="panel p-0 m-0"
@@ -61,9 +61,6 @@
               </td>
             </tr>
           </table>
-    
-          <p id="legend">${locale.legend.title}</p>
-    
           <table width="300px">
             <tr>
               <td vertical-align="bottom" colspan="50%">
