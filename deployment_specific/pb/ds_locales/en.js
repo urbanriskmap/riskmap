@@ -11,7 +11,8 @@ const en = {
     }
   },
   'add_report': 'Report Flood',
-  'search_ph': 'Select Region',
+  'search_ph': 'Search',
+  'search_header': 'Select Region',
   'reports_stats': 'Received {reportsplaceholder} reports in past {hoursplaceholder} hours',
   'prep_menu': {
     'btn_names': {
