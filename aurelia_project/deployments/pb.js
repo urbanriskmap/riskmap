@@ -710,7 +710,7 @@ export default {
     },
     'region_center': [-2.465463549999999, 118.01541650000001],
     'start_city_center': [-6.1754, 106.8271],
-    'starting_zoom': 5.75,
+    'starting_zoom': 5.5,
     'minimum_zoom': 5
   }
 };
