@@ -21,7 +21,7 @@
     "aurelia-http-client": "1.1.1",
     "aurelia-protractor-plugin": "1.0.3",
     "bluebird": "3.5.0",
-    "chart.js": "2.7.2",
+    "chart.js": "2.9.4",
     "jquery": "3.2.1",
     "leaflet": "1.0.3",
     "less": "^3.8.1",
